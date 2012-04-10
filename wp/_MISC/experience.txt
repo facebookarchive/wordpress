@@ -1,6 +1,10 @@
 WP
 - No boilerplate plugin to get started (in the docs-- I did find hello.php though)
 - Too many action hooks to parse
+- Password strength indicator doesn't seem to work
+- Prompted to upgrade akismet, but my FTP details require a cert (non-starter, it seems).
+- http://codex.wordpress.org/Creating_Options_Pages -> do_settings is do_settings_fields (and requires 2 fields, not 1) (oh, nevermind-- revised doc at http://codex.wordpress.org/index.php?title=Creating_Options_Pages&oldid=97268 -- this page is a mess)
+
 
 FB
 - Why do I still get captcha’d when I create an app?  I’ve built on Platform for 5 years and have 100+ apps.

@@ -17,7 +17,7 @@ require_once('fb_admin_menu.php');
 require_once('fb_social_plugins.php');
 
 //wp_enqueue_script('fb_js_sdk', plugins_url('/js/fb.js', __FILE__));
-//add_action ( 'get_footer', 'fb_js_init' );
+add_action ( 'get_footer', 'fb_js_init' );
 
 add_action ( 'wp_head', 'fb_add_og_protocol' );
 
@@ -26,14 +26,15 @@ function fb_add_og_protocol() {
      <meta property="og:type"                 content="article"> 
      <meta property="og:site_name"            content="' . esc_attr(get_bloginfo( 'name' )) . '">
      <meta property="og:image"                content="' . get_header_image() .'">
-     <meta property="og:title"                content="' . wp_title( '|', true, 'right' ) . '">
-     <meta property="og:description"          content="' . bloginfo( 'description' ) . '"> 
-     <meta property="article:published_time"  content="DateTime"> 
-     <meta property="article:modified_time"   content="DateTime"> 
-     <meta property="article:expiration_time" content="DateTime">
-     <meta property="article:author"          content="URL to Author object">
-     <meta property="article:section"         content="Section of article">
-     <meta property="article:tag"             content="Keyword">';
+		 <meta property="og:url"                  content="' . get_permalink() .'">
+     <meta property="og:title"                content="' . get_bloginfo( 'name', 'display' ) . '">
+     <meta property="og:description"          content="' . get_bloginfo( 'description', 'display' ) . '"> 
+     <meta property="article:published_time"  content="' . get_the_date( 'c' ) . '"> 
+     <meta property="article:modified_time"   content="' . get_the_date( 'c' ) . '"> 
+     <meta property="article:expiration_time" content="' . get_the_date( 'c' ) . '"> 
+     <meta property="article:author"          content="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '">
+     <meta property="article:section"         content="">
+     <meta property="article:tag"             content="">';
 		 
 }
 

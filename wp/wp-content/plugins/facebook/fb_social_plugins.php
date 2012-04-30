@@ -14,9 +14,12 @@
  * @param array $url              Optional. If not provided, current URL used.
  */
 
-function fb_display_like_button($enable_send = true, $layout_style = 'standard', $width = 450, $show_faces = true, $verb_to_display = 'like', $color_scheme = 'light', $font = 'arial', $url = '') {
-	
-	print '<div class="fb-like" data-send="true" data-width="450" data-show-faces="true"></div>';
+function fb_get_like_button($enable_send = true, $layout_style = 'standard', $width = 450, $show_faces = true, $verb_to_display = 'like', $color_scheme = 'light', $font = 'arial', $url = '') {
+	return '<div class="fb-like" data-send="true" data-width="450" data-show-faces="true"></div>';
+}
+
+function fb_get_recommendations_bar($trigger = '', $read_time = '', $verb_to_display = '', $side = '', $domain = '', $url ='') {
+	return '<div class="fb-recommendations-bar"></div>';
 }
 
 
@@ -53,7 +56,7 @@ class Facebook_Like_Button extends WP_Widget {
 		if ( ! empty( $title ) )
 			echo $before_title . $title . $after_title;
 			
-		fb_display_like_button();
+		echo fb_get_like_button();
 		echo $after_widget;
 	}
 
@@ -98,12 +101,28 @@ class Facebook_Like_Button extends WP_Widget {
 
 }
 
-
-
-
-
 // register Foo_Widget widget
 add_action( 'widgets_init', create_function( '', 'register_widget( "Facebook_Like_Button" );' ) );
+
+
+
+function fb_recommendations_bar_automatic($content) {
+	$content .= fb_get_recommendations_bar();
+	
+	return $content;
+}
+
+add_filter('the_content', 'fb_recommendations_bar_automatic', 30);
+
+function fb_like_button_automatic($content) {
+	$content .= fb_get_like_button();
+	
+	return $content;
+}
+
+add_filter('the_content', 'fb_like_button_automatic', 30);
+
+
 
 
 ?>

@@ -16,7 +16,7 @@ function register_mysettings() {
 	//register our settings
 	register_setting( 'fb-settings-group', 'enable_like' );
 	register_setting( 'fb-settings-group', 'enable_comments' );
-	register_setting( 'fb-settings-group', 'option_etc' );
+	register_setting( 'fb-settings-group', 'enable_recommendations' );
 }
 
 function fb_settings_page() {
@@ -35,6 +35,11 @@ function fb_settings_page() {
         <tr valign="top">
         <th scope="row">Enable Comments box <a href="https://developers.facebook.com/docs/reference/plugins/comments/" target="_new" title="Comments Box is a social plugin that enables user commenting on your site. Features include moderation tools and distribution. Click to learn more.">[?]</a></th>
         <td><input type="checkbox" name="enable_comments" value="true" <?php checked(TRUE, (bool) get_option('enable_comments'));  print get_option('enable_comments');?> /></td>
+        </tr>
+        
+        <tr valign="top">
+        <th scope="row">Enable Recommendations bar <a href="https://developers.facebook.com/docs/reference/plugins/recommendationsbar/" target="_new" title="The Recommendations Bar allows users to like content, get recommendations, and share what they’re reading with their friends.">[?]</a></th>
+        <td><input type="checkbox" name="enable_recommendations" value="true" <?php checked(TRUE, (bool) get_option('enable_recommendations'));  print get_option('enable_recommendations');?> /></td>
         </tr>
     </table>
     

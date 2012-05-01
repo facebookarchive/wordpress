@@ -1,15 +1,27 @@
 <?php
-add_action( 'widgets_init', create_function( '', 'register_widget( "Facebook_Like_Button" );' ) );
-add_filter('the_content', 'fb_recommendations_bar_automatic', 30);
-add_filter('the_content', 'fb_like_button_automatic', 30);
-add_filter('the_content', 'fb_get_comments', 30);
+add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Like_Button" );'));
 
-
-add_action('wp_footer', 'fb_test', 30);
-
-function fb_test($blah) {
-	print "<script>document.getElementById('comments').style.display = 'none';</script>";
+function fb_apply_filters() {
+	$options = get_option('fb_options');
+	
+	if (isset($options['enable_recommendations_bar'])) {
+		add_filter('the_content',    'fb_recommendations_bar_automatic', 30);
+	}
+	
+	if (isset($options['enable_like'])) {
+		add_filter('the_content',    'fb_like_button_automatic', 30);
+	}
+	
+	if (isset($options['enable_comments'])) {
+		add_filter('the_content',    'fb_comments_automatic', 30);
+		add_filter('comments_array', 'fb_close_wp_comments');
+		add_filter('the_posts',      'fb_set_wp_comment_status');
+		add_filter('comments_open',  'fb_close_wp_comments', 10, 2);
+		add_filter('pings_open',     'fb_close_wp_comments', 10, 2);
+		add_action('wp_footer',      'fb_hide_wp_comments', 30);
+	}
 }
+fb_apply_filters();
 
 /**
  * Display the Like button.
@@ -29,58 +41,11 @@ function fb_get_like_button($enable_send = true, $layout_style = 'standard', $wi
 	return '<div class="fb-like" data-send="true" data-width="450" data-show-faces="true"></div>';
 }
 
-function fb_get_recommendations_bar($trigger = '', $read_time = '', $verb_to_display = '', $side = '', $domain = '', $url ='') {
-	return '<div class="fb-recommendations-bar"></div>';
-}
-/*
-pre_get_comments();
-wp_insert_comment
-
-<noscript></noscript>
-*/
-
-add_filter('comments_array', 'fb_close_comments');
-
-add_filter( 'the_posts', 'set_comment_status');
-
-add_filter( 'comments_open', 'fb_close_comments', 10, 2 );
-add_filter( 'pings_open', 'fb_close_comments', 10, 2 );
-
-add_action( 'pre_get_comments', 'fb_get_comments');
-			
- function close_comments ( $open, $post_id ) {
-			// if not open, than back
-			if ( ! $open )
-				return $open;
-			$post = get_post( $post_id );
-			if ( $post -> post_type ) // all post types
-				return FALSE;
-			return $open;
-		}
-
-function set_comment_status ( $posts ) {
-			if ( ! empty( $posts ) && is_singular() ) {
-				$posts[0]->comment_status = 'open';
-				$posts[0]->post_status = 'open';
-			}
-			return $posts;
-		}
-
-
-function fb_close_comments($comments) {
-	
-	
-	return null;
-}
-
-
-function fb_get_comments($content) {
-	$content .= '<div class="fb-comments" data-num-posts="20" data-width="470"></div>';
+function fb_like_button_automatic($content) {
+	$content .= fb_get_like_button();
 	
 	return $content;
 }
-
-
 
 /**
  * Adds the Like Button Social Plugin as a WordPress Widget
@@ -147,7 +112,7 @@ class Facebook_Like_Button extends WP_Widget {
 			$title = $instance[ 'title' ];
 		}
 		else {
-			$title = __( 'Like this Page', 'text_domain' );
+			$title = __( 'Like ' . esc_attr(get_bloginfo('name')) . ' on Facebook', 'text_domain' );
 		}
 		?>
 		<p>
@@ -159,14 +124,47 @@ class Facebook_Like_Button extends WP_Widget {
 
 }
 
+function fb_get_recommendations_bar($trigger = '', $read_time = '', $verb_to_display = '', $side = '', $domain = '', $url ='') {
+	return '<div class="fb-recommendations-bar"></div>';
+}
+
 function fb_recommendations_bar_automatic($content) {
 	$content .= fb_get_recommendations_bar();
 	
 	return $content;
 }
 
-function fb_like_button_automatic($content) {
-	$content .= fb_get_like_button();
+/*
+wp_insert_comment
+
+<noscript></noscript>
+*/
+
+function fb_hide_wp_comments($blah) {
+	print "<script>document.getElementById('comments').style.display = 'none';</script>";
+}
+
+function fb_set_wp_comment_status ( $posts ) {
+			if ( ! empty( $posts ) && is_singular() ) {
+				$posts[0]->comment_status = 'open';
+				$posts[0]->post_status = 'open';
+			}
+			return $posts;
+		}
+
+function fb_close_wp_comments($comments) {
+	
+	return null;
+}
+
+function fb_get_comments($url = '', $num_posts = '2', $width = '470', $color_scheme = 'light') {
+	return '<div class="fb-comments"></div>';
+}
+
+function fb_comments_automatic($content) {
+	if (!is_home()) {
+		$content .= fb_get_comments();
+	}
 	
 	return $content;
 }

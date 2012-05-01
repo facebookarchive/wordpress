@@ -20,34 +20,34 @@ function fb_settings_page() {
 	$options = get_option('fb_options');
 ?>
 <div class="wrap">
-<h2>Facebook</h2>
+<h2>Facebook for WordPress Settings</h2>
 
 <form method="post" action="options.php">
 	<?php settings_fields( 'fb-settings-group' ); ?>
 	<table class="form-table">
 		<tr valign="top">
-		<th scope="row">Enable Like button <a href="https://developers.facebook.com/docs/reference/plugins/like/" target="_new" title="The Like button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user's friends' News Feed with a link back to your website. Click to learn more.">[?]</a></th>
-		<td><input type="checkbox" name="fb_options[enable_like]" value="true" <?php checked(TRUE, (bool) $options['enable_like']);  print $options['enable_like']; ?> /></td>
+		<th scope="row">App ID</th>
+		<td><a href="#" target="_new" title="TODO">[?]</a>&nbsp; <input type="text" name="fb_options[app_id]" value="<?php print $options['app_id'] ?>" size="40" /></td>
 		</tr>
 		
 		<tr valign="top">
-		<th scope="row">Enable Comments box <a href="https://developers.facebook.com/docs/reference/plugins/comments/" target="_new" title="Comments Box is a social plugin that enables user commenting on your site. Features include moderation tools and distribution. Click to learn more.">[?]</a></th>
-		<td><input type="checkbox" name="fb_options[enable_comments]" value="true" <?php checked(TRUE, (bool) $options['enable_comments']);  print $options['enable_comments']; ?> /></td>
+		<th scope="row">App Secret</th>
+		<td><a href="#" target="_new" title="TODO">[?]</a>&nbsp; <input type="text" name="fb_options[app_secret]" value="<?php print $options['app_secret'] ?>" size="40" /></td>
 		</tr>
 		
 		<tr valign="top">
-		<th scope="row">Enable Recommendations bar <a href="https://developers.facebook.com/docs/reference/plugins/recommendationsbar/" target="_new" title="The Recommendations Bar allows users to like content, get recommendations, and share what they're reading with their friends.">[?]</a></th>
-		<td><input type="checkbox" name="fb_options[enable_recommendations]" value="true" <?php checked(TRUE, (bool) $options['enable_recommendations']);  print $options['enable_recommendations']; ?> /></td>
+		<th scope="row">Enable Like Buttons on Posts</th>
+		<td><a href="https://developers.facebook.com/docs/reference/plugins/like/" target="_new" title="The Like button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user's friends' News Feed with a link back to your website. Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_like]" value="true" <?php checked(TRUE, (bool) $options['enable_like']);  print $options['enable_like']; ?> /></td>
 		</tr>
 		
 		<tr valign="top">
-		<th scope="row">App ID <a href="#" target="_new" title="TODO">[?]</a></th>
-		<td><input type="text" name="fb_options[app_id]" value="<?php print $options['app_id'] ?>" size="40" /></td>
+		<th scope="row">Enable Comments on Posts</th>
+		<td><a href="https://developers.facebook.com/docs/reference/plugins/comments/" target="_new" title="Comments Box is a social plugin that enables user commenting on your site. Features include moderation tools and distribution. Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_comments]" value="true" <?php checked(TRUE, (bool) $options['enable_comments']);  print $options['enable_comments']; ?> /></td>
 		</tr>
 		
 		<tr valign="top">
-		<th scope="row">App Secret <a href="#" target="_new" title="TODO">[?]</a></th>
-		<td><input type="text" name="fb_options[app_secret]" value="<?php print $options['app_secret'] ?>" size="40" /></td>
+		<th scope="row">Enable Recommendations Bar on Posts</th>
+		<td><a href="https://developers.facebook.com/docs/reference/plugins/recommendationsbar/" target="_new" title="The Recommendations Bar allows users to like content, get recommendations, and share what they're reading with their friends.  Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_recommendations_bar]" value="true" <?php checked(TRUE, (bool) $options['enable_recommendations_bar']);  print $options['enable_recommendations_bar']; ?> /></td>
 		</tr>
 		
 		<tr valign="top">

@@ -1,51 +1,104 @@
 <?php
 /**
- * @package Facebook
- * @version 0.1a
+ * @package Facebook for WordPress
+ * @version 1.0
  */
 /*
 Plugin Name: Facebook
 Plugin URI: [TODO]
 Description: [TODO]
-Author: Facebook: Matt Kelly (matthwk), James Pearce (jamesgpearce)
-Version: 0.1a
+Author: Facebook: Matt Kelly (matthwk)
+Version: 1.0
 Author URI: http://developers.facebook.com/
 License: [TODO]
 */
 
 require_once('fb_admin_menu.php');
+require_once('fb_open_graph.php');
 require_once('fb_social_plugins.php');
 
-//wp_enqueue_script('fb_js_sdk', plugins_url('/js/fb.js', __FILE__));
-add_action ( 'get_footer', 'fb_js_init' );
+add_action('wp_footer','fb_add_base_js',20);
+add_action('init','fb_channel_file');
 
-add_action ( 'wp_head', 'fb_add_og_protocol' );
+add_filter('language_attributes','fb_lang_atts');
 
-function fb_add_og_protocol() {
-	print '<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
-     <meta property="og:type"                 content="article"> 
-     <meta property="og:site_name"            content="' . esc_attr(get_bloginfo( 'name' )) . '">
-     <meta property="og:image"                content="' . get_header_image() .'">
-		 <meta property="og:url"                  content="' . get_permalink() .'">
-     <meta property="og:title"                content="' . get_bloginfo( 'name', 'display' ) . '">
-     <meta property="og:description"          content="' . get_bloginfo( 'description', 'display' ) . '"> 
-     <meta property="article:published_time"  content="' . get_the_date( 'c' ) . '"> 
-     <meta property="article:modified_time"   content="' . get_the_date( 'c' ) . '"> 
-     <meta property="article:expiration_time" content="' . get_the_date( 'c' ) . '"> 
-     <meta property="article:author"          content="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '">
-     <meta property="article:section"         content="">
-     <meta property="article:tag"             content="">';
-		 
+function fb_add_base_js($args = array()) {
+	$options = get_option('fb_options');
+	fb_init($options['app_id'], $args);
+};
+
+function fb_lang_atts($lang) {
+    return ' xmlns:fb="http://ogp.me/ns/fb#" xmlns:og="http://ogp.me/ns#" '. $lang;
 }
 
-function fb_js_init() {
-	print '<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, "script", "facebook-jssdk"));</script>';
+function fb_init($app_id, $args = array()) {
+	$locale = fb_get_locale();
+
+	$defaults = array(
+		'appId'=>$app_id,
+		'channelUrl'=>home_url('?fb-channel-file=1'),
+		'status'=>true, 
+		'cookie'=>true, 
+		'xfbml'=>true,
+		'oauth'=>true,
+	);
+	
+	$args = wp_parse_args($args, $defaults);
+
+	echo '<div id="fb-root"></div>
+	<script type="text/javascript">
+		window.fbAsyncInit = function() {
+			FB.init(' .  json_encode($args) . ');
+			' . do_action('fb_async_init') . '
+		};
+		(function(d){
+				 var js, id = "facebook-jssdk"; if (d.getElementById(id)) {return;}
+				 js = d.createElement("script"); js.id = id; js.async = true;
+				 js.src = "//connect.facebook.net/' .  $locale . '/all.js";
+				 d.getElementsByTagName("head")[0].appendChild(js);
+		 }(document));     
+	</script>';
 }
+
+function fb_channel_file() {
+	if (!empty($_GET['fb-channel-file'])) {
+		$cache_expire = 60 * 60 * 24 * 365;
+		header("Pragma: public");
+		header("Cache-Control: max-age=".$cache_expire);
+		header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $cache_expire) . ' GMT');
+		echo '<script src="//connect.facebook.net/' . fb_get_locale() . '/all.js"></script>';
+		exit;
+	}
+}
+
+function fb_get_locale() {
+	$fb_valid_fb_locales = array(
+		'ca_ES', 'cs_CZ', 'cy_GB', 'da_DK', 'de_DE', 'eu_ES', 'en_PI', 'en_UD', 'ck_US', 'en_US', 'es_LA', 'es_CL', 'es_CO', 'es_ES', 'es_MX',
+		'es_VE', 'fb_FI', 'fi_FI', 'fr_FR', 'gl_ES', 'hu_HU', 'it_IT', 'ja_JP', 'ko_KR', 'nb_NO', 'nn_NO', 'nl_NL', 'pl_PL', 'pt_BR', 'pt_PT',
+		'ro_RO', 'ru_RU', 'sk_SK', 'sl_SI', 'sv_SE', 'th_TH', 'tr_TR', 'ku_TR', 'zh_CN', 'zh_HK', 'zh_TW', 'fb_LT', 'af_ZA', 'sq_AL', 'hy_AM',
+		'az_AZ', 'be_BY', 'bn_IN', 'bs_BA', 'bg_BG', 'hr_HR', 'nl_BE', 'en_GB', 'eo_EO', 'et_EE', 'fo_FO', 'fr_CA', 'ka_GE', 'el_GR', 'gu_IN',
+		'hi_IN', 'is_IS', 'id_ID', 'ga_IE', 'jv_ID', 'kn_IN', 'kk_KZ', 'la_VA', 'lv_LV', 'li_NL', 'lt_LT', 'mk_MK', 'mg_MG', 'ms_MY', 'mt_MT',
+		'mr_IN', 'mn_MN', 'ne_NP', 'pa_IN', 'rm_CH', 'sa_IN', 'sr_RS', 'so_SO', 'sw_KE', 'tl_PH', 'ta_IN', 'tt_RU', 'te_IN', 'ml_IN', 'uk_UA',
+		'uz_UZ', 'vi_VN', 'xh_ZA', 'zu_ZA', 'km_KH', 'tg_TJ', 'ar_AR', 'he_IL', 'ur_PK', 'fa_IR', 'sy_SY', 'yi_DE', 'gn_PY', 'qu_PE', 'ay_BO',
+		'se_NO', 'ps_AF', 'tl_ST'
+	);
+
+	$locale = get_locale();
+	
+	// convert locales like "es" to "es_ES", in case that works for the given locale (sometimes it does)
+	if (strlen($locale) == 2) {
+		$locale = strtolower($locale).'_'.strtoupper($locale);
+	}
+	
+	// convert things like de-DE to de_DE
+	$locale = str_replace('-', '_', $locale);
+	
+	// check to see if the locale is a valid FB one, if not, use en_US as a fallback
+	if ( !in_array($locale, $fb_valid_fb_locales) ) {
+		$locale = 'en_US';
+	}
+	
+	return $locale;
+}
+
 ?>

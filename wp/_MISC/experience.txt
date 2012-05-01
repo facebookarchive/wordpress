@@ -30,3 +30,9 @@ Bug count:
 
 https://developers.facebook.com/apps/413161128711224/summary?web_hosting=1
 https://blazing-rain-7743.herokuapp.com/
+
+
+mediaslave
+jeffsebring
+
+http://wpengineer.com/2230/removing-comments-absolutely-wordpress/

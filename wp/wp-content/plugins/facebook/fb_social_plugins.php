@@ -1,4 +1,15 @@
 <?php
+add_action( 'widgets_init', create_function( '', 'register_widget( "Facebook_Like_Button" );' ) );
+add_filter('the_content', 'fb_recommendations_bar_automatic', 30);
+add_filter('the_content', 'fb_like_button_automatic', 30);
+add_filter('the_content', 'fb_get_comments', 30);
+
+
+add_action('wp_footer', 'fb_test', 30);
+
+function fb_test($blah) {
+	print "<script>document.getElementById('comments').style.display = 'none';</script>";
+}
 
 /**
  * Display the Like button.
@@ -21,11 +32,58 @@ function fb_get_like_button($enable_send = true, $layout_style = 'standard', $wi
 function fb_get_recommendations_bar($trigger = '', $read_time = '', $verb_to_display = '', $side = '', $domain = '', $url ='') {
 	return '<div class="fb-recommendations-bar"></div>';
 }
+/*
+pre_get_comments();
+wp_insert_comment
+
+<noscript></noscript>
+*/
+
+add_filter('comments_array', 'fb_close_comments');
+
+add_filter( 'the_posts', 'set_comment_status');
+
+add_filter( 'comments_open', 'fb_close_comments', 10, 2 );
+add_filter( 'pings_open', 'fb_close_comments', 10, 2 );
+
+add_action( 'pre_get_comments', 'fb_get_comments');
+			
+ function close_comments ( $open, $post_id ) {
+			// if not open, than back
+			if ( ! $open )
+				return $open;
+			$post = get_post( $post_id );
+			if ( $post -> post_type ) // all post types
+				return FALSE;
+			return $open;
+		}
+
+function set_comment_status ( $posts ) {
+			if ( ! empty( $posts ) && is_singular() ) {
+				$posts[0]->comment_status = 'open';
+				$posts[0]->post_status = 'open';
+			}
+			return $posts;
+		}
+
+
+function fb_close_comments($comments) {
+	
+	
+	return null;
+}
+
+
+function fb_get_comments($content) {
+	$content .= '<div class="fb-comments" data-num-posts="20" data-width="470"></div>';
+	
+	return $content;
+}
 
 
 
 /**
- * Adds Like button widget
+ * Adds the Like Button Social Plugin as a WordPress Widget
  */
 class Facebook_Like_Button extends WP_Widget {
 
@@ -101,28 +159,15 @@ class Facebook_Like_Button extends WP_Widget {
 
 }
 
-// register Foo_Widget widget
-add_action( 'widgets_init', create_function( '', 'register_widget( "Facebook_Like_Button" );' ) );
-
-
-
 function fb_recommendations_bar_automatic($content) {
 	$content .= fb_get_recommendations_bar();
 	
 	return $content;
 }
 
-add_filter('the_content', 'fb_recommendations_bar_automatic', 30);
-
 function fb_like_button_automatic($content) {
 	$content .= fb_get_like_button();
 	
 	return $content;
 }
-
-add_filter('the_content', 'fb_like_button_automatic', 30);
-
-
-
-
 ?>

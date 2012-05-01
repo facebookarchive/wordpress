@@ -28,8 +28,8 @@ function fb_add_og_protocol() {
 	
 	$meta_tags = apply_filters('fb_meta_tags', $meta_tags, $post);
 	
-	foreach ($meta_tags as $prop => $content) {
-		echo "<meta property='$prop' content='$content' />\n";
+	foreach ($meta_tags as $property => $content) {
+		echo "<meta property='$property' content='$content' />\n";
 	}
 }
 

@@ -39,8 +39,14 @@ fb_apply_filters();
  * @param array $url              Optional. If not provided, current URL used.
  */
 
-function fb_get_like_button($enable_send = true, $layout_style = 'standard', $width = 450, $show_faces = true, $verb_to_display = 'like', $color_scheme = 'light', $font = 'arial', $url = '') {
-	return '<div class="fb-like" data-send="true" data-width="450" data-show-faces="true"></div>';
+function fb_get_like_button($options = array()) {
+	$params = '';
+	
+	foreach ($options as $option => $value) {
+		$params .= $option . '="' . $value . '" ';
+	}
+	
+	return '<div class="fb-like" ' . $params . '></div>';
 }
 
 function fb_like_button_automatic($content) {
@@ -80,8 +86,9 @@ class Facebook_Like_Button extends WP_Widget {
 		echo $before_widget;
 		if ( ! empty( $title ) )
 			echo $before_title . $title . $after_title;
-			
-		echo fb_get_like_button();
+		
+		$options = array('data-href' => $instance['url']);	
+		echo fb_get_like_button($options);
 		echo $after_widget;
 	}
 
@@ -98,6 +105,7 @@ class Facebook_Like_Button extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
 		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['url'] = strip_tags( $new_instance['url'] );
 
 		return $instance;
 	}
@@ -121,16 +129,39 @@ class Facebook_Like_Button extends WP_Widget {
 		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
 		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
+		
 		<?php 
+		if ( isset( $instance[ 'url' ] ) ) {
+			$url = $instance[ 'url' ];
+		}
+		else {
+			$url = '';
+		}
+		?>
+		<p>
+		<label for="<?php echo $this->get_field_id( 'url' ); ?>"><?php _e( 'Facebook Page URL:' ); ?></label>
+		<input class="widefat" id="<?php echo $this->get_field_id( 'url' ); ?>" name="<?php echo $this->get_field_name( 'url' ); ?>" type="text" value="<?php echo esc_attr( $url ); ?>" />
+		<p>Optional.  If you have a Page on Facebook that you want users to Like.  If you leave it blank, the user will like the current page that they're on.</p>
+		</p>
+		<?php
 	}
 }
 
-function fb_get_recommendations_bar($trigger = '', $read_time = '', $verb_to_display = '', $side = '', $domain = '', $url ='') {
-	return '<div class="fb-recommendations-bar"></div>';
+function fb_get_recommendations_bar($options = array()) {
+	$params = '';
+	
+	foreach ($options as $option => $value) {
+		$params .= $option . '="' . $value . '" ';
+	}
+	
+	return '<div class="fb-like" ' . $params . '></div>';
+	return '<div class="fb-recommendations-bar" ' . $params . '></div>';
 }
 
 function fb_recommendations_bar_automatic($content) {
-	$content .= fb_get_recommendations_bar();
+	if (!is_home()) {
+		$content .= fb_get_recommendations_bar();
+	}
 	
 	return $content;
 }
@@ -141,29 +172,34 @@ wp_insert_comment
 <noscript></noscript>
 */
 
-function fb_hide_wp_comments($blah) {
+function fb_hide_wp_comments() {
 	print "<script>document.getElementById('comments').style.display = 'none';</script>";
 }
 
 function fb_set_wp_comment_status ( $posts ) {
-			if ( ! empty( $posts ) && is_singular() ) {
-				$posts[0]->comment_status = 'open';
-				$posts[0]->post_status = 'open';
-			}
-			return $posts;
-		}
+	if ( ! empty( $posts ) && is_singular() ) {
+		$posts[0]->comment_status = 'open';
+		$posts[0]->post_status = 'open';
+	}
+	return $posts;
+}
 
 function fb_close_wp_comments($comments) {
-	
 	return null;
 }
 
-function fb_get_comments($url = '', $num_posts = '2', $width = '470', $color_scheme = 'light') {
-	if ($url == '') {
-		
+function fb_get_comments($options = array()) {
+	if (isset($options['data-href']) == '') {
+		$options['data-href'] = get_permalink();
 	}
 	
-	return '<div class="fb-comments"></div>';
+	$params = '';
+	
+	foreach ($options as $option => $value) {
+		$params .= $option . '="' . $value . '" ';
+	}
+	
+	return '<div class="fb-comments" ' . $params . '></div>';
 }
 
 function fb_comments_automatic($content) {
@@ -174,14 +210,14 @@ function fb_comments_automatic($content) {
 	return $content;
 }
 
-
-
-
-
-
-
 function fb_get_recent_activity($options = array()) {
-	return '<div class="fb-activity" data-width="300" data-height="300" data-header="true" data-recommendations="false"></div>';
+	$params = '';
+	
+	foreach ($options as $option => $value) {
+		$params .= $option . '="' . $value . '" ';
+	}
+	
+	return '<div class="fb-activity" ' . $params . '></div>';
 }
 
 /**
@@ -268,7 +304,13 @@ class Facebook_Recent_Activity extends WP_Widget {
 
 
 function fb_get_recommendations($options = array()) {
-	return '<div class="fb-recommendations" data-width="300" data-height="300" data-header="true"></div>';
+	$params = '';
+	
+	foreach ($options as $option => $value) {
+		$params .= $option . '="' . $value . '" ';
+	}
+	
+	return '<div class="fb-recommendations" ' . $params . '></div>';
 }
 
 /**

@@ -1,0 +1,13 @@
+/**
+ * Basic 2 column (aside)(content) fixed layout
+ * 
+ * @package WPEvoLve
+ * @subpackage Layouts
+ * @beta
+ */
+
+.container { width: 960px; margin: 20px auto; }
+#wrapper {width:990px;}
+.hfeed { width: 620px; float: right; }
+.aside { width: 320px; float: left; }
+.footer { clear: both; }

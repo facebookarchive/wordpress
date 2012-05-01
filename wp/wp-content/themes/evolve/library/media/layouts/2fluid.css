@@ -1,0 +1,22 @@
+/**
+ * Basic 1 column (content)(aside) fluid layout
+ * 
+ * @package WPEvoLve
+ * @subpackage Layouts
+ * @beta
+ */
+
+.container { min-width:960px;max-width:2400px;width:95%;margin:20px 3%;}
+#wrapper {min-width:990px;max-width:2400px;width:95%;}
+.hfeed { width: 57%;min-width:506px; }
+.aside { width: 20%;min-width:210px;  }
+
+#slide_holder {min-width:526px;width: 57%;}
+.slide-container {min-width:526px;width: 100%;}
+
+
+
+#righttopcolumn {min-width:315px; width: 41%;}
+
+#search-text-box {min-width:50px; width: 69%;}
+#search-button-box {min-width:35px; width: 30%;}

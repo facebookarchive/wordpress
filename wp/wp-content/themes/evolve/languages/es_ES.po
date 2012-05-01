@@ -1,0 +1,655 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: EvoLve\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-02-08 21:14+0100\n"
+"PO-Revision-Date: 2011-02-09 22:10+0100\n"
+"Last-Translator: Noé Martínez <noah@iespana.es>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: comments.php:10
+#@ evolve
+msgid "This post is password protected. Enter the password to view comments."
+msgstr "Este art&iacute;culo esta protegido por contrase&ntilde;a. Introduzca la contrase&ntilde;a para ver los comentarios."
+
+#: comments.php:49
+#: library/functions/comments.php:28
+#@ evolve
+msgid "No Comments Yet"
+msgstr "No se han encontrado comentarios"
+
+#: footer.php:124
+#@ evolve
+msgid "Back to Top"
+msgstr "Volver al principio"
+
+#: functions.php:97
+#@ evolve
+msgid "Right &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Derecha &nbsp;&nbsp;&nbsp;(por defecto)"
+
+#: functions.php:101
+#: functions.php:400
+#@ evolve
+msgid "Left"
+msgstr "Izquierda"
+
+#: functions.php:105
+#@ evolve
+msgid "Left + Right"
+msgstr "Izquierda + Derecha"
+
+#: functions.php:112
+#@ evolve
+msgid "Left &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Izquierda &nbsp;&nbsp;&nbsp;(por defecto)"
+
+#: functions.php:116
+#: functions.php:404
+#@ evolve
+msgid "Right"
+msgstr "Derecha"
+
+#: functions.php:120
+#: functions.php:135
+#: functions.php:161
+#: functions.php:176
+#: functions.php:191
+#: functions.php:428
+#: functions.php:443
+#: functions.php:462
+#: functions.php:481
+#@ evolve
+msgid "Disable"
+msgstr "Desactivar"
+
+#: functions.php:127
+#: functions.php:253
+#@ evolve
+msgid "1 &nbsp;&nbsp;&nbsp;(default)"
+msgstr "1 &nbsp;&nbsp;&nbsp;(por defecto)"
+
+#: functions.php:131
+#: functions.php:257
+#: functions.php:323
+#: functions.php:347
+#@ evolve
+msgid "2"
+msgstr ""
+
+#: functions.php:142
+#@ evolve
+msgid "Fixed &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Fijo &nbsp;&nbsp;&nbsp;(default)"
+
+#: functions.php:146
+#@ evolve
+msgid "Fluid"
+msgstr "Fluido"
+
+#: functions.php:153
+#: functions.php:168
+#: functions.php:183
+#@ evolve
+msgid "Search Field + Subscribe Buttons &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Campo de B&uacute;squeda + Botones de subscripci&oacute;n &nbsp;&nbsp;&nbsp;(por defecto)"
+
+#: functions.php:157
+#: functions.php:172
+#: functions.php:187
+#@ evolve
+msgid "Recent Posts + Search Field + Subscribe Buttons"
+msgstr "Mensajes recientes + Campo de B&uacute;squeda + Botones de Subscripci&oacute;n"
+
+#: functions.php:199
+#: functions.php:210
+#@ evolve
+msgid "Light &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Claro &nbsp;&nbsp;&nbsp;(por defecto)"
+
+#: functions.php:203
+#: functions.php:214
+#@ evolve
+msgid "Dark"
+msgstr "Oscuro"
+
+#: functions.php:222
+#@ evolve
+msgid "Dark Grey + Blue &nbsp;&nbsp;&nbsp;(default)"
+msgstr ""
+
+#: functions.php:226
+#@ evolve
+msgid "Light Grey + Blue"
+msgstr "Gris claro + Azul"
+
+#: functions.php:230
+#@ evolve
+msgid "Green + Yellow"
+msgstr "Verde + Amarillo"
+
+#: functions.php:234
+#@ evolve
+msgid "Red + Yellow"
+msgstr "Rojo + Amarillo"
+
+#: functions.php:238
+#@ evolve
+msgid "Pink + Purple"
+msgstr "Rosa + Púrura"
+
+#: functions.php:242
+#@ evolve
+msgid "Light Blue + Blue"
+msgstr "Azul Claro + Azul"
+
+#: functions.php:246
+#@ evolve
+msgid "Brown + Yellow"
+msgstr "Marr&oacute;n + Amarillo"
+
+#: functions.php:261
+#: functions.php:327
+#: functions.php:351
+#@ evolve
+msgid "3"
+msgstr ""
+
+#: functions.php:268
+#@ evolve
+msgid "Impact &nbsp;&nbsp;&nbsp;(default)"
+msgstr ""
+
+#: functions.php:272
+#@ evolve
+msgid "Tahoma"
+msgstr ""
+
+#: functions.php:276
+#: functions.php:299
+#@ evolve
+msgid "Georgia"
+msgstr ""
+
+#: functions.php:280
+#: functions.php:295
+#@ evolve
+msgid "Arial"
+msgstr ""
+
+#: functions.php:284
+#: functions.php:307
+#@ evolve
+msgid "Calibri"
+msgstr ""
+
+#: functions.php:291
+#@ evolve
+msgid "Segoe UI &nbsp;&nbsp;&nbsp;(default)"
+msgstr ""
+
+#: functions.php:303
+#@ evolve
+msgid "Courier New"
+msgstr ""
+
+#: functions.php:315
+#: functions.php:339
+#: functions.php:377
+#: functions.php:396
+#: functions.php:488
+#@ evolve
+msgid "Disable &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Desactivar &nbsp;&nbsp;&nbsp;(por defecto)"
+
+#: functions.php:319
+#: functions.php:343
+#@ evolve
+msgid "1"
+msgstr ""
+
+#: functions.php:331
+#: functions.php:355
+#@ evolve
+msgid "4"
+msgstr ""
+
+#: functions.php:362
+#@ evolve
+msgid "After posts &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Despu&eacte;s de mensajes &nbsp;&nbsp;&nbsp;(por defecto)"
+
+#: functions.php:366
+#@ evolve
+msgid "Before posts"
+msgstr "Antes de mensajes"
+
+#: functions.php:370
+#: functions.php:458
+#@ evolve
+msgid "Both"
+msgstr "Ambos"
+
+#: functions.php:381
+#@ evolve
+msgid "Normal"
+msgstr ""
+
+#: functions.php:385
+#@ evolve
+msgid "Slow"
+msgstr "Lento"
+
+#: functions.php:389
+#@ evolve
+msgid "Fast"
+msgstr "R&aacute;pido"
+
+#: functions.php:408
+#@ evolve
+msgid "Middle"
+msgstr "Medio"
+
+#: functions.php:416
+#@ evolve
+msgid "Single posts &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Mensajes Individuales &nbsp;&nbsp;&nbsp;(por defecto)"
+
+#: functions.php:420
+#@ evolve
+msgid "Single posts + Archive pages"
+msgstr "Mensajes Individuales + Archivo de páginas"
+
+#: functions.php:424
+#@ evolve
+msgid "All pages"
+msgstr "Todas las p&aacute;ginas"
+
+#: functions.php:435
+#@ evolve
+msgid "Single posts + Archive pages &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Mensajes Individuales + Archivo de p&aacute;ginas &nbsp;&nbsp;&nbsp;(por defecto)"
+
+#: functions.php:439
+#@ evolve
+msgid "Single posts"
+msgstr "Mensajes Individuales"
+
+#: functions.php:450
+#@ evolve
+msgid "After post content &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Despu&eacute;s del contenido del mensaje  &nbsp;&nbsp;&nbsp;(por defecto)"
+
+#: functions.php:454
+#@ evolve
+msgid "Before post content"
+msgstr "Antes del contenido del mensaje"
+
+#: functions.php:469
+#@ evolve
+msgid "Next to blog title &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Junto al t&iacute;tulo del blog  &nbsp;&nbsp;&nbsp;(por defecto)"
+
+#: functions.php:473
+#@ evolve
+msgid "Above blog title"
+msgstr "Sobre el t&iacute;tulo del blog"
+
+#: functions.php:477
+#@ evolve
+msgid "Under blog title"
+msgstr "Bajo t&iacute;tulo del blog"
+
+#: functions.php:492
+#@ evolve
+msgid "Match by categories"
+msgstr "Corresponder con Categorías"
+
+#: functions.php:496
+#@ evolve
+msgid "Match by tags"
+msgstr "Corresponder con etiquetas"
+
+#: functions.php:2822
+#@ evolve
+msgid "Primary Menu"
+msgstr "Men&uacute; Principal"
+
+#: functions.php:2879
+#@ evolve
+msgid "<div style=\"padding:5px;margin-bottom:40px;\"><h5 style=\"font-style:italic;\">Similar posts</h5><ul style=\"margin-bottom:0px;\">"
+msgstr "<div style=\"padding:5px;margin-bottom:40px;\"><h5 style=\"font-style:italic;\">Mensajes similares</h5><ul style=\"margin-bottom:0px;\">"
+
+#: functions.php:3040
+#@ evolve
+msgid "SHARE THIS"
+msgstr "COMPARTE ESTO CON"
+
+#: functions.php:3045
+#@ evolve
+msgid "E-mail"
+msgstr "Correo Electr&oacute;nico"
+
+#: functions.php:3046
+#@ evolve
+msgid "More options"
+msgstr "M&aacute;s opciones"
+
+#: header-content.php:28
+#: header-content.php:179
+#@ evolve
+msgid "KEEP IN TOUCH"
+msgstr "CONECTARSE CON"
+
+#: header-content.php:129
+#@ evolve
+msgid "Read more"
+msgstr "Leer m&aacute;s"
+
+#: header-content.php:144
+#@ evolve
+msgid "Oops, please try to refresh the page"
+msgstr "Por favor, intente volver a cargar la p&aacute;gina"
+
+#: header.php:31
+#, php-format
+#@ evolve
+msgid "Page %s"
+msgstr "P&aacute;gina %s"
+
+#: index.php:59
+#: index.php:208
+#: index.php:456
+#: index.php:480
+#: index.php:642
+#: index.php:672
+#: index.php:839
+#: no-sidebar.php:24
+#@ evolve
+msgid "Untitled"
+msgstr "Sin t&iacute;tulo"
+
+#: index.php:82
+#@ evolve
+msgid "By"
+msgstr "Por"
+
+#: index.php:84
+#: index.php:233
+#: index.php:470
+#: index.php:666
+#@ evolve
+msgid "edit"
+msgstr "editar"
+
+#: index.php:95
+#: index.php:241
+#: index.php:485
+#: index.php:676
+#: index.php:843
+#: no-sidebar.php:28
+#@ evolve
+msgid "EDIT"
+msgstr "EDITAR"
+
+#: index.php:230
+#: index.php:468
+#: index.php:662
+#@ evolve
+msgid "Written by"
+msgstr "Escrito por"
+
+#: index.php:264
+#: index.php:717
+#: index.php:852
+#: no-sidebar.php:37
+#@ evolve
+msgid "READ MORE &raquo;"
+msgstr "LEER M&Aacute;S &raquo;"
+
+#: index.php:299
+#: index.php:733
+#@ evolve
+msgid "Posted in"
+msgstr "Publicado en"
+
+#: index.php:302
+#: index.php:737
+#@ evolve
+msgid "Tagged"
+msgstr "Etiquetado"
+
+#: index.php:338
+#: index.php:578
+#: index.php:794
+#: index.php:878
+#@ evolve
+msgid "Not Found"
+msgstr "No se ha encontrado"
+
+#: index.php:344
+#: index.php:582
+#: index.php:798
+#: index.php:882
+#@ evolve
+msgid "Sorry, but you are looking for something that isn't here."
+msgstr "Lo sentimos, pero usted esta buscando algo que no esta aqu&iacute;."
+
+#: index.php:376
+#@ evolve
+msgid "Daily archives for"
+msgstr "Diario de archivos"
+
+#: index.php:378
+#@ evolve
+msgid "Monthly archives for"
+msgstr "Archivos mensuales de"
+
+#: index.php:380
+#@ evolve
+msgid "Yearly archives for"
+msgstr "Archivos anuales  de"
+
+#: index.php:384
+#@ evolve
+msgid "Posts in category"
+msgstr "Mensajes en la categor&iacute;a"
+
+#: index.php:388
+#@ evolve
+msgid "Posts tagged"
+msgstr "Mensajes etiquetados"
+
+#: index.php:394
+#@ evolve
+msgid "Search results for"
+msgstr "Resultados de la b&uacute;squeda de"
+
+#: index.php:399
+#@ evolve
+msgid "Posts by"
+msgstr "Escrito por"
+
+#: index.php:527
+#: index.php:711
+#@ evolve
+msgid "READ MORE"
+msgstr "LEER M&Aacute;S"
+
+#: index.php:558
+#: index.php:774
+#@ evolve
+msgid "Your search for"
+msgstr "Su b&uacute,squeda de"
+
+#: index.php:558
+#: index.php:774
+#@ evolve
+msgid "did not match any entries"
+msgstr "No se ha encontrado en esta página"
+
+#: index.php:563
+#: index.php:779
+#@ evolve
+msgid "Suggestions:"
+msgstr "Sugerencias:"
+
+#: index.php:565
+#: index.php:781
+#@ evolve
+msgid "Make sure all words are spelled correctly."
+msgstr "Aseg&uacute;rese de que todas las palabras est&eacute;n escritas correctamente."
+
+#: index.php:566
+#: index.php:782
+#@ evolve
+msgid "Try different keywords."
+msgstr "Intente usar palabras diferentes."
+
+#: index.php:567
+#: index.php:783
+#@ evolve
+msgid "Try more general keywords."
+msgstr "Intente usar palabras m&aacute;s comunes."
+
+#: navigation.php:12
+#, php-format
+#@ evolve
+msgid "<span class=\"nav-meta\">&laquo;</span> %link"
+msgstr ""
+
+#: navigation.php:13
+#, php-format
+#@ evolve
+msgid "<span class=\"nav-meta\">&raquo;</span> %link"
+msgstr ""
+
+#: navigation.php:23
+#@ evolve
+msgid "<span class=\"nav-meta\">&laquo;</span> Older Entries"
+msgstr "<span class=\"nav-meta\">&laquo;</span> Entradas Anteriores"
+
+#: navigation.php:24
+#@ evolve
+msgid "Newer Entries <span class=\"nav-meta\">&raquo;</span>"
+msgstr "Nuevas Entradas <span class=\"nav-meta\">&raquo;</span>"
+
+#: searchform.php:18
+#@ evolve
+msgid "Type your search"
+msgstr "Escriba el texto a buscar"
+
+#: searchform.php:31
+#@ evolve
+msgid "GO"
+msgstr "BUSCAR"
+
+#: sidebar-2.php:35
+#@ evolve
+msgid "Pages"
+msgstr "P&aacute;ginas"
+
+#: sidebar-2.php:47
+#@ evolve
+msgid "Archives"
+msgstr "Archivos"
+
+#: sidebar-2.php:58
+#@ evolve
+msgid "Recent Comments"
+msgstr "Comentarios recientes"
+
+#: sidebar-2.php:92
+#@ evolve
+msgid "Calendar"
+msgstr "Calendario"
+
+#: sidebar-2.php:102
+#@ evolve
+msgid "Meta"
+msgstr ""
+
+#: sidebar.php:34
+#@ evolve
+msgid "Recent Posts"
+msgstr "Mensajes recientes"
+
+#: sidebar.php:47
+#@ evolve
+msgid "Categories"
+msgstr "Categor&iacute;as"
+
+#: sidebar.php:57
+#@ evolve
+msgid "Tags"
+msgstr "Etiquetas"
+
+#: sidebar.php:65
+#@ evolve
+msgid "RSS Syndication"
+msgstr "Sindicaci&oacute;n RSS"
+
+#: sidebar.php:67
+#@ evolve
+msgid "All posts"
+msgstr "Todos los mensajes"
+
+#: sidebar.php:68
+#@ evolve
+msgid "All comments"
+msgstr "Todos los comentarios"
+
+#: index.php:68
+#: index.php:216
+#: index.php:531
+#: index.php:649
+#@ evolve
+msgid "Leave a Comment"
+msgstr "Deja tu cometario"
+
+#: index.php:68
+#: index.php:216
+#: index.php:531
+#: index.php:649
+#: library/functions/comments.php:29
+#@ evolve
+msgid "1 Comment"
+msgstr "!  Comentario"
+
+#: index.php:68
+#: index.php:216
+#: index.php:531
+#: index.php:649
+#: library/functions/comments.php:27
+#@ evolve
+msgid "% Comments"
+msgstr "% Comentarios"
+
+#: index.php:265
+#: index.php:719
+#@ evolve
+msgid "<strong>Pages:</strong>"
+msgstr "<strong>Páginas:</strong>"
+
+#: library/functions/comments.php:33
+#@ evolve
+msgid "% Trackbacks"
+msgstr ""
+
+#: library/functions/comments.php:35
+#@ evolve
+msgid "1 Trackback"
+msgstr ""
+

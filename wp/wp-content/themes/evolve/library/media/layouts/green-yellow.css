@@ -1,0 +1,19 @@
+/**
+ * Green + yellow
+ * 
+ */
+ 
+ 
+a, .entry-content a:link, .entry-content a:active, .entry-content a:visited, .footer .widgets-holder a {color:#519f22;} 
+.entry-content a:hover, .footer .widgets-holder a:hover, #secondary a:hover, #secondary-2 a:hover {color:#3e7a1a;}
+
+.header {background:#7eda08 url("../images/green-yellow/header-footer.jpg") repeat;border-bottom: 1px solid #80b140;}
+
+#tagline {color:#729e39;text-shadow:0 1px 0 #85e708;}
+
+#logo a, .footer a { color:yellow;text-shadow:0 1px 1px #2e5e0b;}
+#logo a:hover, .footer a:hover { color:#fff;}
+
+.footer {background:#7eda08 url("../images/green-yellow/header-footer.jpg");border-top: 1px solid #80b140;}
+p#copyright {text-shadow:0 1px 0 #85e708;color:#729e39;}
+

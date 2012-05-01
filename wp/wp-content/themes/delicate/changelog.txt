@@ -1,0 +1,94 @@
+Version 3.5.3
+- You can now upload custom favicon.ico
+
+Files changed:
+  * /functions/admin-forms.php
+  * /functions/admin-framework.php
+  * /functions/admin-menu.php
+  * /functions/admin-setup.php
+  * /functions/theme-options.php
+  * /functions/css/admin.css
+  
+  * /include/settings-theme.php
+
+Version 3.5.2
+- JS scripts are properly called with wp_enqueue_script() function
+
+Files changed:
+  * include/hooks.php
+  * header.php
+  * footer.php
+
+Version 3.5.1
+- Fixed Cufon IE9 issue
+
+Files changed:
+  * js/cufon.js
+  
+  * header.php
+   
+Version 3.5
+- Added default Home link for Navigation Menu
+- Added default Wordpress functions for Custom Headers and Backgrounds
+- Option to turn off WordPress Tagline
+- You can replace Header with Slideshow
+- Option to turn off Header
+- Slider based on Cycle jQuery
+
+Files changed:
+  * functions/css/admin.css
+  * functions/theme-options.php
+  * functions/admin-framework.php
+  * functions/admin-menu.php
+  * functions/admin-forms.php
+  * functions/admin-setup.php
+  * functions/custom-video.php
+  
+  * include/settings-theme.php
+  * include/settings-comments.php
+  * include/sidebar-init.php
+  * include/hooks.php
+  
+  * header.php
+  * archive.php
+  * index.php
+  * search.php
+  * single.php
+  * footer.php
+  * style.css
+
+Files added:
+  * js/jquery.cycle.all.min.js
+
+Version 3.4.5
+- Added option to hide header.
+
+Version 3.4.4
+- Removed TimThumb image resizer due to vulnerability.
+Replaced with the_post_thumbnail() 
+- Added post date display
+
+Version 3.4.3
+functions/admin.css
+#image_nattywp_custom_logos {max-width: 670px; max-height:auto; height:auto; width:auto;}
+
+Version 3.4.2
+Removed all deprecated WP functions
+
+Version 3.4.1
+Updated Feedburner widget. Minor code changes.
+
+Version 3.3
+New Screenshot.png added
+
+Version 3.2
+Theme fixes
+
+Version 3.1
+New Framework
+
+Version 3.0
+Updated to support all WP 3.0 features
+
+Version 1.0
+Jun 10, 2010

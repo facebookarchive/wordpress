@@ -1,0 +1,40 @@
+/* Theme Name: Graphene */
+
+
+/* =Content
+-------------------------------------------------------------- */
+
+ul {
+	margin: 10px 30px 10px 10px;
+}
+ol {
+	margin: 5px 30px 5px 0;
+}
+ol ol li {
+	margin-right: 0;
+}
+.alignright {
+	margin: 4px 1em 12px 0 !important;
+}
+.alignleft {
+	margin: 4px 0 12px 1em !important;
+}
+blockquote {
+	background: url(../../wp-content/themes/graphene/images/sprite_master-rtl.png) right -574px no-repeat #f3f3f3;
+	margin: 10px 10px 10px 0;
+	padding: 8px 10px 5px 18px;
+}
+blockquote cite {
+	text-align: left;
+}
+blockquote blockquote {
+	margin-right: 0;
+	margin-left: 10px;
+}
+p cite {
+	text-align: left;
+}
+code.block,
+pre.block {
+	padding: 15px 20px 2px 2px;
+}

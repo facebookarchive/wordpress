@@ -1,0 +1,14 @@
+- Settings page (app id, secret)
+- OG: read (API)
+- OG: publish article (API)
+- Publish article to fan page
+- Comments
+- SEO comments (on page and stored in DB)
+- Recent activity/recommendations widget
+- Like a certain Fan Page
+- Send button
+- Subscribe button
+- i18n
+- Works on mobile
+
+- Instrumentation

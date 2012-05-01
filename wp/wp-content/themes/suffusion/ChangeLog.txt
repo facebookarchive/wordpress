@@ -1,0 +1,1140 @@
+Version 4.0.7 - 20th Apr 2012
+=============================
+1.  Fixed a problem with the tile layout, where having duplicates from the static Featured Content was breaking the layout.
+
+Version 4.0.6 - 12th Apr 2012
+=============================
+1.  Fixed a minor issue with the stylesheet for handling the Suffusion meta-box.
+2.  Added a conditional check for JQuery Cycle. If the Photonic plugin is loaded, we don't load JQuery Cycle.
+3.  Added capability to store generated CSS as a CSS file.
+
+Version 4.0.5 - 04th Apr 2012
+=============================
+1.  Menus in Left Header Widgets and Right Header widgets weren't showing as dropdowns. This has been fixed.
+2.  Query Posts widget was not resetting the query, resulting in erratic behaviour in some cases.
+3.  Fixed a minor conflict with styles on the post edit screen. In some cases native WP styles were being overridden.
+
+Version 4.0.4 - 01st Mar 2012
+=============================
+1.  Tidied up some debugging errors in the widget administration screen.
+2.  Featured content, magazine template etc. were not picking up default images unless the settings were saved. This has been fixed.
+3.  Added some text in the Featured Content widget to indicate to users if they have not defined any selection criteria.
+4.  Changed the height parameter of the header to be a minimum height. This accounts for long titles etc.
+
+Version 4.0.3 - 29th Feb 2012
+=============================
+1.  Fixed an issue where in some cases a menu in the nav bars wasn't rendering properly due to enclosing <ul> tags.
+2.  Fixed a minor bug with the user profile association with the author page. The links were not showing for some users.
+3.  Added "preset-1000px" or "preset-800px" or "preset-1200px" class to "body". This will help set widths better instead of autocomputing.
+4.  Disabling the audio shortcode was preventing the audio-player JS from showing up, but there was a conditional script that was still showing up. That has been removed.
+5.  Added option to control the excerpt length for featured posts.
+6.  Added conditional ids for the <html> tag for ie6, ie7 etc.
+7.  Replaced most IE6 hacks in CSS with more elegant id-based selectors.
+8.  Cleaned up some auto-generated CSS.
+9.  Added filters suffusion_can_display_category_information, suffusion_can_display_author_information, suffusion_can_display_tag_information and suffusion_can_display_search_information
+10. Fixed a small bug with the custom layouts, where a widget in a widget area with one widget per row was resizing with window resizes.
+11. Made some corrections to RTL behaviour: header alignment has been corrected (reversed), nav alignment has been corrected (reversed).
+12. Resolved an issue that required some options to be saved multiple times to take effect.
+
+Version 4.0.2 - 21st Feb 2012
+=============================
+1.  Minor issue with the previous version: the sprites were causing an issue with icon display in some cases. I have patched that.
+
+Version 4.0.1 - 20th Feb 2012
+=============================
+1.  Fixed an issue with the Single Left, Single Right layout, where the same option was being used in both the screens
+2.  Fixed a small problem with the "Custom Layout" where the rightmost widget in a row wasn't being floated to the right if the widget
+	was not in the first row.
+3.  The Custom Layout template was not respecting the title display for the page. This has been fixed.
+4.  The Custom Layout had some issues with laying things out on IE. This has been addressed.
+5.  Added translations for the Admin walker as per previous Trac ticket
+6.  Added YAPB attachment support for image retriever.
+7.  Changed some miscellaneous strings in the back-end for consistency and correctness
+8.  Fixed a "flash of unstyled content" issue in menus for IE.
+9.  A label in the featured content widget was incorrect: it read "Time for each post display" instead of "Delay for each post display".
+10. Added "<post-type>-<post-id>" to the context variable.
+11. Added the capability to disable the navigation bars, the headers and footers for pages.
+12. Added option to style the title of the Custom Layout templates.
+13. Added Google to allowed list of user contact methods.
+14. Added "authorship" support for Google Rich Snippets.
+15. Numbered index in static featured content was not showing up for "Page of Posts" template.
+16. Fixed a Small issue with featured content hover over controller icons.
+17. Moved Google Analytics script to <head> due to a change from Google.
+
+Version 4.0.0 - 10th Feb 2012
+=============================
+1.	Created a new file called functions/framework.php to control function loading depending on admin/non-admin screens. This mostly has some functions moved from functions.php.
+2.	Created a new file called functions/admin.php, which contains functions moved from functions.php. This is only loaded in admin screens, and mostly has functions moved from functions.php.
+3.	Created a new file called functions/template.php, which contains functions moved from functions.php. This is only loaded in the front-end, and mostly has functions moved from functions.php.
+4.	Created a new file called functions/magazine-functions.php, which contains functions used only in the Magazine template.
+5.	Extended Layout capabilities to pages. This deprecates the Page Template functionality.
+6.	Created a new tab called "Layouts" in the options section and moved the erstwhile page template options to it.
+	a.	Moved "No Sidebars", "Single Left Sidebar", "Single Right Sidebar", "Single Left, Single Right Sidebar", "Double Left Sidebars" and "Double Right Sidebars" options to this.
+	b.	Moved sidebar 1 and sidebar 2 positioning options to this section under "Default Sidebar Layout".
+	c.	Moved page width settings from "Sizes and Margins" to "Default Sidebar Layout".
+	d.	Moved layout options from Other Graphical Settings to Layouts.
+7.  Moved typography capability from "Skinning" to a new tab, "Typography". This should stop Suhosin issues.
+8.  Fixed a bug in header.php where the correct colour scheme CSS class was not being assigned to the body tag.
+9.  Added an "excerpt-more" class to the anchor for the "more" link for excerpts.
+10. Added a lot of new options to the Featured content (both, widgets and static):
+	a.	Options to overlay the post pager and the previous/next/pause controls
+	b.	Options to display the post pager as "bullets" instead of numbers
+	c.	Options to display the previous/next/pause controls as icons instead of text
+	d.	Options to position the post pager and the controls in the left, right or center.
+11. Optimized some custom-generated CSS that controlled the widths of the widgets in the widget areas above header/below footer etc.
+12. Added "suffusion-additional-options" theme support so that child themes can disable the "Additional Options for Suffusion" box. In addition
+	the options in that section are separated into tabs.
+13. Removed browser-specific CSS3 definitions for borders, opacity and shadows. Removed irrelevant CSS for nav bars.
+14. Modified the tile layout to use divs instead of tables. Also added the capability to line up the "Full story" buttons with the bottom.
+15. Modified all components of the Magazine template to use divs instead of tables. Added capability to position buttons at the bottom.
+16. Modified the Query Posts widget:
+	a.  Added options to display just the thumbnail
+	b.  Added options to display the full post
+	c.  Allow entering empty titles
+	d.	Allow use of all post types
+17. Added new "Custom Layout" template with multiple widget areas.
+18. Added capability to show an explicit "Read More" after each excerpt.
+19.	Modified the code to use add_help_page for WP 3.3 compatibility.
+20. Dropped code for versions older than WP 3.1 (including a JQuery UI 1.7.3 file)
+21. Added new Mega Menu capability via the WP menus and widget areas.
+22. The "Continue Reading" string was not showing up for translation.
+23. Added code to remove empty widget areas such as Widget Area Below Header etc.
+24. Took out "Custom Types" functionality and made it a new plugin.
+25. Removed the option to select the sidebar layout from Templates -> Magazine. Now the Magazine template must be assigned a layout through the layout options.
+26. Added the capability to toggle the breadcrumb display for pages.
+
+Version 3.9.6 - 26th Dec 2011
+=============================
+1. Fixed a problem with getting custom fields - some fields were getting ignored, resulting in incorrect legacy thumbnails etc.
+
+Version 3.9.5 - 13th Dec 2011
+=============================
+1. Fixed a fatal error that occurred when a user had rotating images defined and tried to save settings.
+2. Fixed a bug in the static tabbed sidebar functionality where the custom tab names were not being picked.
+3. Tall site footers were getting cropped. This has been fixed.
+4. Fixed a minor problem with nesting of child pages in the theme settings.
+
+Version 3.9.4 - 12th Dec 2011
+=============================
+1. Removed deprecated function call for add_contextual_help.
+
+Version 3.9.3 - 29th Nov 2011
+=============================
+1.	Corrected a minor styling issue with buttons.
+2.	Corrected a minor styling issue with padding for "bubble" type comments.
+3.	Removed ability to turn off caching of dynamic options. They are now cached always.
+4.	Docking boxes moved to custom/dbx.php
+5.	Optimized the fetching of post meta information at various places.
+6.	Optimized how options are saved and CSS is generated.
+7.	Reduced file inclusion load on the options pages.
+8.	Added capability to turn off automatic thumbnail generation for sizes that are not frequently used.
+9.	Deleted these files because they were no longer being used: link.png, larrow.png, rarrow.png, newer-page.png, older-page.png,
+	newer-pages.png, older-pages.png, check.gif
+10.	Added support for YouTube and Google+ in the "Follow Me" widget. Also added the capability to open the follow links in a new window.
+11.	Optimized the hook invocation by ensuring that some hooks were only defined if is_admin was not true.
+12. Added WP 3.3 compatibility for JavaScript enqueueing.
+13.	Fixed a bug with the "Disable comments on xyz attachments" feature, that was still showing the link to "Add Comments".
+14.	Fixed a bug with the Minima skin that was causing the comment reply button to lose the text color.
+15.	Fixed an issue with the "Author above comment" type of display for comments in Chrome.
+16.	If the drop-down menu was very long, it automatically introduced a scrollbar and some empty space at the bottom. The
+	behaviour has been modified for Firefox and IE, where the scrollbar only shows upon hovering over the menu. Chrome still has the issue.
+
+Version 3.9.2 - 19th Oct 2011
+=============================
+1. 	Made the loading of the Google Fonts' CSS conditional. Otherwise a link without parameters was being generated, causing a useless server round-trip.
+2. 	Added an option to disable the audio shortcode. This lets you avoid conflicts with other plugins that define the short code, and it also
+	prevents the loading of the JS file unnecessarily. See Other Graphical Elements -> Post Formats for details.
+3. 	Fixed an issue with floating the wide sidebar - if not floated, this was conflicting with certain plugins.
+4. 	Added more Google fonts.
+5. 	Switched drop-caps off by default.
+6.	Added options to disable advanced gallery template and not randomize the thumbnails.
+7.	Added explicit licensing information to readme.txt for the icon sets and the Audio Player.
+
+Version 3.9.1 - 15th Oct 2011
+=============================
+1. Introduced a new skin called Photonique, well-suited for photo-blogging. There is a bonus CSS file with charcoal tones that users can use if they wish.
+2. Introduced a new style of comment forms, where the labels are inside the input fields. See Back-end -> Comment Settings -> Comment form labels styles
+3. Introduced a couple of new styles of comment display, where the comment is displayed as a speech bubble with the author information above or below it.
+   See Back-end -> Comment Settings -> Comment Styles.
+4. Introduced the capability to position the drop-down menu in "Navigation Bar Below Header" at the left, center or right.
+5. Introduced a new capability to position the drop-down lists in "Navigation Bar Above Header" at the center.
+6. Introduced a new byline style, where the byline is displayed in a single line above the post or below the post.
+7. Renamed the "Top Navigation Bar" to "Navigation Bar Above Header" and the "Main Navigation Bar" to "Navigation Bar Below Header".
+8. Fixed a bug with the post_class filter to correctly assign the "full-content" and "excerpt" classes
+9. Added a "no-title" class to the post_class filter.
+10. Added new Typography options:
+	a. 	Renamed section under "Theme Skinning" from "Body Fonts" to "Typography".
+	b. 	Added several Google Fonts
+11. Added drop-caps support by content display type and by post format type.
+12. Added special styling for the Status post format.
+13. Added special support for the Audio post format.
+	a. 	Added a new short-code "audio" that is defined only if the JetPack audio short-code is not there and the Audio Player plugin is not installed.
+	b. 	If a post with "audio" post format has an [audio] shortcode, or has an audio-file as an attachment or has a URL linking to an audio file, that file is
+		shown in an audio player.
+	c.	No support for the HTML5 <audio> tag because Suffusion doesn't do HTML5.
+14. Added special styling for the Gallery post format.
+15. Improved EXIF display by making it toggled.
+16. Added new hook for skin-specific setup, suffusion_skin_setup_{$skin_name}
+17. Fixed a bug where the navigation bar was floating to the left in certain conditions.
+18. Added new icon sets, based on StudioPress' GPL icons. See Skinning -> Icon Sets.
+19. Added minor features to Featured Content to let images be centered and/or occupy the full-width of the slider.
+20. Added pseudo-capability to disable comments for images and other attachments. Comments will still be enabled through the back-end,
+	however users can choose to hide the comment form on the front-end if they wish.
+21.	Bundled 2 post format icon sets with the theme. These can be used with the post format icon placeholders, which are sprite-enabled. Native integration will
+	be provided in the next release.
+22. Minor modifications: "Theme Skinning" is called "Skinning", "Sidebar Configuration" is called "Sidebars" and "Back-end Settings" is called "Back-end"
+23. Fixed a bug that was preventing the skinning of the date box.
+24. Made improvements to the mosaic layout. Added Fancybox and Colorbox support
+25. Fixed a bug with the navigation bars that was preventing the borders from being overridden in the options.
+
+Version 3.9.0 - 03rd Oct 2011
+=============================
+1. Moved these functions back to functions.php from suffusion-options-page.php: suffusion_get_formatted_link_array, suffusion_get_formatted_wp_menu_array.
+   Certain plugins were failing otherwise.
+
+Version 3.8.9 - 26th Sep 2011
+=============================
+1. Changed CSS invocation hook from wp_print_styles to wp_enqueue_scripts
+2. Fixed an issue that was showing errors if a different theme was activated after Suffusion in some instances.
+
+Version 3.8.8 - 24th Sep 2011
+=============================
+1. The last couple of submissions were throwing fatal errors. This version fixes them.
+
+Version 3.8.6 - 24th Sep 2011
+=============================
+1. Fixed a bug in the previous submission that wasn't saving the generated CSS.
+
+Version 3.8.5 - 24th Sep 2011
+=============================
+1. Fixed a bug in the previous submission caused due to moving suffusion_get_allowed_pages out of functions.php. The function has been moved back.
+
+Version 3.8.4 - 23rd Sep 2011
+=============================
+1. Removed all BP CSS from the theme.
+2. Added excerpt / full-content class to post_class filter.
+3. Fixed a breadcrumb display bug for pages, where the breadcrumb was showing up even if disabled.
+4. Created new template files for post formats. Currently files exist for default and chat post formats.
+5. Added post format styling for chats.
+6. Added placeholder to fit a post format icon on posts.
+7. Added the skin name as a class for the return of body_class. Also made suffusion_get_pseudo_template_class return array instead of string.
+8. Renamed suffusion-classes.php to suffusion-css-generator.php because there was only one class in that file.
+9. Removed dynamic retrieval of theme version. This is now set up via a "define" call.
+10. Separated most sidebar content into their own sidebar-* files, sidebar-above-footer.php, sidebar-below-header.php,
+	sidebar-nav-main-right.php, sidebar-nav-main-left.php, sidebar-nav-top-left.php, sidebar-above-header.php, sidebar-in-header.php
+11. Streamlined suffusion-options-page.php by moving JS code out to admin.js. The previous file suffusion-misc.js has been merged with this file.
+12. Deleted redundant functions because they are not used: suffusion_update_available, suffusion_nr_entity_prepositions.
+13. Moved these functions from functions.php to suffusion-options-page.php: suffusion_get_allowed_pages, suffusion_get_formatted_link_array,
+	suffusion_get_formatted_wp_menu_array
+14. Fixed a bug in the navigation menus, which weren't accepting the "highlight" colour.
+
+Version 3.8.3 - 14th Sep 2011
+=============================
+1. Removed a $_SERVER check from comments.php (Trac ticket #4622).
+2. Ensured that wp_head() is the last call before </head> (Trac ticket #4622).
+3. Removed all function declarations from magazine.php. Some have been moved to functions.php and for the others the code has been directly inserted into the loops (Trac ticket #4622).
+4. Fixed a problem with the display of asides and other post formats in Minima (Trac ticket #4622).
+5. Fixed an issue where if the last item in a post was a floated image, things were not clearing properly (Trac ticket #4622).
+6. Fixed an issue with nested comment styling (Trac ticket #4622).
+7. Fixed table styling in main content and comments (Trac ticket #4622).
+8. DID NOT Introduce support for native WP header customization (Trac ticket #4622). The functionality being implemented in the theme is "Custom Header BACKGROUND",
+   not "Custom Image Header". See http://lists.wordpress.org/pipermail/theme-reviewers/2011-September/006871.html and the ensuing thread,
+   particularly http://lists.wordpress.org/pipermail/theme-reviewers/2011-September/006876.html, where I was asked to build something custom.
+9. Introduced support for native WP background customization (Trac ticket #4622). If there is a custom background the theme background settings are ignored. The theme options have been retained for backwards compatibility.
+10. Minor bug fix to allow displaying of the "Links" title in the "Static Tabbed Sidebar"
+11. The global variable "suffusion_options" had been erroneously renamed to "rg_options" in the last version. This has been rolled back.
+12. Changed login.php to redirect to home_url instead of site_url
+13. Added "CDATA" tags to the Twitter widget so that the code passes XHTML validation.
+14. Fixed a bug in the "Featured Posts" widget where the "Previous" and "Next" buttons were only showing if the slider index was activated.
+15. Fixed a bug in the "Query Posts" widget where the posts were not displaying in a random order if a random order was requested.
+16. Fixed a bug in image thumbnail functionality that wasn't escaping special characters in the image "alt" attribute.
+17. Minor change: text domain added to translation string in static tabbed sidebar.
+18. Changed the use of TEMPLATEPATH to get_template_directory() and STYLESHEETPATH to get_stylesheet_directory();
+19. Moved out Tile/Magazine bylines to their own template file (byline-tile.php)
+20. Moved out pagination of Mosaic layout, comments and posts to their own template files - pagination-mosaic.php, pagination-comments.php and pagination-posts.php.
+21. Moved out SEO options to its own template file, seo.php.
+22. Moved out pullout style meta information display (suffusion_meta_pullout_for_post and suffusion_meta_pullout_for_page) into its own template files, pullout.php and pullout-page.php.
+23. Moved out Navigation Menu functionality to its own template file, navigation.php.
+24. Moved out the post header (title + meta) and post footer (meta) to their own templates, post-header.php and post-footer.php
+25. Moved out the breadcrumb functionality to its own template, breadcrumb.php
+26. Moved out the Previous/Next post functionality to its own file, prev-next.php
+27. Moved out functions designed for potential BP child themes to a separate file, bp-integration.php
+28. Split out BuddyPress styles to another sheet called bp.css. This isn't a BP theme by default, so BP styles will only be loaded if BP is active.
+	Also added "function_exists" checks to all the functions to ensure backwards compatibility.
+29. Deleted unused method suffusion_comment_pagination.
+30. Changed code for printing the title to use wp_title() instead of get_bloginfo(). This is to ensure full compatibility with SEO plugins.
+31. Removed redundant function suffusion_in_place_post_navigation.
+32. Use one instance of meta-box callback in Edit Post/Edit Page instead of 2.
+33. Changed default formatting of text to be left/right instead of "justify".
+34. Pushed the file inclusion in suffusion-widgets.php to happen upon the "widgets_init" action. This will ensure that the files are included only on screens that need it.
+	This speeds up a lot of the loading process.
+35. Added option to disable the aspect ratio preservation of images, under Other Graphical Elements -> Miscellaneous.
+36. Did major stylesheet cleanup to remove redundant styles. Also optimized the menu CSS
+37. Removed the FAQ section from the options panel (it was dated).
+38. Added new breadcrumb capability to display on archive views, custom post types, individual posts etc. This is superseded by Yoast Breadcrumbs and Breadcrumb Trail.
+39. Added option to hide the "Allowed HTML tags" message below the comment form.
+40. Fixed a minor issue with label styling in comment forms. All labels in the comment form were getting assigned a style whether they belonged to Suffusion or not.
+41. Fixed a bug where the "No Sidebars" layout was not being picked by single posts.
+42. Fixed a bug in the magazine layout and the tiled layout that showed up if the # of sidebars in that layout was custom.
+43. Added option to disable Featured Content on second/third etc pages from an archive view (disabled by default).
+44. Added option to disable full content posts on second/third etc pages of a tiled/list/mosaic layout (disabled by default)
+45. Deleted slider-init.js and merged its contents with suffusion.js. Also moved all JS variable definitions to a wp_localize_script call
+46. Disabled version checker because SimplePie was causing memory issues for some users.
+47. Added capability to export id-based options (featured content, custom menus etc)
+48. Converted a lot of images to sprites in style.css.
+49. Changed the definition of suffusion_replace_page_with_alt_title and suffusion_unlink_page to use cached post-meta information
+50. Updated the translation file.
+
+Version 3.8.2 - 21st Jul 2011
+=============================
+1. Added an "Announcements Feed" custom header support for the theme and any child theme of it.
+2. Made "Suffusion_Widgets" a new class, in preparation of an upcoming plugin for Suffusion's widgets. Moved suffusion-widgets.php to the widgets folder.
+3. Fixed an issue with the featured posts excerpt, which was not honouring the word limit defined in the options.
+4. Added a new "Query Users Widget" to display site users and/or a user profile.
+5. Added a new "Child Pages Widget" to display child pages for a current page. The title of the widget supports short-codes, so you
+   can say [suffusion-the-post display='title'] for the title to automatically pull the title of the parent page.
+6. Added support for manual excerpts in pages.
+7. Changed code to not store "default" for a post template while saving.
+8. Renamed the "Category Posts" widget to "Query Posts". Added capabilities to display recent posts, random posts
+9. There was a file called "mosaic.php" that had erroneously been left in the theme. It has been deleted.
+10. Cleaned up miscellaneous comments and redundant code in the admin files.
+11. Removed the use of "jquery-dialog" from the admin panel. The screen-specific help texts have been added via the add_contextual_help function.
+	Some admin panel text markup was changed to make it look better in the contextual help screen. This should make the back-end slightly faster.
+12. There was a problem with the "No Sidebars" template in IE7, where if there was no widget area below header/above footer, and if
+	comments were disabled, the content boxes shrunk to the width of the title.
+13. Added a fix for an IE8 bug that doesn't show post thumbnails when floated.
+14. Updated translation file.
+
+Version 3.8.1 - 05th Jul 2011
+=============================
+1. Fixed a bug that was causing a "-->" to appear in IE9.
+2. Replaced deprecated call to caller_get_posts with ignore_sticky_posts in the Featured Content.
+3. Replaced the JQuery Cycle scripts with the older version - the new one wasn't working in some cases.
+4. Replaced output buffering where possible (the_tags, the_category, suffusion_print_author_byline). A couple of uses still remain,
+   but those are for cases where there is no "non-echoing" getter.
+5. Added classes to the post_class response to show the category id (category-xx-id), sequence number of the post (post-seq-1, post-seq-2 etc)
+   and post parity (post-parity-odd, post-parity-even).
+6. Fixed a bug that was causing the Featured Post Widget in a flattened "Widget Area Below Header" and "Widget Area Above Footer" to get squished.
+7. Fixed a bug that would cause incorrect widths and a JS error in IE6.
+8. Added a wp_reset_query() to the "Category Posts" widget to account for any modifications to the query parameters.
+
+Version 3.8.0 - 29th Jun 2011
+=============================
+1. Fixed a small bug in the Meta Box for posts, where one input field was being printed twice.
+
+Version 3.7.9 - 28th Jun 2011
+=============================
+1. Fixed a problem with font names being escaped in font control options in the back-end.
+2. Fixed a problem with IE7 in the "No Sidebars" template with the "Widget Area Below Header" enabled.
+3. Removed the "notifier failed" message in the admin panel. The upgrade notifier now fails without alarming the user.
+4. Extended WPML admin string translation support to fields of type "textarea". Earlier this was set only for "text" fields.
+5. Fixed a problem with widget styles in the bottom sidebars. They were taking the styles of the top sidebars earlier.
+6. Made a couple of corrections to use get_the_title() instead of $post->post_title, to ensure that filters are applied correctly.
+7. Made some minor CSS optimizations.
+8. Fixed a markup bug in the pullout functions. They were missing "</ul>"
+9. Fixed a bug in the image resizer that was creating multiple copies of a remote image for resizing.
+10. Added byline customization for Custom Post Formats (Other Graphical Elements -> Post Formats)
+11. Added capability to display a permalink if there is no post title: this is enabled by default.
+12. Edit link used to be displayed only on singular views. This has been changed to be displayed always when logged in.
+13. Introduced a capability to search for options in the admin panel. This is available for WP 3.1 and higher.
+14. Fixed a bug in the Sitemap template, which wasn't displaying the sections without saving the options for that section twice.
+15. Added byline support for Tile Layout and the Magazine Template.
+16. Added thumbnail support for Category Posts widget.
+17. JQuery Cycle by default terminates if there is only one image. A fix has been put in place to show the single image if this is the case.
+18. Added capability to specify number of sidebars on single post views.
+19. Added capability to specify number of sidebars in the Magazine template.
+20. Added rounded corners support for IE9.
+21. Added character decoding for "More" tag so that HTML can be processed.
+22. Deprecated script enqueueing in footer.
+23. Added new filters 'suffusion_comment_form_fields', 'suffusion_permalink_text'.
+24. Added ability to hide post title for individual posts.
+25. Modified the Twitter widget to use the REST API and JSON instead of the the Search API and PHP. The widget now shows avatars for users
+26. Replaced use of MS expressions in the theme by JS. Also enqueued the IE-specific JS instead of directly including it, removed belatedpng.js.
+27. Fixed a small bug that was showing incorrect default colours in the admin panel for backgrounds, borders and fonts.
+28. Added capability to define custom image sizes for tile layouts (earlier this was inheriting sizes from the Magazine template)
+29. Added a search form to the 404 page
+30. Changed occurrences of checked="checked" and selected="selected" to checked() and selected()
+31. Removed reference to JQuery Accordion from JQuery UI JS files, since the library was not being used.
+32. Added new Mosaic layout for archive displays
+33. Modified options panel slightly to have an unintrusive "button bar". Also made the options panel flexible-width instead of fixed width.
+34. Added a new Flickr widget and a new Flickr shortcode, "suffusion-flickr"
+35. Fixed a small bug in the "Alternate page titles"
+36. Fixed a bug in the image resizer that was creating multiple copies of files if the extension was uppercase
+37. Added capability to display image sizes for image attachment pages
+
+Version 3.7.8 - 28th Feb 2011
+=============================
+1. Thumbnail issue patched: if images were not in the template path but in the local directory, they were not being picked up.
+2. Thumbnail issue patched: if images were being pulled from an HTTPS source they were not being resized.
+3. Colors were not getting correctly assigned to elements. Now fixed.
+4. Reverted to JSColor from Farbtastic for miscellaneous color-related issues.
+5. Eliminated use of JQuery Uniform for back-end beautification. Will reconsider this when the code stabilizes.
+6. Added a check in suffusion_enqueue_styles for is_admin, otherwise some plugins might invoke wp_print_styles explicitly.
+7. Fixed problem with option setting/resetting overwriting options on other pages etc.
+8. Not using cookies any more to store last selected JQuery tab, because of some instances where the cookies don't work.
+9. Fixed a bug where the Widget Area Above Footer was not being assigned margins correctly.
+10. The quotes around font names were being escaped. Now this shouldn't be happening.
+11. The CSS auto-generation was not reflecting the latest options. This has been fixed.
+12. Fixed issues with sub-menu styling in standard skins.
+
+Version 3.7.7 - 22nd Feb 2011
+=============================
+1. Changed the user of "instanceof" to is_wp_error, so that the code doesn't break for PHP 4.x.
+
+Version 3.7.6 - 22nd Feb 2011
+=============================
+1. Put in a critical workaround for users getting a 404 error for jquery.cookie.js in the admin panel.
+2. Fixed a bug in the image resizing algorithm, which was failing in scenarios where image preference sequence was not defined.
+3. Fixed a bug wherein the saved options were not being reflected in the auto-generation mode.
+4. Added basic post-format support without any special treatment to prep for WP 3.1, so that users can create posts with post formats. They will be styled in the next release.
+5. Made minor tweaks to $content_width to adjust for padding.
+
+Version 3.7.5 - 21st Feb 2011
+=============================
+1. Changed names of internal style.css files to skin.css
+2. Added call to get_users() in Authors template, in addition to 3.1 deprecated function get_users_for_blog
+3. Switched a few default options: menus for pages and categories are now hidden by default.
+
+Version 3.7.4 - 20th Feb 2011
+=============================
+1. Changed use of get_bloginfo('wpurl') to site_url() as per Theme Review recommendations.
+2. Changed use of get_bloginfo('template_url') to get_template_directory_uri() as per Theme Review recommendations.
+3. Moved translations out of the core theme.
+4. Fixed a bug with the SEO options where disabling the SEO options was removing the title from the pages.
+5. In the headline box the first headline image was not being selected by default. This has been fixed.
+6. Made JQuery Masonry "opt in" instead of "opt out", because of issues faced by people in the default behaviour.
+7. Made function names consistent (ensured that all functions and classes began with the name "suffusion" or "suf")
+8. Removed redundant use of $themename and $shortname. These are always constant (Suffusion and suf respectively), hence removal means fewer PHP evaluation calls.
+9. Added capability to upload images from admin panel for theme skinning options.
+10. Replaced home-grown options interface with WP's Settings API.
+11. Patched a problem that wasn't showing nested pages in the options for the navigation bar setup (can't see this, though, because of the JQuery Uniform plugin).
+12. Removed existence check for get_template_part (3.0.0 function)
+13. Removed existence check for comment_form (3.0.0 function)
+14. Removed existence check for wp_nav_menu (3.0.0 function)
+15. Removed existence check for wp_login_form (3.0.0 function)
+16. Removed existence check for get_nav_menu_locations (3.0.0 function)
+17. Removed existence check for wp_get_nav_menus (3.0.0 function)
+18. Removed existence check for add_theme_support (2.9.0 function)
+19. Removed existence check for get_the_post_thumbnail (2.9.0 function)
+20. Removed existence check for register_post_type (3.0.0 function)
+21. Removed existence check for register_taxonomy (3.0.0 function)
+22. Removed existence check for post_type_exists (3.0.0 function)
+23. Removed existence check for register_nav_menu (3.0.0 function)
+23. Removed existence check for WP_Widget (2.8 class)
+24. Made modifications to the blog title to use h1/h2 tags instead of div.
+25. Moved "Height of Header Image" and "Empty Space Between Top of Page and Header" to Header Customization from Sizes and Margins.
+26. Reorganized the options menu.
+27. Changed use of get_bloginfo('url') and bloginfo('url') to home_url() as per Theme Review recommendations.
+28. Fixed a bug that was causing the $post variable to be overwritten if Ad Hoc Widgets were included.
+29. Added a "New Version Notifier" that shows a link to the release notes for the latest version of the theme.
+30. Changed color picker library from JSColor to Farbtastic.
+31. Added options to control "Posted By" format, i.e. Posted by Adam, or Posted on dd/mm/yyyy etc.
+32. Added capability to translate strings set in the back-end if the WPML plugin is installed.
+33. Added dual support for JQuery UI 1.7.3 and 1.8.7 (in case theme is being used for WP 3.1)
+34. Added capability to display a different number of sidebars between the blog/category/tag/date/search page and the default settings.
+35. Replaced TimThumb with an image resizing mechanism that uses WP's inbuilt resizing capabilities.
+36. Added zoom-crop (a.k.a. proportional resizing) support for featured content images, magazine headlines, magazine excerpt images. Doesn't work for native WP featured images.
+37. Added capability to control the number of headlines in the Magazine template.
+38. Added notifier for Suffusion BuddyPress Pack if BP is being used.
+39. Removed the option to load CDN JQuery, because of issues with version management.
+40. Removed JS compression option for WP's enqueued files (GZip).
+41. Removed CSS compression support (GZip and minify).
+42. Removed Site compression support (GZip).
+43. Replaced all internal fopen calls. CSS is now displayed using template_redirect
+44. Replaced CURL calls in the Twitter widget to use WP's native libraries.
+45. Added filter hooks suffusion_author_information and suffusion_category_information for archive views.
+46. Renamed classes category-info and tag-info to info-category and info-tag respectively, to avoid styling clashes with categories and tags named "info"
+47. Added more options for auto-generation of CSS (inline, linked etc)
+48. Added option to force compatibility mode in IE8.
+49. Changed translation domain to "suffusion" from "suf_theme".
+50. Fixed a bug that was not displaying the page name in the HTML title if BP was being used.
+
+Version 3.7.3 - 17th Dec 2010
+=============================
+1. The security check in style.php was not done in the last release - doing it properly this time.
+2. Fixed a problem that was making the edit link "unclickable" on pages.
+
+Version 3.7.2 - 15th Dec 2010
+=============================
+1. Added a security check to style.php so that only CSS files are read.
+2. Fixed a layout problem on IE 7 with the pullout-style dates.
+3. Changed an icon file's name to be all lower-case because it wasn't being picked up in Unix-based installations.
+4. Fixed a bug in the SEO settings that was causing a clash of the theme's SEO settings with SEO plugins.
+
+Version 3.7.1 - 29th Nov 2010
+=============================
+1. Removed link to DryIcons in the Meta widget, as per review recommendations.
+2. Added empty styles for .sticky and .bypostauthor, as per review recommendations.
+
+Version 3.7.0 - 27th Nov 2010
+=============================
+1. Fixed a bug that was positioning the double-right-sidebars outside the wrapper.
+2. Changed use of get_option("home") to home_url as per Theme Review recommendations.
+3. Changed use of bloginfo('template_directory') to get_template_directory_uri() as per Theme Review recommendations.
+4. Changed use of bloginfo('stylesheet_directory') to get_stylesheet_directory_uri() as per Theme Review recommendations.
+5. Changed use of get_bloginfo('rss2_url') to get_feed_link('rss2') as per Theme Review recommendations.
+6. Removed existence checks on 'register_sidebar' and 'dynamic_sidebar' since these have existed from WP 2.2.
+7. Removed existence checks on other function calls, from versions older than 2.8.
+8. Enabled JQuery Masonry for multi-column widget areas to balance CSS layout issues.
+9. Fixed a bug that was preventing the Google Translator widget from loading.
+10. Added filters for better child theme template support: suffusion_can_display_top_navigation, suffusion_can_display_main_navigation, suffusion_can_display_sliding_panel,
+   suffusion_can_display_left_sidebars, suffusion_can_display_right_sidebars, suffusion_can_display_widgets_above_header, suffusion_can_display_widget_area_below_header,
+   suffusion_can_display_widget_area_above_footer, suffusion_can_display_open_header, suffusion_can_display_closed_header, suffusion_can_display_breadcrumb_navigation,
+   suffusion_can_display_hierarchical_navigation
+11. Added capability to display post and page information in a "pullout" style.
+12. Added new attachment template with special handling for known mime types.
+13. Fixed a bug that was preventing the navigation bar from stretching across the width of the wrapper if header was inside the wrapper.
+14. Optimized CSS code by removing a lot of declarations involving the sidebar ids, made minor style adjustments.
+15. Fixed a bug that was preventing the disabling of the SEO-specific document title.
+16. Added a tweak to remove the "height" HTML attribute from images. This will ensure that if the max-width is set for images, it doesn't impact the aspect ratio.
+17. Fixed a bug where the home page was not getting highlighted if it was a text link.
+18. Fixed a minor bug that was causing a gap to appear between the navigation menus and the border below.
+19. Fixed a bug that was causing a "Call-time pass-by-reference has been deprecated" under some conditions.
+
+Version 3.6.9 - 10th Nov 2010
+=============================
+1. Fixed a bug that was causing menu tabs to repeat if there were more than 1 WP 3.0 menus on the site.
+2. Fixed a bug that was causing the "Widget Area Below Header" to take the width of the "main-col" and show white space on the side.
+3. Fixed a bug that was causing the "Widget Area Above Footer" to overlap the sidebar.
+4. Fixed a bug that was preventing the post footer (Posted By, Tags) from showing up.
+5. Fixed a bug that was causing the layout to break if the tabbed sidebar was selected. Things work fine now except in IE6 when the tabbed sidebar is on the left.
+6. Fixed a bug that was leaving a padding on the sides for the "No Sidebars" template
+7. Fixed an old bug where the excerpt title in the tiled layout was incorrectly taking the alignment of the excerpt title from the Magazine template
+8. Fixed a bug that was causing excerpt images in the tiled layout to become very tiny.
+
+Version 3.6.8 - 7th Nov 2010
+============================
+1. A one-line bug-fix for a problem in menu generation
+
+Version 3.6.7 - 7th Nov 2010
+============================
+1. Changed footer to link to only one external site as per theme review guidelines.
+2. Fixed an issue with width computation on specific templates, caused due to applying incorrect filters
+3. Featured content links were not getting the right color. That has been fixed.
+4. Fixed an error in "charset" syntax in header.php, style.php and rounded-corners.php
+5. Enhanced navigation bar options to let you pick "None" and "Exclude" from lists of pages. This is mainly for optimization of queries.
+6. Remodeled navigation bar back-end to use native WP calls such as wp_list_pages, wp_list_categories, wp_list_bookmarks and wp_nav_menu.
+   This will cause some loss of flexibility, but it will significantly reduce the number of queries.
+7. Removed the "rolled-up" option for WP 3.0 menus.
+8. Removed the option to not use body_class(). Now body_class will always be used.
+9. HTML elements "legend" and "fieldset" were unstyled earlier. This has been fixed.
+10. List layout style - count was being offset by 1 if all posts were not being displayed (top post was being ignored, 11 posts instead of 10 was causing errors on second page)
+11. Highlighting of navigation bar items was not happening on Minima. This is now fixed.
+12. Selected menu items in WP 3.0 menus were not getting highlighted. This has been fixed.
+13. Fixed a problem with activity drop-down menus in case BP is enabled.
+14. For all scripts included with wp_enqueue_script the appended version has been removed.
+15. Fixed a bug that wasn't taking 0 for legitimate values of widths.
+16. Changed HTML markup to have content before sidebars
+17. Incorporated options for Fluid Width
+18. Added capability to strip out the "title" upon hovering in the navigation bar.
+19. Added custom callback function for comments section to facilitate better styling. Modified the comment styling.
+20. There were some issues with the values in "Theme Skinning" passing on to the highlighted item in the navigation bar. This has now been fixed.
+21. Updated Spanish and French translations.
+22. BuddyPress compatibility problems fixed for Edit Profile and Create Profile page.
+23. BuddyPress compatibility enhanced for list of messages.
+24. Changed default font to Arial from Trebuchet
+
+Version 3.6.6 - 10th Sep 2010
+=============================
+1. Added filtering capability to $template_prefixes and $template_sb, so that users can define custom layouts in child themes with different sidebar settings.
+2. Fixed a problem with the auto-generated CSS file not being accessible in Multi-site installations or when zipping was switched off.
+3. Switched "Opacity" to RGBA for transparency in Theme Skinning. This still doesn't work for IE, but earlier the functionality was broken for other browsers too.
+4. Added filter to suffusion_set_title so that the title can be changed through filters for certain pages.
+5. Sidebars and Widgets moved to new menu item, sidebar diagram updated.
+6. Added capability to display user info on either posts or pages (earlier it would either be displayed on both or none).
+7. Added capability to change the order of displayed content in the Magazine template.
+8. Added new HTML Sitemap template.
+9. Added capability to style the body footer - inside wrapper, outside wrapper etc.
+10. Moved buttons on the options page to a draggable window on the side.
+11. Added skinning options for navigation bars.
+12. Added check_admin_referer and check_ajax_referer calls to validate nonce values on options pages.
+13. New Traditional Chinese translation, updated German translation.
+
+Version 3.6.5 - 30th Aug 2010
+=============================
+1. Emergency code fix for custom-styles.php bug (not invoking the right functions).
+2. Added checks for check_admin_referer to handle nonces.
+
+Version 3.6.4 - 29th Aug 2010
+=============================
+1. Fixed a bug in XHTML validation with compression enabled.
+2. Changed code to create a CSS file from custom-styles.php. Now the styles will not be directly printed in the source.
+3. Fixed a bug that was showing a blank page in case of empty archives (nothing found in search results etc).
+4. Added option to include duplicate posts in content if featured content includes those posts.
+5. Fixed a WP backwards-compatibility bug with menus (versions of WP older than 2.9 were breaking)
+6. Fixed a PHP backwards-compatibility issue with memory_get_usage (not available for really old versions of PHP, < 4.3.2)
+7. Fixed a bug that was preventing child-theme CSS from loading correctly. Note that if you have gzip disabled, child themes need to have all stylesheets explicitly invoked.
+8. Fixed a bug in XHTML validation with comments.
+9. Enhanced search page to show search term at the top, include a search form and highlight search terms.
+10. Made minor stylesheet tweaks to the Minima skin.
+11. Added capability to add page number (for archive views) and blog description (for front page and home page views) to the title.
+12. Added options to include post ids and tags in featured content.
+13. Replaced call to get_bloginfo('name') in the header with get_bloginfo('name', 'display') to apply filters.
+14. Enqueued stylesheets for the admin pages.
+15. Added ability to store the unified options array (i.e. options from DB + theme-options.php + settings.php) into the DB - performance improvements result.
+16. Restyled the blockquote element to make it look different.
+17. New translation for Turkish.
+18. Updated translations for German (Du and Sie), Norwegian, Swedish, Dutch, Danish, Polish and French
+
+Version 3.6.3 - 9th Aug 2010
+============================
+1. Fixed a bug that was causing escaped HTML to appear in the comment form.
+2. Added call to register_nav_menu. This was not required because the menus can be added through the navigation bar setup. However, weirdly, theme approval apparently needs this.
+3. Fixed a bug that was showing a NOTICE in certain cases where featured content was enabled.
+4. Added support for "new window" targets in WP 3.0 navigation menus.
+5. Changed behavior: Top navigation bar shows up even if it is set to "hide" if a WP 3.0 menu is registered with it.
+6. Replaced all JS includes with wp_enqueue_script
+
+Version 3.6.2 - 7th Aug 2010
+============================
+1. Changed behavior - Posts without comments show the "Comments disabled" message by default, pages don't.
+
+Version 3.6.1 - 6th Aug 2010
+============================
+1. Added an option for "all or selected" for the "Comment form closed" message.
+2. Changed behavior - By default the "Comment form closed" message is switched off for both pages and posts.
+3. Fixed a NOTICE message for wide sidebars appearing on pages with a single sidebar.
+
+Version 3.6.0 - 6th Aug 2010
+============================
+1. Added two new sidebars - Wide Sidebar (Top) and Wide Sidebar (Bottom)
+2. Fixed a bug in the "No Sidebars" template where the maximum width of the image was being set incorrectly.
+3. Fixed a bug in the XHTML validation in case gradient images are used.
+4. Switched the JavaScript files to be loaded in the footer by default, in Blog Features -> Site Optimization
+5. Added capability to display text in multiple columns using short codes [suffusion-multic] and [suffusion-column]
+6. Added translation support for child themes.
+7. Changed behavior to exclude posts from the static Featured Content section in the rest of the content on a page.
+8. Made minor style tweaks to Minima
+9. Replaced occurrences of include(TEMPLATEPATH . '/searchform.php') with get_search_form()
+10. Replaced occurrences of file includes with get_template_part()
+11. Fixed XHTML validation errors in GZip compression mode.
+12. Removed support for comments from WP versions older than 2.7. Suffusion anyway has been relying on at least 2.8 for widgets since a long time.
+13. Added call to new function comment_form() in comments.php.
+14. Moved licensing information to style.css file.
+15. Added call to wp_login_form() in login.php.
+16. Updated Brazilian Portuguese translation.
+
+Version 3.5.9 - 24th July 2010
+==============================
+1. Fixed a bug in the suffusion-tag-cloud short code, which was assigning an incorrect value to the "number" parameter.
+2. Optimized back-end code by splitting the options page tabs into individual menu.
+3. Fixed a bug in the custom post types section that was not saving post types with the correct index.
+4. Fixed a layout bug caused by the new Header Widgets, where the navigation bar was getting moved into the header area.
+5. Fixed a bug that was causing single quote characters in the title to cause invalid markup.
+6. Added 5 Ad hoc widget areas. These can be invoked by short codes in your posts as you wish.
+7. Added new short code "suffusion-widgets" to display ad hoc widget areas.
+8. Fixed a bug in the Body Font Settings options - an incorrect control switch was being used to determine if custom fonts were to be used.
+9. Added capability to customize labels in the comment form.
+10. Added new Polish translation.
+
+Version 3.5.8 - 17th July 2010
+==============================
+1. Fixed a bug that was displaying the "Comment form closed" message even if asked to hide it.
+2. Fixed a minor problem with the style resetting that was causing Gallery items to spill over to new lines.
+3. Fixed an issue with the Page of Posts template that was showing a Notice with WP_DEBUG.
+4. Fixed a bug with the "Now Reading" library that was throwing up an undeclared variable.
+5. Added new widget area above header.
+6. Added new widget area in header.
+7. Made minor style changes for the Minima style.
+8. Added new page template for logging in.
+
+Version 3.5.7 - 10th July 2010
+==============================
+1. Fixed a bug that was not showing "full content" posts in the excerpt / list / tile views.
+2. Fixed a bug that was causing the "white screen of death" upon posting a comment.
+
+Version 3.5.6 - 8th July 2010
+==============================
+1. Fixed a bug that was showing incorrect WP 3.0 menus in the top navigation bar.
+2. Fixed TimThumb for WP-MS. Earlier the script was not working in the MU/MS modes.
+3. Reduced repeating code in CSS files by simplifying the l3nav-l8nav CSS elements.
+4. Modified the theme options menu to be added if the user is an Administrator on a multi-site as opposed to a Super Administrator.
+5. Optimized the code in the magazine template, which was exiting if the number of posts was too high.
+6. New option to switch off rounded corners across the site
+7. Made typographic enhancements to the theme. Switched base font size to 12px from 0.75em. This is to tackle font size issues for some browser settings.
+8. Fixed a bug that was causing the nav bars and header to be aligned with the wrapper if the header was set to be outside the wrapper with container spanning the width, but contents aligned to wrapper (out-cfull-halign)
+9. Fixed a bug introduced by the 3.5.5 quick-fix, for displaying the default category widget
+10. Large-scale code rework to use "isset" for various variables.
+11. Fixed a bug that was causing the sidebars to display incorrectly on page templates when static tabbed sidebar was being displayed.
+12. New skin - Minima, with very few images and very few style enhancements.
+13. New option to have navigation bars display as tabs or continuous lists.
+14. Reduced repeating code in CSS by removing redundant #nav declarations.
+
+Version 3.5.5 - 3rd July 2010
+=============================
+1. Minor fixes to remove calls to deprecated APIs, required for approval by WP.
+
+Version 3.5.4 - 20th June 2010
+==============================
+1. Fixed the styling for attachments - they will now get the "post" class assigned to them.
+2. "Donate" button added :-)
+3. Introduced option to flatten WP 3.0 menus.
+4. Added filter hooking capability to the listing in the "List Layout" mode, with hook for suffusion_get_post_title_and_link.
+5. Introduced option section Optimization under Blog Features
+6. GZip and minification support added for theme's CSS files.
+7. GZip support added for internal WP JS files.
+8. GZip support added for main content.
+9. Combined bgiframe.js with suffusion.js to reduce HTTP requests.
+10. Added WP 3.0 support for automatic feed links.
+11. Made minor modifications to the layout files for blog, tiles and list, adding global variables. This is to enable better control of what to display.
+12. Added option to not use the body_class in Visual Effects -> Theme Skinning
+13. Added new sidebars: Sidebar 1 (Bottom) and Sidebar 2 (Bottom). These move with the original sidebars, but can be styled differently.
+14. Added six action hooks for sidebars: suffusion_before_first_sidebar, suffusion_between_first_sidebars, suffusion_after_first_sidebar, suffusion_before_second_sidebar, suffusion_between_second_sidebars, suffusion_after_second_sidebar
+15. Menu support has been extended from WP 3.0 Beta and RC versions to the production release.
+16. Changed is_post_type call to post_type_exists (WP changed the function name between RC 3.0 and the actual release)
+17. Merged the contents of dbx.css with style.css
+18. Fixed a problem for some users who were facing an issue with the "Display all posts" option on the "Page of Posts" template.
+
+Version 3.5.3 - 9th June 2010
+=============================
+1. Removed BP support files. These will be provided separately. The style definitions remain in the stylesheet.
+2. Fixed a few problems with the BP styles, particularly for IE.
+3. Fixed some problems caused by the body_class call.
+4. Added support for the hAtom microformat
+5. Fixed signup form for WP-MS without BP
+6. Added support for Custom Post Types and Custom Taxonomies
+7. Reorganized Options menu
+
+Version 3.5.2 - 28th May 2010
+=============================
+1. Added support for child themes
+2. Fixed a bug that would cause the background to be changed for pages.
+
+Version 3.5.1 - 28th May 2010
+=============================
+0. IMPORTANT: IF YOU ARE UPGRADING FROM VERSION 3.4.3 OR LOWER, FIRST GO TO THE "Upgrades" TAB IN THE OPTIONS AND
+MIGRATE!!! OTHERWISE YOUR OLD SETTINGS MIGHT NOT WORK AS EXPECTED.
+0.5 IF YOU ARE UPGRADING FROM VERSION 3.0.2 OR LOWER, FIRST PERFORM THE 3.0.2 UPGRADE, THEN THE 3.4.3 UPGRADE.
+1. Added BuddyPress support
+2. Fixed a bug where divs in the static tabbed sidebar were getting hidden
+3. Fixed a bug where dates were being shown and rendered incorrectly if search results were pages.
+4. Fixed a bug with the "Page of Posts" in list view
+5. Added "body_class()" to define the classes for the body element
+6. Fixed a bug in the suffusion_get_image function that was sometimes not retrieving the inbuilt "Post Thumbnail", and sometimes not resizing correctly.
+7. New capability to remove date boxes from search results only.
+
+Version 3.5.0 - 20th May 2010
+=============================
+0. IMPORTANT: IF YOU ARE UPGRADING FROM VERSION 3.4.3 OR LOWER, FIRST GO TO THE "Upgrades" TAB IN THE OPTIONS AND
+MIGRATE!!! OTHERWISE YOUR OLD SETTINGS MIGHT NOT WORK AS EXPECTED.
+0.5 IF YOU ARE UPGRADING FROM VERSION 3.0.2 OR LOWER, FIRST PERFORM THE 3.0.2 UPGRADE, THEN THE 3.4.3 UPGRADE.
+1. Support for WP 3.0 Navigation Menus.
+2. Added native tabbed sidebars.
+3. Merged content of plugins.css with other files to reduce HTTP calls.
+4. Fixed a bug that was causing a large font to appear in magazine style section headers.
+5. Fixed a bug that was causing the JQuery Cycle JS to be included twice.
+6. Adjusted font-sizes for headers and made them slightly smaller for content within posts.
+7. Fixed a minor label alignment issue in the comments section.
+8. New Chinese translation.
+
+Version 3.4.9 - 13th May 2010
+=============================
+0. IMPORTANT: IF YOU ARE UPGRADING FROM VERSION 3.4.3 OR LOWER, FIRST GO TO THE "Upgrades" TAB IN THE OPTIONS AND
+MIGRATE!!! OTHERWISE YOUR OLD SETTINGS MIGHT NOT WORK AS EXPECTED.
+0.5 IF YOU ARE UPGRADING FROM VERSION 3.0.2 OR LOWER, FIRST PERFORM THE 3.0.2 UPGRADE, THEN THE 3.4.3 UPGRADE.
+1. Fixed a problem with the CDN JQuery script. Now the script is loaded only if you are not in the admin dashboard.
+2. Changed font sizes to relative sizes for future enhancements.
+3. Fixed a bug in the font selection, which was adding a "\" to the font name if it had spaces.
+4. Theme skinning added for date icons.
+5. Removed the "safe mode" check from the "Follow Me" widget loading.
+6. Fixed dual loading of "rtl.css" for RTL language rendering.
+7. Updated Arabic translation
+8. Separated options page from functions.php
+9. Added $hook_suffix to the options page loading, to reduce JS/CSS script overhead.
+10. Replaced the classes assigned to a post to the output of the WP function post_class(). Users who have set a style for "sticky-post" will have to change it to "sticky".
+
+Version 3.4.8 - 29th Apr 2010
+=============================
+0. IMPORTANT: IF YOU ARE UPGRADING FROM VERSION 3.4.3 OR LOWER, FIRST GO TO THE "Upgrades" TAB IN THE OPTIONS AND
+MIGRATE!!! OTHERWISE YOUR OLD SETTINGS MIGHT NOT WORK AS EXPECTED.
+0.5 IF YOU ARE UPGRADING FROM VERSION 3.0.2 OR LOWER, FIRST PERFORM THE 3.0.2 UPGRADE, THEN THE 3.4.3 UPGRADE.
+1. Fixed a bug in the options that was displaying escaped HTML entities.
+2. Updated Swedish and Russian translations.
+
+Version 3.4.7 - 20th Apr 2010
+=============================
+0. IMPORTANT: IF YOU ARE UPGRADING FROM VERSION 3.4.3 OR LOWER, FIRST GO TO THE "Upgrades" TAB IN THE OPTIONS AND
+MIGRATE!!! OTHERWISE YOUR OLD SETTINGS MIGHT NOT WORK AS EXPECTED.
+0.5 IF YOU ARE UPGRADING FROM VERSION 3.0.2 OR LOWER, FIRST PERFORM THE 3.0.2 UPGRADE, THEN THE 3.4.3 UPGRADE.
+1. Changed the default text for sliding panel "open" and "close" texts, as it was causing a conflict with some types of database encoding.
+2. Fixed a bug in author template that was causing posts to repeat if the display type was set to "list".
+3. Fixed a bug that was causing images to resize in the "No Sidebars" template.
+4. New capability to use the CDN version of JQuery instead of WP's.
+5. New capability to use the "Lite" version of the JQuery Cycle plugin for featured content.
+6. Updated translations for Dutch and German (Sie).
+
+Version 3.4.6 - 09th Apr 2010
+=============================
+0. IMPORTANT: IF YOU ARE UPGRADING FROM VERSION 3.4.3 OR LOWER, FIRST GO TO THE "Upgrades" TAB IN THE OPTIONS AND
+MIGRATE!!! OTHERWISE YOUR OLD SETTINGS MIGHT NOT WORK AS EXPECTED.
+0.5 IF YOU ARE UPGRADING FROM VERSION 3.0.2 OR LOWER, FIRST PERFORM THE 3.0.2 UPGRADE, THEN THE 3.4.3 UPGRADE.
+1. Major bug fix for category and menu drop-downs. During the code changes of 3.4.5 some functionality had inadvertently broken. This made it
+impossible to select 0 categories / pages in the main navigation bar. This has been fixed.
+2. New skinning options - now the background color of posts can be controlled through the options menu.
+3. Updated Norwegian translation.
+
+Version 3.4.5 - 07th Apr 2010
+=============================
+0. IMPORTANT: IF YOU ARE UPGRADING FROM VERSION 3.4.3 OR LOWER, FIRST GO TO THE "Upgrades" TAB IN THE OPTIONS AND
+MIGRATE!!! OTHERWISE YOUR OLD SETTINGS MIGHT NOT WORK AS EXPECTED.
+0.5 IF YOU ARE UPGRADING FROM VERSION 3.0.2 OR LOWER, FIRST PERFORM THE 3.0.2 UPGRADE, THEN THE 3.4.3 UPGRADE.
+1. New template for "Page of Posts".
+2. Massive code housekeeping: moved to a single array with all options instead of a database record for each option.
+3. New capability to add rotating header background images.
+4. Added action hook "suffusion_query_posts" for users to be able to modify the queries for each page.
+5. Changed option category "Body Background Settings" to "Theme Skinning"
+6. Added new options to "Theme Skinning", for wrapper background image.
+7. Fixed a bug in the "Now Reading" templates that was showing "Tagged With:" even if there were no tags.
+8. Fixed a bug in the translation for "X Responses to" in comments.php
+9. New Belarussian translation, updated Greek, Russian and Norwegian translations.
+
+Version 3.4.3 - 28th Mar 2010
+=============================
+1. A critical patch for some installations of the theme where the "Custom PHP Include" was causing the theme to break.
+2. Updated German translation
+
+Version 3.4.2 - 26th Mar 2010
+=============================
+1. Fixed a bug in the "Single Left, Single Right Sidebar" template that was failing to position the sidebars correctly
+2. Added a "Custom PHP" option. Renamed the "Custom CSS, JavaScript & RSS" option to "Custom Includes" and added the Custom PHP to it.
+3. Changed default versions of included JS files to "1.0"
+4. Fixed XHTML validation in comment form.
+5. Renamed "Excerpts / Full Contents" options section to "Layout: Excerpt / List / Tile / Full". Added option grouping to this section.
+6. Added support for the "Zoom Crop" and "Quality" options in TimThumb image resizing (in "Layout: Excerpt / List / Tile / Full" section)
+7. Added support for JQuery Cycle "sync" option in featured content.
+8. Updated Dutch and French translations
+
+Version 3.4.1 - 23rd Mar 2010
+=============================
+1. Added support for the "Now Reading" plugin.
+2. Updated Swedish translation
+3. Updated Spanish translation
+
+Version 3.4.0 - 15th Mar 2010
+=============================
+1. Added capability to "unlink" pages in navigation bar.
+2. Corrected description wording for "Sidebar 2"
+3. Added "control switches" for pages, links and categories in the navigation bar.
+4. Fixed a bug in the Author template that was preventing the author information from being displayed.
+5. Fixed a backslash issue in tabbed sidebar titles and navigation bar tabs
+6. New Italian translation.
+
+Version 3.3.9 - 10th Mar 2010
+=============================
+1. Fixed error including rtl.css file. Apparently wp_head() automatically includes it, which was causing conflicts with the stylesheet loading sequence.
+2. Fixed error with image width in no-sidebars.php template
+3. Fixed a comment pagination bug that was highlighting the incorrect comment page and showing incorrect behavior for Older Comments and Newer Comments.
+4. Added styling options for widgets in sliding panel
+5. Added grouping for "Featured Content" in the options pages
+6. Added compatibility for "SI CAPTCHA Anti-Spam" plugin
+
+Version 3.3.8 - 03rd Mar 2010
+=============================
+1. Fixed most RTL layout issues. One issue is remaining, with the main navigation bar being pushed outside the wrapper in IE6 and IE7.
+2. Added code to order pages in ascending order for featured content
+3. Updated Norwegian and Hebrew translations
+4. Added code that will show categories for selection in the admin menus even if the category is blank.
+5. Fixed a bug that was causing the bookmarks in the drop-down menu to ignore the "target" setting.
+6. Introduced "grouping" in the options page for Custom CSS, JavaScript and RSS
+
+Version 3.3.7 - 26th Feb 2010
+=============================
+1. Fixed a style issue for "Subscribe to Comments" plugin.
+2. Introduced "grouping" into a few more option pages - Custom Emphasis Elements, Main Navigation Bar Setup, Top Navigation Bar Setup, Posts and Pages
+3. Enabled WPML support for search capability, home link and category drop-down for the theme.
+4. Added positioning support for category information, comment information, posted by and tags on pages and posts
+5. New Hebrew and Russian translations. Minor correction to the German translation.
+
+Version 3.3.6 - 19th Feb 2010
+=============================
+1. Added a "sliding panel" capability to Top Bar Right Widgets.
+2. Added some "option grouping" in the administration screens
+2. Fixed a bug that was hiding the top navigation bar if the header was not "open".
+3. Fixed a bug in the Royal Blue theme where visited links upon hover were not getting the blue background.
+
+Version 3.3.5 - 17th Feb 2010
+=============================
+1. Fixed an issue that was causing the Single Left Sidebar template and Single Right Sidebar template to misbehave when the blog had 2 sidebars
+2. Custom image size was not working for the featured posts widget. This has been fixed.
+3. New options for full-width header
+4. New options for full-width main navigation bar
+
+Version 3.3.4 - 15th Feb 2010
+=============================
+1. AdSense short-code bugs fixed
+2. Thumbnail bug fixed for situations where the Post Thumbnail capability is being used.
+3. Set the "Continue Reading" link to be in a span instead of a div
+4. Changed the Twitter tweet icon from a "bullet" to a comment bubble
+5. Fixed a sidebar positioning issue with the Single Left and Single Right sidebar template
+6. New Estonian translation, thanks to Viljar Hera
+
+Version 3.3.3 - 12th Feb 2010
+=============================
+1. Added widget area "Left Header Widgets" to left of main navigation bar.
+2. Added "language_attributes()" call to header.php.
+3. Added auto-resizing capability for images, so that they will not flow over the edges of posts.
+4. Solved page "locking" issue in IE7
+5. Removed the option "Enable Widget Area on right side of navigation bar". If you choose to hide the default search widget there,
+the widget area will automatically disappear.
+6. Major bug fix for bug inadvertently introduced in 3.3.1 regarding sidebar templates.
+
+Version 3.3.1 - 11th Feb 2010
+=============================
+1. Added capability to Export / Import theme settings.
+2. Added widget areas to left and right of top navigation bar.
+3. Changed the structuring of the Search widget, to omit the before_title and after_title tags if title is blank (earlier it was the opposite).
+4. Positioning option for drop-down list in the top navigation bar.
+5. Added code to not print a widget area if it has no contents.
+
+Version 3.3.0 - 09th Feb 2010
+=============================
+1. Cleaned up code for different layout options
+2. Mixed mode layout - you can have the top few posts shown with full content and the subsequent ones shown as excerpts / tiles / list
+3. Fixed minor bugs in the "List" layout
+4. Control to display tag description in single tag view.
+5. Deprecated "Category Info in 'Display List' option", "Author Info in 'Display List' option" and "Tag Info in 'Display List' option".
+Use the controls in the individual templates for Category, Author and Tag instead
+6. Updated Greek translation
+
+Version 3.2.8 - 08th Feb 2010
+=============================
+1. Added an AdSense short code, "suffusion-adsense"
+2. Added a short code for tag clouds, "suffusion-tag-cloud"
+3. Corrected a docking boxes issue with new sidebar template layouts that was causing the sidebars to show without drag-and-drop enabled
+4. New "Tiles layout" to go with pages on a magazine-based theme
+5. Added "Order by Menu order" for pages in Featured Content
+6. Updated translations for French and German (Du and Sie)
+
+Version 3.2.7 - 05th Feb 2010
+=============================
+1. Added explicit Favicon support in the theme.
+2. Fixed a bug that was causing the thumbnail container for excerpts to appear irrespective of the settings.
+3. New display option, "Lists" in standard templates.
+4. Fixed a "problem" with the "Follow Me" widget that caused an incompatibility with paranoid hosts (thanks Wim Scholtes!)
+
+Version 3.2.6 - 02nd Feb 2010
+=============================
+1. New navigation bar added to the top of the page. Changes made to actions.php, functions.php, custom-styles.php and style sheets
+2. Fixed a bug in custom-styles.php that wasn't passing the sidebar count parameter to get_widths. Change made to custom-styles.php
+3. Customizable 404 content.
+
+Version 3.2.5 - 01st Feb 2010
+=============================
+1. New page templates - Single Left Sidebar, Single Right Sidebar, Single Left and Single Right Sidebar, Double Left Sidebars, Double Right Sidebars
+2. New short codes - suffusion-loginout (for wp_loginout), suffusion-register (for wp_register), suffusion-login-url (for wp_login_url) and suffusion-logout-url (for wp_logout_url)
+
+Version 3.2.4 - 28th Jan 2010
+=============================
+1. Added short code support to text widgets
+2. Added short code support to tabbed sidebar
+3. Added short code support to footer
+4. Fixed a link "target" bug in the navigation bar.
+5. Added a new short code for displaying post information, [suffusion-the-post]
+
+Version 3.2.3 - 27th Jan 2010
+=============================
+1. Fixed a bug that was causing the Category posts to show up as excerpts if the "main page" was set up to show excerpts
+2. Fixed a bug that was not displaying featured images in full size
+3. Fixed a bug that was causing the featured image slider to show up incorrectly.
+4. Added WP 2.9 Post Thumbnail Support
+5. Added WP 2.9 Excerpt length and "Read More" support.
+6. Added "target" for bookmarks in dropdown menus.
+
+Version 3.2.2 - 22nd Jan 2010
+=============================
+1. Modified TimThumb script to not execute the Unix shell call "file -bi"
+
+Version 3.2.1 - 22nd Jan 2010
+=============================
+1. Modified image resizing to use TimThumb
+2. Fixed a Twitter widget rendering bug, that was creating invalid markup if neither an icon nor a tagline were being selected
+3. Fixed a W3C validation issue for featured posts
+4. Fixed an alignment issue for the "Follow Me" widget in the "Right Header Widgets"
+
+Version 3.2.0 - 20th Jan 2010
+=============================
+1. Fixed a small bug in the "Follow Me" widget where the default text for the email subscription wasn't showing up by default
+2. Added a template for "All Bookmarks"
+3. Minor fix for "author info" to include it before end of post instead of after end of content
+
+Version 3.1.9 - 19th Jan 2010
+=============================
+1. Added "update available" capability to the admin panel
+2. Added a short code called "suffusion-the-author", that can print almost all author-related information for a post.
+3. Added capability to show an "About the author" section for posts / pages.
+4. Added Social Network support for User Profiles for WP 2.9 enabled blogs.
+
+Version 3.1.8 - 16th Jan 2010
+=============================
+1. Added options to show widgets in a "flattened" layout, in addition to the default "boxed" layout
+2. Added a check for "safe mode" in PHP, that was throwing up an error on paranoid hosts.
+See http://www.aquoid.com/forum/viewtopic.php?f=2&t=521 for details.
+3. Fixed a problem with IE7, where the "Edit" icon was showing up on singular views (single posts / pages)
+4. Did some CSS optimization and reduced a lot of CSS from individual color schemes.
+5. New Brazilian Portuguese translation
+
+Version 3.1.7 - 11th Jan 2010
+=============================
+1. Fixed an incompatibility between the "Follow Me" widget and PHP 4.
+
+Version 3.1.6 - 9th Jan 2010
+============================
+1. Added a "Google Translator" widget. File added: suffusion-translator.php, changes to translation files
+2. Added a "Follow Me" widget. File added: suffusion-subscription.php, changes to translation files
+3. Fixed a layout bug in the default first sidebar, where widget headers were not defined in the JQuery compatible format.
+File changed: sidebar.php
+4. Fixed a bug in the SEO mode, where the SEO options were getting displayed even if not selected. File changed: actions.php
+5. Search button icons were showing with a dull gray background in IE6. This has been fixed. All color-specific CSS files
+have been changed.
+6. Modified the CSS loading order to ensure that style.css is loaded in parallel with the other CSS files to make the loads happen faster
+7. Added options to control delay and the fade-in effect in the drop-down menu
+8. Restructured the approach to handling JS calls
+9. New Greek Translation
+10. Fixed a bug for IE6, where the home icon in the navigation bar was causing the line below the navigation bar to shift down.
+11. Fixed an IE6 and IE7 bug that was causing a sidebar on the left to have no right margin
+
+Version 3.1.5 - 2nd Jan 2010
+============================
+1. Added "hover delay" support for navigation menu
+2. Added option to include static "Links" in navigation menu
+3. Added support for "My Category Order" and "My Link Order" plugins to reorder categories and links
+4. Fixed a bug for IE6, where links at the third level in the navigation menu wouldn't go to the correct page
+5. Consolidated smaller JS files into a single large one
+6. Fixed a bug that was breaking the layout for password-protected posts/pages
+7. Rounded corners for drop-down menus (Firefox, Chrome and Safari only)
+8. Fixed a WPML compatibility issue where the drop-down menus wouldn't display for non-default languages
+9. Fixed a WPML language-selector rendering issue in the header widgets.
+10. Added option to set tab order in a tabbed sidebar (Suffusion Theme Options -> Tabbed Sidebar).
+11. Added default files for date archives and tags (date.php and tag.php)
+12. Redesigned the options menu by structuring it differently.
+13. Added SEO options for customization
+14. Added "Select All" and "Select None" buttons to all multi-select lists in the options page
+15. Added a sorter to place links before categories or pages in the navigation bar
+16. Moved code from slider-init.php to featured-posts.php to avoid "500 Internal Server Error"
+17. Changed default settings in options menu for navigation bar. All pages and all categories are selected by default,
+pages are displayed "rolled-up" by default.
+18. Fixed an incompatibility between WP 2.9 and the Twitter widget
+19. Streamlined the Twitter widget options
+20. New translations for Norwegian Bokmaal (nb_NO) and a Sie version for German (de_DE-sie)
+21. Fixed a bug that was causing the home page to be displayed in the featured content if the home page was a static page.
+
+Version 3.1.0 - 21st Dec 2009
+============================
+1. IMPORTANT: IF YOU ARE UPGRADING FROM VERSION 3.0.2 OR LOWER, FIRST GO TO THE "Upgrades" TAB IN THE OPTIONS AND
+MIGRATE!!! OTHERWISE YOUR OLD SETTINGS MIGHT NOT WORK AS EXPECTED.
+2. Fixed a couple of bugs that were causing fields like "Featured Image" to be overwritten upon Quick Edit
+3. Added extra styling option for category blocks
+4. Removed "JQuery Fix" option, including the fix by default
+5. Fixed a "WP-Recaptcha" compatibility issue
+
+Version 3.0.9 - 18th Dec 2009
+============================
+1. IMPORTANT: IF YOU ARE UPGRADING FROM VERSION 3.0.2 OR LOWER, FIRST GO TO THE "Upgrades" TAB IN THE OPTIONS AND
+MIGRATE!!! OTHERWISE YOUR OLD SETTINGS MIGHT NOT WORK AS EXPECTED.
+2. Added option to show static featured content in static pages
+3. Added option to limit the number of excerpts in the magazine template
+4. Fixed a bug that was not highlighting the "Home" and the "Blog" pages in the navigation bar
+5. Fixed a "navigation bar shifting" issue with non-Firefox browsers
+
+Version 3.0.8 - 16th Dec 2009
+============================
+1. IMPORTANT: IF YOU ARE UPGRADING FROM VERSION 3.0.2 OR LOWER, FIRST GO TO THE "Upgrades" TAB IN THE OPTIONS AND
+MIGRATE!!! OTHERWISE YOUR OLD SETTINGS MIGHT NOT WORK AS EXPECTED.
+2. Introduced a widget to show Featured Posts. File added: suffusion-featured-posts.php
+3. Patched an incompatibility with WPML SitePress plugin.
+4. Fixed minor RTL bugs.
+5. Added "latest posts" capability to the Featured Posts
+
+Version 3.0.7 - 11th Dec 2009
+============================
+1. IMPORTANT: IF YOU ARE UPGRADING FROM VERSION 3.0.2 OR LOWER, FIRST GO TO THE "Upgrades" TAB IN THE OPTIONS AND
+MIGRATE!!! OTHERWISE YOUR OLD SETTINGS MIGHT NOT WORK AS EXPECTED.
+2. Fixed a bug that was causing children pages in the navigation bar to display even if not selected.
+3. Fixed a bug in the Featured Content display where if no categories are selected it was showing all posts.
+
+Version 3.0.6 - 10th Dec 2009
+============================
+1. IMPORTANT: IF YOU ARE UPGRADING FROM VERSION 3.0.2 OR LOWER, FIRST GO TO THE "Upgrades" TAB IN THE OPTIONS AND
+MIGRATE!!! OTHERWISE YOUR OLD SETTINGS MIGHT NOT WORK AS EXPECTED.
+2. Introduced a widget to show posts from a category
+3. Fixed a bug in the Comments settings that was failing to block the "Comments Closed" message.
+4. Added an option to block the "Comments Closed" message on posts.
+
+Version 3.0.5 - 4th Dec 2009
+============================
+1. IMPORTANT: IF YOU ARE UPGRADING, FIRST GO TO THE "Upgrades" TAB IN THE OPTIONS AND
+MIGRATE!!! OTHERWISE YOUR OLD SETTINGS MIGHT NOT WORK AS EXPECTED.
+2. Did a lot of code optimization, causing massive reduction in the number of
+database queries. Files modified: functions.php, actions.php,
+featured-posts.php, magazine.php
+3. Fixed a bug in the Magazine layout that was showing excerpts incorrectly.
+4. Reorganized the widget code and made it more structured.
+5. Made SEO enhancements to the theme.
+
+Version 3.0.2 - 30th Nov 2009
+=============================
+1. Added more features to Tabbed Sidebars. You can now have upto 10 custom
+tabs, each of which is like a Text widget. File modified: sidebar-tabs.php
+2. Fixed some IE6 look-and-feel issues. File modified: ie-fix.css
+3. Fixed some RTL language layout issues. File modified: rtl.css
+4. Fixed the layout problems for widgets without titles. Files modified:
+functions.php and actions.php.
+
+Version 3.0.0 - 25th Nov 2009
+=============================
+1. Introduced a Magazine Layout. New file: magazine.php
+2. Added controls for featured post image size. File modified: functions.php
+3. Added an Arabic Translation
+4. Provided the capability to turn off default widgets in the first sidebar.
+File modified: sidebar.php
+
+Version 2.6.5 - 18th Nov 2009
+=============================
+1. Fixed some long-standing CSS bugs in IE6/IE7. Specifically in IE6, upon
+hover over the menu the entire drop-down tree would be shown (all levels). Now
+only the level immediately below is shown. For both IE6 and IE7, if the menu
+spanned two lines, the drop-down for an item in the first line got obscured by
+an item in the second line. Both of these have been fixed and are now working.
+
+Version 2.6.4 - 17th Nov 2009
+=============================
+1. Fixed bug in "All Categories" template where the template name was missing
+from the file categories.php
+2. Added page support for featured content. File modified: featured-posts.php
+
+Version 2.6.3 - 16th Nov 2009
+=============================
+1. Added RTL language support (experimental). File modified: actions.php, rtl.css
+2. Fixed bug in admin screens, where featured categories were not being saved.
+File modified: functions.php
+3. Fixed bug in plugin support, where plugins.css was not being included in
+the page header. File modified: actions.php
+
+Version 2.6.2 - 13th Nov 2009
+=============================
+1. Added category navigation to the Navigation Bar. File modified: functions.php
+2. Fixed bug in Featured Posts. Earlier posts were being limited to number of
+posts per page. File modified: featured-posts.php
+3. Added template for listing multiple categories in one page. File added:
+categories.php
+4. Made individual page / post title SEO friendly. File modified: header.php
+5. Added option to change wrapper background color (most frequently asked question)
+
+Version 2.6.0 - 08th Nov 2009
+=============================
+1. Added tabbed sidebar functionality. Files modified: sidebar-tabs.php (new), sidebar-tabs.js (new), actions.php
+2. Fixed backward compatibility issue with the theme. File modified: actions.php
+
+Version 2.5.3 - 31st Oct 2009
+=============================
+1. Added comment pagination code. Files modified: comments.php, filters.php, theme-options.php and stylesheets
+2. Made wrapper width customizable. Files modified: custom-styles.php and theme-options.php
+
+Version 2.5.2 - 29th Oct 2009
+=============================
+1. Modified screenshot based on feedback from WP. No other changes
+
+Version 2.5.1 - 28th Oct 2009
+=============================
+1. Fixed a bug in the DBX JavaScript inclusion logic. It was getting included on pages without sidebars too.
+2. Started making design changes for supporting multiple widths.

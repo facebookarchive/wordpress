@@ -1,0 +1,1122 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Responsive 1.4.8\n"
+"POT-Creation-Date: 2012-03-27 20:22-0600\n"
+"PO-Revision-Date: 2012-04-24 23:24-0600\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: 404.php:22
+#: archive.php:94
+#: blog-excerpt.php:91
+#: blog.php:90
+#: content-sidebar-half-page.php:87
+#: content-sidebar-page.php:87
+#: full-width-page.php:87
+#: image.php:80
+#: index.php:80
+#: landing-page.php:55
+#: page.php:86
+#: search.php:108
+#: sidebar-content-half-page.php:87
+#: sidebar-content-page.php:87
+#: single.php:93
+#: sitemap.php:76
+#@ responsive
+msgid "404 &#8212; Fancy meeting you here!"
+msgstr ""
+
+#: 404.php:23
+#: archive.php:95
+#: blog-excerpt.php:92
+#: blog.php:91
+#: content-sidebar-half-page.php:88
+#: content-sidebar-page.php:88
+#: full-width-page.php:88
+#: landing-page.php:56
+#: page.php:87
+#: search.php:109
+#: sidebar-content-half-page.php:88
+#: sidebar-content-page.php:88
+#: single.php:94
+#: sitemap.php:77
+#@ responsive
+msgid "Don&#39;t panic, we&#39;ll get through this together. Let&#39;s explore our options here."
+msgstr ""
+
+#: 404.php:24
+#: archive.php:96
+#: blog-excerpt.php:93
+#: blog.php:92
+#: content-sidebar-half-page.php:89
+#: content-sidebar-page.php:89
+#: full-width-page.php:89
+#: image.php:82
+#: index.php:82
+#: landing-page.php:57
+#: page.php:88
+#: search.php:110
+#: sidebar-content-half-page.php:89
+#: sidebar-content-page.php:89
+#: single.php:95
+#: sitemap.php:78
+#@ responsive
+msgid "You can return"
+msgstr ""
+
+#: 404.php:24
+#: archive.php:96
+#: blog-excerpt.php:93
+#: blog.php:92
+#: content-sidebar-half-page.php:89
+#: content-sidebar-page.php:89
+#: full-width-page.php:89
+#: landing-page.php:57
+#: page.php:88
+#: search.php:110
+#: sidebar-content-half-page.php:89
+#: sidebar-content-page.php:89
+#: single.php:95
+#: sitemap.php:78
+#@ responsive
+msgid "Home"
+msgstr ""
+
+#: 404.php:24
+#@ responsive
+msgid "&larr; Home"
+msgstr ""
+
+#: 404.php:24
+#: archive.php:96
+#: blog-excerpt.php:93
+#: blog.php:92
+#: content-sidebar-half-page.php:89
+#: content-sidebar-page.php:89
+#: full-width-page.php:89
+#: image.php:82
+#: index.php:82
+#: landing-page.php:57
+#: page.php:88
+#: search.php:110
+#: sidebar-content-half-page.php:89
+#: sidebar-content-page.php:89
+#: single.php:95
+#: sitemap.php:78
+#@ responsive
+msgid "or search for the page you were looking for"
+msgstr ""
+
+#: archive.php:30
+#, php-format
+#@ responsive
+msgid "Daily Archives: %s"
+msgstr ""
+
+#: archive.php:32
+#, php-format
+#@ responsive
+msgid "Monthly Archives: %s"
+msgstr ""
+
+#: archive.php:34
+#, php-format
+#@ responsive
+msgid "Yearly Archives: %s"
+msgstr ""
+
+#: archive.php:36
+#@ responsive
+msgid "Blog Archives"
+msgstr ""
+
+#: archive.php:43
+#: blog-excerpt.php:37
+#: blog.php:36
+#: index.php:26
+#: sitemap.php:47
+#, php-format
+#@ responsive
+msgid "Permanent Link to %s"
+msgstr ""
+
+#: archive.php:47
+#: blog-excerpt.php:41
+#: blog.php:40
+#: content-sidebar-half-page.php:37
+#: content-sidebar-page.php:37
+#: full-width-page.php:37
+#: image.php:31
+#: index.php:30
+#: page.php:36
+#: search.php:50
+#: sidebar-content-half-page.php:37
+#: sidebar-content-page.php:37
+#: single.php:35
+#, php-format
+#@ responsive
+msgid "<span class=\"%1$s\">Posted on</span> %2$s by %3$s"
+msgstr ""
+
+#: archive.php:55
+#: blog-excerpt.php:49
+#: blog.php:48
+#: content-sidebar-half-page.php:45
+#: content-sidebar-page.php:45
+#: full-width-page.php:45
+#: image.php:39
+#: index.php:38
+#: page.php:44
+#: search.php:58
+#: sidebar-content-half-page.php:45
+#: sidebar-content-page.php:45
+#: single.php:43
+#, php-format
+#@ responsive
+msgid "View all posts by %s"
+msgstr ""
+
+#: archive.php:63
+#: blog-excerpt.php:57
+#: blog.php:56
+#: content-sidebar-half-page.php:53
+#: content-sidebar-page.php:53
+#: full-width-page.php:53
+#: image.php:47
+#: index.php:46
+#: page.php:52
+#: search.php:66
+#: sidebar-content-half-page.php:53
+#: sidebar-content-page.php:53
+#: single.php:51
+#@ responsive
+msgid "No Comments &darr;"
+msgstr ""
+
+#: archive.php:63
+#: blog-excerpt.php:57
+#: blog.php:56
+#: content-sidebar-half-page.php:53
+#: content-sidebar-page.php:53
+#: full-width-page.php:53
+#: image.php:47
+#: index.php:46
+#: page.php:52
+#: search.php:66
+#: sidebar-content-half-page.php:53
+#: sidebar-content-page.php:53
+#: single.php:51
+#@ responsive
+msgid "1 Comment &darr;"
+msgstr ""
+
+#: archive.php:63
+#: blog-excerpt.php:57
+#: blog.php:56
+#: content-sidebar-half-page.php:53
+#: content-sidebar-page.php:53
+#: full-width-page.php:53
+#: image.php:47
+#: index.php:46
+#: page.php:52
+#: search.php:66
+#: sidebar-content-half-page.php:53
+#: sidebar-content-page.php:53
+#: single.php:51
+#@ responsive
+msgid "% Comments &darr;"
+msgstr ""
+
+#: archive.php:70
+#: blog-excerpt.php:69
+#: blog.php:68
+#: content-sidebar-half-page.php:61
+#: content-sidebar-page.php:61
+#: full-width-page.php:61
+#: image.php:56
+#: index.php:58
+#: landing-page.php:31
+#: page.php:60
+#: search.php:84
+#: sidebar-content-half-page.php:61
+#: sidebar-content-page.php:61
+#: single.php:69
+#: sitemap.php:59
+#@ responsive
+msgid "Pages:"
+msgstr ""
+
+#: archive.php:74
+#: blog-excerpt.php:73
+#: blog.php:72
+#: content-sidebar-half-page.php:66
+#: content-sidebar-page.php:66
+#: full-width-page.php:66
+#: image.php:66
+#: index.php:62
+#: landing-page.php:36
+#: page.php:65
+#: search.php:88
+#: sidebar-content-half-page.php:66
+#: sidebar-content-page.php:66
+#: single.php:73
+#@ responsive
+msgid "Tagged with:"
+msgstr ""
+
+#: archive.php:75
+#: blog-excerpt.php:74
+#: blog.php:73
+#: content-sidebar-half-page.php:67
+#: content-sidebar-page.php:67
+#: full-width-page.php:67
+#: image.php:67
+#: index.php:63
+#: landing-page.php:37
+#: page.php:66
+#: search.php:89
+#: sidebar-content-half-page.php:67
+#: sidebar-content-page.php:67
+#: single.php:74
+#, php-format
+#@ responsive
+msgid "Posted in %s"
+msgstr ""
+
+#: archive.php:78
+#: blog-excerpt.php:77
+#: blog.php:76
+#: content-sidebar-half-page.php:71
+#: content-sidebar-page.php:71
+#: full-width-page.php:71
+#: image.php:71
+#: index.php:66
+#: landing-page.php:41
+#: page.php:70
+#: search.php:92
+#: sidebar-content-half-page.php:71
+#: sidebar-content-page.php:71
+#: single.php:77
+#: sitemap.php:62
+#@ responsive
+msgid "Edit"
+msgstr ""
+
+#: archive.php:87
+#: blog-excerpt.php:84
+#: blog.php:83
+#: content-sidebar-half-page.php:80
+#: content-sidebar-page.php:80
+#: full-width-page.php:80
+#: index.php:73
+#: landing-page.php:48
+#: page.php:79
+#: search.php:101
+#: sidebar-content-half-page.php:80
+#: sidebar-content-page.php:80
+#: single.php:86
+#: sitemap.php:69
+#@ responsive
+msgid "&#8249; Older posts"
+msgstr ""
+
+#: archive.php:88
+#: blog-excerpt.php:85
+#: blog.php:84
+#: content-sidebar-half-page.php:81
+#: content-sidebar-page.php:81
+#: full-width-page.php:81
+#: index.php:74
+#: landing-page.php:49
+#: page.php:80
+#: search.php:102
+#: sidebar-content-half-page.php:81
+#: sidebar-content-page.php:81
+#: single.php:87
+#: sitemap.php:70
+#@ responsive
+msgid "Newer posts &#8250;"
+msgstr ""
+
+#: archive.php:96
+#: blog-excerpt.php:93
+#: blog.php:92
+#: content-sidebar-half-page.php:89
+#: content-sidebar-page.php:89
+#: full-width-page.php:89
+#: image.php:82
+#: index.php:82
+#: landing-page.php:57
+#: page.php:88
+#: search.php:110
+#: sidebar-content-half-page.php:89
+#: sidebar-content-page.php:89
+#: single.php:95
+#: sitemap.php:78
+#@ responsive
+msgid "&#9166; Home"
+msgstr ""
+
+#: blog.php:67
+#: content-sidebar-half-page.php:60
+#: content-sidebar-page.php:60
+#: full-width-page.php:60
+#: index.php:57
+#: landing-page.php:30
+#: page.php:59
+#: search.php:72
+#: sidebar-content-half-page.php:60
+#: sidebar-content-page.php:60
+#: single.php:57
+#@ responsive
+msgid "Read more &#8250;"
+msgstr ""
+
+#: comments.php:18
+#@ responsive
+msgid "This post is password protected. Enter the password to view any comments."
+msgstr ""
+
+#: comments.php:23
+#@ responsive
+msgid "No Comments &#187;"
+msgstr ""
+
+#: comments.php:23
+#@ responsive
+msgid "1 Comment &#187;"
+msgstr ""
+
+#: comments.php:23
+#@ responsive
+msgid "% Comments &#187;"
+msgstr ""
+
+#: comments.php:27
+#: comments.php:38
+#@ responsive
+msgid "&#8249; Older comments"
+msgstr ""
+
+#: comments.php:28
+#: comments.php:39
+#@ responsive
+msgid "Newer comments &#8250;"
+msgstr ""
+
+#: comments.php:50
+#@ responsive
+msgid "Pings&#47;Trackbacks"
+msgstr ""
+
+#: comments.php:53
+#@ responsive
+msgid "for"
+msgstr ""
+
+#: comments.php:66
+#@ responsive
+msgid "Name"
+msgstr ""
+
+#: comments.php:68
+#@ responsive
+msgid "E-mail"
+msgstr ""
+
+#: comments.php:70
+#@ responsive
+msgid "Website"
+msgstr ""
+
+#: footer.php:79
+#@ responsive
+msgid "&copy;"
+msgstr ""
+
+#: footer.php:84
+#@ responsive
+msgid "scroll to top"
+msgstr ""
+
+#: footer.php:84
+#@ responsive
+msgid "&uarr;"
+msgstr ""
+
+#: footer.php:87
+#@ responsive
+msgid "http://themeid.com/responsive-theme"
+msgstr ""
+
+#: footer.php:87
+#@ responsive
+msgid "Responsive Theme"
+msgstr ""
+
+#: footer.php:89
+#@ responsive
+msgid "http://wordpress.org"
+msgstr ""
+
+#: footer.php:89
+#@ responsive
+msgid "WordPress"
+msgstr ""
+
+#: home.php:35
+#@ responsive
+msgid "Hello, World!"
+msgstr ""
+
+#: home.php:49
+#@ responsive
+msgid "Your H2 subheadline here"
+msgstr ""
+
+#: home.php:63
+#@ responsive
+msgid ""
+"Your title, subtitle and this very content is editable from Theme Option. \n"
+"\t\t\t\t\t      Call to Action button and its destination link as well. Image on your right \n"
+"\t\t\t\t\t\t  can be an image or even YouTube video if you like."
+msgstr ""
+
+#: home.php:83
+#@ responsive
+msgid "Call to Action"
+msgstr ""
+
+#: image.php:27
+#@ responsive
+msgid "&#8249; Return to"
+msgstr ""
+
+#: image.php:55
+#@ responsive
+msgid "Read more &#8250;;"
+msgstr ""
+
+#: image.php:81
+#: index.php:81
+#@ responsive
+msgid "Don't panic, we'll get through this together. Let's explore our options here."
+msgstr ""
+
+#: image.php:82
+#: index.php:82
+#@ responsive
+msgid "home"
+msgstr ""
+
+#: includes/functions.php:70
+#@ responsive
+msgid "Top Menu"
+msgstr ""
+
+#: includes/functions.php:71
+#@ responsive
+msgid "Header Menu"
+msgstr ""
+
+#: includes/functions.php:72
+#@ responsive
+msgid "Sub-Header Menu"
+msgstr ""
+
+#: includes/functions.php:73
+#@ responsive
+msgid "Footer Menu"
+msgstr ""
+
+#: includes/functions.php:218
+#@ responsive
+msgid "<div class=\"read-more\">Read more &#8250;</div><!-- end of .read-more -->"
+msgstr ""
+
+#: includes/functions.php:362
+#@ responsive
+msgid "Page"
+msgstr ""
+
+#: includes/functions.php:408
+#@ responsive
+msgid "Untitled"
+msgstr ""
+
+#: includes/functions.php:420
+#@ responsive
+msgid "Main Sidebar"
+msgstr ""
+
+#: includes/functions.php:421
+#@ responsive
+msgid "Area One - sidebar.php"
+msgstr ""
+
+#: includes/functions.php:430
+#@ responsive
+msgid "Right Sidebar"
+msgstr ""
+
+#: includes/functions.php:431
+#@ responsive
+msgid "Area Two - sidebar-right.php"
+msgstr ""
+
+#: includes/functions.php:440
+#@ responsive
+msgid "Left Sidebar"
+msgstr ""
+
+#: includes/functions.php:441
+#@ responsive
+msgid "Area Three - sidebar-left.php"
+msgstr ""
+
+#: includes/functions.php:450
+#@ responsive
+msgid "Left Sidebar Half Page"
+msgstr ""
+
+#: includes/functions.php:451
+#@ responsive
+msgid "Area Four - sidebar-left-half.php"
+msgstr ""
+
+#: includes/functions.php:460
+#@ responsive
+msgid "Right Sidebar Half Page"
+msgstr ""
+
+#: includes/functions.php:461
+#@ responsive
+msgid "Area Five - sidebar-right-half.php"
+msgstr ""
+
+#: includes/functions.php:470
+#: sidebar-home.php:24
+#@ responsive
+msgid "Home Widget 1"
+msgstr ""
+
+#: includes/functions.php:471
+#@ responsive
+msgid "Area Six - sidebar-home.php"
+msgstr ""
+
+#: includes/functions.php:480
+#: sidebar-home.php:39
+#@ responsive
+msgid "Home Widget 2"
+msgstr ""
+
+#: includes/functions.php:481
+#@ responsive
+msgid "Area Seven - sidebar-home.php"
+msgstr ""
+
+#: includes/functions.php:490
+#: sidebar-home.php:54
+#@ responsive
+msgid "Home Widget 3"
+msgstr ""
+
+#: includes/functions.php:491
+#@ responsive
+msgid "Area Eight - sidebar-home.php"
+msgstr ""
+
+#: includes/functions.php:500
+#@ responsive
+msgid "Gallery Sidebar"
+msgstr ""
+
+#: includes/functions.php:501
+#@ responsive
+msgid "Area Nine - sidebar-gallery.php"
+msgstr ""
+
+#: includes/theme-options.php:42
+#@ responsive
+msgid "Theme Options"
+msgstr ""
+
+#: includes/theme-options.php:104
+#@ responsive
+msgid " Theme Options"
+msgstr ""
+
+#: includes/theme-options.php:107
+#@ responsive
+msgid "Options Saved"
+msgstr ""
+
+#: includes/theme-options.php:116
+#@ responsive
+msgid "Theme Elements"
+msgstr ""
+
+#: includes/theme-options.php:125
+#@ responsive
+msgid "Disable Breadcrumb Lists?"
+msgstr ""
+
+#: includes/theme-options.php:128
+#: includes/theme-options.php:139
+#@ responsive
+msgid "Check to disable"
+msgstr ""
+
+#: includes/theme-options.php:136
+#@ responsive
+msgid "Disable Call to Action Button?"
+msgstr ""
+
+#: includes/theme-options.php:141
+#: includes/theme-options.php:234
+#: includes/theme-options.php:288
+#: includes/theme-options.php:345
+#@ responsive
+msgid "Save Options"
+msgstr ""
+
+#: includes/theme-options.php:148
+#@ responsive
+msgid "Logo Upload"
+msgstr ""
+
+#: includes/theme-options.php:156
+#@ responsive
+msgid "Custom Header"
+msgstr ""
+
+#: includes/theme-options.php:159
+#, php-format
+#@ responsive
+msgid "Need to replace or remove default logo? <a href=\"%s\">Click here</a>."
+msgstr ""
+
+#: includes/theme-options.php:166
+#@ responsive
+msgid "Home Page"
+msgstr ""
+
+#: includes/theme-options.php:174
+#@ responsive
+msgid "Headline"
+msgstr ""
+
+#: includes/theme-options.php:176
+#@ default
+msgid "home_headline"
+msgstr ""
+
+#: includes/theme-options.php:177
+#@ responsive
+msgid "Enter your headline"
+msgstr ""
+
+#: includes/theme-options.php:185
+#@ responsive
+msgid "Subheadline"
+msgstr ""
+
+#: includes/theme-options.php:187
+#@ default
+msgid "home_subheadline"
+msgstr ""
+
+#: includes/theme-options.php:188
+#@ responsive
+msgid "Enter your subheadline"
+msgstr ""
+
+#: includes/theme-options.php:196
+#@ responsive
+msgid "Content Area"
+msgstr ""
+
+#: includes/theme-options.php:198
+#@ default
+msgid "home_content_area"
+msgstr ""
+
+#: includes/theme-options.php:199
+#@ responsive
+msgid "Enter your content"
+msgstr ""
+
+#: includes/theme-options.php:207
+#@ responsive
+msgid "Call to Action (URL)"
+msgstr ""
+
+#: includes/theme-options.php:209
+#@ default
+msgid "cta_url"
+msgstr ""
+
+#: includes/theme-options.php:210
+#@ responsive
+msgid "Enter your call to action URL"
+msgstr ""
+
+#: includes/theme-options.php:218
+#@ responsive
+msgid "Call to Action (Text)"
+msgstr ""
+
+#: includes/theme-options.php:220
+#@ default
+msgid "cta_text"
+msgstr ""
+
+#: includes/theme-options.php:221
+#@ responsive
+msgid "Enter your call to action text"
+msgstr ""
+
+#: includes/theme-options.php:229
+#@ responsive
+msgid "Featured Content"
+msgstr ""
+
+#: includes/theme-options.php:231
+#@ default
+msgid "featured_content"
+msgstr ""
+
+#: includes/theme-options.php:232
+#@ responsive
+msgid "Paste your video or image source"
+msgstr ""
+
+#: includes/theme-options.php:241
+#@ responsive
+msgid "Webmaster Tools"
+msgstr ""
+
+#: includes/theme-options.php:250
+#@ responsive
+msgid "Google Site Verification"
+msgstr ""
+
+#: includes/theme-options.php:252
+#@ default
+msgid "google_site_verification"
+msgstr ""
+
+#: includes/theme-options.php:253
+#@ responsive
+msgid "Enter your Google ID number only"
+msgstr ""
+
+#: includes/theme-options.php:261
+#@ responsive
+msgid "Bing Site Verification"
+msgstr ""
+
+#: includes/theme-options.php:263
+#@ default
+msgid "bing_site_verification"
+msgstr ""
+
+#: includes/theme-options.php:264
+#@ responsive
+msgid "Enter your Bing ID number only"
+msgstr ""
+
+#: includes/theme-options.php:272
+#@ responsive
+msgid "Yahoo Site Verification"
+msgstr ""
+
+#: includes/theme-options.php:274
+#@ default
+msgid "yahoo_site_verification"
+msgstr ""
+
+#: includes/theme-options.php:275
+#@ responsive
+msgid "Enter your Yahoo ID number only"
+msgstr ""
+
+#: includes/theme-options.php:283
+#@ responsive
+msgid "Site Statistics Tracker"
+msgstr ""
+
+#: includes/theme-options.php:285
+#@ default
+msgid "site_statistics_tracker"
+msgstr ""
+
+#: includes/theme-options.php:286
+#@ responsive
+msgid "Google Analytics, StatCounter, any other or all of them."
+msgstr ""
+
+#: includes/theme-options.php:295
+#@ responsive
+msgid "Social Icons"
+msgstr ""
+
+#: includes/theme-options.php:304
+#@ responsive
+msgid "Twitter"
+msgstr ""
+
+#: includes/theme-options.php:306
+#@ default
+msgid "twitter_uid"
+msgstr ""
+
+#: includes/theme-options.php:307
+#@ responsive
+msgid "Enter your Twitter URL"
+msgstr ""
+
+#: includes/theme-options.php:310
+#@ responsive
+msgid "Facebook"
+msgstr ""
+
+#: includes/theme-options.php:312
+#@ default
+msgid "facebook_uid"
+msgstr ""
+
+#: includes/theme-options.php:313
+#@ responsive
+msgid "Enter your Facebook URL"
+msgstr ""
+
+#: includes/theme-options.php:316
+#@ responsive
+msgid "LinkedIn"
+msgstr ""
+
+#: includes/theme-options.php:318
+#@ default
+msgid "linkedin_uid"
+msgstr ""
+
+#: includes/theme-options.php:319
+#@ responsive
+msgid "Enter your LinkedIn URL"
+msgstr ""
+
+#: includes/theme-options.php:322
+#@ responsive
+msgid "YouTube"
+msgstr ""
+
+#: includes/theme-options.php:324
+#@ default
+msgid "youtube_uid"
+msgstr ""
+
+#: includes/theme-options.php:325
+#@ responsive
+msgid "Enter your YouTube URL"
+msgstr ""
+
+#: includes/theme-options.php:328
+#@ responsive
+msgid "StumbleUpon"
+msgstr ""
+
+#: includes/theme-options.php:330
+#@ default
+msgid "stumble_uid"
+msgstr ""
+
+#: includes/theme-options.php:331
+#@ responsive
+msgid "Enter your StumbleUpon URL"
+msgstr ""
+
+#: includes/theme-options.php:334
+#@ responsive
+msgid "RSS Feed"
+msgstr ""
+
+#: includes/theme-options.php:336
+#@ default
+msgid "rss_uid"
+msgstr ""
+
+#: includes/theme-options.php:337
+#@ responsive
+msgid "Enter your RSS Feed URL"
+msgstr ""
+
+#: includes/theme-options.php:340
+#@ responsive
+msgid "Google+"
+msgstr ""
+
+#: includes/theme-options.php:342
+#@ default
+msgid "google_plus_uid"
+msgstr ""
+
+#: includes/theme-options.php:343
+#@ responsive
+msgid "Enter your Google+ URL"
+msgstr ""
+
+#: search.php:20
+#@ responsive
+msgid "We found"
+msgstr ""
+
+#: search.php:25
+#@ responsive
+msgid " &#8211; "
+msgstr ""
+
+#: search.php:28
+#@ responsive
+msgid "<span class=\"post-search-terms\">"
+msgstr ""
+
+#: search.php:30
+#@ responsive
+msgid "</span><!-- end of .post-search-terms -->"
+msgstr ""
+
+#: searchform.php:18
+#@ responsive
+msgid "search here &hellip;"
+msgstr ""
+
+#: searchform.php:19
+#@ responsive
+msgid "Go"
+msgstr ""
+
+#: sidebar-gallery.php:21
+#@ responsive
+msgid "Image Information"
+msgstr ""
+
+#: sidebar-gallery.php:26
+#@ responsive
+msgid "Full Size:"
+msgstr ""
+
+#: sidebar-gallery.php:29
+#@ responsive
+msgid "Aperture: f&#47;"
+msgstr ""
+
+#: sidebar-gallery.php:33
+#@ responsive
+msgid "Focal Length:"
+msgstr ""
+
+#: sidebar-gallery.php:33
+#@ responsive
+msgid "mm"
+msgstr ""
+
+#: sidebar-gallery.php:37
+#@ responsive
+msgid "ISO:"
+msgstr ""
+
+#: sidebar-gallery.php:41
+#@ responsive
+msgid "Shutter:"
+msgstr ""
+
+#: sidebar-gallery.php:58
+#@ responsive
+msgid "Camera:"
+msgstr ""
+
+#: sidebar-half-left.php:23
+#: sidebar-left-half.php:23
+#: sidebar-left.php:23
+#: sidebar-right-half.php:23
+#: sidebar-right.php:23
+#: sidebar.php:23
+#@ responsive
+msgid "In Archive"
+msgstr ""
+
+#: sidebar-home.php:25
+#@ responsive
+msgid "This is your first home widget box. To edit please go to Appearance > Widgets and choose 6th widget from the top in area six called Home Widget 1. Title is also managable from widgets as well."
+msgstr ""
+
+#: sidebar-home.php:40
+#@ responsive
+msgid "This is your second home widget box. To edit please go to Appearance > Widgets and choose 7th widget from the top in area seven called Home Widget 2. Title is also managable from widgets as well."
+msgstr ""
+
+#: sidebar-home.php:55
+#@ responsive
+msgid "This is your third home widget box. To edit please go to Appearance > Widgets and choose 8th widget from the top in area eight called Home Widget 3. Title is also managable from widgets as well."
+msgstr ""
+
+#: search.php:78
+#: single.php:63
+#@ responsive
+msgid "About"
+msgstr ""
+
+#: sitemap.php:38
+#@ responsive
+msgid "Categories"
+msgstr ""
+
+#: sitemap.php:43
+#@ responsive
+msgid "Latest Posts"
+msgstr ""
+
+#: includes/functions.php:293
+#@ responsive
+msgid "Archive for "
+msgstr ""
+
+#: includes/functions.php:346
+#@ responsive
+msgid "Search results for "
+msgstr ""
+
+#: includes/functions.php:349
+#@ responsive
+msgid "Posts tagged "
+msgstr ""
+
+#: includes/functions.php:354
+#@ responsive
+msgid "All posts by "
+msgstr ""
+
+#: includes/functions.php:357
+#@ responsive
+msgid "Error 404 "
+msgstr ""
+
+#: search.php:27
+#@ responsive
+msgid "results for "
+msgstr ""
+
+#: sitemap.php:54
+#@ responsive
+msgid "Pages"
+msgstr ""

@@ -1,0 +1,9 @@
+/**
+ * Red + yellow + dark
+ * 
+ */
+ 
+ 
+a, .entry-content a:link, .entry-content a:active, .entry-content a:visited {color:#ff5418;} 
+
+#secondary a:hover, #secondary-2 a:hover,.widgets-holder a:hover {color:#fff!important;}

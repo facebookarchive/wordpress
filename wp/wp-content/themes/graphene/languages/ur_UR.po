@@ -1,0 +1,2223 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Urdu translation for the Graphene theme\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-17 22:20+0100\n"
+"PO-Revision-Date: 2012-03-18 08:57+1200\n"
+"Last-Translator: Syahir Hakim <syahir@khairul-syahir.com>\n"
+"Language-Team: Mohsin Khawaja <khmohsin1@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;esc_attr_e;esc_attr__\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Language: Urdu\n"
+"X-Poedit-Country: PAKISTAN\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: 404.php:20
+#, php-format
+msgid "Searching for: <span>%s</span>"
+msgstr "تلاش کرنے کے لئے: <span>%s</span>"
+
+#: 404.php:26
+#: search-404.php:3
+msgid "Error 404 - Page Not Found"
+msgstr "خرابی 404 -- صفحہ نہیں ملا"
+
+#: 404.php:28
+#: search-404.php:5
+msgid "Sorry, I've looked everywhere but I can't find the page you're looking for."
+msgstr "معاف کیجئے گا ، میں نے ہر جگہ دیکھا لیکن آپ صفحے پر جس کے لئے تلاش کر رہے ہیں اس کو تلاش نہیں کر سکا."
+
+#: 404.php:29
+#: search-404.php:6
+msgid "If you follow the link from another website, I may have removed or renamed the page some time ago. You may want to try searching for the page:"
+msgstr "اگر آپ کسی دوسری ویب سائٹ سے لنک کا استعمال کریں، ہو سکتا ہے کہ میں نے کچھ عرصہ پہلے اسے ہٹا دیا ہو یا نام تبدیل کر دیا ہو. تو آپ جس صفحے کی تلاش کر رہے ہیں شاید تلاش نہ کر سکیں :"
+
+#: 404.php:37
+msgid "Automated search"
+msgstr "خودکار تلاش"
+
+#: 404.php:40
+#, php-format
+msgid "Searching for the terms <strong>%s</strong> ..."
+msgstr "شرائط کی تلاش '<strong>%s</strong>' ..."
+
+#: archive.php:25
+#, php-format
+msgid "Daily Archive: <span>%s</span>"
+msgstr "روزنامہ محفوظ شدہ دستاويزات : <span>%s</span>"
+
+#: archive.php:27
+#, php-format
+msgid "Monthly Archive: <span>%s</span>"
+msgstr "ماہانہ محفوظ شدہ دستاويزات : <span>%s</span>"
+
+#: archive.php:29
+msgid "F Y"
+msgstr "F \\d\\e Y"
+
+#: archive.php:31
+#, php-format
+msgid "Yearly Archive: <span>%s</span>"
+msgstr "سالانہ محفوظ شدہ دستاويزات : <span>%s</span>"
+
+#: archive.php:33
+#: category.php:14
+#, php-format
+msgid "Category Archive: <span>%s</span>"
+msgstr "زمرہ محفوظ شدہ دستاويزات : <span>%s</span>"
+
+#: archive.php:35
+msgid "Blog Archive"
+msgstr "بلاگ کی محفوظ شدہ دستاويزات"
+
+#: author.php:33
+msgid "Author's posts listings"
+msgstr "مصنف کے خطوط لسٹنگ"
+
+#: comments.php:26
+msgid "This post is password protected. Enter the password to view any comments."
+msgstr "یہ پوسٹ پاس ورڈ کی حفاظت کے ساتھ ہے. پاس ورڈ کسی بھی تبصرے کو دیکھنے کے لئے درج کریں."
+
+#: comments.php:49
+#: loop-author.php:85
+#: loop.php:185
+msgid "1 comment"
+msgstr "1 تبصرہ"
+
+#: comments.php:49
+#: loop-author.php:85
+#: loop.php:185
+#, php-format
+msgid "% comments"
+msgstr "% تبصرے"
+
+#: comments.php:50
+msgid "1 ping"
+msgstr "1 پنگ"
+
+#: comments.php:50
+msgid "% pings"
+msgstr "% pings"
+
+#: comments.php:104
+msgid "Comments have been disabled."
+msgstr "تبصرے کو غیر فعال کر دیا گیا ہے ."
+
+#: comments.php:119
+#, php-format
+msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes: %s"
+msgstr "آپ ان ٹیگ <abbr title=\"HyperText Markup Language\">HTML</abbr> اور اوصاف %s کا استعمال کر سکتے ہیں"
+
+#: comments.php:124
+msgid "Your email address will not be published."
+msgstr "آپ کا ای میل ایڈریس شائع نہیں کیا جائے گا."
+
+#: comments.php:127
+#: functions.php:1375
+msgid "Submit Comment"
+msgstr " تبصرہ جمع کرائیں"
+
+#: footer.php:40
+msgid "Copyright"
+msgstr "کاپی رائٹ"
+
+#: footer.php:43
+msgid "Except where otherwise noted, content on this site is licensed under a <a href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">Creative Commons Licence</a>."
+msgstr "جہاں دوسری صورت میں متنبہ کرنے کے سوائے، اس سائٹ پر مواد کے تحت لائسنس ہے: <a href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">تخلیقی العام لائسنس</a>."
+
+#: footer.php:53
+msgid "Creative Commons Licence BY-NC-ND"
+msgstr "این سی - این ڈی کی طرف سےتخلیقی العام لائسنس"
+
+#: footer.php:74
+msgid "Return to top"
+msgstr " واپس اوپر کی طرف"
+
+#: footer.php:83
+#, php-format
+msgid "Powered by %1$s and the %2$s."
+msgstr "کے ذریعے طاقت: %1$s and the %2$s."
+
+#: footer.php:83
+msgid "Graphene Theme"
+msgstr " تھیم گرافین"
+
+#: functions.php:176
+msgid "Header Menu"
+msgstr "ہیڈر مینو"
+
+#: functions.php:177
+msgid "Secondary Menu"
+msgstr "ثانوی مینو"
+
+#: functions.php:178
+msgid "Footer Menu"
+msgstr "فوٹر مینو"
+
+#: functions.php:220
+msgid "Header image by Syahir Hakim"
+msgstr "شیاہرحاکم کی طرف سے ہیڈر کی تصویر"
+
+#: functions.php:224
+msgid "This is the default Graphene theme header image, cropped from image by Quantin Houyoux at sxc.hu"
+msgstr "یہ پہلے سے طے شدہ گرافین تھیم کا ہیڈر ایمیج ہے جو کہsxc.hu پر کوانٹم ہویوس سے لی ہے"
+
+#: functions.php:228
+#: functions.php:232
+#: functions.php:236
+#: functions.php:240
+#: functions.php:244
+msgid "Header image cropped from image by Ilco at sxc.hu"
+msgstr "  ہیڈر امیج sxc.hu پر الکو سے لیا گیا ہے"
+
+#: functions.php:732
+msgid "Home"
+msgstr "ہوم"
+
+#: functions.php:835
+msgid "says:"
+msgstr "کہتے ہیں کہ :"
+
+#: functions.php:841
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "%1$s, a las %2$s"
+
+#: functions.php:843
+msgid "Edit comment"
+msgstr "تبصرہ میں ترمیم کریں"
+
+#: functions.php:847
+msgid "Reply"
+msgstr "جواب دیجیے"
+
+#: functions.php:858
+msgid "Your comment is awaiting moderation."
+msgstr "آپ کا تبصرہ منظور ہونے کے انتظار میں ہے۔"
+
+#: functions.php:954
+msgid "Sidebar Widget Area"
+msgstr "سائڈبار ویجیٹ شعبے"
+
+#: functions.php:956
+msgid "The first sidebar widget area (available in two and three column layouts)."
+msgstr "پہلی سائڈبار ویجیٹ کے علاقے (دو اور تین کالم کی ترتیب میں دستیاب ہیں)."
+
+#: functions.php:963
+msgid "Sidebar Two Widget Area"
+msgstr "سائڈبار دو ویجیٹ ایریا"
+
+#: functions.php:965
+msgid "The second sidebar widget area (only available in three column layouts)."
+msgstr "دوسری سائڈبار ویجیٹ علاقے (صرف تین کالم کی ترتیب میں دستیاب ہے)."
+
+#: functions.php:972
+msgid "Footer Widget Area"
+msgstr "فوٹر ویجیٹ کے ایریا"
+
+#: functions.php:974
+msgid "The footer widget area. Leave empty to disable. Set the number of columns to display at the theme's Display Options page."
+msgstr "فوٹر ویجیٹ ایریا. غیر فعال خالی چھوڑ دیں. کالموں کی تعداد موضوع کے ڈسپلے کے اختیارات کے صفحے پر ظاہر کرنے کے لئے مقرر کریں."
+
+#: functions.php:989
+msgid "Front Page Sidebar Widget Area"
+msgstr "فرنٹ پیج سائڈبار ویجیٹ کے ایریا"
+
+#: functions.php:991
+msgid "The first sidebar widget area that will only be displayed on the front page."
+msgstr "پہلی سائڈبار ویجیٹ ایریا جو کہ صرف سامنے کے صفحے پر دکھایا جائے گا."
+
+#: functions.php:998
+msgid "Front Page Sidebar Two Widget Area"
+msgstr "فرنٹ پیج سائڈبار دو ویجیٹ ایریا"
+
+#: functions.php:1000
+msgid "The second sidebar widget area that will only be displayed on the front page."
+msgstr "دوسری سائڈبار ویجیٹ ایریا جو کہ صرف سامنے کے صفحے پر دکھایا جائے گا."
+
+#: functions.php:1009
+msgid "Front Page Footer Widget Area"
+msgstr "فرنٹ پیج فوٹر ویجیٹ کے ایریا"
+
+#: functions.php:1011
+msgid "The footer widget area that will only be displayed on the front page. Leave empty to disable. Set the number of columns to display at the theme's Display Options page."
+msgstr "فوٹر ویجیٹ ایریا جو کہ صرف سامنے کے صفحے پر دکھایا جائے گا. غیر فعال خالی چھوڑ دیں. کالموں کی تعداد موضوع کے ڈسپلے کے اختیارات کے صفحے پر ظاہر کرنے کے لئے مقرر کریں."
+
+#: functions.php:1021
+msgid "Header Widget Area"
+msgstr "ہیڈر ویجیٹ ایریا"
+
+#: functions.php:1023
+msgid "The header widget area."
+msgstr "ہیڈر ویجیٹ ایریا..."
+
+#: functions.php:1040
+#, php-format
+msgid "Dynamically added widget area. This widget area is attached to the %s action hook."
+msgstr "متحرک طور پر ایڈ کیے وجیٹ ایریا۔ یہ وجیٹ ایریا سیکشن%s کے ساتھ اٹیچ ہوتے ہی"
+
+#: functions.php:1139
+msgid "Display the latest Twitter status updates."
+msgstr "تازہ ترین ٹویٹر حیثیت اپ ڈیٹس کا مشاھدہ."
+
+#: functions.php:1171
+msgid "Loading tweets..."
+msgstr "پیغامات لوڈ کر رہا ہے"
+
+#: functions.php:1175
+msgid "Follow me on Twitter"
+msgstr "ٹویٹر پر میرے پیچھے"
+
+#: functions.php:1187
+msgid "follower"
+msgstr "پیروکار"
+
+#: functions.php:1188
+msgid "followers"
+msgstr "پیروکاروں"
+
+#: functions.php:1219
+msgid "Latest tweets"
+msgstr "تازہ ترین پیغامات"
+
+#: functions.php:1226
+msgid "Title:"
+msgstr "عنوان :"
+
+#: functions.php:1230
+msgid "Twitter Username:"
+msgstr "ٹویٹر صارف کا نام :"
+
+#: functions.php:1234
+msgid "Number of tweets to display:"
+msgstr "پیغامات کی تعداد ظاہر کرنے کے لئے :"
+
+#: functions.php:1238
+msgid "Show followers count"
+msgstr "دکھائیں پیروکاروں شمار"
+
+#: functions.php:1242
+msgid "Open links in new window"
+msgstr "نئی ونڈو میں کھولیں لنکس"
+
+#: functions.php:1290
+msgid "Graphene Options"
+msgstr " اختیارات گرافین"
+
+#: functions.php:1291
+msgid "Graphene FAQs"
+msgstr "اکثر پوچھے جانے والے سوالات گرافین میں"
+
+#: functions.php:1324
+msgid "Toggle all tabs"
+msgstr "تمام ٹیب دبائیں"
+
+#: functions.php:1356
+msgid "Name:"
+msgstr "نام :"
+
+#: functions.php:1357
+msgid "Email:"
+msgstr "ای میل :"
+
+#: functions.php:1358
+msgid "Website:"
+msgstr "ویب سائٹ :"
+
+#: functions.php:1368
+msgid "Message:"
+msgstr "پیغام :"
+
+#: functions.php:1397
+msgid "Continue reading &raquo;"
+msgstr "پڑھنے جاری رکھیں &raquo;"
+
+#: functions.php:1449
+msgid "Older posts &laquo;"
+msgstr "پرانے خطوط &laquo;"
+
+#: functions.php:1450
+msgid "&raquo; Newer posts"
+msgstr "&raquo;نئے خطوط"
+
+#: functions.php:1452
+msgid "Next page &raquo;"
+msgstr "اگلا صفحہ &raquo;"
+
+#: functions.php:1453
+msgid "&laquo; Previous page"
+msgstr "&laquo; پچھلا صفحہ"
+
+#: functions.php:1667
+msgid "View full post"
+msgstr "مکمل مراسلہ دیکھیے"
+
+#: functions.php:1806
+msgid "<strong>ERROR: You must supply the post ID to get the image from as an argument when calling the graphene_get_post_image() function.</strong>"
+msgstr "<strong>خرابی :آپ کو ایک آرگیومنٹ سے تصویر حاصل کرنے کے لے پوسٹ کا نمبر دینا ہو گا جبgraphene_get_post_image() فنکشن کو کال کریں گے۔ .</strong>"
+
+#: functions.php:2167
+msgid "Template preview not found."
+msgstr "سانچہ پیش نظارہ نہیں ملا."
+
+#: functions.php:2170
+msgid "default"
+msgstr "پہلے سے طے شدہ"
+
+#: functions.php:2226
+#: functions.php:2230
+msgid "Theme default"
+msgstr "تھیم پہلے سے طے شدہ"
+
+#: functions.php:2296
+msgid "ERROR: You are not authorised to perform that operation"
+msgstr "خرابی : آپ کا اختیار اس آپریشن کو انجام دینے کے لئے نہیں ہیں"
+
+#: functions.php:2469
+#: functions.php:2480
+#: functions.php:2489
+#: loop-children.php:42
+#: loop-children.php:50
+#: loop-post-formats.php:32
+#: loop.php:71
+#: loop.php:150
+#, php-format
+msgid "Permalink to %s"
+msgstr " کے لئے پرمالنک %s"
+
+#: functions.php:2489
+msgid "Read more"
+msgstr "مزید پڑھیں"
+
+#: functions.php:2558
+#, php-format
+msgid "Follow %s on Twitter"
+msgstr "ٹویٹر پر %s پر عمل کریں"
+
+#: functions.php:2561
+#, php-format
+msgid "Visit %s's Facebook page"
+msgstr "%s کے فیس بک کے صفحہ پر جاءیں"
+
+#: functions.php:2583
+#, php-format
+msgid "Visit %1$s's %2$s page"
+msgstr "%1$s کے فیس بک کے %2$sصفحہ پر جاءیں"
+
+#: header.php:56
+#, php-format
+msgid "Subscribe to %s's RSS feed"
+msgstr "کی آر ایس ایس فیڈ کو سبسکرائب کریں %s"
+
+#: header.php:56
+msgid "Subscribe to RSS feed"
+msgstr "آر ایس ایس فیڈ کو سبسکرائب کریں"
+
+#: header.php:102
+#: header.php:122
+msgid "Go back to the front page"
+msgstr "سامنے کے صفحے پر واپس جائیں"
+
+#: loop-author.php:23
+msgid "Author's details"
+msgstr "مصنف کی تفصیلات"
+
+#: loop-author.php:25
+#, php-format
+msgid "<strong>Name:</strong> %1$s %2$s"
+msgstr "<strong>نام :</strong> %1$s %2$s"
+
+#: loop-author.php:26
+#, php-format
+msgid "<strong>Date registered:</strong> %1$s"
+msgstr "<strong>تاریخ رجسٹرڈ :</strong> %1$s"
+
+#: loop-author.php:35
+msgid "Biography"
+msgstr "سوانح حیات"
+
+#: loop-author.php:52
+msgid "Latest posts"
+msgstr "تازہ ترین مراسلہ"
+
+#: loop-author.php:55
+#: loop-author.php:85
+#: search-404.php:24
+#, php-format
+msgid "Permalink Link to %s"
+msgstr "پرمالنک کے عین مرکز سے %s"
+
+#: loop-author.php:55
+#: loop-author.php:85
+#: loop-children.php:42
+#: loop-post-formats.php:32
+#: loop.php:39
+#: loop.php:71
+msgid "(No title)"
+msgstr "(کوئی عنوان نہیں)"
+
+#: loop-author.php:92
+msgid "Most commented posts"
+msgstr "سب سے زیادہ خطوط تبصرہ"
+
+#: loop-children.php:50
+msgid "View page &raquo;"
+msgstr "دیکھیں صفحہ &raquo;"
+
+#: loop-post-formats.php:15
+msgid "Status update"
+msgstr "درجہ اپ ڈیٹ"
+
+#: loop-post-formats.php:16
+msgid "Audio"
+msgstr "آڈیو"
+
+#: loop-post-formats.php:17
+msgid "Image"
+msgstr "تصاویر"
+
+#: loop-post-formats.php:18
+msgid "Video"
+msgstr "ویڈیو"
+
+#: loop-post-formats.php:19
+msgid "Post format"
+msgstr "پوسٹ فارمیٹ"
+
+#: loop-post-formats.php:28
+msgid "l F j, Y"
+msgstr "l, j \\d\\e F \\d\\e Y"
+
+#: loop-post-formats.php:28
+msgid "g:i A"
+msgstr "g:i A"
+
+#: loop-post-formats.php:38
+#: loop.php:102
+msgid "Edit post"
+msgstr "پیغام میں ترمیم کریں"
+
+#: loop-post-formats.php:78
+#, php-format
+msgid "Posted on: %s"
+msgstr "پوسٹ کیا گیا تھا: %s"
+
+#: loop-post-formats.php:78
+msgid "F j, Y"
+msgstr "j \\d\\e F \\d\\e Y"
+
+#: loop.php:81
+msgid "Categories:"
+msgstr "زمرہ جات :"
+
+#: loop.php:92
+msgid "Print this page"
+msgstr "صفحہ پرنٹ کریں"
+
+#: loop.php:119
+msgid "by"
+msgstr "کی طرف سے"
+
+#: loop.php:145
+msgid "Read the rest of this entry &raquo;"
+msgstr "اس اندراج کے باقی پڑھیں &raquo;"
+
+#: loop.php:163
+msgid "Pages:"
+msgstr "صفحات :"
+
+#: loop.php:173
+msgid "Tags:"
+msgstr "ٹیگز :"
+
+#: loop.php:173
+msgid "This post has no tag"
+msgstr "یہ پیغام کوئی ٹیگ نہیں ہے"
+
+#: loop.php:185
+msgid "Leave comment"
+msgstr "چھوڑ دو تبصرہ"
+
+#: loop.php:200
+msgid "About the author"
+msgstr "مصنف کے بارے میں"
+
+#: loop.php:217
+msgid "Permanent link to this article:"
+msgstr "اس مضمون کے لئے مستقل لنک :"
+
+#: loop.php:248
+msgid "Not found"
+msgstr "نہیں ملا"
+
+#: loop.php:253
+msgid "Sorry, but you are looking for something that isn't here. Wanna try a search?"
+msgstr "معاف کیجئے گا، لیکن آپ جو تلاش کر رہے ہیں وہ یہاں نہیں ہے. کیا آپ تلاش کرنے کی ایک اور کوشش کرنا چاہتے ہیں؟"
+
+#: loop.php:255
+msgid "Sorry, but no results were found for that keyword. Wanna try an alternative keyword search?"
+msgstr "معاف کیجئے گا، لیکن اس مطلوبہ الفاظ کے لئے کوئی نتائج نہیں پائے گئے. ایک متبادل مطلوبہ الفاظ کی تلاش کی کوشش کرنا چاہتے ہیں؟"
+
+#: search-404.php:14
+msgid "Suggested results"
+msgstr "تجویز کردہ نتائج"
+
+#: search-404.php:18
+#, php-format
+msgid "I've done a courtesy search for the term %s for you. See if you can find what you're looking for in the list below:"
+msgstr "میں نے آپ کے لئے اصطلاح %s کے لئے ایک سوپیی تلاش کیا ہے. دیکھو اگر تم تلاش کیا آپ ذیل میں دی گئی فہرست میں سے دیکھ رہے ہیں کر سکتے ہیں :"
+
+#: search-404.php:35
+msgid "<strong>Sorry, couldn't find anything.</strong> Try searching for alternative terms using the search form above."
+msgstr "<strong>معاف کیجئے گا، کچھ نہیں مل سکا.</strong>. اوپر سرچ بکس کا استعمال کرتے ہوئے متبادل تلاش کرنے کی کوشش کریں ."
+
+#: search.php:11
+#, php-format
+msgid "Search results for: <span>%s</span>"
+msgstr "کے لئے تلاش کے نتائج :'<span>%s</span>'"
+
+#: searchform.php:3
+#: searchform.php:4
+msgid "Search"
+msgstr "تلاش"
+
+#: sidebar-two.php:36
+#: sidebar.php:42
+msgid "Meta"
+msgstr "میٹا"
+
+#: sidebar-two.php:41
+#: sidebar.php:47
+msgid "Posts RSS"
+msgstr "مراسلات آر ایس ایس"
+
+#: sidebar-two.php:42
+#: sidebar.php:48
+msgid "Comments RSS"
+msgstr "تبصرے آر ایس ایس"
+
+#: sidebar-two.php:44
+#: sidebar.php:50
+#, php-format
+msgid "Powered by %s"
+msgstr "تیار کیا گیا %s"
+
+#: sidebar-two.php:44
+#: sidebar.php:50
+msgid "Powered by WordPress, state-of-the-art semantic personal publishing platform."
+msgstr "ورڈپریس، ریاست کے جدید سیمینٹک ذاتی اشاعت پلیٹ فارم کی طرف سے حقوق محفوظ ہیں."
+
+#: sidebar-two.php:49
+#: sidebar.php:35
+msgid "Archives"
+msgstr "محفوظ شدہ دستاویزات"
+
+#: tag.php:14
+#, php-format
+msgid "Tag Archive: <span>%s</span>"
+msgstr "ٹیگ محفوظ شدہ دستاويزات : '<span>%s</span>'"
+
+#: admin/custom-fields.php:15
+msgid "Graphene post-specific options"
+msgstr "پوسٹ مخصوص گرافین اختیارات"
+
+#: admin/custom-fields.php:16
+msgid "Graphene page-specific options"
+msgstr "پیج مخصوص گرافین اختیارات"
+
+#: admin/custom-fields.php:98
+msgid "These settings will only be applied to this particular post or page you're editing. They will override the global settings set in the Graphene Options or Graphene Display options page."
+msgstr " یہ ترتیبات صرف خاص پوسٹ اور پیج جس کو آپ ایڈٹ کر رہے ہیں میں ہی اسکا اطلاق ہو گا۔ یہ وہ گرافین اختیارات یا گرافین ڈسپلے عا لمی ترتیبات کی جگہ لے لے گا"
+
+#: admin/custom-fields.php:99
+msgid "Slider options"
+msgstr "سلائیڈر اختیارات"
+
+#: admin/custom-fields.php:103
+msgid "Slider image"
+msgstr "سلائیڈر تصویر"
+
+#: admin/custom-fields.php:107
+#: admin/custom-fields.php:133
+#: admin/custom-fields.php:147
+msgid "Use global setting"
+msgstr "عالمی سطح پر ترتیب کا استعمال کریں"
+
+#: admin/custom-fields.php:108
+msgid "Don't show image"
+msgstr " تصویر نہیں دکھا"
+
+#: admin/custom-fields.php:109
+msgid "Featured Image"
+msgstr "نمایاں تصاویر"
+
+#: admin/custom-fields.php:110
+msgid "First image in post"
+msgstr "پوسٹ میں پہلا تصویر"
+
+#: admin/custom-fields.php:111
+msgid "Custom URL"
+msgstr "اپنی مرضی کے یو آر ایل"
+
+#: admin/custom-fields.php:117
+msgid "Custom slider image URL"
+msgstr "مرضی کے سلائیڈر تصویر کا یو آر ایل"
+
+#: admin/custom-fields.php:121
+msgid "Make sure you select Custom URL in the slider image option above to use this custom url."
+msgstr "اس بات کا یقین کر لیں کہ آپ سلائیڈر تصویر اوپر اختیار اس اپنی مرضی کے یو آر ایل کو استعمال کرنے کے لئے اپنی مرضی کے یو آر ایل کو منتخب کریں."
+
+#: admin/custom-fields.php:125
+msgid "Display options"
+msgstr "نمائش کے اختیارات"
+
+#: admin/custom-fields.php:129
+msgid "AddThis Social Sharing button"
+msgstr "یہ سوشل شیئرنگ کے بٹن کا اضافہ کریں"
+
+#: admin/custom-fields.php:134
+msgid "Show button"
+msgstr "دکھائیں بٹن"
+
+#: admin/custom-fields.php:135
+msgid "Hide button"
+msgstr "بٹن چھپائیں"
+
+#: admin/custom-fields.php:143
+msgid "Post date display"
+msgstr "تاریخ ڈسپلے کریں"
+
+#: admin/custom-fields.php:148
+msgid "Hide date"
+msgstr "تاریخ چھپائیں"
+
+#: admin/custom-fields.php:156
+msgid "Navigation options"
+msgstr "نیویگیشن اختیارات"
+
+#: admin/custom-fields.php:160
+msgid "Description"
+msgstr "تفصیل"
+
+#: admin/custom-fields.php:164
+msgid "Only required if you need a description in the navigation menu and you are not using a custom menu."
+msgstr " اگر آپ کو نیوی گیشن مینو میں وضاحت کی ضرورت ہے اور آپ ایک اپنی مرضی کے مطابق مینو کا استعمال نہیں کر رہے ہیں."
+
+#: admin/faq.php:12
+msgid "Graphene's Frequently Asked Questions"
+msgstr "گرافین اکثر پوچھے جانے والے سوالات"
+
+#: admin/faq.php:15
+msgid "Where should I go for the theme's support?"
+msgstr "میں موضوع کی حمایت کے لئے کہاں جانا چاہئے؟"
+
+#: admin/faq.php:16
+msgid "Please direct all support requests for the theme at the theme's <a href=\"http://forum.khairul-syahir.com/graphene-wordpress-theme/\">Support Forum</a>."
+msgstr "براہ مہربانی تھیم کے لئے تمام کی حمایت کی درخواستوں کو براہ راست <a href=\"http://forum.khairul-syahir.com/graphene-wordpress-theme/\">سپورٹ  فورم</a> پر بھیجیں."
+
+#: admin/faq.php:19
+msgid "The post's featured image is replacing my header image. Help!"
+msgstr "مراسلہ کی  نمایاں تصویر میرے ہیڈر کی تصویر کی جگہ لے.مدد کرو!"
+
+#: admin/faq.php:20
+msgid "This is actually one of the theme's features, based on the feature in the default TwentyTen theme. Any featured image that has a size of greater than or equal to the theme's header image size (960 x 198 pixels) will replace the header image when the post/page that featured image is assigned to is being displayed. It enables you to have different header image for different posts and/or pages."
+msgstr "یہ اصل میں تھیم خصوصیات کی پہلے سے طے شدہ ٹوینٹی ٹین موضوع میں اس سہولت کی بنیاد پر ایک، ہے. کوئی بھی نمایاں جو تصویر یا اس سے زیادہ تھیم کے ہیڈر تصویر کا سائز (960 X 198 پکسلز) کو برابر کا ایک سائز ہے جب پوسٹ / صفحہ خصوصیات تصویر مقرر کیا جاتا ہے ظاہر کیا جا رہا ہے ہیڈر تصویر کی جگہ لے لے گا. یہ آپ کو مختلف خطوط اور / یا صفحات کے لئے مختلف ہیڈر کی تصویر کے لئے کے قابل بناتا ہے."
+
+#: admin/faq.php:21
+msgid "If you want to disable this feature, simply tick the <em>Disable Featured Image replacing header image</em> option in the <a href=\"themes.php?page=graphene_options&tab=display\">Graphene Options</a> page, under Display > Header Display Options."
+msgstr "گر آپ اس نمایاں تصویر کو غیر فعال کرنا چاہتے ہیں، صرف نشان لگائیں <em>نمایاں  تصاویر کو غیر فعال اسکی جگہ ہیڈر کی تصویر</em>,میں اختیار<a href=\"themes.php?page=graphene_options&tab=display\">گرافین اختیارات</a> صفحہ> ہیڈر ظاہر اختیارات، ڈسپلے کے تحت."
+
+#: admin/faq.php:24
+msgid "Can I modify Graphene to my heart's content without paying anything?"
+msgstr "میں کچھ بھی ادائیگی کے بغیر میرے دل کے مواد کے مطابق گرافین تبدیل کر سکتا ہوں؟"
+
+#: admin/faq.php:25
+msgid "The Graphene WordPress theme, along with all the other themes in the WordPress.org Official Free Themes Directory, is released under the GNU General Public License (GPL) Version 2. The full text of that licence is included with the theme in the <code>licence.txt</code> file in the theme's folder. Releasing the theme under that licence means, among others, that you are <em>free to modify the theme in any way for any purpose (including commercial)</em> without any obligation to the theme's author. However, if you decide to redistribute the theme, the licence dictates that you must release the theme under the same licence, GPLv2."
+msgstr "گرافین ورڈپریس تھیم، ورڈ پریس۔یو آر جی دفتری مفت موضوعات کی ڈائرکٹری میں دیگر موضوعات کے ساتھ ساتھ جی ین یو جنرل پبلک لائسنس جی پی ایل2 ورژن کے تحت جاری کی گئی ہے.اس لائسنس کا مکمل متن میں موضوع کے ساتھ شامل ہے <code>licence.txt</code>, تھیم کے فولڈر میں فائل. لائسنس کے ساتھ تھیم کے اجراء کا مطلب ہے ،کہ دوسروں کے درمیان تم ہو، <em> کسی بھی طرح کسی بھی مقصد (تجارتی سمیت)موضوع کی نظر ثانی مفت)</em> تھیم کے مصنف پر ذمہ داری کے بغیر . تاہم ، اگر آپ تھیم پھر سے تقسیم کا فیصلہ کرتے ہیں، تو  لائسنس حکم ہے کہ آپ اسی اجازت نامے جی پی ایل وی 2 کے تحت تھیم کو ریلیز کریں،"
+
+#: admin/faq.php:26
+msgid "But of course, the author would always appreciate <a href=\"themes.php?page=graphene_options\">donations</a> to support ongoing and future developments of the theme."
+msgstr "لیکن،موضوع کے جاری اور مستقبل میں پیش رفت کی حمایت کرنے کے لئے مصنف <a href=\"themes.php?page=graphene_options\">ڈونیشن</a> کی ہمیشہ حوصلہ افزائی کرتے ہیں> ."
+
+#: admin/faq.php:29
+msgid "If the theme is released under GPLv2, what is this Creative Commons licence in the theme's footer?"
+msgstr "اگر موضوع جی پی ایل وی 2 کے تحت جاری کی گئی ہے،تو تھیم کے فوٹر میں اس تخلیقی العام لائسنس کیا ہے؟"
+
+#: admin/faq.php:30
+msgid "The Creative Commons licence is a popular licence nowadays that are used by a lot of web-based content authors to licence their work such that it protects their intellectual property but in the same time allows its free distribution. It is included with the theme simply to make it easy for the theme's users to make use of the licence for the content they publish. Theme users can remove it altogether via the theme's Options page should they wish not to use it."
+msgstr "تخلیقی العام لائسنس ایک مقبول لائسنس ہے آج کل کہ لائسنس ان کے کام کرنے کے لئے ایک ویب پر مبنی مواد کے مصنفین کے بہت سے استعمال کیا جاتا ہے کہ اس طرح ان کی بوددک املاک کی حفاظت کرتا ہے، لیکن ایک ہی وقت میں اس کی مفت تقسیم کی اجازت دیتا ہے. اس کے لیے اسے آسان تھیم صارفین مواد، شائع کرنے کے لئے لائسنس کا استعمال، صرف تھیم کے ساتھ شامل ہے. تھیم صارفین اس موضوع کے اختیارات صفحے کے ذریعے مکمل طور پر ختم کر سکتے ہیں وہ اس کا استعمال نہ کرنے کی خواہش کرنا چاہئے."
+
+#: admin/faq.php:31
+msgid "Put simply, <em>it is not the licence that is applied for the theme itself</em>, but just for the website's content should the theme user wants to use it."
+msgstr "براہ راست الفاظ میں،, <em>یہ لائسنس کے تھیم خود کے لئے درخواست نہیں کی ہے</em>، بلکہ صرف ویب سائٹ کا مواد استعمال کرنے کے لئے موضوع صارف چاہتا ہے."
+
+#: admin/faq.php:34
+msgid "Is the theme compatible with this plugin or that plugin?"
+msgstr "اس پلگ ان یا کہ پلگ ان کے ساتھ ہم آہنگ موضوع ہے؟"
+
+#: admin/faq.php:35
+msgid "I don't know. With so many plugins available for WordPress, there's no way that I (or anybody else for that matter) can test for compatibility for all of them. Having said that, the theme is built with all the necessary WordPress components included with it, so chances are most plugins will be compatible with the theme."
+msgstr "میں نہیں جانتا. ورڈپریس کے بہت سے پلگ ان دستیاب ہیں ممکن نہیں کہ میں [یا اور اس معاملہ کے لے] ہر ایک کو مطابقت کے لحاظ سے ٹیسٹ کر کے پرکھا جاے. ہہ کہا جا سکتا ہے کہ، تھیم میں ورڈپریس کےتمام ضروری  اجزاء کے شا مل ہیں۔ اس لئے امکان ہے سب سے زیادہ پلگ ان تھیم کے ساتھ ہم آہنگ کیا جائے گا."
+
+#: admin/faq.php:36
+msgid "My suggestion is to just install the plugin and try it. If you stumble into problem, ask for support from the plugin author first. If the plugin author says that it's a problems with the theme, you know where to find support."
+msgstr "میری تجویز صرف پلگ ان نصب کرنے کے لئے اور اس کی کوشش کی ہے. اگر آپ مسئلہ میں پھے ہیں، تو سب سے پہلے مصنف کی حمایت کے لئے پوچھنا. اگر پلگ ان مصنف کا کہے کہ اس تھیم کے ساتھ ایک مسئلہ ہے، تو آپ کو معلوم ہے کہ کہاں حمایت تلاش کرنی ہے۔"
+
+#: admin/options-import.php:20
+#: admin/options.php:1705
+msgid "Import Graphene Theme Options"
+msgstr "درآمد گرافین تھیم کے اختیارات"
+
+#: admin/options-import.php:63
+msgid "Options import completed"
+msgstr "اختیارات درآمد مکمل"
+
+#: admin/options-import.php:64
+msgid "Go to the Graphene options page"
+msgstr "گرافین اختیارات کے صفحے پر دیکھیے"
+
+#: admin/options-import.php:67
+#: admin/options-import.php:72
+#: admin/options-import.php:77
+msgid "Sorry, there has been an error."
+msgstr "معاف کیجئے گا، کوئی خرابی آگئی ہے."
+
+#: admin/options-import.php:68
+msgid "The uploaded file does not contain valid Graphene options."
+msgstr "اپ لوڈ کی گئی فائل میں درست گرافین کے اختیارات پر مشتمل نہیں ہے."
+
+#: admin/options-import.php:73
+msgid "The uploaded file could not be read."
+msgstr "اپ لوڈ کی گئی فائل کو پڑھا نہیں جا سکتا ہے."
+
+#: admin/options-import.php:78
+msgid "The uploaded file is not supported."
+msgstr "اپ لوڈ کی گئی فائل کی سہولت نہیں ہے."
+
+#: admin/options-import.php:86
+msgid "File is empty. Please upload something more substantial. This error could also be caused by uploads being disabled in your php.ini or by post_max_size being defined as smaller than upload_max_filesize in php.ini."
+msgstr "فائل خالی ہے. براہ مہربانی کچھ زیادہ اپ لوڈ کریں. آپ کی php.ini میں یا post_max_size php.ini میں upload_max_filesize  کی طرف سے غیر فعال کر دینے کی وجہ سے  یہ غلطی بھی ہو سکتی ہے."
+
+#: admin/options-presets.php:36
+msgid "The \"Normal website\" settings preset has been applied."
+msgstr "\"عمومی ویب سائٹ \" ترتیبات پیش سیٹ لاگو ہو گیا ہے."
+
+#: admin/options-presets.php:41
+msgid "Settings have been reset."
+msgstr "ترتیبات ری سیٹ کیا گیا ہے."
+
+#: admin/options.php:84
+#: admin/uninstall.php:23
+msgid "Uninstall Graphene"
+msgstr "گرافین ان انسٹال کریں"
+
+#: admin/options.php:85
+msgid "Please confirm that you would like to uninstall the Graphene theme. All of the theme's options in the database will be deleted."
+msgstr "براہ مہربانی تصدیق کریں کہ آپ گرافین تھیم کوان انسٹال کرنا چاہتے ہیں. ڈیٹا بیس میں تھیم کے اختیارات کو خارج کر دیا جائے گا."
+
+#: admin/options.php:86
+msgid "This action is not reversible."
+msgstr "یہ کارروائی ریورسیبل نہیں ہے."
+
+#: admin/options.php:90
+#: admin/options.php:302
+msgid "Uninstall Theme"
+msgstr " ان انسٹال کریں تھیم"
+
+#: admin/options.php:104
+msgid "Graphene Theme Options"
+msgstr "گرافین تھیم کے اختیارات"
+
+#: admin/options.php:106
+msgid "These are the global settings for the theme. You may override some of the settings in individual posts and pages."
+msgstr "یہ تھیم کے لئے عالمی سطح پر کی ترتیبات ہیں. آپ کو کچھ انفرادی خطوط اور صفحات کی سیٹنگ کی جگہ لے سکتے ہیں."
+
+#: admin/options.php:114
+msgid "General"
+msgstr "جنرل"
+
+#: admin/options.php:115
+msgid "Display"
+msgstr "دکھائیں"
+
+#: admin/options.php:116
+msgid "Advanced"
+msgstr "اعلی درجے کی"
+
+#: admin/options.php:152
+msgid "Save Options"
+msgstr "اختیارات محفوظ کریں"
+
+#: admin/options.php:164
+msgid "Support the developer"
+msgstr "ڈیولپر کی حمایت"
+
+#: admin/options.php:167
+msgid "Developing this awesome theme took a lot of effort and time, months and months of continuous voluntary unpaid work. If you like this theme or if you are using it for commercial websites, please consider a donation to the developer to help support future updates and development."
+msgstr "اس خوبصورت تھیم کو بنانے میں بہت سی کوششیں، وقت، مہینے اور بہت سے رضاکارانہ طور پ بلا معاوضہ کام کرنے والے مہینے لگے، اگر آپ اس تھیم کو پسند کرتے ہیں یا اگر آپ یہ تجارتی ویب سائٹ کے لئے استعمال کر رہے ہیں تو حمایت مستقبل اپ ڈیٹس اور ترقی کی مدد کے لئے ڈویلپر کے لئے ایک عطیہ کے بارے میں غور کریں."
+
+#: admin/options.php:182
+msgid "Graphene Usage Survey"
+msgstr "استعمال سروےگرافین"
+
+#: admin/options.php:185
+msgid "Help us to get to know you better. Take the Graphene theme usage survey now! Every opinion counts towards making the theme better. The survey is very short, and is completely anonymous."
+msgstr "ہمیں آپ کو بہتر پتہ حاصل کرنے کے لئے مدد. گرافین تھیم کے استعمال کے سروے کریں! ہر رائے تھیم کو مزید بہتر بنانے کی سمت میں ہوگی. سروے تو بہت ہی چھوٹا ہے، اور مکمل طور پر گمنام ہے."
+
+#: admin/options.php:186
+msgid "Take the survey"
+msgstr "سروے لے لو"
+
+#: admin/options.php:196
+msgid "Add-ons and plugins"
+msgstr "شامل کریں ایڈ اون اور پلگ ان"
+
+#: admin/options.php:199
+msgid "Add-ons"
+msgstr "ایڈ اونز"
+
+#: admin/options.php:200
+msgid "Add-ons are not shipped with the theme, but can be installed separately to extend the theme's capability."
+msgstr "ایڈ اون  تھیم کے ساتھ  نہیں بھیجےہیں ، لیکن تھیم کی صلاحیت بڑھانے کے لئے الگ انسٹال کیے جا سکتے ہیں ."
+
+#: admin/options.php:204
+msgid "Installed"
+msgstr "نصب"
+
+#: admin/options.php:205
+#: admin/options.php:224
+msgid "Not installed"
+msgstr "نہیں نصب"
+
+#: admin/options.php:205
+msgid "Learn more"
+msgstr "مزید معلومات حاصل کریں"
+
+#: admin/options.php:206
+msgid "Mobile extension developed specifically for optimised display of your site on mobile devices, such as iPhone and Android devices."
+msgstr "موبائل توسیع خاص طورپر آپ کی ویب سائٹ کے مرضی کے ڈسپلے آپ کے  فون اور لوڈ ، اتارنا اینڈرویڈ آلات پر دکھانے کے لے تیار کی جاتی ہے۔"
+
+#: admin/options.php:209
+msgid "Plugins"
+msgstr "پلگ انز"
+
+#: admin/options.php:210
+msgid "The plugins listed here are natively supported by the theme. All you need to do is install the plugins and activate them."
+msgstr "یہاں درج پلگ ان مقامی طور پر موضوع کی طرف سے مدد کی جاتی ہے. تم سب کو کرنے کی ضرورت نہیں ہے پلگ ان انسٹال کریں اور ان کو چالو کرنے."
+
+#: admin/options.php:223
+msgid "Activated"
+msgstr "چالو"
+
+#: admin/options.php:236
+msgid "Options Presets"
+msgstr "اختیارات پریذینٹ"
+
+#: admin/options.php:239
+msgid "The default settings for the theme is preconfigured for use in blogs. If you're using this theme primarily for a normal website, or if you want to reset the settings to their default values, you can apply one of the available options presets below."
+msgstr "تھیم کے لئے پہلے سے طے شدہ ترتیبات بلاگز میں استعمال کے لئے تشکیل کردہ ہے. اگر آپ اس موضوع کو بنیادی طور پر ایک عام ویب سائٹ کے لئے استعمال کر رہے ہیں، یا اگر آپ ان کے پہلے سے طے شدہ اقدار کو ترتیبات پر ری سیٹ کرنا چاہتے ہیں، آپ کو دستیاب سہولیات پری سیٹز کی ایک ذیل میں لاگو کر سکتے ہیں."
+
+#: admin/options.php:240
+msgid "Note that you can still configure the individual settings after you apply any preset."
+msgstr "یاد رکھیں کہ آپ اب بھی انفرادی کی ترتیبات کو تشکیل دیں کے بعد آپ کے ذہن میں کوئی پیش سیٹ لاگو ہوتے ہیں کر سکتے ہیں."
+
+#: admin/options.php:245
+msgid "Select Options Preset"
+msgstr "موجودہ اختیارات منتخب کریں"
+
+#: admin/options.php:248
+msgid "Normal website"
+msgstr "عمومی ویب سائٹ"
+
+#: admin/options.php:251
+msgid "Reset to default settings"
+msgstr "پہلے سے طے شدہ ترتیبات کو ری سیٹ کرنے"
+
+#: admin/options.php:256
+msgid "Apply Options Preset"
+msgstr "اختیارات پیش سیٹ کا اطلاق کریں"
+
+#: admin/options.php:266
+msgid "Import/export theme options"
+msgstr "درآمد / برآمد کے موضوع کے اختیارات"
+
+#: admin/options.php:270
+msgid "Import"
+msgstr "درآمد"
+
+#: admin/options.php:273
+msgid "Import Theme options"
+msgstr "درآمد تھیم کے اختیارات"
+
+#: admin/options.php:275
+msgid "Export"
+msgstr "برآمد"
+
+#: admin/options.php:279
+msgid "Export Theme options"
+msgstr "ایکسپورٹ تھیم کے اختیارات"
+
+#: admin/options.php:282
+#, php-format
+msgid "Import and export is only available for to users with PHP version 5.2.1 and higher. You are using PHP version %s."
+msgstr "درآمد اور برآمد صرف پی ایچ پی ورژن 5.2.1 اور اعلی کے ساتھ صارفین کے لئے دستیاب ہے. آپ پی ایچ پی ورژن %s استعمال کر رہے ہیں ایس"
+
+#: admin/options.php:292
+msgid "Uninstall theme"
+msgstr "تھیم ان انسٹال کریں"
+
+#: admin/options.php:295
+msgid "<strong>Be careful!</strong> Uninstalling the theme will remove all of the theme's options from the database. Do this only if you decide not to use the theme anymore."
+msgstr "<strong>ہوشیار رہنا!</strong> موضوع ناتنصیب موضوع کے اختیارات کا تمام ڈیٹا بیس سے نکال دیا جائے گا. ایسا صرف اس صورت میں جب کہ آپ تھیم کو مزید استمال نہ کرنا چاہیں."
+
+#: admin/options.php:296
+msgid "If you just want to try another theme, there is no need to uninstall this theme. Simply activate the other theme in the Appearance > Themes admin page."
+msgstr "اگر آپ صرف ایک اورتھیم کو آن کرنا چاہتے ہیں، تو اس تھیم کو انسٹال کرنے کی ضرورت نہیں ہے. بس ظاہری شکل> تھیم ایڈمن صفحے میں دوسری تھیم کو چالو کریں."
+
+#: admin/options.php:297
+msgid "Note that uninstalling this theme <strong>does not remove</strong> the theme's files. To delete the files after you have uninstalled this theme, go to Appearances > Themes and delete the theme from there."
+msgstr "نوٹ کریں کہ اس تھیم کوانسٹال کرتے ہوےتھیم فائلوں کو <strong>ڈیلیٹ مت کریں</strong> . تھیم کو ان انسٹال کرنے کے بعد فائلوں کو ڈیلیٹ کرنے کےلے اپیرنس میں جانے کے بعد تھیم وہاں سے ڈیلیٹ کر دیں۔"
+
+#: admin/options.php:313
+#: admin/options.php:1644
+msgid "Preview"
+msgstr "پیش نظارہ"
+
+#: admin/options.php:314
+msgid "The preview will be updated when the \"Save Options\" button above is clicked."
+msgstr "پیش نظارہ جب \"محفوظ اختیارات \" اوپر کے بٹن پر کلک کیا ہے اپ ڈیٹ کیا جائے گا."
+
+#: admin/options.php:333
+msgid "Slider Options"
+msgstr "سلائیڈر اختیارات"
+
+#: admin/options.php:339
+msgid "Disable slider"
+msgstr "سلائیڈر کو غیر فعال کریں"
+
+#: admin/options.php:347
+msgid "What do you want to show in the slider"
+msgstr " آپ سلائیڈر میں کیا ظاہر کرنا چاہتے ہیں"
+
+#: admin/options.php:351
+msgid "Show latest posts"
+msgstr "تازہ ترین مراسلہ دکھائیں"
+
+#: admin/options.php:354
+msgid "Show random posts"
+msgstr "بے ترتیب خطوط دکھائیں"
+
+#: admin/options.php:357
+msgid "Show specific posts/pages"
+msgstr "مخصوص خطوط / صفحات دکھائیں"
+
+#: admin/options.php:360
+msgid "Show posts from categories"
+msgstr "زمرے سے تازہ ترین دکھائیں مراسلہ"
+
+#: admin/options.php:365
+#: admin/options.php:579
+msgid "Posts and/or pages to display"
+msgstr "مراسلات اور / یا ظاہر کرنے کے لئے صفحات"
+
+#: admin/options.php:370
+#: admin/options.php:584
+msgid "Enter ID of posts and/or pages to be displayed, separated by comma. Example: <code>1,13,45,33</code>"
+msgstr "پوسٹ  یا/اور پیجز کے نمبر دکھانے کے لیے لکھیں۔جو کہ کوما سے علیحدہ کیے ہوں۔ مثلا <code>1,13,45,33</code>"
+
+#: admin/options.php:371
+msgid "Applicable only if <strong>Show specific posts/pages</strong> is selected above."
+msgstr "قابل اطلاق صرف اس صورت میں <strong>مخصوص خطوط / صفحات دکھائیں <strong /> اوپر منتخب شدہ ہے."
+
+#: admin/options.php:377
+msgid "Categories to display"
+msgstr "ظاہر زمرہ جات"
+
+#: admin/options.php:378
+msgid "All posts within the categories selected here will be displayed on the slider. Usage example: create a new category \"Featured\" and assign all posts to be displayed on the slider to that category, and then select that category here."
+msgstr "یہاں منتخب زمروں کےاندر تمام خطوط سلائیڈر پر دکھائے جائے گے. مثال کے طور پر : ایک نئی قسم بنائیں \"نمایاں \" اور اس قسم کے سلائیڈر پر ظاہر کرنے کے لئے تمام خطوط کو تفویض کرنے کے لئے، اور پھر یہاں اس قسم کا انتخاب کریں."
+
+#: admin/options.php:394
+msgid "Number of posts to display"
+msgstr "ظاہر کرنے کے لیے خطوط کی تعداد"
+
+#: admin/options.php:419
+#: admin/options.php:1605
+msgid "Upload or select image from gallery"
+msgstr "یا منتخب گیلری ، نگارخانہ سے تصویر اپ لوڈ"
+
+#: admin/options.php:425
+msgid "Slider display style"
+msgstr "سلائیڈر ڈسپلے انداز"
+
+#: admin/options.php:429
+msgid "Thumbnail and excerpt"
+msgstr "پورنا اور اقتباس"
+
+#: admin/options.php:430
+msgid "Background image and excerpt"
+msgstr "پس منظر کی تصویر اور اقتباس"
+
+#: admin/options.php:431
+msgid "Full post content"
+msgstr "مکمل پوسٹ کے مواد"
+
+#: admin/options.php:437
+msgid "Slider animation"
+msgstr "سلائیڈر حرکت پذیری"
+
+#: admin/options.php:442
+msgid "Horizontal slide"
+msgstr "افقی سلائڈ"
+
+#: admin/options.php:443
+msgid "Vertical slide"
+msgstr "عمودی سلائڈ"
+
+#: admin/options.php:444
+msgid "Fade"
+msgstr "دھندلا"
+
+#: admin/options.php:445
+msgid "No effect"
+msgstr "کوئی اثر نہیں"
+
+#: admin/options.php:451
+msgid "Slider height"
+msgstr "سلائیڈر اونچائی"
+
+#: admin/options.php:459
+msgid "Slider speed"
+msgstr "سلائیڈر رفتار"
+
+#: admin/options.php:462
+#: admin/options.php:471
+msgid "milliseconds"
+msgstr "ملی سیکنڈز"
+
+#: admin/options.php:463
+msgid "This is the duration that each slider item will be shown"
+msgstr "یہ وہ دورانیہ ہے کہ ہر سلائیڈر اشیاء کو دکھایا جائے گ"
+
+#: admin/options.php:468
+msgid "Slider transition speed"
+msgstr "سلائیڈر منتقلی کی رفتار"
+
+#: admin/options.php:472
+msgid "This is the speed of the slider transition. Lower values = higher speed."
+msgstr "یہ سلائیڈر منتقلی کی رفتار ہے. لوئر اقدار کو زیادہ رفتار =."
+
+#: admin/options.php:477
+msgid "Move slider to bottom of page"
+msgstr "صفحے کے سب سے نیچے دیئے سلائیڈر منتقل"
+
+#: admin/options.php:490
+msgid "Front Page Options"
+msgstr "فرنٹ پیج کے اختیارات"
+
+#: admin/options.php:496
+msgid "Front page posts categories"
+msgstr "فرنٹ پیج خطوط زمرے"
+
+#: admin/options.php:498
+msgid "Only posts that belong to the categories selected here will be displayed on the front page. Does not affect Static Front Page."
+msgstr "صرف خطوط یہاں منتخب زمرے سے تعلق رکھتے ہی سامنے کے صفحے پر دکھایا جائے گا. کیا جامد فرنٹ پیج اثر انداز نہیں ہوتے."
+
+#: admin/options.php:503
+msgid "--Disabled--"
+msgstr "-- غیر فعال --"
+
+#: admin/options.php:511
+msgid "You may select multiple categories by holding down the CTRL key."
+msgstr "آپ کنٹرول کلید کا انعقاد ایک سے زیادہ اقسام منتخب کر سکتے ہیں."
+
+#: admin/options.php:523
+msgid "Homepage Panes"
+msgstr "مرکزی صفحہ جامد نہ رکھیں"
+
+#: admin/options.php:530
+msgid "Disable homepage panes"
+msgstr "کے ہوم پیج پر شیشے کو غیر فعال کریں"
+
+#: admin/options.php:540
+msgid "Type of content to show"
+msgstr "دکھانے کے مواد کی قسم"
+
+#: admin/options.php:547
+msgid "Latest posts by category"
+msgstr "زمرے کے لحاظ سے تازہ ترین مراسلہ"
+
+#: admin/options.php:550
+msgid "Posts and/or pages"
+msgstr "مراسلات اور / یا صفحات"
+
+#: admin/options.php:555
+msgid "Number of latest posts to display"
+msgstr "تازہ ترین خطوط کی تعداد ظاہر کرنے کے لئے"
+
+#: admin/options.php:559
+msgid "Applicable only if <strong>Latest posts</strong> or <strong>Latest posts by category</strong> is selected above."
+msgstr ".صرف اسی صورت ممکن ہے جب<strong> تازہ ترین مراسلہ</strong> یا <strong> تازہ ترین مراسلہ کا اطلاق زمرے کے لحاظ</strong> سے اوپر منتخب کیا جاے"
+
+#: admin/options.php:564
+msgid "Category to show latest posts from"
+msgstr "سے تازہ ترین مراسلہ دکھانے کے زمرہ"
+
+#: admin/options.php:574
+msgid "Applicable only if <strong>Latest posts by category</strong> is selected above."
+msgstr ".صرف اسی صورت ممکن ہے جب تازہ ترین<strong> مراسلہ کا اطلاق زمرے کے لحاظ</strong> سے اوپر منتخب کیا جاے"
+
+#: admin/options.php:585
+msgid "Applicable only if <strong>Posts and/or pages</strong> is selected above."
+msgstr ".صرف اسی صورت ممکن ہے جب<strong> مراسلہ یا/اور پیجز </strong> کو اوپر منتخب کیا جاے"
+
+#: admin/options.php:591
+msgid "<strong>Note:</strong> homepage panes are only displayed when using a <a href=\"http://codex.wordpress.org/Creating_a_Static_Front_Page\">static front page</a>."
+msgstr "<strong>نوٹ :</strong>کے ہوم پیج پر شیشے صرف دکھایا جب<a href=\"http://codex.wordpress.org/Creating_a_Static_Front_Page\">سٹیٹک فرنٹ پیج</a> استعمال کر رہے ہیں"
+
+#: admin/options.php:601
+msgid "Comments Options"
+msgstr "تبصرے کے اختیارات"
+
+#: admin/options.php:607
+msgid "Commenting"
+msgstr "تبصرہ"
+
+#: admin/options.php:611
+msgid "Use WordPress settings"
+msgstr "ورڈپریس کی تراتیب کو استعمال کریں"
+
+#: admin/options.php:612
+msgid "Disabled for pages"
+msgstr "صفحات کے لئے غیر فعال"
+
+#: admin/options.php:613
+msgid "Disabled completely"
+msgstr "مکمل طور پر غیر فعال کر دیا"
+
+#: admin/options.php:615
+msgid "Note: this setting overrides the global WordPress Discussion Setting called \"Allow people to post comments on new articles\" and also the \"Allow comments\" option for individual posts/pages."
+msgstr "یہ ترتیبات ورڈ پریس کی عا لمی بحث کی تر یبات کی جگہ لے لیتی ہیں۔ جو کہ /\"تمام لوگو کو نءی پوسٹ پر تبصرہ کرنے کی اجازت\"/ اور /\"تبصرے کی اجازت \"/ انفرادی پوسٹ اور پیجز پر دیتی ہے"
+
+#: admin/options.php:627
+msgid "Child Page Options"
+msgstr "بچے کی صفحہ اختیارات"
+
+#: admin/options.php:633
+msgid "Hide parent box if content is empty"
+msgstr "پیرنٹ باکس چھپائیں اگر مواد خالی ہے"
+
+#: admin/options.php:639
+msgid "Child page listings"
+msgstr "چاءلڈ صفحہ لسٹنگ"
+
+#: admin/options.php:643
+msgid "Show listing"
+msgstr "لسٹنگ دکھائیں"
+
+#: admin/options.php:644
+msgid "Hide listing"
+msgstr "لسٹنگ چھپائیں"
+
+#: admin/options.php:645
+msgid "Only show listing if parent content is empty"
+msgstr "صرف لسٹنگ دکھانے اگر پیرنٹ مواد خالی ہے"
+
+#: admin/options.php:658
+msgid "Widget Area Options"
+msgstr "ویجیٹ ایریا اختیارات"
+
+#: admin/options.php:661
+msgid "Header widget area"
+msgstr "ہیڈر ویجیٹ علاقے"
+
+#: admin/options.php:662
+msgid "<strong>Important:</strong> This widget area is unstyled, as it is often used for advertisement banners, etc. If you enable it, make sure you style it to your needs using the Custom CSS option."
+msgstr "اہم <strong>: </strong> یہ ویجیٹ علاقے unstyled ہے، کیونکہ یہ اکثر اشتہار بینر کے لئے استعمال کیا جاتا ہے، وغیرہ اگر آپ اسے فعال کریں، آپ کو آپ اپنی مرضی سی ایس ایس کا اختیار استعمال کرتے ہوئے کی ضرورت ہے کرنے کے لئے سٹائل اس بات کو یقینی بنانے کے."
+
+#: admin/options.php:666
+msgid "Enable header widget area"
+msgstr "ہیڈر ویجیٹ علاقے کو چالو کریں"
+
+#: admin/options.php:675
+msgid "Alternate Widgets"
+msgstr "متبادل وگیٹس"
+
+#: admin/options.php:676
+msgid "You can enable the theme to show different widget areas in the front page than the rest of the website. If you enable this option, additional widget areas that will only be displayed on the front page will be added to the Widget settings page."
+msgstr "آپ تھیم کے فرنٹ پیج میں ویب سائٹ کا باقی سے مختلف ویجیٹ ایریا کو ظاہر کرنے کے لئے چالو کر سکتے ہیں. اگر آپ اس آپشن کو فعال کرتے ہیں، اضافی ویجیٹ ایریا صرف سامنے کے صفحے پر دکھایا جائے گا ویجیٹ کی ترتیبات کے صفحے پر شامل ہو جائیں گے."
+
+#: admin/options.php:679
+msgid "Enable alternate front page sidebar widget area"
+msgstr "متبادل سامنے صفحہ سائڈبار ویجیٹ ایریا کو چالو کریں"
+
+#: admin/options.php:683
+msgid "Enable alternate front page footer widget area"
+msgstr "متبادل سامنے صفحہ فوٹر ویجیٹ ایریا کو چالو کریں"
+
+#: admin/options.php:684
+msgid "You can also specify different column counts for the front page footer widget and the rest-of-site footer widget if you enable this option."
+msgstr "سامنے صفحہ فوٹر ویجیٹ اور باقی کی سائٹ کے فوٹر ویجیٹ کے لئے آپ مختلف کالم شمار کو فعال کر سکتے ہیں."
+
+#: admin/options.php:697
+msgid "Top Bar Options"
+msgstr "اوپر بار کے اختیارات"
+
+#: admin/options.php:703
+msgid "Hide the top bar"
+msgstr "ڈاؤن بار چھپائیں"
+
+#: admin/options.php:711
+msgid "Hide feed icon"
+msgstr "چھپائیں آئکن فیڈ"
+
+#: admin/options.php:715
+msgid "Use custom feed URL"
+msgstr "اپنی مرضی کے مطابق فیڈ کے یو آر ایل پر استعمال کریں"
+
+#: admin/options.php:718
+msgid "This custom feed URL will replace the default WordPress RSS feed URL."
+msgstr "یہ اپنی مرضی کے فیڈ یو آر ایل کو پہلے سے طے شدہ ورڈپریس آر ایس ایس فیڈ یو آر ایل کی جگہ لے لے گا."
+
+#: admin/options.php:722
+msgid "Open social media links in new window"
+msgstr "نئی ونڈو میں سوشل میڈیا لنک کھولیں"
+
+#: admin/options.php:726
+msgid "Twitter URL"
+msgstr "ٹویٹر یو آر ایل"
+
+#: admin/options.php:729
+msgid "Enter the URL to your Twitter page."
+msgstr "آپ کے ٹویٹر صفحے پر یو آر ایل درج کریں."
+
+#: admin/options.php:733
+msgid "Facebook URL"
+msgstr "فیس بک یو آر ایل"
+
+#: admin/options.php:736
+msgid "Enter the URL to your Facebook profile page."
+msgstr "یو آر ایل اپنے فیس بک پروفائل کے صفحے پر درج کریں."
+
+#: admin/options.php:747
+#, php-format
+msgid "%s Title"
+msgstr "عنوان %s"
+
+#: admin/options.php:752
+#, php-format
+msgid "The title is empty and the following title will be shown: <strong>%s</strong>"
+msgstr "عنوان خالی ہے اور مندرجہ ذیل عنوان پر دکھایا جائے گا : <strong>%s</strong>"
+
+#: admin/options.php:758
+#, php-format
+msgid "%s URL"
+msgstr "یو آر ایل %s"
+
+#: admin/options.php:763
+#, php-format
+msgid "%s icon URL"
+msgstr "آئیکن یو آر ایل %s"
+
+#: admin/options.php:766
+msgid "Delete"
+msgstr "کو حذف کریں"
+
+#: admin/options.php:774
+msgid "Add new social media icon"
+msgstr "نیا سماجی میڈیا کے آئکن شامل کریں"
+
+#: admin/options.php:786
+msgid "Social Sharing Buttons"
+msgstr "سوشل شیئرنگ بٹن"
+
+#: admin/options.php:791
+msgid "Show social sharing button"
+msgstr "سماجی اشتراک کرنے کے بٹن دکھائیں"
+
+#: admin/options.php:797
+msgid "Show in Pages as well?"
+msgstr "صفحات میں دکھانے کے ساتھ ساتھ؟"
+
+#: admin/options.php:801
+msgid "Social sharing buttons location"
+msgstr "سماجی کا اشتراک کے بٹن کا محل وقوع"
+
+#: admin/options.php:804
+msgid "Bottom of posts"
+msgstr "ای میل کے سب سے نیچے دیئے"
+
+#: admin/options.php:805
+msgid "Top of posts"
+msgstr "ای میل کے سب سے اوپر"
+
+#: admin/options.php:806
+msgid "Both top and bottom"
+msgstr "اوپر اور نیچے دونوں"
+
+#: admin/options.php:812
+msgid "Your social sharing button code"
+msgstr "اپنے سماجی اشتراک کرنے کا بٹن کوڈ"
+
+#: admin/options.php:813
+msgid "You can use codes from any popular social sharing sites, like Facebook, Digg, AddThis, etc."
+msgstr "آپ اپنے فیس بک، ڈگ کی طرح کسی بھی مقبول سماجی اشتراک کی سائٹس سے کوڈ استعمال کریں"
+
+#: admin/options.php:816
+msgid "You may use these tags to get the post's URL and title:"
+msgstr "آپ ان ٹیگ پوسٹ کا یو آر ایل اور ٹائٹل حاصل کرنے کے لئے استعمال کر سکتے ہیں :"
+
+#: admin/options.php:828
+msgid "Adsense Options"
+msgstr "ایڈسینس کے اختیارات"
+
+#: admin/options.php:834
+msgid "Show Adsense advertising"
+msgstr "دکھائیں ایڈسینس اشتہارات"
+
+#: admin/options.php:840
+msgid "Show ads on front page as well"
+msgstr "سامنے کے صفحے پر اشتھارات کو بھی دکھائیں"
+
+#: admin/options.php:846
+msgid "Your Adsense code"
+msgstr "آپ کا ایڈسینس کا کوڈ"
+
+#: admin/options.php:859
+msgid "Google Analytics Options"
+msgstr "گوگل تجزیاتی اختیارات"
+
+#: admin/options.php:864
+msgid "Enable Google Analytics tracking"
+msgstr "گوگل کے تجزیات سے باخبر رہنے کے فعال کریں"
+
+#: admin/options.php:871
+msgid "<strong>Note:</strong> the theme now places the Google Analytics script in the <code>&lt;head&gt;</code> element to better support the new asynchronous Google Analytics script. Please make sure you update your script to use the new asynchronous script from Google Analytics."
+msgstr "<strong>نوٹ :</strong>تھیم اب میں گوگل کے تجزیات کے سکرپٹ دیتا ہے <code>&lt;head&gt;</code>بہتر نئے اتلیکالک گوگل کے تجزیات کے سکرپٹ کی حمایت عنصر. برائے مہربانی اس بات کا یقین کر لیں کہ آپ اپنے گوگل کے تجزیات سے نئے اتلیکالک سکرپٹ استعمال کرنے کی سکرپٹ کو اپ ڈیٹ کریں."
+
+#: admin/options.php:875
+msgid "Google Analytics tracking code"
+msgstr "گوگل کے تجزیات سے باخبر رہنے کے کوڈ"
+
+#: admin/options.php:876
+msgid "Make sure you include the full tracking code (including the <code>&lt;script&gt;</code> and <code>&lt;/script&gt;</code> tags) and not just the <code>UA-#######-#</code> code."
+msgstr "اس بات کا یقین کر لیں کہ آپ کو مکمل باخبر رکھنے کا کوڈ شامل (بشمول <code>&lt;script&gt;</code> اور <code>&lt;/script&gt;</code>)اور نہ صرف <code>UA-#######-#</code>."
+
+#: admin/options.php:889
+msgid "Footer Options"
+msgstr "فٹر کے اختیارات"
+
+#: admin/options.php:894
+msgid "Show Creative Commons logo"
+msgstr "تخلیقی العام علامت (لوگو) دکھائیں"
+
+#: admin/options.php:899
+msgid "Copyright text (html allowed)"
+msgstr "کاپی رائٹ متن (ایچ ٹی ایم ایل کی اجازت)"
+
+#: admin/options.php:900
+msgid "If this field is empty, the following default copyright text will be displayed:"
+msgstr "اگر اس فیلڈ کو خالی ہے، مندرجہ ذیل پہلے سے طے شدہ کاپی رائٹ متن دکھایا جائے گا :"
+
+#: admin/options.php:906
+msgid "Do not show copyright info"
+msgstr "کاپی رائٹ معلومات نہیں دکھا"
+
+#: admin/options.php:910
+#: admin/options.php:922
+msgid "Print Options"
+msgstr "چھپائی اختیارات"
+
+#: admin/options.php:927
+msgid "Enable print CSS for single posts and pages?"
+msgstr "فعال کریں سنگل خطوط اور صفحات کے لیے سی ایس ایس پرنٹ؟"
+
+#: admin/options.php:933
+msgid "Show print button as well?"
+msgstr "پرنٹ کے بٹن کو بھی دکھائیں؟"
+
+#: admin/options.php:953
+msgid "Header Display Options"
+msgstr "ہیڈر ظاہر اختیارات"
+
+#: admin/options.php:959
+msgid "Use light-coloured header bars"
+msgstr "ہلکے رنگ کے ہیڈر کی سلاخوں کے کا استعمال کریں"
+
+#: admin/options.php:965
+msgid "Link header image to front page"
+msgstr "فرنٹ پیج کے ہیڈر تصویر لنک"
+
+#: admin/options.php:968
+msgid "Check this if you disable the header texts and want the header image to be linked to the front page."
+msgstr "اس کو چیک کریں اگر آپ ہیڈر کے نصوص کو غیر فعال اور ہیڈر تصویر سامنے کے صفحے پر منسلک کرنے کے لئے چاہتے ہیں."
+
+#: admin/options.php:973
+msgid "Disable Featured Image replacing header image"
+msgstr "نمایاں کو غیر فعال تصاویر کی جگہ ہیڈر کی تصویر"
+
+#: admin/options.php:976
+msgid "Check this to prevent the posts Featured Image replacing the header image regardless of the featured image dimension."
+msgstr "اس سے بچنے کے خطوط نمایاں تصویر کے طول و عرض سے قطع نظر ہیڈر تصویر کی جگہ تصویری نمایاں کی جانچ کرنے کے."
+
+#: admin/options.php:981
+msgid "Use random header image"
+msgstr "بے ترتیب ہیڈر کی تصویر کا استعمال کریں"
+
+#: admin/options.php:985
+msgid "Check this to show a random header image (random image taken from the available default header images)."
+msgstr "یہ ایک بے ترتیب ہیڈر کی تصویر (بے ترتیب دستیاب ڈیفالٹ ہیڈر تصاویر سے لیا تصویر) کو ظاہر کرنے کے لئے چیک کریں."
+
+#: admin/options.php:986
+msgid "<strong>Note:</strong> only works on pages where a specific header image is not defined."
+msgstr "<strong>اس بات کو نوٹ کیجیئے کی : </strong> صفحات میں جہاں ایک مخصوص ہیڈر کی تصویر کی تعریف نہیں ہے پر صرف کام."
+
+#: admin/options.php:992
+msgid "Search box location"
+msgstr "تلاش باکس محل وقوع"
+
+#: admin/options.php:996
+msgid "Top bar"
+msgstr "اوپر بار"
+
+#: admin/options.php:997
+msgid "Navigation bar"
+msgstr "نیویگیشن بار"
+
+#: admin/options.php:998
+msgid "Disable search box"
+msgstr "تلاش کے باکس کے غیر فعال"
+
+#: admin/options.php:1011
+msgid "Column Options"
+msgstr "کالم کے اختیارات"
+
+#: admin/options.php:1017
+msgid "Column mode"
+msgstr "کالم موڈ"
+
+#: admin/options.php:1026
+msgid "One column"
+msgstr "ایک کالم"
+
+#: admin/options.php:1033
+msgid "Two columns (with sidebar right)"
+msgstr "دو کالموں (سائڈبار حق کے ساتھ)"
+
+#: admin/options.php:1037
+msgid "Two columns (with sidebar left)"
+msgstr "دو کالموں (سائڈبار بائیں کے ساتھ)"
+
+#: admin/options.php:1044
+msgid "Three columns (with two sidebars right)"
+msgstr "تین کالم (کے ساتھ دو sidebars حق)"
+
+#: admin/options.php:1048
+msgid "Three columns (with two sidebars left)"
+msgstr "تین کالم (دونوں طرف چھوڑ سلاخوں کے ساتھ)"
+
+#: admin/options.php:1052
+msgid "Three columns (with sidebars left and right)"
+msgstr "تین کالم (کے ساتھ بائیں طرف بار اور صحیح)"
+
+#: admin/options.php:1067
+msgid "Posts Display Options"
+msgstr "مراسلات کے اختیارات دکھائیں"
+
+#: admin/options.php:1073
+msgid "Hide post author"
+msgstr "چھپائیں مصنف مراسلے"
+
+#: admin/options.php:1083
+msgid "Hidden"
+msgstr "پوشیدہ"
+
+#: admin/options.php:1084
+msgid "As an icon (without the year)"
+msgstr "ایک آئیکن (سال کے بغیر) کے طور پر"
+
+#: admin/options.php:1085
+msgid "As an icon (including the year)"
+msgstr "ایک آئیکن (سال بھی شامل ہے) کے طور پر"
+
+#: admin/options.php:1086
+msgid "As inline text"
+msgstr "ان لائن متن کے طور پر"
+
+#: admin/options.php:1088
+msgid "Note: displaying date as inline text allows more space for the content area, especially useful for a three-column layout configuration."
+msgstr "نوٹ : تاریخ کی نمائش کے طور پر ان لائن متن مواد علاقے، ایک تین کالم کی ترتیب ترتیب کے لئے خاص طور پر مفید کے لئے زیادہ جگہ کی اجازت دیتا ہے."
+
+#: admin/options.php:1093
+msgid "Hide post categories"
+msgstr "پوسٹ زمرے چھپائیں"
+
+#: admin/options.php:1099
+msgid "Hide post tags"
+msgstr "پوسٹ ٹیگ چھپائیں"
+
+#: admin/options.php:1105
+msgid "Hide post comment count"
+msgstr "چھپائیں تبصرہ شمار پوسٹ"
+
+#: admin/options.php:1106
+msgid "Only affects posts listing (such as the front page) and not single post view."
+msgstr "صرف خطوط لسٹنگ (مثلا فرنٹ پیج کے طور پر) اور اس کے بعد ایک نہیں نقطہ نظر پر اثر انداز."
+
+#: admin/options.php:1111
+msgid "Show post author's gravatar"
+msgstr "پوسٹ ہے مصنف کی گراوٹار دکھائیں"
+
+#: admin/options.php:1115
+msgid "Show post author's info"
+msgstr "پوسٹ مصنف معلومات دکھائیں"
+
+#: admin/options.php:1127
+msgid "Excerpts Display Options"
+msgstr "تلاوت کے اختیارات دکھائیں"
+
+#: admin/options.php:1133
+msgid "Show excerpts in front page"
+msgstr "فرنٹ پیج میں حوالہ جات دکھائیں"
+
+#: admin/options.php:1139
+msgid "Show full content in archive pages"
+msgstr "محفوظ شدہ دستاويزات صفحات میں مکمل مواد دکھائیں"
+
+#: admin/options.php:1143
+msgid "Note: Archive pages include the archive for category, tags, time, and search results pages. Enabling this option will cause the full content of posts and pages listed in those archives to displayed instead of the excerpt, and truncated by the Read More tag if used."
+msgstr "نوٹ : محفوظ شدہ دستاويزات صفحات قسم کے لئے محفوظ شدہ دستاويزات، ٹیگ، وقت، اور تلاش کے نتائج والے صفحات شامل ہیں. اس اختیار کو چالو کرنے سے ان ابلیھاگار میں درج اقتباس کے بجائے ظاہر کرنے کے لئے، اور مزید ٹیگ کو پڑھا کی طرف سے مقطوعہ اگر استعمال کیا خطوط اور صفحات کی مکمل مواد کی وجہ گا."
+
+#: admin/options.php:1147
+msgid "Show More link for manual excerpts"
+msgstr "دستی حوالہ جات کے لئے مزید لنک دکھائیں"
+
+#: admin/options.php:1151
+msgid "Retain these HTML tags in excerpts"
+msgstr "حوالہ جات میں ان ایچ ٹی ایم ایل ٹیگ برقرار رکھنے"
+
+#: admin/options.php:1154
+msgid "Enter the HTML tags you'd like to retain in excerpts. For example, enter <code>&lt;p&gt;&lt;ul&gt;&lt;li&gt;</code> to retain <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>, and <code>&lt;li&gt;</code> HTML tags."
+msgstr "ایچ ٹی ایم ایل ٹیگ آپ کو حوالہ جات میں برقرار رکھنا چاہتے ہیں درج کریں. مثال کے طور پر درج کرتے ہیں ، <code>&lt;p&gt;&lt;ul&gt;&lt;li&gt;</code> کو برقرار رکھتا ہے <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>, اور <code>&lt;li&gt;</code>."
+
+#: admin/options.php:1167
+msgid "Comments Display Options"
+msgstr "تبصرے کے اختیارات دکھائیں"
+
+#: admin/options.php:1173
+msgid "Hide allowed tags in comment form"
+msgstr "تبصرہ فارم میں اس کی اجازت ٹیگ چھپائیں"
+
+#: admin/options.php:1186
+msgid "Colours Options"
+msgstr "پرچم کے اختیارات"
+
+#: admin/options.php:1189
+msgid "Changing colours for your website involves a lot more than just trial and error. Simply mixing and matching colours without regard to their compatibility may do more damage than good to your site's aesthetics."
+msgstr "رنگ تبدیل کرنے سے آپ کی ویب سائٹ کے لئے صرف مقدمے کی سماعت اور غلطی کے مقابلے میں اور بھی بہت کچھ شامل ہے. بس اختلاط خلوت اور کے ملاپ کے بغیر ان کی مطابقت کے بارے کے رنگ آپ کی سائٹ کی جمالیات کے اچھے سے زیادہ نقصان کر سکتے ہیں ہیں."
+
+#: admin/options.php:1190
+#, php-format
+msgid "It's generally a good idea to stick to colours from colour pallettes that are aesthetically pleasing. Try the %s website for a kickstart on some colour palettes you can use."
+msgstr "عام طور پر یہ کہ جمالیاتی اعتبار سے باتا ہیں رنگ پیلیٹس سے رنگ کرنے کے لئے چھڑی کا ایک اچھا خیال ہے. %s کی ویب سائٹ کے لیے کچھ رنگ پیلٹس آپ استعمال کر سکتے ہیں پر ککسٹارٹ کرنے کی کوشش کریں."
+
+#: admin/options.php:1191
+msgid "When you've got the perfect combination, you can even share it with fellow Graphene theme users through the <a href=\"http://forum.khairul-syahir.com/\">Support Forum</a>."
+msgstr "جب آپ کو کامل مجموعہ مل گیا ہے، آپ اس ساتھی گرافین موضوع کے صارفین کے ساتھ بھی کے ذریعے اشتراک کر سکتے ہیں<a href=\"http://forum.khairul-syahir.com/\">Support Forum</a>."
+
+#: admin/options.php:1192
+msgid "<strong>Note:</strong> The previews work best on modern Gecko- and Webkit-based browsers, such as Mozilla Firefox and Google Chrome."
+msgstr "<strong>نوٹ : </strong> کے مناظر کو جدید جیسے موزیلا فائر فاکس اور گوگل کروم جیسے چھپکلی اور ویب کٹ کی بنیاد پر براؤزر، پر کام سب سے بہتر ہے."
+
+#: admin/options.php:1193
+msgid "<strong>Note:</strong> To reset any of the colours to their default value, just click on \"Clear\" beside the colour field and save the settings. The theme will automatically revert the value to the default colour."
+msgstr "<strong>نوٹ :</strong> ان کے پہلے سے طے شدہ قیمت کے رنگوں کے کسی بھی ری سیٹ رنگ کے خانے کے پاس \"صاف \" پر، صرف کلک کریں اور تراتیب کو محفوظ ہے. مرکزی خیال، موضوع ڈیفالٹ کی رنگ کے لئے قیمت خود بخود واپس آجائے گی."
+
+#: admin/options.php:1194
+msgid "Content area"
+msgstr "مواد علاقے"
+
+#: admin/options.php:1198
+msgid "Main content wrapper background"
+msgstr "مرکزی مواد کی چادر پس منظر"
+
+#: admin/options.php:1199
+msgid "Post and pages content background"
+msgstr "ڈاک اور صفحات مواد پس منظر"
+
+#: admin/options.php:1200
+msgid "Post meta and footer border"
+msgstr "پوسٹ میٹا اور فوٹر سرحد"
+
+#: admin/options.php:1201
+msgid "Post and pages top border"
+msgstr "ڈاک اور اعلی بارڈر صفحات"
+
+#: admin/options.php:1202
+msgid "Post and pages bottom border"
+msgstr "ڈاک اور صفحات کے نیچے دیے سرحد"
+
+#: admin/options.php:1212
+#: admin/options.php:1242
+#: admin/options.php:1268
+#: admin/options.php:1295
+#: admin/options.php:1324
+#: admin/options.php:1460
+#: admin/options.php:1481
+msgid "Clear"
+msgstr "واضح"
+
+#: admin/options.php:1219
+msgid "Widgets"
+msgstr "ویجیٹ"
+
+#: admin/options.php:1222
+msgid "Widget preview"
+msgstr "ویجیٹ پیش نظارہ"
+
+#: admin/options.php:1223
+msgid "Widget title"
+msgstr "ویجیٹ عنوان"
+
+#: admin/options.php:1223
+msgid "List item"
+msgstr "فہرست اشیاء"
+
+#: admin/options.php:1227
+msgid "Widget item background"
+msgstr "ویجیٹ آئٹم کے پس منظر"
+
+#: admin/options.php:1228
+msgid "Widget item list border"
+msgstr "ویجیٹ اشیاء کی فہرست سرحد"
+
+#: admin/options.php:1229
+msgid "Widget header border"
+msgstr "ویجیٹ ہیڈر سرحد"
+
+#: admin/options.php:1230
+msgid "Widget title colour"
+msgstr "ویجیٹ عنوان رنگ"
+
+#: admin/options.php:1231
+msgid "Widget title text shadow colour"
+msgstr "ویجیٹ عنوان متن سایہ رنگ"
+
+#: admin/options.php:1232
+msgid "Widget header gradient bottom colour"
+msgstr "ویجیٹ ہیڈر میلان کے نیچے دیے رنگ"
+
+#: admin/options.php:1233
+msgid "Widget header gradient top colour"
+msgstr "ویجیٹ ہیڈر تدریجی کی سب سے اوپر کا رنگ"
+
+#: admin/options.php:1250
+msgid "Slider"
+msgstr "سلائیڈر"
+
+#: admin/options.php:1253
+msgid "Slider background preview"
+msgstr "سلائیڈر پس منظر پیش نظارہ"
+
+#: admin/options.php:1258
+msgid "Slider top left colour"
+msgstr "سلائیڈر سب سے اوپر کی رنگ کو چھوڑ دیا"
+
+#: admin/options.php:1259
+msgid "Slider bottom right colour"
+msgstr "سلائیڈر کے نیچے دیے حق رنگ"
+
+#: admin/options.php:1276
+msgid "Block buttons"
+msgstr "بلاک بٹن"
+
+#: admin/options.php:1279
+msgid "Block button preview"
+msgstr "بلاک کے بٹن پیش نظارہ"
+
+#: admin/options.php:1280
+msgid "Button label"
+msgstr "بٹن لیبل"
+
+#: admin/options.php:1284
+msgid "Button background colour"
+msgstr "بٹن پس منظر رنگ"
+
+#: admin/options.php:1285
+msgid "Button label colour"
+msgstr "بٹن لیبل رنگ"
+
+#: admin/options.php:1286
+msgid "Button label text shadow"
+msgstr "بٹن لیبل متن کی چھایا"
+
+#: admin/options.php:1303
+msgid "Archive title"
+msgstr "محفوظ شدہ دستاويزات عنوان"
+
+#: admin/options.php:1306
+msgid "Archive title preview"
+msgstr "محفوظ شدہ دستاويزات عنوان پیش نظارہ"
+
+#: admin/options.php:1307
+msgid "Archive title:"
+msgstr "محفوظ شدہ دستاويزات عنوان :"
+
+#: admin/options.php:1307
+msgid "Sample title"
+msgstr "نمونہ عنوان"
+
+#: admin/options.php:1311
+msgid "Archive background gradient left colour"
+msgstr "محفوظ شدہ دستاويزات پس منظر تدریجی رنگ چھوڑ دیا"
+
+#: admin/options.php:1312
+msgid "Archive background gradient right colour"
+msgstr "محفوظ شدہ دستاویزات کے پس منظر تدریجی حق رنگ"
+
+#: admin/options.php:1313
+msgid "Archive label colour"
+msgstr "محفوظ شدہ دستاويزات لیبل کا رنگ"
+
+#: admin/options.php:1314
+msgid "Archive text colour"
+msgstr "محفوظ شدہ دستاويزات لکھائی کا رنگ"
+
+#: admin/options.php:1315
+msgid "Archive label and text shadow colour"
+msgstr "محفوظ شدہ دستاويزات لیبل اور متن سایہ رنگ"
+
+#: admin/options.php:1339
+msgid "Text Style Options"
+msgstr "متن انداز اختیارات"
+
+#: admin/options.php:1342
+msgid "Note that these are CSS properties, so any valid CSS values for each particular property can be used."
+msgstr "اس بات کو نوٹ کیجیئے کی کہ ان میں سی ایس ایس خصوصیات ہیں، تو ہر خاص طور پر جائیداد کے لیے کسی بھی درست سی ایس ایس اقدار کا استعمال کیا جا سکتا ہے."
+
+#: admin/options.php:1343
+msgid "Some example CSS properties values:"
+msgstr "مثال کے طور پر سی ایس ایس خصوصیات اقدار :"
+
+#: admin/options.php:1346
+msgid "Text font:"
+msgstr "متن فونٹ :"
+
+#: admin/options.php:1350
+msgid "Text size and line height:"
+msgstr "متن سائز اور لائن کی اونچائی :"
+
+#: admin/options.php:1354
+msgid "Text weight:"
+msgstr "متن کا وزن :"
+
+#: admin/options.php:1358
+msgid "Text style:"
+msgstr "متن سٹائل :"
+
+#: admin/options.php:1362
+msgid "Text colour:"
+msgstr "لکھائی کا رنگ :"
+
+#: admin/options.php:1367
+msgid "Header Text"
+msgstr "ہیڈر متن"
+
+#: admin/options.php:1371
+msgid "Title text font"
+msgstr "عنوان متن فونٹ"
+
+#: admin/options.php:1377
+msgid "Title text size"
+msgstr "عنوان متن سائز"
+
+#: admin/options.php:1383
+msgid "Title text weight"
+msgstr "عنوان متن کا وزن"
+
+#: admin/options.php:1389
+msgid "Title text line height"
+msgstr "عنوان متن لائن اونچائی"
+
+#: admin/options.php:1395
+msgid "Title text style"
+msgstr "عنوان متن انداز"
+
+#: admin/options.php:1404
+msgid "Description text font"
+msgstr "تفصیل متن فونٹ"
+
+#: admin/options.php:1410
+msgid "Description text size"
+msgstr "تفصیل متن سائز"
+
+#: admin/options.php:1416
+msgid "Description text weight"
+msgstr "تفصیل متن کا وزن"
+
+#: admin/options.php:1422
+msgid "Description text line height"
+msgstr "تفصیل کا متن لائن کی اونچائی"
+
+#: admin/options.php:1428
+msgid "Description text style"
+msgstr "تفصیل متن انداز"
+
+#: admin/options.php:1434
+msgid "Content Text"
+msgstr "تفصیل متن انداز"
+
+#: admin/options.php:1438
+msgid "Text font"
+msgstr "متن فونٹ"
+
+#: admin/options.php:1444
+msgid "Text size"
+msgstr "متن سائز"
+
+#: admin/options.php:1450
+msgid "Text line height"
+msgstr "متن لائن اونچائی"
+
+#: admin/options.php:1456
+msgid "Text colour"
+msgstr "لکھائی کا رنگ"
+
+#: admin/options.php:1466
+msgid "Link Text"
+msgstr "لنک متن"
+
+#: admin/options.php:1470
+msgid "Link colour (normal state)"
+msgstr "لنک کا رنگ (کی معمول کی حالت)"
+
+#: admin/options.php:1471
+msgid "Link colour (visited state)"
+msgstr "لنک رنگ (ریاست کا دورہ کیا)"
+
+#: admin/options.php:1472
+msgid "Link colour (hover state)"
+msgstr "لنک (ہوور ریاست) رنگ"
+
+#: admin/options.php:1489
+msgid "Text decoration (normal state)"
+msgstr "متن کی سجاوٹ (کی معمول کی حالت)"
+
+#: admin/options.php:1495
+msgid "Text decoration (hover state)"
+msgstr "متن کی سجاوٹ (ہوور ریاست)"
+
+#: admin/options.php:1508
+msgid "Footer Widget Display Options"
+msgstr "فوٹر ویجیٹ کی نمائش کے اختیارات"
+
+#: admin/options.php:1514
+msgid "Number of columns to display"
+msgstr "کالموں کی تعداد ظاہر کرنے کے لئے"
+
+#: admin/options.php:1521
+msgid "Number of columns to display for front page footer widget"
+msgstr "صفحہ اول فوٹر ویجیٹ کے لئے ظاہر کرنے کے لئے کالم کی تعداد"
+
+#: admin/options.php:1535
+msgid "Navigation Menu Display Options"
+msgstr "نیویگیشن مینو ڈسپلے کے اختیارات"
+
+#: admin/options.php:1541
+msgid "Dropdown menu item width"
+msgstr "ڈراپ ڈاؤن مینو اشیاء کی چوڑائی"
+
+#: admin/options.php:1547
+msgid "Disable description in Header Menu"
+msgstr "ہیڈر مینو میں وضاحت کو غیر فعال کر دیتے ہیں"
+
+#: admin/options.php:1555
+msgid "Description for default menu \"Home\" item"
+msgstr "پہلے سے طے شدہ مینو \"ہوم \" آئٹم کے لئے تفصیل"
+
+#: admin/options.php:1571
+msgid "Miscellaneous Display Options"
+msgstr "متنوع نمائش کے اختیارات"
+
+#: admin/options.php:1574
+msgid "Site title options"
+msgstr "سائٹ کے عنوان کے اختیارات"
+
+#: admin/options.php:1575
+msgid "Use these tags to customise your own site title structure: <code>#site-name</code>, <code>#site-desc</code>, <code>#post-title</code>"
+msgstr "یہ ٹیگ آپ کی اپنی سائٹ عنوان کے ڈھانچے کو اپنی مرضی کے مطابق کرنے کے لئے استعمال کریں :<code>#site-name</code>, <code>#site-desc</code>, <code>#post-title</code>"
+
+#: admin/options.php:1579
+msgid "Custom front page site title"
+msgstr "اپنی مرضی کے پہلے صفحے کی سائٹ کا عنوان"
+
+#: admin/options.php:1583
+msgid "Defaults to <code>#site-name &raquo; #site-desc</code>. The <code>#post-title</code> tag cannot be used here."
+msgstr "کرنے کے لئے طے شدہ <code>#site-name &raquo; #site-desc</code>. La etiqueta <code>#post-title</code> ٹیگ یہاں نہیں استعمال کیا جا سکتا ہے ہے."
+
+#: admin/options.php:1588
+msgid "Custom content pages site title"
+msgstr "اپنی مرضی کے موادی صفحات سائٹ عنوان"
+
+#: admin/options.php:1592
+msgid "Defaults to <code>#post-title &raquo; #site-name</code>."
+msgstr "کرنے کے لئے طے شدہ <code>#post-title &raquo; #site-name</code>."
+
+#: admin/options.php:1597
+msgid "Favicon options"
+msgstr "ویب شبیہ اختیارات"
+
+#: admin/options.php:1601
+msgid "Favicon URL"
+msgstr "ویب شبیہ یو آر ایل"
+
+#: admin/options.php:1605
+msgid "Simply enter the full URL to your favicon file here to enable favicon. Make sure you include the <code>http://</code> in front of the URL as well. Or use the WordPress media uploader to upload an image, or select one from the media library."
+msgstr "بس مکمل یو آر ایل آپ کے ویب شبیہ ملف (فائل) سے ویب شبیہ کو فعال کرنے کے لئے یہاں درج کریں.اس بات کا یقین کر لیں کہ آپ شامل<code>http://</code>یو آر ایل کے سامنے بھی. یا ورڈپریس میڈیا اپ لوڈر ایک تصویر اپ لوڈ کرنے کے لئے استعمال کریں ، یا میڈیا کی لائبریری سے ایک کو منتخب کریں."
+
+#: admin/options.php:1617
+msgid "Custom CSS"
+msgstr "اپنی مرضی کے سی ایس ایس"
+
+#: admin/options.php:1622
+msgid "Custom CSS styles"
+msgstr "اپنی مرضی کے سی ایس ایس شیلیوں"
+
+#: admin/options.php:1624
+msgid "You can enter your own CSS codes below to modify any other aspects of the theme's appearance that is not included in the options."
+msgstr "آپ اپنے خود سی ایس ایس کوڈ موضوع ظہور کے کسی بھی دوسرے پہلوؤں کے اختیارات میں شامل نہیں ہے کو تبدیل کرنے کے لیے ذیل میں درج کر سکتے ہیں."
+
+#: admin/options.php:1651
+msgid "Enable preview of your site on the Graphene Theme Options page"
+msgstr "گرافین تھیم کے اختیارات کے صفحے پر آپ کی ویب سائٹ کا جائزہ فعال کریں"
+
+#: admin/options.php:1663
+msgid "Action Hooks Widget Areas"
+msgstr "ایکشن ویجیٹ علاقہ جات ہکس"
+
+#: admin/options.php:1666
+msgid "This option enables you to place virtually any content to every nook and cranny in the theme, by attaching widget areas to the theme's action hooks."
+msgstr "یہ آپشن آپ کو موضوع میں موضوع کی کارروائی ہکس ویجیٹ علاقوں منسلک کرنے کے لئے تقریبا ہر کونا اور کرانی کسی بھی مواد کی جگہ، کے قابل بناتا ہے."
+
+#: admin/options.php:1667
+msgid "All action hooks available in the Graphene Theme are listed below. Click on the filename to display all the action hooks available in that file. Then, tick the checkbox next to an action hook to make a widget area available for that action hook."
+msgstr "گرافین تھیم میں تمام کارروائی ہکس دستیاب ذیل میں درج ہیں. فائل کے نام پر اس فائل میں تمام کارروائی ہکس دستیاب ظاہر کرنے کے لئے یہاں دبائیں. اس کے بعد، ایک ویجیٹ اس کارروائی ہک کے لئے دستیاب علاقہ بنانے کے لئے ایک ایکشن ہک کے ساتھ دیئے گئے چیک باکس پر نشان لگائیں."
+
+#: admin/options.php:1676
+msgid "Click to show/hide the action hooks for this file"
+msgstr "اس ملف (فائل) کے لئے کارروائی ہکس دکھائیں / چھپانے کے لئے کلک کریں"
+
+#: admin/options.php:1699
+msgid "Before you can upload your import file, you will need to fix the following error:"
+msgstr "اس سے پہلے کہ آپ اپنے درآمد کی فائل کو اپ لوڈ کر سکتے ہیں، آپ کو مندرجہ ذیل غلطی کو درست کرنے کی ضرورت ہوگی :"
+
+#: admin/options.php:1707
+msgid "<strong>Note:</strong> This is an experimental feature. Please report any problem at the <a href=\"http://forum.khairul-syahir.com/forum/bug-report\">Support Forum</a>."
+msgstr "<strong>نوٹ :</strong> یہ ایک تجرباتی خصوصیت ہے. براہ مہربانی کوئی مسئلہ کو رپورٹ کریں <a href=\"http://forum.khairul-syahir.com/forum/bug-report\">foros de soporte</a>."
+
+#: admin/options.php:1709
+msgid "Choose a file from your computer:"
+msgstr "اپنے کمپیوٹر سے ایک فائل منتخب کریں :"
+
+#: admin/options.php:1709
+#, php-format
+msgid "Maximum size: %s"
+msgstr "زیادہ سے زیادہ سائز : %s"
+
+#: admin/options.php:1716
+msgid "Upload file and import"
+msgstr "فائل اور درآمد کو اپ لوڈ کریں"
+
+#: admin/uninstall.php:24
+#, php-format
+msgid "Theme uninstalled. Redirecting to %s"
+msgstr "تھیم انسٹال کیا ہے.دوسری سمت بھیج رہا کرنے کے لئے %s"
+
+#: admin/user.php:7
+msgid "Graphene-specific User Profile Information"
+msgstr "گرافین مخصوص یوزر کے پروفائل کی معلومات"
+
+#: admin/user.php:8
+msgid "The settings defined here are used only with the Graphene theme."
+msgstr "گرافین مخصوص یوزر کے پروفائل معلومات کی"
+
+#: admin/user.php:12
+msgid "Author profile image URL"
+msgstr "مصنف پروفائل کی تصویر کا یو آر ایل"
+
+#: admin/user.php:13
+msgid "You can specify the image to be displayed as the author's profile image in the Author's page. If no URL is defined here, the author's <a href=\"http://www.gravatar.com\">Gravatar</a> will be used."
+msgstr "آپ مصنف کے صفحے میں مصنف کی پروفائل تصویر کے طور پر ظاہر کرنے کے لئے تصویر کی وضاحت کر سکتے ہیں. اگر یہاں کوئی یو آر ایل نہیں کی وضاحت ہے، مصنف ہے <a href=\"http://www.gravatar.com\">Gravatar</a>استعمال کیا جائے گا."
+
+#: admin/user.php:17
+msgid "Please enter the full URL (including <code>http://</code>) to your profile image."
+msgstr "براہ مہربانی مکمل یو آر ایل درج کریں  (بشمول <code>http://</code>)اپنے پروفائل تصویر.."
+
+#: admin/user.php:17
+msgid "<strong>Important: </strong>Image width must be less than or equal to <strong>150px</strong>."
+msgstr "<strong>اہم : </strong>تصویر کی چوڑائی سے کم یا برابر ہونا چاہئے <strong>150 píxels</strong>."
+
+#: admin/validator.php:24
+msgid "ERROR: Invalid category to show in slider."
+msgstr " ناموزوں سلائیڈر میں ظاہر کرنے کے لئے زمرہ ہے. :خرابی "
+
+#: admin/validator.php:27
+msgid "ERROR: You must specify the posts/pages to be displayed when you have \"Show specific posts/pages\" selected for the slider."
+msgstr "آپ کو جب آپ کے پاس ظاہر کرنے کے لئے خطوط / صفحات کی وضاحت سلائیڈر کے لئے منتخب مخصوص خطوط / صفحات دکھائیں \" :خرابی "
+
+#: admin/validator.php:30
+msgid "ERROR: You must have selected at least one category when you have \"Show posts from categories\" selected for the slider."
+msgstr " آپ کم از کم ایک ہی قسم کو منتخب کیا جانا چاہئے جب آپ کے پاس \"زمرے سے دکھائیں خطوط \" سلائیڈر کے لئے منتخب کیا ہے. :خرابی "
+
+#: admin/validator.php:40
+msgid "ERROR: Invalid category selected for the slider categories."
+msgstr "ناموزوں سلائیڈر زمرے کے لئے منتخب زمرہ. :خرابی "
+
+#: admin/validator.php:46
+msgid "ERROR: The number of posts to displayed in the slider must be a an integer value."
+msgstr "سلائیڈر میں ظاہر کرنے کے لئے خطوط کی تعداد کو ایک عددی قدر ہونا لازمی ہے. :خرابی "
+
+#: admin/validator.php:49
+msgid "ERROR: Invalid option for the slider image is specified."
+msgstr " سلائیڈر تصویر کے لئے جعلی اختیار کی وضاحت ہے.:خرابی "
+
+#: admin/validator.php:51
+msgid "ERROR: Bad URL entered for the custom slider image URL."
+msgstr "برا یو آر ایل مرضی کے سلائیڈر تصویر کا یو آر ایل کے لئے داخل.:خرابی "
+
+#: admin/validator.php:53
+msgid "ERROR: Invalid option for the slider display style is specified."
+msgstr "سلائیڈر ڈسپلے سٹائل کے لیے ناموزوں اختیار کی وضاحت ہے. :خرابی "
+
+#: admin/validator.php:55
+msgid "ERROR: The value for slider height must be an integer."
+msgstr "سلائیڈر کی اونچائی کے لئے قیمت ایک عدد صحیح ہونا لازمی ہے. :خرابی "
+
+#: admin/validator.php:57
+msgid "ERROR: The value for slider speed must be an integer."
+msgstr "سلائیڈر کی رفتار کے لئے قیمت ایک عدد صحیح ہونا لازمی ہے. :خرابی "
+
+#: admin/validator.php:59
+msgid "ERROR: The value for slider transition speed must be an integer."
+msgstr " سلائیڈر منتقلی کی رفتار کے لئے قیمت ایک عدد صحیح ہونا لازمی ہے. :خرابی "
+
+#: admin/validator.php:61
+msgid "ERROR: Invalid slider animation."
+msgstr "خرابی : غلط سلائیڈر حرکت پذیری"
+
+#: admin/validator.php:75
+msgid "ERROR: Invalid category selected for the front page posts categories."
+msgstr "خرابی : ناموزوں سامنے صفحہ خطوط زمرے کے لئے منتخب زمرہ."
+
+#: admin/validator.php:86
+msgid "ERROR: Invalid option for the type of content to show in homepage panes."
+msgstr "خرابی : مواد کی قسم کے لئے غلط آپشن کے ہوم پیج پر شیشے میں دکھانے کے لئے."
+
+#: admin/validator.php:88
+msgid "ERROR: The value for the number of latest posts to display in homepage panes must be an integer."
+msgstr "خرابی : تازہ ترین کے ہوم پیج پر شیشے میں ظاہر کرنے کے لئے کی تعداد کے لئے قیمت ایک عدد صحیح ہونا لازمی ہے."
+
+#: admin/validator.php:93
+msgid "ERROR: Invalid category selected for the latest posts to show from in the homepage panes."
+msgstr "خرابی : ناموزوں تازہ ترین کے ہوم پیج پر شیشے میں سے دکھانے کے لئے کے لئے منتخب زمرہ."
+
+#: admin/validator.php:107
+msgid "ERROR: Invalid option for the comments option."
+msgstr "خرابی : تبصرے کے اختیار کے لئے غلط آپشن ہے."
+
+#: admin/validator.php:116
+msgid "ERROR: Invalid option for the child page listings."
+msgstr "خرابی : بچے صفحہ لسٹنگ کے لئے جعلی اختیار."
+
+#: admin/validator.php:134
+msgid "ERROR: Bad URL entered for the custom feed URL."
+msgstr "خرابی : اپنی مرضی کے مطابق فیڈ کے یو آر ایل کے لئے برا داخل یو آر ایل."
+
+#: admin/validator.php:138
+msgid "ERROR: Bad URL entered for the Twitter URL."
+msgstr "خرابی : برا یو آر ایل ٹویٹر یو آر ایل کے لئے داخل."
+
+#: admin/validator.php:140
+msgid "ERROR: Bad URL entered for the Facebook URL."
+msgstr "خرابی : برا یو آر ایل فیس بک یو آر ایل کے لئے داخل."
+
+#: admin/validator.php:152
+msgid "ERROR: Bad URL entered for the social media icon URL."
+msgstr "خرابی : برا یو آر ایل سوشل میڈیا کا آئکن یو آر ایل کے لئے داخل."
+
+#: admin/validator.php:153
+msgid "ERROR: Bad URL entered for the social media URL."
+msgstr "خرابی : سوشل میڈیا یو آر ایل کے لئے برا داخل یو آر ایل."
+
+#: admin/validator.php:168
+msgid "ERROR: Invalid option for the social sharing buttons location."
+msgstr "خرابی : سماجی اشتراک کرنے کے بٹن کے محل وقوع کے لئے جعلی اختیار."
+
+#: admin/validator.php:228
+msgid "ERROR: Invalid option for the Search box location."
+msgstr "خرابی : تلاش کے باکس کے محل وقوع کے لئے جعلی اختیار."
+
+#: admin/validator.php:233
+msgid "ERROR: Invalid option for the column mode."
+msgstr "خرابی : کالم موڈ کے لئے غلط آپشن ہے."
+
+#: admin/validator.php:239
+msgid "ERROR: Invalid option for the post date display."
+msgstr "خرابی : پوسٹ کی تاریخ کی کارکردگی کے لئے ناموزوں اختیار."
+
+#: admin/validator.php:305
+msgid "ERROR: The number of columns to be displayed in the footer widget must be a an integer value."
+msgstr "خرابی : فوٹر ویجیٹ میں ظاہر کرنے کے لئے کالم کی تعداد ایک عددی قدر ہونا لازمی ہے."
+
+#: admin/validator.php:310
+msgid "ERROR: The width of the submenu must be a an integer value."
+msgstr "خرابی : ذیلی مینیو کی چوڑائی ایک عددی قدر ہونا چاہئے."
+
+#: admin/validator.php:318
+msgid "ERROR: Bad URL entered for the favicon URL."
+msgstr "خرابی : برا یو آر ایل ویب شبیہ یو آر ایل کے لئے داخل."
+
+#: admin/validator.php:332
+msgid "ERROR: Invalid action hook selected widget action hooks."
+msgstr "خرابی : غلط کارروائی ہک منتخب ویجیٹ کی کارروائی ہکس."
+
+#: admin/js/admin.js.php:47
+msgid "Social Media name"
+msgstr "سوشل میڈیا کے نام"
+
+#: admin/js/admin.js.php:50
+msgid "Name of the social media, e.g. LinkedIn, etc."
+msgstr "سوشل میڈیا، مثال کے طور پر کے نام لنکڈ ۱ن، وغیرہ"
+
+#: admin/js/admin.js.php:54
+msgid "Social Media title"
+msgstr "سوشل میڈیا کا عنوان"
+
+#: admin/js/admin.js.php:57
+msgid "Title for the social media, leave empty for generated title."
+msgstr "سوشل میڈیا کے لئے عنوان، پیدا عنوان کے لئے خالی چھوڑ دیں."
+
+#: admin/js/admin.js.php:61
+msgid "Social Media profile URL"
+msgstr "سوشل میڈیا پروفائل یو آر ایل"
+
+#: admin/js/admin.js.php:64
+msgid "URL to your page for the social media."
+msgstr "سوشل میڈیا کے لیے یو آر ایل آر ایل آپ کے صفحے پر"
+
+#: admin/js/admin.js.php:68
+msgid "Social Media icon URL"
+msgstr "سوشل میڈیا کا آئکن یو آر ایل"
+
+#: admin/js/admin.js.php:71
+#, php-format
+msgid "URL to the social media icon. <strong>Note:</strong> the theme uses the %s icon set for the social media icons. Please do not hotlink the icons on the site. Download the icons you need and upload them to your server instead."
+msgstr "سوشل میڈیا کا آئکن کو یو آر ایل. <strong>نوٹ : </strong> %s سوشل میڈیا شبیہیں کے لئے مقرر آئیکن تھیم استعمال کرتا ہے. براہ مہربانی اس ویب سائٹ پر ماؤس کو آاکنوں نہیں ہاٹ لنک. شبیہیں کی آپ کو ضرورت ڈاؤن لوڈ ، اتارنا اور آپ کے سرور پر انہیں اپ لوڈ کرنے کی بجائے."
+
+#~ msgid "<div class=\"link-pages\"><p><strong>Pages:</strong> "
+#~ msgstr "<div class=\"link-pages\"><p><strong>Páginas:</strong> "

@@ -1,0 +1,13 @@
+/**
+ * Green + yellow + dark
+ * 
+ */
+ 
+ 
+a, .entry-content a:link, .entry-content a:active, .entry-content a:visited {color:#6fdb2e;} 
+
+#secondary a:hover, #secondary-2 a:hover, .widgets-holder a:hover {color:#fff!important;}
+
+.widgets-holder a {text-shadow: 0 1px 0 #000 !important;}
+
+  

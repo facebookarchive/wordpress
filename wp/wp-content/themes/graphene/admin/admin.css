@@ -1,0 +1,350 @@
+.form-table th {
+	width: 260px;
+}
+.form-table th.small-row { 
+	width: 120px; 
+}
+.socialprofile-table {
+    background: #eee;
+    border: solid 1px #fff;
+    cursor: move;
+}
+.socialprofile-dragging {
+    background: #fefefe;
+    height: 80px;
+    width: 100%;
+    border: solid 1px #ccc;
+    margin-top: .5em;
+}
+
+
+.wrap h3 {
+	margin: 30px 0 10px 0;
+}
+.wrap h4 {
+	margin: 20px 0 0 0;
+}
+table.graphene-code-example th {
+	font-weight: normal;
+	line-height: 18px;
+	text-align: left;
+}
+.postbox .hndle {
+	cursor: pointer;
+	font-size: 13px;
+	margin: 0;
+	padding: 6px 10px 7px 10px;
+}
+.panel-wrap.inside {
+	padding: 0 10px 10px 10px;
+}
+.handlediv {
+	cursor: pointer;
+}
+.code {
+	font: normal 12px "Courier New", Courier, monospace;
+}
+.left-wrap {
+	float: left;
+	width: 70%;
+}
+.left-wrap label {
+	line-height: normal;
+}
+.side-wrap {
+	float: left;
+	margin-left: 10px;
+	width: 25%;
+}
+.postbox.donation .hndle {
+	cursor: auto;
+}
+.postbox small {
+	display: block;
+	line-height: 18px;
+	margin-top: 5px;
+}
+.code {
+	font: normal 12px "Courier New", Courier, monospace;
+}
+.select-multiple {
+	height: 200px !important;
+	overflow: scroll;
+}
+.options-tab {
+	border-bottom: 1px solid #ccc;
+	height: 27px;
+	margin-bottom: 20px !important;
+	padding-left: 5px !important;
+}
+.options-tab a,
+.options-tab a:visited {
+	display: block;
+	float: left;
+}
+#wpcontent option {
+	padding: 4px;
+}
+.column-options label img {
+	padding-right: 30px;
+	vertical-align: middle;
+}
+.form-table .delete a, .form-table .delete a:visited{
+	color: #BC0B0B;
+	text-decoration: none;
+}
+.form-table .delete a:hover{
+	text-decoration: underline;
+}
+tr.new-social-media, tr.social-media-custom{
+	background: #eee;
+}
+tr.new-social-media-name, tr.social-media-custom-name{
+	border-top: 1px solid #fff;
+}
+.toggle-all, 
+.toggle-all:visited,
+.toggle-options-wrapper a, 
+.toggle-options-wrapper a:visited {
+	text-decoration: none;
+	font-weight: normal;
+	font-size: 12px;
+	padding-top: 5px;
+}
+.toggle-options-wrapper {
+	float: left;
+	width: auto;
+	margin-left: 5px;
+	padding-left: 5px;
+	border-left: 1px solid #ddd;
+	margin-top: 4px;
+}
+.toggle-options-wrapper a {
+	float: none;
+	display: inline;
+}
+.cc-logo{
+	display: block;
+	height: 32px;
+	width: 96px;
+	background: url(../images/sprite_master.png) -417px -240px no-repeat;
+	margin-top: 5px;
+}
+
+.add-ons .title{
+	font-weight: bold;
+}
+.add-ons .activated{
+	color: #2A7FFF;
+}
+.add-ons .not-active{
+	color: #999;	
+}
+.colorpicker{
+	background: none repeat scroll 0 0 #EEEEEE;
+    border: 1px solid #CCCCCC;
+    position: absolute;
+    z-index: 100;	
+}
+
+.sidebar h3 {
+	background: url(images/bg-sidebar-h3.png) left bottom repeat-x #3C9CD2;
+	background: -moz-linear-gradient(#3C9CD2, #1F6EB6);
+	background: -webkit-linear-gradient(#3C9CD2, #1F6EB6);
+	background: linear-gradient(#3C9CD2, #1F6EB6);
+	border-bottom: 1px solid #195392;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+	color: #fff;
+	padding: 7px 12px;
+	font: bold 16px/20px arial;
+	text-shadow: 0 -1px 0 #555;
+	width: 100%;
+	margin: -15px 0 5px -12px;
+	box-shadow: none;
+}
+.sidebar h3:hover{
+	color: #fff;
+	cursor: default;
+}
+.sidebar div.sidebar-wrap {
+	background: #fff;
+	-moz-box-shadow: 0 0 5px #BBB;
+	-webkit-box-shadow: 0 0 5px #BBB;
+	box-shadow: 0 0 5px #BBB;
+	margin-bottom: 16px;
+	padding: 10px 12px;
+	position: relative;
+	width: 220px;
+}
+.sidebar ul {
+	color: #000;
+	font: normal 12px arial;
+	margin: 0;
+}
+.sidebar ul li {
+	border-bottom: 1px solid #e3e3e3;
+	line-height: 15px;
+	padding: 6px 0;
+}
+
+.graphene, .graphene li, .graphene p{
+	color: #2c2b2b;	
+}
+.graphene a,
+.graphene a:visited{
+	color: #1772af;
+	text-decoration: none;
+}
+.graphene a:hover{
+	color: #074d7c;
+	text-decoration: none;	
+}
+#grad-box{
+	width:230px;
+	height:100px;
+	background: #0F2D4D;
+	background: linear-gradient(left top, #0F2D4D, #2880C3);
+	background: -moz-linear-gradient(left top, #0F2D4D, #2880C3);
+	background: -webkit-linear-gradient(left top, #0F2D4D, #2880C3);
+}
+
+.block-button,
+.block-button:visited,
+.Button {
+	background: url(images/bg-block-button.png) left bottom repeat-x #1C5FA5;
+	background: -moz-linear-gradient(#2982C5, #1C5FA5);
+	background: -webkit-linear-gradient(#2982C5, #1C5FA5);
+	background: linear-gradient(#2982C5, #1C5FA5);
+	border: 1px solid #1C5FA5;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	-moz-box-shadow: 0 0 5px #555;
+	-webkit-box-shadow: 0 0 5px #555;
+	box-shadow: 0 0 5px #555;
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	float: left;
+	font: bold 12px arial;
+	padding: 5px 15px 6px;
+	position: relative;
+	text-decoration: none;
+	text-shadow: 0 -1px 0 #16497E;
+}
+.block-button:hover {
+	background: url(images/bg-block-button-hover.png) left bottom repeat-x #1C5FA5;
+	background: -moz-linear-gradient(#2982C5, #15467A);
+	background: -webkit-linear-gradient(#2982C5, #15467A);
+	background: linear-gradient(#2982C5, #15467A);
+	color: #fff;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.archive-title-preview {
+	width: 500px;
+}
+.page-title {
+	background: #2070B7;
+	background: linear-gradient(left top, #0F2D4D, #2880C3);
+	background: -moz-linear-gradient(left top, #0F2D4D, #2880C3);
+	background: -webkit-linear-gradient(left top, #0F2D4D, #2880C3);
+	-pie-background: linear-gradient(left top, #0F2D4D, #2880C3);
+	color: #e3e3e3;
+	font-size: 16px;
+	margin: 0 auto 10px;
+	padding: 8px 0;
+	text-align: center;
+	text-shadow: 0 -1px 0 #333;
+	display: block;
+	font-weight: bold;
+}
+.page-title span {
+	color: #fff;
+}
+
+.graphene-news-list {
+	margin-top: 10px;
+}
+.graphene-news a {
+	text-decoration: none;
+}
+.graphene-news .news-item-date {
+	font-size: 10px;
+	color: #888;
+}
+
+.column-width .form-table th {
+	width: 120px;
+}
+.width-wrap {
+	margin-right: 50px;
+	float: left;
+}
+.slider-legend {
+	font-size: 10px;
+	color: #888;
+}
+
+.hide { display: none; }
+
+.toggle-options-wrapper .toggle-all-options {
+	display: none;
+}
+
+.mysocial { background: url(../images/social/rss.png) no-repeat top left; width: 32px; height: 32px; }
+.mysocial-icon { width: 32px; height: 32px; }
+.social-audioboo{ background-image: url(../images/social/audioboo.png); } 
+.social-bebo{ background-image: url(../images/social/bebo.png); } 
+.social-behance{ background-image: url(../images/social/behance.png); } 
+.social-blogger{ background-image: url(../images/social/blogger.png); } 
+.social-buzz{ background-image: url(../images/social/buzz.png); } 
+.social-creativecommons{ background-image: url(../images/social/creativecommons.png); } 
+.social-dailybooth{ background-image: url(../images/social/dailybooth.png); } 
+.social-delicious{ background-image: url(../images/social/delicious.png); } 
+.social-designfloat{ background-image: url(../images/social/designfloat.png); } 
+.social-deviantart{ background-image: url(../images/social/deviantart.png); } 
+.social-digg{ background-image: url(../images/social/digg.png); } 
+.social-dopplr{ background-image: url(../images/social/dopplr.png); } 
+.social-dribbble{ background-image: url(../images/social/dribbble.png); } 
+.social-email{ background-image: url(../images/social/email.png); } 
+.social-ember{ background-image: url(../images/social/ember.png); } 
+.social-facebook{ background-image: url(../images/social/facebook.png); } 
+.social-flickr{ background-image: url(../images/social/flickr.png); } 
+.social-forrst{ background-image: url(../images/social/forrst.png); } 
+.social-friendfeed{ background-image: url(../images/social/friendfeed.png); } 
+.social-google{ background-image: url(../images/social/google.png); } 
+.social-gowalla{ background-image: url(../images/social/gowalla.png); } 
+.social-grooveshark{ background-image: url(../images/social/grooveshark.png); } 
+.social-hyves{ background-image: url(../images/social/hyves.png); } 
+.social-lastfm{ background-image: url(../images/social/lastfm.png); } 
+.social-linkedin{ background-image: url(../images/social/linkedin.png); } 
+.social-livejournal{ background-image: url(../images/social/livejournal.png); } 
+.social-lockerz{ background-image: url(../images/social/lockerz.png); } 
+.social-megavideo{ background-image: url(../images/social/megavideo.png); } 
+.social-myspace{ background-image: url(../images/social/myspace.png); } 
+.social-piano{ background-image: url(../images/social/piano.png); } 
+.social-playfire{ background-image: url(../images/social/playfire.png); } 
+.social-playstation{ background-image: url(../images/social/playstation.png); } 
+.social-reddit{ background-image: url(../images/social/reddit.png); } 
+.social-rss{ background-image: url(../images/social/rss.png); } 
+.social-skype{ background-image: url(../images/social/skype.png); } 
+.social-socialvibe{ background-image: url(../images/social/socialvibe.png); } 
+.social-soundcloud{ background-image: url(../images/social/soundcloud.png); } 
+.social-spotify{ background-image: url(../images/social/spotify.png); } 
+.social-steam{ background-image: url(../images/social/steam.png); } 
+.social-stumbleupon{ background-image: url(../images/social/stumbleupon.png); } 
+.social-technorati{ background-image: url(../images/social/technorati.png); } 
+.social-tumblr{ background-image: url(../images/social/tumblr.png); } 
+.social-twitpic{ background-image: url(../images/social/twitpic.png); } 
+.social-twitter{ background-image: url(../images/social/twitter.png); } 
+.social-typepad{ background-image: url(../images/social/typepad.png); } 
+.social-vimeo{ background-image: url(../images/social/vimeo.png); } 
+.social-wakoopa{ background-image: url(../images/social/wakoopa.png); } 
+.social-wordpress{ background-image: url(../images/social/wordpress.png); } 
+.social-xing{ background-image: url(../images/social/xing.png); } 
+.social-yahoo{ background-image: url(../images/social/yahoo.png); } 
+.social-youtube{ background-image: url(../images/social/youtube.png); } 

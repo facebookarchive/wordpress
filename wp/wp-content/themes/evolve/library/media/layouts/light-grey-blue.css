@@ -1,0 +1,19 @@
+/**
+ * Light grey + blue
+ * 
+ */
+ 
+
+.header {background:#dedede url("../images/light-grey-blue/header-footer.jpg") repeat;border-bottom: 1px solid #ccc;}
+
+#tagline {color:#aaa;text-shadow:0 1px 0 #eee;}
+
+#logo a, .footer a, .widgets-back .widgets-holder a, .widgets-holder a { text-shadow:0 1px 0px #ddd;}
+.widgets-back .widgets-holder a, .widgets-holder a {text-shadow:none;}
+
+.footer {background:#dedede url("../images/light-grey-blue/footer-light.jpg") repeat;color:#333;border-top: 1px solid #ccc;}
+
+p#copyright {text-shadow:0 1px 0px #fff;}
+
+
+

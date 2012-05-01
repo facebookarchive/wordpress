@@ -1,0 +1,29 @@
+.left-wrap {
+    float:right;
+}
+.side-wrap {
+    float:right;
+    margin-right:10px;
+    margin-left: auto;
+}
+.options-tab {
+	padding-left: 0 !important;
+	padding-right: 5px !important;
+	
+}
+.options-tab a,
+.options-tab a:visited {
+	float: right;
+}
+.column-options label img {
+	padding-left: 30px;
+	padding-right: 0;
+}
+.sidebar h3 {
+	margin: -15px -12px 5px 0;	
+}
+.block-button,
+.block-button:visited,
+.Button {
+	float: right;
+}

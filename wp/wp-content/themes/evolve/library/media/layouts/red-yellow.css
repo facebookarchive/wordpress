@@ -1,0 +1,20 @@
+/**
+ * Red + Yellow
+ * 
+ */
+ 
+ 
+a, .entry-content a:link, .entry-content a:active, .entry-content a:visited, .footer .widgets-holder a {color:#ff4a0b;} 
+.entry-content a:hover, .footer .widgets-holder a:hover, #secondary a:hover, #secondary-2 a:hover {color:#a12f07;}
+
+.header {background:#f0501f url("../images/red-yellow/header-footer.jpg") repeat;border-bottom: 1px solid #b93f19;}
+
+#tagline {color:#c8441b;text-shadow:0 1px 0 #f47b55;}
+
+#logo a, .footer a { color:yellow;text-shadow:0 1px 1px #471b0d;}
+#logo a:hover, .footer a:hover { color:#fff;}
+
+.footer {background:#f0501f url("../images/red-yellow/header-footer.jpg") repeat;border-top: 1px solid #c8441b;}
+p#copyright {text-shadow:0 1px 0 #f47b55;color:#b93f19;}
+
+

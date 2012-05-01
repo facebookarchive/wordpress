@@ -1,0 +1,151 @@
+#content fieldset.bbp-form, 
+#container fieldset.bbp-form, 
+#wrapper fieldset.bbp-form {
+	border-color: #ddd;
+	background: #eee;
+}
+#bbp_topic_title,
+#bbp_topic_tags {
+	width: 100%;
+}
+.bbp-form input[type="text"],
+.bbp-form textarea {
+	border: 1px solid #ddd;
+    color: #2C2B2B;
+    font: 12px arial;
+    height: 16px;
+	padding: 4px 0;
+}
+.bbp-form textarea {
+	height: 175px;
+}
+.post .bbp-author-avatar .avatar {
+	position: static;
+}
+div.bbp-breadcrumb, 
+div.bbp-topic-tags,
+div.bbp-template-notice p,
+.bbp-pagination,
+.bbp-forum-description,
+#content table tbody tr .bbp-forum-description p {
+	font-size: 11px;
+}
+div.bbp-template-notice .bbp-topic-description,
+div.bbp-template-notice .bbp-forum-description,
+.bbp-forum-description p,
+div.bbp-breadcrumb p, 
+div.bbp-topic-tags p,
+.bbp-topic-meta {
+	margin-top: 0 !important;
+}
+div.bbp-template-notice {
+	margin: 5px 0;
+}
+.bbp-pagination {
+	margin-bottom: 5px;
+}
+div.bbp-topic-tags {
+	margin-left: 20px;
+}
+.bbp-replies,
+.bbp-topics,
+.bbp-forums {
+	margin-bottom: 5px;
+}
+.bbp-replies td,
+.bbp-replies th,
+.bbp-replies tr,
+.bbp-topics td,
+.bbp-topics th,
+.bbp-topics tr,
+.bbp-forums td,
+.bbp-forums th,
+.bbp-forums tr {
+	border: none;
+}
+.bbp-reply-header td {
+	font-size: 11px !important;
+}
+table.bbp-forums th, 
+table.bbp-topics th, 
+table.bbp-topic th, 
+table.bbp-replies th {
+	background: #ddd;
+}
+#content table tbody tr.even td {
+	background: #eee;
+}
+.bbp-user-home .post-title,
+.bbp-user-home .post-meta,
+.bbp-user-home hr {
+	display: none;
+}
+.bbp-user-home .page-title {
+	border-bottom: 1px solid #e3e3e3;
+	font: 18px arial;
+	padding-bottom: 5px;
+	background: none;
+	color: #333;
+	margin: 0;
+	padding: 0 0 5px 0;
+	text-align: left;
+	text-shadow: none;
+	display: block;
+}
+.post #author-avatar .avatar {
+	border: none;
+    float: right;
+    margin-right: 0;
+    margin-top: -55px;
+    width: 40px;
+	position: static;
+}
+#entry-author-info {
+	border: none;
+}
+.bbp-user-home #author-description h1,
+.bbp-user-home h2 {
+	font-weight: bold;
+	font-size: 14px;
+	margin-top: 15px;
+	margin-bottom: -5px;
+}
+.bbp-user-home #author-description h1 {
+	font-size: 16px;
+}
+tbody .bbp-reply-author,
+tbody .bbp-reply-content {
+	padding-top: 0 !important;
+}
+#bbp-your-profile fieldset {
+	margin-top: 10px;
+}
+#bbp-your-profile fieldset div {
+	margin-bottom: 0;
+}
+#bbp-your-profile fieldset span.description {
+	background: none;
+	border: none;
+	padding: 0;
+	margin-top: -5px;
+	margin-bottom: 10px;
+}
+#bbp-your-profile fieldset input[disabled='disabled'] {
+	color: #888;
+}
+#bbp-your-profile fieldset #super_admin {
+	float: none;
+	width: auto;
+	text-align: left;
+}
+.bbp-form div label:last-child {
+	width: auto !important;
+}
+#bbp-your-profile fieldset.submit {
+	padding: 0;
+}
+#content fieldset.bbp-form legend, 
+#container fieldset.bbp-form legend, 
+#wrapper fieldset.bbp-form legend {
+	font-weight: bold;
+}

@@ -1,0 +1,1906 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Graphene 1.4 theme for WordPress\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-07-09 16:49+1200\n"
+"PO-Revision-Date: 2011-10-27 13:18+0200\n"
+"Last-Translator: Maksym <mtseo90@gmail.com>\n"
+"Language-Team: Web Geeks\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_n;esc_attr_e;esc_attr__\n"
+"X-Poedit-Basepath: D:\\[MyVault]\\MyProjects\\[Websites]\\wordpress-theme-test\\site\\wp-content\\themes\\graphene\\\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Language: Belarusian\n"
+"X-Poedit-Country: BELARUS\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: 404.php:22
+#, php-format
+msgid "Searching for: <span>%s</span>"
+msgstr "Пошук: <span>%s</span>"
+
+#: 404.php:28
+#: search-404.php:3
+msgid "Error 404 - Page Not Found"
+msgstr "Памылка 404 - Старонка не знойдзена"
+
+#: 404.php:30
+#: search-404.php:5
+msgid "Sorry, I've looked everywhere but I can't find the page you're looking for."
+msgstr "Я шукаў усюды, але нажаль не магу знайсці запытаную вамі старонку."
+
+#: 404.php:31
+#: search-404.php:6
+msgid "If you follow the link from another website, I may have removed or renamed the page some time ago. You may want to try searching for the page:"
+msgstr "Калі вы не знаходзіце прамую спасылку, якая магла быць выдалена з пэўнай старонкі, скарыстайцеся пошукам:"
+
+#: 404.php:39
+msgid "Automated search"
+msgstr "Аўтаматычны пошук"
+
+#: 404.php:42
+#, php-format
+msgid "Searching for the terms <strong>%s</strong> ..."
+msgstr "Пошук тэрмінаў <strong>%s</strong> ..."
+
+#: archive.php:25
+#, php-format
+msgid "Daily Archive: <span>%s</span>"
+msgstr "Штодзённы архіў: <span>%s</span>"
+
+#: archive.php:27
+#, php-format
+msgid "Monthly Archive: <span>%s</span>"
+msgstr "Штомесячны архіў: <span>%s</span>"
+
+#: archive.php:29
+msgid "F Y"
+msgstr "F Y"
+
+#: archive.php:31
+#, php-format
+msgid "Yearly Archive: <span>%s</span>"
+msgstr "Гадавы архіў: <span>%s</span>"
+
+#: archive.php:33
+#: category.php:14
+#, php-format
+msgid "Category Archive: <span>%s</span>"
+msgstr "Катэгорыя Архіў: <span>%s</span>"
+
+#: archive.php:35
+#: author.php:33
+msgid "Author's posts listings"
+msgstr "Спісы паведамленняў аўтара"
+
+#: comments.php:26
+msgid "This post is password protected. Enter the password to view any comments."
+msgstr "Дадзенае паведамленне абаронена паролем. Увядзіце пароль,каб убачыць каментары."
+
+#: comments.php:49
+#: loop-author.php:90
+#: loop.php:183
+msgid "1 comment"
+msgstr "1 каментар"
+
+#: comments.php:49
+#: loop-author.php:90
+#: loop.php:183
+#, php-format
+msgid "% comments"
+msgstr "% каментароў"
+
+#: comments.php:50
+msgid "1 ping"
+msgstr "1 пінг"
+
+#: comments.php:50
+msgid "% pings"
+msgstr "% пінгаў"
+
+#: comments.php:101
+msgid "Comments have been disabled."
+msgstr "Каментары былі заблокированны"
+
+#: comments.php:116
+#, php-format
+msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes: %s"
+msgstr "Вы можаце выкарыстоўваць гэтыя тэгі <abbr title=\"HyperText Markup Language\">HTML</abbr>: %s"
+
+#: comments.php:121
+#: comments.php:124
+#: functions.php:1237
+msgid "Submit Comment"
+msgstr "Дадаць каментар"
+
+#: footer.php:40
+#: footer.php:43
+msgid "Except where otherwise noted, content on this site is licensed under a <a href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">Creative Commons Licence</a>."
+msgstr "За выключэннем вышэйпаказанага, змесціва дадзенага сайта лицензированно <a href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">Creative Commons Licence</a>."
+
+#: footer.php:70
+msgid "Return to top"
+msgstr "Вярнуцца да пачатку"
+
+#: footer.php:78
+#, php-format
+msgid "Powered by %1$s and the %2$s."
+msgstr "Пры падтрымцы %1$s і %2$s."
+
+#: footer.php:78
+msgid "Graphene Theme"
+msgstr "Graphene Theme"
+
+#: functions.php:169
+msgid "Header Menu"
+msgstr "Загалоўнае меню"
+
+#: functions.php:170
+msgid "Secondary Menu"
+msgstr "Другаснае меню"
+
+#: functions.php:171
+msgid "Footer Menu"
+msgstr "Ніжняе меню"
+
+#: functions.php:215
+msgid "Header image by Syahir Hakim"
+msgstr "Галоўная старонка распрацавана Syahir Hakim"
+
+#: functions.php:221
+msgid "This is the default Graphene theme header image, cropped from image by Quantin Houyoux at sxc.hu"
+msgstr "Гэта загалоўная старонка Graphene theme па змаўчанні, кадрированная з малюнка зробленага Quantin Houyoux на sxc.h"
+
+#: functions.php:227
+#: functions.php:233
+#: functions.php:239
+#: functions.php:245
+#: functions.php:251
+msgid "Header image cropped from image by Ilco at sxc.hu"
+msgstr "Загалоўная старонка, кадрированная з малюнка зробленага Ilco на sxc.hu"
+
+#: functions.php:704
+msgid "Home"
+msgstr "Хатняя старонка"
+
+#: functions.php:809
+msgid "says:"
+msgstr "Паведамляе:"
+
+#: functions.php:815
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "%1$s на %2$s"
+
+#: functions.php:817
+msgid "Edit comment"
+msgstr "Рэдагаваць каментар"
+
+#: functions.php:821
+msgid "Reply"
+msgstr "Адказаць"
+
+#: functions.php:832
+msgid "Your comment is awaiting moderation."
+msgstr "Ваш каментар апрацоўваецца."
+
+#: functions.php:930
+msgid "Sidebar Widget Area"
+msgstr "Бакавая панэль для виджетов"
+
+#: functions.php:932
+msgid "The first sidebar widget area (available in two and three column layouts)."
+msgstr "Першая бакавая панэль для виджетов ( даступная з дзвюх і трох калонак)."
+
+#: functions.php:940
+msgid "Sidebar Two Widget Area"
+msgstr "Бакавая панэль для виджетов для другой старонкі"
+
+#: functions.php:942
+msgid "The second sidebar widget area (only available in three column layouts)."
+msgstr "Другая бакавая панэль для виджетов ( даступная толькі з трох калонак)."
+
+#: functions.php:950
+msgid "Footer Widget Area"
+msgstr "Ніжняя панэль для виджетов"
+
+#: functions.php:952
+msgid "The footer widget area. Leave empty to disable. Set the number of columns to display at the theme's Display Options page."
+msgstr "Ніжняя панэль для виджетов. Пакіньце пусты, каб адключыць. Усталюеце лік слупкоў для адлюстравання на старонцы адлюстравання тэмы ў Options"
+
+#: functions.php:968
+msgid "Front Page Sidebar Widget Area"
+msgstr "Бакавая панэль  для виджетов на галоўнай старонцы"
+
+#: functions.php:970
+msgid "The first sidebar widget area that will only be displayed on the front page."
+msgstr "Першая бакавая панэль для виджетов, якая будзе адлюстроўвацца толькі на галоўнай старонцы."
+
+#: functions.php:978
+msgid "Front Page Sidebar Two Widget Area"
+msgstr "Другая панэль виджетов для галоўнай старонкі"
+
+#: functions.php:980
+msgid "The second sidebar widget area that will only be displayed on the front page."
+msgstr "Другая панэль для виджетов будзе адлюстроўвацца толькі на галоўнай старонцы."
+
+#: functions.php:990
+msgid "Front Page Footer Widget Area"
+msgstr "Ніжняя панэль для виджетов на галоўнай старонцы."
+
+#: functions.php:992
+msgid "The footer widget area that will only be displayed on the front page. Leave empty to disable. Set the number of columns to display at the theme's Display Options page."
+msgstr " Ніжняя панэль для виджетов будзе адлюстроўвацца толькі на галоўнай старонцы.Пакіньце пусты, каб адключыць. Усталюеце лік слупкоў для адлюстравання на старонцы адлюстравання тэмы ў Options"
+
+#: functions.php:1003
+#: functions.php:1005
+msgid "The header widget area."
+msgstr "Загалоўная панэль для виджетов"
+
+#: functions.php:1032
+#: functions.php:1057
+#: functions.php:1083
+#: functions.php:1088
+#: functions.php:1092
+msgid "Twitter Username:"
+msgstr "Імя карыстача Twitter"
+
+#: functions.php:1096
+msgid "Number of tweets to display:"
+msgstr "Колькасць адлюстроўваных запісаў"
+
+#: functions.php:1144
+msgid "Graphene Options"
+msgstr "Параметры Graphene"
+
+#: functions.php:1148
+msgid "Graphene FAQs"
+msgstr "FAQs па Graphene"
+
+#: functions.php:1185
+msgid "Toggle all tabs"
+msgstr "Пераключыць усе ўкладкі"
+
+#: functions.php:1218
+msgid "Name:"
+msgstr "Імя:"
+
+#: functions.php:1219
+msgid "Email:"
+msgstr "E-Mail:"
+
+#: functions.php:1220
+msgid "Website:"
+msgstr "Сайт:"
+
+#: functions.php:1230
+msgid "Message:"
+msgstr "Паведамленне:"
+
+#: functions.php:1259
+#: functions.php:1311
+#: functions.php:1312
+msgid "&raquo; Newer posts"
+msgstr "&raquo; Новыя паведамленні"
+
+#: functions.php:1314
+msgid "Next page &raquo;"
+msgstr "Наступная старонка &raquo;"
+
+#: functions.php:1315
+msgid "&laquo; Previous page"
+msgstr "&laquo; Папярэдняя старонка"
+
+#: functions.php:1491
+msgid "View full post"
+msgstr " Цалкам прагледзець паведамленне"
+
+#: functions.php:1630
+msgid "<strong>ERROR: You must supply the post ID to get the image from as an argument when calling the graphene_get_post_image() function.</strong>"
+msgstr "<strong>ПАМЫЛКА: Неабходна ўвесці ідэнтыфікатар паведамлення каб атрымаць малюнак пры выкліку каманды graphene_get_post_image() функцыя.</strong>"
+
+#: functions.php:1977
+msgid "Template preview not found."
+msgstr "Папярэдні прагляд шаблону не знойдзены."
+
+#: functions.php:1980
+msgid "default"
+msgstr "Па змаўчанні"
+
+#: functions.php:2036
+#: functions.php:2040
+msgid "Theme default"
+msgstr "Тэма па змаўчанні"
+
+#: functions.php:2106
+msgid "ERROR: You are not authorised to perform that operation"
+msgstr "ПАМЫЛКА: вы не аўтарызаваны для выканання дадзенай аперацыі"
+
+#: functions.php:2269
+#: functions.php:2280
+#: functions.php:2289
+#: loop-children.php:74
+#: loop-children.php:82
+#: loop-post-formats.php:32
+#: loop.php:69
+#: loop.php:148
+#, php-format
+msgid "Read more"
+msgstr "Чытаць далей"
+
+#: functions.php:2358
+#, php-format
+msgid "Follow %s on Twitter"
+msgstr "Ідзіце за намі ў Twitter"
+
+#: functions.php:2361
+#, php-format
+msgid "Visit %s's Facebook page"
+msgstr "Наведаць старонку %s на Facebook"
+
+#: functions.php:2368
+#, php-format
+msgid "Visit %1$s's %2$s page"
+msgstr "Наведаць старонку %1$s %2$s "
+
+#: header.php:54
+#, php-format
+msgid "Subscribe to %s's RSS feed"
+msgstr "Падпісацца на RSS канал"
+
+#: header.php:54
+#: header.php:98
+#: header.php:118
+msgid "Go back to the front page"
+msgstr "Вярнуцца на галоўную старонку"
+
+#: loop-author.php:23
+#: loop-author.php:25
+#, php-format
+msgid "<strong>Name:</strong> %1$s %2$s"
+msgstr "<strong>Імя:</strong> %1$s %2$s"
+
+#: loop-author.php:26
+#, php-format
+msgid "<strong>Date registered:</strong> %1$s"
+msgstr "<strong>Дата рэгістрацыі:</strong> %1$s"
+
+#: loop-author.php:35
+#: loop-author.php:53
+#: loop-author.php:56
+#: loop-author.php:90
+#: search-404.php:24
+#, php-format
+msgid "Permalink Link to %s"
+msgstr "Сталая спасылка на %s"
+
+#: loop-author.php:56
+#: loop-author.php:90
+#: loop-children.php:74
+#: loop-post-formats.php:32
+#: loop.php:37
+#: loop.php:69
+msgid "(No title)"
+msgstr "(Няма назвы)"
+
+#: loop-author.php:85
+msgid "Most commented posts"
+msgstr "Найболей каментаваныя паведамленні"
+
+#: loop-author.php:90
+#: loop.php:183
+msgid "Leave comment"
+msgstr "Пакінуць каментар"
+
+#: loop-children.php:82
+#: loop-post-formats.php:15
+msgid "Status update"
+msgstr "Абнавіць стан"
+
+#: loop-post-formats.php:16
+#: loop-post-formats.php:17
+msgid "Image"
+msgstr "Малюнак"
+
+#: loop-post-formats.php:18
+msgid "Video"
+msgstr "Відэа"
+
+#: loop-post-formats.php:19
+msgid "Post format"
+msgstr "Фарматаванне паведамлення"
+
+#: loop-post-formats.php:28
+msgid "l F j, Y"
+msgstr "l F j, Y"
+
+#: loop-post-formats.php:28
+msgid "g:i A"
+msgstr "g:i A"
+
+#: loop-post-formats.php:38
+#: loop.php:100
+#: loop-post-formats.php:72
+msgid "F j, Y"
+msgstr "F j, Y"
+
+#: loop.php:79
+msgid "Categories:"
+msgstr "Катэгорыя"
+
+#: loop.php:90
+#: loop.php:117
+msgid "by"
+msgstr "Пад аўтарствам"
+
+#: loop.php:143
+msgid "Read the rest of this entry &raquo;"
+msgstr "Падрабязней &raquo;"
+
+#: loop.php:161
+msgid "<div class=\"link-pages\"><p><strong>Pages:</strong> "
+msgstr "<div class=\"link-pages\"><p><strong>Старонкі:</strong> "
+
+#: loop.php:171
+msgid "Tags:"
+msgstr "Тэгі:"
+
+#: loop.php:171
+#: loop.php:198
+msgid "About the author"
+msgstr "Пра аўтара"
+
+#: loop.php:215
+#: loop.php:244
+#: loop.php:249
+#: loop.php:251
+msgid "Sorry, but no results were found for that keyword. Wanna try an alternative keyword search?"
+msgstr "Выбачыце, але нічога не знойдзена па гэтым ключавым слове. Жадаеце паспрабаваць альтэрнатыўны пошук па ключавых словах?"
+
+#: search-404.php:14
+#: search-404.php:18
+#, php-format
+msgid "I've done a courtesy search for the term %s for you. See if you can find what you're looking for in the list below:"
+msgstr " Я ажыццявіў для вас бясплатны пошук па тэрміне %s.Магчыма, вы знойдзеце тое, што шукаеце ў спісе ніжэй:"
+
+#: search-404.php:35
+msgid "<strong>Sorry, couldn't find anything.</strong> Try searching for alternative terms using the search form above."
+msgstr "<strong>Выбачыце, нічога не знойдзена.</strong> Паспрабуйце альтэрнатыўны пошук па ключавых словах, выкарыстоўваючы форму пошуку, паказаную вышэй"
+
+#: search.php:11
+#, php-format
+msgid "Search results for: <span>%s</span>"
+msgstr "Вынікі пошуку для: <span>%s</span>"
+
+#: searchform.php:3
+#: searchform.php:4
+#: sidebar-two.php:36
+#: sidebar.php:42
+msgid "Meta"
+msgstr "Мета"
+
+#: sidebar-two.php:41
+#: sidebar.php:47
+msgid "Posts RSS"
+msgstr "RSS паведамленні"
+
+#: sidebar-two.php:42
+#: sidebar.php:48
+msgid "Comments RSS"
+msgstr "RSS каментары"
+
+#: sidebar-two.php:44
+#: sidebar.php:50
+#, php-format
+msgid "Powered by %s"
+msgstr "Пры падтрымцы %s"
+
+#: sidebar-two.php:44
+#: sidebar.php:50
+msgid "Powered by WordPress, state-of-the-art semantic personal publishing platform."
+msgstr "Powered by WordPress, state-of-the-art semantic personal publishing platform."
+
+#: sidebar-two.php:49
+#: sidebar.php:35
+msgid "Archives"
+msgstr "Архівы"
+
+#: tag.php:14
+#: admin/custom-fields.php:15
+#, php-format
+msgid "Graphene post-specific options"
+msgstr "Асобныя налады  паведамленняў Graphene"
+
+#: admin/custom-fields.php:16
+msgid "Graphene page-specific options"
+msgstr "Асобныя налады старонкі Graphene"
+
+#: admin/custom-fields.php:89
+msgid "These settings will only be applied to this particular post or page you're editing. They will override the global settings set in the Graphene Options or Graphene Display options page."
+msgstr "Гэтыя налады будуць ужывацца толькі да дадзенага рэдагуемага паведамлення ці старонцы. Яны адменяць глабальныя параметры ў наладах Graphene ці наладах адлюстравання старонкі Graphene."
+
+#: admin/custom-fields.php:90
+msgid "Slider options"
+msgstr "Налады Слайдара"
+
+#: admin/custom-fields.php:94
+#: admin/custom-fields.php:98
+#: admin/custom-fields.php:124
+msgid "Use global setting"
+msgstr "Выкарыстоўваць глабальныя параметры"
+
+#: admin/custom-fields.php:99
+msgid "Don't show image"
+msgstr "Не паказваць малюнак"
+
+#: admin/custom-fields.php:100
+msgid "Featured Image"
+msgstr "Папулярныя малюнкі"
+
+#: admin/custom-fields.php:101
+#: admin/custom-fields.php:102
+msgid "Custom URL"
+msgstr "Карыстацкі URL"
+
+#: admin/custom-fields.php:108
+msgid "Custom slider image URL"
+msgstr "Карыстацкі URL слайдар-малюнкі"
+
+#: admin/custom-fields.php:112
+msgid "Make sure you select Custom URL in the slider image option above to use this custom url."
+msgstr "Пераканаецеся,што вы абралі карыстацкі URL у опцыях слайдар-малюнкі, каб выкарыстоўваць дадзены URL."
+
+#: admin/custom-fields.php:116
+msgid "Display options"
+msgstr "Параметры адлюстравання"
+
+#: admin/custom-fields.php:120
+msgid "AddThis Social Sharing button"
+msgstr "Дадаць кнопку сацыяльнага абмену AddThis"
+
+#: admin/custom-fields.php:125
+msgid "Show button"
+msgstr "Паказаць кнопку"
+
+#: admin/custom-fields.php:126
+msgid "Hide button"
+msgstr "Схаваць кнопку"
+
+#: admin/custom-fields.php:132
+#: admin/custom-fields.php:136
+msgid "Description"
+msgstr "Апісанне"
+
+#: admin/custom-fields.php:140
+msgid "Only required if you need a description in the navigation menu and you are not using a custom menu."
+msgstr "Патрабуецца толькі ў тым выпадку, калі вам неабходна апісанне ў меню навігацыі і вы не выкарыстоўваеце меню карыстача"
+
+#: admin/faq.php:12
+msgid "Graphene's Frequently Asked Questions"
+msgstr " FAQ па Graphene"
+
+#: admin/faq.php:15
+msgid "Where should I go for the theme's support?"
+msgstr "Куды я магу звярнуцца па пытаннях падтрымкі?"
+
+#: admin/faq.php:16
+msgid "Please direct all support requests for the theme at the theme's <a href=\"http://forum.khairul-syahir.com/forum/graphene-wordpress-theme\">Support Forum</a>."
+msgstr "Калі ласка, накіроўвайце ўсе запыты па пытаннях падтрымкі ў частку<a href=\"http://forum.khairul-syahir.com/forum/graphene-wordpress-theme\">Форум падтрымкі</a>"
+
+#: admin/faq.php:19
+msgid "The post's featured image is replacing my header image. Help!"
+msgstr "Дапамажыце!Малюнак,якое ставіцца да паведамлення, замяшчае мой галоўны малюнак"
+
+#: admin/faq.php:20
+msgid "This is actually one of the theme's features, based on the feature in the default TwentyTen theme. Any featured image that has a size of greater than or equal to the theme's header image size (900 x 198 pixels) will replace the header image when the post/page that featured image is assigned to is being displayed. It enables you to have different header image for different posts and/or pages."
+msgstr "Насамрэч, гэта адно з уласцівасцяў тэмы, заснаванае на функцыі ў стандартнай тэме TwentyTen.Любы малюнак,якое адносіцца да паведамлення/старонцы, памер якога перавышае або роўны памеру галоўнага малюнка тэмы (900 x 198 пікселяў), будзе замяшчаць галоўнае изоюражение ў тым выпадку, калі адлюстроўваецца паведамленне/старонка на якой гэты малюнак з'яўляецца зададзеным па змаўчанні. Гэта дае магчымасць мець розныя малюнкі для розных паведамленняў і/ці старонак."
+
+#: admin/faq.php:21
+msgid "If you want to disable this feature, simply tick the <em>Disable Featured Image replacing header image</em> option in the <a href=\"themes.php?page=graphene_options&tab=display\">Graphene Options</a> page, under Display > Header Display Options."
+msgstr "Калі вы жадаеце адключыць гэту ўласцівасць, проста пастаўце галачку ў <em>Адключыць замяшчэнне галоўнага малюнка адпаведным малюнкам"
+
+#: admin/faq.php:24
+msgid "Can I modify Graphene to my heart's content without paying anything?"
+msgstr " Ці магу я бясплатна відазмяняць Graphene як жадаю?"
+
+#: admin/faq.php:25
+msgid "The Graphene WordPress theme, along with all the other themes in the WordPress.org Official Free Themes Directory, is released under the GNU General Public License (GPL) Version 2. The full text of that licence is included with the theme in the <code>licence.txt</code> file in the theme's folder. Releasing the theme under that licence means, among others, that you are <em>free to modify the theme in any way for any purpose (including commercial)</em> without any obligation to the theme's author. However, if you decide to redistribute the theme, the licence dictates that you must release the theme under the same licence, GPLv2."
+msgstr "Тэма Graphene WordPress, нароўні з усімі іншымі тэмамі ў афіцыйным каталогу бясплатных тэм WordPress.org, публікуецца на правах агульнадаступнай ліцэнзіі GNU, версія 2. Поўны тэкст дадзенай ліцэнзіі разам з тэмамі ёсць у тэчцы тым, файл <code>licence.txt</code>. Паводле дадзенай ліцэнзіі <em>вы маеце права відазмяняць тэму як жадаеце і ў любых мэтах(уключаючы камерцыйныя)<em>без якіх-дибо абавязанняў перад аўтарам.Тым не менш,калі вы вырашыце паўторна змесцаваць тэму, паводле агульнадаступнай ліцэнзіі, вы павінны апублікаваць яе на правах той жа самай ліцэнзіі, агульнадаступная лиценция,версія 2"
+
+#: admin/faq.php:26
+#: admin/faq.php:29
+msgid "If the theme is released under GPLv2, what is this Creative Commons licence in the theme's footer?"
+msgstr "Калі тэма публікуецца на правах агульнадаступнай ліцэнзіі,версія 2, што гэта за ліцэнзія Creative Commons у ніжнім калантытуле тэмы"
+
+#: admin/faq.php:30
+msgid "The Creative Commons licence is a popular licence nowadays that are used by a lot of web-based content authors to licence their work such that it protects their intellectual property but in the same time allows its free distribution. It is included with the theme simply to make it easy for the theme's users to make use of the licence for the content they publish. Theme users can remove it altogether via the theme's Options page should they wish not to use it."
+msgstr " На сённяшні дзень ліцэнзія Creative Commons з'яўляецца вельмі папулярнай і выкарыстоўваецца шматлікімі аўтарамі прадуктаў,заснаваных на Інтэрнэт-тэхналогіях, каб абараніць сваю інтэлектуальную ўласнасць і ў таксама час дазволіць вольнае паўторнае месцаванне.Яна ўключана разам з тэмай проста для таго,каб палегчыць выкарыстанне ліцэнзіі на публікуемае змесціва карыстачамі тэмы.Карыстачы тэмы могуць цалкам выдаліць яе праз Налады старонкі тэмы, калі не жадаюць яе выкарыстоўваць"
+
+#: admin/faq.php:31
+msgid "Put simply, <em>it is not the licence that is applied for the theme itself</em>, but just for the website's content should the theme user wants to use it."
+msgstr "Проста абярыце,<em>гэта не тая ліцэнзія, якая ўжываецца непасрэдна да тэмы</em>, а толькі да змесціва сайта, тэму якога карыстач жадае выкарыстоўваць."
+
+#: admin/faq.php:34
+msgid "Is the theme compatible with this plugin or that plugin?"
+msgstr "Ці сумяшчальная тэма з гэтым ці іншай убудовай?"
+
+#: admin/faq.php:35
+msgid "I don't know. With so many plugins available for WordPress, there's no way that I (or anybody else for that matter) can test for compatibility for all of them. Having said that, the theme is built with all the necessary WordPress components included with it, so chances are most plugins will be compatible with the theme."
+msgstr "Я не ведаю. Існуе мноства даступных убудоў для WordPress, таму ні я( ні хто-небудзь іншы па дадзеным пытанні)не можам пратэставаць іх усё на сумяшчальнасць. Тэма ствараецца ўжо з усімі неабходнымі кампанентамі WordPress, менавіта таму большасць убудоў павінны быць з ёй сумяшчальныя."
+
+#: admin/faq.php:36
+msgid "My suggestion is to just install the plugin and try it. If you stumble into problem, ask for support from the plugin author first. If the plugin author says that it's a problems with the theme, you know where to find support."
+msgstr "Мая рада, усталюеце ўбудову і паспрабуйце яго на справе. Калі ў вас узнікаюць праблемы, спачатку звернецеся ў службу падтрымкі аўтара ўбудовы. Калі аўтар убудовы адкажа, што праблема складаецца ў тэме, звяртайцеся ў службу падтрымкі па пытаннях дадзенай тэмы."
+
+#: admin/options-import.php:20
+msgid "Import Graphene Theme Options"
+msgstr "Імпартаваць параметры Graphene Theme"
+
+#: admin/options-import.php:63
+msgid "Options import completed"
+msgstr "Імпарт параметраў завершаны"
+
+#: admin/options-import.php:64
+#: admin/options-import.php:67
+#: admin/options-import.php:72
+#: admin/options-import.php:77
+msgid "Sorry, there has been an error."
+msgstr "Выбачыце, адбылася памылка"
+
+#: admin/options-import.php:68
+msgid "The uploaded file does not contain valid Graphene options."
+msgstr "Загружаны файл не ўтрымоўвае дапушчальных параметраў Graphene."
+
+#: admin/options-import.php:73
+msgid "The uploaded file could not be read."
+msgstr "Немагчыма прачытаць загружаны файл."
+
+#: admin/options-import.php:78
+msgid "The uploaded file is not supported."
+msgstr "Дадзены тып файла не падтрымліваецца"
+
+#: admin/options-import.php:86
+msgid "File is empty. Please upload something more substantial. This error could also be caused by uploads being disabled in your php.ini or by post_max_size being defined as smaller than upload_max_filesize in php.ini."
+msgstr "Файл пусты.Калі ласка, загрузіце іншы файл.Гэта памылка магла быць таксама выклікана загрузкамі, якія блокирутся php.ini або з-за таго, што максімальны памер паведамлення менш,чым максімальны памер загружанага файла ў php.ini."
+
+#: admin/options-presets.php:36
+msgid "The \"Normal website\" settings preset has been applied."
+msgstr "Па змаўчанні быў абраны \"Звычайны сайт\"."
+
+#: admin/options-presets.php:41
+msgid "Settings have been reset."
+msgstr "Налады былі скінуты."
+
+#: admin/options.php:63
+#: admin/uninstall.php:21
+#: admin/options.php:64
+msgid "Please confirm that you would like to uninstall the Graphene theme. All of the theme's options in the database will be deleted."
+msgstr "Калі ласка,пацвердзіце,што выхотите деинсталировать тэму Graphene. Усе налады тэмы будуць выдалены."
+
+#: admin/options.php:65
+#: admin/options.php:69
+#: admin/options.php:283
+msgid "Uninstall Theme"
+msgstr "Деинсталировать тэму"
+
+#: admin/options.php:83
+msgid "Graphene Theme Options"
+msgstr "Параметры Graphene Theme"
+
+#: admin/options.php:85
+#: admin/options.php:90
+msgid "Settings saved."
+msgstr "Налады захаваны."
+
+#: admin/options.php:102
+msgid "General"
+msgstr "Агульнае"
+
+#: admin/options.php:103
+#: admin/options.php:135
+msgid "Save Options"
+msgstr "Захаваць параметры"
+
+#: admin/options.php:147
+#: admin/options.php:150
+msgid "Developing this awesome theme took a lot of effort and time, months and months of continuous voluntary unpaid work. If you like this theme or if you are using it for commercial websites, please consider a donation to the developer to help support future updates and development."
+msgstr "Каб распрацаваць гэту тэму запатрабавалася шмат высілкаў і чакай- месяцы добраахвотнай, працяглай і неаплачанай працы.Калі вам падабаецца гэта тэма ці вы выкарыстоўваеце яе для камерцыйных сайтаў,калі ласка, разгледзіце магчымасць фінансавай дапамогі для далейшага паляпшэння і развіцці."
+
+#: admin/options.php:164
+msgid "Graphene Usage Survey"
+msgstr "Апытанне па выкарыстанні Graphene"
+
+#: admin/options.php:167
+msgid "Help us to get to know you better. Take the Graphene theme usage survey now! Every opinion counts towards making the theme better. The survey is very short, and is completely anonymous."
+msgstr "Дапамажыце нам пазнаць вас лепш.Прыміце ўдзел у апытанні па выкарыстанні тэмы Graphene!Для нас важна кожнае меркаванне,каб мы маглі палепшыць тэму.Апытанне вельмі кароткі і цалкам ананімны."
+
+#: admin/options.php:168
+#: admin/options.php:177
+msgid "Add-ons and plugins"
+msgstr "Дадатковыя кампаненты і ўбудовы"
+
+#: admin/options.php:180
+msgid "Add-ons"
+msgstr "Дадатковыя кампаненты"
+
+#: admin/options.php:181
+msgid "Add-ons are not shipped with the theme, but can be installed separately to extend the theme's capability."
+msgstr "Дадатковыя кампаненты не ўваходзяць у тэму, але іх можна ўсталяваць асобна,каб пашырыць магчымасці тэмы."
+
+#: admin/options.php:185
+msgid "Installed"
+msgstr "Усталявана"
+
+#: admin/options.php:186
+#: admin/options.php:205
+#: admin/options.php:187
+#: admin/options.php:190
+msgid "Plugins"
+msgstr "Убудовы"
+
+#: admin/options.php:191
+msgid "The plugins listed here are natively supported by the theme. All you need to do is install the plugins and activate them."
+msgstr "Пералічаныя тут убудовы першапачаткова падтрымліваюцца тэмай.Вам толькі неабходна ўсталяваць іх і актываваць."
+
+#: admin/options.php:204
+msgid "Activated"
+msgstr "Актывавана"
+
+#: admin/options.php:217
+#: admin/options.php:220
+msgid "The default settings for the theme is preconfigured for use in blogs. If you're using this theme primarily for a normal website, or if you want to reset the settings to their default values, you can apply one of the available options presets below."
+msgstr "Налады для тэмы па змаўчанні прызначаны для блогаў.Калі вы выкарыстоўваеце гэту тэму для звычайнага сайта ці вы жадаеце скінуць першапачатковыя налады па змаўчанні,вы можаце ўжыць адзін з наяўных ніжэй варыянтаў налады."
+
+#: admin/options.php:221
+msgid "Note that you can still configure the individual settings after you apply any preset."
+msgstr "Звернеце ўвагу,што вы можаце змяніць індывідуальныя налады посли усталёўкі папярэдніх налад."
+
+#: admin/options.php:226
+msgid "Select Options Preset"
+msgstr "Выбар папярэдніх налад"
+
+#: admin/options.php:229
+msgid "Normal website"
+msgstr "Звычайны сайт"
+
+#: admin/options.php:232
+msgid "Reset to default settings"
+msgstr "Аднавіць значэнні па змаўчанні"
+
+#: admin/options.php:237
+msgid "Apply Options Preset"
+msgstr "Ужыць папярэднія налады"
+
+#: admin/options.php:247
+#: admin/options.php:251
+#: admin/options.php:254
+msgid "Import Theme options"
+msgstr "Імпарт параметраў тэмы"
+
+#: admin/options.php:256
+#: admin/options.php:260
+msgid "Export Theme options"
+msgstr "Экспарт параметраў тэмы"
+
+#: admin/options.php:263
+#, php-format
+msgid "Import and export is only available for to users with PHP version 5.2.1 and higher. You are using PHP version %s."
+msgstr "Імпарт і экспарт даступны толькі для карыстачоў з версіяй PHP 5.2.1 і вышэй.Вы выкарыстоўваеце версію PHP %s."
+
+#: admin/options.php:273
+msgid "Uninstall theme"
+msgstr "Деинсталировать тэму"
+
+#: admin/options.php:276
+msgid "<strong>Be careful!</strong> Uninstalling the theme will remove all of the theme's options from the database. Do this only if you decide not to use the theme anymore."
+msgstr "<strong>Увага!</strong>Деинсталяция тэмы прывядзе да страты ўсіх параметраў тэмы з базы дадзеных.Пацвердзіце дзеянне,калі вы вырашылі больш не выкарыстоўваць гэту тэму."
+
+#: admin/options.php:277
+msgid "If you just want to try another theme, there is no need to uninstall this theme. Simply activate the other theme in the Appearance > Themes admin page."
+msgstr "Калі вы жадаеце прагледзець іншую тэму,неабавязкова выдаляць гэту.Проста актывуйце іншую тэму ў Налады вонкавага выгляду>Тэмы старонкі адміністратара."
+
+#: admin/options.php:278
+msgid "Note that uninstalling this theme <strong>does not remove</strong> the theme's files. To delete the files after you have uninstalled this theme, go to Appearances > Themes and delete the theme from there."
+msgstr "Звернеце ўвагу,што деинсталяция гэтай тэмы <strong>не прывядзе да выдалення</strong> файлаў тэмы.Каб выдаліць файлы пасля таго,як вы деинсталировали тэму,адкрыйце Налады вонкавага выгляду > Тэмы і выдаліць тэму."
+
+#: admin/options.php:305
+msgid "Slider Options"
+msgstr "Параметры слайдара"
+
+#: admin/options.php:311
+msgid "Category to show in slider"
+msgstr "Катэгорыі,якія будуць паказаны ў слайдары"
+
+#: admin/options.php:312
+msgid "All posts within the category selected here will be displayed on the slider. Usage example: create a new category \"Featured\" and assign all posts to be displayed on the slider to that category, and then select that category here."
+msgstr "Усе паведамленні абранай катэгорыі будуць адлюстроўвацца на слайдары.Прыклад: стварыце новую катекорию \"Адзначаныя\" і пакажыце ўсе паведамленні,якія будуць адлюстраваны на слайдары для гэтай катэгорыі,затым абярыце гэту катэгорыю."
+
+#: admin/options.php:316
+msgid "Show latest posts"
+msgstr "Паказаць апошнія паведамленні"
+
+#: admin/options.php:317
+msgid "Show specific posts/pages"
+msgstr "Паказаць абраныя паведамленні/старонкі"
+
+#: admin/options.php:318
+#: admin/options.php:331
+#: admin/options.php:509
+msgid "Posts and/or pages to display"
+msgstr "Паведамленні і/ці старонкі для адлюстравання"
+
+#: admin/options.php:336
+#: admin/options.php:514
+msgid "Enter ID of posts and/or pages to be displayed, separated by comma. Example: <code>1,13,45,33</code>"
+msgstr "Увядзіце ID паведамленні і/ці старонкі для адлюстравання,праз коску.Прыклад:<code>1,13,45,33</code>"
+
+#: admin/options.php:337
+msgid "Applicable only if <strong>Show specific posts/pages</strong> is selected above."
+msgstr "Можна ўжыць толькі калі вышэй абрана <strong>Паказваць абраныя паведамленні/старонкі</strong>"
+
+#: admin/options.php:343
+msgid "Number of posts to display"
+msgstr "Лік адлюстроўваных паведамленняў"
+
+#: admin/options.php:373
+msgid "Slider display style"
+msgstr "Стыль адлюстравання слайдара"
+
+#: admin/options.php:377
+msgid "Thumbnail and excerpt"
+msgstr "Эскіз і вытрымка"
+
+#: admin/options.php:378
+msgid "Background image and excerpt"
+msgstr "Фонавы малюнак і вытрымка"
+
+#: admin/options.php:379
+msgid "Full post content"
+msgstr "Поўнае ўтрыманне паведамлення"
+
+#: admin/options.php:385
+msgid "Slider height"
+msgstr "Вышыня слайдара"
+
+#: admin/options.php:393
+msgid "Slider speed"
+msgstr "Хуткасць слайдара"
+
+#: admin/options.php:396
+#: admin/options.php:405
+#: admin/options.php:397
+msgid "This is the duration that each slider item will be shown"
+msgstr "Гэта працягласць адлюстравання прадметаў у слайдары"
+
+#: admin/options.php:402
+#: admin/options.php:406
+msgid "This is the speed of the slider transition. Lower values = higher speed."
+msgstr "Гэта хуткасць пераходу слайдара.Менш значэнне-больш хуткасць."
+
+#: admin/options.php:411
+msgid "Move slider to bottom of page"
+msgstr "Перамясціць слайдар на верх старницы"
+
+#: admin/options.php:417
+msgid "Disable slider"
+msgstr "Адключыць слайдар"
+
+#: admin/options.php:430
+msgid "Front Page Options"
+msgstr "Параметры галоўнай старонкі"
+
+#: admin/options.php:436
+#: admin/options.php:438
+#: admin/options.php:443
+#: admin/options.php:451
+#: admin/options.php:463
+msgid "Homepage Panes"
+msgstr "Панэль хатняй старонкі"
+
+#: admin/options.php:466
+msgid "<strong>Note:</strong> homepage panes are only displayed when using a <a href=\"http://codex.wordpress.org/Creating_a_Static_Front_Page\">static front page</a>."
+msgstr "<strong>Увага:</strong>панэль хатняй старонкі адлюстроўваецца толькі ў тым выпадку,калі выкарыстоўваецца <a href=\"http://codex.wordpress.org/Creating_a_Static_Front_Page\">статычная галоўная старонка</a>"
+
+#: admin/options.php:470
+msgid "Type of content to show"
+msgstr "Тып адлюстроўванага змесціва"
+
+#: admin/options.php:477
+msgid "Latest posts by category"
+msgstr "Апошнія паведамленні па катэгорыях"
+
+#: admin/options.php:480
+msgid "Posts and/or pages"
+msgstr "Паведамленні і/ці старонкі"
+
+#: admin/options.php:485
+msgid "Number of latest posts to display"
+msgstr "Колькасць апошніх адлюстроўваных паведамленняў"
+
+#: admin/options.php:489
+#: admin/options.php:494
+msgid "Category to show latest posts from"
+msgstr "Катэгорыя апошніх адлюстроўваных паведамленняў"
+
+#: admin/options.php:504
+msgid "Applicable only if <strong>Latest posts by category</strong> is selected above."
+msgstr "Магчыма ўжыць толькі,калі вышэй абрана <strong>Апошнія паведамленні па катэгорыях</strong>."
+
+#: admin/options.php:515
+msgid "Applicable only if <strong>Posts and/or pages</strong> is selected above."
+msgstr "Магчыма ўжыць толькі,калі вышэй абрана <strong>Паведамленні і/ці старонкі</strong>."
+
+#: admin/options.php:521
+msgid "Disable homepage panes"
+msgstr "Адключыць панэль хатняй старонкі"
+
+#: admin/options.php:536
+msgid "Comments Options"
+msgstr "Параметры каментароў"
+
+#: admin/options.php:542
+#: admin/options.php:546
+msgid "Use WordPress settings"
+msgstr "Выкарыстоўваць налады WordPress"
+
+#: admin/options.php:547
+msgid "Disabled for pages"
+msgstr "Адмяніць для старонак"
+
+#: admin/options.php:548
+#: admin/options.php:550
+msgid "Note: this setting overrides the global WordPress Discussion Setting called \"Allow people to post comments on new articles\" and also the \"Allow comments\" option for individual posts/pages."
+msgstr "Увага:гэтыя налады адмяняюць глабальныя налады абмеркавання для Wordpress \"Дазволіць пакідаць каментары для новых артыкулаў\" а таксама налады для асабістых паведамленняў/старонак \"Дазволіць каментаваць\"."
+
+#: admin/options.php:562
+msgid "Child Page Options"
+msgstr "Параметры даччынай старонкі"
+
+#: admin/options.php:568
+msgid "Hide parent box if content is empty"
+msgstr "Схаваць вышэйстаячае ўтрыманне,калі няма змесціва"
+
+#: admin/options.php:574
+msgid "Child page listings"
+msgstr "Спіс даччынай старонкі"
+
+#: admin/options.php:578
+msgid "Hide listing"
+msgstr "Схаваць спіс"
+
+#: admin/options.php:579
+#: admin/options.php:580
+msgid "Only show listing if parent content is empty"
+msgstr "Паказваць спіс,калі агульнае ўтрыманне пустое"
+
+#: admin/options.php:593
+msgid "Widget Area Options"
+msgstr "Параметры панэлі для виджетов"
+
+#: admin/options.php:596
+msgid "Header widget area"
+msgstr "Схаваць панэль для виджетов"
+
+#: admin/options.php:597
+msgid "<strong>Important:</strong> This widget area is unstyled, as it is often used for advertisement banners, etc. If you enable it, make sure you style it to your needs using the Custom CSS option."
+msgstr "<strong>Важна:</strong> у гэтай панэлі для виджетов няма стылю, бо яна часта выкарыстоўваецца для рэкламных банараў і да т.п.Калі вы актывуеце яе, пераканаецеся,што вы наладзілі стыль у адпаведнасці з вашымі патрэбамі, выкарыстоўваючы карыстацкія налады CSS."
+
+#: admin/options.php:601
+#: admin/options.php:610
+msgid "Alternate Widgets"
+msgstr "Альтэрнатыўныя виджеты"
+
+#: admin/options.php:611
+msgid "You can enable the theme to show different widget areas in the front page than the rest of the website. If you enable this option, additional widget areas that will only be displayed on the front page will be added to the Widget settings page."
+msgstr "У адрозненне ад іншых сайтаў,Вы можаце актываваць паказ розных панэляў для виджетов на галоўнай старонцы. Калі вы актывуеце гэту опцыю, у тэчку Налады виджетов на старонцы будзе змешчана дадатковая панэль для виджетов,якая будзе адлюстроўвацца толькі на галоўнай старонцы."
+
+#: admin/options.php:614
+msgid "Enable alternate front page sidebar widget area"
+msgstr "Актываваць альтэрнатыўную бакавую панэль для виджетов на галоўнай старонцы"
+
+#: admin/options.php:618
+msgid "Enable alternate front page footer widget area"
+msgstr "Актываваць альтэрнатыўную ніжнюю панэль для виджетов на галоўнай старонцы"
+
+#: admin/options.php:619
+msgid "You can also specify different column counts for the front page footer widget and the rest-of-site footer widget if you enable this option."
+msgstr "Вы таксама можаце вызначыць розны лік слупкоў для ніжняга калантытула вобласці виджетов галоўнай старонкі,калі актывуеце гэту функцыю."
+
+#: admin/options.php:632
+msgid "Top Bar Options"
+msgstr "Опцыі верхняй панэлі"
+
+#: admin/options.php:638
+msgid "Hide feed icon"
+msgstr "Схаваць абразок вэб-канала."
+
+#: admin/options.php:642
+msgid "Use custom feed URL"
+msgstr "Выкарыстоўваць карыстацкі струмень URL"
+
+#: admin/options.php:645
+#: admin/options.php:649
+msgid "Twitter URL"
+msgstr "URL Twitter"
+
+#: admin/options.php:652
+msgid "Enter the URL to your Twitter page."
+msgstr "Увядзіце URL для вашай старонкі на Twitter."
+
+#: admin/options.php:656
+msgid "Facebook URL"
+msgstr "URL Facebook"
+
+#: admin/options.php:659
+msgid "Enter the URL to your Facebook profile page."
+msgstr "Увядзіце URL для старонкі профіля на Facebook."
+
+#: admin/options.php:670
+#, php-format
+msgid "%s URL"
+msgstr "%s URL"
+
+#: admin/options.php:675
+#, php-format
+msgid "%s icon URL"
+msgstr "%s URL абразкі"
+
+#: admin/options.php:678
+msgid "Delete"
+msgstr "Выдаліць"
+
+#: admin/options.php:687
+msgid "Add new social media icon"
+msgstr "Дадаць новы абразок сацыяльных сетак"
+
+#: admin/options.php:698
+msgid "Social Sharing Buttons"
+msgstr "Кнопка сацыяльнага абмену"
+
+#: admin/options.php:703
+msgid "Show social sharing button"
+msgstr "Паказаць кнопку сацыяльнага абмену"
+
+#: admin/options.php:707
+msgid "Show in Pages as well?"
+msgstr "Паказваць таксама старонкі?"
+
+#: admin/options.php:711
+msgid "Social sharing buttons location"
+msgstr "Становішча кнопкі сацыяльнага абмену"
+
+#: admin/options.php:714
+#: admin/options.php:715
+msgid "Top of posts"
+msgstr "Пачатак паведамлення"
+
+#: admin/options.php:716
+msgid "Both top and bottom"
+msgstr "Пачатак і канец"
+
+#: admin/options.php:722
+msgid "Your social sharing button code"
+msgstr "Код вашай кнопкі сацыяльнага абмену"
+
+#: admin/options.php:723
+msgid "You can use codes from any popular social sharing sites, like Facebook, Digg, AddThis, etc."
+msgstr "Вы можаце выкарыстоўваць коды іншых папулярных сацыяльных сетак, такіх як Facebook, Digg, AddThis, і г.д."
+
+#: admin/options.php:726
+msgid "You may use these tags to get the post's URL and title:"
+msgstr "Вы можаце выкарыстоўваць гэтыя тэгі, каб атрымаць URL паведамленні і назва:"
+
+#: admin/options.php:739
+#: admin/options.php:745
+msgid "Show Adsense advertising"
+msgstr "Паказаць рэкламу Adsense"
+
+#: admin/options.php:751
+msgid "Show ads on front page as well"
+msgstr "Таксама паказваць рэкламу на галоўнай старонцы"
+
+#: admin/options.php:757
+#: admin/options.php:770
+msgid "Google Analytics Options"
+msgstr "Налады Google Analytics"
+
+#: admin/options.php:773
+msgid "<strong>Note:</strong> the theme now places the Google Analytics script in the <code>&lt;head&gt;</code> element to better support the new asynchronous Google Analytics script. Please make sure you update your script to use the new asynchronous script from Google Analytics."
+msgstr "<strong>Увага:</strong>скрыпт Google Analytics змесцаваны ў <code>&lt;head&gt;</code>-элеменце, для лепшай падтрымкі новага асінхроннага скрыпту Google Analytics.Калі ласка,пераканаецеся,што вы абнавілі скрыпт для таго,каб выкарыстоўваць новы асінхронны скрыпт ад Google Analytics."
+
+#: admin/options.php:776
+msgid "Enable Google Analytics tracking"
+msgstr "Актываваць Google Analytics"
+
+#: admin/options.php:780
+msgid "Google Analytics tracking code"
+msgstr "Код адсочвання Google Analytics"
+
+#: admin/options.php:781
+msgid "Make sure you include the full tracking code (including the <code>&lt;script&gt;</code> and <code>&lt;/script&gt;</code> tags) and not just the <code>UA-#######-#</code> code."
+msgstr "Пераканаецеся,што вы ўставілі поўны код адсочвання (уключаючы тэгі <code>&lt;script&gt;</code> і <code>&lt;/script&gt;</code>) а не толькі код <code>UA-#######-#</code>."
+
+#: admin/options.php:794
+msgid "Footer Options"
+msgstr "Параметры ніжняга калантытула"
+
+#: admin/options.php:799
+msgid "Show Creative Commons logo"
+msgstr "Адлюстроўваць лагатып Creative Commons"
+
+#: admin/options.php:804
+msgid "Copyright text (html allowed)"
+msgstr "Аўтарскія правы(HTML дазволены)"
+
+#: admin/options.php:805
+msgid "If this field is empty, the following default copyright text will be displayed:"
+msgstr "Калі гэта поле пустое, будуць адлюстроўвацца наступныя аўтарскія правы па змаўчанні:"
+
+#: admin/options.php:811
+msgid "Do not show copyright info"
+msgstr "Не паказваць аўтарскія правы"
+
+#: admin/options.php:815
+msgid "Do not show the \"Return to top\" link"
+msgstr "Не паказваць лінк \"Вярнуцца да пачатку\""
+
+#: admin/options.php:826
+msgid "Print Options"
+msgstr "Параметры друку"
+
+#: admin/options.php:831
+msgid "Enable print CSS for single posts and pages?"
+msgstr "Дазволіць друк CSS для асобных паведамленняў і старонак?"
+
+#: admin/options.php:835
+msgid "Show print button as well?"
+msgstr "Паказваць таксама кнопку друку?"
+
+#: admin/options.php:855
+msgid "Header Display Options"
+msgstr "Параметры адлюстравання загалоўкаў"
+
+#: admin/options.php:861
+msgid "Use light-coloured header bars"
+msgstr "Выкарыстоўваць светлыя тоны для загалоўкаў."
+
+#: admin/options.php:867
+msgid "Link header image to front page"
+msgstr "Далучыць малюнак загалоўка да галоўнай старонкі"
+
+#: admin/options.php:870
+msgid "Check this if you disable the header texts and want the header image to be linked to the front page."
+msgstr "Праверце,калі вы адключаеце тэкст загалоўка і жадаеце далучыць малюнак загалоўка да галоўнай старонкі."
+
+#: admin/options.php:875
+msgid "Disable Featured Image replacing header image"
+msgstr "Адключыць рэкамендуемы малюнак, які замяшчае малюнак загалоўка"
+
+#: admin/options.php:878
+msgid "Check this to prevent the posts Featured Image replacing the header image regardless of the featured image dimension."
+msgstr "Праверце,каб пазбегнуць замяшчэнні малюнка загалоўка рэкамендуемым малюнкам з-за яго параметраў."
+
+#: admin/options.php:883
+msgid "Use random header image"
+msgstr "Выкарыстоўваць выпадковы малюнак загалоўка"
+
+#: admin/options.php:887
+msgid "Check this to show a random header image (random image taken from the available default header images)."
+msgstr "Праверце,каб можна быў паказваць выпадковы малюнак загалоўка (выпадковы малюнак з даступных малюнкаў загалоўка па змаўчанні)."
+
+#: admin/options.php:888
+msgid "<strong>Note:</strong> only works on pages where a specific header image is not defined."
+msgstr "<strong>Увага:</strong> даступна толькі на старонках,дзе не абрана адмысловы малюнак загалоўка."
+
+#: admin/options.php:893
+msgid "Hide the top bar"
+msgstr "Схаваць верхнюю панэль навігацыі"
+
+#: admin/options.php:899
+msgid "Search box location"
+msgstr "Размяшчэнне акна пошуку"
+
+#: admin/options.php:903
+msgid "Top bar"
+msgstr "Верхняя панэль навігацыі"
+
+#: admin/options.php:904
+msgid "Navigation bar"
+msgstr "Панэль навігацыі"
+
+#: admin/options.php:905
+msgid "Disable search box"
+msgstr "Адключыць акно пошуку"
+
+#: admin/options.php:918
+msgid "Column Options"
+msgstr "Параметры слупка"
+
+#: admin/options.php:924
+msgid "Column mode"
+msgstr "Тып слупка"
+
+#: admin/options.php:974
+#: admin/options.php:980
+msgid "Hide post author"
+msgstr "Не паказваць аўтара паведамлення"
+
+#: admin/options.php:986
+msgid "Post date display"
+msgstr "Адлюстроўваць дату паведамлення"
+
+#: admin/options.php:990
+msgid "Hidden"
+msgstr "Утоены"
+
+#: admin/options.php:991
+msgid "As an icon (without the year)"
+msgstr "Як абразок (без даты)"
+
+#: admin/options.php:992
+msgid "As an icon (including the year)"
+msgstr "Як абразок ( з указаннем даты)"
+
+#: admin/options.php:993
+msgid "As inline text"
+msgstr "Як убудаваны тэкст"
+
+#: admin/options.php:995
+msgid "Note: displaying date as inline text allows more space for the content area, especially useful for a three-column layout configuration."
+msgstr "Увага:адлюстраванне даты ў выглядзе ўбудаванага тэксту пакідае больш месцы для змесціва, што асабліва карысна для канфігурацыі ў тры калонкі."
+
+#: admin/options.php:1000
+msgid "Hide post categories"
+msgstr "Схаваць катэгорыі паведамлення"
+
+#: admin/options.php:1006
+msgid "Hide post tags"
+msgstr "Схаваць тэгі паведамлення"
+
+#: admin/options.php:1012
+msgid "Hide post comment count"
+msgstr "Схаваць колькасць каментароў да паведамлення"
+
+#: admin/options.php:1013
+msgid "Only affects posts listing (such as the front page) and not single post view."
+msgstr "Уплывае толькі на спіс паведамленняў (напрыклад, на галоўнай старонцы),а не на прагляд адзінкавага  паведамлення."
+
+#: admin/options.php:1018
+#: admin/options.php:1022
+msgid "Show post author's info"
+msgstr "Паказваць інфармацыю пра аўтара паведамлення"
+
+#: admin/options.php:1034
+#: admin/options.php:1040
+#: admin/options.php:1046
+msgid "Show full content in archive pages"
+msgstr "Паказваць усё змесціва на архіўных старонках"
+
+#: admin/options.php:1050
+msgid "Note: Archive pages include the archive for category, tags, time, and search results pages. Enabling this option will cause the full content of posts and pages listed in those archives to displayed instead of the excerpt, and truncated by the Read More tag if used."
+msgstr "Увага:Архіўныя старонкі ўключаюць архівы для катэгорый, тэгаў, чакай і вынікаў старонак пошуку.Актывацыя гэтай опцыі прывядзе да таго, што замест выразак будзе адлюстроўвацца ўсё змесціва пералічаных старонак і паведамленняў архіва.Калі выкарыстоўваецца тэг Read More, змесціва будзе ўсечаным"
+
+#: admin/options.php:1054
+#: admin/options.php:1058
+msgid "Retain these HTML tags in excerpts"
+msgstr "Захаваць HTML тэгі для гэтых вынятак"
+
+#: admin/options.php:1061
+msgid "Enter the HTML tags you'd like to retain in excerpts. For example, enter <code>&lt;p&gt;&lt;ul&gt;&lt;li&gt;</code> to retain <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>, and <code>&lt;li&gt;</code> HTML tags."
+msgstr "Увядзіце HTML тэгі,якія вы б жадалі б захаваць у вынятках.Напрыклад, увядзіце <code>&lt;p&gt;&lt;ul&gt;&lt;li&gt;</code> захаваць <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code> і <code>&lt;li&gt;</code> HTML тэгі."
+
+#: admin/options.php:1074
+#: admin/options.php:1080
+msgid "Hide allowed tags in comment form"
+msgstr "Не паказваць дапушчальныя тэгі ў каментарах"
+
+#: admin/options.php:1093
+msgid "Colours Options"
+msgstr "Налада колеру"
+
+#: admin/options.php:1096
+msgid "Changing colours for your website involves a lot more than just trial and error. Simply mixing and matching colours without regard to their compatibility may do more damage than good to your site's aesthetics."
+msgstr "Змена колеру вашага сайта гэта значна больш,чым проста \"Метад спроб і памылак\".Калі вы будзеце проста змешваць колеры без уліку іх сумяшчальнасці, вы можаце сказіць эстэтычны выгляд вашага сайта."
+
+#: admin/options.php:1097
+#: admin/options.php:1098
+#: admin/options.php:1099
+#, php-format
+msgid "<strong>Note:</strong> The previews work best on modern Gecko- and Webkit-based browsers, such as Mozilla Firefox and Google Chrome."
+msgstr "<strong>Увага:</strong>Прадагляд лепш за ўсё працуе ў бьраузерах Gecko і Webckit, такіх як Mozilla Firefox і Google Chrome."
+
+#: admin/options.php:1100
+#: admin/options.php:1104
+msgid "Main content wrapper background"
+msgstr "Фон асноўнага ўтрымання"
+
+#: admin/options.php:1105
+msgid "Post and pages content background"
+msgstr "Фон утрымання старонак і паведамленняў"
+
+#: admin/options.php:1106
+msgid "Post meta and footer border"
+msgstr "Мета і ніжняя мяжа паведамлення"
+
+#: admin/options.php:1107
+msgid "Post and pages top border"
+msgstr "Верхняя мяжа паведамленняў і старонак"
+
+#: admin/options.php:1108
+#: admin/options.php:1118
+#: admin/options.php:1148
+#: admin/options.php:1174
+#: admin/options.php:1201
+#: admin/options.php:1338
+#: admin/options.php:1359
+#: admin/options.php:1125
+msgid "Widgets"
+msgstr "Виджеты"
+
+#: admin/options.php:1128
+msgid "Widget preview"
+msgstr "Прадагляд виджета"
+
+#: admin/options.php:1129
+#: admin/options.php:1133
+msgid "Widget item background"
+msgstr "Фон дэталяў виджета"
+
+#: admin/options.php:1134
+msgid "Widget item list border"
+msgstr "Мяжа спісу дэталяў виджета"
+
+#: admin/options.php:1135
+msgid "Widget header border"
+msgstr "Мяжа загалоўка виджета"
+
+#: admin/options.php:1136
+msgid "Widget title colour"
+msgstr "Колер назвы виджета"
+
+#: admin/options.php:1137
+msgid "Widget title text shadow colour"
+msgstr "Колер ценю назвы виджета"
+
+#: admin/options.php:1138
+msgid "Widget header gradient bottom colour"
+msgstr "Ніжні колер градыенту загалоўка виджета"
+
+#: admin/options.php:1139
+msgid "Widget header gradient top colour"
+msgstr "Верхні колер градыенту загалоўка виджета"
+
+#: admin/options.php:1156
+#: admin/options.php:1159
+msgid "Slider background preview"
+msgstr "Прадагляд фону слайдара"
+
+#: admin/options.php:1164
+msgid "Slider top left colour"
+msgstr "Колер слайдара ў верхнім левым куце"
+
+#: admin/options.php:1165
+msgid "Slider bottom right colour"
+msgstr "Колер слайдара ў ніжнім правым куце"
+
+#: admin/options.php:1182
+#: admin/options.php:1185
+msgid "Block button preview"
+msgstr "Кнопка прадагляду"
+
+#: admin/options.php:1186
+msgid "Button label"
+msgstr "Тэкст каманднай кнопкі"
+
+#: admin/options.php:1190
+msgid "Button background colour"
+msgstr "Фонавы колер кнопкі"
+
+#: admin/options.php:1191
+msgid "Button label colour"
+msgstr "Колер тэксту каманднай кнопкі"
+
+#: admin/options.php:1192
+msgid "Button label text shadow"
+msgstr "Колер ценю тэксту каманднай кнопкі"
+
+#: admin/options.php:1216
+msgid "Text Style Options"
+msgstr "Налады стылю"
+
+#: admin/options.php:1219
+msgid "Note that these are CSS properties, so any valid CSS values for each particular property can be used."
+msgstr "Увага, гэта ўласцівасці CSS, таму можа быць скарыстаны любы сапраўдны CSS для кожнай уласцівасці."
+
+#: admin/options.php:1220
+msgid "Some example CSS properties values:"
+msgstr "Некаторыя прыклады значэнняў CSS:"
+
+#: admin/options.php:1223
+#: admin/options.php:1227
+msgid "Text size and line height:"
+msgstr "Памер тэксту і міжрадковы інтэрвал:"
+
+#: admin/options.php:1231
+msgid "Text weight:"
+msgstr "Тлустасць тэксту:"
+
+#: admin/options.php:1235
+msgid "Text style:"
+msgstr "Стыль тэксту:"
+
+#: admin/options.php:1239
+msgid "Text colour:"
+msgstr "Колер тэксту:"
+
+#: admin/options.php:1243
+#: admin/options.php:1389
+msgid "Leave field empty to use the default value."
+msgstr "Пакіньце поле пустым,каб выкарыстоўваць уласцівасць па змаўчанні."
+
+#: admin/options.php:1245
+msgid "Header Text"
+msgstr "Загаловак"
+
+#: admin/options.php:1249
+msgid "Title text font"
+msgstr "Шрыфт загалоўка"
+
+#: admin/options.php:1255
+#: admin/options.php:1261
+msgid "Title text weight"
+msgstr "Тлустасць тэксту загалоўка"
+
+#: admin/options.php:1267
+msgid "Title text line height"
+msgstr "Міжрадковы інтэрвал у загалоўку"
+
+#: admin/options.php:1273
+msgid "Title text style"
+msgstr "Стыль тэксту загалоўка"
+
+#: admin/options.php:1282
+#: admin/options.php:1288
+msgid "Description text size"
+msgstr "Памер тэксту апісання"
+
+#: admin/options.php:1294
+msgid "Description text weight"
+msgstr "Тлустасць тэксту апісання"
+
+#: admin/options.php:1300
+msgid "Description text line height"
+msgstr "Міжрадковы інтэрвал у апісанні"
+
+#: admin/options.php:1306
+msgid "Description text style"
+msgstr "Стыль тэксту апісання"
+
+#: admin/options.php:1312
+msgid "Content Text"
+msgstr "Утрыманне"
+
+#: admin/options.php:1316
+#: admin/options.php:1322
+#: admin/options.php:1328
+msgid "Text line height"
+msgstr "Міжрадковы інтэрвал"
+
+#: admin/options.php:1334
+msgid "Text colour"
+msgstr "Колер тэксту"
+
+#: admin/options.php:1344
+msgid "Link Text"
+msgstr "Тэкст спасылкі"
+
+#: admin/options.php:1348
+msgid "Link colour (normal state)"
+msgstr "Колер спасылкі (ненаведаны стан)"
+
+#: admin/options.php:1349
+msgid "Link colour (visited state)"
+msgstr "Колер спасылкі (наведаны стан)"
+
+#: admin/options.php:1350
+msgid "Link colour (hover state)"
+msgstr "Колер спасылкі (пры навядзенні)"
+
+#: admin/options.php:1367
+msgid "Text decoration (normal state)"
+msgstr "Афармленне тэксту(звычайны стан)"
+
+#: admin/options.php:1373
+msgid "Text decoration (hover state)"
+msgstr "Афармленне тэксту( пры навядзенні)"
+
+#: admin/options.php:1386
+msgid "Footer Widget Display Options"
+msgstr "Параметры адлюстравання ніжняга виджета"
+
+#: admin/options.php:1394
+msgid "Number of columns to display"
+msgstr "Колькасць слупкоў"
+
+#: admin/options.php:1401
+msgid "Number of columns to display for front page footer widget"
+msgstr "Колькасць слупкоў для ніжняга виджета галоўнай старонкі"
+
+#: admin/options.php:1415
+msgid "Navigation Menu Display Options"
+msgstr "Параметры меню навігацыі"
+
+#: admin/options.php:1421
+msgid "Dropdown menu item width"
+msgstr "Шырыня выпадальнага меню"
+
+#: admin/options.php:1427
+msgid "Description for default menu \"Home\" item"
+msgstr "Апісанне для меню па змаўчанні\"Хатняя старонка\""
+
+#: admin/options.php:1443
+msgid "Miscellaneous Display Options"
+msgstr "Розныя варыянты адлюстравання"
+
+#: admin/options.php:1446
+msgid "Site title options"
+msgstr "Налады назвы сайта"
+
+#: admin/options.php:1447
+msgid "Use these tags to customise your own site title structure: <code>#site-name</code>, <code>#site-desc</code>, <code>#post-title</code>"
+msgstr "Выкарыстоўвайце гэтыя тэгі,каб наладзіць структуру назвы сайта:<code>#site-name</code>, <code>#site-desc</code>, <code>#post-title</code>"
+
+#: admin/options.php:1451
+msgid "Custom front page site title"
+msgstr "Назва сайта на галоўнай старонцы карыстача"
+
+#: admin/options.php:1455
+msgid "Defaults to <code>#site-name &raquo; #site-desc</code>. The <code>#post-title</code> tag cannot be used here."
+msgstr "Па змаўчанні: <code>#site-name &raquo; #site-desc</code>.Тэг <code>#post-title</code> не можа быць тут скарыстаны"
+
+#: admin/options.php:1460
+msgid "Custom content pages site title"
+msgstr "Назва сайта на старонках утрымання"
+
+#: admin/options.php:1464
+msgid "Defaults to <code>#post-title &raquo; #site-name</code>."
+msgstr "Па змаўчанні:<code>#post-title &raquo; #site-name</code>."
+
+#: admin/options.php:1469
+msgid "Favicon options"
+msgstr "Налады фавикон"
+
+#: admin/options.php:1473
+#: admin/options.php:1477
+msgid "Simply enter the full URL to your favicon file here to enable favicon. Make sure you include the <code>http://</code> in front of the URL as well."
+msgstr "Проста ўвядзіце поўны URL для файла фавикон,каб актываваць фавикон.Пераканаецеся,што вы перад URL вы таксама ўвялі <code>http://</code>."
+
+#: admin/options.php:1489
+msgid "Custom CSS"
+msgstr "Карыстацкі CSS"
+
+#: admin/options.php:1494
+msgid "Custom CSS styles"
+msgstr "Стылі карыстацкага CSS"
+
+#: admin/options.php:1496
+msgid "You can enter your own CSS codes below to modify any other aspects of the theme's appearance that is not included in the options."
+msgstr "Ніжэй вы можаце ўвесці свой уласны код CSS,каб змяніць іншыя налады вонкавага выгляду,якія не ўключаны ў налады."
+
+#: admin/options.php:1512
+#: admin/options.php:1520
+msgid "<strong>Note:</strong> This is an experimental feature. Please report any problem at the <a href=\"http://forum.khairul-syahir.com/forum/bug-report\">Support Forum</a>."
+msgstr "<strong>Увага:</strong> Гэта эксперыментальная функцыя.Калі ласка,паведаміце пра ўзніклыя памылкі ў частцы <a href=\"http://forum.khairul-syahir.com/forum/bug-report\">Форум Падтрымкі</a>."
+
+#: admin/options.php:1522
+msgid "Choose a file from your computer:"
+msgstr "Абярыце файл на вашым кампутары:"
+
+#: admin/options.php:1522
+#, php-format
+msgid "Maximum size: %s"
+msgstr "Максімальны памер:%s"
+
+#: admin/options.php:1529
+msgid "Upload file and import"
+msgstr "Загрузіць файл і мипортировать"
+
+#: admin/uninstall.php:22
+#: admin/user.php:7
+#, php-format
+msgid "Graphene-specific User Profile Information"
+msgstr "Адмысловая інфармацыя профіля карыстача Grephene"
+
+#: admin/user.php:8
+msgid "The settings defined here are used only with the Graphene theme."
+msgstr "Зададзеныя параметры выкарыстоўваюцца толькі з Graphene theme."
+
+#: admin/user.php:12
+msgid "Author profile image URL"
+msgstr " URL малюнкі аўтара профіля"
+
+#: admin/user.php:13
+msgid "You can specify the image to be displayed as the author's profile image in the Author's page. If no URL is defined here, the author's <a href=\"http://www.gravatar.com\">Gravatar</a> will be used."
+msgstr "Вы можаце абраць малюнак,якое будзе адлюстроўвацца ў якасці малюнка аўтара профіля на старонцы аўтара.Калі не паказаны ніякі URL, тады будзе выкарыстоўвацца <a href=\"http://www.gravatar.com\">Gravatar</a>."
+
+#: admin/user.php:17
+msgid "Please enter the full URL (including <code>http://</code>) to your profile image."
+msgstr "Калі ласка,увядзіце поўны URL для малюнка профіля (уключаючы <code>http://</code>)."
+
+#: admin/user.php:17
+msgid "<strong>Important: </strong>Image width must be less than or equal to <strong>150px</strong>."
+msgstr "<strong>Важна: </strong>Шырыня малюнка павінна быць менш ці роўная <strong>150px</strong>."
+
+#: admin/validator.php:24
+msgid "ERROR: Invalid category to show in slider."
+msgstr "ПАМЫЛКА:Недапушчальная катэгорыя для паказу ў слайдары."
+
+#: admin/validator.php:27
+msgid "ERROR: You must specify the posts/pages to be displayed when you have \"Show specific posts/pages\" selected for the slider category."
+msgstr "ПАМЫЛКА:Вы павінны паказаць паведамленні/старонкі,якія будуць адлюстроўвацца, калі для катэгорыі слайдара ў вас абрана \"Паказваць вызначаныя паведамленні/старонкі\"."
+
+#: admin/validator.php:36
+msgid "ERROR: The number of posts to displayed in the slider must be a an integer value."
+msgstr "ПАМЫЛКА:Колькасць адлюстроўваных паведамленняў у слайдары павінна быць цэлым лікам."
+
+#: admin/validator.php:39
+msgid "ERROR: Invalid option for the slider image is specified."
+msgstr "ПАМЫЛКА:Паказаны недапушчальныя параметры для малюнка слайдара."
+
+#: admin/validator.php:41
+msgid "ERROR: Bad URL entered for the custom slider image URL."
+msgstr "ПАМЫЛКА:Уведзены няслушны URL для карыстацкага малюнка слайдара."
+
+#: admin/validator.php:43
+msgid "ERROR: Invalid option for the slider display style is specified."
+msgstr "ПАМЫЛКА:Паказаны недапушчальныя параметры для стылю паказу слайдара."
+
+#: admin/validator.php:45
+msgid "ERROR: The value for slider height must be an integer."
+msgstr "ПАМЫЛКА:Значэнне вышыні слайдара павінна быць цэлым лікам."
+
+#: admin/validator.php:47
+#: admin/validator.php:49
+msgid "ERROR: The value for slider transition speed must be an integer."
+msgstr "ПАМЫЛКА:Значэнне хуткасці прагорткі слайдара павінна быць цэлым лікам."
+
+#: admin/validator.php:63
+#: admin/validator.php:74
+msgid "ERROR: Invalid option for the type of content to show in homepage panes."
+msgstr "ПАМЫЛКА:Недапушчальныя параметры для адлюстравання змесціва на галоўнай старонцы"
+
+#: admin/validator.php:76
+msgid "ERROR: The value for the number of latest posts to display in homepage panes must be an integer."
+msgstr "ПАМЫЛКА:Значэнне апошніх паведамленняў,якія адлюстроўваюцца на галоўнай старонцы, павінна быць цэлым лікам."
+
+#: admin/validator.php:78
+msgid "ERROR: Invalid category selected for the latest posts to show from in the homepage panes."
+msgstr "ПАМЫЛКА:Абрана нелопустимая катэгорыя для паказу апошніх паведамленняў на галоўнай старонцы."
+
+#: admin/validator.php:90
+#: admin/validator.php:99
+#: admin/validator.php:116
+msgid "ERROR: Bad URL entered for the custom feed URL."
+msgstr "ПАМЫЛКА:Паказаны няслушны URL для Feed-URL."
+
+#: admin/validator.php:118
+msgid "ERROR: Bad URL entered for the Twitter URL."
+msgstr "ПАМЫЛКА:Паказаны няслушны URL для Twitter URL."
+
+#: admin/validator.php:120
+msgid "ERROR: Bad URL entered for the Facebook URL."
+msgstr "ПАМЫЛКА:Паказаны няслушны URL для Facebook URL."
+
+#: admin/validator.php:131
+msgid "ERROR: Bad URL entered for the social media icon URL."
+msgstr "ПАМЫЛКА:Паказаны няслушны URL для абразка сацыяльных сетак."
+
+#: admin/validator.php:132
+msgid "ERROR: Bad URL entered for the social media URL."
+msgstr "ПАМЫЛКА:Паказаны няслушны URL для сацыяльных сетак."
+
+#: admin/validator.php:147
+msgid "ERROR: Invalid option for the social sharing buttons location."
+msgstr "ПАМЫЛКА:Недапушчальныя параметры для месцавання кнопкі сацыяльных сетак."
+
+#: admin/validator.php:208
+msgid "ERROR: Invalid option for the Search box location."
+msgstr "ПАМЫЛКА: Недапушчальныя параметры для месцавання Search box."
+
+#: admin/validator.php:213
+msgid "ERROR: Invalid option for the column mode."
+msgstr "ПАМЫЛКА:Недапушчальныя параметры дзеля прыліку калонак."
+
+#: admin/validator.php:219
+msgid "ERROR: Invalid option for the post date display."
+msgstr "ПАМЫЛКА: Недапушчальныя параметры для адлюстравання даты паведамлення"
+
+#: admin/validator.php:278
+msgid "ERROR: The number of columns to be displayed in the footer widget must be a an integer value."
+msgstr "ПАМЫЛКА:Колькасць адлюстроўваных калонак павінна быць цэлым лікам."
+
+#: admin/validator.php:283
+msgid "ERROR: The width of the submenu must be a an integer value."
+msgstr "ПАМЫЛКА: Шырыня субменю павінна быць цэлым лікам."
+
+#: admin/validator.php:290
+msgid "ERROR: Bad URL entered for the favicon URL."
+msgstr "ПАМЫЛКА:Паказаны няслушны URL для фавикон."
+
+#: admin/js/admin.js.php:20
+msgid "Social Media name"
+msgstr "Сацыяльная сетка"
+
+#: admin/js/admin.js.php:23
+msgid "Name of the social media, e.g. LinkedIn, etc."
+msgstr "Назва сацыяльнай сеткі, LinkedIn і да т.п."
+
+#: admin/js/admin.js.php:27
+msgid "Social Media profile URL"
+msgstr "URL профіля сацыяльнай сеткі"
+
+#: admin/js/admin.js.php:30
+msgid "URL to your page for the social media."
+msgstr "URL для вашай старонкі ў сацыяльнай сетцы."
+
+#: admin/js/admin.js.php:34
+msgid "Social Media icon URL"
+msgstr "URL абразкі сацыяльнай сеткі"
+
+#: admin/js/admin.js.php:37
+#, php-format
+msgid "URL to the social media icon. <strong>Note:</strong> the theme uses the %s icon set for the social media icons. Please do not hotlink the icons on the site. Download the icons you need and upload them to your server instead."
+msgstr "URL абразкі сацыяльнай сеткі. <strong>Увага:</strong> гэта тэма выкарыстоўвае %s пакет абразкоў для сацыяльных сетак. Пожайлуста не выкарыстоўвайце абразка з іншых сайтаў на гэтай старонцы. Запампуйце абразкі і загрузіце іх на сервер."
+
+#, php-format
+#~ msgid "Valid XHTML 1.0 Strict"
+#~ msgstr "Дапушчальны XHTML 1.0 Strict"
+
+#~ msgid "Valid CSS"
+#~ msgstr "Дапушчальны CSS"
+
+#~ msgid "Valid CSS Level 2.1"
+#~ msgstr"Дапушчальны CSS Level 2.1"
+
+#~ msgid "%1$s uses %2$s theme by %3$s."
+#~ msgstr "%1$s выкарыстоўвае %2$s тэму %3$s."
+
+#~ msgid "URL to your profile page for the social media."
+#~ msgstr " URL для вашай старонкі профіля ў сацыяльнай сетцы."
+
+#~ msgid "Visit Facebook page"
+#~ msgstr"Перайсці на старонку Facebook"
+
+#~ msgid "Feed Options"
+#~ msgstr "Налады вэб-канала"
+
+#~ msgid "No comment yet"
+#~ msgstr"Без каментароў"
+
+#~ msgid "No ping yet"
+#~ msgstr "Няма пінгу"
+
+#~ msgid ""
+#~ "Please enter only numerical value for the footer widget column count."
+#~ msgstr ""
+#~ "Калі ласка,увядзіце лікавае значэнне слупкоў для ніжняга гаджэта."
+
+#~ msgid ""
+#~ "Please enter only numerical value for the front page footer widget column "
+#~ "count."
+#~ msgstr ""
+#~ "Калі ласка,увядзіце лікавае значэнне для ніжняга гаджэта галоўнай старонкі."
+
+#~ msgid ""
+#~ "Please enter only numerical value for the navigation menu dropdown item "
+#~ "width."
+#~ msgstr "Калі ласка,увядзіце лікавае значэнне для навігацыі выпадальнага меню."
+
+#~ msgid "Graphene Display Options"
+#~ msgstr "Параметры прагляду Graphene"
+
+#~ msgid "ERROR:"
+#~ msgstr"ПАМЫЛКА:"
+
+#~ msgid "Sidebar Options"
+#~ msgstr "Параметры бакавой панэлі"
+
+#~ msgid "Content sidebar location"
+#~ msgstr "Месцаванне бакавой панэлі"
+
+#~ msgid "Right"
+#~ msgstr "Права"
+
+#~ msgid "Left"
+#~ msgstr"Лево"
+
+#~ msgid "Hide sidebar"
+#~ msgstr "Схаваць бакавую панэль"
+
+#~ msgid ""
+#~ "Will cause all posts and pages to be displayed in a single-column layout."
+#~ msgstr "Усе паведамленні і старонкі будуць адлюстроўвацца ў адной калонцы."
+
+#~ msgid "Hide post date"
+#~ msgstr "Не паказваць дату паведамлення"
+
+#~ msgid "Show post year"
+#~ msgstr "Паказваць год паведамлення"
+
+#~ msgid "Only works if the option \"Hide post date\" is disabled."
+#~ msgstr ""
+#~ "Даступна толькі,калі ўключана опцыя \"Не паказваць дату паведамлення\"."
+
+#~ msgid ""
+#~ "<code>arial</code>, <code>tahoma</code>, <code>georgia</code>, "
+#~ "<code>'Trebuchet MS'</code>"
+#~ msgstr ""
+#~ "<code>arial</code>, <code>tahoma</code>, <code>georgia</code>, "
+#~ "<code>'Trebuchet MS'</code>"
+
+#~ msgid "<code>12px</code>, <code>12pt</code>, <code>12em</code>"
+#~ msgstr "<code>12px</code>, <code>12pt</code>, <code>12em</code>"
+
+#~ msgid ""
+#~ "<code>normal</code>, <code>bold</code>, <code>100</code>, <code>700</code>"
+#~ msgstr ""
+#~ "<code>normal</code>, <code>bold</code>, <code>100</code>, <code>700</code>"
+
+#~ msgid " <code>normal</code>, <code>italic</code>, <code>oblique</code>"
+#~ msgstr " <code>normal</code>, <code>italic</code>, <code>oblique</code>"
+
+#~ msgid ""
+#~ "<code>blue</code>, <code>navy</code>, <code>red</code>, <code>#ff0000</"
+#~ "code>"
+#~ msgstr ""
+#~ "<code>blue</code>, <code>navy</code>, <code>red</code>, <code>#ff0000</"
+#~ "code>"
+
+#~ msgid "Swap title order"
+#~ msgstr "Змяніць парадак назвы"
+
+#~ msgid ""
+#~ "If this is checked, the website title will be displayed first, followed "
+#~ "by the page title."
+#~ msgstr ""
+#~ "Пасля праверкі спачатку будзе адлюстроўвацца назва сайта,затым назва старонкі"
+
+#~ msgid "Update Settings"
+#~ msgstr "Абнавіць налады"
+
+#~ msgid "You must enter your Adsense code to enable Adsense advertising"
+#~ msgstr "Неабходна ўвесці Adsense код,каб актываваць рэкламу Adsense"
+
+#~ msgid ""
+#~ "You must enter your AddThis button code to enable the AddThis social "
+#~ "sharing button"
+#~ msgstr ""
+#~ "Неабходна ўвесці AddThis код,каб актываваць кнопку сацыяльных дзеянняў AddThis"
+
+#~ msgid ""
+#~ "You must enter your Google Analytics tracking code to enable Google "
+#~ "Analytics tracking."
+#~ msgstr ""
+#~ "Неабходна ўвесці Google Analytics tracking код,каб актываваць Google"
+
+#~ msgid ""
+#~ "This setting only affects the slider if \"Show latest posts\" is selected "
+#~ "above."
+#~ msgstr ""
+#~ "Гэтыя налады сапраўдныя для слайдара толькі калі абрана \"Паказваць апошнія паведамленні\""
+
+#~ msgid "AddThis Options"
+#~ msgstr "Параметры AddThis"
+
+#~ msgid "Your AddThis button code"
+#~ msgstr "Ваш код кнопкі AddThis"
+
+#~ msgid ""
+#~ "You can generate your button code from the <a href=\"http://www.addthis."
+#~ "com/\">AddThis website</a>."
+#~ msgstr ""
+#~ "Вы можаце абраць выпадковы код кнопкі на <a href=\"http://www.addthis."
+#~ "com/\">AddThis website</a>."

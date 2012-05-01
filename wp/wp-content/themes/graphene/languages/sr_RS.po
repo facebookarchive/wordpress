@@ -1,0 +1,2370 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Graphene 1.6b theme for WordPress\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-21 21:34+1200\n"
+"PO-Revision-Date: 2012-01-30 14:27+0100\n"
+"Last-Translator: Boban Svemoguci <svemoguci.bob@hotmail.com>\n"
+"Language-Team: Balkanboy Media <hello@balkanboymedia.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;esc_attr_e;esc_attr__\n"
+"X-Poedit-Basepath: D:\\MyVault\\MyProjects\\Websites\\theme-graphene\\site\\wp-content\\themes\\graphene\\\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: YUGOSLAVIA\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: 404.php:25
+#, php-format
+msgid "Searching for: <span>%s</span>"
+msgstr "Pretraga: <span>%s</span>"
+
+#: 404.php:31
+msgid "Error 404 - Page Not Found"
+msgstr "Greška 404 - Stranica Nije Nađena"
+
+#: 404.php:33
+msgid "Sorry, I've looked everywhere but I can't find the page you're looking for."
+msgstr "Izvinite, tražio sam svuda ali nisam našao stranicu koju tražite"
+
+#: 404.php:34
+msgid "If you follow the link from another website, I may have removed or renamed the page some time ago. You may want to try searching for the page:"
+msgstr "Ako pratite link sa drugog sajta, možda je pomeren ili je stranica preimenovana  pre izvesnog vremena. Možda želite da pretražujete stranicu:"
+
+#: 404.php:42
+msgid "Automated search"
+msgstr "Automatska pretraga"
+
+#: 404.php:45
+#, php-format
+msgid "Searching for the terms <strong>%s</strong> ..."
+msgstr "Pretraga termina <strong>%s</strong> ..."
+
+#: archive.php:24
+#, php-format
+msgid "Daily Archive: %s"
+msgstr "Dnevna arhiva: %s"
+
+#: archive.php:26
+#, php-format
+msgid "Monthly Archive: %s"
+msgstr "Mesečna arhiva: %s"
+
+#. translators: F will be replaced with month, and Y will be replaced with year, so "F Y" in English would be replaced with something like "June 2008".
+#: archive.php:28
+msgid "F Y"
+msgstr "F Y"
+
+#: archive.php:30
+#, php-format
+msgid "Yearly Archive: %s"
+msgstr "Godišnja arhiva: %s"
+
+#: archive.php:40
+#, php-format
+msgid "%1$s Archive: <span>%2$s</span>"
+msgstr "%1$s Arhiva: <span>%2$s</span>"
+
+#: archive.php:43
+msgid "Blog Archive"
+msgstr "Blog arhiva"
+
+#: author.php:32
+msgid "Author's posts listings"
+msgstr "Autorovi listinzi članaka"
+
+#: category.php:13
+#, php-format
+msgid "Category Archive: <span>%s</span>"
+msgstr "Arhiva kategorije: %s"
+
+#: comments.php:25
+msgid "This post is password protected. Enter the password to view any comments."
+msgstr "Ovaj članak je zaštićen šifrom. Ukucajte šifru da vidite komentare."
+
+#: comments.php:49
+#: loop-author.php:85
+#: loop.php:166
+#, php-format
+msgid "1 comment"
+msgid_plural "%d comments"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:51
+#, php-format
+msgid "1 ping"
+msgid_plural "%d pings"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:109
+msgid "Comments have been disabled."
+msgstr "Komentari su onemogućeni"
+
+#: comments.php:126
+#, php-format
+msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes: %s"
+msgstr "Možete koristiti sledeće <abbr title=\"HyperText Markup Language\">HTML</abbr> tagove i atribute: %s"
+
+#: comments.php:131
+msgid "Your email address will not be published."
+msgstr "Vaša email adresa neće biti obavljena."
+
+#: comments.php:134
+msgid "Submit Comment"
+msgstr "Postaviti Komentar"
+
+#: footer.php:41
+msgid "Copyright"
+msgstr "Autorska prava"
+
+#. translators: %s will replaced by a link to the Creative Commons licence page, with "Creative Commons Licence" as the link text.
+#: footer.php:56
+#, php-format
+msgid "Except where otherwise noted, content on this site is licensed under a %s."
+msgstr "Osim kada je drugačije naznačeno, sadržaj ovog sajta je licenciran pod %s."
+
+#: footer.php:56
+msgid "Creative Commons Licence"
+msgstr "Creative Commons Licenca"
+
+#: footer.php:58
+msgid "Creative Commons Licence BY-NC-ND"
+msgstr "Creative Commons Licenca BY-NC-ND"
+
+#: footer.php:79
+msgid "Return to top"
+msgstr "Vratite se na vrh stranice"
+
+#. translators: %1$s is the link to WordPress.org, %2$s is the theme's name
+#: footer.php:89
+#, php-format
+msgid "Powered by %1$s and the %2$s."
+msgstr "Omogućeno od strane %1$s i %2$s"
+
+#: footer.php:89
+msgid "Graphene Theme"
+msgstr "Graphene Tema"
+
+#: header.php:36
+#, php-format
+msgid "Subscribe to %s's RSS feed"
+msgstr "Pretplatite se na $s RSS feed"
+
+#: header.php:36
+msgid "Subscribe to RSS feed"
+msgstr "Pretplatite se na RSS feed"
+
+#: header.php:82
+#: header.php:102
+msgid "Go back to the front page"
+msgstr "Vratite se na početnu stranicu"
+
+#: loop-author.php:23
+msgid "Author's details"
+msgstr "Podaci o autoru"
+
+#. translators: %1$s is the first name, %2$s is the last name
+#: loop-author.php:25
+#, php-format
+msgid "<strong>Name:</strong> %1$s %2$s"
+msgstr "<strong>Ime:</strong> %1$s %2$s"
+
+#: loop-author.php:26
+#, php-format
+msgid "<strong>Date registered:</strong> %1$s"
+msgstr "<strong>Datum registracije:</strong> %1$s"
+
+#: loop-author.php:35
+msgid "Biography"
+msgstr "Biografija"
+
+#: loop-author.php:52
+msgid "Latest posts"
+msgstr "Poslednji članci"
+
+#: loop-author.php:55
+#: loop-author.php:85
+#, php-format
+msgid "Permalink Link to %s"
+msgstr "Link stalne veze do %s"
+
+#: loop-author.php:55
+#: loop-author.php:85
+#: loop-children.php:45
+#: loop-page.php:8
+#: loop-page.php:35
+#: loop-post-formats.php:36
+#: loop-single.php:67
+#: loop.php:31
+#: loop.php:66
+msgid "(No title)"
+msgstr "(bez naslova)"
+
+#: loop-author.php:92
+msgid "Most commented posts"
+msgstr "Najvise komentarisani članci"
+
+#: loop-children.php:45
+#: loop-children.php:53
+#: loop-post-formats.php:36
+#: loop.php:65
+#: loop.php:134
+#, php-format
+msgid "Permalink to %s"
+msgstr "Link stalne veze do %s"
+
+#: loop-children.php:53
+msgid "View page &raquo;"
+msgstr "Pogledajte stranicu &raquo;"
+
+#: loop-not-found.php:3
+msgid "Not found"
+msgstr "Nije pronadjeno"
+
+#: loop-not-found.php:8
+msgid "Sorry, but you are looking for something that isn't here. Wanna try a search?"
+msgstr "Izvinjavamo se, ali tražite nešto čega ovde nema. Želite li da pokušate sa pretragom?"
+
+#: loop-not-found.php:10
+msgid "Sorry, but no results were found for that keyword. Wanna try an alternative keyword search?"
+msgstr "Izvinjavamo se, ali nema rezultata za ove ključne reči. Želite da pokušate pretragu sa alternativnim ključnim rečima?"
+
+#: loop-page.php:23
+#: loop-page.php:24
+#, php-format
+msgid "Print this %s"
+msgstr "Odštampajte %s"
+
+#: loop-page.php:45
+#: loop-single.php:83
+#: loop.php:85
+#, php-format
+msgid "Edit %s"
+msgstr "Edituj %s"
+
+#: loop-page.php:66
+#: loop-single.php:122
+#: loop.php:148
+msgid "Pages:"
+msgstr "Stranice:"
+
+#: loop-page.php:90
+#: loop-post-formats.php:89
+#: loop-single.php:172
+#: loop.php:179
+msgid "Permanent link to this article:"
+msgstr "Trajni link do ovog članka:"
+
+#: loop-post-formats.php:15
+msgid "Status update"
+msgstr "Ažuriranje statusa"
+
+#: loop-post-formats.php:16
+msgid "Audio"
+msgstr "Audio"
+
+#: loop-post-formats.php:17
+msgid "Image"
+msgstr "Slika"
+
+#: loop-post-formats.php:18
+msgid "Video"
+msgstr "Video"
+
+#: loop-post-formats.php:19
+msgid "Post format"
+msgstr "Format članka"
+
+#. translators: This is the PHP date formatting string for the status post format. See http://php.net/manual/en/function.date.php for more details.
+#: loop-post-formats.php:32
+msgid "l F j, Y"
+msgstr "l F j, Y"
+
+#: loop-post-formats.php:32
+msgid "g:i A"
+msgstr "g:i A"
+
+#: loop-post-formats.php:42
+msgid "Edit post"
+msgstr "Izmeniti članak"
+
+#. translators: This is the PHP date formatting string for the image post format. See http://php.net/manual/en/function.date.php for more details.
+#: loop-post-formats.php:77
+#, php-format
+msgid "Posted on: %s"
+msgstr "Postavljeno na: %s"
+
+#: loop-post-formats.php:77
+msgid "F j, Y"
+msgstr "F j, Y"
+
+#: loop-single.php:76
+#: loop.php:78
+msgid "Categories:"
+msgstr "Kategorije:"
+
+#: loop-single.php:98
+#: loop.php:102
+#, php-format
+msgid "by %s"
+msgstr "od %s"
+
+#: loop-single.php:132
+#: loop.php:158
+msgid "Tags:"
+msgstr "Oznake:"
+
+#: loop-single.php:132
+#: loop.php:158
+msgid "This post has no tag"
+msgstr "Ovaj članak nema oznaku"
+
+#: loop-single.php:153
+msgid "About the author"
+msgstr "O autoru"
+
+#: loop.php:127
+msgid "Read the rest of this entry &raquo;"
+msgstr "Pročitajte ostatak ovog članka &raquo;"
+
+#: loop.php:166
+msgid "Leave comment"
+msgstr "Ostavite komentar"
+
+#: loop.php:166
+msgid "Comments off"
+msgstr "Komentari su isključeni"
+
+#: search-404.php:14
+msgid "Suggested results"
+msgstr "Predloženi rezultati"
+
+#. translators: %s is the search term
+#: search-404.php:18
+#, php-format
+msgid "I've done a courtesy search for the term %s for you. See if you can find what you're looking for in the list below:"
+msgstr "Pretražili smo termin %s za Vas. Pogledajte da li možete naći ono što tražite u listi ispod:"
+
+#: search-404.php:35
+msgid "<strong>Sorry, couldn't find anything.</strong> Try searching for alternative terms using the search form above."
+msgstr "<strong>Izvinite, ne možemo ništa da nadjemo.</strong> Pokušajte da tražite alternativne termine koristeći pretragu iznad."
+
+#: search.php:10
+#, php-format
+msgid "Search results for: %s"
+msgstr "Rezultati pretrage za: %s"
+
+#: searchform.php:3
+#: searchform.php:4
+msgid "Search"
+msgstr "Petraga"
+
+#: sidebar-two.php:35
+#: sidebar.php:41
+msgid "Meta"
+msgstr "Meta"
+
+#: sidebar-two.php:40
+#: sidebar.php:46
+msgid "Posts RSS"
+msgstr "Meta"
+
+#: sidebar-two.php:41
+#: sidebar.php:47
+msgid "Comments RSS"
+msgstr "RSS Komentara"
+
+#. translators: %s is the link to wordpress.org
+#: sidebar-two.php:43
+#: sidebar.php:49
+#, php-format
+msgid "Powered by %s"
+msgstr "Omogućeno od strane %s"
+
+#: sidebar-two.php:43
+#: sidebar.php:49
+msgid "Powered by WordPress, state-of-the-art semantic personal publishing platform."
+msgstr "Omogućeno od strane WordPress, state-of-the-art semantic personal publishing platform."
+
+#: sidebar-two.php:48
+#: sidebar.php:34
+msgid "Archives"
+msgstr "Arhive"
+
+#: tag.php:13
+#, php-format
+msgid "Tag Archive: <span>%s</span>"
+msgstr "Arhiva oznake: <span>%s</span>"
+
+#: admin/custom-fields.php:14
+msgid "Graphene post-specific options"
+msgstr "Odredjene opcije Graphene članka"
+
+#: admin/custom-fields.php:15
+msgid "Graphene page-specific options"
+msgstr "Odredjene opcije Graphene stranice"
+
+#: admin/custom-fields.php:97
+msgid "These settings will only be applied to this particular post or page you're editing. They will override the global settings set in the Graphene Options or Graphene Display options page."
+msgstr "Ova podešavanja će važiti samo za odredjene članke ili stranicu koju prepravljate. Ona će presnimiti globalna podešavanja na stranici podešena u Graphene Opcijama ili Graphene stranici Opcije prikazivanja."
+
+#: admin/custom-fields.php:98
+msgid "Slider options"
+msgstr "Slider opcije"
+
+#: admin/custom-fields.php:102
+msgid "Slider image"
+msgstr "Slajder slika"
+
+#: admin/custom-fields.php:106
+#: admin/custom-fields.php:132
+#: admin/custom-fields.php:146
+msgid "Use global setting"
+msgstr "Koristite globalno podešavanje"
+
+#: admin/custom-fields.php:107
+msgid "Don't show image"
+msgstr "Ne prikazuj sliku"
+
+#: admin/custom-fields.php:108
+msgid "Featured Image"
+msgstr "Izdvojena slika"
+
+#: admin/custom-fields.php:109
+msgid "First image in post"
+msgstr "Prva slika u članku"
+
+#: admin/custom-fields.php:110
+msgid "Custom URL"
+msgstr "Prilagođen URL"
+
+#: admin/custom-fields.php:116
+msgid "Custom slider image URL"
+msgstr "URL prilagođene slike slajdera"
+
+#: admin/custom-fields.php:120
+msgid "Make sure you select Custom URL in the slider image option above to use this custom url."
+msgstr "Proverite da li ste odabrali Prilagođen URL u opciji slajder slika da biste koristili prilagodjen URL"
+
+#: admin/custom-fields.php:124
+msgid "Display options"
+msgstr "Opcije prikazivanja"
+
+#: admin/custom-fields.php:128
+msgid "AddThis Social Sharing button"
+msgstr "AddThis Social Sharing dugme"
+
+#: admin/custom-fields.php:133
+msgid "Show button"
+msgstr "Prikažite dugme"
+
+#: admin/custom-fields.php:134
+msgid "Hide button"
+msgstr "Sakrijte dugme"
+
+#: admin/custom-fields.php:142
+msgid "Post date display"
+msgstr "Prikaz datuma članka"
+
+#: admin/custom-fields.php:147
+msgid "Hide date"
+msgstr "Sakrijte datum"
+
+#: admin/custom-fields.php:155
+msgid "Navigation options"
+msgstr "Opcije za navigaciju"
+
+#: admin/custom-fields.php:159
+msgid "Description"
+msgstr "Opis"
+
+#: admin/custom-fields.php:163
+msgid "Only required if you need a description in the navigation menu and you are not using a custom menu."
+msgstr "Zahteva se samo ako je potreban opis u meniju navigacije i ako ne koristite prilagođeni meni."
+
+#: admin/faq.php:11
+msgid "Graphene's Frequently Asked Questions"
+msgstr "Graphene često postavljena pitanja"
+
+#: admin/faq.php:14
+msgid "Where should I go for the theme's support?"
+msgstr "Koj sajt da posetim za podršku u vezi teme?"
+
+#: admin/faq.php:15
+msgid "Please direct all support requests for the theme at the theme's <a href=\"http://forum.khairul-syahir.com/graphene-wordpress-theme/\">Support Forum</a>."
+msgstr "Molimo Vas sve tehničke zahteve teme prosledite na <a href=\"http://forum.khairul-syahir.com/graphene-wordpress-theme/\"> na Forum za podršku </a>."
+
+#: admin/faq.php:18
+msgid "The post's featured image is replacing my header image. Help!"
+msgstr "Izdvojena slika članka menja moju sliku zaglavlja. Pomozite!"
+
+#: admin/faq.php:19
+msgid "This is actually one of the theme's features, based on the feature in the default TwentyTen theme. Any featured image that has a size of greater than or equal to the theme's header image size (960 x 198 pixels) will replace the header image when the post/page that featured image is assigned to is being displayed. It enables you to have different header image for different posts and/or pages."
+msgstr "Ovo je u stvari jedna od opcija teme, bazirane na opciji u podrazumevanoj TwentyTen temi. Bilo koja izdvojena slika koje je veća ili je iste veličine kao slika zaglavlja (960 x 198 piksela) zameniće sliku zaglavlja kada članak/stranica kojoj je opcija slike dodeljena će biti prikazana. To omogućava da imate različitu header sliku za različite postove i/ili stranice."
+
+#: admin/faq.php:20
+msgid "If you want to disable this feature, simply tick the <em>Disable Featured Image replacing header image</em> option in the <a href=\"themes.php?page=graphene_options&tab=display\">Graphene Options</a> page, under Display &gt; Header Display Options."
+msgstr "Ako želite da onemogućite ovu opciju, jednostavno označite <em>Isključi izdvojenu sliku i zameni slikom zaglavlja</em> opciju u <a href=\"themes.php?page=graphene_options&tab=display\">Graphene Opcije</a> stranici, pod Prikaz > Opcije prikazivanja zaglavlja."
+
+#: admin/faq.php:23
+msgid "Can I modify Graphene to my heart's content without paying anything?"
+msgstr "Mogu li da modifikujem Graphene temu kako mi srce želi bez da bilo šta platim?"
+
+#: admin/faq.php:24
+msgid "The Graphene WordPress theme, along with all the other themes in the WordPress.org Official Free Themes Directory, is released under the GNU General Public License (GPL) Version 2. The full text of that licence is included with the theme in the <code>licence.txt</code> file in the theme's folder. Releasing the theme under that licence means, among others, that you are <em>free to modify the theme in any way for any purpose (including commercial)</em> without any obligation to the theme's author. However, if you decide to redistribute the theme, the licence dictates that you must release the theme under the same licence, GPLv2."
+msgstr "Graphene WordPress tema, zajedno sa ostalim temama u WordPress.org Official Free Themes Directory, je objavljeno pod GNU General Public License (GPL) Version 2. Kompletan tekst licence je uključen u temu u  <code>licence.txt</code> fajl u folderu teme. Objavljivanje teme pod licencom znači, izmedju ostalog, da ste <em> slobodni da modifikujete temu na bilo koj način ili u bilo koje svrhe ( uključujući komercijalne)</em> bez ikakvih obligacija prema autora teme, licenca diktira da morate objaviti temu pod istom licencom, GPLv2."
+
+#: admin/faq.php:25
+msgid "But of course, the author would always appreciate <a href=\"themes.php?page=graphene_options\">donations</a> to support ongoing and future developments of the theme."
+msgstr "Ali naravno , autor bi uvek cenio <a href=\"themes.php?page=graphene_options\">donaciju</a> da podrži tekuće i buduće razvoje teme."
+
+#: admin/faq.php:28
+msgid "If the theme is released under GPLv2, what is this Creative Commons licence in the theme's footer?"
+msgstr "Ako je tema objavljena pod GPLv2, šta je onda Creative Commons licence u podnožju teme?"
+
+#: admin/faq.php:29
+msgid "The Creative Commons licence is a popular licence nowadays that are used by a lot of web-based content authors to licence their work such that it protects their intellectual property but in the same time allows its free distribution. It is included with the theme simply to make it easy for the theme's users to make use of the licence for the content they publish. Theme users can remove it altogether via the theme's Options page should they wish not to use it."
+msgstr "The Creative Commons licenca je popularna licenca današnjice koja se koristi od strane mnogih autora stranica koje se baziraju na web sadržaju da licenciraju svoj rad tako što štite intelektualnu svojinu ali u isto vreme omogućavaju slobodnu distribuciju. To je uključeno u temu jednostavno da omogući korisnicima teme lakše korišćenje licence za sadržaj koji objavljuju. Korisnici tema mogu da je uklone zajedno preko teme stranice Opcija ako ne žele da je koriste."
+
+#: admin/faq.php:30
+msgid "Put simply, <em>it is not the licence that is applied for the theme itself</em>, but just for the website's content should the theme user wants to use it."
+msgstr "Ubacite jednostavno, <em> to nije licenca koja se primenjuje za samu temu </em>, već za sadržaj vebsajta koji korisnik teme želi da upotrebi. "
+
+#: admin/faq.php:33
+msgid "Is the theme compatible with this plugin or that plugin?"
+msgstr "Da li je tema kompatibilna sa ovim ili onim dodatkom?"
+
+#: admin/faq.php:34
+msgid "I don't know. With so many plugins available for WordPress, there's no way that I (or anybody else for that matter) can test for compatibility for all of them. Having said that, the theme is built with all the necessary WordPress components included with it, so chances are most plugins will be compatible with the theme."
+msgstr "Ne znam. Sa toliko dodataka-ova dostupnih za WordPress, nije moguće da ja (ili bilo ko drugi u ove svrhe) može da testira kompatibilnost za sve njih. Takoreći, tema je napravljena sa svim potrebnim WordPress komponentama koje su uključene, tako da je većina  dodataka-ova kompatibilna sa temom.   "
+
+#: admin/faq.php:35
+msgid "My suggestion is to just install the plugin and try it. If you stumble into problem, ask for support from the plugin author first. If the plugin author says that it's a problems with the theme, you know where to find support."
+msgstr "Moja sugestija je da samo instalirate i probate. Ako naletite na problem, potražite pomoć od autora dodatka prvo. Ako autor dodatka kaže da je problem u temi, znate gde da nadjete podršku. "
+
+#: admin/feature-pointers.php:8
+msgid "Where are all the options?!"
+msgstr "Gde su sve opcije?"
+
+#: admin/feature-pointers.php:9
+msgid "We've decided to clean things up!"
+msgstr "Rešili smo da raščistimo stvari"
+
+#: admin/feature-pointers.php:10
+msgid "We know how too many options can really be daunting to new users, so we've hidden them."
+msgstr "Znamo da previše opcija ume da obeshrabri nove korisnike, zato smo ih sakrili."
+
+#: admin/feature-pointers.php:11
+msgid "But no worries! If you're a seasoned user of the Graphene theme, or whenever you feel ready to further customise your site, just click on the \"Show all options\" link, and they will magically appear to you."
+msgstr "Ali bez brige! Ako ste povremeni korisnik Graphene teme, ili kad god odlučite da više preuredjujete svoj sajt, samo kliknite na \"Prikaži sve opcije\", i one će vam se prikazati odmah."
+
+#: admin/options-advanced.php:12
+#: admin/options.php:350
+msgid "Preview"
+msgstr "Pregled"
+
+#: admin/options-advanced.php:19
+msgid "Enable preview of your site on the Graphene Theme Options page"
+msgstr "Uključi pregled promena svog sajta na Graphene stranici Opcije prikaza"
+
+#: admin/options-advanced.php:31
+msgid "Action Hooks Widget Areas"
+msgstr "Action Hooks Widget polja"
+
+#: admin/options-advanced.php:34
+msgid "This option enables you to place virtually any content to every nook and cranny in the theme, by attaching widget areas to the theme's action hooks."
+msgstr "Ova opcija Vam omogućava da virtualno postavite bilo koji sadržaj bilo gde, na taj način što ćete postaviti vidžet polja na action hooks teme."
+
+#: admin/options-advanced.php:35
+msgid "All action hooks available in the Graphene Theme are listed below. Click on the filename to display all the action hooks available in that file. Then, tick the checkbox next to an action hook to make a widget area available for that action hook."
+msgstr "Svi action hook-ovi u Graphen temi su dostupne u listi ispod. Kliknite na ime fajla da prikažete sve action hook-ove dostupne u fajlu. Zatim, označite checkbox do action hook-a da napravite vidžet polje dostupno za action hook."
+
+#: admin/options-advanced.php:44
+msgid "Click to show/hide the action hooks for this file"
+msgstr "Klikni prikaži/sakrij action hooks za ovaj fajl"
+
+#: admin/options-advanced.php:56
+msgid "Rescan action hooks"
+msgstr "Skenirajte ponovo action hooks"
+
+#: admin/options-display.php:13
+msgid "Header Display Options"
+msgstr "Opcije prikaza zaglavlja"
+
+#: admin/options-display.php:19
+msgid "Use light-coloured header bars"
+msgstr "Koristi svetle boje za bar zaglavlja"
+
+#: admin/options-display.php:25
+msgid "Link header image to front page"
+msgstr "Linkuj sliku zaglavlja do početne stranice "
+
+#: admin/options-display.php:28
+msgid "Check this if you disable the header texts and want the header image to be linked to the front page."
+msgstr "Štiklirajte ovo ukoliko ste isključili tekst zaglavlja i želite da slika zaglavlja linkuje početnu stranicu."
+
+#: admin/options-display.php:33
+msgid "Disable Featured Image replacing header image"
+msgstr "Isključi da izdvojena slika zamenjuje sliku zaglavlja"
+
+#: admin/options-display.php:36
+msgid "Check this to prevent the posts Featured Image replacing the header image regardless of the featured image dimension."
+msgstr "Štiklirajte ovo kako bi ste sprečili izdvojenu sliku članka da zameni sliku zaglavlja bez obzira na dimenzije izdvojene slike."
+
+#: admin/options-display.php:41
+msgid "Use random header image"
+msgstr "Koristi nasumičnu sliku zaglavlja"
+
+#: admin/options-display.php:45
+msgid "Check this to show a random header image (random image taken from the available default header images)."
+msgstr "Štiklirajte ovo da prikažete nasumičnu sliku zaglavlja (nasumična slika je uzeta iz dostupnih predefinisanih slika zaglavlja)."
+
+#: admin/options-display.php:46
+msgid "<strong>Note:</strong> only works on pages where a specific header image is not defined."
+msgstr "<strong>Napomena:</strong> radi samo na stranicama gde nije definisana slika zaglavlja. "
+
+#: admin/options-display.php:52
+msgid "Search box location"
+msgstr "Lokacija polja za pretraživanje"
+
+#: admin/options-display.php:56
+msgid "Top bar"
+msgstr "Top bar"
+
+#: admin/options-display.php:57
+msgid "Navigation bar"
+msgstr "Bar za navigaciju"
+
+#: admin/options-display.php:58
+msgid "Disable search box"
+msgstr "Isključi box za pretragu"
+
+#: admin/options-display.php:71
+msgid "Column Options"
+msgstr "Opcije kolona"
+
+#: admin/options-display.php:77
+msgid "Column mode"
+msgstr "Mod kolona"
+
+#: admin/options-display.php:86
+#: admin/options-display.php:131
+msgid "One column"
+msgstr "Jedna kolona"
+
+#: admin/options-display.php:93
+#: admin/options-display.php:138
+msgid "Two columns (with sidebar right)"
+msgstr "Dve kolone( sa sajdbarom desno)"
+
+#: admin/options-display.php:97
+#: admin/options-display.php:142
+msgid "Two columns (with sidebar left)"
+msgstr "Dve kolone( sa sajdbarom levo)"
+
+#: admin/options-display.php:104
+#: admin/options-display.php:149
+msgid "Three columns (with two sidebars right)"
+msgstr "Tri kolone (sa dva sajdbara desno)"
+
+#: admin/options-display.php:108
+#: admin/options-display.php:153
+msgid "Three columns (with two sidebars left)"
+msgstr "Tri kolone (sa dva sajdbara levo)"
+
+#: admin/options-display.php:112
+#: admin/options-display.php:157
+msgid "Three columns (with sidebars left and right)"
+msgstr "Tri kolone (sa sajdbarovima levo i desno)"
+
+#: admin/options-display.php:122
+msgid "bbPress column mode"
+msgstr "bbPress mod kolona"
+
+#: admin/options-display.php:173
+msgid "Column Width Options"
+msgstr "Opcije širine kolone"
+
+#: admin/options-display.php:176
+msgid "Note: Leave values empty to reset to the default values."
+msgstr "Napomena: Ostavite prazne vrednosti da resetujete na predefinisane vrednosti"
+
+#: admin/options-display.php:180
+msgid "Container width"
+msgstr "Širina container-a"
+
+#: admin/options-display.php:197
+#: admin/options-display.php:220
+msgid "Column width"
+msgstr "Širina kolone"
+
+#: admin/options-display.php:197
+msgid "two-column mode"
+msgstr "Mod sa dve kolone"
+
+#: admin/options-display.php:201
+#: admin/options-display.php:228
+msgid "Content"
+msgstr "Sadržaj"
+
+#: admin/options-display.php:205
+msgid "Sidebar"
+msgstr "Sajdbar"
+
+#: admin/options-display.php:220
+msgid "three-column mode"
+msgstr "Mod sa tri kolone"
+
+#: admin/options-display.php:224
+msgid "Left sidebar"
+msgstr "Levi sajdbar"
+
+#: admin/options-display.php:232
+msgid "Right sidebar"
+msgstr "Desni sajdbar"
+
+#: admin/options-display.php:253
+msgid "Posts Display Options"
+msgstr "Opcije prikazivanja članka"
+
+#: admin/options-display.php:259
+msgid "Hide post author"
+msgstr "Sakrij autora članka"
+
+#: admin/options-display.php:269
+msgid "Hidden"
+msgstr "Sakriven"
+
+#: admin/options-display.php:270
+msgid "As an icon (without the year)"
+msgstr "Kao ikona (bez godine)"
+
+#: admin/options-display.php:271
+msgid "As an icon (including the year)"
+msgstr "Kao ikona (uključujući godinu)"
+
+#: admin/options-display.php:272
+msgid "As inline text"
+msgstr "Kao inline tekst"
+
+#: admin/options-display.php:274
+msgid "Note: displaying date as inline text allows more space for the content area, especially useful for a three-column layout configuration."
+msgstr "Napomena: Prikazivanje datuma kao inline tekst dozvoljava više prostora za područje sadržaja, naročito za layout konfiguraciju sa tri kolone."
+
+#: admin/options-display.php:279
+msgid "Hide post categories"
+msgstr "Sakrij kategorije članka"
+
+#: admin/options-display.php:285
+msgid "Hide post tags"
+msgstr "Sakrij oznake članka"
+
+#: admin/options-display.php:291
+msgid "Hide post comment count"
+msgstr "Sakrij broj komentara članka"
+
+#: admin/options-display.php:292
+msgid "Only affects posts listing (such as the front page) and not single post view."
+msgstr "Utiče samo na listing članaka (kao što je početna stranica) ne samo na jedan post."
+
+#: admin/options-display.php:297
+msgid "Show post author's <a href=\"http://en.gravatar.com/\">gravatar</a>"
+msgstr "Prikaži <a href=\"http://en.gravatar.com/\">gravatar</a> autora članka"
+
+#: admin/options-display.php:301
+msgid "Show post author's info"
+msgstr "Prikaži informacije autora članka"
+
+#: admin/options-display.php:313
+msgid "Excerpts Display Options"
+msgstr "Opcije prikaza odlomka"
+
+#: admin/options-display.php:319
+msgid "Show excerpts in front page"
+msgstr "Prikaži odlomak na početnoj stranici"
+
+#: admin/options-display.php:325
+msgid "Show full content in archive pages"
+msgstr "Prikaži pun sadržaj na stranicama arhive"
+
+#: admin/options-display.php:329
+msgid "Note: Archive pages include the archive for category, tags, time, and search results pages. Enabling this option will cause the full content of posts and pages listed in those archives to displayed instead of the excerpt, and truncated by the Read More tag if used."
+msgstr "Napomena: Stranice arhive uključuju arhivu za kategorije, oznake, vreme i stranice rezultata pretrage. Uključivanje ove opcije  će učiniti da se potpuni sadržaj članaka i stranica prelista u ovim arhivama  umesto odlomaka i biće skraćeno sa Pročitaj više tagom."
+
+#: admin/options-display.php:333
+msgid "Show More link for manual excerpts"
+msgstr "Prikaži Više link za manualne odlomke"
+
+#: admin/options-display.php:337
+msgid "Retain these HTML tags in excerpts"
+msgstr "Zadržati ove HTML oznake u odlomcima"
+
+#: admin/options-display.php:340
+msgid "Enter the HTML tags you'd like to retain in excerpts. For example, enter <code>&lt;p&gt;&lt;ul&gt;&lt;li&gt;</code> to retain <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>, and <code>&lt;li&gt;</code> HTML tags."
+msgstr "Unesite HTML tagove koje želite da zadržite u odlomcima. Na primer, unesite <code>&lt;p&gt;&lt;ul&gt;&lt;li&gt;</code> da zadržite <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>, i <code>&lt;li&gt;</code> HTML oznake."
+
+#: admin/options-display.php:353
+msgid "Comments Display Options"
+msgstr "Opcije prikazivanja komentara"
+
+#: admin/options-display.php:359
+msgid "Hide allowed tags in comment form"
+msgstr "Sakrij dozvoljene oznake u formi komentara"
+
+#: admin/options-display.php:372
+msgid "Colours Options"
+msgstr "Opcije za boju"
+
+#: admin/options-display.php:375
+msgid "Changing colours for your website involves a lot more than just trial and error. Simply mixing and matching colours without regard to their compatibility may do more damage than good to your site's aesthetics."
+msgstr "Menjanje boje vašeg sajta uključuje mnogo više od procesa i greške. Jednostavno mešanje i uklapanje boja bez obzira na njihovu kompatibilnost mogu da napravi više štete od nego koristi estetici Vašeg sajta. "
+
+#: admin/options-display.php:376
+#, php-format
+msgid "It's generally a good idea to stick to colours from colour pallettes that are aesthetically pleasing. Try the %s website for a kickstart on some colour palettes you can use."
+msgstr "Generalno je dobra ideja da se držite palete boja koje su estetski zadovoljavajuće. Probajte %s vebsajt za palete boja koje možete koristiti."
+
+#: admin/options-display.php:377
+msgid "When you've got the perfect combination, you can even share it with fellow Graphene theme users through the <a href=\"http://forum.khairul-syahir.com/\">Support Forum</a>."
+msgstr "Kada dobijete idealnu kombinaciju, možete to podeliti sa korisnicima Graphene teme preko <a href=\"http://forum.khairul-syahir.com/\">Foruma za podršku</a>."
+
+#: admin/options-display.php:378
+msgid "<strong>Note:</strong> The previews work best on modern Gecko- and Webkit-based browsers, such as Mozilla Firefox and Google Chrome."
+msgstr "<strong>Napomena:</strong> Pregled najbolje radi na modernim Gecko i Webkit pregledačima, kao što su Mozilla Firefox i Google Chrome."
+
+#: admin/options-display.php:379
+msgid "<strong>Note:</strong> To reset any of the colours to their default value, just click on \"Clear\" beside the colour field and save the settings. The theme will automatically revert the value to the default colour."
+msgstr "<strong>Napomena:</strong> Da resetujete bilo koju od boja na njihove predefinisane vrednosti, samo kliknite na \"Obriši\" pored polja sa bojama i sačuvajte ga u podešavanjima. Tema će se automatski vratiti u vrednost predefinisane boje."
+
+#: admin/options-display.php:380
+msgid "Content area"
+msgstr "Oblast sa sadržajem "
+
+#: admin/options-display.php:384
+msgid "Main content wrapper background"
+msgstr "Pozadina okvira glavnog sadržaja"
+
+#: admin/options-display.php:385
+msgid "Post and pages content background"
+msgstr "Pozadina sadržaja članka i stranica"
+
+#: admin/options-display.php:386
+msgid "Post meta and footer border"
+msgstr "Meta članka i okvir podnožja"
+
+#: admin/options-display.php:387
+msgid "Post and pages top border"
+msgstr "Gornji okvir članka i stranice"
+
+#: admin/options-display.php:388
+msgid "Post and pages bottom border"
+msgstr "Donji okvir članka i stranice"
+
+#: admin/options-display.php:398
+#: admin/options-display.php:428
+#: admin/options-display.php:454
+#: admin/options-display.php:481
+#: admin/options-display.php:510
+#: admin/options-display.php:646
+#: admin/options-display.php:667
+msgid "Clear"
+msgstr "Obriši"
+
+#: admin/options-display.php:405
+msgid "Widgets"
+msgstr "Vidžeti"
+
+#: admin/options-display.php:408
+msgid "Widget preview"
+msgstr "Pregled vidžeta"
+
+#: admin/options-display.php:409
+msgid "Widget title"
+msgstr "Naslov vidžeta"
+
+#: admin/options-display.php:409
+msgid "List item"
+msgstr "Član liste"
+
+#: admin/options-display.php:413
+msgid "Widget item background"
+msgstr "Pozadina stavke u vidžetu"
+
+#: admin/options-display.php:414
+msgid "Widget item list border"
+msgstr "Okvir stavke iz liste vidžeta"
+
+#: admin/options-display.php:415
+msgid "Widget header border"
+msgstr "Okvir zaglavlja vidžeta"
+
+#: admin/options-display.php:416
+msgid "Widget title colour"
+msgstr "Boja vidžet naslova"
+
+#: admin/options-display.php:417
+msgid "Widget title text shadow colour"
+msgstr "Boja senke teksta vidžet naslova"
+
+#: admin/options-display.php:418
+msgid "Widget header gradient bottom colour"
+msgstr "Donja boja gradijenta zaglavlja vidžeta"
+
+#: admin/options-display.php:419
+msgid "Widget header gradient top colour"
+msgstr "Gornja boja gradijenta zaglavlja vidžeta"
+
+#: admin/options-display.php:436
+msgid "Slider"
+msgstr "Slajder"
+
+#: admin/options-display.php:439
+msgid "Slider background preview"
+msgstr "Pregled pozadine slajdera"
+
+#: admin/options-display.php:444
+msgid "Slider top left colour"
+msgstr "Boja gornjeg levog slajdera"
+
+#: admin/options-display.php:445
+msgid "Slider bottom right colour"
+msgstr "Boja donjeg desnog slajdera"
+
+#: admin/options-display.php:462
+msgid "Block buttons"
+msgstr "Blok dugmad"
+
+#: admin/options-display.php:465
+msgid "Block button preview"
+msgstr "Pregled blok dugmeta"
+
+#: admin/options-display.php:466
+msgid "Button label"
+msgstr "Oznaka dugmeta"
+
+#: admin/options-display.php:470
+msgid "Button background colour"
+msgstr "Boja pozadine dugmeta"
+
+#: admin/options-display.php:471
+msgid "Button label colour"
+msgstr "Boja teksta dugmeta"
+
+#: admin/options-display.php:472
+msgid "Button label text shadow"
+msgstr "Senka teksta dugmeta"
+
+#: admin/options-display.php:489
+msgid "Archive title"
+msgstr "Naslov arhive"
+
+#: admin/options-display.php:492
+msgid "Archive title preview"
+msgstr "Pregled naslova arhive"
+
+#: admin/options-display.php:493
+msgid "Archive title:"
+msgstr "Naslov arhive:"
+
+#: admin/options-display.php:493
+msgid "Sample title"
+msgstr "Naslov primera"
+
+#: admin/options-display.php:497
+msgid "Archive background gradient left colour"
+msgstr "Boja levog gradijenta pozadine arhive"
+
+#: admin/options-display.php:498
+msgid "Archive background gradient right colour"
+msgstr "Boja desnog gradijenta pozadine arhive"
+
+#: admin/options-display.php:499
+msgid "Archive label colour"
+msgstr "Boja oznake arhive"
+
+#: admin/options-display.php:500
+msgid "Archive text colour"
+msgstr "Boja teksta arhive"
+
+#: admin/options-display.php:501
+msgid "Archive label and text shadow colour"
+msgstr "Boja oznake, i senke teksta arhive"
+
+#: admin/options-display.php:525
+msgid "Text Style Options"
+msgstr "Opcije stila teksta"
+
+#: admin/options-display.php:528
+msgid "Note that these are CSS properties, so any valid CSS values for each particular property can be used."
+msgstr "Ovo su CSS stavke, pa se  bilo koje validne CSS vrednosti mogu koristiti za svaku stavku. "
+
+#: admin/options-display.php:529
+msgid "Some example CSS properties values:"
+msgstr "Neki od primera CSS stavki:"
+
+#: admin/options-display.php:532
+msgid "Text font:"
+msgstr "Font teksta:"
+
+#: admin/options-display.php:536
+msgid "Text size and line height:"
+msgstr "Veličina teksta i visina linije:"
+
+#: admin/options-display.php:540
+msgid "Text weight:"
+msgstr "Debljina teksta:"
+
+#: admin/options-display.php:544
+msgid "Text style:"
+msgstr "Stil teksta:"
+
+#: admin/options-display.php:548
+msgid "Text colour:"
+msgstr "Boja teksta:"
+
+#: admin/options-display.php:553
+msgid "Header Text"
+msgstr "Tekst zaglavlja"
+
+#: admin/options-display.php:557
+msgid "Title text font"
+msgstr "Font teksta naslova"
+
+#: admin/options-display.php:563
+msgid "Title text size"
+msgstr "Veličina teksta naslova"
+
+#: admin/options-display.php:569
+msgid "Title text weight"
+msgstr "Debljina teksta naslova"
+
+#: admin/options-display.php:575
+msgid "Title text line height"
+msgstr "Visina linije teksta naslova"
+
+#: admin/options-display.php:581
+msgid "Title text style"
+msgstr "Stil teksta naslova"
+
+#: admin/options-display.php:590
+msgid "Description text font"
+msgstr "Font opisa teksta"
+
+#: admin/options-display.php:596
+msgid "Description text size"
+msgstr "Veličina opisa teksta"
+
+#: admin/options-display.php:602
+msgid "Description text weight"
+msgstr "Debljina opisa teksta"
+
+#: admin/options-display.php:608
+msgid "Description text line height"
+msgstr "Visina linije opisa teksta"
+
+#: admin/options-display.php:614
+msgid "Description text style"
+msgstr "Stil opisa teksta"
+
+#: admin/options-display.php:620
+msgid "Content Text"
+msgstr "Sadržaj teksta"
+
+#: admin/options-display.php:624
+msgid "Text font"
+msgstr "Font teksta"
+
+#: admin/options-display.php:630
+msgid "Text size"
+msgstr "Veličina teksta"
+
+#: admin/options-display.php:636
+msgid "Text line height"
+msgstr "Visina linije teksta"
+
+#: admin/options-display.php:642
+msgid "Text colour"
+msgstr "Boja teksta"
+
+#: admin/options-display.php:652
+msgid "Link Text"
+msgstr "Tekst linka"
+
+#: admin/options-display.php:656
+msgid "Link colour (normal state )"
+msgstr "Boja linka (normal)"
+
+#: admin/options-display.php:657
+msgid "Link colour (visited state )"
+msgstr "Boja linka (visited)"
+
+#: admin/options-display.php:658
+msgid "Link colour (hover state )"
+msgstr "Boja linka (hover)"
+
+#: admin/options-display.php:675
+msgid "Text decoration (normal state )"
+msgstr "Dekoracija teksta (normal)"
+
+#: admin/options-display.php:681
+msgid "Text decoration (hover state )"
+msgstr "Dekoracija teksta ( hover)"
+
+#: admin/options-display.php:694
+msgid "Footer Widget Display Options"
+msgstr "Opcije prikazivanja vidžeta podnožja"
+
+#: admin/options-display.php:700
+msgid "Number of columns to display"
+msgstr "Broj kolona za prikaz"
+
+#: admin/options-display.php:707
+msgid "Number of columns to display for front page footer widget"
+msgstr "Broj kolona za prikaz vidžeta u podnožju na početnoj stranicu"
+
+#: admin/options-display.php:721
+msgid "Navigation Menu Display Options"
+msgstr "Opcije prikazivanja navigacionog menija"
+
+#: admin/options-display.php:727
+msgid "Dropdown menu item width"
+msgstr "Širina stavke opadajućeg menija "
+
+#: admin/options-display.php:733
+msgid "Disable description in Header Menu"
+msgstr "Isključi opis u meniju zaglavlja"
+
+#: admin/options-display.php:741
+msgid "Description for default menu \"Home\" item"
+msgstr "Opis za predefinisanu meni stavku \"Home\" "
+
+#: admin/options-display.php:757
+msgid "Miscellaneous Display Options"
+msgstr "Raznovrsne opcije prikazivanja"
+
+#: admin/options-display.php:760
+msgid "Site title options"
+msgstr "Opcije naslova sajta"
+
+#: admin/options-display.php:761
+msgid "Use these tags to customise your own site title structure: <code>#site-name</code>, <code>#site-desc</code>, <code>#post-title</code>"
+msgstr "Koristite ove oznake da prilagodite strukturu naslova sajta: <code>#site-name</code>, <code>#site-desc</code>, <code>#post-title</code>"
+
+#: admin/options-display.php:765
+msgid "Custom front page site title"
+msgstr "Prilagođeni naslov sajta na početnoj stranici"
+
+#: admin/options-display.php:769
+msgid "Defaults to <code>#site-name &raquo; #site-desc</code>. The <code>#post-title</code> tag cannot be used here."
+msgstr "Predefinisani <code>#site-name &raquo; #site-desc</code>. <code>#post-title</code> oznaka se ne može koristiti ovde."
+
+#: admin/options-display.php:774
+msgid "Custom content pages site title"
+msgstr "Prilagodi sadržaj naslova stranice sajta"
+
+#: admin/options-display.php:778
+msgid "Defaults to <code>#post-title &raquo; #site-name</code>."
+msgstr "Predefinisani <code>#post-title &raquo; #site-name</code>."
+
+#: admin/options-display.php:783
+msgid "Favicon options"
+msgstr "Favicon opcije"
+
+#: admin/options-display.php:787
+msgid "Favicon URL"
+msgstr "Favicon URL"
+
+#: admin/options-display.php:791
+#: admin/options-general.php:98
+msgid "Upload or select image from gallery"
+msgstr "Otpremi ili selektuj sliku iz galerije"
+
+#: admin/options-display.php:791
+msgid "Simply enter the full URL to your favicon file here to enable favicon. Make sure you include the <code>http://</code> in front of the URL as well. Or use the WordPress media uploader to upload an image, or select one from the media library."
+msgstr "Jednostavno unesite kompletan URL do Vašeg favicon fajla ovde da bi se prikazao favicon. Budite sigurni da ste uneli <code>http://</code> ispred URL-a. Ili koristite WordPress media uploader da otpremite sliku, ili da selektujete jednu iz media biblioteke."
+
+#: admin/options-display.php:796
+msgid "WordPress Editor options"
+msgstr "Opcije Wordpress uređivača"
+
+#: admin/options-display.php:800
+msgid "Disable custom editor styles"
+msgstr "Onemogućite prilagođene stilove uređivača"
+
+#: admin/options-display.php:813
+msgid "Custom CSS"
+msgstr "Prilagođeni CSS"
+
+#: admin/options-display.php:818
+msgid "Custom CSS styles"
+msgstr "Prilagođeni stilovi CSS"
+
+#: admin/options-display.php:820
+msgid "You can enter your own CSS codes below to modify any other aspects of the theme's appearance that is not included in the options."
+msgstr "Možete uneti Vaš CSS kod ispod da modifikujete bilo koji od aspekata izgleda teme koja se ne nalazi u opcijama."
+
+#: admin/options-general.php:12
+msgid "Slider Options"
+msgstr "Slider opcije"
+
+#: admin/options-general.php:18
+msgid "Disable slider"
+msgstr "Isključite slajder"
+
+#: admin/options-general.php:26
+msgid "What do you want to show in the slider"
+msgstr "Šta želite da prikažete na slajderu"
+
+#: admin/options-general.php:30
+msgid "Show latest posts"
+msgstr "Prikaži poslednje članke"
+
+#: admin/options-general.php:33
+msgid "Show random posts"
+msgstr "Prikaži nasumične članke"
+
+#: admin/options-general.php:36
+msgid "Show specific posts/pages"
+msgstr "Prikaži odredjene članke/stranice"
+
+#: admin/options-general.php:39
+msgid "Show posts from categories"
+msgstr "Prikažite članke iz kategorija"
+
+#: admin/options-general.php:44
+#: admin/options-general.php:258
+msgid "Posts and/or pages to display"
+msgstr "Članci i/ili stranice za prikaz"
+
+#: admin/options-general.php:49
+#: admin/options-general.php:263
+msgid "Enter ID of posts and/or pages to be displayed, separated by comma. Example: <code>1,13,45,33</code>"
+msgstr "Unesite ID članaka i/ili stranica za prikaz, odvojedni zarezom. primer:<code>1,13,45,33</code>"
+
+#: admin/options-general.php:50
+msgid "Applicable only if <strong>Show specific posts/pages</strong> is selected above."
+msgstr "Primenljivo samo ako su <strong> Prikazani odredjeneni članci/stranice </strong> selektovani iznad"
+
+#: admin/options-general.php:56
+msgid "Categories to display"
+msgstr "Kategorije za prikaz"
+
+#: admin/options-general.php:57
+msgid "All posts within the categories selected here will be displayed on the slider. Usage example: create a new category \"Featured\" and assign all posts to be displayed on the slider to that category, and then select that category here."
+msgstr "Svi članci medju selektovanim kategorijama ovde biće prikazani na slajderu. Primer upotrebe: kreiraj novu kategoriju \"Featured\" "
+
+#: admin/options-general.php:73
+msgid "Number of posts to display"
+msgstr "Broj članaka za prikaz "
+
+#: admin/options-general.php:104
+msgid "Slider display style"
+msgstr "Stil prikazivanja slajdera"
+
+#: admin/options-general.php:108
+msgid "Thumbnail and excerpt"
+msgstr "Mala slika i odlomak"
+
+#: admin/options-general.php:109
+msgid "Background image and excerpt"
+msgstr "Pozadinska slika i odlomak"
+
+#: admin/options-general.php:110
+msgid "Full post content"
+msgstr "Pun sadržaj članka"
+
+#: admin/options-general.php:116
+msgid "Slider animation"
+msgstr "Slajder animacija"
+
+#: admin/options-general.php:121
+msgid "Horizontal slide"
+msgstr "Horizontalni slajd"
+
+#: admin/options-general.php:122
+msgid "Vertical slide"
+msgstr "Vertikalni slajd"
+
+#: admin/options-general.php:123
+msgid "Fade"
+msgstr "Fade"
+
+#: admin/options-general.php:124
+msgid "No effect"
+msgstr "Bez efekta"
+
+#: admin/options-general.php:130
+msgid "Slider height"
+msgstr "Visina slajda"
+
+#: admin/options-general.php:138
+msgid "Slider speed"
+msgstr "Brzina slajda"
+
+#: admin/options-general.php:141
+#: admin/options-general.php:150
+msgid "milliseconds"
+msgstr "milisekunde"
+
+#: admin/options-general.php:142
+msgid "This is the duration that each slider item will be shown"
+msgstr "Vremenski period koliko će svaki slajd trajati"
+
+#: admin/options-general.php:147
+msgid "Slider transition speed"
+msgstr "Brzina tranzicije slajdera"
+
+#: admin/options-general.php:151
+msgid "This is the speed of the slider transition. Lower values = higher speed."
+msgstr "Ovo je brzina tranzicije slajdera. Niže vrednosti = veća brzina"
+
+#: admin/options-general.php:156
+msgid "Move slider to bottom of page"
+msgstr "Prebaci slajder na dno stranice"
+
+#: admin/options-general.php:169
+msgid "Front Page Options"
+msgstr "Opcije početne stranice"
+
+#: admin/options-general.php:175
+msgid "Front page posts categories"
+msgstr "Kategorije članaka na početnoj stranici"
+
+#: admin/options-general.php:177
+msgid "Only posts that belong to the categories selected here will be displayed on the front page. Does not affect Static Front Page."
+msgstr "Samo članci koji pripadaju selektovanim kategorijama biće prikazane na početnoj stranici. Ne utiče na statičnu početnu stranicu."
+
+#: admin/options-general.php:182
+msgid "--Disabled--"
+msgstr "--Onemogućeno--"
+
+#: admin/options-general.php:190
+msgid "You may select multiple categories by holding down the CTRL key."
+msgstr "Možete selektovati više kategorija tako što ćete pritisnuti CTRL taster."
+
+#: admin/options-general.php:202
+msgid "Homepage Panes"
+msgstr "Paneli početne strane"
+
+#: admin/options-general.php:209
+msgid "Disable homepage panes"
+msgstr "Onemogućiti panele početne strane "
+
+#: admin/options-general.php:219
+msgid "Type of content to show"
+msgstr "Vrsta sadržaja koja se prikazuje"
+
+#: admin/options-general.php:226
+msgid "Latest posts by category"
+msgstr "Poslednji članci po kategorijama"
+
+#: admin/options-general.php:229
+msgid "Posts and/or pages"
+msgstr "Članci i/ili stranice"
+
+#: admin/options-general.php:234
+msgid "Number of latest posts to display"
+msgstr "Broj poslednjih članaka za prikazivanje"
+
+#: admin/options-general.php:238
+msgid "Applicable only if <strong>Latest posts</strong> or <strong>Latest posts by category</strong> is selected above."
+msgstr "Primenljivo samo ako su <strong>Poslednji članci</strong> ili <strong>Poslednji članci po kategorijama</strong> selektovani iznad."
+
+#: admin/options-general.php:243
+msgid "Category to show latest posts from"
+msgstr "Kategorije koje pokazuju poslednje postove od"
+
+#: admin/options-general.php:253
+msgid "Applicable only if <strong>Latest posts by category</strong> is selected above."
+msgstr "Primenljivo samo ako su <strong>Poslednji članci po kategorijama</strong> selektovani iznad."
+
+#: admin/options-general.php:264
+msgid "Applicable only if <strong>Posts and/or pages</strong> is selected above."
+msgstr "Primenljivo samo ako su <strong>članci i/ili stranice</strong> selektovani iznad."
+
+#: admin/options-general.php:270
+msgid "<strong>Note:</strong> homepage panes are only displayed when using a <a href=\"http://codex.wordpress.org/Creating_a_Static_Front_Page\">static front page</a>."
+msgstr "<strong>Napomena:</strong> paneli na početnoj stranici se prikazuju samo ako se koristi <a href=\"http://codex.wordpress.org/Creating_a_Static_Front_Page\">statična početna stranica</a>."
+
+#: admin/options-general.php:280
+msgid "Comments Options"
+msgstr "Opcije komentara"
+
+#: admin/options-general.php:286
+msgid "Commenting"
+msgstr "Komentarisanje"
+
+#: admin/options-general.php:290
+msgid "Use WordPress settings"
+msgstr "Koristite WordPress podešavanja"
+
+#: admin/options-general.php:291
+msgid "Disabled for pages"
+msgstr "Onemogućiti za stranice"
+
+#: admin/options-general.php:292
+msgid "Disabled completely"
+msgstr "Potpuno onemogućiti"
+
+#: admin/options-general.php:294
+msgid "Note: this setting overrides the global WordPress Discussion Setting called \"Allow people to post comments on new articles\" and also the \"Allow comments\" option for individual posts/pages."
+msgstr "Napomena: ova podešavanja zamenjuju globalne WordPress opcije diskusije \"Dozvoliti da se postuju komentari na novim artiklima\" ili takodje \"Dozvoliti komentare\"  opciju za individualne članke/stranice."
+
+#: admin/options-general.php:306
+msgid "Child Page Options"
+msgstr "Opcije stranice ćerke"
+
+#: admin/options-general.php:312
+msgid "Hide parent box if content is empty"
+msgstr "Sakij polja ako nema sadržaja"
+
+#: admin/options-general.php:318
+msgid "Child page listings"
+msgstr "Listinzi stranica ćerke"
+
+#: admin/options-general.php:322
+msgid "Show listing"
+msgstr "Pokaži listing"
+
+#: admin/options-general.php:323
+msgid "Hide listing"
+msgstr "Sakrij listing"
+
+#: admin/options-general.php:324
+msgid "Only show listing if parent content is empty"
+msgstr "Pokaži listing samo ako nema sadržaja"
+
+#: admin/options-general.php:337
+msgid "Widget Area Options"
+msgstr "Opcije za vidžet polja"
+
+#: admin/options-general.php:340
+msgid "Header widget area"
+msgstr "Vidžet polje u zaglavlju"
+
+#: admin/options-general.php:341
+msgid "<strong>Important:</strong> This widget area is unstyled, as it is often used for advertisement banners, etc. If you enable it, make sure you style it to your needs using the Custom CSS option."
+msgstr "<strong>Važno:</strong> Ovo vidžet polje nije stilizovano kako je inače slučaj za reklamne banere, itd. Ako ovo omogućite, vodite računa da ste ga uredili po svojim optrebama koristeći opciju Prilagodjen CSS."
+
+#: admin/options-general.php:345
+msgid "Enable header widget area"
+msgstr "Uključite vidžet polje u zaglavlju"
+
+#: admin/options-general.php:354
+msgid "Alternate Widgets"
+msgstr "Rezervni vidžeti"
+
+#: admin/options-general.php:355
+msgid "You can enable the theme to show different widget areas in the front page than the rest of the website. If you enable this option, additional widget areas that will only be displayed on the front page will be added to the Widget settings page."
+msgstr "Možete uključiti da tema pokazuje različita vidžet polja na početnoj stranici od ostatka vebsajta. Ako omogućite ovu opciju, dodatna vidžet polja koja će biti prikazana na početnoj stranici će biti dodata na stranici Vidžeti."
+
+#: admin/options-general.php:358
+msgid "Enable alternate front page sidebar widget area"
+msgstr "Uključite rezervni sajdbar na početnoj stranici"
+
+#: admin/options-general.php:362
+msgid "Enable alternate front page footer widget area"
+msgstr "Uključite rezervno vidžet polje u podnožju na početnoj stranici"
+
+#: admin/options-general.php:363
+msgid "You can also specify different column counts for the front page footer widget and the rest-of-site footer widget if you enable this option."
+msgstr "Možete odrediti različiti broj kolona za vidžet u podnožju na početnoj stranici i ostalim vidžetima u podnožju na sajtu ukoliko omogućite ovu opciju."
+
+#: admin/options-general.php:376
+msgid "Top Bar Options"
+msgstr "Top bar opcije"
+
+#: admin/options-general.php:382
+msgid "Hide the top bar"
+msgstr "Sakrij top bar"
+
+#: admin/options-general.php:390
+msgid "Hide feed icon"
+msgstr "Sakrij Feed ikonu"
+
+#: admin/options-general.php:394
+msgid "Use custom feed URL"
+msgstr "Koristi prilagodjeni feed URL"
+
+#: admin/options-general.php:397
+msgid "This custom feed URL will replace the default WordPress RSS feed URL."
+msgstr "Ovaj prilagođeni feed URL će zameniti predefinisani WordPress RSS feed URL."
+
+#: admin/options-general.php:401
+msgid "Open social media links in new window"
+msgstr "Otvori social media linkove u novom prozoru"
+
+#: admin/options-general.php:405
+msgid "Twitter URL"
+msgstr "Twitter URL"
+
+#: admin/options-general.php:408
+msgid "Enter the URL to your Twitter page."
+msgstr "Unesite URL do vaše Twiter stranice"
+
+#: admin/options-general.php:412
+msgid "Facebook URL"
+msgstr "Facebook URL"
+
+#: admin/options-general.php:415
+msgid "Enter the URL to your Facebook profile page."
+msgstr "Unesite URL do vaše Facebook profil stranice"
+
+#. translators: %s will be replaced by the social media service name. Example: LinkedIn Title
+#: admin/options-general.php:426
+#, php-format
+msgid "%s Title"
+msgstr "%s Naslov"
+
+#: admin/options-general.php:431
+#, php-format
+msgid "The title is empty and the following title will be shown: <strong>%s</strong>"
+msgstr "Nema naslova i sledeći naslov će biti prikazan: <strong>%s</strong>"
+
+#. translators: %s will be replaced by the social media service name. Example: LinkedIn URL
+#: admin/options-general.php:437
+#, php-format
+msgid "%s URL"
+msgstr "%s URL"
+
+#. translators: %s will be replaced by the social media service name. Example: LinkedIn icon URL
+#: admin/options-general.php:442
+#, php-format
+msgid "%s icon URL"
+msgstr "%s ikona URL"
+
+#: admin/options-general.php:445
+msgid "Delete"
+msgstr "Obrišite"
+
+#: admin/options-general.php:453
+msgid "Add new social media icon"
+msgstr "Dodaj novu social media ikonu"
+
+#: admin/options-general.php:465
+msgid "Social Sharing Buttons"
+msgstr "Social Sharing dugmad"
+
+#: admin/options-general.php:470
+msgid "Show social sharing button"
+msgstr "Prikaži dugme za social sharing"
+
+#: admin/options-general.php:476
+msgid "Show in Pages as well?"
+msgstr "Takodje prikaži na stranici?"
+
+#: admin/options-general.php:480
+msgid "Social sharing buttons location"
+msgstr "Pozicija social sharing dugmadi "
+
+#: admin/options-general.php:483
+msgid "Bottom of posts"
+msgstr "Ispod članaka"
+
+#: admin/options-general.php:484
+msgid "Top of posts"
+msgstr "Iznad članaka"
+
+#: admin/options-general.php:485
+msgid "Both top and bottom"
+msgstr "Zajedno iznad i ispod"
+
+#: admin/options-general.php:491
+msgid "Your social sharing button code"
+msgstr "Kod za vaše social sharing dugme"
+
+#: admin/options-general.php:492
+msgid "You can use codes from any popular social sharing sites, like Facebook, Digg, AddThis, etc."
+msgstr "Možete koristiti kodove za bilo koji popularni social sharing sajta kao što su Facebook, Digg, AddThis itd."
+
+#: admin/options-general.php:495
+msgid "You may use these tags to get the post's URL, title, and excerpt:"
+msgstr "Možete koristiti ove oznake da dobijete URL članka, naslov i odlomak:"
+
+#: admin/options-general.php:507
+msgid "Adsense Options"
+msgstr "Adsense opcije"
+
+#: admin/options-general.php:513
+msgid "Show Adsense advertising"
+msgstr "Prikaži Adsense reklamiranje"
+
+#: admin/options-general.php:521
+msgid "Show ads on front page as well"
+msgstr "Prikaži reklame i na početnoj stranici"
+
+#: admin/options-general.php:527
+msgid "Your Adsense code"
+msgstr "Vaš Adsense kod"
+
+#: admin/options-general.php:540
+msgid "Google Analytics Options"
+msgstr "Google Analitycs opcije"
+
+#: admin/options-general.php:545
+msgid "Enable Google Analytics tracking"
+msgstr "Uključi Google Analytics praćenje"
+
+#: admin/options-general.php:552
+msgid "<strong>Note:</strong> the theme now places the Google Analytics script in the <code>&lt;head&gt;</code> element to better support the new asynchronous Google Analytics script. Please make sure you update your script to use the new asynchronous script from Google Analytics."
+msgstr "<strong>Napomena:</strong> tema sada stavlja Google Analytics skriptu u  <code>&lt;head&gt;</code> element da bolje podrži novu asinhrovanu Google Analytics skriptu. Proverite da li ste ažurirali skriptu da bi koristili novu asinhrovanu skriptu iz Google Analytics-a."
+
+#: admin/options-general.php:556
+msgid "Google Analytics tracking code"
+msgstr "Kod za praćenje Google Analytics"
+
+#: admin/options-general.php:557
+msgid "Make sure you include the full tracking code (including the <code>&lt;script&gt;</code> and <code>&lt;/script&gt;</code> tags) and not just the <code>UA-#######-#</code> code."
+msgstr "Proverite da li ste ubacili ceo kod za praćenje (uključujući <code>&lt;script&gt;</code> i <code>&lt;/script&gt;</code> oznake) a ne samo <code>UA-#######-#</code> kod."
+
+#: admin/options-general.php:570
+msgid "Footer Options"
+msgstr "Opcije podnožja"
+
+#: admin/options-general.php:575
+msgid "Use Creative Commons licence for content"
+msgstr "Koristi Creative Commons licencu za sadržaj"
+
+#: admin/options-general.php:580
+msgid "Copyright text (html allowed)"
+msgstr "Copyright tekst (html dozvoljen)"
+
+#: admin/options-general.php:581
+msgid "If this field is empty, the following default copyright text will be displayed:"
+msgstr "Ako je ovo polje prazno, sledeći predefinisani copyright tekst biće prikazan:"
+
+#: admin/options-general.php:587
+msgid "Do not show copyright info"
+msgstr "Ne pokazuj copyright informaciju"
+
+#: admin/options-general.php:591
+msgid "Do not show the \"Return to top\" link"
+msgstr "Ne prikazuj \"Vratite se na vrh stranice\" link"
+
+#: admin/options-general.php:603
+msgid "Print Options"
+msgstr "Opcije štampanja"
+
+#: admin/options-general.php:608
+msgid "Enable print CSS for single posts and pages?"
+msgstr "Uključi CSS za štampu za pojedinačne članke i stranice?"
+
+#: admin/options-general.php:614
+msgid "Show print button"
+msgstr "Prikazati dugme za štampanje?"
+
+#: admin/options-import.php:38
+#: admin/options-import.php:169
+#: admin/options-presets.php:48
+#: admin/uninstall.php:32
+msgid "ERROR: You are not authorised to perform that operation"
+msgstr "GREŠKA: Niste autorizovani da izvedete ovu operaciju"
+
+#: admin/options-import.php:59
+msgid "Before you can upload your import file, you will need to fix the following error:"
+msgstr "Pre nego što otpremite svoj uvežen fajl, moraćete da popravite sledeće greške:"
+
+#: admin/options-import.php:65
+#: admin/options-import.php:98
+msgid "Import Graphene Theme Options"
+msgstr "Uvoženje opcije Graphene Theme "
+
+#: admin/options-import.php:67
+msgid "<strong>Note:</strong> This is an experimental feature. Please report any problem at the <a href=\"http://forum.khairul-syahir.com/forum/bug-report\">Support Forum</a>."
+msgstr "<strong>Naznačite:</strong> Ovo je eksperimentalni opcija . Molimo Vas prijavite bilo koji problem na <a href=\"http://forum.khairul-syahir.com/forum/bug-report\">Forum za podršku</a>."
+
+#: admin/options-import.php:69
+msgid "Choose a file from your computer:"
+msgstr "Izaberite fajl sa Vašeg kompjutera:"
+
+#: admin/options-import.php:69
+#, php-format
+msgid "Maximum size: %s"
+msgstr "Maksimalna veličina: %s"
+
+#: admin/options-import.php:76
+msgid "Upload file and import"
+msgstr "Otpremi fajl i uvezi"
+
+#: admin/options-import.php:141
+msgid "Options import completed"
+msgstr "Uvoženje opcija izvršeno"
+
+#: admin/options-import.php:142
+msgid "Go to the Graphene options page"
+msgstr "Idi na stranicu Graphene opcije"
+
+#: admin/options-import.php:145
+#: admin/options-import.php:150
+#: admin/options-import.php:155
+msgid "Sorry, there has been an error."
+msgstr "Izvinite, doslo je do greške."
+
+#: admin/options-import.php:146
+msgid "The uploaded file does not contain valid Graphene options."
+msgstr "Otpremljeni fajl ne sadrži validne Graphene opcije."
+
+#: admin/options-import.php:151
+msgid "The uploaded file could not be read."
+msgstr "Otpremljeni fajl ne može da se učita."
+
+#: admin/options-import.php:156
+msgid "The uploaded file is not supported."
+msgstr "Otpremljeni fajl nije podržan."
+
+#: admin/options-import.php:164
+msgid "File is empty. Please upload something more substantial. This error could also be caused by uploads being disabled in your php.ini or by post_max_size being defined as smaller than upload_max_filesize in php.ini."
+msgstr "Fajl je prazan. Molimo otpremite nešto više kul. Ova greška takođe može biti izazvana ukoliko je otpremanje onemogućeno u Vašem php.ini ili je post_max_size definisano kao manje od upload_max_filesize u php.ini."
+
+#: admin/options-init.php:34
+msgid "Graphene Options"
+msgstr "Graphene Opcije"
+
+#: admin/options-init.php:35
+msgid "Graphene FAQs"
+msgstr "Graphene FAQs"
+
+#: admin/options-init.php:85
+msgid "Toggle all options boxes"
+msgstr "Otvori sva polja za opcije"
+
+#: admin/options-init.php:127
+msgid "Template preview not found."
+msgstr "Pregled šablona nije pronadjen."
+
+#: admin/options-init.php:130
+msgid "default"
+msgstr "podrazumevano"
+
+#: admin/options-init.php:186
+#: admin/options-init.php:190
+msgid "Theme default"
+msgstr "Theme default"
+
+#: admin/options-presets.php:36
+msgid "The \"Normal website\" settings preset has been applied."
+msgstr "\"Normal website\" podešavanja su primenjena"
+
+#: admin/options-presets.php:41
+msgid "Settings have been reset."
+msgstr "Podešavanja su resetovana"
+
+#: admin/options-validator.php:24
+msgid "ERROR: Invalid category to show in slider."
+msgstr "Greška: Nevalidna kategorija za prikazivanje na slajderu."
+
+#: admin/options-validator.php:27
+msgid "ERROR: You must specify the posts/pages to be displayed when you have \"Show specific posts/pages\" selected for the slider."
+msgstr "Greška: Morate odrediti članke/stranice koje se prikazuju kada imate  \"Prikaži specifične članke/stranice\"  selektovane za slajder."
+
+#: admin/options-validator.php:30
+msgid "ERROR: You must have selected at least one category when you have \"Show posts from categories\" selected for the slider."
+msgstr "Greška: Morate selektovati najmanje jednu kategoriju kada imate \"Prikaži članke iz kategorije\" selektovano u ovom folderu."
+
+#: admin/options-validator.php:40
+msgid "ERROR: Invalid category selected for the slider categories."
+msgstr "Greška: Nevalidna kategorija selektovana za slajder kategorije"
+
+#: admin/options-validator.php:46
+msgid "ERROR: The number of posts to displayed in the slider must be a an integer value."
+msgstr "Greška: Broj postova prikazanih na slajderu mora biti celi broj."
+
+#: admin/options-validator.php:49
+msgid "ERROR: Invalid option for the slider image is specified."
+msgstr "Greška: Nevalidna opcija za slajder sliku je odredjena."
+
+#: admin/options-validator.php:51
+msgid "ERROR: Bad URL entered for the custom slider image URL."
+msgstr "Greška: Loš URL unešen za prilagođenu slajder sliku"
+
+#: admin/options-validator.php:53
+msgid "ERROR: Invalid option for the slider display style is specified."
+msgstr "Greška: Odredjena je nevalidna opcija za prikaz stila slajdera."
+
+#: admin/options-validator.php:55
+msgid "ERROR: The value for slider height must be an integer."
+msgstr "Greška: Vrednost za visinu slajdera mora biti celi broj"
+
+#: admin/options-validator.php:57
+msgid "ERROR: The value for slider speed must be an integer."
+msgstr "Greška: Vrednost za brzinu slajdera mora biti celi broj."
+
+#: admin/options-validator.php:59
+msgid "ERROR: The value for slider transition speed must be an integer."
+msgstr "Greška: Vrednost tranzicije slajdera mora biti celi broj."
+
+#: admin/options-validator.php:61
+msgid "ERROR: Invalid slider animation."
+msgstr "Greška: Nevalidna slajder animacija."
+
+#: admin/options-validator.php:75
+msgid "ERROR: Invalid category selected for the front page posts categories."
+msgstr "Greška: Označena nevalidna kategorija za kategorije članaka na početnoj stranici"
+
+#: admin/options-validator.php:86
+msgid "ERROR: Invalid option for the type of content to show in homepage panes."
+msgstr "Greška: Nevalidna opcija za tip sadržaja koji se prikazuju na okvirima na početnoj stranici."
+
+#: admin/options-validator.php:88
+msgid "ERROR: The value for the number of latest posts to display in homepage panes must be an integer."
+msgstr "Greška: Vrednost brojeva poslednjih članaka koji se prikazuju na okvirima na početnoj stranici moraju biti celi broj."
+
+#: admin/options-validator.php:93
+msgid "ERROR: Invalid category selected for the latest posts to show from in the homepage panes."
+msgstr "Greška: Selektovana nevalidna kategorija za prikazivanje poslednjih članaka koji će se prikazivati na okviru početne stranice."
+
+#: admin/options-validator.php:107
+msgid "ERROR: Invalid option for the comments option."
+msgstr "Greška: Nevalidna opcija za opcije komentara."
+
+#: admin/options-validator.php:116
+msgid "ERROR: Invalid option for the child page listings."
+msgstr "Greška: Nevalidna opcija za listing stranice ćerke."
+
+#: admin/options-validator.php:134
+msgid "ERROR: Bad URL entered for the custom feed URL."
+msgstr "Greška: Loš URL unešen za prilagođeni feed URL"
+
+#: admin/options-validator.php:138
+msgid "ERROR: Bad URL entered for the Twitter URL."
+msgstr "Greška: Loš URL unešen za Twitter URL"
+
+#: admin/options-validator.php:140
+msgid "ERROR: Bad URL entered for the Facebook URL."
+msgstr "Greška: Loš URL unešen za  Facebook URL."
+
+#: admin/options-validator.php:152
+msgid "ERROR: Bad URL entered for the social media icon URL."
+msgstr "Greška: Loš URL unešen za ikonu social media"
+
+#: admin/options-validator.php:153
+msgid "ERROR: Bad URL entered for the social media URL."
+msgstr "Greška: Loš URL unešen za social media URL."
+
+#: admin/options-validator.php:169
+msgid "ERROR: Invalid option for the social sharing buttons location."
+msgstr "Greška: Nevalidna opcija za lokaciju social sharing dugmadi."
+
+#: admin/options-validator.php:229
+msgid "ERROR: Invalid option for the Search box location."
+msgstr "Greška: Nevalidna opcija za Search box lokaciju"
+
+#: admin/options-validator.php:234
+msgid "ERROR: Invalid option for the column mode."
+msgstr "Greška: Nevalidna opcija za column mode."
+
+#: admin/options-validator.php:235
+msgid "ERROR: Invalid option for the bbPress column mode."
+msgstr "Greška: Nevalidna opcija za bbPress mod kolona."
+
+#: admin/options-validator.php:242
+#, php-format
+msgid "ERROR: Invalid width for %s. Width value must be positive number without units."
+msgstr "Greška: Nevalidna širina za %s. Vrednost širine mora biti pozitivni broj bez mere za jedinicu."
+
+#: admin/options-validator.php:250
+msgid "ERROR: Invalid option for the post date display."
+msgstr "Greška: Nevalidna opcija za prikaz vremena na članku."
+
+#: admin/options-validator.php:316
+msgid "ERROR: The number of columns to be displayed in the footer widget must be a an integer value."
+msgstr "Greška: Broj kolona koje se prikazuju vidžetu podnožja moraju biti celi brojevi."
+
+#: admin/options-validator.php:321
+msgid "ERROR: The width of the submenu must be a an integer value."
+msgstr "Greška: Širina u podmeniju mora biti celi broj."
+
+#: admin/options-validator.php:329
+msgid "ERROR: Bad URL entered for the favicon URL."
+msgstr "Greška: loš URL unešen za favicon URL."
+
+#: admin/options-validator.php:344
+msgid "ERROR: Invalid action hook selected widget action hooks."
+msgstr "Greška: nevalidni action hook selektovan."
+
+#: admin/options.php:81
+#: admin/uninstall.php:23
+msgid "Uninstall Graphene"
+msgstr "Deinstalirati Graphene"
+
+#: admin/options.php:82
+msgid "Please confirm that you would like to uninstall the Graphene theme. All of the theme's options in the database will be deleted."
+msgstr "Molim potvrdite da želite da deinstalirate Graphene temu. Sve opcije teme u bazi podataka će biti obrisane."
+
+#: admin/options.php:83
+msgid "This action is not reversible."
+msgstr "Ova radnja nije reverzibilna."
+
+#: admin/options.php:87
+#: admin/options.php:339
+msgid "Uninstall Theme"
+msgstr "Deinstaliraj temu."
+
+#: admin/options.php:101
+msgid "Graphene Theme Options"
+msgstr "Opcije Graphene teme"
+
+#: admin/options.php:103
+msgid "These are the global settings for the theme. You may override some of the settings in individual posts and pages."
+msgstr "Ovo su globalna podešavanja teme. Možete promeniti neka podešavanja u individualnim člancima i stranicama."
+
+#: admin/options.php:111
+msgid "General"
+msgstr "Opšte"
+
+#: admin/options.php:112
+msgid "Display"
+msgstr "Prikaz"
+
+#: admin/options.php:113
+msgid "Advanced"
+msgstr "Napredno"
+
+#: admin/options.php:152
+msgid "Save Options"
+msgstr "Sačuvajte opcije"
+
+#: admin/options.php:164
+msgid "Need help?"
+msgstr "Potrebna Vam je pomoć?"
+
+#: admin/options.php:168
+msgid "Documentation Wiki"
+msgstr "Wiki dokumentacija"
+
+#: admin/options.php:169
+msgid "Support Forum"
+msgstr "Forum za podršku"
+
+#: admin/options.php:171
+#, php-format
+msgid "Also, find out how you can %s."
+msgstr "Takođe, saznajte kako možete da %s."
+
+#: admin/options.php:171
+msgid "support the Graphene theme"
+msgstr "podržite Graphene temu"
+
+#: admin/options.php:178
+msgid "Support the developer"
+msgstr "podržite divelopera"
+
+#: admin/options.php:181
+msgid "Developing this awesome theme took a lot of effort and time, months and months of continuous voluntary unpaid work. If you like this theme or if you are using it for commercial websites, please consider a donation to the developer to help support future updates and development."
+msgstr "Razvitak ovih super tema zahteva puno truda i vremena, mesece i mesece neprekidnog volonterskog rada. Ako Vam se svidja ova tema ili ako je koristite za komercijalne sajtove, molimo Vas razmislite o donaciji diveloperu da pomognete podršku budućih abdejtova i razvoja. "
+
+#: admin/options.php:195
+msgid "Graphene Theme news"
+msgstr "Vesti Graphene teme"
+
+#: admin/options.php:206
+msgid "No news items."
+msgstr "Nema vesti."
+
+#: admin/options.php:223
+msgid "Graphene Usage Survey"
+msgstr "Anketa korišćenja Graphene"
+
+#: admin/options.php:226
+msgid "Help us to get to know you better. Take the Graphene theme usage survey now! Every opinion counts towards making the theme better. The survey is very short, and is completely anonymous."
+msgstr "Pomozite nam da Vas upoznamo bolje. Popunite anketu o korišćenju Graphene teme ! Svako mišljenje pomaže stvaranju bolje teme. Anketa je kratka, i potpuno anonimna."
+
+#: admin/options.php:227
+msgid "Take the survey"
+msgstr "Popunite anketu"
+
+#: admin/options.php:237
+msgid "Add-ons and plugins"
+msgstr "Dodaci"
+
+#: admin/options.php:240
+msgid "Add-ons"
+msgstr "Dodaci"
+
+#: admin/options.php:241
+msgid "Add-ons are not shipped with the theme, but can be installed separately to extend the theme's capability."
+msgstr "Dodaci ne idu uz temu, ali mogu biti instalirani posebno da produže sposobnost teme."
+
+#: admin/options.php:245
+msgid "Installed"
+msgstr "Instalirano"
+
+#: admin/options.php:246
+#: admin/options.php:265
+msgid "Not installed"
+msgstr "Nije instalirano"
+
+#: admin/options.php:246
+msgid "Learn more"
+msgstr "Naučite više"
+
+#: admin/options.php:247
+msgid "Mobile extension developed specifically for optimised display of your site on mobile devices, such as iPhone and Android devices."
+msgstr "Mobilna ekstenzija razvijena posebno za optimizovan prikaz Vašeg sajta na mobilnom uredjaju, kao što su iPhone i Android"
+
+#: admin/options.php:250
+msgid "Plugins"
+msgstr "Dodaci"
+
+#: admin/options.php:251
+msgid "The plugins listed here are natively supported by the theme. All you need to do is install the plugins and activate them."
+msgstr "Dodaci navedeni ovde su direktno podržani od strane teme. Sve što treba da uradite je da instalirate dodatke i aktivirate ih."
+
+#: admin/options.php:264
+msgid "Activated"
+msgstr "Aktivirano"
+
+#: admin/options.php:277
+msgid "Options Presets"
+msgstr "Prisetovi opcija"
+
+#: admin/options.php:280
+msgid "The default settings for the theme is preconfigured for use in blogs. If you're using this theme primarily for a normal website, or if you want to reset the settings to their default values, you can apply one of the available options presets below."
+msgstr "Predefinisanja podešavanja za temu su prekonfigurisana za upotrebu na blogovima. Ako koristite temu prevashodno za normalan sajt, ili ako želite da resetujete podešavanja na njihove predefinisane vrednosti, možete primeniti jednu od mogućih opcija prisetovanih ispod."
+
+#: admin/options.php:281
+msgid "Note that you can still configure the individual settings after you apply any preset."
+msgstr "Znajte da još uvek možete konfigurisati individualna podešavanja pošto ste prijavili bilo koji priset"
+
+#: admin/options.php:286
+msgid "Select Options Preset"
+msgstr "Selektujte prisetove opcije"
+
+#: admin/options.php:289
+msgid "Normal website"
+msgstr "Standardni vebsajt"
+
+#: admin/options.php:292
+msgid "Reset to default settings"
+msgstr "Resetuj na predifinisana podešavanja"
+
+#: admin/options.php:297
+msgid "Apply Options Preset"
+msgstr "Primeni prisetove opcije"
+
+#: admin/options.php:307
+msgid "Import/export theme options"
+msgstr "Opcije Uvoza/Izvoza"
+
+#: admin/options.php:310
+msgid "Import"
+msgstr "Uvoz"
+
+#: admin/options.php:313
+msgid "Import Theme options"
+msgstr "Uvezi temu"
+
+#: admin/options.php:315
+msgid "Export"
+msgstr "Izvoz"
+
+#: admin/options.php:319
+msgid "Export Theme options"
+msgstr "Izvezi temu"
+
+#: admin/options.php:329
+msgid "Uninstall theme"
+msgstr "Deinstaliraj temu"
+
+#: admin/options.php:332
+msgid "<strong>Be careful!</strong> Uninstalling the theme will remove all of the theme's options from the database. Do this only if you decide not to use the theme anymore."
+msgstr "<strong>Budite obazrivi!</strong> Deinstaliranjem teme ćete ukloniti sve opcije teme iz baze podataka. Učinite ovo samo ako odlučite da ne koristite ovu temu ikada više."
+
+#: admin/options.php:333
+msgid "If you just want to try another theme, there is no need to uninstall this theme. Simply activate the other theme in the Appearance &gt; Themes admin page."
+msgstr "Ako želite da pokušate sa drugom temom , nema potrebe da deinstalirate ovu temu. Jednostavno aktivirajte drugu temu u  Izgled > Teme admin stranici"
+
+#: admin/options.php:334
+msgid "Note that uninstalling this theme <strong>does not remove</strong> the theme's files. To delete the files after you have uninstalled this theme, go to Appearances &gt; Themes and delete the theme from there."
+msgstr "Uočite da deinstaliranje ove teme <strong> ne uklanja </strong> fajlove teme. Da obrišete fajlove pošto ste deinstalirali ovu temu, idite na Izgled > Teme i obrisite teme odatle."
+
+#: admin/options.php:351
+msgid "The preview will be updated when the \"Save Options\" button above is clicked."
+msgstr "Pregled će biti ažuriran kada se \"Sačuvajte opcije\" dugme iznad klikne."
+
+#: admin/uninstall.php:24
+#, php-format
+msgid "Theme uninstalled. Redirecting to %s"
+msgstr "Tema je deinstalirana. Redirekcija %s"
+
+#: admin/user.php:7
+msgid "Graphene-specific User Profile Information"
+msgstr "Informacije korisničkog profila specifičnog za Graphene"
+
+#: admin/user.php:8
+msgid "The settings defined here are used only with the Graphene theme."
+msgstr "Podešavanja koja su definisana ovde se koriste samo sa Graphene temom."
+
+#: admin/user.php:12
+msgid "Author profile image URL"
+msgstr "URL slike autorovog profila"
+
+#: admin/user.php:13
+msgid "You can specify the image to be displayed as the author's profile image in the Author's page. If no URL is defined here, the author's <a href=\"http://www.gravatar.com\">Gravatar</a> will be used."
+msgstr "Možete odrediti da slika bude prikazana kao što je autorova profil slika na njegovoj stranici. Ako URL nije definisan ovde, autorov <a href=\"http://www.gravatar.com\">Gravatar</a> će biti korišćen."
+
+#: admin/user.php:17
+msgid "Please enter the full URL (including <code>http://</code>) to your profile image."
+msgstr "Molimo da  unesete pun URL (uključujući <code>http://</code>) na vašu profil sliku."
+
+#: admin/user.php:17
+msgid "<strong>Important: </strong>Image width must be less than or equal to <strong>150px</strong>."
+msgstr "<strong>Važno: </strong>širina slike mora biti jednaka ili manja od <strong>150px</strong>."
+
+#: admin/js/admin.js.php:47
+msgid "Social Media name"
+msgstr "Social Media ime"
+
+#: admin/js/admin.js.php:50
+msgid "Name of the social media, e.g. LinkedIn, etc."
+msgstr "Ime social media, npr. LinkedIn itd."
+
+#: admin/js/admin.js.php:54
+msgid "Social Media title"
+msgstr "Social Media naslov"
+
+#: admin/js/admin.js.php:57
+msgid "Title for the social media, leave empty for generated title."
+msgstr "Naslov za social media, ostavite prazno za generisani naslov."
+
+#: admin/js/admin.js.php:61
+msgid "Social Media profile URL"
+msgstr "URL do Social Media profila"
+
+#: admin/js/admin.js.php:64
+msgid "URL to your page for the social media."
+msgstr "URL do Vaše stranice za social media."
+
+#: admin/js/admin.js.php:68
+msgid "Social Media icon URL"
+msgstr "Social Media URL ikone"
+
+#: admin/js/admin.js.php:71
+#, php-format
+msgid "URL to the social media icon. Note: the theme uses the %s icon set for the social media icons. Please do not hotlink the icons on the site. Download the icons you need and upload them to your server instead."
+msgstr "URL do social media ikone  <strong>Napomena:</strong> tema koristi %s set ikona za social media ikone. Nemojte da hotlinkujete ikone na sajtu. Daunloudujte ikone koje su vam potrebne i aploudujte ih umesto toga na svoj server."
+
+#. translators: %1$s is the comment date, %2$s is the comment time
+#: includes/theme-comments.php:34
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "%1$s u %2$s"
+
+#: includes/theme-comments.php:36
+msgid "Edit comment"
+msgstr "Izmeniti komentar"
+
+#: includes/theme-comments.php:40
+msgid "Reply"
+msgstr "Odgovoriti"
+
+#: includes/theme-comments.php:51
+msgid "Your comment is awaiting moderation."
+msgstr "Vaš komentar čeka odobrenje"
+
+#: includes/theme-comments.php:76
+msgid "Name:"
+msgstr "Ime:"
+
+#: includes/theme-comments.php:81
+msgid "Email:"
+msgstr "Email:"
+
+#: includes/theme-comments.php:86
+msgid "Website:"
+msgstr "Vebsajt:"
+
+#: includes/theme-comments.php:100
+msgid "Message:"
+msgstr "Poruka:"
+
+#: includes/theme-functions.php:72
+#, php-format
+msgid "Follow %s on Twitter"
+msgstr "Pratite %s na Tviteru"
+
+#: includes/theme-functions.php:75
+#, php-format
+msgid "Visit %s's Facebook page"
+msgstr "Posetite %s's Facebook stranicu"
+
+#: includes/theme-functions.php:97
+#, php-format
+msgid "Visit %1$s's %2$s page"
+msgstr "Posetite %1$s's %2$s stranicu"
+
+#: includes/theme-loop.php:85
+msgid "Continue reading &raquo;"
+msgstr "Pročitaj više &raquo;"
+
+#: includes/theme-loop.php:137
+msgid "Older posts &laquo;"
+msgstr "Stari postovi &laquo;"
+
+#: includes/theme-loop.php:138
+msgid "&raquo; Newer posts"
+msgstr "&raquo; Noviji članci"
+
+#: includes/theme-loop.php:140
+msgid "Next page &raquo;"
+msgstr "Sledeća stranica &raquo;"
+
+#: includes/theme-loop.php:141
+msgid "&laquo; Previous page"
+msgstr "&laquo; Prethodna stranica"
+
+#: includes/theme-loop.php:221
+msgid "<strong>ERROR: You must supply the post ID to get the image from as an argument when calling the graphene_get_post_image() function.</strong>"
+msgstr "<strong>GREŠKA: Morate dodati ID članka kao argument da biste dobili sliku kada pozivate graphene_get_post_image() function.</strong>"
+
+#: includes/theme-menu.php:65
+msgid "Home"
+msgstr "Početna"
+
+#: includes/theme-panes.php:93
+msgid "Read more"
+msgstr "Pročitaj više"
+
+#: includes/theme-setup.php:90
+msgid "Header Menu"
+msgstr "Meni zaglavlja"
+
+#: includes/theme-setup.php:91
+msgid "Secondary Menu"
+msgstr "Sekundarni Meni"
+
+#: includes/theme-setup.php:92
+msgid "Footer Menu"
+msgstr "Meni podnožja"
+
+#: includes/theme-setup.php:125
+msgid "Header image by Syahir Hakim"
+msgstr "Slika zaglavlja od strane Syahir Hakim"
+
+#: includes/theme-setup.php:129
+msgid "This is the default Graphene theme header image, cropped from image by Quantin Houyoux at sxc.hu"
+msgstr "Ovo je podrazumevana slika zaglavlja Graphene teme, isečena od strane Quantin Houyoux at sxc.hu"
+
+#: includes/theme-setup.php:133
+#: includes/theme-setup.php:137
+#: includes/theme-setup.php:141
+#: includes/theme-setup.php:145
+#: includes/theme-setup.php:149
+msgid "Header image cropped from image by Ilco at sxc.hu"
+msgstr "Slika zaglavlja isečena iz slike Ilco na sxc.hu"
+
+#: includes/theme-setup.php:204
+msgid "Sidebar Widget Area"
+msgstr "Polje za vidžete u Sajdbaru"
+
+#: includes/theme-setup.php:206
+msgid "The first sidebar widget area (will always be displayed on the right hand side)."
+msgstr "Prvo Sajdbar vidžet područje (uvek će biti prikazano na desnoj strani)"
+
+#: includes/theme-setup.php:213
+msgid "Sidebar Two Widget Area"
+msgstr "Drugo vidžet polje u Sajdbaru"
+
+#: includes/theme-setup.php:215
+msgid "The second sidebar widget area (will always be displayed on the left hand side)."
+msgstr "Drugo Sajdbar vidžet polje (dostupno samo u lejautu sa tri kolone)"
+
+#: includes/theme-setup.php:222
+msgid "Footer Widget Area"
+msgstr " Vidžet polje podnožja"
+
+#: includes/theme-setup.php:224
+msgid "The footer widget area. Leave empty to disable. Set the number of columns to display at the theme's Display Options page."
+msgstr "Vidžet polje podnožja. Ostavite prazno da ne bude prikazano. Postavite broj kolona koje ćete prikazati na stranici Opcije Prikazivanja. "
+
+#: includes/theme-setup.php:239
+msgid "Front Page Sidebar Widget Area"
+msgstr "Polje za Sajdbar vidžet na početnoj stranici"
+
+#: includes/theme-setup.php:241
+msgid "The first sidebar widget area that will only be displayed on the front page."
+msgstr "Prvo Sajdbar vidžet polje koje će biti prikazano na početnoj stranici"
+
+#: includes/theme-setup.php:248
+msgid "Front Page Sidebar Two Widget Area"
+msgstr "Polje za drugi vidžet Sajdbar na početnoj stranici  "
+
+#: includes/theme-setup.php:250
+msgid "The second sidebar widget area that will only be displayed on the front page."
+msgstr "Drugo Sajdbar vidžet polje koje će biti prikazano samo na početnoj stranici."
+
+#: includes/theme-setup.php:259
+msgid "Front Page Footer Widget Area"
+msgstr "Polje u podnožju za vidžet na početnoj stranici"
+
+#: includes/theme-setup.php:261
+msgid "The footer widget area that will only be displayed on the front page. Leave empty to disable. Set the number of columns to display at the theme's Display Options page."
+msgstr "Polje u podnožju za vidžet  koje se prikazuje samo na početnoj stranici. Ostavite prazno da ne bude prikazano. Postavite broj kolona za prikaz na stranici Opcije prikazivanjai teme."
+
+#: includes/theme-setup.php:271
+msgid "Header Widget Area"
+msgstr "Vidžet polje zaglavlja"
+
+#: includes/theme-setup.php:273
+msgid "The header widget area."
+msgstr "Vidžet polje za zaglavlje"
+
+#: includes/theme-setup.php:290
+#, php-format
+msgid "Dynamically added widget area. This widget area is attached to the %s action hook."
+msgstr "Dinamički dodato vidžet polje. Ovo vidžet polje je prikačeno na %s action hook."
+
+#: includes/theme-slider.php:115
+#: includes/theme-slider.php:143
+msgid "View full post"
+msgstr "Pogledaj ceo članak"
+
+#: includes/theme-widgets.php:14
+msgid "Display the latest Twitter status updates."
+msgstr "Prikažite poslednje Twitter status informacije"
+
+#: includes/theme-widgets.php:46
+msgid "Loading tweets..."
+msgstr "Učitavanje tvitova..."
+
+#: includes/theme-widgets.php:50
+msgid "Follow me on Twitter"
+msgstr "Pratite me na twitter-u"
+
+#: includes/theme-widgets.php:60
+msgid "follower"
+msgstr "pratilac"
+
+#: includes/theme-widgets.php:61
+msgid "followers"
+msgstr "pratilaca"
+
+#: includes/theme-widgets.php:93
+msgid "Latest tweets"
+msgstr "Najnoviji tvitovi"
+
+#: includes/theme-widgets.php:100
+msgid "Title:"
+msgstr "Naslov:"
+
+#: includes/theme-widgets.php:104
+msgid "Twitter Username:"
+msgstr "Tviter korisničko ime:"
+
+#: includes/theme-widgets.php:108
+msgid "Number of tweets to display:"
+msgstr "Broj tvitova koji se prikazuju:"
+
+#: includes/theme-widgets.php:112
+msgid "Show followers count"
+msgstr "Prikaži broj pratilaca"
+
+#: includes/theme-widgets.php:116
+msgid "Open links in new window"
+msgstr "Otvorite linkove u novom prozoru"
+

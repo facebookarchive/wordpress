@@ -1,0 +1,8 @@
+/**
+ * 1 column (content) fluid layout
+ * 
+ */
+
+.container { min-width:960px;max-width:2400px;width:95%;margin:20px 3%;}
+.hfeed { width: 100%;min-width:960px; }
+

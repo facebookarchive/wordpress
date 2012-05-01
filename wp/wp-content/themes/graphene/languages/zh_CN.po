@@ -1,0 +1,1338 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Graphene chinese zh_CN (version 1.1.1)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-02-19 16:31+0800\n"
+"PO-Revision-Date: 2011-02-22 00:39+0800\n"
+"Last-Translator: Ren.me <gfcyz@msn.com>\n"
+"Language-Team: RENME <gfcyz@msn.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_n;esc_attr_e;esc_attr__\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: archive.php:25
+#, php-format
+msgid "Daily Archive: <span>%s</span>"
+msgstr "日存档： <span>%s</span>"
+
+#: archive.php:27
+#, php-format
+msgid "Monthly Archive: <span>%s</span>"
+msgstr "月存档： <span>%s</span>"
+
+#: archive.php:29
+#, php-format
+msgid "Yearly Archive: <span>%s</span>"
+msgstr "年存档： <span>%s</span>"
+
+#: archive.php:31
+#: category.php:14
+#, php-format
+msgid "Category Archive: <span>%s</span>"
+msgstr "目录存档： <span>%s</span>"
+
+#: archive.php:33
+msgid "Blog Archive"
+msgstr "博客存档"
+
+#: author.php:33
+msgid "Author's posts listings"
+msgstr "作者文章发布列表"
+
+#: comments.php:19
+msgid "This post is password protected. Enter the password to view any comments."
+msgstr "本文受密码保护。请输入密码查看评论。"
+
+#: comments.php:40
+msgid "No comment yet"
+msgstr "没有评论"
+
+#: comments.php:40
+#: loop-author.php:90
+#: loop.php:127
+msgid "1 comment"
+msgstr "1 条评论"
+
+#: comments.php:40
+#: loop-author.php:90
+#: loop.php:127
+#, php-format
+msgid "% comments"
+msgstr "% 条评论"
+
+#: comments.php:41
+msgid "No ping yet"
+msgstr "未链接"
+
+#: comments.php:41
+msgid "1 ping"
+msgstr "1 已链接"
+
+#: comments.php:41
+msgid "% pings"
+msgstr "% 已链接"
+
+#: comments.php:79
+msgid "Comments have been disabled."
+msgstr "禁止评论。"
+
+#: comments.php:94
+#, php-format
+msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes: %s"
+msgstr "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes: %s"
+
+#: comments.php:99
+msgid "Your email address will not be published."
+msgstr "呢称和邮箱是必填项，您的邮箱只有管理员可见。"
+
+#: comments.php:102
+#: functions.php:927
+msgid "Submit Comment"
+msgstr "提交评论"
+
+#: footer.php:47
+msgid "Except where otherwise noted, content on this site is licensed under a <a href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">Creative Commons Licence</a>."
+msgstr "Except where otherwise noted, content on this site is licensed under a <a href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">Creative Commons Licence</a>."
+
+#: footer.php:59
+msgid "Valid XHTML 1.0 Strict"
+msgstr "Valid XHTML 1.0 Strict"
+
+#: footer.php:60
+msgid "Valid CSS"
+msgstr "Valid CSS"
+
+#: footer.php:60
+msgid "Valid CSS Level 2.1"
+msgstr "Valid CSS Level 2.1"
+
+#: footer.php:82
+#, php-format
+msgid "%1$s uses %2$s theme by %3$s."
+msgstr "%1$s uses %2$s theme by %3$s."
+
+#: functions.php:178
+msgid "Header Menu"
+msgstr "顶部菜单"
+
+#: functions.php:179
+msgid "Secondary Menu"
+msgstr "二级菜单"
+
+#: functions.php:222
+msgid "Header image by Syahir Hakim"
+msgstr "Header image by Syahir Hakim"
+
+#: functions.php:228
+msgid "This is the default Graphene theme header image, cropped from image by Quantin Houyoux at sxc.hu"
+msgstr "This is the default Graphene theme header image, cropped from image by Quantin Houyoux at sxc.hu"
+
+#: functions.php:234
+#: functions.php:240
+#: functions.php:246
+#: functions.php:252
+#: functions.php:258
+msgid "Header image cropped from image by Ilco at sxc.hu"
+msgstr "Header image cropped from image by Ilco at sxc.hu"
+
+#: functions.php:470
+msgid "Home"
+msgstr "主页"
+
+#: functions.php:508
+msgid " says:"
+msgstr " 说："
+
+#: functions.php:514
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "%1$s 在 %2$s"
+
+#: functions.php:516
+msgid "Edit comment"
+msgstr "编辑评论"
+
+#: functions.php:520
+msgid "Reply"
+msgstr "回复"
+
+#: functions.php:531
+msgid "Your comment is awaiting moderation."
+msgstr "你的评论正在等待审查。"
+
+#: functions.php:624
+msgid "Sidebar Widget Area"
+msgstr "边栏区 Widget"
+
+#: functions.php:626
+msgid "The first sidebar widget area (available in two and three column layouts)."
+msgstr "第一边栏区 widget （可用二或三栏布局）。"
+
+#: functions.php:634
+msgid "Sidebar Two Widget Area"
+msgstr "边栏二区  Widget"
+
+#: functions.php:636
+msgid "The second sidebar widget area (only available in three column layouts)."
+msgstr "第二边栏区 widget (只可用三栏布局）。"
+
+#: functions.php:644
+msgid "Footer Widget Area"
+msgstr "底部 Widget"
+
+#: functions.php:646
+msgid "The footer widget area. Leave empty to disable. Set the number of columns to display at the theme's Display Options page."
+msgstr "底部 widget。留空默认未开启。设置栏目数字，这将显示在主题选项相应区域。"
+
+#: functions.php:662
+msgid "Front Page Sidebar Widget Area"
+msgstr "首页边栏区 widget"
+
+#: functions.php:664
+msgid "The first sidebar widget area that will only be displayed on the front page."
+msgstr "第一边栏 widget 将只会显示在主页。"
+
+#: functions.php:672
+msgid "Front Page Sidebar Two Widget Area"
+msgstr "首页边栏二区 widget"
+
+#: functions.php:674
+msgid "The second sidebar widget area that will only be displayed on the front page."
+msgstr "第二边栏区 widget 将只会显示在主页。"
+
+#: functions.php:684
+msgid "Front Page Footer Widget Area"
+msgstr "首页底部 Widget"
+
+#: functions.php:686
+msgid "The footer widget area that will only be displayed on the front page. Leave empty to disable. Set the number of columns to display at the theme's Display Options page."
+msgstr "底部 widget 只会显示在首页。留空默认未开启。设置栏目数字，这将显示在主题选项相应区域。"
+
+#: functions.php:697
+msgid "Header Widget Area"
+msgstr "页眉区 Widget"
+
+#: functions.php:699
+msgid "The header widget area."
+msgstr "页面区 widget。"
+
+#: functions.php:726
+msgid "Display the latest Twitter status updates."
+msgstr "显示最新Twitter状态更新。"
+
+#: functions.php:751
+msgid "Follow me on Twitter"
+msgstr "从 Twitter 关注我"
+
+#: functions.php:788
+msgid "Latest tweets"
+msgstr "最新 tweets"
+
+#: functions.php:793
+msgid "Title:"
+msgstr "题目:"
+
+#: functions.php:797
+msgid "Twitter Username:"
+msgstr "Twitter 用户名:"
+
+#: functions.php:801
+msgid "Number of tweets to display:"
+msgstr "显示 tweets 数目:"
+
+#: functions.php:835
+msgid "Graphene Options"
+msgstr "Graphene 选项"
+
+#: functions.php:839
+msgid "Graphene FAQs"
+msgstr "Graphene 常见问题"
+
+#: functions.php:908
+msgid "Name:"
+msgstr "昵称:"
+
+#: functions.php:909
+msgid "Email:"
+msgstr "邮件:"
+
+#: functions.php:910
+msgid "Website:"
+msgstr "网站:"
+
+#: functions.php:920
+msgid "Message:"
+msgstr "留言:"
+
+#: functions.php:948
+msgid "Continue reading &raquo;"
+msgstr "继续阅读 &raquo;"
+
+#: functions.php:995
+msgid "Older posts &laquo;"
+msgstr "旧文章 &laquo;"
+
+#: functions.php:996
+msgid "&raquo; Newer posts"
+msgstr "&raquo; 新文章"
+
+#: functions.php:1169
+msgid "View full post"
+msgstr "阅读全文"
+
+#: functions.php:1304
+msgid "<strong>ERROR: You must supply the post ID to get the image from as an argument when calling the graphene_get_post_image() function.</strong>"
+msgstr "<strong>ERROR: You must supply the post ID to get the image from as an argument when calling the graphene_get_post_image() function.</strong>"
+
+#: header.php:65
+msgid "Subscribe to RSS feed"
+msgstr "订阅 RSS"
+
+#: header.php:108
+#: header.php:117
+msgid "Go back to the front page"
+msgstr "返回首页"
+
+#: loop-author.php:23
+msgid "Author's details"
+msgstr "作者详细信息"
+
+#: loop-author.php:25
+#, php-format
+msgid "<strong>Name:</strong> %1$s %2$s"
+msgstr "<strong>姓名:</strong> %1$s %2$s"
+
+#: loop-author.php:26
+#, php-format
+msgid "<strong>Date registered:</strong> %1$s"
+msgstr "<strong>注册日期:</strong> %1$s"
+
+#: loop-author.php:35
+msgid "Biography"
+msgstr "地区"
+
+#: loop-author.php:53
+msgid "Latest posts"
+msgstr "最新发表"
+
+#: loop-author.php:56
+#: loop-author.php:90
+#: search-404.php:24
+#, php-format
+msgid "Permalink Link to %s"
+msgstr "链接到 %s"
+
+#: loop-author.php:56
+#: loop-author.php:90
+#: loop-children.php:69
+#: loop.php:40
+msgid "(No title)"
+msgstr "(无标题)"
+
+#: loop-author.php:85
+msgid "Most commented posts"
+msgstr "最多评论文章"
+
+#: loop-author.php:90
+#: loop.php:127
+msgid "Leave comment"
+msgstr "发表评论"
+
+#: loop-children.php:69
+#: loop-children.php:77
+#: loop.php:40
+#, fuzzy, php-format
+msgid "Permalink to %s"
+msgstr "链接到 %s"
+
+#: loop-children.php:77
+msgid "View page &raquo;"
+msgstr "阅读 &raquo; 页"
+
+#: loop.php:58
+msgid "Edit post"
+msgstr "编辑文章"
+
+#: loop.php:76
+msgid "by"
+msgstr "文章由"
+
+#: loop.php:91
+msgid "Read the rest of this entry &raquo;"
+msgstr "继续阅读 &raquo;"
+
+#: loop.php:105
+msgid "<div class=\"link-pages\"><p><strong>Pages:</strong> "
+msgstr "<div class=\"link-pages\"><p><strong>页数：</strong> "
+
+#: loop.php:115
+msgid "Tags:"
+msgstr "标签:"
+
+#: loop.php:115
+msgid "This post has no tag"
+msgstr "没有标签"
+
+#: loop.php:140
+msgid "About the author"
+msgstr "关于作者"
+
+#: loop.php:180
+msgid "Not found"
+msgstr "没有找到"
+
+#: loop.php:185
+msgid "Sorry, but you are looking for something that isn't here. Wanna try a search?"
+msgstr "抱歉，没有找到。要不试试搜索？"
+
+#: loop.php:187
+msgid "Sorry, but no results were found for that keyword. Wanna try an alternative keyword search?"
+msgstr "抱歉，未找到任何与关键字匹配的信息。要不试试其他关键字？"
+
+#: search-404.php:3
+msgid "Error 404 - Page Not Found"
+msgstr "Error 404 - 页面空"
+
+#: search-404.php:5
+msgid "Sorry, I've looked everywhere but I can't find the page you're looking for."
+msgstr "抱歉，已搜索所以页面。"
+
+#: search-404.php:6
+msgid "If you follow the link from another website, I may have removed or renamed the page some time ago. You may want to try searching for the page:"
+msgstr "如果你是从外部链接到此，我可能已经移除或者重命名本页面。你可以尝试一下页面搜索："
+
+#: search-404.php:14
+msgid "Suggested results"
+msgstr "建议结果"
+
+#: search-404.php:18
+#, php-format
+msgid "I've done a courtesy search for the term %s for you. See if you can find what you're looking for in the list below:"
+msgstr "Hemos puesto en práctica una búsqueda de cortesía correspondiente al término %s que has utilizado. Comprueba si puedes encontrar lo que estabas buscando en la lista que tienes a continuación:"
+
+#: search-404.php:35
+msgid "<strong>Sorry, couldn't find anything.</strong> Try searching for alternative terms using the search form above."
+msgstr "<strong>Lo sentimos, pero no hemos podido encontrar nada.</strong>. Inténtalo con un patrón de búsqueda alternativo mediante el formulario que tienes sobre estas líneas."
+
+#: search.php:11
+#, php-format
+msgid "Search results for: <span>%s</span>"
+msgstr "搜索 <span>%s</span> 结果。"
+
+#: searchform.php:3
+#: searchform.php:4
+msgid "Search"
+msgstr "搜索"
+
+#: sidebar-two.php:36
+#: sidebar.php:42
+msgid "Meta"
+msgstr "Meta"
+
+#: sidebar-two.php:41
+#: sidebar.php:47
+msgid "Posts RSS"
+msgstr "文章 RSS "
+
+#: sidebar-two.php:42
+#: sidebar.php:48
+msgid "Comments RSS"
+msgstr "评论 RSS"
+
+#: sidebar-two.php:44
+#: sidebar.php:50
+#, php-format
+msgid "Powered by %s"
+msgstr "Powered by %s"
+
+#: sidebar-two.php:44
+#: sidebar.php:50
+msgid "Powered by WordPress, state-of-the-art semantic personal publishing platform."
+msgstr "Powered by WordPress, state-of-the-art semantic personal publishing platform."
+
+#: sidebar-two.php:49
+#: sidebar.php:35
+msgid "Archives"
+msgstr "存档"
+
+#: tag.php:14
+#, php-format
+msgid "Tag Archive: <span>%s</span>"
+msgstr "标签存档： <span>%s</span>"
+
+#: admin/custom-fields.php:15
+msgid "Graphene post-specific options"
+msgstr "Graphene 具体发布选项"
+
+#: admin/custom-fields.php:16
+msgid "Graphene page-specific options"
+msgstr "Graphene 具体页面选项"
+
+#: admin/custom-fields.php:82
+msgid "These settings will only be applied to this particular post or page you're editing. They will override the global settings set in the Graphene Options or Graphene Display options page."
+msgstr "这些设置将只对本文章/页面有效。本设置将会取代 Graphene 选项或者 Graphene 显示里相应的设置。"
+
+#: admin/custom-fields.php:83
+msgid "Slider options"
+msgstr "滑块设置"
+
+#: admin/custom-fields.php:87
+#: admin/options.php:201
+msgid "Slider image"
+msgstr "滑块图片"
+
+#: admin/custom-fields.php:91
+#: admin/custom-fields.php:117
+msgid "Use global setting"
+msgstr "使用全局设置"
+
+#: admin/custom-fields.php:92
+#: admin/options.php:205
+msgid "Don't show image"
+msgstr "不显示图片"
+
+#: admin/custom-fields.php:93
+#: admin/options.php:206
+msgid "Featured Image"
+msgstr "特色图片"
+
+#: admin/custom-fields.php:94
+#: admin/options.php:207
+msgid "First image in post"
+msgstr "文章中第一张图片"
+
+#: admin/custom-fields.php:95
+#: admin/options.php:208
+msgid "Custom URL"
+msgstr "自定义 URL"
+
+#: admin/custom-fields.php:101
+#: admin/options.php:214
+msgid "Custom slider image URL"
+msgstr "自定义滑块图片 URL"
+
+#: admin/custom-fields.php:105
+#: admin/options.php:218
+msgid "Make sure you select Custom URL in the slider image option above to use this custom url."
+msgstr "请确认在上面下拉框中选择自定义URL选项。"
+
+#: admin/custom-fields.php:109
+msgid "Display options"
+msgstr "显示选项"
+
+#: admin/custom-fields.php:113
+msgid "AddThis Social Sharing button"
+msgstr "AddThis  分享按钮"
+
+#: admin/custom-fields.php:118
+msgid "Show button"
+msgstr "显示按钮"
+
+#: admin/custom-fields.php:119
+msgid "Hide button"
+msgstr "隐藏按钮"
+
+#: admin/faq.php:12
+msgid "Graphene's Frequently Asked Questions"
+msgstr "Graphene的常见问题"
+
+#: admin/faq.php:15
+msgid "Where should I go for the theme's support?"
+msgstr "到哪寻找本主题帮助？"
+
+#: admin/faq.php:16
+msgid "Please direct all support requests for the theme at the theme's <a href=\"http://forum.khairul-syahir.com/forum/graphene-wordpress-theme\">Support Forum</a>."
+msgstr "请直接到本主题 <a href=\"http://forum.khairul-syahir.com/forum/graphene-wordpress-theme\">支持论坛</a> 寻找支持！"
+
+#: admin/faq.php:19
+msgid "The post's featured image is replacing my header image. Help!"
+msgstr "文章特色图片替换顶部图片，帮助！"
+
+#: admin/faq.php:20
+msgid "This is actually one of the theme's features, based on the feature in the default TwentyTen theme. Any featured image that has a size of greater than or equal to the theme's header image size (900 x 198 pixels) will replace the header image when the post/page that featured image is assigned to is being displayed. It enables you to have different header image for different posts and/or pages."
+msgstr "This is actually one of the theme's features, based on the feature in the default TwentyTen theme. Any featured image that has a size of greater than or equal to the theme's header image size (900 x 198 pixels) will replace the header image when the post/page that featured image is assigned to is being displayed. It enables you to have different header image for different posts and/or pages."
+
+#: admin/faq.php:21
+msgid "If you want to disable this feature, simply tick the <em>Disable Featured Image replacing header image</em> option in the <a href=\"themes.php?page=graphene_options&tab=display\">Graphene Options</a> page, under Display > Header Display Options."
+msgstr "如果要取消这一特点，请点击 <em>使特色图片代替顶部图片失效</em> 选项，选项在 <a href=\"themes.php?page=graphene_options&tab=display\">Graphene 选择</a> 中， 显示 > 顶部显示选项。"
+
+#: admin/faq.php:24
+msgid "Can I modify Graphene to my heart's content without paying anything?"
+msgstr "是否可修改Graphene主题而不支付费用？"
+
+#: admin/faq.php:25
+msgid "The Graphene Wordpress theme, along with all the other themes in the Wordpress.org Official Free Themes Directory, is released under the GNU General Public License (GPL) Version 2. The full text of that licence is included with the theme in the <code>licence.txt</code> file in the theme's folder. Releasing the theme under that licence means, among others, that you are <em>free to modify the theme in any way for any purpose (including commercial)</em> without any obligation to the theme's author. However, if you decide to redistribute the theme, the licence dictates that you must release the theme under the same licence, GPLv2."
+msgstr "本主题为官方免费主题，是发布于 GNU General Public License (GPL) Version 2 授权下，具体条款在主题文件夹的<code>licence.txt</code>文件中。在该条款授权下意味着<em>你可以免费使用本主题，无论任何方式任何目的（包括商业用途）</em> 而不必经过作者的授权。然而，如果你要重新发布主题，则必须使用相同的授权条款，GNU General Public License (GPL) Version 2。"
+
+#: admin/faq.php:26
+msgid "But of course, the author would always appreciate <a href=\"themes.php?page=graphene_options\">donations</a> to support ongoing and future developments of the theme."
+msgstr "理所当然的，对于<a href=\"themes.php?page=graphene_options\">资助本主题</a>以支持后续发展，作者表示感激！"
+
+#: admin/faq.php:29
+msgid "If the theme is released under GPLv2, what is this Creative Commons licence in the theme's footer?"
+msgstr "If the theme is released under GPLv2, what is this Creative Commons licence in the theme's footer?"
+
+#: admin/faq.php:30
+msgid "The Creative Commons licence is a popular licence nowadays that are used by a lot of web-based content authors to licence their work such that it protects their intellectual property but in the same time allows its free distribution. It is included with the theme simply to make it easy for the theme's users to make use of the licence for the content they publish. Theme users can remove it altogether via the theme's Options page should they wish not to use it."
+msgstr "The Creative Commons licence is a popular licence nowadays that are used by a lot of web-based content authors to licence their work such that it protects their intellectual property but in the same time allows its free distribution. It is included with the theme simply to make it easy for the theme's users to make use of the licence for the content they publish. Theme users can remove it altogether via the theme's Options page should they wish not to use it."
+
+#: admin/faq.php:31
+msgid "Put simply, <em>it is not the licence that is applied for the theme itself</em>, but just for the website's content should the theme user wants to use it."
+msgstr "Put simply, <em>it is not the licence that is applied for the theme itself</em>, but just for the website's content should the theme user wants to use it."
+
+#: admin/faq.php:34
+msgid "Is the theme compatible with this plugin or that plugin?"
+msgstr "本主题是否支持插件？"
+
+#: admin/faq.php:35
+msgid "I don't know. With so many plugins available for Wordpress, there's no way that I (or anybody else for that matter) can test for compatibility for all of them. Having said that, the theme is built with all the necessary Wordpress components included with it, so chances are most plugins will be compatible with the theme."
+msgstr "由于Wordpress插件众多，作者无法对所以插件的兼容性进行逐一测试。话虽如此，本主题是建立在所以Wordpress必要组件上的，所以大部分插件将得以兼容。"
+
+#: admin/faq.php:36
+msgid "My suggestion is to just install the plugin and try it. If you stumble into problem, ask for support from the plugin author first. If the plugin author says that it's a problems with the theme, you know where to find support."
+msgstr "作者建议直接安装插件并测试，如果有任何问题，可到问题插件支持论坛提问。如果插件作者指出问题与主题有关，请转向本主题论坛。"
+
+#: admin/options.php:42
+#: admin/uninstall.php:23
+msgid "Uninstall Graphene"
+msgstr "卸载 Graphene"
+
+#: admin/options.php:43
+msgid "Please confirm that you would like to uninstall the Graphene theme. All of the theme's options in the database will be deleted."
+msgstr "请确认你要卸载 Graphene 主题。所以主题设置将被删除。"
+
+#: admin/options.php:44
+msgid "This action is not reversible."
+msgstr "此操作不可逆。"
+
+#: admin/options.php:48
+#: admin/options.php:146
+msgid "Uninstall Theme"
+msgstr "卸载主题"
+
+#: admin/options.php:60
+msgid "Graphene Theme Options"
+msgstr "Graphene 主题选项"
+
+#: admin/options.php:62
+msgid "These are the global settings for the theme. You may override some of the settings in individual posts and pages."
+msgstr "以下是主题全局设置。你可以在单独文章或者页面中根据需要设置。"
+
+#: admin/options.php:66
+msgid "Settings saved."
+msgstr "设置保存。"
+
+#: admin/options.php:73
+msgid "General"
+msgstr "通用"
+
+#: admin/options.php:74
+msgid "Display"
+msgstr "显示"
+
+#: admin/options.php:106
+msgid "Save Options"
+msgstr "保存选项"
+
+#: admin/options.php:118
+msgid "Support the developer"
+msgstr "赞助作者"
+
+#: admin/options.php:121
+#, fuzzy
+msgid "Developing this awesome theme took a lot of effort and time, months and months of continuous voluntary unpaid work. If you like this theme or if you are using it for commercial websites, please consider a donation to the developer to help support future updates and development."
+msgstr "开发这个很棒的主题，作者付出了许多努力和精力。如果你喜欢这个主题或者你将它用与商业网站，请考虑捐助开发者以支持主题的后续更新和发展。"
+
+#: admin/options.php:136
+msgid "Uninstall theme"
+msgstr "卸载主题"
+
+#: admin/options.php:139
+msgid "<strong>Be careful!</strong> Uninstalling the theme will remove all of the theme's options from the database. Do this only if you decide not to use the theme anymore."
+msgstr "<strong>注意！</strong> 卸载主题将会从数据库中移除所有主题设置。只有当你决定不再使用这个主题时才进行卸载。"
+
+#: admin/options.php:140
+msgid "If you just want to try another theme, there is no need to uninstall this theme. Simply activate the other theme in the Appearance > Themes admin page."
+msgstr "如果你只是想换其他主题，则你不需要进行卸载。只需要在外观 > 主题选项中开启相应主题即可。"
+
+#: admin/options.php:141
+msgid "Note that uninstalling this theme <strong>does not remove</strong> the theme's files. To delete the files after you have uninstalled this theme, go to Appearances > Themes and delete the theme from there."
+msgstr "注意，卸载主题 <strong>不会移除</strong> 主题文件。 卸载后如需删除文件，请到外观 > 主题中选择本主题删除。"
+
+#: admin/options.php:168
+msgid "Slider Options"
+msgstr "滑块选项"
+
+#: admin/options.php:174
+msgid "Category to show in slider"
+msgstr "显示在滑块的分类"
+
+#: admin/options.php:175
+msgid "All posts within the category selected here will be displayed on the slider. Usage example: create a new category \"Featured\" and assign all posts to be displayed on the slider to that category, and then select that category here."
+msgstr "所以发布在此分类下的文章将会显示在滑块中。例如：新建一个分类如“特色”，然后选择发布在此分类下（你可以选择多个分类），然后在这里选择该分类显示。"
+
+#: admin/options.php:179
+msgid "Show latest posts"
+msgstr "显示最新发布"
+
+#: admin/options.php:180
+msgid "Show random posts"
+msgstr "随机显示发布"
+
+#: admin/options.php:193
+msgid "Number of posts to display"
+msgstr "显示文章数量"
+
+#: admin/options.php:223
+msgid "Slider display style"
+msgstr "滑块显示样式"
+
+#: admin/options.php:227
+msgid "Thumbnail and excerpt"
+msgstr "缩略图与摘要"
+
+#: admin/options.php:228
+msgid "Background image and excerpt"
+msgstr "背景图片与摘要"
+
+#: admin/options.php:229
+msgid "Full post content"
+msgstr "完整文章内容"
+
+#: admin/options.php:235
+msgid "Slider height"
+msgstr "滑块高度"
+
+#: admin/options.php:243
+msgid "Slider speed"
+msgstr "滑块速度"
+
+#: admin/options.php:246
+msgid "milliseconds"
+msgstr "毫秒"
+
+#: admin/options.php:247
+msgid "This is the duration that each slider item will be shown"
+msgstr "这是每个滑块停留时间"
+
+#: admin/options.php:252
+msgid "Move slider to bottom of page"
+msgstr "将滑块移到页面底部"
+
+#: admin/options.php:258
+msgid "Disable slider"
+msgstr "取消滑块"
+
+#: admin/options.php:271
+msgid "Front Page Options"
+msgstr "首页选项"
+
+#: admin/options.php:277
+msgid "Front page posts categories"
+msgstr "首页文章分类"
+
+#: admin/options.php:279
+msgid "Only posts that belong to the categories selected here will be displayed on the front page. Does not affect Static Front Page."
+msgstr "只有文章属于已选目录才会在首页显示。不会影响静态首页。"
+
+#: admin/options.php:284
+msgid "--Disabled--"
+msgstr "--失效--"
+
+#: admin/options.php:292
+msgid "You may select multiple categories by holding down the CTRL key."
+msgstr "可通过按下CTRL键选择多个分类。"
+
+#: admin/options.php:304
+msgid "Widget Area Options"
+msgstr "Widget 选项"
+
+#: admin/options.php:307
+msgid "Header widget area"
+msgstr "页面区 Widget"
+
+#: admin/options.php:308
+msgid "<strong>Important:</strong> This widget area is unstyled, as it is often used for advertisement banners, etc. If you enable it, make sure you style it to your needs using the Custom CSS option."
+msgstr "<strong>重要：</strong> 此 widget 区未定义格式， 由于此区域常用于广告横幅等。如开启，请确认使用自定义CSS选项定义格式。"
+
+#: admin/options.php:312
+msgid "Enable header widget area"
+msgstr "开启页面区 widget"
+
+#: admin/options.php:321
+msgid "Alternate Widgets"
+msgstr "Widgets 替换"
+
+#: admin/options.php:322
+msgid "You can enable the theme to show different widget areas in the front page than the rest of the website. If you enable this option, additional widget areas that will only be displayed on the front page will be added to the Widget settings page."
+msgstr "你可以使用主题设置在首页和在其他页面开启不同的 widget。如果选择这个选项，只在首页显示的 widget 区也会同时显示在小工具设置页面。"
+
+#: admin/options.php:325
+msgid "Enable alternate front page sidebar widget area"
+msgstr "开启另一个首页边栏 widget"
+
+#: admin/options.php:329
+msgid "Enable alternate front page footer widget area"
+msgstr "开启另一个首页底部 widget"
+
+#: admin/options.php:330
+msgid "You can also specify different column counts for the front page footer widget and the rest-of-site footer widget if you enable this option."
+msgstr "你可以同时为首页底部 widget 指定不同的栏数，开启时可用。"
+
+#: admin/options.php:343
+msgid "Feed Options"
+msgstr "订阅选项"
+
+#: admin/options.php:348
+msgid "Hide feed icon"
+msgstr "隐藏订阅图标"
+
+#: admin/options.php:352
+msgid "Use custom feed URL"
+msgstr "自定义订阅 URL"
+
+#: admin/options.php:355
+msgid "This custom feed URL will replace the default Wordpress RSS feed URL."
+msgstr "此自定义订阅 URL 将代替默认的 Wordpress RSS 订阅 URL。"
+
+#: admin/options.php:367
+msgid "Social Sharing Buttons"
+msgstr "分享按钮"
+
+#: admin/options.php:372
+msgid "Show social sharing button"
+msgstr "显示分享按钮"
+
+#: admin/options.php:376
+msgid "Show in Pages as well?"
+msgstr "是否在所以页面显示？"
+
+#: admin/options.php:381
+msgid "Your social sharing button code"
+msgstr "分享按钮代码"
+
+#: admin/options.php:382
+msgid "You can use codes from any popular social sharing sites, like Facebook, Digg, AddThis, etc."
+msgstr "可使用来自社交网站代码，如Facebook, Digg, AddThis 等。"
+
+#: admin/options.php:396
+msgid "Adsense Options"
+msgstr "AdSense 选项"
+
+#: admin/options.php:402
+msgid "Show Adsense advertising"
+msgstr "显示 AdSense 广告"
+
+#: admin/options.php:408
+msgid "Show ads on front page as well"
+msgstr "在首页显示"
+
+#: admin/options.php:414
+msgid "Your Adsense code"
+msgstr "你的 AdSense code"
+
+#: admin/options.php:427
+msgid "Google Analytics Options"
+msgstr "Google Analytics 选项"
+
+#: admin/options.php:430
+msgid "<strong>Note:</strong> the theme now places the Google Analytics script in the <code>&lt;head&gt;</code> element to better support the new asynchronous Google Analytics script. Please make sure you update your script to use the new asynchronous script from Google Analytics."
+msgstr "<strong>注意：</strong> 主题现已将 Google Analytics 脚步置与 <code>&lt;head&gt;</code> 以更好的支持新的异步 Google Analytics 脚步。请确保更新你的脚本以使用新的异布方式。"
+
+#: admin/options.php:433
+msgid "Enable Google Analytics tracking"
+msgstr "开启 Google Analytics tracking"
+
+#: admin/options.php:437
+msgid "Google Analytics tracking code"
+msgstr "Google Analytics tracking code"
+
+#: admin/options.php:438
+msgid "Make sure you include the full tracking code (including the <code>&lt;script&gt;</code> and <code>&lt;/script&gt;</code> tags) and not just the <code>UA-#######-#</code> code."
+msgstr "请确认包含完整的追踪代码 (包括 <code>&lt;script&gt;</code> 和 <code>&lt;/script&gt;</code>) 不只是 <code>UA-#######-#</code>。"
+
+#: admin/options.php:451
+msgid "Footer Options"
+msgstr "底部选项"
+
+#: admin/options.php:456
+msgid "Show Creative Commons logo"
+msgstr "显示 Creative Commons 标志"
+
+#: admin/options.php:461
+msgid "Copyright text (html allowed)"
+msgstr "版权文本 (可用 HTML 代码)"
+
+#: admin/options.php:462
+msgid "If this field is empty, the following default copyright text will be displayed:"
+msgstr "如留空，将显示以下默认版权信息："
+
+#: admin/options.php:468
+msgid "Do not show copyright info"
+msgstr "不显示版权信息"
+
+#: admin/options.php:488
+msgid "Header Display Options"
+msgstr "顶部显示选项"
+
+#: admin/options.php:494
+msgid "Use light-coloured header bars"
+msgstr "顶部和导航栏使用淡色"
+
+#: admin/options.php:500
+msgid "Link header image to front page"
+msgstr "链接顶部图片到首页"
+
+#: admin/options.php:503
+msgid "Check this if you disable the header texts and want the header image to be linked to the front page."
+msgstr "请确认，你将让网站名称失去链接回主页功能，转而替代为图片链接回首页。"
+
+#: admin/options.php:508
+msgid "Disable Featured Image replacing header image"
+msgstr "关闭特色图片替换顶部图片"
+
+#: admin/options.php:511
+msgid "Check this to prevent the posts Featured Image replacing the header image regardless of the featured image dimension."
+msgstr "选择此项防止以任意大小特色图片替换顶部图片。"
+
+#: admin/options.php:516
+msgid "Use random header image"
+msgstr "使用随机顶部图像"
+
+#: admin/options.php:520
+msgid "Check this to show a random header image (random image taken from the available default header images)."
+msgstr "按键以显示随机顶部图片（随机图片来自默认顶部图像中）"
+
+#: admin/options.php:521
+msgid "<strong>Note:</strong> only works on pages where a specific header image is not defined."
+msgstr "<strong>注意：</strong> 只有文字在顶部图片中是为定义。"
+
+#: admin/options.php:526
+msgid "Hide the top bar"
+msgstr "隐藏顶栏"
+
+#: admin/options.php:532
+msgid "Search box location"
+msgstr "搜索框位置"
+
+#: admin/options.php:536
+msgid "Top bar"
+msgstr "顶条"
+
+#: admin/options.php:537
+msgid "Navigation bar"
+msgstr "导航条"
+
+#: admin/options.php:550
+msgid "Column Options"
+msgstr "栏目选项"
+
+#: admin/options.php:556
+msgid "Column mode"
+msgstr "栏目模式"
+
+#: admin/options.php:606
+msgid "Posts Display Options"
+msgstr "文章显示选项"
+
+#: admin/options.php:612
+msgid "Show excerpts in front page"
+msgstr "在首页显示摘要"
+
+#: admin/options.php:618
+msgid "Hide post author"
+msgstr "隐藏文章作者"
+
+#: admin/options.php:624
+msgid "Post date display"
+msgstr "发布日期显示"
+
+#: admin/options.php:628
+msgid "Hidden"
+msgstr "隐藏"
+
+#: admin/options.php:629
+msgid "As an icon (without the year)"
+msgstr "图标（无年份）"
+
+#: admin/options.php:630
+msgid "As an icon (including the year)"
+msgstr "图标（包含年份）"
+
+#: admin/options.php:631
+msgid "As inline text"
+msgstr "内嵌文本"
+
+#: admin/options.php:633
+msgid "Note: displaying date as inline text allows more space for the content area, especially useful for a three-column layout configuration."
+msgstr "注意：显示日期为嵌入文本可留给内容更多空间，特别是使用三栏布局设置。"
+
+#: admin/options.php:638
+msgid "Hide post categories"
+msgstr "隐藏文章分类"
+
+#: admin/options.php:644
+msgid "Hide post tags"
+msgstr "隐藏文章标签"
+
+#: admin/options.php:650
+msgid "Hide post comment count"
+msgstr "隐藏评论数"
+
+#: admin/options.php:651
+msgid "Only affects posts listing (such as the front page) and not single post view."
+msgstr "这只会影响到文章列表（例如首页），不会影响到单独的文章页面。"
+
+#: admin/options.php:656
+msgid "Show post author's gravatar"
+msgstr "显示文章作者的 gravatar"
+
+#: admin/options.php:660
+msgid "Show post author's info"
+msgstr "显示文章作者的信息"
+
+#: admin/options.php:664
+msgid "Show More link for manual excerpts"
+msgstr "显示更多手动摘要链接"
+
+#: admin/options.php:677
+msgid "Comments Display Options"
+msgstr "评论显示选项"
+
+#: admin/options.php:683
+msgid "Hide allowed tags in comment form"
+msgstr "隐藏评论留言框下方标签"
+
+#: admin/options.php:696
+msgid "Text Style Options"
+msgstr "文本格式选项"
+
+#: admin/options.php:699
+msgid "Note that these are CSS properties, so any valid CSS values for each particular property can be used."
+msgstr "提示：下面为 CSS 格式，所以 CSS 值都可以使用。"
+
+#: admin/options.php:700
+msgid "Some example CSS properties values:"
+msgstr "一些 CSS 特性值："
+
+#: admin/options.php:703
+msgid "Text font:"
+msgstr "文本字体："
+
+#: admin/options.php:707
+msgid "Text size and line height:"
+msgstr "文本大小和线高："
+
+#: admin/options.php:711
+msgid "Text weight:"
+msgstr "文本重量："
+
+#: admin/options.php:715
+msgid "Text style:"
+msgstr "文本格式："
+
+#: admin/options.php:719
+msgid "Text colour:"
+msgstr "文本颜色："
+
+#: admin/options.php:723
+#: admin/options.php:864
+#: admin/options.php:893
+msgid "Leave field empty to use the default value."
+msgstr "留空则使用默认值。"
+
+#: admin/options.php:725
+msgid "Header Text"
+msgstr "顶部文本"
+
+#: admin/options.php:729
+msgid "Title text font"
+msgstr "标题文字字体"
+
+#: admin/options.php:735
+msgid "Title text size"
+msgstr "标题文字大小"
+
+#: admin/options.php:741
+msgid "Title text weight"
+msgstr "标题文字重量"
+
+#: admin/options.php:747
+msgid "Title text line height"
+msgstr "标题文字线高"
+
+#: admin/options.php:753
+msgid "Title text style"
+msgstr "标题文字格式"
+
+#: admin/options.php:762
+msgid "Description text font"
+msgstr "描述文字字体"
+
+#: admin/options.php:768
+msgid "Description text size"
+msgstr "描述文字大小"
+
+#: admin/options.php:774
+msgid "Description text weight"
+msgstr "描述文字重量"
+
+#: admin/options.php:780
+msgid "Description text line height"
+msgstr "描述文字线高"
+
+#: admin/options.php:786
+msgid "Description text style"
+msgstr "描述文字格式"
+
+#: admin/options.php:792
+msgid "Content Text"
+msgstr "内容文字"
+
+#: admin/options.php:796
+msgid "Text font"
+msgstr "文字字体"
+
+#: admin/options.php:802
+msgid "Text size"
+msgstr "文字大小"
+
+#: admin/options.php:808
+msgid "Text line height"
+msgstr "文字线高"
+
+#: admin/options.php:814
+msgid "Text colour"
+msgstr "文字颜色"
+
+#: admin/options.php:820
+msgid "Link Text"
+msgstr "链接文本"
+
+#: admin/options.php:824
+msgid "Link colour (normal state)"
+msgstr "链接颜色（标准状态）"
+
+#: admin/options.php:830
+msgid "Link colour (visited state)"
+msgstr "链接颜色（被访状态）"
+
+#: admin/options.php:836
+msgid "Link colour (hover state)"
+msgstr "链接颜色（悬停状态）"
+
+#: admin/options.php:842
+msgid "Text decoration (normal state)"
+msgstr "文本展示（标准状态）"
+
+#: admin/options.php:848
+msgid "Text decoration (hover state)"
+msgstr "文本展示（悬停状态）"
+
+#: admin/options.php:861
+msgid "Footer Widget Display Options"
+msgstr "底部 Widget 显示选项"
+
+#: admin/options.php:869
+msgid "Number of columns to display"
+msgstr "栏目显示数"
+
+#: admin/options.php:876
+msgid "Number of columns to display for front page footer widget"
+msgstr "首页底部 widget 栏目显示数"
+
+#: admin/options.php:890
+msgid "Navigation Menu Display Options"
+msgstr "导航菜单显示选项"
+
+#: admin/options.php:898
+msgid "Dropdown menu item width"
+msgstr "下拉菜单宽度"
+
+#: admin/options.php:911
+msgid "Miscellaneous Display Options"
+msgstr "杂项"
+
+#: admin/options.php:914
+msgid "Site title options"
+msgstr "站点标题设置"
+
+#: admin/options.php:915
+msgid "Use these tags to customise your own site title structure: <code>#site-name</code>, <code>#site-desc</code>, <code>#post-title</code>"
+msgstr "使用这些标签自定义站点标题格式： <code>#site-name</code>, <code>#site-desc</code>, <code>#post-title</code>"
+
+#: admin/options.php:919
+msgid "Custom front page site title"
+msgstr "自定义首页标题"
+
+#: admin/options.php:923
+msgid "Defaults to <code>#site-name &raquo; #site-desc</code>. The <code>#post-title</code> tag cannot be used here."
+msgstr "默认为 <code>#site-name &raquo; #site-desc</code>。<code>#post-title</code> 标签不可使用。"
+
+#: admin/options.php:928
+msgid "Custom content pages site title"
+msgstr "自定义内容页标题"
+
+#: admin/options.php:932
+msgid "Defaults to <code>#post-title &raquo; #site-name</code>."
+msgstr "默认为 <code>#post-title &raquo; #site-name</code>。"
+
+#: admin/options.php:937
+msgid "Favicon options"
+msgstr "图标设置"
+
+#: admin/options.php:941
+msgid "Favicon URL"
+msgstr "图标URL"
+
+#: admin/options.php:945
+msgid "Simply enter the full URL to your favicon file here to enable favicon. Make sure you include the <code>http://</code> in front of the URL as well."
+msgstr "输入完整URL开启图标。请确认要包含<code>http://</code>。"
+
+#: admin/options.php:957
+msgid "Custom CSS"
+msgstr "自定义CSS"
+
+#: admin/options.php:962
+msgid "Custom CSS styles"
+msgstr "自定义CSS样式"
+
+#: admin/options.php:964
+msgid "You can enter your own CSS codes below to modify any other aspects of the theme's appearance that is not included in the options."
+msgstr "在下面输入自己的CSS以更改其他方面未保护在本主题显示选项中。"
+
+#: admin/uninstall.php:24
+#, php-format
+msgid "Theme uninstalled. Redirecting to %s"
+msgstr "主题已删除。重新指向%s。"
+
+#: admin/uninstall.php:32
+msgid "ERROR: You are not authorised to perform that operation"
+msgstr "ERROR: 你没有权限执行。"
+
+#: admin/user.php:7
+msgid "Graphene-specific User Profile Information"
+msgstr "Graphene 具体用户信息"
+
+#: admin/user.php:8
+msgid "The settings defined here are used only with the Graphene theme."
+msgstr "这些设置只能作用于 Graphene 主题。"
+
+#: admin/user.php:12
+msgid "Author profile image URL"
+msgstr "作者图片 URL"
+
+#: admin/user.php:13
+msgid "You can specify the image to be displayed as the author's profile image in the Author's page. If no URL is defined here, the author's <a href=\"http://www.gravatar.com\">Gravatar</a> will be used."
+msgstr "你可以指定显示在作者页面的头像. 如果没有指定 URL，将会显示作者的 <a href=\"http://www.gravatar.com\">Gravatar</a>。"
+
+#: admin/user.php:17
+msgid "Please enter the URL to your profile image."
+msgstr "请填入图片的 URL。"
+
+#: admin/user.php:17
+msgid "<strong>Important: </strong>Image width must be less than or equal to <strong>150px</strong>."
+msgstr "<strong>重要提示: </strong>图片宽度必须少于或等于<strong>150px</strong>。"
+
+#~ msgid "Graphene Display"
+#~ msgstr "Graphene 显示"
+
+#~ msgid ""
+#~ "Please enter only numerical value for the footer widget column count."
+#~ msgstr "请为底部 widget 栏数输入有效值，只限数字。"
+
+#~ msgid ""
+#~ "Please enter only numerical value for the front page footer widget column "
+#~ "count."
+#~ msgstr "请为首页底部 widget 栏数输入有效值，只限数字。"
+
+#~ msgid ""
+#~ "Please enter only numerical value for the navigation menu dropdown item "
+#~ "width."
+#~ msgstr "请为导航下拉菜单显示个数输入有效值，只限数字。"
+
+#~ msgid "Graphene Display Options"
+#~ msgstr "Graphene 显示选项"
+
+#~ msgid "ERROR:"
+#~ msgstr "ERROR:"
+
+#~ msgid "Hide post date"
+#~ msgstr "隐藏发布日期"
+
+#~ msgid ""
+#~ "<code>arial</code>, <code>tahoma</code>, <code>georgia</code>, "
+#~ "<code>'Trebuchet MS'</code>"
+#~ msgstr ""
+#~ "<code>arial</code>, <code>tahoma</code>, <code>georgia</code>, "
+#~ "<code>'Trebuchet MS'</code>"
+
+#~ msgid "<code>12px</code>, <code>12pt</code>, <code>12em</code>"
+#~ msgstr "<code>12px</code>, <code>12pt</code>, <code>12em</code>"
+
+#~ msgid ""
+#~ "<code>normal</code>, <code>bold</code>, <code>100</code>, <code>700</code>"
+#~ msgstr ""
+#~ "<code>normal</code>, <code>bold</code>, <code>100</code>, <code>700</code>"
+
+#~ msgid " <code>normal</code>, <code>italic</code>, <code>oblique</code>"
+#~ msgstr "<code>normal</code>, <code>italic</code>, <code>oblique</code>"
+
+#~ msgid ""
+#~ "<code>blue</code>, <code>navy</code>, <code>red</code>, <code>#ff0000</"
+#~ "code>"
+#~ msgstr ""
+#~ "<code>blue</code>, <code>navy</code>, <code>red</code>, <code>#ff0000</"
+#~ "code>"
+
+#~ msgid "Swap title order"
+#~ msgstr "交换标题顺序"
+
+#~ msgid ""
+#~ "If this is checked, the website title will be displayed first, followed "
+#~ "by the page title."
+#~ msgstr "选择这个选项，网站名称会先显示，然后是页面标题。请查看浏览器标签。"
+
+#~ msgid "Update Settings"
+#~ msgstr "更新设置"
+
+#~ msgid "You must enter your Adsense code to enable Adsense advertising"
+#~ msgstr "你需要输入 Adsense code 才能开启 Adsense 广告"
+
+#~ msgid ""
+#~ "You must enter your AddThis button code to enable the AddThis social "
+#~ "sharing button"
+#~ msgstr ""
+#~ "你需要输入 AddThis 按钮 code 才能开启 AddThis social sharing 按钮。国内用"
+#~ "户建议到中文的主页申请 code。"
+
+#~ msgid ""
+#~ "You must enter your Google Analytics tracking code to enable Google "
+#~ "Analytics tracking."
+#~ msgstr "你需要输入 Google Analytics tracking code 才能开启谷歌统计。"
+
+#~ msgid ""
+#~ "This setting only affects the slider if \"Show latest posts\" is selected "
+#~ "above."
+#~ msgstr "此设置只有当选择“显示最新发布”时才有效。"
+
+#~ msgid "AddThis Options"
+#~ msgstr "AddThis 选项"
+
+#~ msgid "Your AddThis button code"
+#~ msgstr "你的 AddThis code"
+
+#~ msgid ""
+#~ "You can generate your button code from the <a href=\"http://www.addthis."
+#~ "com/\">AddThis website</a>."
+#~ msgstr "你可以在此申请 <a href=\"http://www.addthis.com/\">AddThis</a>。"
+
+#~ msgid "by %s"
+#~ msgstr "por %s"

@@ -1,0 +1,796 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Graphene theme for WordPress\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-09-01 00:26+1200\n"
+"PO-Revision-Date: 2010-09-01 11:38+0100\n"
+"Last-Translator: Roberto Rota <mail@tevac.com>\n"
+"Language-Team: ZigoZago <zigorob@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: D:/[[MyVault]]/MyProjects/[Websites]/wordpress-theme-test/site/wp-content/themes/graphene/\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: author.php:32
+msgid "Author's posts listings"
+msgstr "Lista post dell'Autore"
+
+# @ graphene
+#: comments.php:18
+msgid "This post is password protected. Enter the password to view any comments."
+msgstr "Questo contenuto è protetto da Password, per visualizzarlo è necessaria l'autorizzazione."
+
+# @ graphene
+#: comments.php:36
+msgid "No comment yet"
+msgstr "Ancora nessun commento"
+
+# @ graphene
+#: comments.php:36
+#: loop-author.php:54
+#: loop.php:82
+msgid "1 comment"
+msgstr "1 commento"
+
+# @ graphene
+#: comments.php:36
+#: loop-author.php:54
+#: loop.php:82
+#, php-format
+msgid "% comments"
+msgstr "% commenti"
+
+# @ graphene
+#: comments.php:65
+msgid "Your email address will not be published."
+msgstr "Il tuo indirizzo mail non sarà pubblicato!"
+
+# @ graphene
+#: comments.php:66
+#, php-format
+msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes: %s"
+msgstr "Puoi usare i seguenti tag <abbr title=\"Hyper Text Markup Language\">HTML</abbr>: %s"
+
+# @ graphene
+#: comments.php:68
+#: functions.php:670
+msgid "Submit Comment"
+msgstr "Invia Commento"
+
+# @ graphene
+#: footer.php:24
+msgid "Except where otherwise noted, content on this site is licensed under a <a href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">Creative Commons Licence</a>."
+msgstr "Eccetto dove diversamente specificato, i contenuti di questo sito sono coperti da <a href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/deed.pt_BR/\" target=\"_blank\">Licenza Creative Commons</a>."
+
+# @ graphene
+#: footer.php:30
+msgid "Valid XHTML 1.0 Strict"
+msgstr "XHTML 1.0 Strict Valido"
+
+# @ graphene
+#: footer.php:31
+msgid "Valid CSS"
+msgstr "CSS Valido"
+
+# @ graphene
+#: footer.php:31
+msgid "Valid CSS Level 2.1"
+msgstr "CSS 2.1 Valido"
+
+# @ graphene
+#: footer.php:52
+#, php-format
+msgid "%1$s uses %2$s theme by %3$s."
+msgstr "%1$s usa il tema %2$s di %3$s."
+
+# @ graphene
+#: functions.php:100
+msgid "Header Menu"
+msgstr "Menu Header"
+
+# @ graphene
+#: functions.php:144
+msgid "Header image by Syahir Hakim"
+msgstr "Immagine testata di Syahir Hakim"
+
+# @ graphene
+#: functions.php:150
+msgid "This is the default Graphene theme header image, cropped from image by Quantin Houyoux at sxc.hu"
+msgstr "Questa è l'immagine predefinita della testata del tema, ritagliata da Quantin Houyoux su sxc.hu"
+
+# @ graphene
+#: functions.php:156
+#: functions.php:162
+#: functions.php:168
+#: functions.php:174
+#: functions.php:180
+msgid "Header image cropped from image by Ilco at sxc.hu"
+msgstr "Immagine testata ritagliata da Ilco su sxc.hu"
+
+# @ graphene
+#: functions.php:365
+msgid "Home"
+msgstr "Home"
+
+# @ graphene
+#: functions.php:385
+msgid " says:"
+msgstr " scrive:"
+
+# @ ksv3
+#: functions.php:389
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "%1$s a %2$s"
+
+# @ graphene
+#: functions.php:391
+msgid "Edit comment"
+msgstr "Modifica commento"
+
+# @ ksv3
+#: functions.php:392
+msgid "Reply"
+msgstr "Rispondi"
+
+# @ default
+#: functions.php:396
+msgid "Your comment is awaiting moderation."
+msgstr "Commento in attesa di moderazione..."
+
+# @ graphene
+#: functions.php:459
+msgid "Sidebar Widget Area"
+msgstr "Area Widget Sidebar"
+
+# @ graphene
+#: functions.php:461
+msgid "The right sidebar widget area."
+msgstr "Area widget Sidebar destra"
+
+# @ graphene
+#: functions.php:469
+msgid "Footer Widget Area"
+msgstr "Area Widget Piè di Pagina"
+
+#: functions.php:471
+msgid "The footer widget area. Leave empty to disable. Set the number of columns to display at the theme's Display Options page."
+msgstr "Area Widget Piè di Pagina. Lascia vuota per disabilitarla. Imposta il numero di colonne da visualizzare nella pagina Opzioni di Visualizzazione del tema."
+
+# @ graphene
+#: functions.php:487
+msgid "Front Page Sidebar Widget Area"
+msgstr "Area Widget Sidebar pagina principale"
+
+#: functions.php:489
+msgid "The right sidebar widget area that will only be displayed on the front page."
+msgstr "L'area widget della sidebar di destra sarà visualizzata solo nella pagina principale."
+
+# @ graphene
+#: functions.php:499
+msgid "Front Page Footer Widget Area"
+msgstr "Area Widget Piè di Pagina pagina principale"
+
+#: functions.php:501
+msgid "The footer widget area that will only be displayed on the front page. Leave empty to disable. Set the number of columns to display at the theme's Display Options page."
+msgstr "L'Area Widget nel Piè di Pagina verrà mostrata solo nella pagina principale. Lascia vuota per disabilitarla. Imposta il numero di colonne da visualizzare nella pagina Opzioni di Visualizzazione del tema."
+
+# @ graphene
+#: functions.php:550
+msgid "Follow me on Twitter"
+msgstr "Seguimi su Twitter"
+
+# @ graphene
+#: functions.php:588
+msgid "Latest tweets"
+msgstr "Ultimo tweets"
+
+# @ graphene
+#: functions.php:593
+msgid "Title:"
+msgstr "Titolo:"
+
+# @ graphene
+#: functions.php:597
+msgid "Twitter Username:"
+msgstr "Twitter Username:"
+
+# @ graphene
+#: functions.php:601
+msgid "Number of tweets to display:"
+msgstr "Numero di tweets da mostrare:"
+
+# @ graphene
+#: functions.php:633
+msgid "Graphene Options"
+msgstr "Opzioni Graphene"
+
+# @ graphene
+#: functions.php:634
+msgid "Graphene Display"
+msgstr "Visualizzazione Graphene"
+
+# @ graphene
+#: functions.php:656
+msgid "Name:"
+msgstr "Nome:"
+
+# @ graphene
+#: functions.php:657
+msgid "Email:"
+msgstr "Mail:"
+
+# @ graphene
+#: functions.php:658
+msgid "Website:"
+msgstr "Sito web:"
+
+# @ graphene
+#: functions.php:665
+msgid "Message:"
+msgstr "Messaggio:"
+
+#: functions.php:688
+msgid "Continue reading &raquo;"
+msgstr "Continua la lettura &raquo;"
+
+# @ graphene
+#: header.php:52
+msgid "Subscribe to RSS feed"
+msgstr "Sottoscrivi RSS"
+
+#: loop-author.php:15
+msgid "Author's details"
+msgstr "Dettagli sull'autore"
+
+# @ graphene
+#: loop-author.php:17
+#, php-format
+msgid "<strong>Name:</strong> %1$s %2$s"
+msgstr "<strong>Nome:</strong> %1$s %2$s"
+
+# @ graphene
+#: loop-author.php:18
+#, php-format
+msgid "<strong>Date registered:</strong> %1$s"
+msgstr "<strong>Data di registrazione:</strong> %1$s"
+
+#: loop-author.php:26
+msgid "Biography"
+msgstr "Biografia"
+
+# @ graphene
+#: loop-author.php:35
+msgid "Latest posts"
+msgstr "Ultimi post"
+
+# @ graphene
+#: loop-author.php:41
+#: loop-author.php:54
+#: loop.php:23
+#: search-404.php:24
+#, php-format
+msgid "Permalink Link to %s"
+msgstr "PermaLink per %s"
+
+# @ graphene
+#: loop-author.php:41
+#: loop-author.php:54
+#: loop.php:23
+msgid "(No title)"
+msgstr "(senza titolo)"
+
+# @ graphene
+#: loop-author.php:46
+msgid "Most commented posts"
+msgstr "Post più commentati"
+
+# @ graphene
+#: loop-author.php:54
+#: loop.php:82
+msgid "Leave comment"
+msgstr "Scrivi un tuo commento"
+
+#: loop.php:42
+msgid "by"
+msgstr "di"
+
+# @ graphene
+#: loop.php:44
+msgid "Edit post"
+msgstr "Modifica"
+
+# @ graphene
+#: loop.php:59
+msgid "Read the rest of this entry &raquo;"
+msgstr "Leggi tutto &raquo;"
+
+# @ graphene
+#: loop.php:63
+msgid "<p><strong>Pages:</strong> "
+msgstr "<p><strong>Pagine:</strong> "
+
+# @ graphene
+#: loop.php:70
+msgid "Tags: "
+msgstr "Tags: "
+
+# @ graphene
+#: loop.php:70
+msgid "This post has no tag"
+msgstr "Nessun tag per questo post"
+
+# @ graphene
+#: loop.php:104
+msgid "Older posts &laquo;"
+msgstr "Post precedenti &laquo;"
+
+# @ graphene
+#: loop.php:105
+msgid "&raquo; Newer posts"
+msgstr "&raquo; Post successivi"
+
+# @ graphene
+#: loop.php:112
+msgid "Not found"
+msgstr "Non trovato..."
+
+# @ graphene
+#: loop.php:117
+msgid "Sorry, but you are looking for something that isn't here. Wanna try a search?"
+msgstr "Spiacente, forse stai cercando qualcosa che non c'è. Prova ancora con altri termini di ricerca..."
+
+# @ graphene
+#: loop.php:119
+msgid "Sorry, but no results were found for that keyword. Wanna try an alternative keyword search?"
+msgstr "Spiacente ma la ricerca non ha prodotto risultati. Prova ancora con altri termini di ricerca..."
+
+# @ graphene
+#: search-404.php:3
+msgid "Error 404 - Page Not Found"
+msgstr "Errore 404 - Pagina non trovata"
+
+# @ graphene
+#: search-404.php:5
+msgid "Sorry, I've looked everywhere but I can't find the page you're looking for."
+msgstr "Spiacente, ho cercato ovunque ma la pagina che cerchi non la trovo, forse è inesistente!"
+
+# @ graphene
+#: search-404.php:6
+msgid "If you follow the link from another website, I may have removed or renamed the page some time ago. You may want to try searching for the page:"
+msgstr "Se hai seguito un link da un altro sito, forse ho rimosso o rinominato la pagina che cercavi. Ti consiglio di provare a cercare la pagina:"
+
+# @ graphene
+#: search-404.php:14
+msgid "Suggested results"
+msgstr "Risultati consigliati"
+
+# @ graphene
+#: search-404.php:18
+#, php-format
+msgid "I've done a courtesy search for the term %s for you. See if you can find what you're looking for in the list below:"
+msgstr "Ho effettuato per te una ricerca con il termine <strong>%s</strong>. Guarda tra i risultati se trovi ciò che stai cercando..."
+
+# @ graphene
+#: search-404.php:37
+msgid "<strong>Sorry, couldn't find anything.</strong> Try searching for alternative terms using the search form above."
+msgstr "Mi spiace ma non trovo nulla. Prova ancora con altri termini di ricerca nel modulo qui sopra."
+
+# @ graphene
+#: searchform.php:3
+#: searchform.php:4
+msgid "Search"
+msgstr "Cerca"
+
+# @ graphene
+#: sidebar.php:31
+msgid "Archives"
+msgstr "Archivi"
+
+# @ graphene
+#: sidebar.php:38
+msgid "Meta"
+msgstr "Meta"
+
+# @ graphene
+#: sidebar.php:43
+msgid "Posts RSS"
+msgstr "Posts RSS"
+
+# @ graphene
+#: sidebar.php:44
+msgid "Comments RSS"
+msgstr "Commenti RSS"
+
+# @ graphene
+#: sidebar.php:46
+#, php-format
+msgid "Powered by %s"
+msgstr "Scritto da %s"
+
+# @ graphene
+#: sidebar.php:46
+msgid "Powered by WordPress, state-of-the-art semantic personal publishing platform."
+msgstr "Powered by WordPress."
+
+#: admin/display.php:51
+msgid "Please enter only numerical value for the footer widget column count."
+msgstr "Inserisci solo valori numerici per il numero di colonne nei widget a piè di pagina."
+
+#: admin/display.php:60
+msgid "Please enter only numerical value for the front page footer widget column count."
+msgstr "Inserisci solo valori numerici per il numero di colonne nei widget della pagina principale."
+
+#: admin/display.php:70
+msgid "Please enter only numerical value for the navigation menu dropdown item width."
+msgstr "Inserisci solo valori numerici per la larghezza  contenuto dei menu di navigazione a discesa."
+
+#: admin/display.php:116
+#: admin/options.php:101
+msgid "Settings updated."
+msgstr "Impostazioni aggiornate."
+
+# @ graphene
+#: admin/display.php:163
+msgid "Graphene Display Options"
+msgstr "Opzioni Visualizzazione Graphene"
+
+#: admin/display.php:169
+#: admin/options.php:145
+msgid "ERROR:"
+msgstr "ERRORE:"
+
+#: admin/display.php:191
+msgid "Header Display Options"
+msgstr "Opzioni di visualizzazione della testata"
+
+#: admin/display.php:195
+msgid "Use light-coloured header bars"
+msgstr "Usa la barra di colore chiaro nella testata"
+
+#: admin/display.php:203
+msgid "Posts Display Options"
+msgstr "Opzioni di visualizzazione dei post"
+
+# @ graphene
+#: admin/display.php:207
+msgid "Hide post author"
+msgstr "Nascondi l'autore dei post"
+
+#: admin/display.php:213
+msgid "Hide post date"
+msgstr "Nascondi la data nei post"
+
+#: admin/display.php:219
+msgid "Hide post categories"
+msgstr "Nascondi la categoria nei post"
+
+#: admin/display.php:225
+msgid "Hide post tags"
+msgstr "Nascondi i tag nei post"
+
+#: admin/display.php:231
+msgid "Hide post comment count"
+msgstr "Nascondi il numero dei commenti nei post"
+
+#: admin/display.php:232
+msgid "Only affects posts listing (such as the front page) and not single post view."
+msgstr "Influisce solamente nelle liste di post (come la pagina principale) e non nella visualizzazione dei singoli post"
+
+#: admin/display.php:237
+msgid "Show post author's gravatar"
+msgstr "Mostra il Gravatar dell'autore del post"
+
+# @ graphene
+#: admin/display.php:243
+msgid "Text Style Options"
+msgstr "Opzioni stile testo"
+
+#: admin/display.php:244
+msgid "Note that these are CSS properties, so any valid CSS values for each particular property can be used."
+msgstr "Si noti che queste sono proprietà CSS, è possibile utilizzare tutti i valori CSS validi per ogni proprietà."
+
+#: admin/display.php:245
+msgid "Some example CSS properties values:"
+msgstr "Alcuni esempi di proprietà CSS:"
+
+#: admin/display.php:248
+msgid "Text font:"
+msgstr "Carattere testo:"
+
+#: admin/display.php:249
+msgid "<code>arial</code>, <code>tahoma</code>, <code>georgia</code>, <code>'Trebuchet MS'</code>"
+msgstr "<code>arial</code>, <code>tahoma</code>, <code>georgia</code>, <code>'Trebuchet MS'</code>"
+
+#: admin/display.php:252
+msgid "Text size and line height:"
+msgstr "Dimensione e interlinea del testo:"
+
+#: admin/display.php:253
+msgid "<code>12px</code>, <code>12pt</code>, <code>12em</code>"
+msgstr "<code>12px</code>, <code>12pt</code>, <code>12em</code>"
+
+#: admin/display.php:256
+msgid "Text weight:"
+msgstr "Spessore testo:"
+
+#: admin/display.php:257
+msgid "<code>normal</code>, <code>bold</code>, <code>100</code>, <code>700</code>"
+msgstr "<code>normal</code>, <code>bold</code>, <code>100</code>, <code>700</code>"
+
+#: admin/display.php:260
+msgid "Text style:"
+msgstr "Stile testo:"
+
+#: admin/display.php:261
+msgid " <code>normal</code>, <code>italic</code>, <code>oblique</code>"
+msgstr " <code>normal</code>, <code>italic</code>, <code>oblique</code>"
+
+#: admin/display.php:264
+msgid "Text colour:"
+msgstr "Colore Testo:"
+
+#: admin/display.php:265
+msgid "<code>blue</code>, <code>navy</code>, <code>red</code>, <code>#ff0000</code>"
+msgstr "<code>blue</code>, <code>navy</code>, <code>red</code>, <code>#ff0000</code>"
+
+#: admin/display.php:268
+#: admin/display.php:366
+#: admin/display.php:388
+msgid "Leave field empty to use the default value."
+msgstr "Lascia il campo vuoto per usare i valori di default."
+
+# @ graphene
+#: admin/display.php:269
+msgid "Header Text"
+msgstr "Testo Intestazione"
+
+#: admin/display.php:273
+msgid "Title text font"
+msgstr "Carattere testo del Titolo"
+
+#: admin/display.php:279
+msgid "Title text size"
+msgstr "Dimensione testo del Titolo"
+
+#: admin/display.php:285
+msgid "Title text weight"
+msgstr "Spessore testo del Titolo"
+
+#: admin/display.php:291
+msgid "Title text line height"
+msgstr "Interlinea testo del Titolo"
+
+#: admin/display.php:297
+msgid "Title text style"
+msgstr "Stile testo del Titolo"
+
+#: admin/display.php:306
+msgid "Description text font"
+msgstr "Carattere testo della Descrizione"
+
+#: admin/display.php:312
+msgid "Description text size"
+msgstr "Dimensione testo della Descrizione"
+
+#: admin/display.php:318
+msgid "Description text weight"
+msgstr "Spessore testo della Descrizione"
+
+#: admin/display.php:324
+msgid "Description text line height"
+msgstr "Interlinea testo della Descrizione"
+
+#: admin/display.php:330
+msgid "Description text style"
+msgstr "Stile testo della Descrizione"
+
+#: admin/display.php:335
+msgid "Content Text"
+msgstr "Testo del contenuto"
+
+#: admin/display.php:339
+msgid "Text font"
+msgstr "Carattere testo"
+
+#: admin/display.php:345
+msgid "Text size"
+msgstr "Dimensione testo"
+
+#: admin/display.php:351
+msgid "Text line height"
+msgstr "Interlinea testo"
+
+#: admin/display.php:357
+msgid "Text colour"
+msgstr "Colore testo"
+
+# @ graphene
+#: admin/display.php:365
+msgid "Footer Widget Display Options"
+msgstr "Opzioni Visualizzazione Widget Piè di Pagina"
+
+# @ graphene
+#: admin/display.php:371
+msgid "Number of columns to display"
+msgstr "Numero di colonne da mostrare"
+
+#: admin/display.php:378
+msgid "Number of columns to display for front page footer widget"
+msgstr "Numero di colonne da visualizzare per i widget a piè di pagina della pagina principale"
+
+#: admin/display.php:387
+msgid "Navigation Menu Display Options"
+msgstr "Opzioni del menu di navigazione"
+
+#: admin/display.php:393
+msgid "Dropdown menu item width"
+msgstr "Larghezza del menu a discesa"
+
+# @ graphene
+#: admin/display.php:402
+#: admin/options.php:262
+msgid "Update Settings"
+msgstr "Aggiorna Impostazioni"
+
+#: admin/options.php:24
+msgid "You must enter your Adsense code to enable Adsense advertising"
+msgstr "Devi inserire il tuo codice Adsense per attivare gli annunci Adsense."
+
+#: admin/options.php:39
+msgid "You must enter your AddThis button code to enable the AddThis social sharing button"
+msgstr "Devi inserire il tuo codice AddThis per attivare il pulsante AddThis."
+
+#: admin/options.php:53
+msgid "You must enter your Google Analytics tracking code to enable Google Analytics tracking."
+msgstr "Devi inserire il tuo codice di tracciamento Google Analytics per attivare Google Analytics."
+
+# @ graphene
+#: admin/options.php:139
+msgid "Graphene Theme Options"
+msgstr "Opzioni Tema Graphene"
+
+# @ graphene
+#: admin/options.php:164
+msgid "Adsense Options"
+msgstr "Opzioni Adsense"
+
+# @ graphene
+#: admin/options.php:171
+msgid "Show Adsense advertising"
+msgstr "Mostra annunci Adsense"
+
+#: admin/options.php:177
+msgid "Show ads on front page as well"
+msgstr "Mostra annunci sulla pagina principale"
+
+# @ graphene
+#: admin/options.php:183
+msgid "Your Adsense code"
+msgstr "Il tuo codice Adsense"
+
+# @ graphene
+#: admin/options.php:192
+msgid "AddThis Options"
+msgstr "Opzioni AddThis"
+
+# @ graphene
+#: admin/options.php:195
+msgid "Show AddThis social sharing button"
+msgstr "Mostra pulsante AddThis"
+
+# @ graphene
+#: admin/options.php:200
+msgid "Your AddThis button code"
+msgstr "Codice pulsante AddThis"
+
+#: admin/options.php:201
+msgid "You can generate your button code from the <a href=\"http://www.addthis.com/\">AddThis website</a>."
+msgstr "Puoi generare il codice del tuo pulsante sul <a href=\"http://www.addthis.com/\">sito web di AddThis</a>."
+
+# @ graphene
+#: admin/options.php:209
+msgid "Google Analytics Options"
+msgstr "Opzioni Google Analytics"
+
+# @ graphene
+#: admin/options.php:212
+msgid "Enable Google Analytics tracking"
+msgstr "Abilita tracciamento Google Analytics"
+
+# @ graphene
+#: admin/options.php:216
+msgid "Google Analytics tracking code"
+msgstr "Codice Google Analytics"
+
+#: admin/options.php:217
+msgid "Make sure you include the full tracking code (including the <code>&lt;script&gt;</code> and <code>&lt;/script&gt;</code> tags) and not just the <code>UA-#######-#</code> code."
+msgstr "Accertati di includere il codice completo di tracciamento (inclusi i <code>&lt;script&gt;</code> e <code>&lt;/script&gt;</code> tag) e non solo il codice <code>UA-#######-#</code>."
+
+# @ graphene
+#: admin/options.php:225
+msgid "Widget Area Options"
+msgstr "Opzioni Area Widget"
+
+#: admin/options.php:226
+msgid "Alternate Widgets"
+msgstr "Widget Alternativi"
+
+#: admin/options.php:227
+msgid "You can enable the theme to show different widget areas in the front page than the rest of the website. If you enable this option, additional widget areas that will only be displayed on the front page will be added to the Widget settings page."
+msgstr "Puoi configurare il tema per visualizzare differenti Aree Widget nella pagina principale e nel resto dei sito. Se abiliti questa opzione, delle Aree Widget addizionali, che verranno visualizzate solo nella pagina principale, saranno aggiunte nella pagina di amministrazione Widget"
+
+#: admin/options.php:230
+msgid "Enable alternate front page sidebar widget area"
+msgstr "Abilita l'Area alternativa Widget nella Sidebar della pagina principale"
+
+#: admin/options.php:234
+msgid "Enable alternate front page footer widget area"
+msgstr "Abilita l'Area alternativa Widget nel Piè di Pagina della pagina principale"
+
+#: admin/options.php:235
+msgid "You can also specify different column counts for the front page footer widget and the rest-of-site footer widget if you enable this option."
+msgstr "Se si abilita questa opzione, è possibile specificare numeri di colonna differenti per i Widget a Piè di Pagina della pagina principale e del resto del sito."
+
+# @ graphene
+#: admin/options.php:243
+msgid "Footer Options"
+msgstr "Opzioni Piè di Pagina"
+
+# @ graphene
+#: admin/options.php:246
+msgid "Show Creative Commons logo"
+msgstr "Mostra Logo Creative Commons"
+
+# @ graphene
+#: admin/options.php:251
+msgid "Copyright text (html allowed)"
+msgstr "Testo Copyright (HTML permesso)"
+
+# @ graphene
+#: admin/options.php:252
+msgid "If this field is empty, the following default copyright text will be displayed:"
+msgstr "Se il campo è vuoto, viene mostrato di default il copyright visualizzato:"
+
+# @ graphene
+#: admin/options.php:268
+msgid "Support the developer"
+msgstr "Supporta lo sviluppatore"
+
+# @ graphene
+#: admin/options.php:269
+msgid "Developing this awesome theme took a lot of effort and time, weeks and weeks of voluntary unpaid work. If you like this theme or if you are using it for commercial websites, please consider a donation to the developer to help support future updates and development."
+msgstr "Sviluppando questo tema ho impiegato molto tempo e fatica, settimane e settimane di lavoro volontario non retribuito. Se ti piace questo tema o se lo stai usando per siti web commerciali, sei pregato di prendere in considerazione una donazione allo sviluppatore per contribuire e sostenere i futuri aggiornamenti e sviluppi. Grazie..."
+
+# @ graphene
+#: admin/options.php:279
+msgid "Uninstall theme"
+msgstr "Disinstalla Tema"
+
+# @ graphene
+#: admin/options.php:280
+msgid "<strong>Be careful!</strong> Uninstalling the theme will remove all of the theme's options from the database. Do this only if you decide not to use the theme anymore."
+msgstr "<strong>ATTENZIONE</strong> La disinstallazione del Tema rimuoverà per sempre tutte le opzioni del tema dal Database. Rimuovi il tema Graphene solo se sei sicuro di quello che fai."
+
+# @ graphene
+#: admin/options.php:281
+msgid "If you just want to try another theme, there is no need to uninstall this theme. Simply activate the other theme in the Appearance > Themes admin page."
+msgstr "Se vuoi provare/testare altri temi, non serve rimuovere questo. Puoi cambiare/attivare un nuovo tema in Aspetto > Temi del pannello di amministrazione di WordPress."
+
+# @ graphene
+#: admin/options.php:282
+msgid "Note that uninstalling this theme <strong>does not remove</strong> the theme's files. To delete the files after you have uninstalled this theme, go to Appearances > Themes and delete the theme from there."
+msgstr "Si noti che la disinstallazione del tema, non rimuove definitivamente il tema dal server. Per eliminare tutto, si deve disinstallare il tema da Aspetto > Temi nel pannello di amministrazione di WordPress."
+
+# @ graphene
+#: admin/options.php:285
+msgid "Uninstall Theme"
+msgstr "Disinstalla Tema"
+

@@ -1,0 +1,21 @@
+/**
+ * Brown + Yellow
+ * 
+ */
+
+a, .entry-content a:link, .entry-content a:active, .entry-content a:visited, .footer .widgets-holder a {color:#846430;} 
+.entry-content a:hover, .footer .widgets-holder a:hover, #secondary a:hover, #secondary-2 a:hover {color:#634b24;}
+ 
+.header {background:#8e6525 url("../images/brown-yellow/header-footer.jpg") repeat;border-bottom:1px solid #5e441b;}
+
+#tagline {color:#6b4d1f;text-shadow:0 1px 0 #a7772c;}
+
+#logo a, .footer a { color:yellow;text-shadow:0 1px 0px #18130b;}
+#logo a:hover, .footer a:hover { color:#fff;}
+
+       
+.footer {background:#8e6525 url("../images/brown-yellow/header-footer.jpg") repeat;border-top:1px solid #5e441b;}
+p#copyright {color:#6b4d1f;text-shadow:0 1px 0 #a7772c;}
+
+
+

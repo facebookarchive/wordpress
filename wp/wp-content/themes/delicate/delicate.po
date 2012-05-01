@@ -1,0 +1,387 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-05 16:41+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: NattyWP <support@nattywp.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: 404.php:11
+msgid "Error 404"
+msgstr ""
+
+#: 404.php:13
+msgid "It appears you've missed you're intended destination, either through a bad or outdated link, or a typo in the page you were hoping to reach."
+msgstr ""
+
+#: 404.php:14
+msgid "You can take a look through my recent posts."
+msgstr ""
+
+#: archive.php:15
+#: author.php:39
+#: index.php:16
+#: search.php:15
+#: single.php:10
+msgid "Posted by"
+msgstr ""
+
+#: archive.php:15
+#: author.php:39
+#: index.php:16
+#: search.php:15
+#: single.php:10
+msgid "in"
+msgstr ""
+
+#: archive.php:15
+#: author.php:39
+#: index.php:16
+#: search.php:15
+msgid "0 Comments"
+msgstr ""
+
+#: archive.php:15
+#: author.php:39
+#: index.php:16
+#: search.php:15
+msgid "1 Comments"
+msgstr ""
+
+#: archive.php:15
+#: author.php:39
+#: index.php:16
+#: search.php:15
+msgid "% Comments"
+msgstr ""
+
+#: archive.php:15
+#: author.php:39
+#: index.php:16
+#: page.php:17
+#: search.php:15
+#: single.php:10
+msgid "Edit"
+msgstr ""
+
+#: archive.php:43
+#: author.php:67
+#: index.php:45
+#, php-format
+msgid "<h2 class='center'>Sorry, but there aren't any posts in the %s category yet.</h2>"
+msgstr ""
+
+#: archive.php:45
+#: author.php:69
+#: index.php:47
+msgid "<h2>Sorry, but there aren't any posts with this date.</h2>"
+msgstr ""
+
+#: archive.php:48
+#: author.php:72
+#: index.php:50
+#, php-format
+msgid "<h2 class='center'>Sorry, but there aren't any posts by %s yet.</h2>"
+msgstr ""
+
+#: archive.php:50
+#: author.php:74
+#: index.php:52
+msgid "<h2 class='center'>No posts found.</h2>"
+msgstr ""
+
+#: archives.php:12
+msgid "Archives"
+msgstr ""
+
+#: archives.php:15
+msgid "Archives by Month:"
+msgstr ""
+
+#: archives.php:21
+msgid "Archives by Subject:"
+msgstr ""
+
+#: author.php:13
+#, php-format
+msgid ""
+"\n"
+"Author Archives: %s"
+msgstr ""
+
+#: author.php:24
+#, php-format
+msgid "About %s"
+msgstr ""
+
+#: comments-old.php:92
+msgid "Logged in as"
+msgstr ""
+
+#: comments-old.php:92
+msgid "Log out of this account"
+msgstr ""
+
+#: comments-old.php:92
+msgid "Logout"
+msgstr ""
+
+#: comments.php:12
+msgid "This post is password protected. Enter the password to view comments."
+msgstr ""
+
+#: comments.php:21
+msgid "No Responses"
+msgstr ""
+
+#: comments.php:21
+msgid "One Response"
+msgstr ""
+
+#: comments.php:21
+msgid "% Responses"
+msgstr ""
+
+#: comments.php:26
+#: comments.php:38
+msgid "<span class=\"meta-nav\">&larr;</span> Older Comments"
+msgstr ""
+
+#: comments.php:27
+#: comments.php:39
+msgid "Newer Comments <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: comments.php:60
+msgid "Leave a Reply"
+msgstr ""
+
+#: comments.php:61
+#, php-format
+msgid "Leave a Reply to %s"
+msgstr ""
+
+#: comments.php:62
+msgid "Cancel reply"
+msgstr ""
+
+#: comments.php:63
+msgid "Post Comment"
+msgstr ""
+
+#: footer.php:8
+msgid "Copyright &copy; 2010 "
+msgstr ""
+
+#: footer.php:8
+msgid "All rights reserved."
+msgstr ""
+
+#: header.php:8
+msgid "Search Results"
+msgstr ""
+
+#: header.php:9
+msgid "Author Archives"
+msgstr ""
+
+#: header.php:14
+#: header.php:15
+msgid "Archive"
+msgstr ""
+
+#: header.php:16
+msgid "Tag Archive"
+msgstr ""
+
+#: search.php:41
+#: single.php:47
+msgid "Not Found"
+msgstr ""
+
+#: search.php:42
+#: single.php:48
+msgid "Sorry, but you are looking for something that isn't here."
+msgstr ""
+
+#: searchform.php:2
+#: searchform.php:3
+msgid "Search"
+msgstr ""
+
+#: single.php:23
+msgid "You can follow any responses to this entry through the"
+msgstr ""
+
+#: single.php:26
+msgid "You can <a href=\"#respond\">leave a response</a>, or"
+msgstr ""
+
+#: single.php:26
+#: single.php:29
+msgid "trackback"
+msgstr ""
+
+#: single.php:29
+msgid "Responses are currently closed, but you can"
+msgstr ""
+
+#: single.php:32
+msgid "You can skip to the end and leave a response. Pinging is currently not allowed."
+msgstr ""
+
+#: single.php:35
+msgid "Both comments and pings are currently closed."
+msgstr ""
+
+#: sitemap.php:13
+msgid "Sitemap"
+msgstr ""
+
+#: sitemap.php:16
+msgid "Pages"
+msgstr ""
+
+#: sitemap.php:22
+msgid "Categories"
+msgstr ""
+
+#: sitemap.php:40
+msgid "Comments"
+msgstr ""
+
+#: functions/admin-framework.php:175
+msgid "&laquo; First"
+msgstr ""
+
+#: functions/admin-framework.php:189
+msgid "Last &raquo;"
+msgstr ""
+
+#: functions/admin-framework.php:320
+#, php-format
+msgid "View all posts under %s"
+msgstr ""
+
+#: functions/admin-menu.php:10
+msgid "Theme Options"
+msgstr ""
+
+#: functions/admin-menu.php:11
+msgid "Color Options"
+msgstr ""
+
+#: functions/admin-menu.php:12
+msgid "More themes"
+msgstr ""
+
+#: functions/admin-menu.php:300
+#: functions/admin-menu.php:325
+msgid "Update Options"
+msgstr ""
+
+#: functions/admin-menu.php:331
+msgid "Backup Options"
+msgstr ""
+
+#: functions/admin-menu.php:335
+msgid "Restore Color Options"
+msgstr ""
+
+#: functions/admin-menu.php:337
+msgid "Restore Theme Options"
+msgstr ""
+
+#: functions/custom-title.php:10
+msgid "Custom Post Title"
+msgstr ""
+
+#: functions/custom-title.php:11
+msgid "By default, natty uses the title of your post as the contents of the <code>&lt;title&gt;</code> tag. You can override this and further extend your on-page <acronym title=\"Search Engine Optimization\">SEO</acronym> by entering your own <code>&lt;title&gt;</code> tag below."
+msgstr ""
+
+#: functions/custom-title.php:12
+msgid "Value for <code>&lt;title&gt;</code> tag"
+msgstr ""
+
+#: functions/custom-title.php:17
+msgid "Meta Description"
+msgstr ""
+
+#: functions/custom-title.php:19
+msgid "Value for <code>&lt;meta&gt;</code> description"
+msgstr ""
+
+#: functions/custom-title.php:24
+msgid "Meta Keywords"
+msgstr ""
+
+#: functions/custom-title.php:25
+msgid "Like the <code>&lt;meta&gt;</code> description, <code>&lt;meta&gt;</code> keywords are yet another on-page <acronym title=\"Search Engine Optimization\">SEO</acronym> opportunity. Enter a few keywords that are relevant to your article."
+msgstr ""
+
+#: functions/custom-title.php:26
+msgid "Value for <code>&lt;meta&gt;</code> keywords"
+msgstr ""
+
+#: include/hooks.php:25
+msgid "Blue"
+msgstr ""
+
+#: include/hooks.php:30
+msgid "Green"
+msgstr ""
+
+#: include/hooks.php:82
+msgid "Primary Navigation"
+msgstr ""
+
+#: include/hooks.php:93
+msgid "Read more <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: include/hooks.php:137
+#, php-format
+msgid "%1$s"
+msgstr ""
+
+#: include/settings-comments.php:32
+msgid "Pingback:"
+msgstr ""
+
+#: include/settings-comments.php:32
+msgid "(Edit)"
+msgstr ""
+
+#: include/widgets/feedburner.php:25
+msgid "Enter your e-mail address"
+msgstr ""
+
+#: include/widgets/feedburner.php:29
+msgid "Subscribe"
+msgstr ""
+
+#: include/widgets/twitter.php:24
+msgid "Follow us on Twitter"
+msgstr ""
+
+#: include/widgets/twitter.php:55
+msgid "Account:"
+msgstr ""
+
+#: include/widgets/twitter.php:59
+msgid "Title:"
+msgstr ""
+
+#: include/widgets/twitter.php:63
+msgid "Show:"
+msgstr ""
+

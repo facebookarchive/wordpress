@@ -1,0 +1,1551 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Graphene 1.0 theme for WordPress\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-02-06 21:16+0800\n"
+"PO-Revision-Date: 2011-02-06 21:16+0800\n"
+"Last-Translator: Dayan <dayan.wp@gmail.com>\n"
+"Language-Team: Dayan <dayan.wp@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: Iran\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: D:/[MyVault]/MyProjects/[Websites]/theme-graphene/site/wp-content/themes/graphene/graphene/\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: author.php:33
+#@ graphene
+msgid "Author's posts listings"
+msgstr "فهرست پست‌های نویسنده"
+
+#: comments.php:19
+#@ graphene
+msgid "This post is password protected. Enter the password to view any comments."
+msgstr "این پست بوسیله‌ی کلمه‌ی عبور محافظت می‌شود. برای مشاهده‌ی دیدگاه‌ها، کلمه‌ی عبور مورد نیاز را وارد کنید."
+
+#: comments.php:40
+#@ graphene
+msgid "No comment yet"
+msgstr "بدون دیدگاه"
+
+#: comments.php:40
+#: loop-author.php:90
+#: loop.php:127
+#@ graphene
+msgid "1 comment"
+msgstr "1 دیدگاه"
+
+#: comments.php:40
+#: loop-author.php:90
+#: loop.php:127
+#, php-format
+#@ graphene
+msgid "% comments"
+msgstr "% دیدگاه"
+
+#: comments.php:41
+#@ graphene
+msgid "No ping yet"
+msgstr "بدون بازتاب"
+
+#: comments.php:41
+#@ graphene
+msgid "1 ping"
+msgstr "1 بازتاب"
+
+#: comments.php:41
+#@ graphene
+msgid "% pings"
+msgstr "% بازتاب"
+
+#: comments.php:79
+#@ graphene
+msgid "Comments have been disabled."
+msgstr "دیدگاه‌ها غیرفعال است."
+
+#: comments.php:94
+#, php-format
+#@ graphene
+msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes: %s"
+msgstr "می‌توانید از این تگ‌های <abbr title=\"HyperText Markup Language\">اچ‌تی‌ام‌ال</abbr> استفاده کنید: %s"
+
+#: comments.php:99
+#@ graphene
+msgid "Your email address will not be published."
+msgstr "آدرس پست الکترونیکی شما منتشر نمی‌شود."
+
+#: comments.php:102
+#: functions.php:927
+#@ graphene
+msgid "Submit Comment"
+msgstr "ثبت دیدگاه"
+
+#: admin/options.php:463
+#: footer.php:47
+#@ graphene
+msgid "Except where otherwise noted, content on this site is licensed under a <a href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">Creative Commons Licence</a>."
+msgstr "به جز برخی موارد، تمام محتوای این سایت براساس <a href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">اجازه‌نامه‌ی کریتیو کامنز</a> منتشر می‌شود."
+
+#: footer.php:59
+#@ graphene
+msgid "Valid XHTML 1.0 Strict"
+msgstr "XHTML معتبر"
+
+#: footer.php:60
+#@ graphene
+msgid "Valid CSS"
+msgstr "CSS معتبر"
+
+#: footer.php:60
+#@ graphene
+msgid "Valid CSS Level 2.1"
+msgstr "CSS سطح 2.1 معتبر"
+
+#. translators: %1$s is the blog title, %2$s is the theme's name, %3$s is the theme's author
+#: footer.php:82
+#, php-format
+#@ graphene
+msgid "%1$s uses %2$s theme by %3$s."
+msgstr "%1$s، پوسته‌ی %2$s توسط %3$s."
+
+#: functions.php:178
+#@ graphene
+msgid "Header Menu"
+msgstr "فهرست عنوان"
+
+#: functions.php:179
+#@ graphene
+msgid "Secondary Menu"
+msgstr "فهرست ثانویه"
+
+#. translators: header image description
+#: functions.php:222
+#@ graphene
+msgid "Header image by Syahir Hakim"
+msgstr "تصویر عنوان توسط Syahir Hakim"
+
+#. translators: header image description
+#: functions.php:228
+#@ graphene
+msgid "This is the default Graphene theme header image, cropped from image by Quantin Houyoux at sxc.hu"
+msgstr "تصویر عنوان پیش‌فرض پوسته‌ی گرافین، محصول Quantin Houyoux در sxc.hu"
+
+#. translators: header image description
+#: functions.php:234
+#: functions.php:240
+#: functions.php:246
+#: functions.php:252
+#: functions.php:258
+#@ graphene
+msgid "Header image cropped from image by Ilco at sxc.hu"
+msgstr "تصویر عنوان محصول Ilco در sxc.hu"
+
+#: functions.php:470
+#@ graphene
+msgid "Home"
+msgstr "خانه"
+
+#: functions.php:508
+#@ graphene
+msgid " says:"
+msgstr " می‌گوید:"
+
+#. translators: %1$s is the comment date, %2#s is the comment time
+#: functions.php:514
+#, php-format
+#@ graphene
+msgid "%1$s at %2$s"
+msgstr "%1$s - %2$s"
+
+#: functions.php:516
+#@ graphene
+msgid "Edit comment"
+msgstr "ویرایش دیدگاه"
+
+#: functions.php:520
+#@ graphene
+msgid "Reply"
+msgstr "پاسخ"
+
+#: functions.php:531
+#@ default
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: functions.php:624
+#@ graphene
+msgid "Sidebar Widget Area"
+msgstr "قسمت ابزارک‌های سایدبار"
+
+#: functions.php:644
+#@ graphene
+msgid "Footer Widget Area"
+msgstr "قسمت ابزارک‌های پانویس"
+
+#: functions.php:646
+#@ graphene
+msgid "The footer widget area. Leave empty to disable. Set the number of columns to display at the theme's Display Options page."
+msgstr "قسمت ابزارک‌های پانویس (فوتر). برای غیرفعال کردن خالی بگذارید. نمایش تعداد ستون‌های پانویس از طریق تنظیمات نحوه‌ی نمایش قابل تغییر است."
+
+#: functions.php:662
+#@ graphene
+msgid "Front Page Sidebar Widget Area"
+msgstr "قسمت ابزارک‌های سایدبار صفحه‌ی اول"
+
+#: functions.php:684
+#@ graphene
+msgid "Front Page Footer Widget Area"
+msgstr "قسمت ابزارک‌های پانویس صفحه‌ی اول"
+
+#: functions.php:686
+#@ graphene
+msgid "The footer widget area that will only be displayed on the front page. Leave empty to disable. Set the number of columns to display at the theme's Display Options page."
+msgstr "ابزارک‌هایی که در این قسمت قرار می‌گیرند، فقط در پانویس (فوتر) صفحه‌ی اول نمایش داده می‌شوند. برای غیرفعال کردن خالی بگذارید. نمایش تعداد ستون‌های پانویس از طریق تنظیمات نحوه‌ی نمایش قابل تغییر است."
+
+#: functions.php:751
+#@ graphene
+msgid "Follow me on Twitter"
+msgstr "مرا در توییتر دنبال کنید"
+
+#: functions.php:788
+#@ graphene
+msgid "Latest tweets"
+msgstr "آخرین توییت‌ها"
+
+#: functions.php:793
+#@ graphene
+msgid "Title:"
+msgstr "عنوان:"
+
+#: functions.php:797
+#@ graphene
+msgid "Twitter Username:"
+msgstr "شناسه‌ی توییتر:"
+
+#: functions.php:801
+#@ graphene
+msgid "Number of tweets to display:"
+msgstr "تعداد توییت‌های قابل نمایش:"
+
+#: functions.php:835
+#@ graphene
+msgid "Graphene Options"
+msgstr "تنظیمات پوسته"
+
+#: functions.php:839
+#@ graphene
+msgid "Graphene FAQs"
+msgstr "پشتیبانی"
+
+#: functions.php:908
+#@ graphene
+msgid "Name:"
+msgstr "نام:"
+
+#: functions.php:909
+#@ graphene
+msgid "Email:"
+msgstr "پست الکترونیکی:"
+
+#: functions.php:910
+#@ graphene
+msgid "Website:"
+msgstr "وب‌سایت:"
+
+#: functions.php:920
+#@ graphene
+msgid "Message:"
+msgstr "متن پیغام:"
+
+#: functions.php:948
+#@ graphene
+msgid "Continue reading &raquo;"
+msgstr "ادامه‌ی مطلب &raquo;"
+
+#: functions.php:995
+#@ graphene
+msgid "Older posts &laquo;"
+msgstr "&laquo; نوشته‌های قدیمی‌تر"
+
+#: functions.php:996
+#@ graphene
+msgid "&raquo; Newer posts"
+msgstr "نوشته‌های جدیدتر &raquo;"
+
+#: functions.php:1169
+#@ graphene
+msgid "View full post"
+msgstr "مشاهده‌ی متن کامل"
+
+#: functions.php:1304
+#@ graphene
+msgid "<strong>ERROR: You must supply the post ID to get the image from as an argument when calling the graphene_get_post_image() function.</strong>"
+msgstr "<strong>اخطار: ابتدا باید ID پست را برای تولید تصویر از یک آرگومان، هنگام فراخوانی تابع graphene_get_post_image() وارد کنید.</strong>"
+
+#: header.php:65
+#@ graphene
+msgid "Subscribe to RSS feed"
+msgstr "در خوراک آراس‌اس مشترک شوید"
+
+#: header.php:108
+#: header.php:117
+#@ graphene
+msgid "Go back to the front page"
+msgstr "بازگشت به صفحه‌ی اول"
+
+#: loop-author.php:23
+#@ graphene
+msgid "Author's details"
+msgstr "جزئیات نویسنده"
+
+#. translators: %1$s is the first name, %2$s is the last name
+#: loop-author.php:25
+#, php-format
+#@ graphene
+msgid "<strong>Name:</strong> %1$s %2$s"
+msgstr "<strong>نام:</strong> %1$s %2$s"
+
+#: loop-author.php:26
+#, php-format
+#@ graphene
+msgid "<strong>Date registered:</strong> %1$s"
+msgstr "<strong>تاریخ ثبت:</strong> %1$s"
+
+#: loop-author.php:35
+#@ graphene
+msgid "Biography"
+msgstr "زندگی‌نامه"
+
+#: loop-author.php:53
+#@ graphene
+msgid "Latest posts"
+msgstr "آخرین پست‌ها"
+
+#: loop-author.php:56
+#: loop-author.php:90
+#: search-404.php:24
+#, php-format
+#@ graphene
+msgid "Permalink Link to %s"
+msgstr "پیوند یکتا برای %s"
+
+#: loop-author.php:56
+#: loop-author.php:90
+#: loop-children.php:69
+#: loop.php:40
+#@ graphene
+msgid "(No title)"
+msgstr "(بدون عنوان)"
+
+#: loop-author.php:85
+#@ graphene
+msgid "Most commented posts"
+msgstr "پست‌های با بیشترین دیدگاه"
+
+#: loop-author.php:90
+#: loop.php:127
+#@ graphene
+msgid "Leave comment"
+msgstr "ارسال دیدگاه"
+
+#: loop-children.php:69
+#: loop-children.php:77
+#: loop.php:40
+#, php-format
+#@ graphene
+msgid "Permalink to %s"
+msgstr "پیوند یکتا برای %s"
+
+#: loop.php:58
+#@ graphene
+msgid "Edit post"
+msgstr "ویرایش نوشته"
+
+#. translators: this is for the author byline, such as 'by John Doe'
+#: loop.php:76
+#@ graphene
+msgid "by"
+msgstr "توسط"
+
+#: loop.php:91
+#@ graphene
+msgid "Read the rest of this entry &raquo;"
+msgstr "ادامه‌ی این مطلب را بخوانید &raquo;"
+
+#: loop.php:115
+#@ graphene
+msgid "Tags:"
+msgstr "برچسب‌ها:"
+
+#: loop.php:115
+#@ graphene
+msgid "This post has no tag"
+msgstr "این پست بدون برچسب است"
+
+#: loop.php:140
+#@ graphene
+msgid "About the author"
+msgstr "درباره‌ی نویسنده"
+
+#: loop.php:180
+#@ graphene
+msgid "Not found"
+msgstr "یافت نشد"
+
+#: loop.php:185
+#@ graphene
+msgid "Sorry, but you are looking for something that isn't here. Wanna try a search?"
+msgstr "متأسفانه به دنبال چیزی هستید که وجود ندارد. در صورت تمایل جستجو کنید."
+
+#: loop.php:187
+#@ graphene
+msgid "Sorry, but no results were found for that keyword. Wanna try an alternative keyword search?"
+msgstr "متأسفانه جستجوی شما بی‌نتیجه بود. می‌توانید دوباره جستجو کنید."
+
+#: search-404.php:3
+#@ graphene
+msgid "Error 404 - Page Not Found"
+msgstr "خطای 404 - یافت نشد"
+
+#: search-404.php:5
+#@ graphene
+msgid "Sorry, I've looked everywhere but I can't find the page you're looking for."
+msgstr "متأسفانه صفحه‌ی مورد نظر شما یافت نشد."
+
+#: search-404.php:6
+#@ graphene
+msgid "If you follow the link from another website, I may have removed or renamed the page some time ago. You may want to try searching for the page:"
+msgstr "اگر شما از طریق سایر وب‌سایت‌ها به اینجا رسیده‌اید، ممکن است صفحه‌ی مورد نظر شما حذف و یا تغییر نام داده شده باشد. می‌توانید جستجو کنید."
+
+#: search-404.php:14
+#@ graphene
+msgid "Suggested results"
+msgstr "نتایج پیشنهادی"
+
+#. translators: %s is the search term
+#: search-404.php:18
+#, php-format
+#@ graphene
+msgid "I've done a courtesy search for the term %s for you. See if you can find what you're looking for in the list below:"
+msgstr "ما برای شما برخی نتایج مشابه با کلمه‌ی کلیدی %s را فهرست کرده‌ایم. ممکن است آنچه که به دنبالش هستید پیدا کنید!"
+
+#: search-404.php:35
+#@ graphene
+msgid "<strong>Sorry, couldn't find anything.</strong> Try searching for alternative terms using the search form above."
+msgstr "<strong>متاسفانه چیزی یافت نشد.</strong> برای جستجوی عبارت‌های جایگزین از فرم جستجو استفاده کنید."
+
+#: searchform.php:3
+#: searchform.php:4
+#@ graphene
+msgid "Search"
+msgstr "جستجو"
+
+#: sidebar-two.php:49
+#: sidebar.php:35
+#@ graphene
+msgid "Archives"
+msgstr "بایگانی"
+
+#: sidebar-two.php:36
+#: sidebar.php:42
+#@ graphene
+msgid "Meta"
+msgstr "مدیریت"
+
+#: sidebar-two.php:41
+#: sidebar.php:47
+#@ graphene
+msgid "Posts RSS"
+msgstr "خوراک نوشته‌ها"
+
+#: sidebar-two.php:42
+#: sidebar.php:48
+#@ graphene
+msgid "Comments RSS"
+msgstr "خوراک دیدگاه‌ها"
+
+#. translators: %s is the link to wordpress.org
+#: sidebar-two.php:44
+#: sidebar.php:50
+#, php-format
+#@ graphene
+msgid "Powered by %s"
+msgstr "با قدرت %s"
+
+#: sidebar-two.php:44
+#: sidebar.php:50
+#@ graphene
+msgid "Powered by WordPress, state-of-the-art semantic personal publishing platform."
+msgstr "با قدرت وردپرس، محبوب‌ترین سکوی انتشار وبلاگ مفهومی"
+
+#: admin/custom-fields.php:15
+#@ graphene
+msgid "Graphene post-specific options"
+msgstr "تنظیمات ویژه‏ی نوشته‌ها"
+
+#: admin/custom-fields.php:16
+#@ graphene
+msgid "Graphene page-specific options"
+msgstr "تنظیمات ویژه‌ی برگه‌ها"
+
+#: admin/custom-fields.php:82
+#@ graphene
+msgid "These settings will only be applied to this particular post or page you're editing. They will override the global settings set in the Graphene Options or Graphene Display options page."
+msgstr "این تنظیمات فقط مربوط به پست‌ها و یا برگه‌های در حال ویرایش است. ممکن است از طربق تنظیمات پوسته و یا تنظیمات نحوه‌ی نمایش لغو شود."
+
+#: admin/custom-fields.php:83
+#@ graphene
+msgid "Slider options"
+msgstr "تنظیمات نمایش اسلاید"
+
+#: admin/custom-fields.php:87
+#: admin/options.php:201
+#@ graphene
+msgid "Slider image"
+msgstr "تصاویر اسلایدر"
+
+#: admin/custom-fields.php:91
+#: admin/custom-fields.php:117
+#@ graphene
+msgid "Use global setting"
+msgstr "استفاده از تنظیمات عمومی"
+
+#: admin/custom-fields.php:92
+#: admin/options.php:205
+#@ graphene
+msgid "Don't show image"
+msgstr "نمایش ندادن تصویر"
+
+#: admin/custom-fields.php:93
+#: admin/options.php:206
+#@ graphene
+msgid "Featured Image"
+msgstr "تصویر برجسته"
+
+#: admin/custom-fields.php:94
+#: admin/options.php:207
+#@ graphene
+msgid "First image in post"
+msgstr "اولین تصویر در پست"
+
+#: admin/custom-fields.php:95
+#: admin/options.php:208
+#@ graphene
+msgid "Custom URL"
+msgstr "آدرس سفارشی"
+
+#: admin/custom-fields.php:101
+#: admin/options.php:214
+#@ graphene
+msgid "Custom slider image URL"
+msgstr "آدرس سفارشی تصویر اسلایدر"
+
+#: admin/custom-fields.php:105
+#: admin/options.php:218
+#@ graphene
+msgid "Make sure you select Custom URL in the slider image option above to use this custom url."
+msgstr "مطمئن شوید که در تنظیمات قسمت بالا، آدرس سفارشی برای تصویر اسلایدر را انتخاب کرده باشید."
+
+#: admin/custom-fields.php:109
+#@ graphene
+msgid "Display options"
+msgstr "تنظیمات نمایش"
+
+#: admin/custom-fields.php:113
+#@ graphene
+msgid "AddThis Social Sharing button"
+msgstr "دکمه‌ی به اشتراک گذاری AddThis"
+
+#: admin/custom-fields.php:118
+#@ graphene
+msgid "Show button"
+msgstr "نمایش دکمه"
+
+#: admin/custom-fields.php:119
+#@ graphene
+msgid "Hide button"
+msgstr "مخفی کردن دکمه"
+
+#: admin/uninstall.php:32
+#@ graphene
+msgid "ERROR: You are not authorised to perform that operation"
+msgstr "خطا: شما مجاز به انجام عملیات نیستید"
+
+#: admin/options.php:488
+#@ graphene
+msgid "Header Display Options"
+msgstr "تنظیمات نمایش عنوان"
+
+#: admin/options.php:494
+#@ graphene
+msgid "Use light-coloured header bars"
+msgstr "استفاده از رنگ روشن در نوار عنوان"
+
+#: admin/options.php:500
+#@ graphene
+msgid "Link header image to front page"
+msgstr "پیوند تصویر عنوان به صفحه‌ی اول"
+
+#: admin/options.php:503
+#@ graphene
+msgid "Check this if you disable the header texts and want the header image to be linked to the front page."
+msgstr "اگر شما متن عنوان را غیر‎فعال کرده‌اید و مایلید تا تصویر عنوان، پیوندی به صفحه‌ی اول باشد، این قسمت را علامت بزنید."
+
+#: admin/options.php:508
+#@ graphene
+msgid "Disable Featured Image replacing header image"
+msgstr "غیرفعال کردن جایگزینی تصویر عنوان با تصویر شاخص"
+
+#: admin/options.php:511
+#@ graphene
+msgid "Check this to prevent the posts Featured Image replacing the header image regardless of the featured image dimension."
+msgstr "این قسمت را برای جلوگیری از جایگزینی تصویر عنوان با تصاویر شاخص پست‌ها بدون درنظر گرفتن ابعاد تصویر شاخص، علامت بزنید."
+
+#: admin/options.php:516
+#@ graphene
+msgid "Use random header image"
+msgstr "استفاده از تصویر عنوان تصادفی (راندم)"
+
+#: admin/options.php:520
+#@ graphene
+msgid "Check this to show a random header image (random image taken from the available default header images)."
+msgstr "برای نمایش تصادفی تصاویر عنوان، این قسمت را علامت بزنید. (تصاویر پیش‌فرض موجود در قسمت پس‌زمینه مورد استفاده قرار خواهند گرفت.)"
+
+#: admin/options.php:521
+#@ graphene
+msgid "<strong>Note:</strong> only works on pages where a specific header image is not defined."
+msgstr "<strong>نکته:</strong> فقط در صفحاتی که تصویر عنوان شاخص تعریف نشده باشد، عمل خواهد کرد."
+
+#: admin/options.php:526
+#@ graphene
+msgid "Hide the top bar"
+msgstr "مخفی کردن نوار بالا"
+
+#: admin/options.php:532
+#@ graphene
+msgid "Search box location"
+msgstr "موقعیت جعبه‌ی جستجو"
+
+#: admin/options.php:536
+#@ graphene
+msgid "Top bar"
+msgstr "نوار بالا"
+
+#: admin/options.php:537
+#@ graphene
+msgid "Navigation bar"
+msgstr "نوار ناوبری"
+
+#: admin/options.php:606
+#@ graphene
+msgid "Posts Display Options"
+msgstr "تنظیمات نمایش پست‌ها"
+
+#: admin/options.php:612
+#@ graphene
+msgid "Show excerpts in front page"
+msgstr "نمایش خلاصه‌ی نوشته‌ها در صفحه‌ی اول"
+
+#: admin/options.php:618
+#@ graphene
+msgid "Hide post author"
+msgstr "مخفی کردن نویسنده‌ی پست"
+
+#: admin/options.php:638
+#@ graphene
+msgid "Hide post categories"
+msgstr "مخفی کردن دسته‌بندی پست‌ها"
+
+#: admin/options.php:644
+#@ graphene
+msgid "Hide post tags"
+msgstr "مخفی کردن برچسب‌ پست‌ها"
+
+#: admin/options.php:650
+#@ graphene
+msgid "Hide post comment count"
+msgstr "مخفی کردن تعداد دیدگاه‌های پست‌ها"
+
+#: admin/options.php:651
+#@ graphene
+msgid "Only affects posts listing (such as the front page) and not single post view."
+msgstr "فقط در لیست پست‌ها (مانند صفحه‌ی اول) تاثیر می‌گذارد و در مشاهده‌ی صفحات مجزای پست‌ها بی‌تأثیر است."
+
+#: admin/options.php:656
+#@ graphene
+msgid "Show post author's gravatar"
+msgstr "نمایش گراواتار نویسنده‌ی پست"
+
+#: admin/options.php:660
+#@ graphene
+msgid "Show post author's info"
+msgstr "نمایش اطلاعات نویسنده‌ی پست"
+
+#: admin/options.php:664
+#@ graphene
+msgid "Show More link for manual excerpts"
+msgstr "نمایش پیوند‌های بیشتر برای ادامه‌ی مطلب دستی"
+
+#: admin/options.php:677
+#@ graphene
+msgid "Comments Display Options"
+msgstr "تنظیمات نمایش دیدگاه‌ها"
+
+#: admin/options.php:683
+#@ graphene
+msgid "Hide allowed tags in comment form"
+msgstr "مخفی کردن تگ های مجاز در فرم دیدگاه"
+
+#: admin/options.php:696
+#@ graphene
+msgid "Text Style Options"
+msgstr "تنظیمات استایل متن"
+
+#: admin/options.php:699
+#@ graphene
+msgid "Note that these are CSS properties, so any valid CSS values for each particular property can be used."
+msgstr "توجه داشته باشید که این‌ها، ویژگی‌های CSS هستند، بنابراین می‌توان مقادیر مجاز CSS را برای هر ویژگی خاص استفاده کرد."
+
+#: admin/options.php:700
+#@ graphene
+msgid "Some example CSS properties values:"
+msgstr "برخی نمونه‌ها برای مقادیر مناسب CSS:"
+
+#: admin/options.php:703
+#@ graphene
+msgid "Text font:"
+msgstr "فونت متن:"
+
+#: admin/options.php:707
+#@ graphene
+msgid "Text size and line height:"
+msgstr "اندازه‌ی متن و ارتفاع خط (line height):"
+
+#: admin/options.php:711
+#@ graphene
+msgid "Text weight:"
+msgstr "وزن متن (Text weight):"
+
+#: admin/options.php:715
+#@ graphene
+msgid "Text style:"
+msgstr "استایل متن:"
+
+#: admin/options.php:719
+#@ graphene
+msgid "Text colour:"
+msgstr "رنگ متن:"
+
+#: admin/options.php:723
+#: admin/options.php:864
+#: admin/options.php:893
+#@ graphene
+msgid "Leave field empty to use the default value."
+msgstr "فیلدها را خالی بگذارید تا مقدار پیش‌فرض در نظر گرفته شود."
+
+#: admin/options.php:725
+#@ graphene
+msgid "Header Text"
+msgstr "متن عنوان"
+
+#: admin/options.php:729
+#@ graphene
+msgid "Title text font"
+msgstr "فونت متن عنوان"
+
+#: admin/options.php:735
+#@ graphene
+msgid "Title text size"
+msgstr "اندازه‌ی متن عنوان"
+
+#: admin/options.php:741
+#@ graphene
+msgid "Title text weight"
+msgstr "وزن متن عنوان (Title text weight)"
+
+#: admin/options.php:747
+#@ graphene
+msgid "Title text line height"
+msgstr "ارتفاع خط (line height) متن عنوان"
+
+#: admin/options.php:753
+#@ graphene
+msgid "Title text style"
+msgstr "استایل متن (text style) عنوان"
+
+#: admin/options.php:762
+#@ graphene
+msgid "Description text font"
+msgstr "فونت متن توضیحات (Description)"
+
+#: admin/options.php:768
+#@ graphene
+msgid "Description text size"
+msgstr "اندازه‌ی متن (text size) توضیحات"
+
+#: admin/options.php:774
+#@ graphene
+msgid "Description text weight"
+msgstr "وزن متن (text weight) توضیحات"
+
+#: admin/options.php:780
+#@ graphene
+msgid "Description text line height"
+msgstr "ارتفاع خط (line height) متن توضیحات"
+
+#: admin/options.php:786
+#@ graphene
+msgid "Description text style"
+msgstr "استایل متن (text style) توضیحات"
+
+#: admin/options.php:792
+#@ graphene
+msgid "Content Text"
+msgstr "متن محتوا"
+
+#: admin/options.php:796
+#@ graphene
+msgid "Text font"
+msgstr "فونت متن"
+
+#: admin/options.php:802
+#@ graphene
+msgid "Text size"
+msgstr "اندازه‌ی متن"
+
+#: admin/options.php:808
+#@ graphene
+msgid "Text line height"
+msgstr "ارتفاع خط (line height) متن"
+
+#: admin/options.php:814
+#@ graphene
+msgid "Text colour"
+msgstr "رنگ متن"
+
+#: admin/options.php:820
+#@ graphene
+msgid "Link Text"
+msgstr "متن پیوند (Link)"
+
+#: admin/options.php:824
+#@ graphene
+msgid "Link colour (normal state)"
+msgstr "رنگ لینک (حالت عادی)"
+
+#: admin/options.php:830
+#@ graphene
+msgid "Link colour (visited state)"
+msgstr "رنگ لینک (حالت مشاهده شده)"
+
+#: admin/options.php:836
+#@ graphene
+msgid "Link colour (hover state)"
+msgstr "رنگ لینک (حالت شناور (hover state))"
+
+#: admin/options.php:842
+#@ graphene
+msgid "Text decoration (normal state)"
+msgstr "دکوراسیون متن (Text decoration) (حالت عادی)"
+
+#: admin/options.php:848
+#@ graphene
+msgid "Text decoration (hover state)"
+msgstr "دکوراسیون متن (حالت شناور)"
+
+#: admin/options.php:861
+#@ graphene
+msgid "Footer Widget Display Options"
+msgstr "تنظیمات نمایش عناصر پانویس"
+
+#: admin/options.php:869
+#@ graphene
+msgid "Number of columns to display"
+msgstr "تعداد ستون‌ها برای نمایش"
+
+#: admin/options.php:876
+#@ graphene
+msgid "Number of columns to display for front page footer widget"
+msgstr "تعداد ستون‌ها برای نمایش در فوتر صفحه‌ی اول"
+
+#: admin/options.php:890
+#@ graphene
+msgid "Navigation Menu Display Options"
+msgstr "تنظیمات نمایش منوی ناوبری"
+
+#: admin/options.php:898
+#@ graphene
+msgid "Dropdown menu item width"
+msgstr "عرض آیتم منوی کرکره‌ای"
+
+#: admin/options.php:911
+#@ graphene
+msgid "Miscellaneous Display Options"
+msgstr "تنظیمات نمایش متفرقه"
+
+#: admin/options.php:957
+#@ graphene
+msgid "Custom CSS"
+msgstr "CSS سفارشی"
+
+#: admin/options.php:962
+#@ graphene
+msgid "Custom CSS styles"
+msgstr "سبک CSS سفارشی"
+
+#: admin/options.php:964
+#@ graphene
+msgid "You can enter your own CSS codes below to modify any other aspects of the theme's appearance that is not included in the options."
+msgstr "می‌توانید کدهای CSS خود را برای تغییر هرجنبه از خصوصیات ظاهری پوسته که در تنظیمات شامل نمی‌شود، در این قسمت وارد کنید."
+
+#: admin/faq.php:12
+#@ graphene
+msgid "Graphene's Frequently Asked Questions"
+msgstr "پرسش و پاسخ‌های متداول درباره‌ی پوسته‌ی گرافین"
+
+#: admin/faq.php:15
+#@ graphene
+msgid "Where should I go for the theme's support?"
+msgstr "برای درخواست پشتیبانی و گزارش اشکالات پوسته، باید به کجا برویم؟\t"
+
+#: admin/faq.php:16
+#@ graphene
+msgid "Please direct all support requests for the theme at the theme's <a href=\"http://forum.khairul-syahir.com/forum/graphene-wordpress-theme\">Support Forum</a>."
+msgstr "تمام درخواست‌های پشتیبانی از طریق <a href=\"http://forum.khairul-syahir.com/forum/graphene-wordpress-theme\">انجمن پشتیبانی</a> رسیدگی می‌شود."
+
+#: admin/faq.php:19
+#@ graphene
+msgid "The post's featured image is replacing my header image. Help!"
+msgstr "کمک کنید! تصویر عنوان با تصویر شاخص نوشته‌ها جایگزین شده است."
+
+#: admin/faq.php:20
+#@ graphene
+msgid "This is actually one of the theme's features, based on the feature in the default TwentyTen theme. Any featured image that has a size of greater than or equal to the theme's header image size (900 x 198 pixels) will replace the header image when the post/page that featured image is assigned to is being displayed. It enables you to have different header image for different posts and/or pages."
+msgstr "در واقع این یکی از امکانات پوسته است که براساس ویژگی پوسته‌ی پیش‌فرض TwentyTen می‌باشد. هر تصویر شاخصی که اندازه‌ی بزرگ‌تر و یا برابر با تصویر عنوان وبلاگ (900 در 198 پیکسل) داشته باشد، به عنوان تصویر عنوان قرار می‌گیرد و برای داشتن تصویر عنوان مختلف در پست/برگه های مختلف، برای شما فعال شده است."
+
+#: admin/faq.php:24
+#@ graphene
+msgid "Can I modify Graphene to my heart's content without paying anything?"
+msgstr "آیا می‌توانم آن‌طور که دلم می‌خواهد تغییراتی در پوسته‌ی گرافین ایجاد کنم؟"
+
+#: admin/faq.php:25
+#@ graphene
+msgid "The Graphene Wordpress theme, along with all the other themes in the Wordpress.org Official Free Themes Directory, is released under the GNU General Public License (GPL) Version 2. The full text of that licence is included with the theme in the <code>licence.txt</code> file in the theme's folder. Releasing the theme under that licence means, among others, that you are <em>free to modify the theme in any way for any purpose (including commercial)</em> without any obligation to the theme's author. However, if you decide to redistribute the theme, the licence dictates that you must release the theme under the same licence, GPLv2."
+msgstr "پوسته‌ی گرافین، مانند همه‌ی پوسته‌های رایگان موجود در مخازن وب سایت رسمی وردپرس، تحت GNU General Public License (GPL) Version 2 منتشر شده است. متن کامل این اجازه‌نامه با نام <code>licence.txt</code>، در پوشه‌ی پوسته قرار دارد. انتشار این پوسته تحت این لیسانس به این معنی است که هر کسی حتی شما <em>آزادید تا در پوسته، به هر طریق و با هر مقصودی (شامل مقاصد تجاری)</em> تغییراتی بوجود بیاورید، بدون الزام به مطلع ساختن طراح پوسته. با این وجود، اگر تصمیم به توزیع پوسته گرفتید، محصول نهایی شما نیز باید تحت GPLv2 باشد."
+
+#: admin/faq.php:26
+#@ graphene
+msgid "But of course, the author would always appreciate <a href=\"themes.php?page=graphene_options\">donations</a> to support ongoing and future developments of the theme."
+msgstr "اما، نویسنده، همواره و بنا به نیاز می‌تواند برای پشتیبانی و توسعه‌ی پوسته تقاضای <a href=\"themes.php?page=graphene_options\">کمک مالی</a> کند."
+
+#: admin/faq.php:29
+#@ graphene
+msgid "If the theme is released under GPLv2, what is this Creative Commons licence in the theme's footer?"
+msgstr "اگر این پوسته تحت اجازه نامه‌ی GPLv2 منتشر شده است، پس Creative Commons licence در فوتر پوسته به چه معنی است؟"
+
+#: admin/faq.php:30
+#@ graphene
+msgid "The Creative Commons licence is a popular licence nowadays that are used by a lot of web-based content authors to licence their work such that it protects their intellectual property but in the same time allows its free distribution. It is included with the theme simply to make it easy for the theme's users to make use of the licence for the content they publish. Theme users can remove it altogether via the theme's Options page should they wish not to use it."
+msgstr "اجازه نامه‌ی کریتیو کامنز یک لیسانس عمومی است که امروزه توسط بسیاری از تولیدکنندگان محتوای اینترنتی برای ارزش‌گذاری برای کارهایشان شامل حفاظت در برابر سرقت ادبی استفاده می‌شود که در بعضی موارد به توزیع رایگان نیز اجازه می‌دهد. این به استفاده‌کنندگان پوسته این حق را می‌دهد تا محتوای خود را تحت این لیسانس در وب منتشر کنند. کاربران می‌توانند در صورت تمایل از طریق صفحه‌ی تنظیمات پوسته از این ویژگی چشم‌پوشی کنند."
+
+#: admin/faq.php:31
+#@ graphene
+msgid "Put simply, <em>it is not the licence that is applied for the theme itself</em>, but just for the website's content should the theme user wants to use it."
+msgstr "به عبارت ساده‌تر، <em> این اجازه‌نامه برای خود پوسته بکار نمی‌رود</em>، بلکه فقط برای محتوای تولید شده توسط کاربرانی است که از این پوسته استفاده می‌کنند."
+
+#: admin/faq.php:34
+#@ graphene
+msgid "Is the theme compatible with this plugin or that plugin?"
+msgstr "آیا این پوسته با افزونه‌های مختلف سازگاری دارد؟"
+
+#: admin/faq.php:35
+#@ graphene
+msgid "I don't know. With so many plugins available for Wordpress, there's no way that I (or anybody else for that matter) can test for compatibility for all of them. Having said that, the theme is built with all the necessary Wordpress components included with it, so chances are most plugins will be compatible with the theme."
+msgstr "نمی‌دونم. با توجه به تعداد بسیار زیاد افزونه‌های منتشر شده برای وردپرس، هیچ راه منطقی برای بررسی کردن سازگاری همه‌ی هزاران افزونه با این پوسته وجود ندارد. با این وجود این پوسته با کامپوننت‌های استاندارد وردپرس نوشته شده است و امید است که با اکثر افزونه‌های استاندارد سازگار باشد."
+
+#: admin/faq.php:36
+#@ graphene
+msgid "My suggestion is to just install the plugin and try it. If you stumble into problem, ask for support from the plugin author first. If the plugin author says that it's a problems with the theme, you know where to find support."
+msgstr "پیشنهاد من این است که شما افزونه‌ی مورد نیازتان را نصب و امتحان کنید، در صورت بروز مشکل، ابتدا آن را در انجمن پشتیبانی آن افزونه مطرح کنید و اگر به شما گفته شد که اشکال از پوسته است، سپس آن را در انجمن پشتیبانی پوسته مطرح کنید."
+
+#: admin/options.php:42
+#: admin/uninstall.php:23
+#@ graphene
+msgid "Uninstall Graphene"
+msgstr "حذف Graphene"
+
+#: admin/options.php:43
+#@ graphene
+msgid "Please confirm that you would like to uninstall the Graphene theme. All of the theme's options in the database will be deleted."
+msgstr "لطفا تأیید کنید که می‌خواهید پوسته‌ گرافین را حذف کنید. تمام تنظیمات پوسته در پایگاه داده حذف خواهد شد."
+
+#: admin/options.php:44
+#@ graphene
+msgid "This action is not reversible."
+msgstr "این عمل غیرقابل برگشت خواهد‌بود."
+
+#: admin/options.php:48
+#: admin/options.php:146
+#@ graphene
+msgid "Uninstall Theme"
+msgstr "حذف کردن پوسته"
+
+#: admin/options.php:60
+#@ graphene
+msgid "Graphene Theme Options"
+msgstr "تنظیمات پوسته‌ی گرافین"
+
+#: admin/options.php:62
+#@ graphene
+msgid "These are the global settings for the theme. You may override some of the settings in individual posts and pages."
+msgstr "این قسمت تنظیمات کلی برای پوسته را شامل می‌شود. شما ممکن است تغییرات این قسمت را از طریق تنظیمات منحصربه‏فرد در پست‌ها و برگه‌ها لغو کنید."
+
+#: admin/options.php:168
+#@ graphene
+msgid "Slider Options"
+msgstr "تنظیمات نمایش اسلایدی"
+
+#: admin/options.php:174
+#@ graphene
+msgid "Category to show in slider"
+msgstr "نمایش اسلایدی براساس دسته‌ها"
+
+#: admin/options.php:175
+#@ graphene
+msgid "All posts within the category selected here will be displayed on the slider. Usage example: create a new category \"Featured\" and assign all posts to be displayed on the slider to that category, and then select that category here."
+msgstr "همه‌ی پست‌های موجود در دسته‌ای که انتخاب می‌کنید در اسلاید نمایش داده خواهند شد. برای مثال: یک دسته‌ی جدید با نام \"Featured\" ایجاد کنید و تعدادی از پست‌ها را برای نمایش در این دسته اختصاص دهید و سپس این دسته را در این قسمت انتخاب کنید."
+
+#: admin/options.php:179
+#@ graphene
+msgid "Show latest posts"
+msgstr "نمایش آخرین پست‌ها"
+
+#: admin/options.php:180
+#@ graphene
+msgid "Show random posts"
+msgstr "نمایش تصادفی پست‌ها"
+
+#: admin/options.php:193
+#@ graphene
+msgid "Number of posts to display"
+msgstr "تعداد پست‌ها برای نمایش"
+
+#: admin/options.php:235
+#@ graphene
+msgid "Slider height"
+msgstr "ارتفاع اسلایدر"
+
+#: admin/options.php:243
+#@ graphene
+msgid "Slider speed"
+msgstr "سرعت اسلایدر"
+
+#: admin/options.php:246
+#@ graphene
+msgid "milliseconds"
+msgstr "هزارم ثانیه"
+
+#: admin/options.php:247
+#@ graphene
+msgid "This is the duration that each slider item will be shown"
+msgstr "این قسمت مربوط به مدتی است که هر آیتم اسلایدر نمایش داده می‌شود"
+
+#: admin/options.php:252
+#@ graphene
+msgid "Move slider to bottom of page"
+msgstr "انتقال اسلایدر به پایین صفحه"
+
+#: admin/options.php:258
+#@ graphene
+msgid "Disable slider"
+msgstr "غیرفعال کردن اسلایدر"
+
+#: admin/options.php:271
+#@ graphene
+msgid "Front Page Options"
+msgstr "تنظیمات صفحه‌ی اول"
+
+#: admin/options.php:277
+#@ graphene
+msgid "Front page posts categories"
+msgstr "نمایش پست‌های دسته‌ی خاص در صفحه‌ی اول"
+
+#: admin/options.php:279
+#@ graphene
+msgid "Only posts that belong to the categories selected here will be displayed on the front page. Does not affect Static Front Page."
+msgstr "تنها پست‌های متعلق به دسته‌ی انتخاب شده در این قسمت، در صفحه‌ی اول نمایش داده می‌شوند. در صفحات استاتیک بی‌تأثیر است."
+
+#: admin/options.php:284
+#@ graphene
+msgid "--Disabled--"
+msgstr "--غیرفعال--"
+
+#: admin/options.php:292
+#@ graphene
+msgid "You may select multiple categories by holding down the CTRL key."
+msgstr "برای انتخاب بیش از یک دسته، کلید Ctrl صفحه کلید را نگه دارید."
+
+#: admin/options.php:304
+#@ graphene
+msgid "Widget Area Options"
+msgstr "تنظیمات قسمت ابزارک‌ها"
+
+#: admin/options.php:321
+#@ graphene
+msgid "Alternate Widgets"
+msgstr "ابزارک‌های متناوب"
+
+#: admin/options.php:322
+#@ graphene
+msgid "You can enable the theme to show different widget areas in the front page than the rest of the website. If you enable this option, additional widget areas that will only be displayed on the front page will be added to the Widget settings page."
+msgstr "این امکان وجود دارد تا شما ابزارک‌های مختلف را فقط برای نمایش در صفحه‌ی اول قرار دهید بدون اینکه در سایر صفحات دیده شود. اگر شما این ویژگی را فعال کنید، گزینه‌های جدیدی به قسمت ابزارک‌ها برای نمایش در صفحه‌ی اصلی اضافه می‌شود."
+
+#: admin/options.php:325
+#@ graphene
+msgid "Enable alternate front page sidebar widget area"
+msgstr "فعال کردن قسمت ابزارک‌های سایدبار برای صفحه‌ی اول"
+
+#: admin/options.php:329
+#@ graphene
+msgid "Enable alternate front page footer widget area"
+msgstr "فعال کردن قسمت ابزارک‌های پانویس برای صفحه‌ی اول"
+
+#: admin/options.php:330
+#@ graphene
+msgid "You can also specify different column counts for the front page footer widget and the rest-of-site footer widget if you enable this option."
+msgstr "همچنین با فعال کردن این ویژگی، می‌توانید تعداد ستون‌های مختلفی را برای ابزارک‌های پانویس صفحه‌ی اول تعیین کنید."
+
+#: admin/options.php:343
+#@ graphene
+msgid "Feed Options"
+msgstr "تنظیمات خوراک"
+
+#: admin/options.php:348
+#@ graphene
+msgid "Hide feed icon"
+msgstr "مخفی کردن آیکون خوراک"
+
+#: admin/options.php:352
+#@ graphene
+msgid "Use custom feed URL"
+msgstr "استفاده از آدرس خوراک سفارشی"
+
+#: admin/options.php:355
+#@ graphene
+msgid "This custom feed URL will replace the default Wordpress RSS feed URL."
+msgstr "این آدرس خوراک سفارشی با آدرس RSS feed پیش‌فرض وردپرس جایگزین می‌شود."
+
+#: admin/options.php:367
+#@ graphene
+msgid "Social Sharing Buttons"
+msgstr "دکمه‌های به اشتراک گذاری"
+
+#: admin/options.php:372
+#@ graphene
+msgid "Show social sharing button"
+msgstr "نمایش دکمه‌های به اشتراک گذاری"
+
+#: admin/options.php:376
+#@ graphene
+msgid "Show in Pages as well?"
+msgstr "به درستی در صفحات نمایش داده شود؟"
+
+#: admin/options.php:381
+#@ graphene
+msgid "Your social sharing button code"
+msgstr "کد دکمه‌ی به اشتراک گذاری شما"
+
+#: admin/options.php:382
+#@ graphene
+msgid "You can use codes from any popular social sharing sites, like Facebook, Digg, AddThis, etc."
+msgstr "شما می‌توانید از کدهای سایت‌های به اشتراک گذاری معروف مانند فیس‌بوک، دیگ، AddThis و غیره استفاده کنید."
+
+#: admin/options.php:396
+#@ graphene
+msgid "Adsense Options"
+msgstr "تنظیمات Adsense"
+
+#: admin/options.php:402
+#@ graphene
+msgid "Show Adsense advertising"
+msgstr "نمایش آگهی‌های ادسنس"
+
+#: admin/options.php:408
+#@ graphene
+msgid "Show ads on front page as well"
+msgstr "نمایش بدون اشکال آگهی‌ها در صفحه‌ی اول"
+
+#: admin/options.php:414
+#@ graphene
+msgid "Your Adsense code"
+msgstr "کد ادسنس شما"
+
+#: admin/options.php:427
+#@ graphene
+msgid "Google Analytics Options"
+msgstr "تنظیمات Google Analytics"
+
+#: admin/options.php:430
+#@ graphene
+msgid "<strong>Note:</strong> the theme now places the Google Analytics script in the <code>&lt;head&gt;</code> element to better support the new asynchronous Google Analytics script. Please make sure you update your script to use the new asynchronous script from Google Analytics."
+msgstr "<strong>نکته: </strong> این پوسته هم اکنون اسکریپت گوگل آنالایتیک را برای پشتیبانی بهتر از ویژگی غیرهمزمان، بین المنت <code>&lt;head&gt;</code> قرار می‌دهد. لطفا اطمینان حاصل کنید که به ویژگی جدید استفاده‌ی غیرهمزمان اسکریپت گوگل آنالایتیک به‌روزرسانی کرده باشید."
+
+#: admin/options.php:433
+#@ graphene
+msgid "Enable Google Analytics tracking"
+msgstr "فعال کردن شمارنده‌ی گوگل آنالایتیک"
+
+#: admin/options.php:437
+#@ graphene
+msgid "Google Analytics tracking code"
+msgstr "کد شمارنده‌ی گوگل آنالایتیک"
+
+#: admin/options.php:438
+#@ graphene
+msgid "Make sure you include the full tracking code (including the <code>&lt;script&gt;</code> and <code>&lt;/script&gt;</code> tags) and not just the <code>UA-#######-#</code> code."
+msgstr "مطمئن شوید که همه‌ی کد را به طور کامل قرار داده باشید. شامل کدهای بین تگ‌های <code>&lt;script&gt;</code> و <code>&lt;/script&gt;</code>، و نه فقط کد <code>UA-#######-#</code>"
+
+#: admin/options.php:451
+#@ graphene
+msgid "Footer Options"
+msgstr "تنظیمات پانویس"
+
+#: admin/options.php:456
+#@ graphene
+msgid "Show Creative Commons logo"
+msgstr "نمایش لوگوی کریتیو کامنز"
+
+#: admin/options.php:461
+#@ graphene
+msgid "Copyright text (html allowed)"
+msgstr "متن کپی رایت (html مجاز است)"
+
+#: admin/options.php:462
+#@ graphene
+msgid "If this field is empty, the following default copyright text will be displayed:"
+msgstr "اگر این فیلد خالی بماند، متن پیش‌فرض زیر به عنوان متن کپی رایت نمایش داده می‌شود."
+
+#: admin/options.php:468
+#@ graphene
+msgid "Do not show copyright info"
+msgstr "اطلاعات کپی رایت را نمایش نده"
+
+#: admin/options.php:118
+#@ graphene
+msgid "Support the developer"
+msgstr "حمایت از توسعه‌دهندگان"
+
+#: admin/options.php:136
+#@ graphene
+msgid "Uninstall theme"
+msgstr "حذف پوسته"
+
+#: admin/options.php:139
+#@ graphene
+msgid "<strong>Be careful!</strong> Uninstalling the theme will remove all of the theme's options from the database. Do this only if you decide not to use the theme anymore."
+msgstr "<strong>احتیاط کنید!</strong> حذف پوسته به معنی حذف تمام تنظیمات آن از پایگاه داده می‌باشد. فقط در صورتی که تصمیم گرفته‌اید به هیچ عنوان از این پوسته استفاده نکنید این کار را انجام دهید."
+
+#: admin/options.php:140
+#@ graphene
+msgid "If you just want to try another theme, there is no need to uninstall this theme. Simply activate the other theme in the Appearance > Themes admin page."
+msgstr "اگر تصمیم گرفته‌اید تا از پوسته‌ی دیگری استفاده کنید، نیاز به حذف این پوسته نیست. کافیست از قسمت پوسته‌ها، قالب دیگری را فعال کنید."
+
+#: admin/options.php:141
+#@ graphene
+msgid "Note that uninstalling this theme <strong>does not remove</strong> the theme's files. To delete the files after you have uninstalled this theme, go to Appearances > Themes and delete the theme from there."
+msgstr "و نکته‌ی آخر اینکه این قسمت فقط اطلاعات موجود در پایگاه داده را حذف می‌کند و برای حذف فایل‌های پوسته، پس از حذف در این قسمت، به بخش پوسته‌ها بروید و این پوسته را از آن قسمت نیز حذف کنید."
+
+#: admin/user.php:7
+#@ graphene
+msgid "Graphene-specific User Profile Information"
+msgstr "اطلاعات کاربری، ویژه‌ی پوسته‌ی Graphene"
+
+#: admin/user.php:8
+#@ graphene
+msgid "The settings defined here are used only with the Graphene theme."
+msgstr "این تنظیمات فقط با استفاده از پوسته‌ی Graphene تعریف می‌شود."
+
+#: admin/user.php:12
+#@ graphene
+msgid "Author profile image URL"
+msgstr "آدرس تصویر پروفایل نویسنده"
+
+#: admin/user.php:13
+#@ graphene
+msgid "You can specify the image to be displayed as the author's profile image in the Author's page. If no URL is defined here, the author's <a href=\"http://www.gravatar.com\">Gravatar</a> will be used."
+msgstr "شما می‌توانید عکسی را به عنوان تصویر شاخص نویسنده (آواتار) در صفحه‌ی معرفی نویسنده‌ی وبلاگ نمایش دهید. اگر آدرس جدیدی تعریف نشود، <a href=\"http://www.gravatar.com\">گراواتار</a> نویسنده، نمایش داده خواهد شد."
+
+#: admin/user.php:17
+#@ graphene
+msgid "Please enter the URL to your profile image."
+msgstr "لطفا آدرس اینترنتی تصویر مورد نظر خود را وارد کنید."
+
+#: admin/user.php:17
+#@ graphene
+msgid "<strong>Important: </strong>Image width must be less than or equal to <strong>150px</strong>."
+msgstr "<strong>مهم: </strong>پهنای تصویر باید کمتر و یا برابر <strong>150 پیکسل</strong> باشد."
+
+#: admin/faq.php:21
+#@ graphene
+msgid "If you want to disable this feature, simply tick the <em>Disable Featured Image replacing header image</em> option in the <a href=\"themes.php?page=graphene_options&tab=display\">Graphene Options</a> page, under Display > Header Display Options."
+msgstr "برای غیرفعال کردن این ویژگی، کافیست <em>غیرفعال کردن جایگزینی تصویر عنوان با تصویر شاخص</em> را در صفحه‌ی <a href=\"themes.php?page=graphene_options&tab=display\">تنظیمات پوسته</a>، در زبانه‌ی نمایش > تنظیمات نمایش عنوان، علامت بزنید."
+
+#: admin/options.php:66
+#@ graphene
+msgid "Settings saved."
+msgstr "تغییرات ذخیره شد."
+
+#: admin/options.php:73
+#@ graphene
+msgid "General"
+msgstr "عمومی"
+
+#: admin/options.php:74
+#@ graphene
+msgid "Display"
+msgstr "نمایش"
+
+#: admin/options.php:106
+#@ graphene
+msgid "Save Options"
+msgstr "ذخیره‌ی تنظیمات"
+
+#: admin/options.php:121
+#@ graphene
+msgid "Developing this awesome theme took a lot of effort and time, months and months of continuous voluntary unpaid work. If you like this theme or if you are using it for commercial websites, please consider a donation to the developer to help support future updates and development."
+msgstr "طراحی و توسعه‌ی پوسته‌های این چنینی، نیازمند ماه‌ها تلاش مداوم و بی‌وقفه و بدون هیچ چشم‌داشتی است. پس اگر به این پوسته علاقه دارید و یا برای مقاصد تجاری از آن استفاده می‌کنید، لطفا برای کمک به پشتیبانی و توسعه‌ی آن، با هدایای نقدی خود مارا حمایت کنید."
+
+#: admin/options.php:223
+#@ graphene
+msgid "Slider display style"
+msgstr "شیوه‌ی نمایش اسلایدر"
+
+#: admin/options.php:227
+#@ graphene
+msgid "Thumbnail and excerpt"
+msgstr "تصویر شاخص و خلاصه‌ی مطلب"
+
+#: admin/options.php:228
+#@ graphene
+msgid "Background image and excerpt"
+msgstr "تصویر پس‌زمینه و خلاصه‌ی مطلب"
+
+#: admin/options.php:229
+#@ graphene
+msgid "Full post content"
+msgstr "تمام محتوای نوشته"
+
+#: admin/options.php:307
+#@ graphene
+msgid "Header widget area"
+msgstr "قسمت ابزارک عنوان"
+
+#: admin/options.php:308
+#@ graphene
+msgid "<strong>Important:</strong> This widget area is unstyled, as it is often used for advertisement banners, etc. If you enable it, make sure you style it to your needs using the Custom CSS option."
+msgstr "<strong>مهم:</strong> این قسمت ابزارکی، استایل‌بندی نشده است و اغلب برای درج بنرهای تبلیغاتی استفاده می‌شود. در صورت فعال کردن این قسمت، از سفارشی‌سازی استایل آن با استفاده از تنظیمات CSS سفارشی اطمینان حاصل کنید."
+
+#: admin/options.php:312
+#@ graphene
+msgid "Enable header widget area"
+msgstr "فعال کردن قسمت ابزارک عنوان"
+
+#: admin/options.php:550
+#@ graphene
+msgid "Column Options"
+msgstr "تنظیمات ستون"
+
+#: admin/options.php:556
+#@ graphene
+msgid "Column mode"
+msgstr "حالت ستون‌ها"
+
+#: admin/options.php:624
+#@ graphene
+msgid "Post date display"
+msgstr "نمایش تاریخ ارسال پست"
+
+#: admin/options.php:628
+#@ graphene
+msgid "Hidden"
+msgstr "مخفی"
+
+#: admin/options.php:629
+#@ graphene
+msgid "As an icon (without the year)"
+msgstr "به صورت آیکون (بدون سال)"
+
+#: admin/options.php:630
+#@ graphene
+msgid "As an icon (including the year)"
+msgstr "به صورت آیکون (از جمله شامل سال)"
+
+#: admin/options.php:631
+#@ graphene
+msgid "As inline text"
+msgstr "به صورت متن"
+
+#: admin/options.php:633
+#@ graphene
+msgid "Note: displaying date as inline text allows more space for the content area, especially useful for a three-column layout configuration."
+msgstr "نکته: نمایش تاریخ نوشته‌ها به صورت متنی، فضای بیشتری را برای محتوا مخصوصا در پیکربندی طرح سه‌ستونه فراهم می‌کند."
+
+#: admin/options.php:914
+#@ default
+msgid "Site title options"
+msgstr ""
+
+#: admin/options.php:915
+#@ graphene
+msgid "Use these tags to customise your own site title structure: <code>#site-name</code>, <code>#site-desc</code>, <code>#post-title</code>"
+msgstr "برای سفارشی کردن ساختار عنوان سایت، می‌توانید از این تگ‌‎ها استفاده کنید: <code>#site-name</code> ، <code>#site-desc</code> ، <code>#post-title</code>"
+
+#: admin/options.php:919
+#@ graphene
+msgid "Custom front page site title"
+msgstr "سفارشی کردن عنوان صفحه‌ی اول"
+
+#: admin/options.php:923
+#@ graphene
+msgid "Defaults to <code>#site-name &raquo; #site-desc</code>. The <code>#post-title</code> tag cannot be used here."
+msgstr "پیش‌فرض <code>#site-name &raquo; #site-desc</code>. برچسب <code>#post-title</code> نمی‌تواند در این قسمت استفاده شود."
+
+#: admin/options.php:928
+#@ graphene
+msgid "Custom content pages site title"
+msgstr "سفارشی کردن عنوان صفحات محتوا"
+
+#: admin/options.php:932
+#@ graphene
+msgid "Defaults to <code>#post-title &raquo; #site-name</code>."
+msgstr "پیش‌فرض <code>#post-title &raquo; #site-name</code>."
+
+#: admin/options.php:937
+#@ default
+msgid "Favicon options"
+msgstr ""
+
+#: admin/options.php:941
+#@ graphene
+msgid "Favicon URL"
+msgstr "آدرس Favicon"
+
+#: admin/options.php:945
+#@ graphene
+msgid "Simply enter the full URL to your favicon file here to enable favicon. Make sure you include the <code>http://</code> in front of the URL as well."
+msgstr "به راحتی آدرس کامل favicon خود را وارد کنید تا این قسمت فعال شود. از <code>http://</code> در ابتدای آدرس اطمینان حاصل کنید."
+
+#: admin/uninstall.php:24
+#, php-format
+#@ graphene
+msgid "Theme uninstalled. Redirecting to %s"
+msgstr "پوسته حذف شد. تغییر مسیر به %s"
+
+#: archive.php:25
+#, php-format
+#@ graphene
+msgid "Daily Archive: <span>%s</span>"
+msgstr "بایگانی روزانه: <span>%s</span>"
+
+#: archive.php:27
+#, php-format
+#@ graphene
+msgid "Monthly Archive: <span>%s</span>"
+msgstr "بایگانی ماهیانه: <span>%s</span>"
+
+#: archive.php:29
+#, php-format
+#@ graphene
+msgid "Yearly Archive: <span>%s</span>"
+msgstr "بایگانی سالیانه: <span>%s</span>"
+
+#: archive.php:31
+#: category.php:14
+#, php-format
+#@ graphene
+msgid "Category Archive: <span>%s</span>"
+msgstr "بایگانی موضوعی: <span>%s</span>"
+
+#: archive.php:33
+#@ graphene
+msgid "Blog Archive"
+msgstr "بایگانی وبلاگ"
+
+#: functions.php:626
+#@ graphene
+msgid "The first sidebar widget area (available in two and three column layouts)."
+msgstr "اولین قسمت ابزارک‌های سایدبار (قابل دسترس در دوستونه و سه‌ستونه)"
+
+#: functions.php:634
+#@ graphene
+msgid "Sidebar Two Widget Area"
+msgstr "قسمت ابزارک‌‎های دوم سایدبار"
+
+#: functions.php:636
+#@ graphene
+msgid "The second sidebar widget area (only available in three column layouts)."
+msgstr "قسمت ابزارک‌های سایدبار دوم. (فقط در سه‌ستونه قابل دسترس است)"
+
+#: functions.php:664
+#@ graphene
+msgid "The first sidebar widget area that will only be displayed on the front page."
+msgstr "قسمت ابزارک سایدبار اول که فقط در صفحه‌ی اول نمایش داده می‌شود."
+
+#: functions.php:672
+#@ graphene
+msgid "Front Page Sidebar Two Widget Area"
+msgstr "قسمت ابزارک‌های سایدبار دوم صفحه‌ی اول"
+
+#: functions.php:674
+#@ graphene
+msgid "The second sidebar widget area that will only be displayed on the front page."
+msgstr "قسمت ابزارک‌های سایدبار دوم که فقط در صفحه‌ی اول نمایش داده می‌شود."
+
+#: functions.php:697
+#@ graphene
+msgid "Header Widget Area"
+msgstr "قسمت ابزارک عنوان"
+
+#: functions.php:699
+#@ graphene
+msgid "The header widget area."
+msgstr "قسمتی برای ابزارک عنوان."
+
+#: functions.php:726
+#@ graphene
+msgid "Display the latest Twitter status updates."
+msgstr "نمایش آخرین بروزرسانی‌های وضعیت توییتر."
+
+#: functions.php:1758
+#@ default
+msgid "There is no excerpt because this is a protected post."
+msgstr ""
+
+#: loop-children.php:77
+#@ graphene
+msgid "View page &raquo;"
+msgstr "مشاهده‌ی صفحه &raquo;"
+
+#: loop.php:105
+#@ graphene
+msgid "<div class=\"link-pages\"><p><strong>Pages:</strong> "
+msgstr "<div class=\"link-pages\"><p><strong>برگه‌ها:</strong> "
+
+#: search.php:11
+#, php-format
+#@ graphene
+msgid "Search results for: <span>%s</span>"
+msgstr "نتایج جستجو برای: <span>%s</span>"
+
+#: tag.php:14
+#, php-format
+#@ graphene
+msgid "Tag Archive: <span>%s</span>"
+msgstr "بایگانی برچسب: <span>%s</span>"
+

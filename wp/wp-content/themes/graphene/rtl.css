@@ -1,0 +1,844 @@
+/*
+Theme Name: Graphene
+*/
+/* Grid >> Global
+----------------------------------------------------------------------------------------------------*/
+.grid_1,
+.grid_2,
+.grid_3,
+.grid_4,
+.grid_5,
+.grid_6,
+.grid_7,
+.grid_8,
+.grid_9,
+.grid_10,
+.grid_11,
+.grid_12,
+.grid_13,
+.grid_14,
+.grid_15,
+.grid_16 {
+    float: right;
+}
+.push_1,
+.pull_1,
+.push_2,
+.pull_2,
+.push_3,
+.pull_3,
+.push_4,
+.pull_4,
+.push_5,
+.pull_5,
+.push_6,
+.pull_6,
+.push_7,
+.pull_7,
+.push_8,
+.pull_8,
+.push_9,
+.pull_9,
+.push_10,
+.pull_10,
+.push_11,
+.pull_11,
+.push_12,
+.pull_12,
+.push_13,
+.pull_13,
+.push_14,
+.pull_14,
+.push_15,
+.pull_15,
+.push_16,
+.pull_16 {
+    position: relative
+}
+.gutter-left {
+	margin-right: 10px;
+	margin-left: 0;
+}
+.gutter-right {
+	margin-left: 10px;
+	margin-right: 0;
+}
+
+/* Grid >> Children (Alpha ~ First, Omega ~ Last)
+----------------------------------------------------------------------------------------------------*/
+.alpha-rtl {
+    margin-right: 0;
+}
+.omega-rtl {
+    margin-left: 0;
+}
+
+/* Prefix Extra Space >> 16 Columns
+----------------------------------------------------------------------------------------------------*/
+.container_16 .prefix_1 {
+    padding-right: 60px;
+	padding-left: 0;
+}
+.container_16 .prefix_2 {
+    padding-right: 120px;
+	padding-left: 0;
+}
+.container_16 .prefix_3 {
+    padding-right: 180px;
+	padding-left: 0;
+}
+.container_16 .prefix_4 {
+    padding-right: 240px;
+	padding-left: 0;
+}
+.container_16 .prefix_5 {
+    padding-right: 300px;
+	padding-left: 0;
+}
+.container_16 .prefix_6 {
+    padding-right: 360px;
+	padding-left: 0;
+}
+.container_16 .prefix_7 {
+    padding-right: 420px;
+	padding-left: 0;
+}
+.container_16 .prefix_8 {
+    padding-right: 480px;
+	padding-left: 0;
+}
+.container_16 .prefix_9 {
+    padding-right: 540px;
+	padding-left: 0;
+}
+.container_16 .prefix_10 {
+    padding-right: 600px;
+	padding-left: 0;
+}
+.container_16 .prefix_11 {
+    padding-right: 660px;
+	padding-left: 0;
+}
+.container_16 .prefix_12 {
+    padding-right: 720px;
+	padding-left: 0;
+}
+.container_16 .prefix_13 {
+    padding-right: 780px;
+	padding-left: 0;
+}
+.container_16 .prefix_14 {
+    padding-right: 840px;
+	padding-left: 0;
+}
+.container_16 .prefix_15 {
+    padding-right: 900px;
+	padding-left: 0;
+}
+/* Suffix Extra Space >> 16 Columns
+----------------------------------------------------------------------------------------------------*/
+.container_16 .suffix_1 {
+    padding-left: 60px;
+	padding-right: 0;
+}
+.container_16 .suffix_2 {
+    padding-left: 120px;
+	padding-right: 0;
+}
+.container_16 .suffix_3 {
+    padding-left: 180px;
+	padding-right: 0;
+}
+.container_16 .suffix_4 {
+    padding-left: 240px;
+	padding-right: 0;
+}
+.container_16 .suffix_5 {
+    padding-left: 300px;
+	padding-right: 0;
+}
+.container_16 .suffix_6 {
+    padding-left: 360px;
+	padding-right: 0;
+}
+.container_16 .suffix_7 {
+    padding-left: 420px;
+	padding-right: 0;
+}
+.container_16 .suffix_8 {
+    padding-left: 480px;
+	padding-right: 0;
+}
+.container_16 .suffix_9 {
+    padding-left: 540px;
+	padding-right: 0;
+}
+.container_16 .suffix_10 {
+    padding-left: 600px;
+	padding-right: 0;
+}
+.container_16 .suffix_11 {
+    padding-left: 660px;
+	padding-right: 0;
+}
+.container_16 .suffix_12 {
+    padding-left: 720px;
+	padding-right: 0;
+}
+.container_16 .suffix_13 {
+    padding-left: 780px;
+	padding-right: 0;
+}
+.container_16 .suffix_14 {
+    padding-left: 840px;
+	padding-right: 0;
+}
+.container_16 .suffix_15 {
+    padding-left: 900px;
+	padding-right: 0;
+}
+/* Push Space >> 16 Columns
+----------------------------------------------------------------------------------------------------*/
+.container_16 .push_1 {
+    right: 60px;
+	left: auto;
+}
+.container_16 .push_2 {
+    right: 120px;
+	left: auto;
+}
+.container_16 .push_3 {
+    right: 180px;
+	left: auto;
+}
+.container_16 .push_4 {
+    right: 240px;
+	left: auto;
+}
+.container_16 .push_5 {
+    right: 300px;
+	left: auto;
+}
+.container_16 .push_6 {
+    right: 360px;
+	left: auto;
+}
+.container_16 .push_7 {
+    right: 420px;
+	left: auto;
+}
+.container_16 .push_8 {
+    right: 480px;
+	left: auto;
+}
+.container_16 .push_9 {
+    right: 540px;
+	left: auto;
+}
+.container_16 .push_10 {
+    right: 600px;
+	left: auto;
+}
+.container_16 .push_11 {
+    right: 660px;
+	left: auto;
+}
+.container_16 .push_12 {
+    right: 720px;
+	left: auto;
+}
+.container_16 .push_13 {
+    right: 780px;
+	left: auto;
+}
+.container_16 .push_14 {
+    right: 840px;
+	left: auto;
+}
+.container_16 .push_15 {
+    right: 900px;
+	left: auto;
+}
+/* Pull Space >> 16 Columns
+----------------------------------------------------------------------------------------------------*/
+.container_16 .pull_1 {
+    right: -60px;
+	left: auto;
+}
+.container_16 .pull_2 {
+    right: -120px;
+	left: auto;
+}
+.container_16 .pull_3 {
+    right: -180px;
+	left: auto;
+}
+.container_16 .pull_4 {
+    right: -240px;
+	left: auto;
+}
+.container_16 .pull_5 {
+    right: -300px;
+	left: auto;
+}
+.container_16 .pull_6 {
+    right: -360px;
+	left: auto;
+}
+.container_16 .pull_7 {
+    right: -420px;
+	left: auto;
+}
+.container_16 .pull_8 {
+    right: -480px;
+	left: auto;
+}
+.container_16 .pull_9 {
+    right: -540px;
+	left: auto;
+}
+.container_16 .pull_10 {
+    right: -600px;
+	left: auto;
+}
+.container_16 .pull_11 {
+    right: -660px;
+	left: auto;
+}
+.container_16 .pull_12 {
+    right: -720px;
+	left: auto;
+}
+.container_16 .pull_13 {
+    right: -780px;
+	left: auto;
+}
+.container_16 .pull_14 {
+    right: -840px;
+	left: auto;
+}
+.container_16 .pull_15 {
+    right: -900px;
+	left: auto;
+}
+
+
+/* =Header
+-------------------------------------------------------------- */
+
+#profiles {
+	float: right;
+}
+#profiles a {
+	float: right;
+	margin-left: 10px;
+	margin-right: 0;
+}
+#top_search {
+	float: left;
+}
+#top_search input {
+	padding: 3px 5px 2px 7px;
+	float: right;
+}
+#top_search button {
+	float: left;
+	margin-left: 0;
+	padding: 0;
+}
+#nav #top_search {
+	left: 0;
+	right: auto;
+}
+.sidebar-wrap #searchsubmit {
+	float: left;
+}
+
+
+/* =Navigation
+-------------------------------------------------------------- */
+
+#nav li {
+	float: right;
+	position: relative !important;
+}
+#header-menu li ul ul {
+	margin: -34px 200px 0 0;
+}
+#header-menu li ul {
+	left: auto;
+	right: -999em;
+}
+#header-menu li:hover ul {
+	right: 0;
+}
+#nav li:hover ul ul,
+#nav li:hover ul ul ul,
+#nav li:hover ul ul ul ul,
+#nav li:hover ul ul ul ul ul {
+	right: -999em;
+	left: 0;
+}
+#nav li:hover ul, 
+#nav li li:hover ul,
+#nav li li li:hover ul,
+#nav li li li li:hover ul {
+	right: 0;
+}
+#secondary-menu li ul ul {
+	margin: -29px 200px 0 0;
+}
+#header-menu > li {
+	margin: 0 5px 0 0;
+}
+#header-menu > li:first-child {
+	margin-right: 0;
+}
+#header-menu > li.menu-item-ancestor > a {
+	background: url(images/sprite_master-rtl.png) right -103px no-repeat transparent;
+	padding-left: 10px;
+	padding-right: 26px;
+}
+#header-menu > li.menu-item-ancestor:hover > a,
+#header-menu > li.current-menu-item > a,
+#header-menu > li.current-menu-ancestor > a {
+	background-position: right -59px;
+}
+
+/* Sub level header menu, default state */
+#header-menu ul li.menu-item-ancestor > a {
+	background: url(images/sprite_master-rtl.png) 6px -61px no-repeat transparent;
+	padding-left: 25px;
+	padding-right: 10px;
+	width: 165px;
+}
+#header-menu ul li.menu-item-ancestor:hover > a,
+#header-menu ul li.current-menu-item > a,
+#header-menu ul li.current-menu-ancestor > a {
+	background-position: 6px -105px;
+}
+
+/* Secondary menu */
+/* Top level, default state */
+#secondary-menu > li:first-child {
+	margin-right: 0;
+	margin-left: 5px;
+}
+#secondary-menu > li.menu-item-ancestor > a {
+	padding-right: 20px;
+	padding-left: 10px;
+}
+
+/* Sub level, default state */
+#secondary-menu ul li.menu-item-ancestor > a {
+	padding-left: 20px;
+	padding-right: 10px;
+}
+
+
+/* =Content Area
+-------------------------------------------------------------- */
+
+.three-col-right .full-sized.featured_slider #slider_root {
+	margin-right: 0;
+}
+.sliderpost_featured_image {
+	float: right;
+	margin: 4px 0 12px 1em;
+}
+.slider_post {
+	float: right;
+}
+.fade .slider_post {
+	left: auto;
+	right: 0;
+}
+.sliderpost_featured_image {
+	margin: 20px 20px 1em 1em;
+}
+.full-sized .slider-entry-wrap {
+	left: auto;
+	right: 0;
+}
+.slider_post .permalink-overlay {
+	left: auto;
+	right: 0;
+}
+
+.block-button,
+.block-button:visited,
+.Button,
+.button,
+#commentform #submit {
+	float: left;
+}
+.slider_nav {
+	left: 10px;
+	right: auto;
+	text-align: left;
+}
+.full-sized .slider_nav {
+	right: auto;
+	left: 0;
+}
+.slider_nav a,
+.slider_nav a:visited {
+	margin-right: 3px;
+	margin-left: 0;
+}
+.post-meta p,
+.post-meta ul,
+.post-meta li {
+	float: right;
+}
+.post-meta .meta_categories {
+	background: url("images/sprite_master-rtl.png") no-repeat scroll right 3px transparent;
+	padding-right: 20px;
+	padding-left: 0;
+}
+.post-meta li {
+	margin-right: 5px;
+	margin-left: 0;
+}
+.post-meta .post-author,
+.post-meta .edit-post,
+.post-meta .post-date-inline,
+.email,
+.print,
+.post-format .edit-post, 
+.post-format .comment-link {
+	float: left;
+}
+.post-meta .edit-post,
+.post-meta .post-date-inline,
+.print,
+.email {
+	margin-right: 5px;
+	margin-left: 0;
+}
+.post-format .edit-post, 
+.post-format .comment-link {
+	margin-right: 0;
+	margin-left: 5px;
+}
+.post-meta .post-date-inline {
+	border-right: 1px solid #ccc;
+	border-left: none;
+	padding-right: 5px;
+	padding-left: 0;
+}
+.post-avatar-wrap {
+	float: left;
+}
+.comment-entry ol,
+.comment-entry ul {
+	margin: 5px 25px 10px 0 !important;
+}
+.entry-content .excerpt-thumb img,
+.child-page .excerpt-thumb img{
+	float: right;
+	margin: 0 0 0 1em;
+}
+a.more-link,
+a.more-link span {
+	display: block;
+	margin: 0 0 5px 5px;
+}
+.entry-content ul {
+	margin: 10px 30px 10px 0;
+}
+.entry-content ol {
+	margin: 5px 30px 5px 0;
+}
+.comment-entry ol ol li {
+	margin-left: auto;
+	margin-right: 0;
+}
+blockquote {
+	background: url(images/sprite_master-rtl.png) right -574px no-repeat #f3f3f3;
+	margin: 10px 10px 10px 0;
+	padding: 8px 10px 5px 18px;
+}
+blockquote cite {
+	text-align: left;
+}
+blockquote blockquote {
+	margin-right: 0;
+	margin-left: auto;
+}
+p cite {
+	text-align: left;
+}
+code.block,
+pre.block {
+	padding: 15px 20px 2px 2px;
+}
+.add-this,
+.add-this-right {
+	float: right;
+}
+.add-this-right {
+	float: left;
+	margin: 0 1em 1em 0;
+}
+.post-tags {
+	float: right;
+}
+.single .author_h4 {
+	margin: 15px 10px 5px 0;
+}
+.author-entry .avatar,
+.author-info .avatar {
+	float: right;
+}
+.author-info .avatar {
+    margin-right: 0;
+}
+.author-entry .avatar {
+	float: right;
+}
+.author-entry h2,
+.author-entry .entry-content {
+	float: left;
+}
+.author-entry .entry-content {
+	clear: left;
+}
+.comment-link {
+	float: left;
+	text-align: left;
+}
+#previous {
+	float: right;
+}
+#next-post {
+	float: left;
+	text-align: left;
+}
+.comment-avatar-wrap {
+    float: right;
+    margin-left: 10px;
+	margin-right: 0;
+}
+#comments .children {
+	margin-left: 0;
+	margin-right: 60px;
+}
+
+/* =Post Formats
+-------------------------------------------------------------- */
+
+.post-format .format-title {
+	background: url("images/sprite_master-rtl.png") no-repeat left -345px #185069;
+	padding-left: 8px;
+	padding-right: 0;
+	float: right;
+}
+.post-format .entry-title {
+	float: right;
+	margin-right: 10px;
+	margin-left: 0;
+}
+.post-format .edit-post {
+	left: 10px;
+	right: auto;
+}
+.post-format .entry-content {
+	padding-left: 15px;
+	padding-right: 130px;
+}
+.post-format .post-format-thumbnail {
+	left: auto;
+	right: 0;
+}
+.post-format .post-format-thumbnail img {
+	left: auto;
+	right: 0;
+}
+.post-format .post-author {
+	left: 15px;
+	right: auto;
+	text-align: left;
+}
+.format-audio .format-title {
+	background-position: -135px -345px;
+}
+.format-video .format-title,
+.format-image .format-title {
+	background-position: -135px -310px;
+}
+.format-image .entry-content,
+.format-video .entry-content {
+	padding-left: 0;
+	padding-right: 110px;
+}
+.format-image .wp-caption-text {
+	right: 10px;
+	left: auto;
+	text-align: right;
+}
+.format-image .entry-date,
+.format-video .entry-date {
+	left: auto;
+	right: 10px;
+}
+
+
+/* =Comments
+-------------------------------------------------------------- */
+
+#comments .nopassword {
+	float: right;
+}
+#comments > h4,
+#respond > h3,
+h3.author-post-list {
+	background-position: right 5px;
+	padding-left: 0;
+	padding-right: 25px;
+}
+#comments h4.comments {
+	background: url(images/sprite_master-rtl.png) right -519px no-repeat;
+}
+#comments h4.pings {
+    background-position: right -110px;
+}
+#comments > h4 {
+	float: right;
+}
+#respond h3#reply-title {
+	background-position: right -162px;
+	margin-right: 10px;
+	margin-left: 0;
+}
+h3.author-post-list {
+	padding-left: 0;
+	padding-right: 30px;
+	background-position: right -75px;
+}
+#comments ol.children .avatar {
+	left: auto;
+	right: 0;
+}
+#comments p.comment-reply-link {
+	right: auto;
+	left: 0;
+}
+#comments ol.children li.bypostauthor .avatar,
+#comments li.bypostauthor li.comment .avatar {
+	left: 0;
+	right: 10px;
+}
+.two-col-right #comments_list > #respond #commentform {
+	margin-left: 0;
+	margin-right: -2px;
+}
+#commentform label.graphene_form_label {
+	float: right;
+}
+#commentform #submit {
+	float: right;
+}
+#respond {
+	right: 0;
+	left: 0;
+}
+#commentform .block-button {
+	float: right;
+}
+
+
+/* =Sidebars
+-------------------------------------------------------------- */
+
+#sidebar1,
+#sidebar2 {
+	float: right;
+}
+#sidebar2 {
+	padding-right: 0;
+}
+.sidebar h3 {
+	margin: -15px -12px 5px 0;
+}
+.sidebar #tweetfollow {
+	text-align: left;
+}
+#wp-calendar #prev {
+	text-align: right;
+}
+#wp-calendar #next {
+	text-align: left;
+}
+.sidebar ol {
+	list-style-position: outside;
+	margin-right: 29px;
+	margin-left: 0;
+}
+.sidebar ol ol,
+.sidebar ul ul {
+	margin-left: 20px;
+}
+
+
+/* =The homepage panes
+-------------------------------------------------------------- */
+
+.homepage_panes .omega {
+	float: left;
+}
+.homepage_pane .post-comments{
+	margin-left: 0;
+}
+
+
+/* =Footer
+-------------------------------------------------------------- */
+
+#copyright {
+	float: right;
+}
+.footer-menu-wrap {
+    float: left;
+    text-align: left;
+}
+.footer-menu-wrap li {
+	padding-left: 0;
+	padding-right: 10px;
+	margin-left: 0;
+	margin-right: 10px;
+}
+.footer-menu-wrap ul.sub-menu {
+	padding-left: 0;
+	padding-right: 5px;
+	border-right: 1px solid #222;
+	border-left: none;
+}
+#footer-menu {
+	text-align: right;
+}
+#developer {
+    text-align: left;
+    clear: left;
+	float: left;
+}
+
+
+/* =Shortcode blocks
+-------------------------------------------------------------- */
+
+.message-block {
+	padding: 5px 50px 5px 10px;
+}
+.warning_block,
+.error_block,
+.notice_block,
+.important_block {
+    background-position: 99% 7px;
+}
+
+/* WPStats */
+#wpstats {
+	left: auto;
+	right: 0;
+}

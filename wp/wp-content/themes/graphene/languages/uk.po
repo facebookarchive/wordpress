@@ -1,0 +1,1906 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Graphene 1.4 theme for WordPress\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-07-09 16:49+1200\n"
+"PO-Revision-Date: 2011-11-14 12:27+0200\n"
+"Last-Translator: Lisovuy Igor <mustangturbo@yandex.ru>\n"
+"Language-Team: Leiste <blog@leiste.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_n;esc_attr_e;esc_attr__\n"
+"X-Poedit-Basepath: D:\\[MyVault]\\MyProjects\\[Websites]\\wordpress-theme-test\\site\\wp-content\\themes\\graphene\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Language: Ukrainian\n"
+"X-Poedit-Country: UKRAINE\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: 404.php:22
+#, php-format
+msgid "Searching for: <span>%s</span>"
+msgstr "Пошук: <span>%s</span>"
+
+#: 404.php:28
+#: search-404.php:3
+msgid "Error 404 - Page Not Found"
+msgstr "Помілка 404 - Сторінка не знайдена"
+
+#: 404.php:30
+#: search-404.php:5
+msgid "Sorry, I've looked everywhere but I can't find the page you're looking for."
+msgstr "Я шукав скрізь, але на шкода не можу знайті запрошувану вами сторінку."
+
+#: 404.php:31
+#: search-404.php:6
+msgid "If you follow the link from another website, I may have removed or renamed the page some time ago. You may want to try searching for the page:"
+msgstr "Якщо ві не знаходіте пряме посилання, яку могло буті відалене з конкретної сторінки, ськорістайтеся пошуком:"
+
+#: 404.php:39
+msgid "Automated search"
+msgstr "Автоматічній пошук"
+
+#: 404.php:42
+#, php-format
+msgid "Searching for the terms <strong>%s</strong> ..."
+msgstr "Пошук термінів <strong>%s</strong> ..."
+
+#: archive.php:25
+#, php-format
+msgid "Daily Archive: <span>%s</span>"
+msgstr "Щоденній архів: <span>%s</span>"
+
+#: archive.php:27
+#, php-format
+msgid "Monthly Archive: <span>%s</span>"
+msgstr "Щомісячний архів: <span>%s</span>"
+
+#: archive.php:29
+msgid "F Y"
+msgstr "F Y"
+
+#: archive.php:31
+#, php-format
+msgid "Yearly Archive: <span>%s</span>"
+msgstr "Річний архів: <span>%s</span>"
+
+#: archive.php:33
+#: category.php:14
+#, php-format
+msgid "Category Archive: <span>%s</span>"
+msgstr "Категорія Архів: <span>%s</span>"
+
+#: archive.php:35
+#: author.php:33
+msgid "Author's posts listings"
+msgstr "Списки повідомлень автора"
+
+#: comments.php:26
+msgid "This post is password protected. Enter the password to view any comments."
+msgstr "Дане повідомлення захищене паролем. Введіть пароль, щоб побачиті коментарі."
+
+#: comments.php:49
+#: loop-author.php:90
+#: loop.php:183
+msgid "1 comment"
+msgstr "1 коментар"
+
+#: comments.php:49
+#: loop-author.php:90
+#: loop.php:183
+#, php-format
+msgid "%s comments"
+msgstr "%s коментарів"
+
+#: comments.php:50
+msgid "1 ping"
+msgstr "1 пінг"
+
+#: comments.php:50
+msgid "% pings"
+msgstr "% пінгів"
+
+#: comments.php:101
+msgid "Comments have been disabled."
+msgstr "Коментарі були заблоковані"
+
+#: comments.php:116
+#, php-format
+msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes: %s"
+msgstr "Ви можете використовувати ці теги <abbr title=\"HyperText Markup Language\">HTML</abbr>: %s"
+
+#: comments.php:121
+#: comments.php:124
+#: functions.php:1237
+msgid "Submit Comment"
+msgstr "Додати коментар"
+
+#: footer.php:40
+#: footer.php:43
+msgid "Except where otherwise noted, content on this site is licensed under а <а href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">Creative Commons Licence</a>."
+msgstr "За винятком вищезгаданого, вміст даного сайту ліцензовано <а href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">Creative Commons Licence</a>."
+
+#: footer.php:70
+msgid "Return to top"
+msgstr "Повернутися до початку"
+
+#: footer.php:78
+#, php-format
+msgid "Powered by %1$s and the %2$s."
+msgstr "За підтримки %1$s і %2$s."
+
+#: footer.php:78
+msgid "Graphene Theme"
+msgstr "Graphene Theme"
+
+#: functions.php:169
+msgid "Header Menu"
+msgstr "Заголовне меню"
+
+#: functions.php:170
+msgid "Secondary Menu"
+msgstr "Вторинне меню"
+
+#: functions.php:171
+msgid "Footer Menu"
+msgstr "Нижнє меню"
+
+#: functions.php:215
+msgid "Header image by Syahir Hakim"
+msgstr "Головна сторінка розроблена Syahir Hakim"
+
+#: functions.php:221
+msgid "This is the default Graphene theme header image, cropped from image by Quantin Houyoux at sxc.hu"
+msgstr "Це заголовна сторінка Graphene theme за умовчанням, що кадрується із зображення зробленого Quantin Houyoux на sxc.h"
+
+#: functions.php:227
+#: functions.php:233
+#: functions.php:239
+#: functions.php:245
+#: functions.php:251
+msgid "Header image cropped from image by Ilco at sxc.hu"
+msgstr "Заголовна сторінка, що кадрується із зображення зробленого Ilco на sxc.hu"
+
+#: functions.php:704
+msgid "Home"
+msgstr "Домашня сторінка"
+
+#: functions.php:809
+msgid "says:"
+msgstr "Повідомляє:"
+
+#: functions.php:815
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "%1$s на %2$s"
+
+#: functions.php:817
+msgid "Edit comment"
+msgstr "Редагувати коментар"
+
+#: functions.php:821
+msgid "Reply"
+msgstr "Відповісти"
+
+#: functions.php:832
+msgid "Your comment is awaiting moderation."
+msgstr "Ваш коментар обробляється."
+
+#: functions.php:930
+msgid "Sidebar Widget Area"
+msgstr "Бічна панель для віджетов"
+
+#: functions.php:932
+msgid "The first sidebar widget area (available in two and three column layouts)."
+msgstr "Перша бічна панель для віджетов ( доступна з двох і трьох колонок)."
+
+#: functions.php:940
+msgid "Sidebar Two Widget Area"
+msgstr "Бічна панель для віджетов для другої сторінки"
+
+#: functions.php:942
+msgid "The second sidebar widget area (only available in three column layouts)."
+msgstr "Друга бічна панель для віджетов ( доступна тільки з трьох колонок)."
+
+#: functions.php:950
+msgid "Footer Widget Area"
+msgstr "Нижня панель для віджетів"
+
+#: functions.php:952
+msgid "The footer widget area. Leave empty to disable. Set the number of columns to display at the theme's Display Options page."
+msgstr "Нижня панель для віджетів. Залиште порожній, щоб відключити. Встановіть число стовпців для відображення на сторінці відображення теми в Options"
+
+#: functions.php:968
+msgid "Front Page Sidebar Widget Area"
+msgstr "Бічна панель  для віджетів на головній сторінці"
+
+#: functions.php:970
+msgid "The first sidebar widget area that will only be displayed on the front page."
+msgstr "Перша бічна панель для віджетів, яка відображатиметься тільки на головній сторінці."
+
+#: functions.php:978
+msgid "Front Page Sidebar Two Widget Area"
+msgstr "Друга панель віджетів для головної сторінки"
+
+#: functions.php:980
+msgid "The second sidebar widget area that will only be displayed on the front page."
+msgstr "Друга панель для віджетів відображатиметься тільки на головній сторінці."
+
+#: functions.php:990
+msgid "Front Page Footer Widget Area"
+msgstr "Нижня панель для віджетів на головній сторінці."
+
+#: functions.php:992
+msgid "The footer widget area that will only be displayed on the front page. Leave empty to disable. Set the number of columns to display at the theme's Display Options page."
+msgstr " Нижня панель для віджетів відображатиметься тільки на головній сторінці.Залиште порожній, щоб відключити. Встановіть число стовпців для відображення на сторінці відображення теми в Options"
+
+#: functions.php:1003
+#: functions.php:1005
+msgid "The header widget area."
+msgstr "Головна панель для віджетів"
+
+#: functions.php:1032
+#: functions.php:1057
+#: functions.php:1083
+#: functions.php:1088
+#: functions.php:1092
+msgid "Twitter Username:"
+msgstr "Ім'я користувача Twitter"
+
+#: functions.php:1096
+msgid "Number of tweets to display:"
+msgstr "Кількість записів, що відображаються"
+
+#: functions.php:1144
+msgid "Graphene Options"
+msgstr "Параметри Graphene"
+
+#: functions.php:1148
+msgid "Graphene FAQs"
+msgstr "FAQs по Graphene"
+
+#: functions.php:1185
+msgid "Toggle all tabs"
+msgstr "Перемкнути всі вкладки"
+
+#: functions.php:1218
+msgid "Name:"
+msgstr "Ім'я:"
+
+#: functions.php:1219
+msgid "Email:"
+msgstr "E-Mail:"
+
+#: functions.php:1220
+msgid "Website:"
+msgstr "Сайт:"
+
+#: functions.php:1230
+msgid "Message:"
+msgstr "Повідомлення:"
+
+#: functions.php:1259
+#: functions.php:1311
+#: functions.php:1312
+msgid "&raquo; Newer posts"
+msgstr "&raquo; Нові повідомлення"
+
+#: functions.php:1314
+msgid "Next page &raquo;"
+msgstr "Наступна сторінка &raquo;"
+
+#: functions.php:1315
+msgid "&laquo; Previous page"
+msgstr "&laquo; Попередня сторінка"
+
+#: functions.php:1491
+msgid "View full post"
+msgstr " Повністю проглянути повідомлення"
+
+#: functions.php:1630
+msgid "<strong>ERROR: You must supply the post ID to get the image from as an argument when calling the graphene_get_post_image() function.</strong>"
+msgstr "<strong>ПОМИЛКА: Необхідно ввести ідентифікатор повідомлення щоб отримати зображення при виклику команди graphene_get_post_image() функція.</strong>"
+
+#: functions.php:1977
+msgid "Template preview not found."
+msgstr "Попередній перегляд шаблону не знайдений."
+
+#: functions.php:1980
+msgid "default"
+msgstr "За замовчуванням"
+
+#: functions.php:2036
+#: functions.php:2040
+msgid "Theme default"
+msgstr "Тема за замовчуванням"
+
+#: functions.php:2106
+msgid "ERROR: You are not authorised to perform that operation"
+msgstr "ПОМИЛКА: ви не авторизовані для виконання даної операції"
+
+#: functions.php:2269
+#: functions.php:2280
+#: functions.php:2289
+#: loop-children.php:74
+#: loop-children.php:82
+#: loop-post-formats.php:32
+#: loop.php:69
+#: loop.php:148
+#, php-format
+msgid "Read more"
+msgstr "Читати далі"
+
+#: functions.php:2358
+#, php-format
+msgid "Follow %s on Twitter"
+msgstr "Слідуйте %sза нами в Twitter"
+
+#: functions.php:2361
+#, php-format
+msgid "Visit %s's Facebook page"
+msgstr "Відвідати сторінку %s на Facebook"
+
+#: functions.php:2368
+#, php-format
+msgid "Visit %1$s's %2$s page"
+msgstr "Відвідати сторінку %1$s %2$s "
+
+#: header.php:54
+#, php-format
+msgid "Subscribe to %s's RSS feed"
+msgstr "Підписатися на %s RSS канал"
+
+#: header.php:54
+#: header.php:98
+#: header.php:118
+msgid "Go back to the front page"
+msgstr "Повернутися на головну сторінку"
+
+#: loop-author.php:23
+#: loop-author.php:25
+#, php-format
+msgid "<strong>Name:</strong> %1$s %2$s"
+msgstr "<strong>Ім'я:</strong> %1$s %2$s"
+
+#: loop-author.php:26
+#, php-format
+msgid "<strong>Date registered:</strong> %1$s"
+msgstr "<strong>Дата реєстрації:</strong> %1$s"
+
+#: loop-author.php:35
+#: loop-author.php:53
+#: loop-author.php:56
+#: loop-author.php:90
+#: search-404.php:24
+#, php-format
+msgid "Permalink Link to %s"
+msgstr "Постійне посилання на %s"
+
+#: loop-author.php:56
+#: loop-author.php:90
+#: loop-children.php:74
+#: loop-post-formats.php:32
+#: loop.php:37
+#: loop.php:69
+msgid "(No title)"
+msgstr "(Немає назви)"
+
+#: loop-author.php:85
+msgid "Most commented posts"
+msgstr "Повідомлення, що найбільш коментуються"
+
+#: loop-author.php:90
+#: loop.php:183
+msgid "Leave comment"
+msgstr "Залишити коментар"
+
+#: loop-children.php:82
+#: loop-post-formats.php:15
+msgid "Status update"
+msgstr "Відновити стан"
+
+#: loop-post-formats.php:16
+#: loop-post-formats.php:17
+msgid "Image"
+msgstr "Зображення"
+
+#: loop-post-formats.php:18
+msgid "Video"
+msgstr "Відео"
+
+#: loop-post-formats.php:19
+msgid "Post format"
+msgstr "Форматування повідомлення"
+
+#: loop-post-formats.php:28
+msgid "l F j, Y"
+msgstr "l F j, Y"
+
+#: loop-post-formats.php:28
+msgid "g:i A"
+msgstr "g:i A"
+
+#: loop-post-formats.php:38
+#: loop.php:100
+#: loop-post-formats.php:72
+msgid "F j, Y"
+msgstr "F j, Y"
+
+#: loop.php:79
+msgid "Categories:"
+msgstr "Категорія"
+
+#: loop.php:90
+#: loop.php:117
+msgid "by"
+msgstr "Під авторством"
+
+#: loop.php:143
+msgid "Read the rest of this entry &raquo;"
+msgstr "Докладніше &raquo;"
+
+#: loop.php:161
+msgid "<div class=\"link-pages\"><p><strong>Pages:</strong> "
+msgstr "<div class=\"link-pages\"><p><strong>Сторінки:</strong> "
+
+#: loop.php:171
+msgid "Tags:"
+msgstr "Теги:"
+
+#: loop.php:171
+#: loop.php:198
+msgid "About the author"
+msgstr "Про автора"
+
+#: loop.php:215
+#: loop.php:244
+#: loop.php:249
+#: loop.php:251
+msgid "Sorry, but no results were found for that keyword. Wanna try an alternative keyword search?"
+msgstr "Вибачите, але нічого не знайдено по цьому ключовому слову. Хочете спробувати альтернативний пошук за ключовими словами?"
+
+#: search-404.php:14
+#: search-404.php:18
+#, php-format
+msgid "I've done а courtesy search for the term %s for you. See if you can find what you're looking for in the list below:"
+msgstr " Я здійснив для вас безкоштовний пошук по терміну %s.Можливо, ви знайдете те, що шукаєте в списку нижче:"
+
+#: search-404.php:35
+msgid "<strong>Sorry, couldn't find anything.</strong> Try searching for alternative terms using the search form above."
+msgstr "<strong>Пробачте, нічого не знайдено.</strong> Спробуйте альтернативний пошук за ключовими словами, використовуючи форму пошуку, вказану вище"
+
+#: search.php:11
+#, php-format
+msgid "Search results for: <span>%s</span>"
+msgstr "Результати пошуку для: <span>%s</span>"
+
+#: searchform.php:3
+#: searchform.php:4
+#: sidebar-two.php:36
+#: sidebar.php:42
+msgid "Meta"
+msgstr "Мета"
+
+#: sidebar-two.php:41
+#: sidebar.php:47
+msgid "Posts RSS"
+msgstr "RSS повідомлення"
+
+#: sidebar-two.php:42
+#: sidebar.php:48
+msgid "Comments RSS"
+msgstr "RSS коментарі"
+
+#: sidebar-two.php:44
+#: sidebar.php:50
+#, php-format
+msgid "Powered by %s"
+msgstr "За підтримки %s"
+
+#: sidebar-two.php:44
+#: sidebar.php:50
+msgid "Powered by WordPress, state-of-the-art semantic personal publishing platform."
+msgstr "Powered by WordPress, state-of-the-art semantic personal publishing platform."
+
+#: sidebar-two.php:49
+#: sidebar.php:35
+msgid "Archives"
+msgstr "Архіви"
+
+#: tag.php:14
+#: admin/custom-fields.php:15
+#, php-format
+msgid "Graphene post-specific options"
+msgstr "Окремі налаштування  повідомлень Graphene"
+
+#: admin/custom-fields.php:16
+msgid "Graphene page-specific options"
+msgstr "Окремі налаштування сторінки Graphene"
+
+#: admin/custom-fields.php:89
+msgid "These settings will only be applied to this particular post or page you're editing. They will override the global settings set in the Graphene Options or Graphene Display options page."
+msgstr "Ці налаштування застосовуватимуться тільки до даного редагованого повідомлення або сторінки. Вони відмінять глобальні параметри в настройках Graphene або настройках відображення сторінки Graphene."
+
+#: admin/custom-fields.php:90
+msgid "Slider options"
+msgstr "Налаштування Слайдера"
+
+#: admin/custom-fields.php:94
+#: admin/custom-fields.php:98
+#: admin/custom-fields.php:124
+msgid "Use global setting"
+msgstr "Використовувати глобальні параметри"
+
+#: admin/custom-fields.php:99
+msgid "Don't show image"
+msgstr "Не показувати зображення"
+
+#: admin/custom-fields.php:100
+msgid "Featured Image"
+msgstr "Популярні зображення"
+
+#: admin/custom-fields.php:101
+#: admin/custom-fields.php:102
+msgid "Custom URL"
+msgstr "Користувальницький URL"
+
+#: admin/custom-fields.php:108
+msgid "Custom slider image URL"
+msgstr "Користувальницький URL слайдер-зображення"
+
+#: admin/custom-fields.php:112
+msgid "Make sure you select Custom URL in the slider image option above to use this custom url."
+msgstr "Переконайтеся,що ви вибрали власний URL в опціях слайдер-зображення, щоб використовувати цей URL."
+
+#: admin/custom-fields.php:116
+msgid "Display options"
+msgstr "Параметри відображення"
+
+#: admin/custom-fields.php:120
+msgid "AddThis Social Sharing button"
+msgstr "Додати кнопку соціального обміну AddThis"
+
+#: admin/custom-fields.php:125
+msgid "Show button"
+msgstr "Показати кнопку"
+
+#: admin/custom-fields.php:126
+msgid "Hide button"
+msgstr "Приховати кнопку"
+
+#: admin/custom-fields.php:132
+#: admin/custom-fields.php:136
+msgid "Description"
+msgstr "Опис"
+
+#: admin/custom-fields.php:140
+msgid "Only required if you need а description in the navigation menu and you are not using а custom menu."
+msgstr "Потрібний тільки в тому випадку, якщо вам необхідний опис в меню навігації і ви не використовуєте меню користувача"
+
+#: admin/faq.php:12
+msgid "Graphene's Frequently Asked Questions"
+msgstr " FAQ по Graphene"
+
+#: admin/faq.php:15
+msgid "Where should I go for the theme's support?"
+msgstr "Куди я можу звернутися з питань підтримки?"
+
+#: admin/faq.php:16
+msgid "Please direct all support requests for the theme at the theme's <а href=\"http://forum.khairul-syahir.com/forum/graphene-wordpress-theme\">Support Forum</a>."
+msgstr "Будь ласка, направляйте всі запити з питань підтримки в розділ<a href=\"http://forum.khairul-syahir.com/forum/graphene-wordpress-theme\">Форум підтримки</a>"
+
+#: admin/faq.php:19
+msgid "The post's featured image is replacing my header image. Help!"
+msgstr "Допоможіть! Зображення, яке відноситься до повідомлення, заміщає моє головне зображення"
+
+#: admin/faq.php:20
+msgid "This is actually one of the theme's features, based on the feature in the default TwentyTen theme. Any featured image that has а size of greater than or equal to the theme's header image size (900 x 198 pixels) will replace the header image when the post/page that featured image is assigned to is being displayed. It enables you to have different header image for different posts and/or pages."
+msgstr "Насправді, це одна з властивостей теми, засноване на функції в стандартній темі TwentyTen. Любе зображення, що відноситься до повідомлення/сторінки, розмір якого перевищує або рівний розміру головного зображення теми (900 x 198 пікселів), заміщатиме головне ізоюраженіє у тому випадку, коли відображається повідомлення/сторінка на якій це зображення є заданим за умовчанням. Це дає можливість мати різні зображення для різних повідомлень і/або сторінок."
+
+#: admin/faq.php:21
+msgid "If you want to disable this feature, simply tick the <Em>Disable Featured Image replacing header image</em> option in the <а href=\"themes.php?page=graphene_options&tab=display\">Graphene Options</a> page, under Display > Header Display Options."
+msgstr "Якщо ви хочете відключити цю властивість, просто поставте галочку в <em>Відключити заміщення головного зображення відповідним зображенням"
+
+#: admin/faq.php:24
+msgid "Can I modify Graphene to my heart's content without paying anything?"
+msgstr " Чи можу я безкоштовно видозмінювати Graphene як хочу?"
+
+#: admin/faq.php:25
+msgid "The Graphene WordPress theme, along with all the other themes in the WordPress.org Official Free Themes Directory, is released under the GNU General Public License (GPL) Version 2. The full text of that licence is included with the theme in the <code>licence.txt</code> file in the theme's folder. Releasing the theme under that licence means, among others, that you are <em>free to modify the theme in any way for any purpose (including commercial) </em> without any obligation to the theme's author. However, if you decide to redistribute the theme, the licence dictates that you must release the theme under the same licence, GPLv2."
+msgstr "Тема Graphene WordPress, разом зі всіма іншими темами в офіційному каталозі безкоштовних тем WordPress.org, публікується на правах загальнодоступної ліцензії GNU, версія 2. Повний текст даної ліцензії разом з темами є в теці тем, файл <code>licence.txt</code>. Згідно даної ліцензії <em>вы маєте право видозмінювати тему як хочете і в будь-яких цілях(включаючи комерційні) <em>без будь-яких зобов'язань перед автором.Проте, якщо ви вирішите повторно розмістити тему, згідно загальнодоступної ліцензії, ви повинні опублікувати її на правах тієї ж самої ліцензії, загальнодоступна лиценция, версия 2"
+
+#: admin/faq.php:26
+#: admin/faq.php:29
+msgid "If the theme is released under GPLv2, what is this Creative Commons licence in the theme's footer?"
+msgstr "Якщо тема публікується на правах загальнодоступної ліцензії, версія 2, що це за ліцензія Creative Commons в нижньому колонтитулі теми"
+
+#: admin/faq.php:30
+msgid "The Creative Commons licence is а popular licence nowadays that are used by а lot of web-based content authors to licence their work such that it protects their intellectual property but in the same time allows its free distribution. It is included with the theme simply to make it easy for the theme's users to make use of the licence for the content they publish. Theme users can remove it altogether via the theme's Options page should they wish not to use it."
+msgstr " На сьогоднішній день ліцензія Creative Commons є дуже популярною і використовується багатьма авторами продуктів, заснованих на Інтернет-технологіях, щоб захистити свою інтелектуальну власність і в теж час вирішити вільне повторне розміщення.Вона включена разом з темою просто для того, щоб полегшити використання ліцензії на публікований вміст користувачами теми.Користувачі теми можуть повністю видалити її через Налаштування сторінки теми, якщо не хочуть її використовувати"
+
+#: admin/faq.php:31
+msgid "Put simply, <Em>it is not the licence that is applied for the theme itself</em>, but just for the website's content should the theme user wants to use it."
+msgstr "Просто оберіть,<em>это не та ліцензія, яка застосовується безпосередньо до теми</em>, а тільки до вмісту сайту, тему якого користувач хоче використовувати."
+
+#: admin/faq.php:34
+msgid "Is the theme compatible with this plugin or that plugin?"
+msgstr "Чи сумісна тема з цим або іншим плагіном?"
+
+#: admin/faq.php:35
+msgid "I don't know. With so many plugins available for WordPress, there's no way that I (or anybody else for that matter) can test for compatibility for all of them. Having said that, the theme is built with all the necessary WordPress components included with it, so chances are most plugins will be compatible with the theme."
+msgstr "Я не знаю. Існує безліч доступних плагінів для WordPress, тому ні я( ні хто-небудь інший з даного питання) не можемо протестувати їх всі на сумісність. Тема створюється вже зі всіма необхідними компонентами WordPress, саме тому більшість плагінов повинні бути з нею сумісні."
+
+#: admin/faq.php:36
+msgid "My suggestion is to just install the plugin and try it. If you stumble into problem, ask for support from the plugin author first. If the plugin author says that it's а problems with the theme, you know where to find support."
+msgstr "Моя порада, встановіть плагін і спробуйте його на ділі. Якщо у вас виникають проблеми, спочатку зверніться в службу підтримки автора плагіна. Якщо автор плагіна відповість, що проблема полягає в темі, звертайтеся в службу підтримки з питань даної теми."
+
+#: admin/options-import.php:20
+msgid "Import Graphene Theme Options"
+msgstr "Імпортувати параметри Graphene Theme"
+
+#: admin/options-import.php:63
+msgid "Options import completed"
+msgstr "Імпорт параметрів завершений"
+
+#: admin/options-import.php:64
+#: admin/options-import.php:67
+#: admin/options-import.php:72
+#: admin/options-import.php:77
+msgid "Sorry, there has been an error."
+msgstr "Вибачите, відбулася помилка"
+
+#: admin/options-import.php:68
+msgid "The uploaded file does not contain valid Graphene options."
+msgstr "Завантажений файл не містить допустимих параметрів Graphene."
+
+#: admin/options-import.php:73
+msgid "The uploaded file could not be read."
+msgstr "Неможливо прочитати завантажений файл."
+
+#: admin/options-import.php:78
+msgid "The uploaded file is not supported."
+msgstr "Даний тип файлу не підтримується"
+
+#: admin/options-import.php:86
+msgid "File is empty. Please upload something more substantial. This error could also be caused by uploads being disabled in your php.ini or by post_max_size being defined as smaller than upload_max_filesize in php.ini."
+msgstr "Файл порожній.Будь ласка, завантажите інший файл.Ця помилка могла бути також викликана завантаженнями, які блокуються php.ini або через те, що максимальний розмір повідомлення менший, ніж максимальний розмір завантажуваного файлу в php.ini."
+
+#: admin/options-presets.php:36
+msgid "The \"Normal website\" settings preset has been applied."
+msgstr "За замовчуванням був обраний \"Нормальний сайт\"."
+
+#: admin/options-presets.php:41
+msgid "Settings have been reset."
+msgstr "Налаштування були скинуті."
+
+#: admin/options.php:63
+#: admin/uninstall.php:21
+#: admin/options.php:64
+msgid "Please confirm that you would like to uninstall the Graphene theme. All of the theme's options in the database will be deleted."
+msgstr "Будь ласка,підтвердіть,що ви хочете деинсталювати тему Graphene. Всі налаштування теми будуть видалені."
+
+#: admin/options.php:65
+#: admin/options.php:69
+#: admin/options.php:283
+msgid "Uninstall Theme"
+msgstr "Деінталювати тему"
+
+#: admin/options.php:83
+msgid "Graphene Theme Options"
+msgstr "Параметри Graphene Theme"
+
+#: admin/options.php:85
+#: admin/options.php:90
+msgid "Settings saved."
+msgstr "Налаштування збережені."
+
+#: admin/options.php:102
+msgid "General"
+msgstr "Загальне"
+
+#: admin/options.php:103
+#: admin/options.php:135
+msgid "Save Options"
+msgstr "Зберегти параметри"
+
+#: admin/options.php:147
+#: admin/options.php:150
+msgid "Developing this awesome theme took а lot of effort and time, months and months of continuous voluntary unpaid work. If you like this theme or if you are using it for commercial websites, please consider а donation to the developer to help support future updates and development."
+msgstr "Щоб розробити цю тему було потрібно багато зусиль і часу- місяці добровільної, тривалої і неоплачуваної роботи.Якщо вам подобається ця тема або ви використовуєте її для комерційних сайтів, будь ласка, розглянете можливість фінансової допомоги для подальшого поліпшення і розвитку."
+
+#: admin/options.php:164
+msgid "Graphene Usage Survey"
+msgstr "Опитування по використанню Graphene"
+
+#: admin/options.php:167
+msgid "Help us to get to know you better. Take the Graphene theme usage survey now! Every opinion counts towards making the theme better. The survey is very short, and is completely anonymous."
+msgstr "Допоможіть нам дізнатися вас краще.Візьміть участь в опиті по використанню теми Graphene!Для нас важлива кожна думка, щоб ми могли поліпшити тему.Опит дуже короткий і повністю анонімний."
+
+#: admin/options.php:168
+#: admin/options.php:177
+msgid "Add-ons and plugins"
+msgstr "Додаткові компоненти і плагини"
+
+#: admin/options.php:180
+msgid "Add-ons"
+msgstr "Додаткові компоненти"
+
+#: admin/options.php:181
+msgid "Add-ons are not shipped with the theme, but can be installed separately to extend the theme's capability."
+msgstr "Додаткові компоненти не входять в тему, але їх можна встановити окремо, щоб розширити можливості теми."
+
+#: admin/options.php:185
+msgid "Installed"
+msgstr "Встановлене"
+
+#: admin/options.php:186
+#: admin/options.php:205
+#: admin/options.php:187
+#: admin/options.php:190
+msgid "Plugins"
+msgstr "Плагіни"
+
+#: admin/options.php:191
+msgid "The plugins listed here are natively supported by the theme. All you need to do is install the plugins and activate them."
+msgstr "Перераховані тут плагіни спочатку підтримуються темою.Вам лише необхідно встановити їх і активувати."
+
+#: admin/options.php:204
+msgid "Activated"
+msgstr "Активоване"
+
+#: admin/options.php:217
+#: admin/options.php:220
+msgid "The default settings for the theme is preconfigured for use in blogs. If you're using this theme primarily for а normal website, or if you want to reset the settings to their default values, you can apply one of the available options presets below."
+msgstr "Налаштування для теми за замовчуванням призначені для блогів. Якщо ви використовуєте цю тему для звичайного сайту або ви хочете скинути початкові налаштування за замовуванням, ви можете застосувати один з варіантів налаштування, що є нижче."
+
+#: admin/options.php:221
+msgid "Note that you can still configure the individual settings after you apply any preset."
+msgstr "Зверніть увагу, що ви можете змінити індивідуальні налаштування після установки попередніх налаштувань."
+
+#: admin/options.php:226
+msgid "Select Options Preset"
+msgstr "Вибір попередніх налаштувань"
+
+#: admin/options.php:229
+msgid "Normal website"
+msgstr "Звичайний сайт"
+
+#: admin/options.php:232
+msgid "Reset to default settings"
+msgstr "Відновити значення за замовчуванням"
+
+#: admin/options.php:237
+msgid "Apply Options Preset"
+msgstr "Застосувати попередні налаштування"
+
+#: admin/options.php:247
+#: admin/options.php:251
+#: admin/options.php:254
+msgid "Import Theme options"
+msgstr "Імпорт параметрів теми"
+
+#: admin/options.php:256
+#: admin/options.php:260
+msgid "Export Theme options"
+msgstr "Експорт параметрів теми"
+
+#: admin/options.php:263
+#, php-format
+msgid "Import and export is only available for to users with PHP version 5.2.1 and higher. You are using PHP version %s."
+msgstr "Імпорт і експорт доступний тільки для користувачів з версією PHP 5.2.1 і вище.Ви використовуєте версію PHP %s."
+
+#: admin/options.php:273
+msgid "Uninstall theme"
+msgstr "Деінсталювати тему"
+
+#: admin/options.php:276
+msgid "<strong>Be careful!</strong> Uninstalling the theme will remove all of the theme's options from the database. Do this only if you decide not to use the theme anymore."
+msgstr "<strong>Увага!</strong>Деінсталяція теми призведе до втрати всіх параметрів теми з бази даних. Підтвердіть дію, якщо ви вирішили більше не використовувати цю тему."
+
+#: admin/options.php:277
+msgid "If you just want to try another theme, there is no need to uninstall this theme. Simply activate the other theme in the Appearance > Themes admin page."
+msgstr "Якщо ви хочете проглянути іншу тему, необязательно видаляти цю.Просто активуйте іншу тему в Настройки зовнішнього вигляду>Темы сторінки адміністратора."
+
+#: admin/options.php:278
+msgid "Note that uninstalling this theme <strong>does not remove</strong> the theme's files. To delete the files after you have uninstalled this theme, go to Appearances > Themes and delete the theme from there."
+msgstr "Зверніть увагу, що деінсталяція цієї теми <strong>не призведе до видалення</strong> файлів теми.Щоб видалити файли після того, як ви деінсталювали тему, відкрийте Настройки зовнішнього вигляду > Теми і видалити тему."
+
+#: admin/options.php:305
+msgid "Slider Options"
+msgstr "Параметри слайдера"
+
+#: admin/options.php:311
+msgid "Category to show in slider"
+msgstr "Категорії, які будуть зображені в слайдері"
+
+#: admin/options.php:312
+msgid "All posts within the category selected here will be displayed on the slider. Usage example: create а new category \"Featured\" and assign all posts to be displayed on the slider to that category, and then select that category here."
+msgstr "Всі повідомлення вибраної категорії відображатимуться на слайдері. Приклад: створіть нову катекорію \"Зазначені\" і вкажіть всі повідомлення, які будуть відображені на слайдері для цієї категорії, потім виберіть цю категорію."
+
+#: admin/options.php:316
+msgid "Show latest posts"
+msgstr "Показати останні повідомлення"
+
+#: admin/options.php:317
+msgid "Show specific posts/pages"
+msgstr "Показати вибрані повідомлення/сторінки"
+
+#: admin/options.php:318
+#: admin/options.php:331
+#: admin/options.php:509
+msgid "Posts and/or pages to display"
+msgstr "Повідомлення і/або сторінки для відображення"
+
+#: admin/options.php:336
+#: admin/options.php:514
+msgid "Enter ID of posts and/or pages to be displayed, separated by comma. Example: <code>1,13,45,33</code>"
+msgstr "Введіть ID повідомлення і/або сторінки для відображення, через кому. Приклад:<code>1,13,45,33</code>"
+
+#: admin/options.php:337
+msgid "Applicable only if <strong>Show specific posts/pages</strong> is selected above."
+msgstr "Можна застосувати тільки якщо вище вибране <strong>Показувати вибрані повідомлення/сторінки</strong>"
+
+#: admin/options.php:343
+msgid "Number of posts to display"
+msgstr "Кількість повідомлень, що відображаються"
+
+#: admin/options.php:373
+msgid "Slider display style"
+msgstr "Стиль відображення слайдеру"
+
+#: admin/options.php:377
+msgid "Thumbnail and excerpt"
+msgstr "Ескіз і витримка"
+
+#: admin/options.php:378
+msgid "Background image and excerpt"
+msgstr "Фонове зображення і витримка"
+
+#: admin/options.php:379
+msgid "Full post content"
+msgstr "Повний зміст повідомлення"
+
+#: admin/options.php:385
+msgid "Slider height"
+msgstr "Висота слайдера"
+
+#: admin/options.php:393
+msgid "Slider speed"
+msgstr "Швидкість слайдера"
+
+#: admin/options.php:396
+#: admin/options.php:405
+#: admin/options.php:397
+msgid "This is the duration that each slider item will be shown"
+msgstr "Це тривалість відображення предметів в слайдері"
+
+#: admin/options.php:402
+#: admin/options.php:406
+msgid "This is the speed of the slider transition. Lower values = higher speed."
+msgstr "Це швидкість переходу слайдера. Менше значенння-більше швидкість."
+
+#: admin/options.php:411
+msgid "Move slider to bottom of page"
+msgstr "Перемістити слайдер на верх сторінки"
+
+#: admin/options.php:417
+msgid "Disable slider"
+msgstr "Відключити слайдер"
+
+#: admin/options.php:430
+msgid "Front Page Options"
+msgstr "Параметри головної сторінки"
+
+#: admin/options.php:436
+#: admin/options.php:438
+#: admin/options.php:443
+#: admin/options.php:451
+#: admin/options.php:463
+msgid "Homepage Panes"
+msgstr "Панель домашньої сторінки"
+
+#: admin/options.php:466
+msgid "<strong>Note:</strong> homepage panes are only displayed when using а <а href=\"http://codex.wordpress.org/Creating_a_Static_Front_Page\">static front page</a>."
+msgstr "<strong>Увага:</strong>панель домашньої сторінки відображається тільки у тому випадку, коли використовується <а href=\"http://codex.wordpress.org/Creating_a_Static_Front_Page\">статична головна сторінка</a>"
+
+#: admin/options.php:470
+msgid "Type of content to show"
+msgstr "Тип вмісту, що відображається"
+
+#: admin/options.php:477
+msgid "Latest posts by category"
+msgstr "Останні повідомлення по категоріях"
+
+#: admin/options.php:480
+msgid "Posts and/or pages"
+msgstr "Повідомлення і/або сторінки"
+
+#: admin/options.php:485
+msgid "Number of latest posts to display"
+msgstr "Кількість останніх повідомлень, що відображаються"
+
+#: admin/options.php:489
+#: admin/options.php:494
+msgid "Category to show latest posts from"
+msgstr "Категорія останніх повідомлень, що відображаються"
+
+#: admin/options.php:504
+msgid "Applicable only if <strong>Latest posts by category</strong> is selected above."
+msgstr "Можливо застосувати тільки, якщо вище вибрано <strong>Останні повідомлення по категоріям</strong>."
+
+#: admin/options.php:515
+msgid "Applicable only if <strong>Posts and/or pages</strong> is selected above."
+msgstr "Можливо застосувати тільки, якщо вище вибране <strong>Повідомлення і/або сторінки</strong>."
+
+#: admin/options.php:521
+msgid "Disable homepage panes"
+msgstr "Відключити панель домашньої сторінки"
+
+#: admin/options.php:536
+msgid "Comments Options"
+msgstr "Параметри коментарів"
+
+#: admin/options.php:542
+#: admin/options.php:546
+msgid "Use WordPress settings"
+msgstr "Використовувати налаштування WordPress"
+
+#: admin/options.php:547
+msgid "Disabled for pages"
+msgstr "Відмінити для сторінок"
+
+#: admin/options.php:548
+#: admin/options.php:550
+msgid "Note: this setting overrides the global WordPress Discussion Setting called \"Allow people to post comments on new articles\" and also the \"Allow comments\" option for individual posts/pages."
+msgstr "Увага: ці налаштування скасують глобальні налаштування обговорення для Wordpress \"Дозволити залишати коментарі для нових статей\" а також настройок для особистих повідомлень/сторінок \"Дозволити коментувати\"."
+
+#: admin/options.php:562
+msgid "Child Page Options"
+msgstr "Параметри дочірньої сторінки"
+
+#: admin/options.php:568
+msgid "Hide parent box if content is empty"
+msgstr "Приховати вищестоящий зміст, якщо немає вмісту"
+
+#: admin/options.php:574
+msgid "Child page listings"
+msgstr "Список дочірньої сторінки"
+
+#: admin/options.php:578
+msgid "Hide listing"
+msgstr "Приховати список"
+
+#: admin/options.php:579
+#: admin/options.php:580
+msgid "Only show listing if parent content is empty"
+msgstr "Показувати список, якщо загальний зміст порожній"
+
+#: admin/options.php:593
+msgid "Widget Area Options"
+msgstr "Параметри панелі для віджетів"
+
+#: admin/options.php:596
+msgid "Header widget area"
+msgstr "Приховати панель для віджетів"
+
+#: admin/options.php:597
+msgid "<strong>Important:</strong> This widget area is unstyled, as it is often used for advertisement banners, etc. If you enable it, make sure you style it to your needs using the Custom CSS option."
+msgstr "<strong>Важливо:</strong> у цієї панелі для віджетів немає стилю, оскільки вона часто використовується для рекламних банерів і т.п. Якшо ви активуєте її, переконаєтеся, що ви налаштували стиль відповідно до ваших потреб, використовуючи призначені для користувача налаштування CSS."
+
+#: admin/options.php:601
+#: admin/options.php:610
+msgid "Alternate Widgets"
+msgstr "Альтернативні віджети"
+
+#: admin/options.php:611
+msgid "You can enable the theme to show different widget areas in the front page than the rest of the website. If you enable this option, additional widget areas that will only be displayed on the front page will be added to the Widget settings page."
+msgstr "На відміну від інших сайтів, Ви можете активувати показ різних панелей для віджетов на головній сторінці. Якщо ви активуєте цю опцію, в теку Настройки віджетів на сторінці буде поміщена додаткова панель для виджетів, яка відображатиметься тільки на головній сторінці."
+
+#: admin/options.php:614
+msgid "Enable alternate front page sidebar widget area"
+msgstr "Активувати альтернативну бічну панель для віджетів на головній сторінці"
+
+#: admin/options.php:618
+msgid "Enable alternate front page footer widget area"
+msgstr "Активувати альтернативну нижню панель для віджетів на головній сторінці"
+
+#: admin/options.php:619
+msgid "You can also specify different column counts for the front page footer widget and the rest-of-site footer widget if you enable this option."
+msgstr "Ви також можете визначити різну кількість стовпців для нижнього колонтитулу області віджетів головної сторінки, якщо активуєте цю функцію."
+
+#: admin/options.php:632
+msgid "Top Bar Options"
+msgstr "Опції верхньої панелі"
+
+#: admin/options.php:638
+msgid "Hide feed icon"
+msgstr "Приховати іконку веб-каналу."
+
+#: admin/options.php:642
+msgid "Use custom feed URL"
+msgstr "Використовувати призначений для користувача потік URL"
+
+#: admin/options.php:645
+#: admin/options.php:649
+msgid "Twitter URL"
+msgstr "URL Twitter"
+
+#: admin/options.php:652
+msgid "Enter the URL to your Twitter page."
+msgstr "Введіть URL для вашої сторінки на Twitter."
+
+#: admin/options.php:656
+msgid "Facebook URL"
+msgstr "URL Facebook"
+
+#: admin/options.php:659
+msgid "Enter the URL to your Facebook profile page."
+msgstr "Введіть URL для сторінки профілю на Facebook."
+
+#: admin/options.php:670
+#, php-format
+msgid "%s URL"
+msgstr "%s URL"
+
+#: admin/options.php:675
+#, php-format
+msgid "%s icon URL"
+msgstr "%s URL іконки"
+
+#: admin/options.php:678
+msgid "Delete"
+msgstr "Видалити"
+
+#: admin/options.php:687
+msgid "Add new social media icon"
+msgstr "Додати нову іконку соціальних мереж"
+
+#: admin/options.php:698
+msgid "Social Sharing Buttons"
+msgstr "Кнопка соціального обміну"
+
+#: admin/options.php:703
+msgid "Show social sharing button"
+msgstr "Показати кнопку соціального обміну"
+
+#: admin/options.php:707
+msgid "Show in Pages as well?"
+msgstr "Показувати також сторінки?"
+
+#: admin/options.php:711
+msgid "Social sharing buttons location"
+msgstr "Положення кнопки соціального обміну"
+
+#: admin/options.php:714
+#: admin/options.php:715
+msgid "Top of posts"
+msgstr "Початок повідомлення"
+
+#: admin/options.php:716
+msgid "Both top and bottom"
+msgstr "Початок і кінець"
+
+#: admin/options.php:722
+msgid "Your social sharing button code"
+msgstr "Код вашої кнопки соціального обміну"
+
+#: admin/options.php:723
+msgid "You can use codes from any popular social sharing sites, like Facebook, Digg, AddThis, etc."
+msgstr "Ви можете використовувати коди інших популярних соціальних мереж, таких як Facebook, Digg, AddThis, і т.д."
+
+#: admin/options.php:726
+msgid "You may use these tags to get the post's URL and title:"
+msgstr "Ви можете використовувати ці теги, щоб отримати URL повідомлення і назву:"
+
+#: admin/options.php:739
+#: admin/options.php:745
+msgid "Show Adsense advertising"
+msgstr "Показати рекламу Adsense"
+
+#: admin/options.php:751
+msgid "Show ads on front page as well"
+msgstr "Також показувати рекламу на головній сторінці"
+
+#: admin/options.php:757
+#: admin/options.php:770
+msgid "Google Analytics Options"
+msgstr "Настройки Google Analytics"
+
+#: admin/options.php:773
+msgid "<strong>Note:</strong> the theme now places the Google Analytics script in the <code>&lt;head&gt;</code> element to better support the new asynchronous Google Analytics script. Please make sure you update your script to use the new asynchronous script from Google Analytics."
+msgstr "<strong>Увага:</strong>скрипт Google Analytics розміщений в <code>&lt;head&gt;</code>-елементі, для кращої підтримки нового асинхронного скрипта Google Analytics.Будь ласка, переконайтеся,що ви оновили скрипт для того,щоб використовувати новий асинхронний скрипт від Google Analytics."
+
+#: admin/options.php:776
+msgid "Enable Google Analytics tracking"
+msgstr "Активувати Google Analytics"
+
+#: admin/options.php:780
+msgid "Google Analytics tracking code"
+msgstr "Код відстежування Google Analytics"
+
+#: admin/options.php:781
+msgid "Make sure you include the full tracking code (including the <code>&lt;script&gt;</code> and <code>&lt;/script&gt;</code> tags) and not just the <code>UA-#######-#</code> code."
+msgstr "Переконайтесь, что ви вставили повний код відстежування (включаючи теги <code>&lt;script&gt;</code> і <code>&lt;/script&gt;</code>) а не тільки код <code>UA-#######-#</code>."
+
+#: admin/options.php:794
+msgid "Footer Options"
+msgstr "Параметри нижнього колонтитулу"
+
+#: admin/options.php:799
+msgid "Show Creative Commons logo"
+msgstr "Відображати логотип Creative Commons"
+
+#: admin/options.php:804
+msgid "Copyright text (html allowed)"
+msgstr "Авторські права(HTML дозволений)"
+
+#: admin/options.php:805
+msgid "If this field is empty, the following default copyright text will be displayed:"
+msgstr "Якщо це поле порожнє, відображатимуться наступні авторські права за замовчуванням:"
+
+#: admin/options.php:811
+msgid "Do not show copyright info"
+msgstr "Не показувати авторські права"
+
+#: admin/options.php:815
+msgid "Do not show the \"Return to top\" link"
+msgstr "Не показувати лінк \"Повернутися до початку\""
+
+#: admin/options.php:826
+msgid "Print Options"
+msgstr "Параметри друку"
+
+#: admin/options.php:831
+msgid "Enable print CSS for single posts and pages?"
+msgstr "Дозволити друк CSS для окремих повідомлень і сторінок?"
+
+#: admin/options.php:835
+msgid "Show print button as well?"
+msgstr "Показувати також кнопку друку?"
+
+#: admin/options.php:855
+msgid "Header Display Options"
+msgstr "Параметри відображення заголовків"
+
+#: admin/options.php:861
+msgid "Use light-coloured header bars"
+msgstr "Використовувати світлі тони для заголовків."
+
+#: admin/options.php:867
+msgid "Link header image to front page"
+msgstr "Приєднати зображення заголовка до головної сторінки"
+
+#: admin/options.php:870
+msgid "Check this if you disable the header texts and want the header image to be linked to the front page."
+msgstr "Перевірте, якщо ви відключаєте текст заголовка і хочете приєднати зображення заголовка до головної сторінки."
+
+#: admin/options.php:875
+msgid "Disable Featured Image replacing header image"
+msgstr "Відключити рекомендоване зображення, що заміщає зображення заголовка"
+
+#: admin/options.php:878
+msgid "Check this to prevent the posts Featured Image replacing the header image regardless of the featured image dimension."
+msgstr "Перевірте, щоб уникнути заміщення зображення заголовка рекомендованим зображенням із його параметрів."
+
+#: admin/options.php:883
+msgid "Use random header image"
+msgstr "Використовувати випадкове зображення заголовка"
+
+#: admin/options.php:887
+msgid "Check this to show а random header image (random image taken from the available default header images)."
+msgstr "Перевірте, щоб можна було показувати випадкове зображення заголовка (випадкове зображення з доступних зображень заголовка за умовчанням)."
+
+#: admin/options.php:888
+msgid "<strong>Note:</strong> only works on pages where а specific header image is not defined."
+msgstr "<strong>Увага:</strong> доступно тільки на сторінках, де не вибрано спеціальне зображення заголовка."
+
+#: admin/options.php:893
+msgid "Hide the top bar"
+msgstr "Заховати верхню панель навігації"
+
+#: admin/options.php:899
+msgid "Search box location"
+msgstr "Розташування вікна пошуку"
+
+#: admin/options.php:903
+msgid "Top bar"
+msgstr "Верхня панель навігації"
+
+#: admin/options.php:904
+msgid "Navigation bar"
+msgstr "Панель навігації"
+
+#: admin/options.php:905
+msgid "Disable search box"
+msgstr "Відключити вікно пошуку"
+
+#: admin/options.php:918
+msgid "Column Options"
+msgstr "Параметри стовпця"
+
+#: admin/options.php:924
+msgid "Column mode"
+msgstr "Тип стовпця"
+
+#: admin/options.php:974
+#: admin/options.php:980
+msgid "Hide post author"
+msgstr "Не показувати автора повідомлення"
+
+#: admin/options.php:986
+msgid "Post date display"
+msgstr "Відображати дату повідомлення"
+
+#: admin/options.php:990
+msgid "Hidden"
+msgstr "Прихований"
+
+#: admin/options.php:991
+msgid "As an icon (without the year)"
+msgstr "Як іконка (без дати)"
+
+#: admin/options.php:992
+msgid "As an icon (including the year)"
+msgstr "Як іконка ( з вказівкою дати)"
+
+#: admin/options.php:993
+msgid "As inline text"
+msgstr "Як вбудований текст"
+
+#: admin/options.php:995
+msgid "Note: displaying date as inline text allows more space for the content area, especially useful for а three-column layout configuration."
+msgstr "Увага: відображення дати у вигляді вбудованого тексту залишає більше місця для вмісту, що особливо корисно для конфігурації в три колонки."
+
+#: admin/options.php:1000
+msgid "Hide post categories"
+msgstr "Приховати категорії повідомлення"
+
+#: admin/options.php:1006
+msgid "Hide post tags"
+msgstr "Приховати теги повідомлення"
+
+#: admin/options.php:1012
+msgid "Hide post comment count"
+msgstr "Приховати кількість коментарів до повідомлення"
+
+#: admin/options.php:1013
+msgid "Only affects posts listing (such as the front page) and not single post view."
+msgstr "Впливає тільки на список повідомлень (наприклад, на головній сторінці),а не на проглядання одиничного  повідомлення."
+
+#: admin/options.php:1018
+#: admin/options.php:1022
+msgid "Show post author's info"
+msgstr "Показувати інформацію про автора повідомлення"
+
+#: admin/options.php:1034
+#: admin/options.php:1040
+#: admin/options.php:1046
+msgid "Show full content in archive pages"
+msgstr "Показувати весь вміст на архівних сторінках"
+
+#: admin/options.php:1050
+msgid "Note: Archive pages include the archive for category, tags, time, and search results pages. Enabling this option will cause the full content of posts and pages listed in those archives to displayed instead of the excerpt, and truncated by the Read More tag if used."
+msgstr "Увага: Архівні сторінки включають архіви для категорій, тегів, часу і результатів сторінок пошуку.Активація цієї опції призведе до того, що замість вирізок відображатиметься весь вміст перерахованих сторінок і повідомлень архіву. Якщо використовується тег Read More, вміст буде усіченим"
+
+#: admin/options.php:1054
+#: admin/options.php:1058
+msgid "Retain these HTML tags in excerpts"
+msgstr "Збережіть HTML теги для цих витримок"
+
+#: admin/options.php:1061
+msgid "Enter the HTML tags you'd like to retain in excerpts. For example, enter <code>&lt;p&gt;&lt;ul&gt;&lt;li&gt;</code> to retain <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>, and <code>&lt;li&gt;</code> HTML tags."
+msgstr "Введіте HTML теги, котрі ви б хотіли б зберегти у витримках. Наприклад, введіть <code>&lt;p&gt;&lt;ul&gt;&lt;li&gt;</code> зберегти <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code> і <code>&lt;li&gt;</code> HTML теги."
+
+#: admin/options.php:1074
+#: admin/options.php:1080
+msgid "Hide allowed tags in comment form"
+msgstr "Не показувати допустимі теги в коментарях"
+
+#: admin/options.php:1093
+msgid "Colours Options"
+msgstr "Настройка кольору"
+
+#: admin/options.php:1096
+msgid "Changing colours for your website involves а lot more than just trial and error. Simply mixing and matching colours without regard to their compatibility may do more damage than good to your site's aesthetics."
+msgstr "Зміна кольору вашого сайту це значно більше, чим просто \"Метод спроб та помилок\".Якщо ви просто змішуватимете кольори без урахування їх сумісності, ви можете спотворити естетичний вид вашого сайту."
+
+#: admin/options.php:1097
+#: admin/options.php:1098
+#: admin/options.php:1099
+#, php-format
+msgid "<strong>Note:</strong> The previews work best on modern Gecko- and Webkit-based browsers, such as Mozilla Firefox and Google Chrome."
+msgstr "<strong>Увага:</strong>Попередній перегляд краще всього працює в браузерах Gecko і Webckit, таких як Mozilla Firefox і Google Chrome."
+
+#: admin/options.php:1100
+#: admin/options.php:1104
+msgid "Main content wrapper background"
+msgstr "Фон основного змісту"
+
+#: admin/options.php:1105
+msgid "Post and pages content background"
+msgstr "Фон змісту сторінок і повідомлень"
+
+#: admin/options.php:1106
+msgid "Post meta and footer border"
+msgstr "Мета і нижня межа повідомлення"
+
+#: admin/options.php:1107
+msgid "Post and pages top border"
+msgstr "Верхня межа повідомлень і сторінок"
+
+#: admin/options.php:1108
+#: admin/options.php:1118
+#: admin/options.php:1148
+#: admin/options.php:1174
+#: admin/options.php:1201
+#: admin/options.php:1338
+#: admin/options.php:1359
+#: admin/options.php:1125
+msgid "Widgets"
+msgstr "Віджети"
+
+#: admin/options.php:1128
+msgid "Widget preview"
+msgstr "Попередній перегляд віджету"
+
+#: admin/options.php:1129
+#: admin/options.php:1133
+msgid "Widget item background"
+msgstr "Фон деталей віджета"
+
+#: admin/options.php:1134
+msgid "Widget item list border"
+msgstr "Межа списку деталей віджету"
+
+#: admin/options.php:1135
+msgid "Widget header border"
+msgstr "Межа заголовка віджету"
+
+#: admin/options.php:1136
+msgid "Widget title colour"
+msgstr "Колір назви віджета"
+
+#: admin/options.php:1137
+msgid "Widget title text shadow colour"
+msgstr "Колір тіні назви віджету"
+
+#: admin/options.php:1138
+msgid "Widget header gradient bottom colour"
+msgstr "Нижній колір градієнта заголовка віджету"
+
+#: admin/options.php:1139
+msgid "Widget header gradient top colour"
+msgstr "Верхній колір градієнта заголовка віджету"
+
+#: admin/options.php:1156
+#: admin/options.php:1159
+msgid "Slider background preview"
+msgstr "Попередній перегляд фону слайдера"
+
+#: admin/options.php:1164
+msgid "Slider top left colour"
+msgstr "Колір слайдера у верхньому лівому кутку"
+
+#: admin/options.php:1165
+msgid "Slider bottom right colour"
+msgstr "Колір слайдера в нижньому правому кутку"
+
+#: admin/options.php:1182
+#: admin/options.php:1185
+msgid "Block button preview"
+msgstr "Кнопка попереднього перегляду"
+
+#: admin/options.php:1186
+msgid "Button label"
+msgstr "Текст командної кнопки"
+
+#: admin/options.php:1190
+msgid "Button background colour"
+msgstr "Фоновий колір кнопки"
+
+#: admin/options.php:1191
+msgid "Button label colour"
+msgstr "Колір тексту командної кнопки"
+
+#: admin/options.php:1192
+msgid "Button label text shadow"
+msgstr "Колір тіні тексту командної кнопки"
+
+#: admin/options.php:1216
+msgid "Text Style Options"
+msgstr "Налаштуванння стилю"
+
+#: admin/options.php:1219
+msgid "Note that these are CSS properties, so any valid CSS values for each particular property can be used."
+msgstr "Увага, це властивості CSS, тому може бути використаний будь-якій дійсний CSS для кожної властивості."
+
+#: admin/options.php:1220
+msgid "Some example CSS properties values:"
+msgstr "Деякі приклади значень CSS:"
+
+#: admin/options.php:1223
+#: admin/options.php:1227
+msgid "Text size and line height:"
+msgstr "Розмір тексту і міжрядковий інтервал:"
+
+#: admin/options.php:1231
+msgid "Text weight:"
+msgstr "Жирність тексту:"
+
+#: admin/options.php:1235
+msgid "Text style:"
+msgstr "Стиль тексту:"
+
+#: admin/options.php:1239
+msgid "Text colour:"
+msgstr "Колір тексту:"
+
+#: admin/options.php:1243
+#: admin/options.php:1389
+msgid "Leave field empty to use the default value."
+msgstr "Залиште поле порожнім, щоб використовувати властивість за замовчуванням."
+
+#: admin/options.php:1245
+msgid "Header Text"
+msgstr "Заголовок"
+
+#: admin/options.php:1249
+msgid "Title text font"
+msgstr "Шрифт заголовка"
+
+#: admin/options.php:1255
+#: admin/options.php:1261
+msgid "Title text weight"
+msgstr "Жирність тексту заголовка"
+
+#: admin/options.php:1267
+msgid "Title text line height"
+msgstr "Міжрядковий інтервал в заголовку"
+
+#: admin/options.php:1273
+msgid "Title text style"
+msgstr "Стиль тексту заголовка"
+
+#: admin/options.php:1282
+#: admin/options.php:1288
+msgid "Description text size"
+msgstr "Розмір тексту опису"
+
+#: admin/options.php:1294
+msgid "Description text weight"
+msgstr "Жирність тексту опису"
+
+#: admin/options.php:1300
+msgid "Description text line height"
+msgstr "Міжрядковий інтервал в описі"
+
+#: admin/options.php:1306
+msgid "Description text style"
+msgstr "Стиль тексту опису"
+
+#: admin/options.php:1312
+msgid "Content Text"
+msgstr "Зміст"
+
+#: admin/options.php:1316
+#: admin/options.php:1322
+#: admin/options.php:1328
+msgid "Text line height"
+msgstr "Міжрядковий інтервал"
+
+#: admin/options.php:1334
+msgid "Text colour"
+msgstr "Колір тексту"
+
+#: admin/options.php:1344
+msgid "Link Text"
+msgstr "Текст посилання"
+
+#: admin/options.php:1348
+msgid "Link colour (normal state)"
+msgstr "Колір посилання (невідвіданий стан)"
+
+#: admin/options.php:1349
+msgid "Link colour (visited state)"
+msgstr "Колір посилання (відвіданий стан)"
+
+#: admin/options.php:1350
+msgid "Link colour (hover state)"
+msgstr "Колір посилання (при наведенні)"
+
+#: admin/options.php:1367
+msgid "Text decoration (normal state)"
+msgstr "Оформлення тексту(нормальний стан)"
+
+#: admin/options.php:1373
+msgid "Text decoration (hover state)"
+msgstr "Оформлення тексту(при наведенні)"
+
+#: admin/options.php:1386
+msgid "Footer Widget Display Options"
+msgstr "Параметри відображення нижнього віджету"
+
+#: admin/options.php:1394
+msgid "Number of columns to display"
+msgstr "Кількість стовпців"
+
+#: admin/options.php:1401
+msgid "Number of columns to display for front page footer widget"
+msgstr "Кількість стовпців для нижнього віджету головної сторінки"
+
+#: admin/options.php:1415
+msgid "Navigation Menu Display Options"
+msgstr "Параметри меню навігації"
+
+#: admin/options.php:1421
+msgid "Dropdown menu item width"
+msgstr "Ширина випадаючого меню"
+
+#: admin/options.php:1427
+msgid "Description for default menu \"Home\" item"
+msgstr "Опис для меню за замовчуванням\"Домашня сторінка\""
+
+#: admin/options.php:1443
+msgid "Miscellaneous Display Options"
+msgstr "Різні варіанти відображення"
+
+#: admin/options.php:1446
+msgid "Site title options"
+msgstr "Настройки назви сайту"
+
+#: admin/options.php:1447
+msgid "Use these tags to customise your own site title structure: <code>#site-name</code>, <code>#site-desc</code>, <code>#post-title</code>"
+msgstr "Використовуйте ці теги, шоб налаштувати структуру назви сайту:<code>#site-name</code>, <code>#site-desc</code>, <code>#post-title</code>"
+
+#: admin/options.php:1451
+msgid "Custom front page site title"
+msgstr "Назва сайту на головній сторінці користувача"
+
+#: admin/options.php:1455
+msgid "Defaults to <code>#site-name &raquo; #site-desc</code>. The <code>#post-title</code> tag cannot be used here."
+msgstr "За замовчуванням: <code>#site-name &raquo; #site-desc</code>.Тег <code>#post-title</code> не може бути тут використаний"
+
+#: admin/options.php:1460
+msgid "Custom content pages site title"
+msgstr "Назва сайту на сторінках змісту"
+
+#: admin/options.php:1464
+msgid "Defaults to <code>#post-title &raquo; #site-name</code>."
+msgstr "За замовчуванням<code>#post-title &raquo; #site-name</code>."
+
+#: admin/options.php:1469
+msgid "Favicon options"
+msgstr "Настройки фавікон"
+
+#: admin/options.php:1473
+#: admin/options.php:1477
+msgid "Simply enter the full URL to your favicon file here to enable favicon. Make sure you include the <code>http://</code> in front of the URL as well."
+msgstr "Просто введіть повний URL для файлу фавикон, шоб активувати фавікон. Переконайтесь, что ви перед URL ви також ввели <code>http://</code>."
+
+#: admin/options.php:1489
+msgid "Custom CSS"
+msgstr "Призначений для користувача CSS"
+
+#: admin/options.php:1494
+msgid "Custom CSS styles"
+msgstr "Стилі призначеного для користувача CSS"
+
+#: admin/options.php:1496
+msgid "You can enter your own CSS codes below to modify any other aspects of the theme's appearance that is not included in the options."
+msgstr "Нижче ви можете ввести свій власний код CSS, шоб змінити інші налаштування зовнішнього вигляду, які не включені в налаштування."
+
+#: admin/options.php:1512
+#: admin/options.php:1520
+msgid "<strong>Note:</strong> This is an experimental feature. Please report any problem at the <а href=\"http://forum.khairul-syahir.com/forum/bug-report\">Support Forum</a>."
+msgstr "<strong>Увага:</strong> Це експериментальна функція. Будь ласка, повідомте про виниклі помилки в розділі <а href=\"http://forum.khairul-syahir.com/forum/bug-report\">Форум Підтримки</a>."
+
+#: admin/options.php:1522
+msgid "Choose а file from your computer:"
+msgstr "Оберіть файл на вашому комп'ютері:"
+
+#: admin/options.php:1522
+#, php-format
+msgid "Maximum size: %s"
+msgstr "Максимальний розмір:%s"
+
+#: admin/options.php:1529
+msgid "Upload file and import"
+msgstr "Завантажити файл і міні-портувати"
+
+#: admin/uninstall.php:22
+#: admin/user.php:7
+#, php-format
+msgid "Graphene-specific User Profile Information"
+msgstr "Спеціальна інформація профілю користувача Grephene"
+
+#: admin/user.php:8
+msgid "The settings defined here are used only with the Graphene theme."
+msgstr "Задані параметри використовуються тільки з Graphene theme."
+
+#: admin/user.php:12
+msgid "Author profile image URL"
+msgstr " URL зображення автора профілю"
+
+#: admin/user.php:13
+msgid "You can specify the image to be displayed as the author's profile image in the Author's page. If no URL is defined here, the author's <а href=\"http://www.gravatar.com\">Gravatar</a> will be used."
+msgstr "Ви можете вибрати зображення, яке відображатиметься як зображення автора профілю на сторінці автора. Якщо не вказаний ніякий URL, тоді використовуватиметься <а href=\"http://www.gravatar.com\">Gravatar</a>."
+
+#: admin/user.php:17
+msgid "Please enter the full URL (including <code>http://</code>) to your profile image."
+msgstr "Будь ласка, введіть повний URL для зображення профілю (включаючи <code>http://</code>)."
+
+#: admin/user.php:17
+msgid "<strong>Important: </strong>Image width must be less than or equal to <strong>150px</strong>."
+msgstr "<strong>Увага: </strong>Ширина зображення повинна бути менше або рівна <strong>150px</strong>."
+
+#: admin/validator.php:24
+msgid "ERROR: Invalid category to show in slider."
+msgstr "ПОМИЛКА:Неприпустима категорія для показу в слайдері."
+
+#: admin/validator.php:27
+msgid "ERROR: You must specify the posts/pages to be displayed when you have \"Show specific posts/pages\" selected for the slider category."
+msgstr "ПОМИЛКА:Ви повинні вказати повідомлення/сторінки, яке будуть відображатися, коли для категорії слайдера у вас вибрано \"Показувати певні повідомлення/сторінки\"."
+
+#: admin/validator.php:36
+msgid "ERROR: The number of posts to displayed in the slider must be а an integer value."
+msgstr "ПОМИЛКА:Кількість повідомлень, що відображаються, в слайдері повинна бути цілим числом."
+
+#: admin/validator.php:39
+msgid "ERROR: Invalid option for the slider image is specified."
+msgstr "ПОМИЛКА:Вказані неприпустимі параметри для зображення слайдера."
+
+#: admin/validator.php:41
+msgid "ERROR: Bad URL entered for the custom slider image URL."
+msgstr "ПОМИЛКА:Введено невірний URL для призначеного для користувача зображення слайдера."
+
+#: admin/validator.php:43
+msgid "ERROR: Invalid option for the slider display style is specified."
+msgstr "ПОМИЛКА:Введено неприпустимі параметри для стилю показу слайдера."
+
+#: admin/validator.php:45
+msgid "ERROR: The value for slider height must be an integer."
+msgstr "ПОМИЛКА:Значення висоти слайдера повинне бути цілим числом."
+
+#: admin/validator.php:47
+#: admin/validator.php:49
+msgid "ERROR: The value for slider transition speed must be an integer."
+msgstr "ПОМИЛКА:Значення швидкості прокрутки слайдера повинне бути цілим числом."
+
+#: admin/validator.php:63
+#: admin/validator.php:74
+msgid "ERROR: Invalid option for the type of content to show in homepage panes."
+msgstr "ПОМИЛКА:Недопустимі параметри для відображення вмісту на головній сторінці"
+
+#: admin/validator.php:76
+msgid "ERROR: The value for the number of latest posts to display in homepage panes must be an integer."
+msgstr "ПОМИЛКА:Значення останніх повідомлень, що відображаються на головній сторінці, повинно бути цілим числом."
+
+#: admin/validator.php:78
+msgid "ERROR: Invalid category selected for the latest posts to show from in the homepage panes."
+msgstr "ПОМИЛКА:Обрана недопустима категорія для показу останніх повідомлень на головній сторінці."
+
+#: admin/validator.php:90
+#: admin/validator.php:99
+#: admin/validator.php:116
+msgid "ERROR: Bad URL entered for the custom feed URL."
+msgstr "ПОМИЛКА:Зазначений невірний URL для FEED-URL."
+
+#: admin/validator.php:118
+msgid "ERROR: Bad URL entered for the Twitter URL."
+msgstr "ПОМИЛКА:Зазначений невірний URL для Twitter URL."
+
+#: admin/validator.php:120
+msgid "ERROR: Bad URL entered for the Facebook URL."
+msgstr "ПОМИЛКА:Зазначений невірний URL для Facebook URL."
+
+#: admin/validator.php:131
+msgid "ERROR: Bad URL entered for the social media icon URL."
+msgstr "ПОМИЛКА:Зазначений невірний URL для ікони соціальних мереж."
+
+#: admin/validator.php:132
+msgid "ERROR: Bad URL entered for the social media URL."
+msgstr "ПОМИЛКА:Зазначений невірний URL для соціальних мереж."
+
+#: admin/validator.php:147
+msgid "ERROR: Invalid option for the social sharing buttons location."
+msgstr "ПОМИЛКА:Неприпустимі параметри для розміщення кнопки соціальних мереж."
+
+#: admin/validator.php:208
+msgid "ERROR: Invalid option for the Search box location."
+msgstr "ПОМИЛКА: Неприпустимі параметри для розміщення Search box."
+
+#: admin/validator.php:213
+msgid "ERROR: Invalid option for the column mode."
+msgstr "ПОМИЛКА:Неприпустимі параметри для вигляду колонок."
+
+#: admin/validator.php:219
+msgid "ERROR: Invalid option for the post date display."
+msgstr "ПОМИЛКА: Неприпустимі параметри для відображення дати повідомлення"
+
+#: admin/validator.php:278
+msgid "ERROR: The number of columns to be displayed in the footer widget must be а an integer value."
+msgstr "ПОМИЛКА:Кількість колонок, що відображаються, повинна бути цілим числом."
+
+#: admin/validator.php:283
+msgid "ERROR: The width of the submenu must be а an integer value."
+msgstr "ПОМИЛКА: Ширина субменю повинна бути цілим числом."
+
+#: admin/validator.php:290
+msgid "ERROR: Bad URL entered for the favicon URL."
+msgstr "ПОМИЛКА:Зазначенний невірний URL для фавікон."
+
+#: admin/js/admin.js.php:20
+msgid "Social Media name"
+msgstr "Соціальна мережа"
+
+#: admin/js/admin.js.php:23
+msgid "Name of the social media, e.g. LinkedIn, etc."
+msgstr "Назва соціальної мережі, LinkedIn і т.п."
+
+#: admin/js/admin.js.php:27
+msgid "Social Media profile URL"
+msgstr "URL профілю соціальної мережі"
+
+#: admin/js/admin.js.php:30
+msgid "URL to your page for the social media."
+msgstr "URL для вашої сторінки в соціальній мережі."
+
+#: admin/js/admin.js.php:34
+msgid "Social Media icon URL"
+msgstr "URL іконки соціальної мережі"
+
+#: admin/js/admin.js.php:37
+#, php-format
+msgid "URL to the social media icon. <strong>Note:</strong> the theme uses the %s icon set for the social media icons. Please do not hotlink the icons on the site. Download the icons you need and upload them to your server instead."
+msgstr "URL іконки соціальної мережі. <strong>Увага:</strong> ця тема використовує %s пакет іконок для соціальних мереж. Будь ласка не використовуйте іконки з інших сайтів на цій сторінці. Викачайте іконки і завантажте їх на сервер."
+
+#, php-format
+#~ msgid "Valid XHTML 1.0 Strict"
+#~ msgstr "Допустимий XHTML 1.0 Strict"
+
+#~ msgid "Valid CSS"
+#~ msgstr "Допустимий CSS"
+
+#~ msgid "Valid CSS Level 2.1"
+#~ msgstr"Допустимый CSS Level 2.1"
+
+#~ msgid "%1$s uses %2$s theme by %3$s."
+#~ msgstr "%1$s використовує %2$s тему %3$s."
+
+#~ msgid "URL to your profile page for the social media."
+#~ msgstr " URL для вашої сторінки профілю в соціальній мережі."
+
+#~ msgid "Visit Facebook page"
+#~ msgstr"Перейти на сторінку Facebook"
+
+#~ msgid "Feed Options"
+#~ msgstr "Настройки веб-каналу"
+
+#~ msgid "No comment yet"
+#~ msgstr"Без коментарів"
+
+#~ msgid "No ping yet"
+#~ msgstr "Немає пінга"
+
+#~ msgid ""
+#~ "Please enter only numerical value for the footer widget column count."
+#~ msgstr ""
+#~ "Будь ласка, введіть чисельне значення стовпців для нижнього гаджету."
+
+#~ msgid ""
+#~ "Please enter only numerical value for the front page footer widget column "
+#~ "count."
+#~ msgstr ""
+#~ "Будь ласка, введіть чисельне значення для нижнього гаджету головної сторінки."
+
+#~ msgid ""
+#~ "Please enter only numerical value for the navigation menu dropdown item "
+#~ "width."
+#~ msgstr "Будь ласка, введіть чисельне значення для навігації випадного меню."
+
+#~ msgid "Graphene Display Options"
+#~ msgstr "Параметри проглядання Graphene"
+
+#~ msgid "ERROR:"
+#~ msgstr"ПОМИЛКА:"
+
+#~ msgid "Sidebar Options"
+#~ msgstr "Параметри бічної панелі"
+
+#~ msgid "Content sidebar location"
+#~ msgstr "Розміщення бічної панелі"
+
+#~ msgid "Right"
+#~ msgstr "Право"
+
+#~ msgid "Left"
+#~ msgstr"Ліво"
+
+#~ msgid "Hide sidebar"
+#~ msgstr "Заховати бічну панель"
+
+#~ msgid ""
+#~ "Will cause all posts and pages to be displaye in а single-column layout."
+#~ msgstr "Всі повідомлення і сторінки відображатимуться в одній колонці."
+
+#~ msgid "Hide post date"
+#~ msgstr "Не показувати дату повідомлення"
+
+#~ msgid "Show post year"
+#~ msgstr "Показувати рік повідомлення"
+
+#~ msgid "Only works if the option \"Hide post date\" is disabled."
+#~ msgstr ""
+#~ "Доступно тільки, якщо включена опція \"Не показувати дату повідомлення\"."
+
+#~ msgid ""
+#~ "<code>arial</code>, <code>tahoma</code>, <code>georgia</code> "
+#~ "<code>'Trebuchet MS'</code>"
+#~ msgstr ""
+#~ "<code>arial</code>, <code>tahoma</code>, <code>georgia</code> "
+#~ "<code>'Trebuchet MS'</code>"
+
+#~ msgid "<code>12px</code>, <code>12pt</code>, <code>12em</code>"
+#~ msgstr "<code>12px</code>, <code>12pt</code>, <code>12em</code>"
+
+#~ msgid ""
+#~ "<code>normal</code>, <code>bold</code>, <code>100</code>, <code>700</code>"
+#~ msgstr ""
+#~ "<code>normal</code>, <code>bold</code>, <code>100</code>, <code>700</code>"
+
+#~ msgid " <code>normal</code>, <code>italic</code>, <code>oblique</code>"
+#~ msgstr " <code>normal</code>, <code>italic</code>, <code>oblique</code>"
+
+#~ msgid ""
+#~ "<code>blue</code>, <code>navy</code>, <code>red</code>, <code>#ff0000</"
+#~ "code>"
+#~ msgstr ""
+#~ "<code>blue</code>, <code>navy</code>, <code>red</code>, <code>#ff0000</"
+#~ "code>"
+
+#~ msgid "Swap title order"
+#~ msgstr "Змінити порядок назви"
+
+#~ msgid ""
+#~ "If this is checked, the website title will be displayed first, followed "
+#~ "by the page title."
+#~ msgstr ""
+#~ "Після перевірки спочатку відображатиметься назва сайту, потім назва сторінки"
+
+#~ msgid "Update Settings"
+#~ msgstr "Відновити налаштування"
+
+#~ msgid "You must enter your Adsense code to enable Adsense advertising"
+#~ msgstr "Необхідно ввести Adsense код, щоб активувати рекламу Adsense"
+
+#~ msgid ""
+#~ "You must enter your AddThis button code to enable the AddThis social "
+#~ "sharing button"
+#~ msgstr ""
+#~ "Необхідно ввести AddThis код, щоб активувати кнопку соціальних дій AddThis"
+
+#~ msgid ""
+#~ "You must enter your Google Analytics tracking code to enable Google "
+#~ "Analytics tracking."
+#~ msgstr ""
+#~ "Необхідно ввести Google Analytics tracking код, щоб активувати Google"
+
+#~ msgid ""
+#~ "This setting only affects the slider if \"Show latest posts\" is selected "
+#~ "above."
+#~ msgstr ""
+#~ "Ці налаштування дійсні для слайдера тільки якщо обрано \"Показувати останні повідомлення\""
+
+#~ msgid "AddThis Options"
+#~ msgstr "Параметри AddThis"
+
+#~ msgid "Your AddThis button code"
+#~ msgstr "Ваш код кнопки AddThis"
+
+#~ msgid ""
+#~ "You can generate your button code from the <а href=\"http://www.addthis."
+#~ "com/\">AddThis website</a>."
+#~ msgstr ""
+#~ "Ви можете вибрати випадковий код кнопки <а href=\"http://www.addthis."
+#~ "com/\">AddThis website</a>."

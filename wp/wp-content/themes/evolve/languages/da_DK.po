@@ -1,0 +1,519 @@
+# Translation of the EvoLve by Theme4Press.
+# This file is distributed under the same license as the EvoLve package.
+msgid ""
+msgstr ""
+"Project-Id-Version: EvoLve\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-02-08 21:14+0100\n"
+"PO-Revision-Date: 2012-04-10 19:12+0100\n"
+"Last-Translator: Alexander Guldager <alexsus@me.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-Language: English\n"
+
+#: comments.php:14
+msgid "This post is password protected. Enter the password to view comments."
+msgstr "Denne post er beskyttet med en kode. Skriv koden for at se kommentarer"
+
+#: comments.php:53
+msgid "No Comments Yet"
+msgstr "Ingen kommentarer"
+
+#: footer.php:212
+msgid "Back to Top"
+msgstr "Tilbage til toppen"
+
+#: functions.php:68
+msgid "Right &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Højre &nbsp;&nbsp;&nbsp;(default)"
+
+#: functions.php:72
+#: functions.php:371
+msgid "Left"
+msgstr "Venstre"
+
+#: functions.php:76
+msgid "Left + Right"
+msgstr "Venstre + Højre"
+
+#: functions.php:83
+msgid "Left &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Venstre &nbsp;&nbsp;&nbsp;(default)"
+
+#: functions.php:87
+#: functions.php:375
+msgid "Right"
+msgstr "Højre"
+
+#: functions.php:91
+#: functions.php:106
+#: functions.php:132
+#: functions.php:147
+#: functions.php:162
+#: functions.php:399
+#: functions.php:414
+#: functions.php:433
+#: functions.php:452
+msgid "Disable"
+msgstr "Slå fra"
+
+#: functions.php:98
+#: functions.php:224
+msgid "1 &nbsp;&nbsp;&nbsp;(default)"
+msgstr "1 &nbsp;&nbsp;&nbsp;(default)"
+
+#: functions.php:102
+#: functions.php:228
+#: functions.php:294
+#: functions.php:318
+msgid "2"
+msgstr "2"
+
+#: functions.php:113
+msgid "Fixed &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Fast &nbsp;&nbsp;&nbsp;(default)"
+
+#: functions.php:117
+msgid "Fluid"
+msgstr "Flyende"
+
+#: functions.php:124
+#: functions.php:139
+#: functions.php:154
+msgid "Search Field + Subscribe Buttons &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Søg felt + Abonner knapper &nbsp;&nbsp;&nbsp;(default)"
+
+#: functions.php:128
+#: functions.php:143
+#: functions.php:158
+msgid "Recent Posts + Search Field + Subscribe Buttons"
+msgstr "Nylige posts + Søg felt + Abonner knapper"
+
+#: functions.php:170
+#: functions.php:181
+msgid "Light &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Lys"
+
+#: functions.php:174
+#: functions.php:185
+msgid "Dark"
+msgstr "Mørk"
+
+#: functions.php:193
+msgid "Dark Grey + Blue &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Mørke grå + Blå &nbsp;&nbsp;&nbsp;(default)"
+
+#: functions.php:197
+msgid "Light Grey + Blue"
+msgstr "Lys grå + Blå"
+
+#: functions.php:201
+msgid "Green + Yellow"
+msgstr "Grøn + Gul"
+
+#: functions.php:205
+msgid "Red + Yellow"
+msgstr "Rød + Gul"
+
+#: functions.php:209
+msgid "Pink + Purple"
+msgstr "Pink + Lilla"
+
+#: functions.php:213
+msgid "Light Blue + Blue"
+msgstr "Lyseblå + Blå"
+
+#: functions.php:217
+msgid "Brown + Yellow"
+msgstr "Brun + Gul"
+
+#: functions.php:232
+#: functions.php:298
+#: functions.php:322
+msgid "3"
+msgstr "3"
+
+#: functions.php:239
+msgid "Impact &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Impact &nbsp;&nbsp;&nbsp;(default)"
+
+#: functions.php:243
+msgid "Tahoma"
+msgstr "Tahoma"
+
+#: functions.php:247
+#: functions.php:270
+msgid "Georgia"
+msgstr "Georgia"
+
+#: functions.php:251
+#: functions.php:266
+msgid "Arial"
+msgstr "Arial"
+
+#: functions.php:255
+#: functions.php:278
+msgid "Calibri"
+msgstr "Calibri"
+
+#: functions.php:262
+msgid "Segoe UI &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Segoe UI &nbsp;&nbsp;&nbsp;(default)"
+
+#: functions.php:274
+msgid "Courier New"
+msgstr "Courier New"
+
+#: functions.php:286
+#: functions.php:310
+#: functions.php:348
+#: functions.php:367
+#: functions.php:459
+msgid "Disable &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Slå fra &nbsp;&nbsp;&nbsp;(default)"
+
+#: functions.php:290
+#: functions.php:314
+msgid "1"
+msgstr "1"
+
+#: functions.php:302
+#: functions.php:326
+msgid "4"
+msgstr "4"
+
+#: functions.php:333
+msgid "After posts &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Efter posts &nbsp;&nbsp;&nbsp;(default)"
+
+#: functions.php:337
+msgid "Before posts"
+msgstr "Før posts"
+
+#: functions.php:341
+#: functions.php:429
+msgid "Both"
+msgstr "Begge"
+
+#: functions.php:352
+msgid "Normal"
+msgstr "Normal"
+
+#: functions.php:356
+msgid "Slow"
+msgstr "Langsom"
+
+#: functions.php:360
+msgid "Fast"
+msgstr "Hurtig"
+
+#: functions.php:379
+msgid "Middle"
+msgstr "Middel"
+
+#: functions.php:387
+msgid "Single posts &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Enkelt posts &nbsp;&nbsp;&nbsp;(default)"
+
+#: functions.php:391
+msgid "Single posts + Archive pages"
+msgstr "Enkelt posts + Arkiv sider"
+
+#: functions.php:395
+msgid "All pages"
+msgstr "Alle sider"
+
+#: functions.php:406
+msgid "Single posts + Archive pages &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Enkelt posts + Arkiv sider &nbsp;&nbsp;&nbsp;(default)"
+
+#: functions.php:410
+msgid "Single posts"
+msgstr "Enkelt posts"
+
+#: functions.php:421
+msgid "After post content &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Efter post indhold &nbsp;&nbsp;&nbsp;(default)"
+
+#: functions.php:425
+msgid "Before post content"
+msgstr "Før post indhold"
+
+#: functions.php:440
+msgid "Next to blog title &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Ved siden af blog titel"
+
+#: functions.php:444
+msgid "Above blog title"
+msgstr "Over blog titel"
+
+#: functions.php:448
+msgid "Under blog title"
+msgstr "Under blog titel"
+
+#: functions.php:463
+msgid "Match by categories"
+msgstr "Passer ud fra kategori"
+
+#: functions.php:467
+msgid "Match by tags"
+msgstr "Passer ud fra tags"
+
+#: functions.php:2639
+msgid "Primary Menu"
+msgstr "Primer Menu"
+
+#: functions.php:2696
+msgid "<div style=\"padding:5px;margin-bottom:40px;\"><h5 style=\"font-style:italic;\">Similar posts</h5><ul style=\"margin-bottom:0px;\">"
+msgstr "<div style=\"padding:5px;margin-bottom:40px;\"><h5 style=\"font-style:italic;\">Ligende posts</h5><ul style=\"margin-bottom:0px;\">"
+
+#: functions.php:2762
+msgid "SHARE THIS"
+msgstr "DEL DETTE"
+
+#: functions.php:2767
+msgid "E-mail"
+msgstr "E-mail"
+
+#: functions.php:2768
+msgid "More options"
+msgstr "Flere valg"
+
+#: header-content.php:20
+#: header-content.php:170
+msgid "KEEP IN TOUCH"
+msgstr "Hold forbindelsen"
+
+#: header-content.php:120
+msgid "Read more"
+msgstr "Læs mere"
+
+#: header-content.php:135
+msgid "Oops, please try to refresh the page"
+msgstr "Hov'sa, Prøv at indlæs siden igen"
+
+#: header.php:31
+#, php-format
+msgid "Page %s"
+msgstr "Side %s"
+
+#: index.php:35
+#: index.php:184
+#: index.php:421
+#: index.php:445
+#: index.php:607
+#: index.php:637
+#: index.php:804
+msgid "Untitled"
+msgstr "Uden titel"
+
+#: index.php:44
+#: index.php:192
+#: index.php:496
+#: index.php:614
+msgid "Leave a Comment"
+msgstr "Skriv en kommentar"
+
+#: index.php:44
+#: index.php:192
+#: index.php:496
+#: index.php:614
+msgid "1 Comment"
+msgstr "1 Kommentar"
+
+#: index.php:44
+#: index.php:192
+#: index.php:496
+#: index.php:614
+msgid "% Comments"
+msgstr "% Kommentarer"
+
+#: index.php:58
+msgid "By"
+msgstr "Af"
+
+#: index.php:60
+#: index.php:209
+#: index.php:435
+#: index.php:631
+msgid "edit"
+msgstr "rediger"
+
+#: index.php:71
+#: index.php:217
+#: index.php:450
+#: index.php:641
+#: index.php:808
+msgid "EDIT"
+msgstr "REDIGER"
+
+#: index.php:206
+#: index.php:433
+#: index.php:627
+msgid "Written by"
+msgstr "Skrevet af"
+
+#: index.php:240
+#: index.php:682
+#: index.php:817
+msgid "READ MORE &raquo;"
+msgstr "LÆS MERE &raquo;"
+
+#: index.php:264
+#: index.php:698
+msgid "Posted in"
+msgstr "Posted i"
+
+#: index.php:267
+#: index.php:702
+msgid "Tagged"
+msgstr "Tagged"
+
+#: index.php:303
+#: index.php:543
+#: index.php:759
+#: index.php:843
+msgid "Not Found"
+msgstr "Ikke fundet"
+
+#: index.php:309
+#: index.php:547
+#: index.php:763
+#: index.php:847
+msgid "Sorry, but you are looking for something that isn't here."
+msgstr "Undskyld, men du kigger efter noget der ikke er her mere!."
+
+#: index.php:341
+msgid "Daily archives for"
+msgstr "Daglige arkiver for"
+
+#: index.php:343
+msgid "Monthly archives for"
+msgstr "Månedlige arkiver for"
+
+#: index.php:345
+msgid "Yearly archives for"
+msgstr "Årlige arkiver for"
+
+#: index.php:349
+msgid "Posts in category"
+msgstr "Posts i kategori"
+
+#: index.php:353
+msgid "Posts tagged"
+msgstr "Posts tagged"
+
+#: index.php:359
+msgid "Search results for"
+msgstr "Søge resultater for"
+
+#: index.php:364
+msgid "Posts by"
+msgstr "Posts af"
+
+#: index.php:492
+#: index.php:676
+msgid "READ MORE"
+msgstr "LÆS MERE"
+
+#: index.php:523
+#: index.php:739
+msgid "Your search for"
+msgstr "Din søgning efter"
+
+#: index.php:523
+#: index.php:739
+msgid "did not match any entries"
+msgstr "passer ikke på noget indhold"
+
+#: index.php:528
+#: index.php:744
+msgid "Suggestions:"
+msgstr "Forslag:"
+
+#: index.php:530
+#: index.php:746
+msgid "Make sure all words are spelled correctly."
+msgstr "Sørg for at alle ord er skrevet korrekt"
+
+#: index.php:531
+#: index.php:747
+msgid "Try different keywords."
+msgstr "Prøv andre nøgleord"
+
+#: index.php:532
+#: index.php:748
+msgid "Try more general keywords."
+msgstr "Prøv flere generelle nøgleord"
+
+#: navigation.php:12
+msgid "<span class=\"nav-meta\">&laquo;</span> %link"
+msgstr "<span class=\"nav-meta\">&laquo;</span> %link"
+
+#: navigation.php:13
+msgid "<span class=\"nav-meta\">&raquo;</span> %link"
+msgstr "<span class=\"nav-meta\">&laquo;</span> %link"
+
+#: navigation.php:23
+msgid "<span class=\"nav-meta\">&laquo;</span> Older Entries"
+msgstr "<span class=\"nav-meta\">&laquo;</span> Ældre indhold"
+
+#: navigation.php:24
+msgid "Newer Entries <span class=\"nav-meta\">&raquo;</span>"
+msgstr "Nye indlæg "
+
+#: searchform.php:18
+msgid "Type your search"
+msgstr "Skriv hvad du søger"
+
+#: searchform.php:31
+msgid "GO"
+msgstr "GÅ"
+
+#: sidebar-2.php:35
+msgid "Pages"
+msgstr "Sider"
+
+#: sidebar-2.php:47
+msgid "Archives"
+msgstr "Arkiver"
+
+#: sidebar-2.php:58
+msgid "Recent Comments"
+msgstr "Nylige kommentarer"
+
+#: sidebar-2.php:92
+msgid "Calendar"
+msgstr "Kalender"
+
+#: sidebar-2.php:102
+msgid "Meta"
+msgstr "Meta"
+
+#: sidebar.php:34
+msgid "Recent Posts"
+msgstr "Nylige posts"
+
+#: sidebar.php:47
+msgid "Categories"
+msgstr "Kategorier"
+
+#: sidebar.php:57
+msgid "Tags"
+msgstr "Tags"
+
+#: sidebar.php:65
+msgid "RSS Syndication"
+msgstr "RSS"
+
+#: sidebar.php:67
+msgid "All posts"
+msgstr "Alle posts"
+
+#: sidebar.php:68
+msgid "All comments"
+msgstr "Alle kommentarer"
+

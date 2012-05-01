@@ -1,0 +1,77 @@
+
+#text-demo label{
+	display:block;
+	float:left;
+	width:140px;
+	text-align:right;
+	padding:6px;
+}
+
+textarea {
+	font-family: "courier new", monospace;
+	width: 750px;  /* With 100%, FF loses width when tabs are switched and makes textareas 2x tall. (with dynamicdrive tabs). Try mootools tabs later */
+	border: 0px solid #C6D9E9;
+	color: navy;
+	/*font-size: 12px;
+	line-height: 18px;*/
+	/*margin: 5px 0;*/
+	margin: 0;
+	padding: 0px !important;
+	-moz-border-radius: 6px;
+	-khtml-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+}
+
+div.mooarea {
+	clear:right;
+	display: block;
+	width: 750px; /* With 100%, FF loses width when tabs are switched and makes textareas 2x tall. (with dynamicdrive tabs). Try mootools tabs later */
+	border: 3px solid #C6D9E9;
+	margin: 7px 0;
+	padding: 5px;
+	background: #ffffff;
+	-moz-border-radius: 6px;
+	-khtml-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	}
+
+	
+/*
+this class is for the lower bar container.
+It does really require any styling
+*/
+.tbWrapper{
+
+}
+
+/*
+This is the progress bar container
+Width is set with javascript, but those value can be modified
+Try to keep the button's and preogres bar's margin-left the same for better results
+*/
+.tbProgress{
+	height:1em;
+	border:1px inset #FF7A19;
+	background-color:#FFF;
+}
+
+/*
+this is the actual progress indicator, inside the porgressbar container
+Except the background color, you probably don't want to mess up the other properties
+You can set a background image if you want
+*/
+.tbProgressBar{
+	background-color:#FFB119;
+}
+
+/*
+chracters counter. Same here, except the text color, you don't want to modify any other property
+*/
+.tbCounter{
+	color:#000;
+	font-family:Trebuchet MS, Helvetica, sans-serif;
+	font-size:0.8em;
+	font-weight:bold;
+}

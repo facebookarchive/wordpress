@@ -1,0 +1,131 @@
+/***
+ *  - mooRainbow: defaultCSS
+ * author: w00fz <w00fzIT@gmail.com>
+ */
+input.picker-input {float:left;margin-top:2px;margin-right:5px;}
+div.picker {width:26px;height:22px;float:left;}
+div.picker .overlay { width:26px;height:22px;background:url(images/picker.png);}
+
+.upload-input-text {width:240px; margin-top:5px; margin-bottom:5px;}
+#mooRainbow { font-size: 11px; color: #000; }
+
+.moor-box {
+	width: 281px; 
+	height: 181px; 
+	background: url(images/chooser-back.png) no-repeat;
+}
+.moor-overlayBox {
+	width: 132px; /* Width and Height of the overlay must be setted here: default 256x256 */
+	height: 132px; 
+	margin-top: 25px; 
+	margin-left: 24px;
+	border: 1px solid #666;
+}
+.moor-slider {
+	border: 1px solid #666;
+	margin-top: 25px; 
+	margin-left: 168px;
+	width: 12px; /* if you want a bigger or smaller slider... */
+	height: 132px;
+}
+.moor-arrows {
+	background-image: url(images/moor_arrows.png);
+	top: 22px; 
+	left: 162px;
+	width: 26px;
+	height: 8px;
+}
+.moor-colorBox {
+	border: 1px solid #666; 
+	width: 64px; 
+	height: 23px; 
+	margin-top: 25px; 
+	margin-left: 190px;
+}
+.moor-chooseColor { /* Top Box Color, the choosen one */
+	margin-top: 26px; 
+	margin-left: 191px; 
+	width: 32px; 
+	height: 23px;
+}
+.moor-currentColor { /* Bottom Box Color, the backup one */
+	margin-top: 26px; 
+	margin-left: 223px; 
+	width: 32px; 
+	height: 23px;
+}
+.moor-box input.moor-okButton {
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 0px;
+	margin-top: 8px;
+	margin-left: 250px;
+	height: 16px;
+	width: 16px;
+	background: transparent;
+	border: none;
+	cursor:pointer;
+}
+.moor-box  label {
+	font-family: Helvetica;
+	color:#999;
+	font-size:10px;
+	font-weight: bold;
+}
+
+.moor-box input {
+	background: #323232;
+	border: 1px solid #666;
+	color: #ccc;
+}
+/* Following are just <label> */
+.moor-rLabel {
+	display:none;
+	margin-top: 60px;
+	margin-left: 196px;
+}
+.moor-gLabel {
+	display:none;
+	margin-top: 125px;
+	margin-left: 315px;
+}
+.moor-bLabel {
+	display:none;
+	margin-top: 150px;
+	margin-left: 315px;
+}
+.moor-HueLabel {
+	margin-top: 60px;
+	margin-left: 196px;
+}
+span.moor-ballino { /* Style hue ° (degree) !! */
+	margin-top: 62px;
+	margin-left: 245px;
+	color:#999;
+}
+.moor-SatuLabel {
+	margin-top: 80px;
+	margin-left: 196px;
+}
+.moor-BrighLabel {
+	margin-top: 100px;
+	margin-left: 196px;
+}
+.moor-hexLabel {
+	margin-top: 131px;
+	margin-left: 196px;
+}
+
+/* <input> */
+.moor-rInput, .moor-gInput, .moor-bInput, .moor-HueInput, .moor-SatuInput, .moor-BrighInput { 
+	width: 30px;
+}
+.moor-hexInput {
+	width: 60px;
+}
+.moor-cursor {
+	background-image: url(images/moor_cursor.gif); 
+	width: 12px;
+	height: 12px;
+}
+

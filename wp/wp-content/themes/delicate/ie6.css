@@ -1,0 +1,23 @@
+.png_crop { 
+	filter: expression(
+		(runtimeStyle.filter == '') ? runtimeStyle.filter = 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src='+currentStyle.backgroundImage.split('\"')[1]+', sizingMethod=crop)' : runtimeStyle.filter,
+		runtimeStyle.backgroundImage = 'none');
+}
+
+.png_scale { 
+	filter: expression(
+		(runtimeStyle.filter == '') ? runtimeStyle.filter = 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src='+currentStyle.backgroundImage.split('\"')[1]+', sizingMethod=scale)' : runtimeStyle.filter,
+		runtimeStyle.backgroundImage = 'none');
+}
+
+.png_crop a { position: relative; }
+.head-img {width:600px; height:200px;}
+#logo img { height:61px !important;}
+
+#sidebar {width:300px;overflow:hidden;}
+#sidebar ul li.widget {background:none; border-bottom:2px dotted #C8C8C8;}
+
+.narrowcolumn {overflow:hidden;}
+.topnav .sf-sub-indicator { display:none; }
+.topnav li a:hover { text-decoration:none; }
+.topnav li a.sf-with-ul { padding-right:10px; }

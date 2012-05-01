@@ -1,0 +1,42 @@
+/**
+ * Print - Makes the layout Print Friendly
+ *
+ * @package WPevolve
+ * @subpackage Media
+ */
+
+/* Document Body */
+body 							{ background: #fff; color: #000; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 10pt; line-height: 1.5; }
+
+/* No Show - Hide various parts of the theme
+#header, #navigation, #secondary, #footer 	{ display: none; } */
+
+/* Anchor Element (links) */
+a:link, a:visited 				{ background: transparent; font-weight: 700; text-decoration: underline; color: #333; }
+a:link:after, a:visited:after 	{ content: " (" attr(href) ") "; font-size: 90%; }
+
+	/* If you're having trouble printing relative links, uncomment and customize this:
+	   (note: This is valid CSS3, but it still won't go through the W3C CSS Validator) */
+	
+	/* a[href^="/"]:after {s
+	  content: " (http://www.yourdomain.com" attr(href) ") ";
+	} */
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 			{ font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
+ 
+/* Element Changes */
+blockquote 						{ margin: 1.5em; padding: 1em; font-style: italic; font-size: .9em; }
+code 							{ font: 0.9em "Courier New", Monaco, Courier, monospace; } 
+img								{ float: left; margin: 1.5em 1.5em 1.5em 0; }
+a img 							{ border: none; }
+
+/* Table */
+table 							{ margin: 1px; text-align:left; }
+th 								{ border-bottom: 1px solid #333;  font-weight: bold; }
+td 								{ border-bottom: 1px solid #333; }
+th, td 							{ padding: 4px 10px 4px 0; }
+tfoot 							{ font-style: italic; }
+caption 						{ background: #fff; margin-bottom: 2em; text-align: left; }
+thead 							{ display: table-header-group; }
+tr 								{ page-break-inside: avoid; }

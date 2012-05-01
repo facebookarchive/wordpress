@@ -1,0 +1,163 @@
+body {
+    background: white;
+    color: black;
+    font: 10pt/13pt arial;
+    margin: 0;
+}
+a,
+a:link,
+a:visited,
+.printonly.url span {
+	background: transparent;
+    color: #1772AF;
+	text-decoration: none;
+}
+.printonly.url {
+	border: 1px solid #888;
+	display: block;
+	padding: 5px;
+	
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.printonly {
+	clear: both;
+}
+
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6,
+img { 
+    page-break-after:avoid; 
+    page-break-inside:avoid;
+}
+blockquote, 
+table, 
+pre { 
+    page-break-inside:avoid;
+}
+ul, 
+ol, 
+dl { 
+    page-break-before:avoid;
+}
+img.aligncenter { 
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+img.alignright { 
+    padding: 4px; 
+    margin: 0 0 2px 7px; 
+    display: inline; 
+}
+img.alignleft { 
+    padding: 4px; 
+    margin: 0 7px 2px 0; 
+    display: inline; 
+}
+.alignright { 
+    float: right; 
+}
+.alignleft { 
+    float: left; 
+}
+
+/* hide the following IDs*/
+#top-bar,
+#nav,
+#footer,
+.sidebar,
+.featured_slider,
+#respond,
+.post-nav,
+.post .avatar,
+.date,
+.post-date-inline,
+.edit-post,
+.comment-edit-link,
+.comment-reply-link,
+.print,
+.email {
+    display: none;
+}
+
+#header {
+	border-bottom: 1px solid #bbb;
+}
+.header_title,
+.header_title a,
+.header_desc {
+	display: block !important;
+}
+.header_title a {
+	color: #000;
+	font: bold 16pt arial;
+}
+.header_title {
+	margin-bottom: 5px;
+}
+.header_desc {
+	font: normal 12pt/14pt arial;
+	margin-top: 0;
+	}
+
+#content-main {
+    float: none;
+    width: auto;
+    display: block;
+}
+
+.post-meta ul, 
+.post-meta li,
+.meta_categories {
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+.author-info .avatar {
+	float: left;
+	margin: 0 10px 10px 0;
+}
+#comments > h4 {
+	font-size: 18px;
+}
+#comments_list {
+	margin: 0;
+}
+#comments li {
+	list-style: none;
+	border-top: 1px solid #eee;
+	padding: 10px 0;
+}
+.comment-avatar-wrap {
+	float: left;
+	margin-right: 10px;
+}
+.comment-author {
+	margin: 0;
+	padding-top: 5px;
+	font-size: 16px;
+}
+.comment-meta p {
+	font-size: 11px;
+	color: #bbb;
+	margin-top: 0;
+}
+.comment-entry {
+	clear: both;
+}
+.message-block {
+	padding: 0 10px;
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}

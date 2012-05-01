@@ -1,0 +1,19 @@
+/**
+ * Posts Layout
+ * 
+ */
+ 
+ 
+.home .hentry, .archive .hentry, .search .hentry {width:48%;float:left;margin-right:19px;padding-bottom:12px;}
+.home .hentry .entry-content, .archive .hentry .entry-content, .search .hentry .entry-content {font-size:13px;}
+.entry-content {margin-top:25px;}
+.home .odd0, .archive .odd0, .search .odd0{clear:both;}
+.home .odd1, .archive .odd1, .search .odd1{margin-right:0px;}
+.home .entry-title, .entry-title a, .archive .entry-title, .search .entry-title {font-size:24px;letter-spacing:-1px;line-height:23px;}
+.home .hentry img, .archive .hentry img, .search .hentry img{float:left;margin-right:10px;max-width:100px;max-height:150px;padding:3px;width:expression(document.body.clientWidth < 742? '100px' : document.body.clientWidth > 1000? '100px' : 'auto');}
+.home .entry-header, .archive .entry-header, .search .entry-header{font-size:12px;}
+.home .published strong, .archive .published strong,  .search .published strong{font-size:15px;line-height:15px;}
+.home .hentry .comment-count a, .archive .hentry .comment-count a, .search .hentry .comment-count a  {background:url('../images/comment.png') 0 9px no-repeat;text-decoration:none;position:relative;bottom:-9px;border:none;padding:8px 10px 8px 22px;}
+.home .hfeed, .archive .hfeed, .single .hfeed, .page .hfeed {margin-right:0px;}
+.home .hentry .entry-footer, .archive .hentry .entry-footer, .search .hentry .entry-footer {float:left;width:100%}
+.home .hentry .comment-count, .archive .hentry .comment-count, .search .hentry .comment-count {background:none!important;padding-right:0;}

@@ -1,0 +1,10 @@
+/**
+ * Pink + Purple + Dark
+ * 
+ */
+ 
+ 
+a, .entry-content a:link, .entry-content a:active, .entry-content a:visited {color:#e076ff;} 
+
+#secondary a:hover, #secondary-2 a:hover, .widgets-holder a:hover {color:#fff!important;}
+

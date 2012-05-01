@@ -1,0 +1,19 @@
+/**
+ * Light Blue + Blue
+ * 
+ */
+ 
+ 
+.header {background:#81c0f1 url("../images/light-blue/header-footer.jpg") repeat;border-bottom: 1px solid #6290b3;}
+
+#tagline {color:#6290b3;text-shadow:0 1px 0 #b6d8fd;}
+
+#logo a, .footer a { color:#1f68b3;text-shadow:0 1px 0px #b6d8fd;}
+#logo a:hover, .footer a:hover { color:#333;}
+
+.footer {background:#81c0f1 url("../images/light-blue/header-footer.jpg") repeat;color:#333;border-top: 1px solid #6290b3;}
+
+p#copyright {text-shadow:0 1px 0px #B6D8FD;color:#6290b3;}
+
+
+

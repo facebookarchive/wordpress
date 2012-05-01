@@ -117,7 +117,69 @@ class Facebook_Like_Button extends WP_Widget {
 		<input class="widefat" id="<?php echo $this->get_field_id( 'url' ); ?>" name="<?php echo $this->get_field_name( 'url' ); ?>" type="text" value="<?php echo esc_attr( $url ); ?>" />
 		<p>Optional.  If you have a Page on Facebook that you want users to Like.  If you leave it blank, the user will like the current page that they're on.</p>
 		</p>
+		
+		
+		
+		
 		<?php
+		//send button
+		if ( isset( $instance[ 'send' ] ) ) {
+			$send = $instance[ 'send' ];
+		}
+		else {
+			$send = '';
+		}
+		?>
+		<p>
+		<input type="checkbox" id="<?php echo $this->get_field_id( 'send' ); ?>" name="<?php echo $this->get_field_name( 'send' ); ?>" value="true" <?php checked(TRUE, (bool) $send);  print $send; ?> />
+		<label for="<?php echo $this->get_field_id( 'send' ); ?>"><?php _e( 'Enable send button' ); ?></label>
+		</p>
+		
+		<?php
+		
+		//		<div class="fb-like" data-send="false" data-layout="button_count" data-width="454" data-show-faces="false" data-action="recommend" data-colorscheme="dark" data-font="segoe ui"></div>
+		
+		
+		//layout style
+		//width
+		//show faces
+		//verb to display
+		//color scheme
+		//font
+		
+		/*
+		dropdown
+		checkbox
+		field
+		*/
+		
+		
 	}
 }
+
+function form_field($placement, $field_type, $field_options = array()) {
+	if ($placement == 'widget') {
+			/*
+		//send button
+		if ( isset( $instance[ 'send' ] ) ) {
+			$send = $instance[ 'send' ];
+		}
+		else {
+			$send = '';
+		}
+		?>
+		<p>
+		<input type="checkbox" id="<?php echo $this->get_field_id( 'send' ); ?>" name="<?php echo $this->get_field_name( 'send' ); ?>" value="true" <?php checked(TRUE, (bool) $send);  print $send; ?> />
+		<label for="<?php echo $this->get_field_id( 'send' ); ?>"><?php _e( 'Enable send button' ); ?></label>
+		</p>*/
+		}
+	else if ($placement == 'menu') {
+		
+	}
+		
+		
+		
+}
+
+
 ?>

@@ -12,3 +12,18 @@
 - Works on mobile
 
 - Instrumentation
+
+
+Open Graph meta tags
+http://codex.wordpress.org/Plugin_API/Action_Reference/wp_head or http://codex.wordpress.org/Plugin_API/Action_Reference/wp_meta
+
+http://wordpress.org/extend/plugins/add-meta-tags/
+
+http://wordpress.org/extend/plugins/simple-facebook-connect/ 
+http://wordpress.org/extend/plugins/facebook-comments-for-wordpress/
+http://wordpress.org/extend/plugins/wordpress-facebook-like-plugin/
+http://wordpress.org/extend/plugins/wp-facebook-open-graph-protocol/
+http://wordpress.org/extend/plugins/facebook-like-box-widget/
+http://wordpress.org/extend/plugins/facebook-button-plugin/
+http://wordpress.org/extend/plugins/add-link-to-facebook/
+

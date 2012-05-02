@@ -17,6 +17,7 @@ function fb_admin_style() {
 
 // __return_false for no desc
 function fb_admin_menu_settings() {
+	$options = get_option('fb_options');
 	wp_register_style('fb_admin', plugins_url('style_admin.css', __FILE__));
 		
 	register_setting( 'fb_options', 'fb_options', 'fb_options_validate');
@@ -24,21 +25,25 @@ function fb_admin_menu_settings() {
 	add_settings_section('fb_section_main', 'Main Settings', 'fb_section_main', 'fb_options' );
 	add_settings_field('fb_field_app_id', 'App ID', 'fb_field_app_id', 'fb_options', 'fb_section_main');
 	add_settings_field('fb_field_app_secret', 'App Secret', 'fb_field_app_secret', 'fb_options', 'fb_section_main');
+	add_settings_field('fb_field_enable_fb', 'Enable Facebook for WordPress', 'fb_field_enable_fb', 'fb_options', 'fb_section_main');
 	
-	add_settings_section('fb_section_like_send_subscribe', 'Like, Send, Subscribe Buttons on Posts', 'fb_section_like_send_subscribe', 'fb_options' );
-	add_settings_field('fb_field_like', 'Like Button', 'fb_field_like', 'fb_options', 'fb_section_like_send_subscribe');
-	add_settings_field('fb_field_subscribe', 'Subscribe Button', 'fb_field_subscribe', 'fb_options', 'fb_section_like_send_subscribe');
-	add_settings_field('fb_field_send', 'Send Button', 'fb_field_send', 'fb_options', 'fb_section_like_send_subscribe');
+	if (isset($options['enable_fb'])) {
+		add_settings_section('fb_section_like_send_subscribe', 'Like, Send, Subscribe Buttons on Posts', 'fb_section_like_send_subscribe', 'fb_options' );
+		add_settings_field('fb_field_like', 'Like Button', 'fb_field_like', 'fb_options', 'fb_section_like_send_subscribe');
 	
-	add_settings_section('fb_section_comments', 'Comments on Posts', 'fb_section_comments', 'fb_options' );
-	add_settings_field('fb_field_comments', 'Comments on Posts', 'fb_field_comments', 'fb_options', 'fb_section_comments');
-	
-	add_settings_section('fb_section_social_reader', 'Social Reader for Posts', 'fb_section_social_reader', 'fb_options' );
-	add_settings_field('fb_field_recommendations_bar', 'Recommendations Bar', 'fb_field_recommendations_bar', 'fb_options', 'fb_section_social_reader');
-	
-	add_settings_section('fb_section_social_publisher', 'Social Publisher for Posts', 'fb_section_social_publisher', 'fb_options' );
-	add_settings_field('fb_field_og_publish', 'Publish New Posts to User Profile', 'fb_field_og_publish', 'fb_options', 'fb_section_social_publisher');
-	add_settings_field('fb_field_posts_to_fb_page', 'Publish New Posts to Facebook Page', 'fb_field_posts_to_fb_page', 'fb_options', 'fb_section_social_publisher');
+		add_settings_field('fb_field_subscribe', 'Subscribe Button', 'fb_field_subscribe', 'fb_options', 'fb_section_like_send_subscribe');
+		add_settings_field('fb_field_send', 'Send Button', 'fb_field_send', 'fb_options', 'fb_section_like_send_subscribe');
+		
+		add_settings_section('fb_section_comments', 'Comments on Posts', 'fb_section_comments', 'fb_options' );
+		add_settings_field('fb_field_comments', 'Comments on Posts', 'fb_field_comments', 'fb_options', 'fb_section_comments');
+		
+		add_settings_section('fb_section_social_reader', 'Social Reader for Posts', 'fb_section_social_reader', 'fb_options' );
+		add_settings_field('fb_field_recommendations_bar', 'Recommendations Bar', 'fb_field_recommendations_bar', 'fb_options', 'fb_section_social_reader');
+		
+		add_settings_section('fb_section_social_publisher', 'Social Publisher for Posts', 'fb_section_social_publisher', 'fb_options' );
+		add_settings_field('fb_field_og_publish', 'Publish New Posts to User Profile', 'fb_field_og_publish', 'fb_options', 'fb_section_social_publisher');
+		add_settings_field('fb_field_posts_to_fb_page', 'Publish New Posts to Facebook Page', 'fb_field_posts_to_fb_page', 'fb_options', 'fb_section_social_publisher');
+	}
 }
 
 function fb_settings_page() {
@@ -59,7 +64,6 @@ function fb_settings_page() {
 	<?php
 }
 
-/*
 // validate our options
 function fb_options_validate($input) {
 	if (!defined('FB_APP_SECRET')) {
@@ -89,9 +93,6 @@ function fb_options_validate($input) {
 	$input = apply_filters('fb_validate_options',$input); // filter to let sub-plugins validate their options too
 	return $input;
 }
-*/
-
-
 
 function fb_section_main() {
 	echo '<p></p>';
@@ -107,6 +108,13 @@ function fb_field_app_secret() {
 	echo '<a href="#" target="_new" title="TODO">[?]</a>&nbsp; <input type="text" name="fb_options[app_secret]" value="' . $options['app_secret'] . '" size="40" />';
 }
 
+function fb_field_enable_fb() {
+	$options = get_option('fb_options');
+	$checked = checked(isset($options['enable_fb']), 1, false);
+	
+	echo '<input type="checkbox" name="fb_options[enable_fb]" value="true" ' . $checked . '" />';
+}
+
 
 
 
@@ -118,17 +126,44 @@ function fb_section_like_send_subscribe() {
 
 function fb_field_like() {
 	$options = get_option('fb_options');
-	echo '<a href="https://developers.facebook.com/docs/reference/plugins/like/" target="_new" title="The Like button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user\'s friends\' News Feed with a link back to your website. Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_like]" value="true" checked="' . isset($options['enable_like']) . '" />';
+	$checked = checked(isset($options['enable_like']), 1, false);
+	
+	echo '<a href="https://developers.facebook.com/docs/reference/plugins/like/" target="_new" title="The Like button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user\'s friends\' News Feed with a link back to your website. Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_like]" value="true" ' . $checked . ' />';
 }
+
+function fb_field_like_position() {
+	$options = get_option('fb_options');
+	
+	if (isset($options['like_position'])) {
+		echo '<select name="fb_options[like_position]">
+				<option value="top"' . selected( $options['like_position'], 'top' ) . '>Top</option>
+				<option value="bottom"' . selected( $options['like_position'], 'bottom' ) . '>Bottom</option>
+				<option value="both"' . selected( $options['like_position'], 'both' ) . '>Both</option>
+			</select>';
+	}
+	else {
+		echo '<select name="fb_options[like_position]">
+				<option value="top">Top</option>
+				<option value="bottom">Bottom</option>
+				<option value="both" selected>Both</option>
+			</select>';
+	}
+}
+
+
+
 
 function fb_field_subscribe() {
 	$options = get_option('fb_options');
-	echo '<a href="https://developers.facebook.com/docs/reference/plugins/subscribe/" target="_new" title="The Subscribe button lets a user subscribe to your public updates on Facebook. Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_subscribe]" value="true" checked="' . isset($options['enable_subscribe']) . '" />';
+	$checked = checked(isset($options['enable_subscribe']), 1, false);
+	
+	echo '<a href="https://developers.facebook.com/docs/reference/plugins/subscribe/" target="_new" title="The Subscribe button lets a user subscribe to your public updates on Facebook. Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_subscribe]" value="true" ' . $checked . '" />';
 }
 
 function fb_field_send() {
 	$options = get_option('fb_options');
-	echo '<a href="https://developers.facebook.com/docs/reference/plugins/send/" target="_new" title="The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address. Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_send]" value="true" checked="' . isset($options['enable_send']) . '" />';
+	$checked = checked(isset($options['enable_send']), 1, false);
+	echo '<a href="https://developers.facebook.com/docs/reference/plugins/send/" target="_new" title="The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address. Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_send]" value="true" ' . $checked . '" />';
 }
 
 
@@ -141,7 +176,8 @@ function fb_section_comments() {
 
 function fb_field_comments() {
 	$options = get_option('fb_options');
-	echo '<a href="https://developers.facebook.com/docs/reference/plugins/comments/" target="_new" title="Comments Box is a social plugin that enables user commenting on your site. Features include moderation tools and distribution. Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_comments]" value="true" checked="' . isset($options['enable_comments']) . '" />';
+	$checked = checked(isset($options['enable_comments']), 1, false);
+	echo '<a href="https://developers.facebook.com/docs/reference/plugins/comments/" target="_new" title="Comments Box is a social plugin that enables user commenting on your site. Features include moderation tools and distribution. Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_comments]" value="true" ' . $checked . '" />';
 }
 
 
@@ -153,7 +189,8 @@ function fb_section_social_reader() {
 
 function fb_field_recommendations_bar() {
 	$options = get_option('fb_options');
-	echo '<a href="https://developers.facebook.com/docs/reference/plugins/recommendationsbar/" target="_new" title="The Recommendations Bar allows users to like content, get recommendations, and share what they\'re reading with their friends.  Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_recommendations_bar]" value="true" checked="' . isset($options['enable_recommendations_bar']) . '" />';
+	$checked = checked(isset($options['enable_recommendations_bar']), 1, false);
+	echo '<a href="https://developers.facebook.com/docs/reference/plugins/recommendationsbar/" target="_new" title="The Recommendations Bar allows users to like content, get recommendations, and share what they\'re reading with their friends.  Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_recommendations_bar]" value="true" ' . $checked . '" />';
 }
 
 
@@ -165,10 +202,12 @@ function fb_section_social_publisher() {
 
 function fb_field_og_publish() {
 	$options = get_option('fb_options');
-	echo '<a href="#" target="_new" title="TODO">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_og_publish]" value="true" checked="' . isset($options['enable_og_publish']) . '" />';
+	$checked = checked(isset($options['enable_og_publish']), 1, false);
+	echo '<a href="#" target="_new" title="TODO">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_og_publish]" value="true" ' . $checked . '" />';
 }
 function fb_field_posts_to_fb_page() {
 	$options = get_option('fb_options');
-	echo '<a href="#" target="_new" title="TODO">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_posts_to_fb_page]" value="true" checked="' . isset($options['enable_posts_to_fb_page']) . '" />';
+	$checked = checked(isset($options['enable_posts_to_fb_page']), 1, false);
+	echo '<a href="#" target="_new" title="TODO">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_posts_to_fb_page]" value="true" ' . $checked . '" />';
 }
 ?>

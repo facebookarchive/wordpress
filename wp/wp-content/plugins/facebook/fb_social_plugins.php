@@ -1,7 +1,9 @@
 <?php
 require_once('fb_social_plugin_like.php');
+require_once('fb_social_plugin_send.php');
 require_once('fb_social_plugin_recent_activity.php');
 require_once('fb_social_plugin_recommendations.php');
+require_once('fb_social_plugin_recommendation_bar.php');
 require_once('fb_social_plugin_comments.php');
 
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Like_Button" );'));
@@ -17,6 +19,10 @@ function fb_apply_filters() {
 	
 	if (isset($options['enable_like'])) {
 		add_filter('the_content', 'fb_like_button_automatic', 30);
+	}
+	
+	if (isset($options['enable_send'])) {
+		add_filter('the_content', 'fb_send_button_automatic', 30);
 	}
 	
 	if (isset($options['enable_comments'])) {

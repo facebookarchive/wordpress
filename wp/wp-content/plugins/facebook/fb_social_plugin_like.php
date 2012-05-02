@@ -24,7 +24,20 @@ function fb_get_like_button($options = array()) {
 }
 
 function fb_like_button_automatic($content) {
-	$content .= fb_get_like_button();
+	$options = get_option('fb_options');
+	
+	switch ($options['like_position']) {
+		case 'top':
+			$content = fb_get_like_button() . $content;
+			break;
+		case 'bottom':
+			$content .= fb_get_like_button();
+			break;
+		case 'both':
+			$content = fb_get_like_button() . $content;
+			$content .= fb_get_like_button();
+			break;
+	}
 	
 	return $content;
 }

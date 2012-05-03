@@ -1,11 +1,11 @@
 <?php
-require_once('fb_social_plugin_like.php');
-require_once('fb_social_plugin_send.php');
-require_once('fb_social_plugin_subscribe.php');
-require_once('fb_social_plugin_recent_activity.php');
-require_once('fb_social_plugin_recommendations.php');
-require_once('fb_social_plugin_recommendations_bar.php');
-require_once('fb_social_plugin_comments.php');
+require_once('fb_like.php');
+require_once('fb_send.php');
+require_once('fb_subscribe.php');
+require_once('fb_recent_activity.php');
+require_once('fb_recommendations.php');
+require_once('fb_recommendations_bar.php');
+require_once('fb_comments.php');
 
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Like_Button" );'));
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Send_Button" );'));
@@ -17,7 +17,6 @@ function fb_apply_filters() {
 	$options = get_option('fb_options');
 	
 	if (isset($options['recommendations_bar'])) {
-		
 		add_filter('the_content', 'fb_recommendations_bar_automatic', 30);
 	}
 	

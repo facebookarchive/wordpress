@@ -18,7 +18,7 @@ function fb_admin_style() {
 
 
 function fb_admin_scripts( $hook_suffix ) {
-	wp_register_script( 'fb_admin', plugins_url('/fb_admin.js', __FILE__) );
+	wp_register_script( 'fb_admin', plugins_url('/scripts/fb_admin.js', __FILE__) );
 	wp_enqueue_script( 'fb_admin' );
 }
 
@@ -26,7 +26,7 @@ function fb_admin_scripts( $hook_suffix ) {
 function fb_admin_menu_settings() {
 	$options = get_option('fb_options');
 	
-	wp_register_style('fb_admin', plugins_url('style_admin.css', __FILE__));
+	wp_register_style('fb_admin', plugins_url('style/style_admin.css', __FILE__));
 	
 	register_setting( 'fb_options', 'fb_options', 'fb_options_validate');
 	
@@ -160,7 +160,7 @@ function fb_construct_fields($placement, $children, $parent = null) {
 		if ($parent) {
 			echo '	<tr valign="top">
 								<th scope="row"><strong>Enable</strong></th>
-								<td><a href="' . $parent['help_link'] . '" target="_new" title="' . $parent['help_text'] . '" style=" text-decoration: none;">[?]</a>&nbsp; <input type="checkbox" name="fb_options[' . $parent['name'] . '][enabled]" value="true" id="' . $parent['name'] . '" ' . checked(isset($options[$parent['name']]), 1, false) . ' onclick="toggleOptions(\'' . $parent['name'] . '\', [\'' . implode("','", $children_fields['names']) . '\'])"></td>
+								<td><a href="' . $parent['help_link'] . '" target="_new" title="' . $parent['help_text'] . '" style=" text-decoration: none;">[?]</a>&nbsp; <input type="checkbox" name="fb_options[' . $parent['name'] . '][enabled]" value="true" id="' . $parent['name'] . '" ' . checked(isset($options[$parent['name']]['enabled']), 1, false) . ' onclick="toggleOptions(\'' . $parent['name'] . '\', [\'' . implode("','", $children_fields['names']) . '\'])"></td>
 								</tr>';
 		}
 			echo $children_fields['output'];

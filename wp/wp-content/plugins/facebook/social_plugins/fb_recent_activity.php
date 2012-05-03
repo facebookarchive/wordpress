@@ -71,7 +71,6 @@ class Facebook_Recent_Activity extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		fb_get_recommendations_box_fields();
-		
 	}
 
 }

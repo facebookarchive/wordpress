@@ -15,7 +15,9 @@ License: [TODO]
 
 require_once('fb_admin_menu.php');
 require_once('fb_open_graph.php');
-require_once('fb_social_plugins.php');
+require_once('social_plugins/fb_social_plugins.php');
+require_once('fb_login.php');
+require_once('fb_social_publisher.php');
 
 add_action('wp_footer','fb_add_base_js',20);
 add_action('init','fb_channel_file');
@@ -27,7 +29,9 @@ function fb_add_base_js($args = array()) {
 	fb_init($options['app_id'], $args);
 };
 
-/*function fb_lang_atts($lang) {
+/*
+ //disabled so that the site is HTML5-compliant, and it's not needed for social plugins any more
+ function fb_lang_atts($lang) {
     return ' xmlns:fb="http://ogp.me/ns/fb#" xmlns:og="http://ogp.me/ns#" '. $lang;
 }*/
 

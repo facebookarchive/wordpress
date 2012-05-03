@@ -113,28 +113,7 @@ class Facebook_Send_Button extends WP_Widget {
 		<p>Optional.  If you have a Page on Facebook that you want users to Send.  If you leave it blank, the user will send the current page that they're on.</p>
 		</p>
 		
-		
-		
-		
 		<?php
-		
-		//		<div class="fb-send" data-send="false" data-layout="button_count" data-width="454" data-show-faces="false" data-action="recommend" data-colorscheme="dark" data-font="segoe ui"></div>
-		
-		
-		//layout style
-		//width
-		//show faces
-		//verb to display
-		//color scheme
-		//font
-		
-		/*
-		dropdown
-		checkbox
-		field
-		*/
-		
-		
 	}
 }
 

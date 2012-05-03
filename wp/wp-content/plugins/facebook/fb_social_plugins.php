@@ -4,7 +4,7 @@ require_once('fb_social_plugin_send.php');
 require_once('fb_social_plugin_subscribe.php');
 require_once('fb_social_plugin_recent_activity.php');
 require_once('fb_social_plugin_recommendations.php');
-require_once('fb_social_plugin_recommendation_bar.php');
+require_once('fb_social_plugin_recommendations_bar.php');
 require_once('fb_social_plugin_comments.php');
 
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Like_Button" );'));
@@ -16,23 +16,24 @@ add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Reco
 function fb_apply_filters() {
 	$options = get_option('fb_options');
 	
-	if (isset($options['enable_recommendations_bar'])) {
+	if (isset($options['recommendations_bar'])) {
+		
 		add_filter('the_content', 'fb_recommendations_bar_automatic', 30);
 	}
 	
-	if (isset($options['enable_like'])) {
+	if (isset($options['like'])) {
 		add_filter('the_content', 'fb_like_button_automatic', 30);
 	}
 	
-	if (isset($options['enable_send'])) {
+	if (isset($options['send'])) {
 		add_filter('the_content', 'fb_send_button_automatic', 30);
 	}
 	
-	if (isset($options['enable_subscribe'])) {
+	if (isset($options['subscribe'])) {
 		add_filter('the_content', 'fb_subscribe_button_automatic', 30);
 	}
 	
-	if (isset($options['enable_comments'])) {
+	if (isset($options['comments'])) {
 		add_filter('the_content', 'fb_comments_automatic', 30);
 		add_filter('comments_array', 'fb_close_wp_comments');
 		add_filter('the_posts', 'fb_set_wp_comment_status');

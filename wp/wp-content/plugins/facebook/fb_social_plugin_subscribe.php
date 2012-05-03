@@ -10,10 +10,19 @@ function fb_get_subscribe_button($options = array()) {
 }
 
 function fb_subscribe_button_automatic($content) {
-	$content .= fb_get_subscribe_button();
+	$options = get_option('fb_options');
+	
+	foreach($options['subscribe'] as $param => $val) {
+		$param = str_replace('_', '-', $param);
+			
+		$options['subscribe']['data-' . $param] =  $val;
+	}
+	
+	$content .= fb_get_subscribe_button($options['subscribe']);
 	
 	return $content;
 }
+
 
 /**
  * Adds the Subscribe Button Social Plugin as a WordPress Widget

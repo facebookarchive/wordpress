@@ -69,21 +69,10 @@ class Facebook_Recent_Activity extends WP_Widget {
 	 *
 	 * @param array $instance Previously saved values from database.
 	 */
-	/*
 	public function form( $instance ) {
-		if ( isset( $instance[ 'title' ] ) ) {
-			$title = $instance[ 'title' ];
-		}
-		else {
-			$title = __( 'Like ' . esc_attr(get_bloginfo('name')) . ' on Facebook', 'text_domain' );
-		}
-		?>
-		<p>
-		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
-		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
-		</p>
-		<?php 
-	}*/
+		fb_get_recommendations_box_fields();
+		
+	}
 
 }
 ?>

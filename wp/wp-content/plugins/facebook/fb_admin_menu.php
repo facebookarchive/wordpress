@@ -47,6 +47,10 @@ function fb_settings_page() {
 			<?php
 			settings_fields( 'fb_options' );
 			
+			print "<h3>Main Settings</h3>
+			<p></p>";
+			fb_get_main_settings_fields();
+			
 			print "<h3>Like Button</h3>
 			<p>The Like button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user's friends' News Feed with a link back to your website.</p>";
 			fb_get_like_fields();
@@ -63,7 +67,8 @@ function fb_settings_page() {
 			<p>Comments Box is a social plugin that enables user commenting on your site. Features include moderation tools and distribution.</p>';
 			fb_get_comments_fields();
 			
-			print '<h3>Recommendation Bar</h3>';
+			print '<h3>Recommendation Bar</h3>
+			<p>The Recommendations Bar allows users to like content, get recommendations, and share what they\'re reading with their friends.</p>';
 			fb_get_recommendations_bar_fields();
 			
 			print '<h3>Social Publisher</h3>';
@@ -128,56 +133,34 @@ function fb_field_enable_fb() {
 	echo '<input type="checkbox" name="fb_options[enable_fb]" value="true" ' . checked(isset($options['enable_fb']), 1, false) . '" />';
 }
 
-
-
-/*
- add_settings_field('fb_field_like', 'Like Button', 'fb_field_like', 'fb_options', 'fb_section_like');
-
-parent
-	name
-	section
-	field_type
-	help_text
-	help_link
-	
-	
-
-children
-	0
-		name
-		section (from parent)
-		field_type
-		help_text
-		help_link
-*/
 function fb_construct_fields($placement, $children, $parent = null) {
 	$options = get_option('fb_options');
 	
 	if ($placement == 'widget') {
-			/*
-		//send button
-		if ( isset( $instance[ 'send' ] ) ) {
-			$send = $instance[ 'send' ];
+		if ( isset( $instance[ 'title' ] ) ) {
+			$title = $instance[ 'title' ];
 		}
 		else {
-			$send = '';
+			$title = __( 'Like ' . esc_attr(get_bloginfo('name')) . ' on Facebook', 'text_domain' );
 		}
-		?>
-		<p>
-		<input type="checkbox" id="<?php echo $this->get_field_id( 'send' ); ?>" name="<?php echo $this->get_field_name( 'send' ); ?>" value="true" <?php checked(TRUE, (bool) $send);  print $send; ?> />
-		<label for="<?php echo $this->get_field_id( 'send' ); ?>"><?php _e( 'Enable send button' ); ?></label>
-		</p>*/
+		
+		$children_fields = fb_construct_fields_children($placement, $children, $parent);
+		
+		/*echo '<p>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
+			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
+			</p>';*/
 		}
 	else if ($placement == 'settings') {
-		$children_fields = fb_construct_fields_children($children, $parent);
+		$children_fields = fb_construct_fields_children($placement, $children, $parent);
 		
 		echo '<table class="form-table">
 						<tbody>';
 		
 		if ($parent) {
 			echo '	<tr valign="top">
-								<th scope="row"><strong>' . ucwords(str_replace("_", " ", $parent['name'])) . '</strong></th>
-								<td><a href="' . $parent['help_link'] . '" target="_new" title="' . $parent['help_text'] . '" style=" text-decoration: none;">[?]</a>&nbsp; <input type="checkbox" name="fb_options[' . $parent['name'] . ']" value="true" id="' . $parent['name'] . '" ' . checked(isset($options[$parent['name']]), 1, false) . ' onclick="toggleOptions(\'' . $parent['name'] . '\', [\'' . implode("','", $children_fields['names']) . '\'])"></td>
+								<th scope="row"><strong>Enable</strong></th>
+								<td><a href="' . $parent['help_link'] . '" target="_new" title="' . $parent['help_text'] . '" style=" text-decoration: none;">[?]</a>&nbsp; <input type="checkbox" name="fb_options[' . $parent['name'] . '][enabled]" value="true" id="' . $parent['name'] . '" ' . checked(isset($options[$parent['name']]), 1, false) . ' onclick="toggleOptions(\'' . $parent['name'] . '\', [\'' . implode("','", $children_fields['names']) . '\'])"></td>
 								</tr>';
 		}
 			echo $children_fields['output'];
@@ -187,13 +170,17 @@ function fb_construct_fields($placement, $children, $parent = null) {
 	}
 }
 
-function fb_construct_fields_children($children, $parent = null) {
+function fb_construct_fields_children($placement, $children, $parent = null) {
 	$options = get_option('fb_options');
+	
+	print '<!--';
+	print_r($options);
+	print '-->';
 	
 	$display = ' style="display: none" ';
 	
 	if ($parent) {
-		if (isset($options[$parent['name']]) && $options[$parent['name']] == 'true') {
+		if (isset($options[$parent['name']]['enabled']) && $options[$parent['name']]['enabled'] == 'true') {
 			$display = '';
 		}
 	}
@@ -213,17 +200,32 @@ function fb_construct_fields_children($children, $parent = null) {
 			$help_link = '<a href="' . $child['help_link'] . '" target="_new" title="' . $child['help_text'] . '" style=" text-decoration: none;">[?]</a>';
 		}
 		
+		$parent_js_array = '';
+		
+		if ($parent) {
+			$parent_js_array = '[' . $parent['name'] . ']';
+			
+			if (isset($options[$parent['name']][$child['name']])) {
+				$child_value = $options[$parent['name']][$child['name']];
+			}
+		}
+		else {
+			if (isset($options[$child['name']])) {
+				$child_value = $options[$child['name']];
+			}
+		}
+		
 		switch ($child['field_type']) {
 			case 'dropdown':
 				$children_output .= '	<tr valign="top"' . $display . ' id="' . $parent['name'] . '_' . $child['name'] . '">
 						<th scope="row">' . ucwords(str_replace("_", " ", $child['name'])) . '</th>
 						<td>' . $help_link . '&nbsp;';
 				
-				$children_output .= '<select name="fb_options[' . $parent['name'] . '_' . $child['name'] . ']">';
+				$children_output .= '<select name="fb_options' . $parent_js_array . '[' . $child['name'] . ']">';
 				
-				if (isset($options[$parent['name'] . '_' . $child['name']])) {
+				if (isset($child_value)) {
 					foreach ($child['options'] as $option) {
-						$children_output .= '<option value="' . $option . '" ' . selected( $options[$parent['name'] . '_' . $child['name']], $option, false ) . '>' . $option . '</option>';
+						$children_output .= '<option value="' . $option . '" ' . selected( $child_value, $option, false ) . '>' . $option . '</option>';
 					}
 				}
 				else {
@@ -232,27 +234,25 @@ function fb_construct_fields_children($children, $parent = null) {
 					}
 				}
 				
-				$children_output .= '</select>
-														</td>
-																</tr>';
+				$children_output .= '</select></td></tr>';
 				
 				break;
 			case 'checkbox':
 				$children_output .= '	<tr valign="top"' . $display . ' id="' . $parent['name'] . '_' . $child['name'] . '">
 						<th scope="row">' . ucwords(str_replace("_", " ", $child['name'])) . '</th>
-						<td>' . $help_link . '&nbsp; <input type="checkbox" name="fb_options[' . $parent['name'] . '_' . $child['name'] . ']" value="true"' . checked(isset($options[$parent['name'] . '_' . $child['name']]), 1, false) . '></td>
+						<td>' . $help_link . '&nbsp; <input type="checkbox" name="fb_options' . $parent_js_array . '[' . $child['name'] . ']" value="true"' . checked(isset($child_value), 1, false) . '></td>
 						</tr>';
 				break;
 			case 'text':
 				$text_field_value = '';
 				
-				if (isset($options[$parent['name'] . '_' . $child['name']])) {
-					$text_field_value = $options[$parent['name'] . '_' . $child['name']];
+				if (isset($child_value)) {
+					$text_field_value = $child_value;
 				}
 				
 				$children_output .= '	<tr valign="top"' . $display . ' id="' . $parent['name'] . '_' . $child['name'] . '">
 						<th scope="row">' . ucwords(str_replace("_", " ", $child['name'])) . '</th>
-						<td>' . $help_link . '&nbsp; <input type="text" name="fb_options[' . $parent['name'] . '_' . $child['name'] . ']" value="' . $text_field_value . '"></td>
+						<td>' . $help_link . '&nbsp; <input type="text" name="fb_options' . $parent_js_array . '[' . $child['name'] . ']" value="' . $text_field_value . '"></td>
 						</tr>';
 				break;
 		}
@@ -274,9 +274,22 @@ function fb_construct_fields_children($children, $parent = null) {
 	return $return;
 }
 
+function fb_get_main_settings_fields() {
+	$children = array(array('name' => 'app_id',
+													'field_type' => 'text',
+													'help_text' => 'Your app id.',
+													),
+										array('name' => 'app_secret',
+													'field_type' => 'text',
+													'help_text' => 'Your app secret.',
+													),
+										);
+	
+	fb_construct_fields('settings', $children);
+}
+
 function fb_get_like_fields() {
-	$parent = array(
-									'name' => 'enable_like',
+	$parent = array('name' => 'like',
 									'field_type' => 'checkbox',
 									'help_text' => 'Click to learn more.',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/like/',
@@ -299,6 +312,11 @@ function fb_get_like_fields() {
 													'field_type' => 'checkbox',
 													'help_text' => 'Show profile pictures below the button.  Applicable to standard layout only.',
 													),
+										array('name' => 'position',
+													'field_type' => 'dropdown',
+													'options' => array('top', 'bottom', 'both'),
+													'help_text' => 'Where the button will display on the page or post.',
+													),
 										array('name' => 'action',
 													'field_type' => 'dropdown',
 													'options' => array('like', 'recommend'),
@@ -320,8 +338,7 @@ function fb_get_like_fields() {
 }
 
 function fb_get_subscribe_fields() {
-	$parent = array(
-									'name' => 'enable_subscribe',
+	$parent = array('name' => 'subscribe',
 									'field_type' => 'checkbox',
 									'help_text' => 'Click to learn more.',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
@@ -357,8 +374,7 @@ function fb_get_subscribe_fields() {
 
 
 function fb_get_send_fields() {
-	$parent = array(
-									'name' => 'enable_send',
+	$parent = array('name' => 'send',
 									'field_type' => 'checkbox',
 									'help_text' => 'Click to learn more.',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/send/',
@@ -383,8 +399,7 @@ function fb_get_send_fields() {
 
 
 function fb_get_comments_fields() {
-	$parent = array(
-									'name' => 'enable_comments',
+	$parent = array('name' => 'comments',
 									'field_type' => 'checkbox',
 									'help_text' => 'Click to learn more.',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/comments/',
@@ -408,23 +423,38 @@ function fb_get_comments_fields() {
 	fb_construct_fields('settings', $children, $parent);
 }
 
-
-
 function fb_get_recommendations_bar_fields() {
-	$children = array(array('name' => 'recommendation_bar',
-													'field_type' => 'checkbox',
-													'help_text' => 'The Recommendations Bar allows users to like content, get recommendations, and share what they’re reading with their friends.',
-													'help_text' => 'Click to learn more.',
-													'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
+	$parent = array('name' => 'recommendations_bar',
+									'field_type' => 'checkbox',
+									'help_text' => 'Click to learn more.',
+									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/recommendationsbar/',
+									);
+	
+	$children = array(array('name' => 'trigger',
+													'field_type' => 'text',
+													'help_text' => 'This specifies the percent of the page the user must scroll down before the plugin is expanded.',
+													),
+										array('name' => 'read_time',
+													'field_type' => 'text',
+													'help_text' => 'The number of seconds the plugin will wait until it expands.',
+													),
+										array('name' => 'action',
+													'field_type' => 'dropdown',
+													'options' => array('like', 'recommend'),
+													'help_text' => 'The verb to display in the button.',
+													),
+										array('name' => 'side',
+													'field_type' => 'dropdown',
+													'options' => array('left', 'right'),	
+													'help_text' => 'The side of the window that the plugin will display.',
 													),
 										);
 	
-	fb_construct_fields('settings', $children);
+	fb_construct_fields('settings', $children, $parent);
 }
 
 function fb_get_social_publisher_fields() {
-	$parent = array(
-									'name' => 'enable_social_publisher',
+	$parent = array('name' => 'social_publisher',
 									'field_type' => 'checkbox',
 									'help_text' => 'Click to learn more.',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
@@ -443,4 +473,68 @@ function fb_get_social_publisher_fields() {
 	
 	fb_construct_fields('settings', $children, $parent);
 }
+
+function fb_get_recommendations_box_fields() {
+	$children = array(array('name' => 'width',
+													'field_type' => 'text',
+													'help_text' => 'The width of the plugin, in pixels.',
+													),
+										array('name' => 'height',
+													'field_type' => 'text',
+													'help_text' => 'The width of the plugin, in pixels.',
+													),
+										array('name' => 'colorscheme',
+													'field_type' => 'dropdown',
+													'options' => array('light', 'dark'),
+													'help_text' => 'The color scheme of the plugin.',
+													),
+										array('name' => 'border_color',
+													'field_type' => 'dropdown',
+													'options' => array('light', 'dark'),
+													'help_text' => 'The color scheme of the plugin.',
+													),
+										array('name' => 'font',
+													'field_type' => 'dropdown',
+													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
+													'help_text' => 'The font of the plugin.',
+													),
+										);
+	
+	fb_construct_fields('settings', $children);
+}
+
+function fb_get_activity_feed_fields() {
+	$children = array(array('name' => 'width',
+													'field_type' => 'text',
+													'help_text' => 'The width of the plugin, in pixels.',
+													),
+										array('name' => 'height',
+													'field_type' => 'text',
+													'help_text' => 'The width of the plugin, in pixels.',
+													),
+										array('name' => 'colorscheme',
+													'field_type' => 'dropdown',
+													'options' => array('light', 'dark'),
+													'help_text' => 'The color scheme of the plugin.',
+													),
+										array('name' => 'border_color',
+													'field_type' => 'dropdown',
+													'options' => array('light', 'dark'),
+													'help_text' => 'The color scheme of the plugin.',
+													),
+										array('name' => 'font',
+													'field_type' => 'dropdown',
+													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
+													'help_text' => 'The font of the plugin.',
+													),
+										array('name' => 'recommendations',
+													'field_type' => 'checkbox',
+													'help_text' => 'Includes recommendations.',
+													),
+										);
+	
+	fb_construct_fields('settings', $children);
+}
+
+
 ?>

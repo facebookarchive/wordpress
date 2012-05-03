@@ -20,22 +20,26 @@ function fb_get_like_button($options = array()) {
 		$params .= $option . '="' . $value . '" ';
 	}
 	
-	return '<div class="fb-like" ' . $params . '></div>';
+	return '<div class="fb-like" ' . $params . ' ></div>';
 }
 
 function fb_like_button_automatic($content) {
 	$options = get_option('fb_options');
 	
-	switch ($options['like_position']) {
+	foreach($options['like'] as $param => $val) {
+		$options['like']['data-' . $param] =  $val;
+	}
+	
+	switch ($options['like']['position']) {
 		case 'top':
-			$content = fb_get_like_button() . $content;
+			$content = fb_get_like_button($options['like']) . $content;
 			break;
 		case 'bottom':
-			$content .= fb_get_like_button();
+			$content .= fb_get_like_button($options['like']);
 			break;
 		case 'both':
-			$content = fb_get_like_button() . $content;
-			$content .= fb_get_like_button();
+			$content = fb_get_like_button($options['like']) . $content;
+			$content .= fb_get_like_button($options['like']);
 			break;
 	}
 	

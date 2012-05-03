@@ -37,7 +37,15 @@ function fb_get_comments($options = array()) {
 
 function fb_comments_automatic($content) {
 	if (!is_home()) {
-		$content .= fb_get_comments();
+		$options = get_option('fb_options');
+		
+		foreach($options['comments'] as $param => $val) {
+			$param = str_replace('_', '-', $param);
+				
+			$options['comments']['data-' . $param] =  $val;
+		}
+		
+		$content .= fb_get_comments($options['comments']);
 	}
 	
 	return $content;

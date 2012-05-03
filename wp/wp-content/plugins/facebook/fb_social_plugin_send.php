@@ -10,10 +10,19 @@ function fb_get_send_button($options = array()) {
 }
 
 function fb_send_button_automatic($content) {
-	$content .= fb_get_send_button();
+	$options = get_option('fb_options');
+	
+	foreach($options['send'] as $param => $val) {
+		$param = str_replace('_', '-', $param);
+			
+		$options['send']['data-' . $param] =  $val;
+	}
+	
+	$content .= fb_get_send_button($options['send']);
 	
 	return $content;
 }
+
 
 /**
  * Adds the Send Button Social Plugin as a WordPress Widget
@@ -27,7 +36,7 @@ class Facebook_Send_Button extends WP_Widget {
 		parent::__construct(
 	 		'fb_send', // Base ID
 			'Facebook_Send_Button', // Name
-			array( 'description' => __( "The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address. ", 'text_domain' ), ) // Args
+			array( 'description' => __( "The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address.", 'text_domain' ), ) // Args
 		);
 	}
 

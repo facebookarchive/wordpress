@@ -20,16 +20,16 @@ require_once('fb_social_plugins.php');
 add_action('wp_footer','fb_add_base_js',20);
 add_action('init','fb_channel_file');
 
-add_filter('language_attributes','fb_lang_atts');
+//add_filter('language_attributes','fb_lang_atts');
 
 function fb_add_base_js($args = array()) {
 	$options = get_option('fb_options');
 	fb_init($options['app_id'], $args);
 };
 
-function fb_lang_atts($lang) {
+/*function fb_lang_atts($lang) {
     return ' xmlns:fb="http://ogp.me/ns/fb#" xmlns:og="http://ogp.me/ns#" '. $lang;
-}
+}*/
 
 function fb_init($app_id, $args = array()) {
 	$locale = fb_get_locale();

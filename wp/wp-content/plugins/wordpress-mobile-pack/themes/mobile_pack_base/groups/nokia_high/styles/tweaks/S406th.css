@@ -1,0 +1,22 @@
+/*compensates for large font on S40 webkit devices*/
+body {
+	font-size: 90%;
+}
+table {
+	font-size: 80%;
+}
+/*creates 3 x 3 (portrait) grid on 240 px wide devices*/
+ul.grid li img{
+	border: 1px solid #BEC1C3;
+	padding: .15em .15em;
+	margin-right: .1em;
+	margin-left: 0em;
+	margin-bottom: .2em;
+}
+/*optional, may cascade too heavily in certain contexts*/
+ul li, ol li {
+	font-size: 95%;
+}
+ul.nav-horizontal-rounded, ul.nav-horizontal-flat  {
+	font-size: 95%;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN"
+"http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../resources/styles/reset.css" rel="stylesheet" type="text/css" />
+    <link href="../resources/styles/baseStyles.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../resources/scripts/templates.js" />
+    <script type="text/javascript">
+      function init() {
+        var myStyleTweaks = new StyleTweaker();
+        myStyleTweaks.add("Series60/5.0", "../resources/styles/tweaks/S605th.css");
+        myStyleTweaks.add("Series60/3.2", "../resources/styles/tweaks/S603rdFP2.css");
+        myStyleTweaks.add("AppleWebKit/420+", "../resources/styles/tweaks/S406th.css");
+        myStyleTweaks.add("N900", "../resources/styles/tweaks/maemo.css");
+        myStyleTweaks.add("Firefox/3.0a1 Tablet browser 0.3.7", "../resources/styles/tweaks/maemo.css");
+        myStyleTweaks.add("Opera Mini/4", "../resources/styles/tweaks/operamini.css");
+        myStyleTweaks.tweak();
+      }
+      addEvent("onload",init);
+    </script>
+  </head>
+  <body>
+  <div id="wrap">
+  <div id="header">
+  <div class="branding">
+    <a href="http://nokia.mobi">
+    <img src="../resources/images/img-logo.png" alt="Logo" />  
+    </a>
+      <p>Company Logo</p>
+      <p>Company Tagline</p>
+  </div>
+  </div>
+  <div id="content">
+  <h1>H1 Lorem Ipsum</h1>
+    <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit enim ad minim venia.</em></p>
+  <h2>H2 Lorem Ipsum</h2>
+  <p>
+  Lorem ipsum dolor sit amet, consectetur <strong>adipisicing</strong> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+  <div class="advertisement">
+  <span>Advertisement</span>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+  </div>
+  <h3>H3 Lorem Ipsum</h3>
+  <p>
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore <a href="sms:01234545">SMS</a> aliqua. Ut enim ad <a class="external" href="http://forumnokia.mobi">laboris</a> veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </p>
+  <h4>H4 Lorem Ipsum</h4>
+  <p>
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut <a href="mailto:info@yourcompany.com?subject=Sample%20subject%20line">email</a> ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </p>
+  <h5>H5 Lorem Ipsum</h5>
+  <blockquote><p>
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></blockquote>
+  <h6>H6 Lorem Ipsum</h6>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <div class="box-rounded">
+      <div class="box-rounded-inner">
+        <div class="box-rounded-outer">
+          <h2>Lorem</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ad minim veniam, quis nostrud <a class="ical" href="../resources/data-ical.php">lorem <strong>iCal</strong></a> exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+      </div>
+    </div>
+    <div class="box-flat">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p>Lorem ipsum: <a href="tel:123 456 789">+44 123 456 789</a></p>
+  </div>
+  <div class="home"><a href="index.html">Home</a></div>
+  </div>
+  <div id="footer">
+      <p>© 2009 Forum Nokia</p>
+    <div class="stack" />
+  </div>
+  </div>
+  </body>
+</html>

@@ -27,7 +27,7 @@ class Facebook_Send_Button extends WP_Widget {
 		parent::__construct(
 	 		'fb_send', // Base ID
 			'Facebook_Send_Button', // Name
-			array( 'description' => __( "The Send button lets a user share your content with friends on Facebook. When the user clicks the Send button on your site, a story appears in the user's friends' News Feed with a link back to your website.", 'text_domain' ), ) // Args
+			array( 'description' => __( "The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address. ", 'text_domain' ), ) // Args
 		);
 	}
 
@@ -106,20 +106,6 @@ class Facebook_Send_Button extends WP_Widget {
 		
 		
 		
-		
-		<?php
-		//send button
-		if ( isset( $instance[ 'send' ] ) ) {
-			$send = $instance[ 'send' ];
-		}
-		else {
-			$send = '';
-		}
-		?>
-		<p>
-		<input type="checkbox" id="<?php echo $this->get_field_id( 'send' ); ?>" name="<?php echo $this->get_field_name( 'send' ); ?>" value="true" <?php checked(TRUE, (bool) $send);  print $send; ?> />
-		<label for="<?php echo $this->get_field_id( 'send' ); ?>"><?php _e( 'Enable send button' ); ?></label>
-		</p>
 		
 		<?php
 		

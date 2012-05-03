@@ -1,0 +1,80 @@
+/*
+$Id: style.css 258240 2010-06-28 16:21:14Z jamesgpearce $
+$URL: http://plugins.svn.wordpress.org/wordpress-mobile-pack/trunk/themes/mobile_pack_base/style.css $
+Copyright (c) 2009 James Pearce & friends, portions mTLD Top Level Domain Limited, ribot, Forum Nokia
+This file is part of the WordPress Mobile Pack, licensed under the Apache License, Version 2.0. Consult server-side files for license.
+*/
+
+/*
+Theme Name: WordPress Mobile (base)
+Theme URI: http://wordpress.org/extend/plugins/wordpress-mobile-pack/
+Description: The base theme of the WordPress Mobile Pack. It is designed to be used by mobile browsers - but also to be extended by other themes. Tested with WordPress 2.5, 2.6 and 2.7.
+Version: 1.2.4
+Author: ribot, Forum Nokia & James Pearce
+Author URI: http://ribot.co.uk
+*/
+
+/*
+PALETTE
+-------
+*/
+
+
+/* DARKEST */
+a:hover {
+  color:#111111;
+}
+body {
+  background:#111111;
+}
+
+
+/* VERY DARK */
+body, h2 a {
+  color:#333333;
+}
+.button, #submit, #header, #footer {
+  background-color:#333333
+}
+input, textarea {
+  border-color:#333333;
+}
+
+
+/* DARK */
+a, a:visited, #sidebar ul h2, li.current_page_item a {
+  color:#444444;
+}
+
+
+/* MID */
+div.dateicon, p.metadata {
+  color:#8C8F6C;
+}
+
+
+/* LIGHT MID */
+#menu, #sidebar ul h2, h1, div.post, ol.commentlist, #commentform {
+  border-color:#DDDFD9;
+}
+
+
+/* LIGHT */
+#menu, #sidebar ul h2 {
+  background-color:#EFF1EA;
+}
+
+
+/* VERY LIGHT */
+#wrap {
+  background:#F2F4ED;
+}
+
+
+/* LIGHTEST */
+#header, #header a, #header a:hover, #header h2, #footer a, #footer a:hover, #footer, #submit, .button  {
+  color:#FFFFFF;
+}
+.navigation, h3, div.post, #footer {
+  border-top-color:#FFFFFF;
+}

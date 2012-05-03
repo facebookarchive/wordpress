@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN"
+"http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>Utility Components</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../resources/styles/reset.css" rel="stylesheet" type="text/css" />
+      <link href="../resources/styles/baseStyles.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../resources/scripts/templates.js"></script>
+    <script type="text/javascript">
+      function init() {
+        var mySlideshow = new Slideshow ("slideshow", 0, true);
+        var myToggle = new ToggleSwitch(["toggler1","toggler2","toggler3"]);
+        var myStyleTweaks = new StyleTweaker();
+        myStyleTweaks.add("Series60/5.0", "../resources/styles/tweaks/S605th.css");
+        myStyleTweaks.add("Series60/3.2", "../resources/styles/tweaks/S603rdFP2.css");
+        myStyleTweaks.add("AppleWebKit/420+", "../resources/styles/tweaks/S406th.css");
+        myStyleTweaks.add("N900", "../resources/styles/tweaks/maemo.css");
+        myStyleTweaks.add("Firefox/3.0a1 Tablet browser 0.3.7", "../resources/styles/tweaks/maemo.css");
+        myStyleTweaks.add("Opera Mini/4", "../resources/styles/tweaks/operamini.css");
+        myStyleTweaks.tweak();
+      }
+      addEvent("onload",init);
+    </script>
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+    <div id="content">
+    
+    <h1 class="top-aligned">Utility components</h1>
+    <h3>1. Slideshow</h3>
+    <div id="slideshow" class="slideshow">
+      <a class="preview">
+        <img src="../resources/images/photos/large/loading.png" alt="loading" />
+        <span></span>
+      </a>
+      <ul class="controls nav-horizontal-rounded stack">
+        <li  class="first two-piece"><a class="previous">previous</a></li>
+        <li class="last two-piece"><a class="next">next</a></li>
+      </ul>
+      <ol class="data">
+        <li>
+          <a href="../resources/images/photos/large/image_01.png">
+          <img src="../resources/images/photos/large/image_01.png" alt="image 01" />
+          </a>
+        </li>
+        <li>
+          <a href="../resources/images/photos/large/image_02.png">
+          <img src="../resources/images/photos/large/image_02.png" alt="image 02" />
+          </a>
+        </li>
+        <li>
+          <a href="../resources/images/photos/large/image_03.png">
+          <img src="../resources/images/photos/large/image_03.png" alt="image 03" />
+          </a>
+        </li>
+        <li>
+          <a href="../resources/images/photos/large/image_04.png">
+          <img src="../resources/images/photos/large/image_04.png" alt="image 04" />
+          </a>
+        </li>
+      </ol>
+    </div>
+    
+    <h3>2. Toggle</h3>
+    <ul class="list-toggle stack">
+        <li>
+          <ul class="toggle">
+            <li>
+              <label>Label</label>
+              <input id="toggler1" type="checkbox" name="preference" checked="checked" />
+            </li>
+          </ul>
+        </li>
+    </ul>
+    <ul class="list-toggle stack">
+        <li>
+          <ul class="toggle">
+            <li>
+              <label>Label</label>
+              <input id="toggler2" type="checkbox" name="preference" checked="checked" />
+            </li>
+          </ul>
+        </li>
+    </ul>
+    <h3>3. Standalone toggle</h3>
+    <ul class="toggle">
+      <li>
+        <label>Label</label>
+        <input id="toggler3" type="checkbox" name="preference"  />
+      </li>
+    </ul>
+    <h3>4. 5-star rating</h3>
+    <div class="rating stars-3"><span>3/5</span></div>
+    <div class="home"><a href="index.html">Home</a></div>
+    </div>
+    <div id="footer">
+      <p>© 2009 Forum Nokia</p>
+    </div>
+    </div>
+  </body>
+</html>

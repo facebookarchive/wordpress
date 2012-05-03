@@ -1,0 +1,239 @@
+/*
+$Id: style.css 156906 2009-09-22 07:35:03Z jamesgpearce $
+$URL: http://plugins.svn.wordpress.org/wordpress-mobile-pack/trunk/themes/mobile_pack_base/style.css $
+Copyright (c) 2009 James Pearce & friends, portions mTLD Top Level Domain Limited, ribot, Forum Nokia
+This file is part of the WordPress Mobile Pack, licensed under the Apache License, Version 2.0. Consult server-side files for license.
+*/
+
+/*
+IMAGES
+------
+*/
+
+#header {
+	background-image:url("img/shad.png");
+  background-repeat:repeat-x;
+	background-position:bottom;
+}
+#footer {
+	background-image:url("img/dahs.png");
+  background-repeat:repeat-x;
+	background-position:top;
+}
+#menu, #sidebar ul h2 {
+  background-image:url("img/high.png");
+  background-repeat:repeat-x;
+	background-position:top;
+}
+
+
+/*
+LAYOUT
+------
+*/
+
+* {
+  margin:0;
+  padding:0;
+}
+
+body {
+  font-family:arial, verdana, sans-serif;
+  font-size:medium;
+}
+
+img {
+  border:none;
+  padding:0.2em;
+}
+
+
+a, a:hover, a:visited {
+  text-decoration:underline
+}
+
+li.current_page_item a {
+  text-decoration:none;
+}
+
+ul {
+  list-style-type:none;
+}
+
+h2 {
+  font-size:x-large;
+  font-weight:bold;
+}
+
+h3 {
+  font-weight:normal;
+  font-size:large;
+  border-top-width:1px;
+  border-top-style:solid;
+  padding-top:0.5em;
+}
+
+abbr, acronym {
+  border-bottom:none;
+}
+
+p, blockquote {
+  padding-top:0.2em;
+  padding-bottom:0.2em;
+}
+
+blockquote {
+	padding-left:1em;
+}
+
+input, textarea {
+  font-family:verdana, arial, sans-serif;
+  font-size:medium;
+  margin:0.2em;
+  border-width:1px;
+  border-style:solid;
+  width:16em;
+  padding:0.2em;
+}
+
+input[type="checkbox"], input.button {
+  width:auto;
+}
+
+label {
+  font-size:0.8em;
+}
+
+#wrap {
+	max-width:480px;
+	margin:0 auto;
+}
+
+#header, #menu, #content {
+  padding:0.5em;
+}
+
+#content {
+	padding-top:0;
+}
+
+#header {
+  text-align:left;
+}
+
+#header h1 {
+  font-size:large;
+}
+
+#header h2 {
+  font-size:0.8em;
+}
+
+#menu ul li {
+	display:inline;
+  padding-right:0.5em;
+  font-size:0.8em;
+}
+
+#menu, #sidebar ul h2 {
+  border-width:1px;
+  border-style:solid;
+}
+
+#sidebar {
+  font-size:0.8em;
+}
+
+#sidebar ul h2 {
+  font-size:1.25em;
+  padding:0.2em 0.5em;
+  margin-top:1em;
+}
+
+#sidebar ul ul, #sidebar ul div {
+  padding:0.2em 0.8em 0.5em;
+}
+
+#sidebar ul ul ul {
+  padding-left:1em;
+}
+
+#footer {
+  font-size:0.8em;
+  padding:0.5em;
+  text-align:left;
+  margin-top:1.2em;
+  border-top-width:1px;
+  border-top-style:solid;
+}
+
+div.dateicon, p.metadata {
+  font-size:0.8em;
+}
+
+.entry {
+	padding:0.2em 0;
+}
+
+h1 {
+  border-bottom-width:1px;
+  border-bottom-style:solid;
+}
+
+div.post {
+  padding-top:0.5em;
+  padding-bottom:0.5em;
+  border-top-width:1px;
+  border-top-style:solid;
+  border-bottom-width:1px;
+  border-bottom-style:solid;
+}
+
+.navigation {
+	padding-top:0.5em;
+	border-top-width:1px;
+  border-top-style:solid;
+}
+
+div.post:first-child {
+  border-top:none;
+}
+
+div.post ul, div.post ol {
+  padding:1em 2em;
+}
+
+div.post ul {
+  list-style-type:square;
+}
+
+ol.commentlist {
+  list-style-type:none;
+  border-bottom-width:1px;
+  border-bottom-style:solid;
+}
+
+ol.commentlist li {
+	padding:0.5em 0 0.5em 1em;
+}
+
+#commentform {
+	padding:0.5em 0 0.5em 1em;
+  border-bottom-width:1px;
+  border-bottom-style:solid;
+}
+
+#submit {
+  width:auto;
+  padding:0.2em;
+}
+
+#wpmp_analytics {
+	display:none!important;
+}
+#wpmp_analytics img {
+	display:none!important;
+  padding:0em!important;
+	margin:0em!important;
+}
+

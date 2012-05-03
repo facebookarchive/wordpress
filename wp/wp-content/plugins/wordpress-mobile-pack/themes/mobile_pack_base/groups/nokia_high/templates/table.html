@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN"
+"http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>Table</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../resources/styles/reset.css" rel="stylesheet" type="text/css" />
+      <link href="../resources/styles/baseStyles.css" rel="stylesheet" type="text/css" />
+      <script type="text/javascript" src="../resources/scripts/templates.js"></script>
+      <script type="text/javascript">
+      function init() {
+        var myStyleTweaks = new StyleTweaker();
+        myStyleTweaks.add("Series60/5.0", "../resources/styles/tweaks/S605th.css");
+        myStyleTweaks.add("Series60/3.2", "../resources/styles/tweaks/S603rdFP2.css");
+        myStyleTweaks.add("AppleWebKit/420+", "../resources/styles/tweaks/S406th.css");
+        myStyleTweaks.add("N900", "../resources/styles/tweaks/maemo.css");
+        myStyleTweaks.add("Firefox/3.0a1 Tablet browser 0.3.7", "../resources/styles/tweaks/maemo.css");
+        myStyleTweaks.add("Opera Mini/4", "../resources/styles/tweaks/operamini.css");
+        myStyleTweaks.tweak();
+      }
+      addEvent("onload",init);
+    </script>
+  </head>
+  <body>
+  <div id="wrap">
+  <div id="header">
+  </div>
+  <div id="content">
+    <h1 class="top-aligned">Tables</h1>
+    <h3>1. Table with top and side header.</h3>
+    <table>
+      <caption>
+        Lorem ipsum dolor.
+      </caption>
+        <tr>
+          <th scope="col">Lorem</th>
+          <th scope="col">Ipsum</th>
+          <th scope="col">Dolor</th>
+       </tr>
+          <tr>
+            <th scope="row">Lorem 1</th>
+            <td>Lorem ipisum</td>
+            <td>Lorem ipisum</td>
+          </tr>
+          <tr class="odd">
+            <th scope="row">Lorem 2</th>
+            <td>Lorem ipisum</td>
+            <td>Lorem ipisum</td>
+          </tr>
+          <tr>
+            <th scope="row">Lorem 3</th>
+            <td>Lorem ipisum</td>
+            <td>Lorem ipisum</td>
+          </tr>
+           <tr class="odd">
+            <th scope="row">Lorem 4</th>
+            <td>Lorem ipisum</td>
+            <td>Lorem ipisum</td>
+          </tr>
+    </table>
+    <h3>2. Simple table.</h3>
+    <table>
+      <caption>
+        Lorem ipsum dolor.
+      </caption>
+      <tr>
+        <th scope="col">Lorem</th>
+        <th scope="col">Ipsum</th>
+        <th scope="col">Dolor</th>
+     </tr>
+        <tr>
+          <td>Lorem ipisum</td>
+          <td>Lorem ipisum</td>
+          <td>Lorem ipisum</td>
+        </tr>
+        <tr class="odd">
+          <td>Lorem ipisum</td>
+          <td>Lorem ipisum</td>
+          <td>Lorem ipisum</td>
+        </tr>
+        <tr>
+          <td>Lorem ipisum</td>
+          <td>Lorem ipisum</td>
+          <td>Lorem ipisum</td>
+        </tr>
+         <tr class="odd">
+          <td>Lorem ipisum</td>
+          <td>Lorem ipisum</td>
+          <td>Lorem ipisum</td>
+        </tr>
+    </table>
+    <div class="home"><a href="index.html">Home</a></div>
+    </div>
+    <div id="footer">
+      <p>© 2009 Forum Nokia</p>
+    </div>
+    </div>
+  </body>
+</html>

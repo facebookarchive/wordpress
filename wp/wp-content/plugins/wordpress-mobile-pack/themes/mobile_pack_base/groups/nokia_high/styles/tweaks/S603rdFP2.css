@@ -1,0 +1,10 @@
+body {
+	font-size: 100%;
+}
+/*creates 3 x 3 (portrait) grid on 240 px wide devices*/
+ul.grid li img{
+	border: 1px solid #BEC1C3;
+	padding: .2em .2em;
+	margin-right: .1em;
+	margin-bottom: .2em;
+}

@@ -1,0 +1,33 @@
+/*
+$Id: style.css 258240 2010-06-28 16:21:14Z jamesgpearce $
+$URL: http://plugins.svn.wordpress.org/wordpress-mobile-pack/trunk/themes/mobile_pack_blue/style.css $
+Copyright (c) 2009 James Pearce & friends, portions mTLD Top Level Domain Limited, ribot, Forum Nokia
+This file is part of the WordPress Mobile Pack, licensed under the Apache License, Version 2.0. Consult server-side files for license.
+*/
+
+/*
+Theme Name: WordPress Mobile (blue)
+Theme URI: http://wordpress.org/extend/plugins/wordpress-mobile-pack/
+Description: A tinted version of base theme of the WordPress Mobile Pack. It is designed to be used by mobile browsers.
+Version: 1.2.4
+Author: ribot, Forum Nokia & James Pearce
+Author URI: http://ribot.co.uk
+Template: mobile_pack_base
+
+@import "../mobile_pack_base/style.css";
+^ Deprecated and replaced by an additional <link> in the markup.
+
+*/
+
+/* VERY DARK */
+.button, #submit, #header, #footer {
+	background-color:#003366
+}
+input, textarea {
+  border-color:#003366;
+}
+
+/* DARK */
+a, a:visited {
+	color:#4488DD;
+}

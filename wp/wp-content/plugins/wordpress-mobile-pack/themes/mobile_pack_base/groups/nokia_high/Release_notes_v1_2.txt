@@ -1,0 +1,98 @@
+
+Nokia Mobile Web Templates for High-end Devices
+
+The Nokia Mobile Web Templates for High-end Devices provide custom, styled and fully tested mobile web components. You can mix and match the components or use the full series to completely customise your mobile website or application. The components are suitable for most S60 3rd Edition and S60 5th Edition devices from Nokia and also are compatible with newer Series 40 WebKit and Maemo devices.   
+  
+--------------------------------------------------------------------------------
+
+PREREQUISITES
+
+XHTML
+CSS
+JavaScript
+
+-------------------------------------------------------------------------------
+
+IMPORTANT FILES/CLASSES
+
+Template files (in Library):
+buttons.html
+content.html
+form.html
+lists.html
+navigation.html
+table.html
+utility.html
+
+Scripts (in Resources):
+templates.js
+Key functions as noted in documentation.
+
+Styles (in Resources):
+baseStyles.css
+reset.css
+Classes as noted in documentation.
+
+Optional styles (in Tweaks):
+maemo.css
+operamini.css
+S406th.css
+S603rdFP2.css
+S605th.css
+
+Graphics source files:
+Artwork_Fireworks_CS4.png
+Artwork_Illustrator_CS4.ai
+Artwork_Panel_Fireworks_CS4.png
+Artwork_Panel_Illustrator_CS4.ai
+
+-------------------------------------------------------------------------------
+
+REQUIRED CAPABILITIES
+
+none    
+
+-------------------------------------------------------------------------------
+
+KNOWN ISSUES
+
+- Class .button-submit is not supported on Maemo devices.
+See accompanying online documentation for full overview of all classes.
+
+- Saving iCal data to a device using the sample provided may not be supported on some devices. Testing on target devices is recommended.See accompanying online documentation for full overview of all classes and JavaScript functions.    
+
+--------------------------------------------------------------------------------
+
+RUNNING THE EXAMPLE
+
+Templates can be viewed locally in a desktop browser.
+Begin with Library/index.html      
+
+BUILD & INSTALLATION INSTRUCTIONS
+
+See accompanying online documentation for details of JavaScript functions required on each page.    
+
+--------------------------------------------------------------------------------
+
+COMPATIBILITY
+
+S60 WebKit touch browser
+S60 WebKit (non-touch) version 525 and later
+S60 WebKit (non-touch) version 413
+Series 40 WebKit
+Maemo (touch)
+
+See accompanying online documentation for clarification of each browser category.
+
+---------------------------------------------------------------------------------
+
+VERSION HISTORY
+  
+1.0 First release
+
+1.1 Second release
+- Includes user agent detection for the Nokia N900 and N97 Mini. Also includes an N97 Mini specific style sheet in the 'tweaks' folder.
+- Includes the new 'list-graphical-inline' style. 
+- Includes minor revisions to styles and HTML to improve template reuse and flexibility.
+1.2 Third release
+- Removal of user agent detection and tweaks for the Nokia N97 Mini due to device pre-release browser adjustments.

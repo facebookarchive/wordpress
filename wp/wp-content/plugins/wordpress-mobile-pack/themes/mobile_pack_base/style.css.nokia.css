@@ -1,0 +1,185 @@
+/*
+$Id: style.css 156906 2009-09-22 07:35:03Z jamesgpearce $
+$URL: http://plugins.svn.wordpress.org/wordpress-mobile-pack/trunk/themes/mobile_pack_base/style.css $
+Copyright (c) 2009 James Pearce & friends, portions mTLD Top Level Domain Limited, ribot, Forum Nokia
+This file is part of the WordPress Mobile Pack, licensed under the Apache License, Version 2.0. Consult server-side files for license.
+*/
+
+/* MINOR OVERRIDES */
+body.nokia_high div#header {
+  font-size:0.8em;
+}
+body.nokia_low div#footer p,
+body.nokia_mid div#footer p {
+  margin-left:10px;
+}
+body div#header, body div#footer {
+  height:auto!important;
+  padding:0.7em 0;
+}
+body div#header p{
+  margin-bottom:0em!important;
+  padding-bottom:0em!important;
+  margin-top:0em!important;
+}
+body.nokia_high div#header {
+  padding-left:10px;
+}
+body.nokia_high ul.breadcrumbs {
+  margin:0px;
+}
+body.nokia_mid div#header, body.nokia_mid div#footer, body.nokia_mid h1, body.nokia_mid h2,
+body.nokia_high h1 {
+  background-image: url(img/radial.png);
+  background-position:top;
+  background-repeat:repeat-x;
+}
+body.nokia_high div#header,
+body.nokia_high div#menu {
+  background-image: url(img/radial.png);
+  background-position:0 -16px;
+  background-repeat:repeat-x;
+}
+body.nokia_high div#footer {
+  background-image: url(img/dahs.png);
+  background-position:top;
+  background-repeat:repeat-x;
+}
+#sidebar ul {
+  list-style-type:none;
+  margin-left:0;
+  padding:10px;
+}
+h1 {
+  margin-top:0;
+}
+body.nokia_low h1, body.nokia_mid h1 {
+  padding-top:0.2em;
+}
+ul.list li, dl.list-accordion dt {
+  white-space:nowrap;
+  background-image: url(img/radial.png);
+  background-position:top;
+  background-repeat:repeat-x;
+}
+ul.list li:hover, dl.list-accordion dt:hover {
+  background-image: url(img/dahs.png);
+  background-position:top;
+}
+body.nokia_high #sidebar {
+  margin-left:10px;
+  margin-right:10px;
+}
+
+body.nokia_high input.button {
+  border:0;
+  cursor:pointer;
+  font-weight:bold;
+  font-size: .95em;
+  padding:0 1.5em;
+  text-align:center;
+  margin: 0.4em 0;
+  background-image: url(img/radial.png);
+  background-position:0 -16px;
+  background-repeat:repeat-x;
+  height:40px;
+  line-height:40px;
+}
+input[type='search'] {
+	border: 1px solid #D8D8D8;
+	background: #FFF url(groups/nokia_high/images/img-form-input-shadow.png) repeat-x top;
+	display: block;
+	padding: 0.2em;
+	width: 98%;
+	color: #333333;
+	margin-bottom: 1em;
+}
+body.base #wrap,
+body.nokia_low #wrap,
+body.nokia_mid #wrap
+{
+	max-width:480px;
+	margin:0 auto;
+  position:relative;
+}
+body.nokia_high p.metadata {
+  font-size:0.8em;
+}
+
+#wpmp_analytics {
+	display:none!important;
+}
+#wpmp_analytics img {
+	display:none!important;
+  padding:0em!important;
+	margin:0em!important;
+}
+
+
+/* PALETTE */
+
+/* DARKEST */
+body.nokia_low h1, body.nokia_low h2,
+body.nokia_mid h1, body.nokia_mid h2 {
+  border-bottom-color: #111111;
+}
+
+/* VERY DARK */
+body.nokia_low h1, body.nokia_low h2, body.nokia_low div.header-box h3,
+body.nokia_mid h1, body.nokia_mid h2, body.nokia_mid div.header-box h3,
+body.nokia_high div#header, body.nokia_high div#footer {
+  background-color: #333333!important;
+}
+body div.header-box h3 {
+  border-color: #333333;
+}
+a:link, body td.table-header,
+body h3, body h4, body h5, body form, body table, a:visited, a:hover, a:active {
+  color: #333333;
+}
+body.nokia_low div#header, body.nokia_low div#header a,
+body.nokia_mid div#header, body.nokia_mid div#header a,
+body.nokia_low div#footer, body.nokia_low div#footer a,
+body.nokia_mid div#footer, body.nokia_mid div#footer a,
+body input[type='button'] {
+  color: #333333;
+}
+
+/* DARK */
+ul.list li:hover, dl.list-accordion dt:hover {
+  background-color:#444444;
+}
+
+body div#header {
+  border-bottom-color: #444444;
+}
+body.nokia_low h1, body.nokia_low h2,
+body.nokia_mid h1, body.nokia_mid h2 {
+  border-top-color: #444444;
+}
+
+/* LIGHT MID */
+body.nokia_high h1,
+body div#header,
+body.nokia_low div#footer, body.nokia_mid div#footer,
+ul.list li, dl.list-accordion dt {
+  background-color: #DDDFD9;
+}
+body div#footer,
+body h6, blockquote, blockquote p, body table, body td, body div.header-box p, body div.box p.box-text,
+body input[type='text'], body input[type='search'], body textarea {
+  border-color: #DDDFD9;
+}
+
+/* VERY LIGHT */
+div#menu, body h6, body td.table-header, body table td.odd, body div.box p.box-text, body div.header-box p {
+  background-color: #F2F4ED;
+}
+
+/* LIGHTEST */
+body.nokia_low h1, body.nokia_low h2, body.nokia_low div.header-box h3,
+body.nokia_low h1 a, body.nokia_low h2 a, body.nokia_low div.header-box h3 a,
+body.nokia_mid h1, body.nokia_mid h2, body.nokia_mid div.header-box h3,
+body.nokia_mid h1 a, body.nokia_mid h2 a, body.nokia_mid div.header-box h3 a {
+  color: #FFFFFF!important;
+}

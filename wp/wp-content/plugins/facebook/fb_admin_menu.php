@@ -5,45 +5,35 @@ add_action('admin_menu', 'fb_create_menu');
 
 function fb_create_menu() {
 	//create new top-level menu
-	$page = add_menu_page('Facebook Plugin Settings', 'Facebook', 'administrator', __FILE__, 'fb_settings_page',plugins_url('/images/icon.png', __FILE__));
+	$page = add_menu_page('Facebook Plugin Settings', 'Facebook', 'administrator', __FILE__, 'fb_settings_page', plugins_url('/images/icon.png', __FILE__));
 
 	//call register settings function
 	add_action( 'admin_print_styles-' . $page, 'fb_admin_style');
+	add_action( 'admin_enqueue_scripts', 'fb_admin_scripts' );
 }
 
 function fb_admin_style() {
-		wp_enqueue_style('fb_admin');
+	wp_enqueue_style('fb_admin');
+}
+
+
+function fb_admin_scripts( $hook_suffix ) {
+	wp_register_script( 'fb_admin', plugins_url('/fb_admin.js', __FILE__) );
+	wp_enqueue_script( 'fb_admin' );
 }
 
 // __return_false for no desc
 function fb_admin_menu_settings() {
 	$options = get_option('fb_options');
+	
 	wp_register_style('fb_admin', plugins_url('style_admin.css', __FILE__));
-		
+	
 	register_setting( 'fb_options', 'fb_options', 'fb_options_validate');
 	
 	add_settings_section('fb_section_main', 'Main Settings', 'fb_section_main', 'fb_options' );
 	add_settings_field('fb_field_app_id', 'App ID', 'fb_field_app_id', 'fb_options', 'fb_section_main');
 	add_settings_field('fb_field_app_secret', 'App Secret', 'fb_field_app_secret', 'fb_options', 'fb_section_main');
 	add_settings_field('fb_field_enable_fb', 'Enable Facebook for WordPress', 'fb_field_enable_fb', 'fb_options', 'fb_section_main');
-	
-	if (isset($options['enable_fb'])) {
-		add_settings_section('fb_section_like_send_subscribe', 'Like, Send, Subscribe Buttons on Posts', 'fb_section_like_send_subscribe', 'fb_options' );
-		add_settings_field('fb_field_like', 'Like Button', 'fb_field_like', 'fb_options', 'fb_section_like_send_subscribe');
-		add_settings_field('fb_field_like_position', 'Like Button Position', 'fb_field_like_position', 'fb_options', 'fb_section_like_send_subscribe');
-		add_settings_field('fb_field_subscribe', 'Subscribe Button', 'fb_field_subscribe', 'fb_options', 'fb_section_like_send_subscribe');
-		add_settings_field('fb_field_send', 'Send Button', 'fb_field_send', 'fb_options', 'fb_section_like_send_subscribe');
-		
-		add_settings_section('fb_section_comments', 'Comments on Posts', 'fb_section_comments', 'fb_options' );
-		add_settings_field('fb_field_comments', 'Comments on Posts', 'fb_field_comments', 'fb_options', 'fb_section_comments');
-		
-		add_settings_section('fb_section_social_reader', 'Social Reader for Posts', 'fb_section_social_reader', 'fb_options' );
-		add_settings_field('fb_field_recommendations_bar', 'Recommendations Bar', 'fb_field_recommendations_bar', 'fb_options', 'fb_section_social_reader');
-		
-		add_settings_section('fb_section_social_publisher', 'Social Publisher for Posts', 'fb_section_social_publisher', 'fb_options' );
-		add_settings_field('fb_field_og_publish', 'Publish New Posts to User Profile', 'fb_field_og_publish', 'fb_options', 'fb_section_social_publisher');
-		add_settings_field('fb_field_posts_to_fb_page', 'Publish New Posts to Facebook Page', 'fb_field_posts_to_fb_page', 'fb_options', 'fb_section_social_publisher');
-	}
 }
 
 function fb_settings_page() {
@@ -56,7 +46,26 @@ function fb_settings_page() {
 		<form method="post" action="options.php">
 			<?php
 			settings_fields( 'fb_options' );
-			do_settings_sections( 'fb_options' );
+			
+			print "<h3>Like Button</h3>
+			<p>The Like button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user's friends' News Feed with a link back to your website.</p>";
+			fb_get_like_fields();
+			
+			print '<h3>Subscribe Button</h3>';
+			fb_get_subscribe_fields();
+			
+			print '<h3>Send Button</h3>';
+			fb_get_send_fields();
+			
+			print '<h3>Comments</h3>';
+			fb_get_comments_fields();
+			
+			print '<h3>Social Reader</h3>';
+			fb_get_social_reader_fields();
+			
+			print '<h3>Social Publisher</h3>';
+			fb_get_social_publisher_fields();
+			
 			submit_button();
 			?>
 		</form>
@@ -66,6 +75,7 @@ function fb_settings_page() {
 
 // validate our options
 function fb_options_validate($input) {
+	/*
 	if (!defined('FB_APP_SECRET')) {
 		// secrets are 32 bytes long and made of hex values
 		$input['app_secret'] = trim($input['app_secret']);
@@ -91,6 +101,7 @@ function fb_options_validate($input) {
 	}
 
 	$input = apply_filters('fb_validate_options',$input); // filter to let sub-plugins validate their options too
+	*/
 	return $input;
 }
 
@@ -116,95 +127,229 @@ function fb_field_enable_fb() {
 
 
 
+/*
+ add_settings_field('fb_field_like', 'Like Button', 'fb_field_like', 'fb_options', 'fb_section_like');
 
+parent
+	name
+	section
+	field_type
+	help_text
+	help_link
+	
+	
 
-
-function fb_section_like_send_subscribe() {
-	echo '<p></p>';
-}
-
-function fb_field_like() {
+children
+	0
+		name
+		section (from parent)
+		field_type
+		help_text
+		help_link
+*/
+function fb_construct_fields($placement, $children, $parent = null) {
 	$options = get_option('fb_options');
 	
-	echo '<a href="https://developers.facebook.com/docs/reference/plugins/like/" target="_new" title="The Like button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user\'s friends\' News Feed with a link back to your website. Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_like]" value="true" ' . checked(isset($options['enable_like']), 1, false) . ' />';
-}
-
-function fb_field_like_position() {
-	$options = get_option('fb_options');
-	
-	if (isset($options['like_position'])) {
-		echo '<select name="fb_options[like_position]">
-				<option value="top"' . selected( $options['like_position'], 'top', false ) . '>Top</option>
-				<option value="bottom"' . selected( $options['like_position'], 'bottom', false ) . '>Bottom</option>
-				<option value="both"' . selected( $options['like_position'], 'both', false ) . '>Both</option>
-			</select>';
+	if ($placement == 'widget') {
+			/*
+		//send button
+		if ( isset( $instance[ 'send' ] ) ) {
+			$send = $instance[ 'send' ];
+		}
+		else {
+			$send = '';
+		}
+		?>
+		<p>
+		<input type="checkbox" id="<?php echo $this->get_field_id( 'send' ); ?>" name="<?php echo $this->get_field_name( 'send' ); ?>" value="true" <?php checked(TRUE, (bool) $send);  print $send; ?> />
+		<label for="<?php echo $this->get_field_id( 'send' ); ?>"><?php _e( 'Enable send button' ); ?></label>
+		</p>*/
+		}
+	else if ($placement == 'settings') {
+		$children_fields = fb_construct_fields_children($children, $parent);
+		
+		echo '<table class="form-table">
+						<tbody>';
+		
+		if ($parent) {
+			echo '	<tr valign="top">
+								<th scope="row">' . ucwords(str_replace("_", " ", $parent['name'])) . '</th>
+								<td><a href="' . $parent['help_link'] . '" target="_new" title="' . $parent['help_text'] . '" style=" text-decoration: none;">[?]</a>&nbsp; <input type="checkbox" name="fb_options[' . $parent['name'] . ']" value="true" id="' . $parent['name'] . '" ' . checked(isset($options[$parent['name']]), 1, false) . ' onclick="toggleOptions(\'' . $parent['name'] . '\', [\'' . implode("','", $children_fields['names']) . '\'])"></td>
+								</tr>';
+		}
+			echo $children_fields['output'];
+			
+			echo '</tbody>
+						</table>';
 	}
-	else {
-		echo '<select name="fb_options[like_position]">
-				<option value="top">Top</option>
-				<option value="bottom">Bottom</option>
-				<option value="both" selected>Both</option>
-			</select>';
+}
+
+function fb_construct_fields_children($children, $parent = null) {
+	$options = get_option('fb_options');
+	
+	$display = ' style="display: none" ';
+	
+	if ($parent) {
+		if (isset($options[$parent['name']]) && $options[$parent['name']] == 'true') {
+			$display = '';
+		}
 	}
-}
-
-
-
-
-function fb_field_subscribe() {
-	$options = get_option('fb_options');
 	
-	echo '<a href="https://developers.facebook.com/docs/reference/plugins/subscribe/" target="_new" title="The Subscribe button lets a user subscribe to your public updates on Facebook. Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_subscribe]" value="true" ' . checked(isset($options['enable_subscribe']), 1, false) . '" />';
-}
-
-function fb_field_send() {
-	$options = get_option('fb_options');
+	$children_output = '';
 	
-	echo '<a href="https://developers.facebook.com/docs/reference/plugins/send/" target="_new" title="The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address. Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_send]" value="true" ' . checked(isset($options['enable_send']), 1, false) . '" />';
-}
-
-
-
-
-
-function fb_section_comments() {
-	echo '<p></p>';
-}
-
-function fb_field_comments() {
-	$options = get_option('fb_options');
+	foreach ($children as $child) {
+		$help_link = '';
+		
+		if (!isset($child['help_link'])) {
+			$help_link = '<a href="#" target="_new" title="' . $child['help_text'] . '" onclick="return false;" style="color: #aaa; text-decoration: none;">[?]</a>';
+		}
+		else {
+			$help_link = '<a href="' . $child['help_link'] . '" target="_new" title="' . $child['help_text'] . '" style=" text-decoration: none;">[?]</a>';
+		}
+		
+		switch ($child['field_type']) {
+			case 'dropdown':
+				$children_output .= '	<tr valign="top"' . $display . ' id="' . $parent['name'] . '_' . $child['name'] . '">
+						<th scope="row">' . ucwords(str_replace("_", " ", $child['name'])) . '</th>
+						<td>' . $help_link . '&nbsp;';
+				
+				$children_output .= '<select name="fb_options[' . $parent['name'] . '_' . $child['name'] . ']">';
+				
+				if (isset($options[$child['name']])) {
+					foreach ($child['options'] as $option) {
+						
+						$children_output .= '<option value="' . $option . '"' . selected( $options[$child['name']], $option, false ) . '>' . $option . '</option>';
+					}
+				}
+				else {
+					foreach ($child['options'] as $option) {
+						$children_output .= '<option value="' . $option . '">' . $option . '</option>';
+					}
+				}
+				
+				$children_output .= '</select>
+														</td>
+																</tr>';
+				
+				break;
+			case 'checkbox':
+				$text_field_value = '';
+				
+				if (isset($options[$child['name']])) {
+					$text_field_value = $options[$child['name']];
+				}
+				
+				$children_output .= '	<tr valign="top"' . $display . ' id="' . $parent['name'] . '_' . $child['name'] . '">
+						<th scope="row">' . ucwords(str_replace("_", " ", $child['name'])) . '</th>
+						<td>' . $help_link . '&nbsp; <input type="checkbox" name="fb_options[' . $parent['name'] . '_' . $child['name'] . ']" value="' . $text_field_value . '"></td>
+						</tr>';
+				break;
+			case 'text':
+				$children_output .= '	<tr valign="top"' . $display . ' id="' . $parent['name'] . '_' . $child['name'] . '">
+						<th scope="row">' . ucwords(str_replace("_", " ", $child['name'])) . '</th>
+						<td>' . $help_link . '&nbsp; <input type="text" name="fb_options[' . $parent['name'] . '_' . $child['name'] . ']" value="true" ' . checked(isset($options[$child['name']]), 1, false) . '"></td>
+						</tr>';
+				break;
+		}
+		
+		
+		if ($parent['name']) {
+			$children_names[] = $parent['name'] . '_' . $child['name'];
+		}
+		else {
+			$children_names[] = $child['name'];
+		}
+		
+		
+	}
 	
-	echo '<a href="https://developers.facebook.com/docs/reference/plugins/comments/" target="_new" title="Comments Box is a social plugin that enables user commenting on your site. Features include moderation tools and distribution. Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_comments]" value="true" ' . checked(isset($options['enable_comments']), 1, false) . '" />';
-}
-
-
-
-
-function fb_section_social_reader() {
-	echo '<p></p>';
-}
-
-function fb_field_recommendations_bar() {
-	$options = get_option('fb_options');
+	$return['output'] = $children_output;
+	$return['names'] = $children_names;
 	
-	echo '<a href="https://developers.facebook.com/docs/reference/plugins/recommendationsbar/" target="_new" title="The Recommendations Bar allows users to like content, get recommendations, and share what they\'re reading with their friends.  Click to learn more.">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_recommendations_bar]" value="true" ' . $checked = checked(isset($options['enable_recommendations_bar']), 1, false) . '" />';
+	return $return;
 }
 
-
-
-function fb_section_social_publisher() {
-	echo '<p></p>';
-}
-
-
-function fb_field_og_publish() {
-	$options = get_option('fb_options');
+function fb_get_like_fields() {
+	$parent = array(
+									'name' => 'enable_like',
+									'field_type' => 'checkbox',
+									'help_text' => 'Click to learn more.',
+									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/like/',
+									);
 	
-	echo '<a href="#" target="_new" title="TODO">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_og_publish]" value="true" ' . checked(isset($options['enable_og_publish']), 1, false) . '" />';
-}
-function fb_field_posts_to_fb_page() {
-	$options = get_option('fb_options');
+	$children = array(array('name' => 'send',
+													'field_type' => 'checkbox',
+													'help_text' => 'Include a send button.',
+													),
+										array('name' => 'layout',
+													'field_type' => 'dropdown',
+													'options' => array('standard', 'button_count', 'box_count'),
+													'help_text' => 'Determines the size and amount of social context at the bottom.',
+													),
+										array('name' => 'width',
+													'field_type' => 'text',
+													'help_text' => 'The width of the plugin, in pixels.',
+													),
+										array('name' => 'show_faces',
+													'field_type' => 'checkbox',
+													'help_text' => 'Show profile pictures below the button.  Applicable to standard layout only.',
+													),
+										array('name' => 'action',
+													'field_type' => 'dropdown',
+													'options' => array('like', 'recommend'),
+													'help_text' => 'The verb to display in the button.',
+													),
+										array('name' => 'colorscheme',
+													'field_type' => 'dropdown',
+													'options' => array('light', 'dark'),
+													'help_text' => 'The color scheme of the button.',
+													),
+										array('name' => 'font',
+													'field_type' => 'dropdown',
+													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
+													'help_text' => 'The font of the button.',
+													),
+										);
 	
-	echo '<a href="#" target="_new" title="TODO">[?]</a>&nbsp; <input type="checkbox" name="fb_options[enable_posts_to_fb_page]" value="true" ' . checked(isset($options['enable_posts_to_fb_page']), 1, false) . '" />';
+	fb_construct_fields('settings', $children, $parent);
 }
+
+function fb_get_subscribe_fields() {
+	$parent = array(
+									'name' => 'enable_subscribe',
+									'field_type' => 'checkbox',
+									'help_text' => 'Click to learn more.',
+									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
+									);
+	
+	$children = array(array('name' => 'layout',
+													'field_type' => 'dropdown',
+													'options' => array('standard', 'button_count', 'box_count'),
+													'help_text' => 'Determines the size and amount of social context at the bottom.',
+													),
+										array('name' => 'width',
+													'field_type' => 'text',
+													'help_text' => 'The width of the plugin, in pixels.',
+													),
+										array('name' => 'show_faces',
+													'field_type' => 'checkbox',
+													'help_text' => 'Show profile pictures below the button.  Applicable to standard layout only.',
+													),
+										array('name' => 'colorscheme',
+													'field_type' => 'dropdown',
+													'options' => array('light', 'dark'),
+													'help_text' => 'The color scheme of the plugin.',
+													),
+										array('name' => 'font',
+													'field_type' => 'dropdown',
+													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
+													'help_text' => 'The font of the plugin.',
+													),
+										);
+	
+	fb_construct_fields('settings', $children, $parent);
+}
+
+
+
 ?>

@@ -1,0 +1,54 @@
+/*
+$Id: style.css 156906 2009-09-22 07:35:03Z jamesgpearce $
+$URL: http://plugins.svn.wordpress.org/wordpress-mobile-pack/trunk/themes/mobile_pack_base/style.css $
+Copyright (c) 2009 James Pearce & friends, portions mTLD Top Level Domain Limited, ribot, Forum Nokia
+This file is part of the WordPress Mobile Pack, licensed under the Apache License, Version 2.0. Consult server-side files for license.
+*/
+
+/* VERY DARK */
+body.nokia_low h1, body.nokia_low h2, body.nokia_low div.header-box h3,
+body.nokia_mid h1, body.nokia_mid h2, body.nokia_mid div.header-box h3,
+body.nokia_high div#header, body.nokia_high div#footer {
+	background-color: #6E811F!important;
+}
+body div.header-box h3 {
+	border-color: #6E811F;
+}
+a:link, body td.table-header,
+body h3, body h4, body h5, body form, body table, a:visited, a:hover, a:active {
+	color: #6E811F;
+}
+body.nokia_low div#header, body.nokia_low div#header a,
+body.nokia_mid div#header, body.nokia_mid div#header a,
+body.nokia_low div#footer, body.nokia_low div#footer a,
+body.nokia_mid div#footer, body.nokia_mid div#footer a,
+body input[type='button'] {
+  color: #6E811F;
+}
+
+/* DARK */
+ul.list li:hover, dl.list-accordion dt:hover {
+  background-color:#8D9C50;
+}
+
+body div#header {
+	border-bottom-color: #8D9C50;
+}
+body.nokia_low h1, body.nokia_low h2,
+body.nokia_mid h1, body.nokia_mid h2 {
+	border-top-color: #8D9C50;
+}
+
+/* LIGHT MID */
+
+body.nokia_high h1,
+body div#header,
+body.nokia_low div#footer, body.nokia_mid div#footer,
+ul.list li, dl.list-accordion dt {
+	background-color: #A2AE6F;
+}
+body div#footer,
+body h6, blockquote, blockquote p, body table, body td, body div.header-box p, body div.box p.box-text,
+body input[type='text'], body input[type='search'], body textarea {
+	border-color: #A2AE6F;
+}

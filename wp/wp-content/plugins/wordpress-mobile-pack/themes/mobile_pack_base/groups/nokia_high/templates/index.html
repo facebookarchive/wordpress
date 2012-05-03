@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN"
+"http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>Nokia Mobile Web Templates</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../resources/styles/reset.css" rel="stylesheet" type="text/css" />
+    <link href="../resources/styles/baseStyles.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../resources/scripts/templates.js" />
+    <script type="text/javascript">
+      function init() {
+        var myStyleTweaks = new StyleTweaker();
+        myStyleTweaks.add("Series60/5.0", "../resources/styles/tweaks/S605th.css");
+        myStyleTweaks.add("Series60/3.2", "../resources/styles/tweaks/S603rdFP2.css");
+        myStyleTweaks.add("AppleWebKit/420+", "../resources/styles/tweaks/S406th.css");
+        myStyleTweaks.add("N900", "../resources/styles/tweaks/maemo.css");
+        myStyleTweaks.add("Firefox/3.0a1 Tablet browser 0.3.7", "../resources/styles/tweaks/maemo.css");
+        myStyleTweaks.add("Opera Mini/4", "../resources/styles/tweaks/operamini.css");
+        myStyleTweaks.tweak();
+      }
+      addEvent("onload",init);
+    </script>
+  </head>
+  <body>
+  <div id="wrap">
+  <div id="header">
+  </div>
+  <div id="content">
+  <h1>Nokia Mobile Web Templates</h1>
+  <h3>Components</h3>
+  <ul class="list">
+    <li><a href="content.html">Content</a></li>
+    <li><a href="form.html">Forms</a></li>
+    <li><a href="lists.html">Lists</a></li>
+    <li><a href="buttons.html">Buttons</a></li>
+    <li><a href="navigation.html">Navigation</a></li>
+    <li><a href="table.html">Tables</a></li>
+    <li><a href="utility.html">Utility</a></li>
+  </ul>
+  </div>
+  <div id="footer" class="ft-large">
+  <p>© 2009 Forum Nokia</p>
+  </div>
+  </div>
+  </body>
+</html>

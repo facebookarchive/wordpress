@@ -169,30 +169,4 @@ class Facebook_Like_Button extends WP_Widget {
 		
 	}
 }
-
-function form_field($placement, $field_type, $field_options = array()) {
-	if ($placement == 'widget') {
-			/*
-		//send button
-		if ( isset( $instance[ 'send' ] ) ) {
-			$send = $instance[ 'send' ];
-		}
-		else {
-			$send = '';
-		}
-		?>
-		<p>
-		<input type="checkbox" id="<?php echo $this->get_field_id( 'send' ); ?>" name="<?php echo $this->get_field_name( 'send' ); ?>" value="true" <?php checked(TRUE, (bool) $send);  print $send; ?> />
-		<label for="<?php echo $this->get_field_id( 'send' ); ?>"><?php _e( 'Enable send button' ); ?></label>
-		</p>*/
-		}
-	else if ($placement == 'menu') {
-		
-	}
-		
-		
-		
-}
-
-
 ?>

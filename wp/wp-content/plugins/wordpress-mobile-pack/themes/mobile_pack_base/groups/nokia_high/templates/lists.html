@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN"
+"http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>Lists</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../resources/styles/reset.css" rel="stylesheet" type="text/css" />
+      <link href="../resources/styles/baseStyles.css" rel="stylesheet" type="text/css" />
+      <script type="text/javascript" src="../resources/scripts/templates.js"></script>
+    <script type="text/javascript">
+      function init() {
+        var myAccordionList = new AccordionList("accordion");
+        var myStyleTweaks = new StyleTweaker();
+        myStyleTweaks.add("Series60/5.0", "../resources/styles/tweaks/S605th.css");
+        myStyleTweaks.add("Series60/3.2", "../resources/styles/tweaks/S603rdFP2.css");
+        myStyleTweaks.add("AppleWebKit/420+", "../resources/styles/tweaks/S406th.css");
+        myStyleTweaks.add("N900", "../resources/styles/tweaks/maemo.css");
+        myStyleTweaks.add("Firefox/3.0a1 Tablet browser 0.3.7", "../resources/styles/tweaks/maemo.css");
+        myStyleTweaks.add("Opera Mini/4", "../resources/styles/tweaks/operamini.css");
+        myStyleTweaks.tweak();
+      }
+      addEvent("onload",init);
+    </script>
+  </head>
+  <body>
+  <div id="wrap">
+  <div id="header">
+  </div>
+  <div id="content">
+    <h1 class="top-aligned">Lists</h1>
+    <h3>1a. List with 30 x 30 (background) image</h3>
+        <ul class="list-graphical stack">
+          <li><a href="http://forumnokia.mobi">Line 1</a></li>
+          <li><a href="http://forumnokia.mobi">Line 2</a></li>
+        </ul>
+    <h3>1b. List with 40 x 40 (background) image</h3>
+        <ul class="list-graphical stack">
+          <li><a class="photo" href="http://forumnokia.mobi">Line 1</a></li>
+          <li><a class="photo" href="http://forumnokia.mobi">Line 2</a></li>
+        </ul>
+    <h3>2. List with 40 x 40 (inline) image</h3>
+        <ul class="list-graphical-inline stack">
+          <li><a href="http://forumnokia.mobi"><img src="../resources/images/img-40x40.png" alt="image" />Line 1</a></li>
+          <li><a href="http://forumnokia.mobi"><img src="../resources/images/img-40x40.png" alt="image" />Line 2</a></li>
+        </ul>
+    <h3>3. Styled list</h3>
+        <ul class="list stack">
+          <li><a href="http://forumnokia.mobi">Line 1</a></li>
+          <li><a href="http://forumnokia.mobi">Line 2</a></li>
+        </ul>
+
+    <h3>4. Unordered list (native)</h3>
+        <ul class="bullet">
+          <li>Line 1</li>
+          <li>Line 2</li>
+          <li>Line 3</li>
+        </ul>
+    <h3>5. Ordered list (native)</h3>
+    <ol>
+      <li>Line 1</li>
+      <li>Line 2
+      <ol>
+        <li>Nested 1</li>
+        <li>Nested 2</li>
+      </ol>
+      </li>
+      <li>Line 3</li>
+    </ol>
+    <h3>6. Accordion (definition) list</h3>
+    <dl id="accordion" class="list-accordion">
+      <dt><span></span>Lorem</dt>
+        <dd><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></dd>
+        <dt class="collapsed"><span></span>Ipsum</dt>
+        <dd><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></dd>
+        <dt class="expanded"><span></span>Dolor</dt>
+        <dd><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></dd>
+    </dl>
+    <h3>7. Grid</h3>
+    <ul class="grid">
+      <li><img src="../resources/images/img-60x60.png" alt="image" /></li>
+      <li><img src="../resources/images/img-60x60.png" alt="image" /></li>
+      <li><img src="../resources/images/img-60x60.png" alt="image" /></li>
+      <li><img src="../resources/images/img-60x60.png" alt="image" /></li>
+      <li><img src="../resources/images/img-60x60.png" alt="image" /></li>
+      <li><img src="../resources/images/img-60x60.png" alt="image" /></li>
+      <li><img src="../resources/images/img-60x60.png" alt="image" /></li>
+    </ul>
+    <div class="home"><a href="index.html">Home</a></div>
+  </div>
+  <div id="footer">
+    <p>© 2009 Forum Nokia</p>
+  </div>
+  </div>
+  </body>
+</html>

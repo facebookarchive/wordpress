@@ -1,0 +1,151 @@
+Nokia Mobile Web Templates for Mid-Range Devices
+
+-------------------------------------------------
+
+Nokia Mobile Web Templates are a series of custom, tested mobile web styles and components. Creative developers can mix and match components as needed or use the full series to completely customise their website or application. This series of templates is primarily intended for mid-range devices.
+
+--------------------------------------------------------------------------------
+
+PREREQUISITES
+
+XHTML
+
+Cascading Style Sheets (CSS)
+
+--------------------------------------------------------------------------------
+
+IMPORTANT FILES/CLASSES
+
+Template files (in Library):
+
+content.html
+
+lists.html
+
+form.html
+
+table.html
+
+
+Styles (in Resources):
+
+baseStyles-mid.css
+
+reset-mid.css
+
+
+Classes as noted in online documentation.
+
+
+Graphics source files:
+
+Artwork_Fireworks_CS4.png
+
+Artwork_Illustrator_CS4.ai
+
+--------------------------------------------------------------------------------
+
+REQUIRED CAPABILITIES
+
+None
+
+--------------------------------------------------------------------------------
+
+KNOWN ISSUES
+
+Please see detailed online documentation for issues and suggested solutions.
+
+--------------------------------------------------------------------------------
+
+RUNNING THE EXAMPLE
+
+Templates can be viewed locally in a desktop browser.
+
+Begin with mid-range/index.html.      
+
+--------------------------------------------------------------------------------
+
+BUILD & INSTALLATION INSTRUCTIONS
+
+See accompanying online documentation for details of classes and usage.   
+
+--------------------------------------------------------------------------------
+
+COMPATIBILITY
+
+Midrange templates are optimised for browsers that support the following CSS and XHTML capabilities: 
+
+Content
+
+- Basic styling (font weight, font size, colour) of common text elements including p, a, em, strong, and blockquote
+
+- Basic styling of link states 
+
+- Ability to apply background colours or images to headers, IDs, and DIVs 
+
+- Good support for margins, padding, and background image positioning  
+
+
+Lists
+
+- Styling of ordered, unordered, and definition lists using native bullets
+
+
+Tables
+
+- Styling of table borders and copy (i.e., font size, colour, font weight)
+
+- Styling of table headers (i.e., font size, font weight, background colour)
+
+- Styling of table captions (i.e., font size, font weight, colour)
+
+
+Forms
+
+- Basic styling of input fields (i.e., width, border, background image)
+
+- Basic support for margins and padding within forms 
+
+
+These capabilities can most often be found in the following Nokia devices:
+
+- Series 40 3rd Edition, initial release
+
+- Series 40 3rd Edition, Feature Pack 1 (e.g., Nokia 6131 and Nokia 6233 devices)
+
+- Series 40 3rd Edition, FP2 (e.g., Nokia 5300 and Nokia 7373 devices) 
+
+- Series 40 5th Edition Lite
+
+- Series 40 5th Edition, FP1 (e.g., Nokia 5310 XpressMusic, Nokia 6500 classic, Nokia 6600 fold, and Nokia 7900 Prism devices)
+
+- Series 40 5th Edition, FP1 Lite (e.g., Nokia 5000 device)
+
+- Series 40 6th Edition, non-WebKit devices
+
+Note: Device and browser capabilities will vary. Testing on a range of devices from within these platforms is recommended.
+
+--------------------------------------------------------------------------------
+
+VERSION HISTORY  
+
+1.0 First release
+1.1 Second release: Includes minor changes to styles for headers (h1-6), paragraphs, breadcrumbs (ul.breadcrumbs), and lists (ul).
+
+--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

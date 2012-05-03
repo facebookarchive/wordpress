@@ -1,0 +1,373 @@
+/* CSS Document */
+/*
+ * DEFAULT STYLES
+ * 
+ */
+body {
+	color: #333333;
+	font-weight: normal;
+	font-family: sans-serif;
+}
+/*removes horizontal overflow on certain devices*/
+body div#wrap {
+	width: 100%;
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	padding: 0;
+}
+/*
+ * HEADER
+ * 
+ */
+body div#header {
+	height: 36px;
+	background-color: #D8D8D8;
+	border-bottom: 4px solid #44AA33;
+	margin-bottom: .5em;
+}
+/*
+ * FOOTER
+ * 
+ */
+body div#footer {
+	background-color: #F6F6F6;
+	border-top: 1px solid #D8D8D8;
+	padding: .7em 0em;
+	clear: both;
+	height: auto;
+	display: block;
+}
+body div#footer ul {
+	margin-left: 20px;
+	padding-left: 0px;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+body div#footer ul li {
+	margin-left: 0;
+	padding-left: 0;
+}
+body div#footer p {
+	margin-left: 5px;
+	margin-top: .3em;
+	padding: 0;
+}
+/*
+ * BASIC ELEMENTS
+ * 
+ */
+ 
+/*body required as early browsers don't understand p by itself */
+body p {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 0.2em 0.5em 0.4em 10px;
+}
+
+strong {
+	font-weight: bold;
+}
+em {
+	font-style: normal;
+	font-weight: bold;
+}
+/*
+ * LINK STATES
+ * 
+ */
+a:link {
+	color:#003399;
+}
+
+a:visited {
+	color:#006600;
+}
+a:hover {
+	color:#FF9900;
+}
+
+a:active {
+	color:#990000;
+}
+
+/*
+ * HEADERS
+ * 
+ */
+body h1 {
+	padding-left: 10px;
+	padding-right: 10px;
+	color: white;
+	background-color: #0033CC;
+	border-top: 1px solid #367CE4;
+	border-bottom: 2px solid #001F80;
+	margin-top: .1em;
+	margin-bottom: .3em;
+	line-height: normal;
+	clear: both;
+}
+
+body h2 {
+	padding-left: 10px;
+	padding-right: 10px;
+	color: white;
+	background-color: #44AA33;
+	border-top: 1px solid #67DD30;
+	border-bottom: 2px solid #378C29;
+	margin-top: 0.1em;
+	margin-bottom: 0.3em;
+	line-height: normal;
+	clear: both;
+}
+
+body h3 {
+	padding-left: 10px;
+	color: #000077;
+	margin-top: 0.1em;
+	margin-bottom: 0.3em;
+}
+
+body h4 {
+	padding-left: 10px;
+	color: #CC0066;
+	margin-bottom: 0.3em;
+	margin-top: 0.1em;
+	font-weight: bold;
+}
+
+body h5 {
+	padding-left: 10px;
+	color: #333333;
+	margin-bottom: 0.2em;
+	margin-top: 0.1em;
+}
+
+body h6 {
+	background-color: #F6F6F6;
+	border-bottom: 1px solid #D8D8D8;
+	border-top: 1px solid #D8D8D8;
+	padding-left: 10px;
+	padding-top: .3em;
+	padding-bottom: .3em;
+	margin-bottom: 0.1em;
+	margin-top: 0.1em;
+}
+/*
+ * IMAGE WITH (OPTIONAL) CAPTION
+ * 
+ */
+body img.captioned-image {
+	margin: 0 0 0 2px;
+}
+
+body p.caption-image {
+	font-size: small;
+	margin-top: 0;
+	margin-bottom: 5px;
+	padding-left: 2px;
+}
+/*
+ * BLOCKQUOTE
+ * 
+ */
+blockquote {
+	margin: .3em 1em .6em 1em;
+	padding: .6em 0em .3em 0em;
+	border-top: 1px solid #D8D8D8;
+	border-bottom: 1px solid #D8D8D8;
+}
+blockquote p {
+	margin: .0;
+	padding: 0 0 .3em 0;
+	border-bottom: 1px solid #D8D8D8;
+}
+/*
+ * LISTS
+ * 
+ */
+/* compensates for smaller Opera Mini margins */
+ol, ul {
+	margin-left: .5em;
+}
+/* compensates for small margins on very early devices */
+ol ol, ul ul {
+	margin-left: .5em;
+}
+dd {
+	margin-left: 1em;
+}
+/*forces native margin*/
+body ul {
+	margin-bottom: 0.4em;
+}
+/*
+ * BREADCRUMBS
+ * 
+ */
+body ul.breadcrumbs {
+	padding-top: 0;
+	padding-bottom: .5em;
+	padding-left: 0;
+	padding-right: .5em;
+	font-size: small;
+	list-style-type: none;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+body ul.breadcrumbs li {
+	display: inline;
+	line-height: 1.5em;
+}
+/*
+ * FORMS
+ * 
+ */
+body fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+body form {
+	margin: 0;
+	color: #333333;
+}
+body form label {
+	font-size: .9em;
+	margin-bottom: .5em;
+	margin-top: .5em;
+}
+		
+body input[type='text'] { 
+	padding: 0.2em;	
+	margin-bottom: .5em;
+	display: block;
+}
+
+body textarea { 
+	padding: 0.2em;
+	margin-bottom: .7em;
+	display: block;
+}
+
+body form input[type='radio'], body form input[type='checkbox'] { 
+	margin:0.1em 0em;
+	padding: 0;
+}
+
+body select {
+	margin-bottom: 0;
+}
+
+body input[type='button'] {
+	padding: 1em 1.3em;
+	color: #666666;
+	margin: 1em 0em;
+}
+
+
+/*
+ * TABLES
+ * 
+ */
+body table {
+	border: 1px solid #D8D8D8;
+	margin: 0;
+	width: 100%;
+	color: #333333;
+	font-size: 80%;
+}
+
+body td {
+	padding-left: .3em;
+	padding-right: .3em;
+	padding-top: .2em;
+	padding-bottom: .2em;
+	line-height: 1.5em;
+	border: 1px solid #D8D8D8;
+}
+/*compensates for lack of consistent header support*/
+body td.table-header {
+	color: #0033CC;
+	font-weight: bold;
+	background-color: #F6F6F6;
+}
+body tr {
+	height: 1.5em;
+}
+
+body table td.odd {
+	background-color: #F6F6F6;
+}
+/*caption-side unlikely to be supported*/
+body caption {
+	caption-side: bottom;
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+	margin-left: 5px;
+	font-size: small;
+	text-align: left;
+	font-style: normal;
+}
+
+/*
+ * CONTAINER BOXES
+ * 
+ */
+body div.box p.box-text {
+	border: 1px solid #D8D8D8;
+	width: 90%;
+	margin: 0.3em auto;
+	padding: 0.4em 0.4em;
+	background-color: #F6F6F6;
+}
+body div.header-box p {
+	border: 1px solid #D8D8D8;
+	width: 90%;
+	margin: 0em auto;
+	padding: 0.4em 0.4em;
+	background-color: #F6F6F6;
+}
+/* 2px border is required to ensure header is flush with the box */
+body div.header-box h3 {
+	border: 2px solid #0033CC;
+	width: 90%;
+	margin: 0em auto;
+	padding: 0.3em 0.3em;
+	background-color: #0033CC;
+	color: white;
+}
+/*
+ * BACK TO TOP/HOME
+ * 
+ */
+p.top {
+	font-size: small;
+	background-color: #F6F6F6;
+	border-bottom: 1px solid #D8D8D8;
+	border-top: 1px solid #D8D8D8;
+	padding-top: .3em;
+	padding-bottom: .3em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	clear: both;
+}
+p.home {
+	font-size: small;
+	background-color: #F6F6F6;
+	border-bottom: 1px solid #D8D8D8;
+	border-top: 1px solid #D8D8D8;
+	padding-top: .3em;
+	padding-bottom: .3em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	clear: both;
+}
+p.top a, p.home a {
+	color: #333333;
+	text-decoration: none;
+	width: 100%;
+	display: block;
+}
+

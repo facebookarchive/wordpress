@@ -1,0 +1,8 @@
+/*slight increase in font size on large screen devices*/
+body {
+	font-size: 110%;
+}
+#footer.ft-large {
+	height: 12em;
+}
+

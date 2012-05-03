@@ -536,5 +536,17 @@ function fb_get_activity_feed_fields() {
 	fb_construct_fields('settings', $children);
 }
 
+function fb_add_settings_pages() {
+     add_submenu_page(
+         'edit-comments.php',
+         'Facebook',
+         'Facebook',
+         'moderate_comments',
+         'fb',
+         'fb_settings_page'
+     );
+}
+add_action('admin_menu', 'fb_add_settings_pages', 10);
+
 
 ?>

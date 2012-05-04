@@ -1,25 +1,25 @@
 <?php
 function fb_get_send_button($options = array()) {
 	$params = '';
-	
+
 	foreach ($options as $option => $value) {
 		$params .= $option . '="' . $value . '" ';
 	}
-	
+
 	return '<div class="fb-send" ' . $params . '></div>';
 }
 
 function fb_send_button_automatic($content) {
 	$options = get_option('fb_options');
-	
+
 	foreach($options['send'] as $param => $val) {
 		$param = str_replace('_', '-', $param);
-			
+
 		$options['send']['data-' . $param] =  $val;
 	}
-	
+
 	$content .= fb_get_send_button($options['send']);
-	
+
 	return $content;
 }
 
@@ -35,7 +35,7 @@ class Facebook_Send_Button extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 	 		'fb_send', // Base ID
-			'Facebook_Send_Button', // Name
+			'Facebook Send Button', // Name
 			array( 'description' => __( "The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address.", 'text_domain' ), ) // Args
 		);
 	}
@@ -55,8 +55,8 @@ class Facebook_Send_Button extends WP_Widget {
 		echo $before_widget;
 		if ( ! empty( $title ) )
 			echo $before_title . $title . $after_title;
-		
-		$options = array('data-href' => $instance['url']);	
+
+		$options = array('data-href' => $instance['url']);
 		echo fb_get_send_button($options);
 		echo $after_widget;
 	}
@@ -95,11 +95,11 @@ class Facebook_Send_Button extends WP_Widget {
 		}
 		?>
 		<p>
-		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
+		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
 		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
-		
-		<?php 
+
+		<?php
 		if ( isset( $instance[ 'url' ] ) ) {
 			$url = $instance[ 'url' ];
 		}
@@ -112,7 +112,7 @@ class Facebook_Send_Button extends WP_Widget {
 		<input class="widefat" id="<?php echo $this->get_field_id( 'url' ); ?>" name="<?php echo $this->get_field_name( 'url' ); ?>" type="text" value="<?php echo esc_attr( $url ); ?>" />
 		<p>Optional.  If you have a Page on Facebook that you want users to Send.  If you leave it blank, the user will send the current page that they're on.</p>
 		</p>
-		
+
 		<?php
 	}
 }

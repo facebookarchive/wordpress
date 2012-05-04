@@ -411,6 +411,9 @@ function responsive_breadcrumb_lists () {
         }
     }
 
+     // Use shortcodes in text widgets.
+     add_filter('featured-image', 'do_shortcode');
+	 
     /**
      * WordPress Widgets start right here.
      */

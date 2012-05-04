@@ -4,8 +4,7 @@
  *
  *
  * @file           theme-options.php
- * @package        WordPress 
- * @subpackage     responsive 
+ * @package        Responsive 
  * @author         Emil Uzelac 
  * @copyright      2003 - 2011 ThemeID
  * @license        license.txt
@@ -89,6 +88,18 @@ function responsive_site_statistics_tracker() {
 }
 
 add_action('wp_head', 'responsive_site_statistics_tracker');
+
+function responsive_inline_css() {
+    $options = get_option('responsive_theme_options');
+    if ($options['responsive_inline_css']) {
+		echo '<!-- Custom CSS Styles -->' . "\n";
+        echo '<style type="text/css" media="screen">' . "\n";
+		echo $options['responsive_inline_css'] . "\n";
+		echo '</style>' . "\n";
+	}
+}
+
+add_action('wp_head', 'responsive_inline_css');
 	
 /**
  * Create the options page
@@ -226,7 +237,11 @@ function responsive_theme_options_do_page() {
                  * Homepage Featured Content
                  */
                 ?>
-                <div class="grid col-300"><?php _e('Featured Content', 'responsive'); ?></div><!-- end of .grid col-300 -->
+                <div class="grid col-300">
+				    <?php _e('Featured Content', 'responsive'); ?>
+                    <a class="help-links" href="<?php echo esc_url(__('http://themeid.com/forum/topic/510/theme-options-featured-content/','responsive')); ?>" title="<?php esc_attr_e('See Docs', 'responsive'); ?>" target="_blank">
+                    <?php printf('See Docs'); ?></a>
+                </div><!-- end of .grid col-300 -->
                     <div class="grid col-620 fit">
                         <textarea id="responsive_theme_options[featured_content]" class="large-text" cols="50" rows="10" name="responsive_theme_options[featured_content]"><?php if (!empty($options['featured_content'])) esc_attr_e($options['featured_content']); ?></textarea>
                         <label class="description" for="responsive_theme_options[featured_content]"><?php _e('Paste your video or image source', 'responsive'); ?></label>
@@ -280,7 +295,11 @@ function responsive_theme_options_do_page() {
                  * Site Statistics Tracker
                  */
                 ?>
-                <div class="grid col-300"><?php _e('Site Statistics Tracker', 'responsive'); ?></div><!-- end of .grid col-300 -->
+                <div class="grid col-300">
+				    <?php _e('Site Statistics Tracker', 'responsive'); ?>
+                    <span class="help-links"><?php _e('Leave blank if plugin handles your webmaster tools', 'responsive'); ?></span>
+                </div><!-- end of .grid col-300 -->
+                    
                     <div class="grid col-620 fit">
                         <textarea id="responsive_theme_options[site_statistics_tracker]" class="large-text" cols="50" rows="10" name="responsive_theme_options[site_statistics_tracker]"><?php if (!empty($options['site_statistics_tracker'])) esc_attr_e($options['site_statistics_tracker']); ?></textarea>
                         <label class="description" for="responsive_theme_options[site_statistics_tracker]"><?php _e('Google Analytics, StatCounter, any other or all of them.', 'responsive'); ?></label>
@@ -341,11 +360,49 @@ function responsive_theme_options_do_page() {
                     <div class="grid col-620 fit">
                         <input id="responsive_theme_options[google_plus_uid]" class="regular-text" type="text" name="responsive_theme_options[google_plus_uid]" value="<?php if (!empty($options['google_plus_uid'])) esc_attr_e($options['google_plus_uid']); ?>" />  
                         <label class="description" for="responsive_theme_options[google_plus_uid]"><?php _e('Enter your Google+ URL', 'responsive'); ?></label>
+                    </div><!-- end of .grid col-620 -->
+                    
+                <div class="grid col-300"><?php _e('Instagram', 'responsive'); ?></div><!-- end of .grid col-300 -->
+                    <div class="grid col-620 fit">
+                        <input id="responsive_theme_options[instagram_uid]" class="regular-text" type="text" name="responsive_theme_options[instagram_uid]" value="<?php if (!empty($options['instagram_uid'])) esc_attr_e($options['instagram_uid']); ?>" />  
+                        <label class="description" for="responsive_theme_options[instagram_uid]"><?php _e('Enter your Instagram URL', 'responsive'); ?></label>
+                    </div><!-- end of .grid col-620 -->
+                    
+                <div class="grid col-300"><?php _e('Pinterest', 'responsive'); ?></div><!-- end of .grid col-300 -->
+                    <div class="grid col-620 fit">
+                        <input id="responsive_theme_options[pinterest_uid]" class="regular-text" type="text" name="responsive_theme_options[pinterest_uid]" value="<?php if (!empty($options['pinterest_uid'])) esc_attr_e($options['pinterest_uid']); ?>" />  
+                        <label class="description" for="responsive_theme_options[pinterest_uid]"><?php _e('Enter your Pinterest URL', 'responsive'); ?></label>
                         <p class="submit">
                         <input type="submit" class="button-primary" value="<?php _e('Save Options', 'responsive'); ?>" />
                         </p>
                     </div><!-- end of .grid col-620 -->
 
+                </div><!-- end of .rwd-block -->
+            </div><!-- end of .rwd-container -->
+            
+            <h3 class="rwd-toggle"><a href="#"><?php _e('Custom CSS Styles', 'responsive'); ?></a></h3>
+            <div class="rwd-container">
+                <div class="rwd-block"> 
+
+                <?php
+                /**
+                 * Custom Styles
+                 */
+                ?>
+                <div class="grid col-300">
+				    <?php _e('Custom CSS Styles', 'responsive'); ?>
+                    <a class="help-links" href="<?php echo esc_url(__('http://www.w3schools.com/css/default.asp','responsive')); ?>" title="<?php esc_attr_e('CSS Tutorial', 'responsive'); ?>" target="_blank">
+                    <?php printf('CSS Tutorial'); ?></a>
+                </div><!-- end of .grid col-300 -->
+                
+                    <div class="grid col-620 fit">
+                        <textarea id="responsive_theme_options[responsive_inline_css]" class="inline-css large-text" cols="50" rows="30" name="responsive_theme_options[responsive_inline_css]"><?php if (!empty($options['responsive_inline_css'])) esc_attr_e($options['responsive_inline_css']); ?></textarea>
+                        <label class="description" for="responsive_theme_options[responsive_inline_css]"><?php _e('Enter your custom CSS styles.', 'responsive'); ?></label>
+                        <p class="submit">
+                        <input type="submit" class="button-primary" value="<?php _e('Save Options', 'responsive'); ?>" />
+                        </p>
+                    </div><!-- end of .grid col-620 -->
+                                    
                 </div><!-- end of .rwd-block -->
             </div><!-- end of .rwd-container -->
             
@@ -391,6 +448,9 @@ function responsive_theme_options_validate($input) {
 	$input['stumble_uid'] = esc_url_raw($input['stumble_uid']);
 	$input['rss_uid'] = esc_url_raw($input['rss_uid']);
 	$input['google_plus_uid'] = esc_url_raw($input['google_plus_uid']);
+	$input['instagram_uid'] = esc_url_raw($input['instagram_uid']);
+	$input['pinterest_uid'] = esc_url_raw($input['pinterest_uid']);
+	$input['responsive_inline_css'] = wp_kses_stripslashes($input['responsive_inline_css']);
 	
     return $input;
 }

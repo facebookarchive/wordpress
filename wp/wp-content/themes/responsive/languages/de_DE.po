@@ -1,0 +1,953 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Responsive Theme\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-25 13:42:58 UTC\n"
+"PO-Revision-Date: 2012-04-30 20:28+0100\n"
+"Last-Translator: \n"
+"Language-Team: German, Germany\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: WebTranslateIt.com\n"
+
+#: 404.php
+#: archive.php
+#: blog-excerpt.php
+#: blog.php
+#: content-sidebar-half-page.php
+#: content-sidebar-page.php
+#: full-width-page.php
+#: image.php
+#: index.php
+#: landing-page.php
+#: page.php
+#: search.php
+#: sidebar-content-half-page.php
+#: sidebar-content-page.php
+#: single.php
+#: sitemap.php
+msgid "404 &#8212; Fancy meeting you here!"
+msgstr "404 &#8212; Es erstaunt mich dich hier zu treffen."
+
+#: sitemap.php
+#: single.php
+#: sidebar-content-page.php
+#: sidebar-content-half-page.php
+#: search.php
+#: page.php
+#: landing-page.php
+#: full-width-page.php
+#: content-sidebar-page.php
+#: content-sidebar-half-page.php
+#: blog.php
+#: blog-excerpt.php
+#: archive.php
+#: 404.php
+msgid "Don&#39;t panic, we&#39;ll get through this together. Let&#39;s explore our options here."
+msgstr "Keine Panik, wir werden hier zusammen durch kommen. Schauen wir die Möglichkeiten an."
+
+#: sitemap.php
+#: single.php
+#: sidebar-content-page.php
+#: sidebar-content-half-page.php
+#: search.php
+#: page.php
+#: landing-page.php
+#: index.php
+#: image.php
+#: full-width-page.php
+#: content-sidebar-page.php
+#: content-sidebar-half-page.php
+#: blog.php
+#: blog-excerpt.php
+#: archive.php
+#: 404.php
+msgid "You can return"
+msgstr "Du kannst zurückkehren"
+
+#: sitemap.php
+#: single.php
+#: sidebar-content-page.php
+#: sidebar-content-half-page.php
+#: search.php
+#: page.php
+#: landing-page.php
+#: full-width-page.php
+#: content-sidebar-page.php
+#: content-sidebar-half-page.php
+#: blog.php
+#: blog-excerpt.php
+#: archive.php
+#: 404.php
+msgid "Home"
+msgstr "Home"
+
+#: 404.php
+msgid "&larr; Home"
+msgstr "&larr; Home"
+
+#: 404.php
+#: archive.php
+#: blog-excerpt.php
+#: blog.php
+#: content-sidebar-half-page.php
+#: content-sidebar-page.php
+#: full-width-page.php
+#: image.php
+#: index.php
+#: landing-page.php
+#: page.php
+#: search.php
+#: sidebar-content-half-page.php
+#: sitemap.php
+#: single.php
+#: sidebar-content-page.php
+msgid "or search for the page you were looking for"
+msgstr "oder suchst du die Seite die du gesucht hast"
+
+#: archive.php
+msgid "Daily Archives: %s"
+msgstr "Tagesarchive: %s"
+
+#: archive.php
+msgid "Monthly Archives: %s"
+msgstr "Monatsarchive: %s"
+
+#: archive.php
+msgid "Yearly Archives: %s"
+msgstr "Jahresarchive: %s"
+
+#: archive.php
+msgid "Blog Archives"
+msgstr "Blog-Archive"
+
+#: sitemap.php
+#: index.php
+#: blog.php
+#: blog-excerpt.php
+#: archive.php
+msgid "Permanent Link to %s"
+msgstr "Permanenter Link zu %s"
+
+#: single.php
+#: sidebar-content-page.php
+#: sidebar-content-half-page.php
+#: search.php
+#: page.php
+#: index.php
+#: image.php
+#: full-width-page.php
+#: content-sidebar-page.php
+#: content-sidebar-half-page.php
+#: blog.php
+#: blog-excerpt.php
+#: archive.php
+msgid "<span class=\"%1$s\">Posted on</span> %2$s by %3$s"
+msgstr "<span class=\"%1$s\">Veröffentlicht am</span> %2$s von %3$s"
+
+#: single.php
+#: sidebar-content-page.php
+#: sidebar-content-half-page.php
+#: search.php
+#: page.php
+#: index.php
+#: image.php
+#: full-width-page.php
+#: content-sidebar-page.php
+#: content-sidebar-half-page.php
+#: blog.php
+#: blog-excerpt.php
+#: archive.php
+msgid "View all posts by %s"
+msgstr "Zeige alle Beiträge von %s"
+
+#: archive.php
+#: blog-excerpt.php
+#: blog.php
+#: content-sidebar-half-page.php
+#: content-sidebar-page.php
+#: full-width-page.php
+#: image.php
+#: index.php
+#: page.php
+#: search.php
+#: sidebar-content-half-page.php
+#: sidebar-content-page.php
+#: single.php
+msgid "No Comments &darr;"
+msgstr "Keine Kommentare ↓"
+
+#: single.php
+#: sidebar-content-page.php
+#: sidebar-content-half-page.php
+#: search.php
+#: page.php
+#: index.php
+#: image.php
+#: full-width-page.php
+#: content-sidebar-page.php
+#: content-sidebar-half-page.php
+#: blog.php
+#: blog-excerpt.php
+#: archive.php
+msgid "1 Comment &darr;"
+msgstr "1 Kommentar ↓"
+
+#: single.php
+#: sidebar-content-page.php
+#: sidebar-content-half-page.php
+#: search.php
+#: page.php
+#: index.php
+#: image.php
+#: full-width-page.php
+#: content-sidebar-page.php
+#: content-sidebar-half-page.php
+#: blog.php
+#: blog-excerpt.php
+#: archive.php
+msgid "% Comments &darr;"
+msgstr "% Kommentare ↓"
+
+#: sitemap.php
+#: single.php
+#: sidebar-content-page.php
+#: sidebar-content-half-page.php
+#: search.php
+#: page.php
+#: landing-page.php
+#: index.php
+#: image.php
+#: full-width-page.php
+#: content-sidebar-page.php
+#: content-sidebar-half-page.php
+#: blog.php
+#: blog-excerpt.php
+#: archive.php
+msgid "Pages:"
+msgstr "Seiten:"
+
+#: archive.php
+#: blog-excerpt.php
+#: blog.php
+#: content-sidebar-half-page.php
+#: content-sidebar-page.php
+#: single.php
+#: sidebar-content-page.php
+#: sidebar-content-half-page.php
+#: search.php
+#: page.php
+#: landing-page.php
+#: index.php
+#: image.php
+#: full-width-page.php
+msgid "Tagged with:"
+msgstr "Verschlagwortet mit:"
+
+#: single.php
+#: sidebar-content-page.php
+#: sidebar-content-half-page.php
+#: search.php
+#: page.php
+#: landing-page.php
+#: index.php
+#: image.php
+#: full-width-page.php
+#: content-sidebar-page.php
+#: content-sidebar-half-page.php
+#: blog.php
+#: blog-excerpt.php
+#: archive.php
+msgid "Posted in %s"
+msgstr "Veröffentlicht unter %s"
+
+#: sitemap.php
+#: single.php
+#: sidebar-content-page.php
+#: sidebar-content-half-page.php
+#: search.php
+#: page.php
+#: landing-page.php
+#: index.php
+#: image.php
+#: full-width-page.php
+#: content-sidebar-page.php
+#: content-sidebar-half-page.php
+#: blog.php
+#: blog-excerpt.php
+#: archive.php
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: sitemap.php
+#: single.php
+#: sidebar-content-page.php
+#: sidebar-content-half-page.php
+#: search.php
+#: page.php
+#: landing-page.php
+#: index.php
+#: full-width-page.php
+#: content-sidebar-page.php
+#: content-sidebar-half-page.php
+#: blog.php
+#: blog-excerpt.php
+#: archive.php
+msgid "&#8249; Older posts"
+msgstr "&#8249; Ältere Beiträge"
+
+#: archive.php
+#: blog-excerpt.php
+#: blog.php
+#: content-sidebar-half-page.php
+#: content-sidebar-page.php
+#: sitemap.php
+#: single.php
+#: sidebar-content-page.php
+#: sidebar-content-half-page.php
+#: search.php
+#: page.php
+#: landing-page.php
+#: index.php
+#: full-width-page.php
+msgid "Newer posts &#8250;"
+msgstr "Neuere Beiträge &#8250;"
+
+#: sitemap.php
+#: single.php
+#: sidebar-content-page.php
+#: sidebar-content-half-page.php
+#: search.php
+#: page.php
+#: landing-page.php
+#: index.php
+#: image.php
+#: full-width-page.php
+#: content-sidebar-page.php
+#: content-sidebar-half-page.php
+#: blog.php
+#: blog-excerpt.php
+#: archive.php
+msgid "&#9166; Home"
+msgstr "&#9166; Home"
+
+#: single.php
+#: sidebar-content-page.php
+#: sidebar-content-half-page.php
+#: search.php
+#: page.php
+#: landing-page.php
+#: index.php
+#: full-width-page.php
+#: content-sidebar-page.php
+#: content-sidebar-half-page.php
+#: blog.php
+msgid "Read more &#8250;"
+msgstr "Weiter lesen>"
+
+#: comments.php
+msgid "This post is password protected. Enter the password to view any comments."
+msgstr "Dieser Beitrag ist Passwort geschützt. Gib das Passwort ein, um alle Kommentare anzuzeigen."
+
+#: comments.php
+msgid "No Comments &#187;"
+msgstr "Keine Kommentare »"
+
+#: comments.php
+msgid "1 Comment &#187;"
+msgstr "1 Kommentar »"
+
+#: comments.php
+msgid "% Comments &#187;"
+msgstr "% Kommentare »"
+
+#: comments.php
+msgid "&#8249; Older comments"
+msgstr "&#8249; Ältere Kommentare"
+
+#: comments.php
+msgid "Newer comments &#8250;"
+msgstr "Neuere Kommentare &#8250;"
+
+#: comments.php
+msgid "Pings&#47;Trackbacks"
+msgstr "Pings/Trackbacks"
+
+#: comments.php
+msgid "for"
+msgstr "für"
+
+#: comments.php
+msgid "Name"
+msgstr "Name"
+
+#: comments.php
+msgid "E-mail"
+msgstr "E-Mail"
+
+#: comments.php
+msgid "Website"
+msgstr "Webseite"
+
+#: footer.php
+msgid "&copy;"
+msgstr "©"
+
+#: footer.php
+msgid "scroll to top"
+msgstr "Nach oben scrollen"
+
+#: footer.php
+msgid "&uarr;"
+msgstr "↑"
+
+#: footer.php
+msgid "http://themeid.com/responsive-theme"
+msgstr "http://themeid.com/responsive-theme"
+
+#: footer.php
+msgid "Responsive Theme"
+msgstr "Responsive Theme"
+
+#: footer.php
+msgid "http://wordpress.org"
+msgstr "http://wordpress.org"
+
+#: footer.php
+msgid "WordPress"
+msgstr "WordPress"
+
+#: home.php
+msgid "Hello, World!"
+msgstr "Hallo, Welt!"
+
+#: home.php
+msgid "Your H2 subheadline here"
+msgstr "Ihre H2 Unterschlagzeile kommt hier"
+
+#: home.php
+msgid ""
+"Your title, subtitle and this very content is editable from Theme Option. \n"
+"\t\t\t\t\t      Call to Action button and its destination link as well. Image on your right \n"
+"\t\t\t\t\t\t  can be an image or even YouTube video if you like."
+msgstr ""
+"Dein Titel, Untertitel und auch dieser Inhalt ist von Theme-Option aus bearbeitbar. \n"
+"\n"
+"\t\t\t\t\t      Call-to-Action Knopf und sein Ziel-link auch. Das Bild auf der rechten Seite \n"
+"\n"
+"\t\t\t\t\t\t  kann auch ein Bild oder YouTube-Video sein falls du möchtest."
+
+#: home.php
+msgid "Call to Action"
+msgstr "Call-to-Action"
+
+#: image.php
+msgid "&#8249; Return to"
+msgstr "&#8249; Zurück zu"
+
+#: image.php
+msgid "Read more &#8250;;"
+msgstr "Weiter lesen &#8250;;"
+
+#: index.php
+#: image.php
+msgid "Don't panic, we'll get through this together. Let's explore our options here."
+msgstr "Keine Panik, wir werden durch diese zusammen kommen. Schauen wir unsere Möglichkeiten an."
+
+#: index.php
+#: image.php
+msgid "home"
+msgstr "home"
+
+#: includes/functions.php
+msgid "Top Menu"
+msgstr "Top-Menü"
+
+#: includes/functions.php
+msgid "Header Menu"
+msgstr "Kopfzeilenmenü"
+
+#: includes/functions.php
+msgid "Sub-Header Menu"
+msgstr "Unterkopfzeilemenü"
+
+#: includes/functions.php
+msgid "Footer Menu"
+msgstr "Fußzeilenmenü"
+
+#: includes/functions.php
+msgid "<div class=\"read-more\">Read more &#8250;</div><!-- end of .read-more -->"
+msgstr "<div class=\"read-more\">Weiter lesen &#8250; </div><!-- end of .read-more -->"
+
+#: includes/functions.php
+msgid "Page"
+msgstr "Seite"
+
+#: includes/functions.php
+msgid "Untitled"
+msgstr "Unbetitelt"
+
+#: includes/functions.php
+msgid "Main Sidebar"
+msgstr "Haupt Sidebar"
+
+#. Only translate the first part and don't change the file name
+#: includes/functions.php
+msgid "Area One - sidebar.php"
+msgstr "Fläche Eins - sidebar.php"
+
+#: includes/functions.php
+msgid "Right Sidebar"
+msgstr "Rechten Sidebar"
+
+#. Only translate the first part and don't change the file name
+#: includes/functions.php
+msgid "Area Two - sidebar-right.php"
+msgstr "Fläche Zwei - sidebar-right.php"
+
+#: includes/functions.php
+msgid "Left Sidebar"
+msgstr "Linken Sidebar"
+
+#. Only translate the first part and don't change the file name
+#: includes/functions.php
+msgid "Area Three - sidebar-left.php"
+msgstr "Fläche Drei - sidebar-left.php"
+
+#: includes/functions.php
+msgid "Left Sidebar Half Page"
+msgstr "Linken Sidebar Halbe Seite"
+
+#. Only translate the first part and don't change the file name
+#: includes/functions.php
+msgid "Area Four - sidebar-left-half.php"
+msgstr "Fläche Vier - sidebar-left-half.php"
+
+#: includes/functions.php
+msgid "Right Sidebar Half Page"
+msgstr "Richten Sidebar Halbe Seite"
+
+#. Only translate the first part and don't change the file name
+#: includes/functions.php
+msgid "Area Five - sidebar-right-half.php"
+msgstr "Fläche Fünf - sidebar-right-half.php"
+
+#: sidebar-home.php
+#: includes/functions.php
+msgid "Home Widget 1"
+msgstr "Home Widget 1"
+
+#. Only translate the first part and don't change the file name
+#: includes/functions.php
+msgid "Area Six - sidebar-home.php"
+msgstr "Fläche Sechs - sidebar-home.php"
+
+#: sidebar-home.php
+#: includes/functions.php
+msgid "Home Widget 2"
+msgstr "Home Widget 2"
+
+#. Only translate the first part and don't change the file name
+#: includes/functions.php
+msgid "Area Seven - sidebar-home.php"
+msgstr "Fläche Sieben - sidebar-home.php"
+
+#: sidebar-home.php
+#: includes/functions.php
+msgid "Home Widget 3"
+msgstr "Home Widget 3"
+
+#. Only translate the first part and don't change the file name
+#: includes/functions.php
+msgid "Area Eight - sidebar-home.php"
+msgstr "Fläche Acht - sidebar-home.php"
+
+#: includes/functions.php
+msgid "Gallery Sidebar"
+msgstr "Galerie Sidebar"
+
+#. Only translate the first part and don't change the file name
+#: includes/functions.php
+msgid "Area Nine - sidebar-gallery.php"
+msgstr "Fläche Neuen - sidebar-gallery.php"
+
+#: includes/theme-options.php
+msgid "Theme Options"
+msgstr "Theme-Optionen"
+
+#. Don't forget the space at the start
+#: includes/theme-options.php
+msgid " Theme Options"
+msgstr " Theme-Optionen"
+
+#: includes/theme-options.php
+msgid "Options Saved"
+msgstr "Optionen gespeichert"
+
+#: includes/theme-options.php
+msgid "Theme Elements"
+msgstr "Elemente des Theme"
+
+#: includes/theme-options.php
+msgid "Disable Breadcrumb Lists?"
+msgstr "Brotkrümellisten deaktivieren?"
+
+#: includes/theme-options.php
+msgid "Check to disable"
+msgstr "Hacken zum deaktivieren"
+
+#: includes/theme-options.php
+msgid "Disable Call to Action Button?"
+msgstr "Call-to-Action Knopf deaktivieren?"
+
+#: includes/theme-options.php
+msgid "Save Options"
+msgstr "Optionen speichern"
+
+#: includes/theme-options.php
+msgid "Logo Upload"
+msgstr "Logo Hochladen"
+
+#: includes/theme-options.php
+msgid "Custom Header"
+msgstr "Benutzerdefinierte Kopfzeile"
+
+#: includes/theme-options.php
+msgid "Need to replace or remove default logo? <a href=\"%s\">Click here</a>."
+msgstr "Brauchen du das Standardlogo zu ersetzen oder entfernen? <a href=\"%s\">Hier Klicken</a>."
+
+#: includes/theme-options.php
+msgid "Home Page"
+msgstr "Homepage"
+
+#: includes/theme-options.php
+msgid "Headline"
+msgstr "Schlagzeile"
+
+#: includes/theme-options.php
+msgid "home_headline"
+msgstr "home_headline"
+
+#: includes/theme-options.php
+msgid "Enter your headline"
+msgstr "Dein Schlagzeile eingeben"
+
+#: includes/theme-options.php
+msgid "Subheadline"
+msgstr "Unterschlagzeile"
+
+#: includes/theme-options.php
+msgid "home_subheadline"
+msgstr "home_subheadline"
+
+#: includes/theme-options.php
+msgid "Enter your subheadline"
+msgstr "Dein Unterschlagzeile eingeben"
+
+#: includes/theme-options.php
+msgid "Content Area"
+msgstr "Inhaltsbereich"
+
+#: includes/theme-options.php
+msgid "home_content_area"
+msgstr "home_content_area"
+
+#: includes/theme-options.php
+msgid "Enter your content"
+msgstr "Dein Inhalt eingeben"
+
+#: includes/theme-options.php
+msgid "Call to Action (URL)"
+msgstr "Call-to-Action (URL)"
+
+#: includes/theme-options.php
+msgid "cta_url"
+msgstr "cta_url"
+
+#: includes/theme-options.php
+msgid "Enter your call to action URL"
+msgstr "Dein Call-to-Action URL eingeben"
+
+#: includes/theme-options.php
+msgid "Call to Action (Text)"
+msgstr "Call-to-Action (Text)"
+
+#: includes/theme-options.php
+msgid "cta_text"
+msgstr "cta_text"
+
+#: includes/theme-options.php
+msgid "Enter your call to action text"
+msgstr "Dein Call-to-Action Text eingeben"
+
+#: includes/theme-options.php
+msgid "Featured Content"
+msgstr "Vorgestellter Inhalt"
+
+#: includes/theme-options.php
+msgid "featured_content"
+msgstr "featured_content"
+
+#: includes/theme-options.php
+msgid "Paste your video or image source"
+msgstr "Dein Video- oder Bildquelle einfügen"
+
+#: includes/theme-options.php
+msgid "Webmaster Tools"
+msgstr "Webmaster-Tools"
+
+#: includes/theme-options.php
+msgid "Google Site Verification"
+msgstr "Google Website Bestätigung "
+
+#: includes/theme-options.php
+msgid "google_site_verification"
+msgstr "google_site_verification"
+
+#: includes/theme-options.php
+msgid "Enter your Google ID number only"
+msgstr "Nur dein Google ID-Nummer eingeben"
+
+#: includes/theme-options.php
+msgid "Bing Site Verification"
+msgstr "Bing Website Bestätigung"
+
+#: includes/theme-options.php
+msgid "bing_site_verification"
+msgstr "bing_site_verification"
+
+#: includes/theme-options.php
+msgid "Enter your Bing ID number only"
+msgstr "Nur dein Bing ID-Nummer eingeben"
+
+#: includes/theme-options.php
+msgid "Yahoo Site Verification"
+msgstr "Yahoo Website Bestätigung"
+
+#: includes/theme-options.php
+msgid "yahoo_site_verification"
+msgstr "yahoo_site_verification"
+
+#: includes/theme-options.php
+msgid "Enter your Yahoo ID number only"
+msgstr "Nur dein Yahoo ID-Nummer eingeben"
+
+#: includes/theme-options.php
+msgid "Site Statistics Tracker"
+msgstr "Website-Statistik Tracker"
+
+#: includes/theme-options.php
+msgid "site_statistics_tracker"
+msgstr "site_statistics_tracker"
+
+#: includes/theme-options.php
+msgid "Google Analytics, StatCounter, any other or all of them."
+msgstr "Google Analytics, StatCounter, eine andere oder alle von ihnen."
+
+#: includes/theme-options.php
+msgid "Social Icons"
+msgstr "Social Icons"
+
+#: includes/theme-options.php
+msgid "Twitter"
+msgstr "Twitter"
+
+#: includes/theme-options.php
+msgid "twitter_uid"
+msgstr "twitter_uid"
+
+#: includes/theme-options.php
+msgid "Enter your Twitter URL"
+msgstr "Dein Twitter URL eingeben"
+
+#: includes/theme-options.php
+msgid "Facebook"
+msgstr "Facebook"
+
+#: includes/theme-options.php
+msgid "facebook_uid"
+msgstr "facebook_uid"
+
+#: includes/theme-options.php
+msgid "Enter your Facebook URL"
+msgstr "Dein Facebook URL eingeben"
+
+#: includes/theme-options.php
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: includes/theme-options.php
+msgid "linkedin_uid"
+msgstr "linkedin_uid"
+
+#: includes/theme-options.php
+msgid "Enter your LinkedIn URL"
+msgstr "Dein LinkedIn URL eingeben"
+
+#: includes/theme-options.php
+msgid "YouTube"
+msgstr "YouTube"
+
+#: includes/theme-options.php
+msgid "youtube_uid"
+msgstr "youtube_uid"
+
+#: includes/theme-options.php
+msgid "Enter your YouTube URL"
+msgstr "Dein YouTube URL eingeben"
+
+#: includes/theme-options.php
+msgid "StumbleUpon"
+msgstr "StumbleUpon"
+
+#: includes/theme-options.php
+msgid "stumble_uid"
+msgstr "stumble_uid"
+
+#: includes/theme-options.php
+msgid "Enter your StumbleUpon URL"
+msgstr "Dein StumbleUpon URL eingeben"
+
+#: includes/theme-options.php
+msgid "RSS Feed"
+msgstr "RSS Feed"
+
+#: includes/theme-options.php
+msgid "rss_uid"
+msgstr "rss_uid"
+
+#: includes/theme-options.php
+msgid "Enter your RSS Feed URL"
+msgstr "Dein RSS Feed URL eingeben"
+
+#: includes/theme-options.php
+msgid "Google+"
+msgstr "Google +"
+
+#: includes/theme-options.php
+msgid "google_plus_uid"
+msgstr "google_plus_uid"
+
+#: includes/theme-options.php
+msgid "Enter your Google+ URL"
+msgstr "Dein Google+ URL eingeben"
+
+#: search.php
+msgid "We found"
+msgstr "Wir fanden"
+
+#: search.php
+msgid " &#8211; "
+msgstr " &#8211; "
+
+#: search.php
+msgid "<span class=\"post-search-terms\">"
+msgstr "<span class=\"post-search-terms\">"
+
+#: search.php
+msgid "</span><!-- end of .post-search-terms -->"
+msgstr "</span><!-- end of .post-search-terms -->"
+
+#: searchform.php
+msgid "search here &hellip;"
+msgstr "Hier suchen..."
+
+#: searchform.php
+msgid "Go"
+msgstr "Los"
+
+#: sidebar-gallery.php
+msgid "Image Information"
+msgstr "Bildinformationen"
+
+#: sidebar-gallery.php
+msgid "Full Size:"
+msgstr "In voller Größe:"
+
+#: sidebar-gallery.php
+msgid "Aperture: f&#47;"
+msgstr "Blende: f&#47;"
+
+#: sidebar-gallery.php
+msgid "Focal Length:"
+msgstr "Brennweite:"
+
+#: sidebar-gallery.php
+msgid "mm"
+msgstr "mm"
+
+#: sidebar-gallery.php
+msgid "ISO:"
+msgstr "ISO:"
+
+#: sidebar-gallery.php
+msgid "Shutter:"
+msgstr "Kameraverschluss:"
+
+#: sidebar-gallery.php
+msgid "Camera:"
+msgstr "Kamera:"
+
+#: sidebar.php
+#: sidebar-right.php
+#: sidebar-right-half.php
+#: sidebar-left.php
+#: sidebar-left-half.php
+#: sidebar-half-left.php
+msgid "In Archive"
+msgstr "Im Archiv"
+
+#: sidebar-home.php
+msgid "This is your first home widget box. To edit please go to Appearance > Widgets and choose 6th widget from the top in area six called Home Widget 1. Title is also managable from widgets as well."
+msgstr "Dies ist dein erster Home Widget Kästchen. Zum Bearbeiten bitte auf Design > Widgets gehen und das 6. Widget von oben in Fläche sechs namens Home Widget 1 wählen. Der Titel ist auch bei Widgets kontrollierbar."
+
+#: sidebar-home.php
+msgid "This is your second home widget box. To edit please go to Appearance > Widgets and choose 7th widget from the top in area seven called Home Widget 2. Title is also managable from widgets as well."
+msgstr "Dies ist dein erster Home Widget Kästchen. Zum Bearbeiten bitte auf Design > Widgets gehen und das 7. Widget von oben in Fläche sechs namens Home Widget 2 wählen. Der Titel ist auch bei Widgets kontrollierbar."
+
+#: sidebar-home.php
+msgid "This is your third home widget box. To edit please go to Appearance > Widgets and choose 8th widget from the top in area eight called Home Widget 3. Title is also managable from widgets as well."
+msgstr "Dies ist dein erster Home Widget Kästchen. Zum Bearbeiten bitte auf Design > Widgets gehen und das 8. Widget von oben in Fläche sechs namens Home Widget 3 wählen. Der Titel ist auch bei Widgets kontrollierbar."
+
+#: single.php
+#: search.php
+msgid "About"
+msgstr "Über"
+
+#: sitemap.php
+msgid "Categories"
+msgstr "Kategorien"
+
+#: sitemap.php
+msgid "Latest Posts"
+msgstr "Neueste Beiträge"
+
+#: includes/functions.php
+msgid "Archive for "
+msgstr "Archiv für"
+
+#: includes/functions.php
+msgid "Search results for "
+msgstr "Suchergebnisse für"
+
+#: includes/functions.php
+msgid "Posts tagged "
+msgstr "Beiträge verschlagwortet"
+
+#: includes/functions.php
+msgid "All posts by "
+msgstr "Alle Beiträge von"
+
+#: includes/functions.php
+msgid "Error 404 "
+msgstr "Fehler 404"
+
+#: search.php
+msgid "results for "
+msgstr "Ergebnisse für"
+
+#: sitemap.php
+msgid "Pages"
+msgstr "Seiten"
+

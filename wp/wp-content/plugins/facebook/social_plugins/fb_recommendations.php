@@ -1,11 +1,11 @@
 <?php
 function fb_get_recommendations($options = array()) {
 	$params = '';
-	
+
 	foreach ($options as $option => $value) {
 		$params .= $option . '="' . $value . '" ';
 	}
-	
+
 	return '<div class="fb-recommendations" ' . $params . '></div>';
 }
 
@@ -20,7 +20,7 @@ class Facebook_Recommendations extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 	 		'fb_recommendations', // Base ID
-			'Facebook_Recommendations', // Name
+			'Facebook Recommendations', // Name
 			array( 'description' => __( "The Recommendations Box shows personalized recommendations to your users.", 'text_domain' ), ) // Args
 		);
 	}
@@ -40,7 +40,7 @@ class Facebook_Recommendations extends WP_Widget {
 		echo $before_widget;
 		if ( ! empty( $title ) )
 			echo $before_title . $title . $after_title;
-			
+
 		echo fb_get_recommendations();
 		echo $after_widget;
 	}
@@ -79,10 +79,10 @@ class Facebook_Recommendations extends WP_Widget {
 		}
 		?>
 		<p>
-		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
+		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
 		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
-		<?php 
+		<?php
 	}*/
 
 }

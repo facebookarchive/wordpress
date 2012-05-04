@@ -15,48 +15,13 @@
 <!--BEGIN head-->
 <head profile="<?php evlget_profile_uri(); ?>">
 
-	<title><?php
-
-	global $page, $paged;
-
-	wp_title( '-', true, 'right' );
-
-	bloginfo( 'name' );
-
-	$site_description = get_bloginfo( 'description', 'display' );
-	if ( $site_description && ( is_home() || is_front_page() ) )
-		echo " - $site_description";
-
-	if ( $paged >= 2 || $page >= 2 )
-		echo ' - ' . sprintf( __( 'Page %s', 'evolve' ), max( $paged, $page ) );
-
-	?></title>
+	<title><?php wp_title('-', true); ?></title>
 
 	<!-- Meta Tags -->
 	<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo('charset'); ?>" />
 	<meta name="generator" content="WordPress" />
 
-	<!-- Stylesheets -->
-	<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" type="text/css" media="screen, projection" />
-	<link rel="stylesheet" href="<?php echo EVLCSS . '/print.css'; ?>" type="text/css" media="print" />
-  
-
-  <!-- Custom Stylesheets -->
-  
-  <?php get_template_part('custom-css', 'header'); ?>
-  
-	<!-- Theme Hook -->
-  <?php if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); // loads the javascript required for threaded comments ?>  
-  
-	     
-
- <?php $options = get_option('evolve'); 
- $css_content = $options['evl_css_content'];
- if (!empty($css_content)) {
- echo '<style type="text/css">'.stripslashes($css_content).'</style>'; } ?>      
-
-
-<?php wp_head(); ?>
+	<?php wp_head(); ?>
  
 <!--END head-->  
 </head>
@@ -66,7 +31,7 @@
 <!--BEGIN body-->
 <body <?php body_class(); ?>>
 
-<?php if ($options['evl_custom_background'] == "1") { ?>
+<?php $options = get_option('evolve'); if ($options['evl_custom_background'] == "1") { ?>
 <div id="wrapper">
 <?php } ?>
 

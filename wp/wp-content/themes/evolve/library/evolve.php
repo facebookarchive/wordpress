@@ -47,7 +47,7 @@ class WPevolve {
 		define( 'EVLTHEME', get_template_directory_uri(), true );
 		define( 'EVLLIBRARY', EVLTHEME . '/library', true ); // Shortcut to point to the /library/ URI
 		
-		if ( STYLESHEETPATH !== get_template_directory() ) define( 'EVLMEDIA', get_stylesheet_directory_uri(), true ); // Shortcut to point to the /media/ URI
+		if ( get_stylesheet_directory() !== get_template_directory() ) define( 'EVLMEDIA', get_stylesheet_directory_uri(), true ); // Shortcut to point to the /media/ URI
 		else define( 'EVLMEDIA', EVLLIBRARY . '/media', true ); // Shortcut to point to the /media/ URI
 		
 		define( 'EVLCSS', EVLMEDIA . '/css', true );

@@ -46,9 +46,9 @@ if ( ! isset( $content_width ) )
   
   
   
-	load_theme_textdomain( 'evolve', TEMPLATEPATH . '/languages' );
+	load_theme_textdomain( 'evolve', get_template_directory() . '/languages' );
 	$locale = get_locale();
-	$locale_file = TEMPLATEPATH . "/languages/$locale.php";
+	$locale_file = get_template_directory() . "/languages/$locale.php";
 	if ( is_readable( $locale_file ) )
 		require_once( $locale_file ); 
 /**
@@ -1724,7 +1724,7 @@ case 'select1':
 								foreach ( $evlselect_sidebar_num as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+										$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
 										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 								}
@@ -1755,7 +1755,7 @@ case 'select2':
 								foreach ( $evlselect_sidebar as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+												$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
 										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 								}
@@ -1786,7 +1786,7 @@ case 'select3':
 								foreach ( $evlselect_width as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+												$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
 										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 								}
@@ -1818,7 +1818,7 @@ case 'select4':
 								foreach ( $evlselect_home_header as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
 										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
 								}
@@ -1850,9 +1850,9 @@ case 'select5':
 								foreach ( $evlselect_content_back as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";   
 								}
 								echo $p . $r;   
 							?>    
@@ -1882,9 +1882,9 @@ case 'select6':
 								foreach ( $evlselect_menu_back as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+												$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";    
 								}
 								echo $p . $r;   
 							?>    
@@ -1914,9 +1914,9 @@ case 'select7':
 								foreach ( $evlselect_main_color as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+												$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>"; 
 								}
 								echo $p . $r;   
 							?>    
@@ -1946,9 +1946,9 @@ case 'select8':
 								foreach ( $evlselect_post_layout as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";    
 								}
 								echo $p . $r;   
 							?>    
@@ -1978,9 +1978,9 @@ case 'select9':
 								foreach ( $evlselect_title_font as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";    
 								}
 								echo $p . $r;   
 							?>    
@@ -2010,9 +2010,9 @@ case 'select10':
 								foreach ( $evlselect_content_font as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";     
 								}
 								echo $p . $r;   
 							?>    
@@ -2042,9 +2042,9 @@ case 'select11':
 								foreach ( $evlselect_widgets_num as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";   
 								}
 								echo $p . $r;   
 							?>    
@@ -2074,9 +2074,9 @@ case 'select12':
 								foreach ( $evlselect_widgets_header as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";   
 								}
 								echo $p . $r;   
 							?>    
@@ -2105,9 +2105,9 @@ case 'select13':
 								foreach ( $evlselect_logo as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";    
 								}
 								echo $p . $r;   
 							?>    
@@ -2138,9 +2138,9 @@ case 'select14':
 								foreach ( $evlselect_nav_links as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";    
 								}
 								echo $p . $r;   
 							?>    
@@ -2170,9 +2170,9 @@ case 'select15':
 								foreach ( $evlslider_speed as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";  
 								}
 								echo $p . $r;   
 							?>    
@@ -2201,9 +2201,9 @@ case 'select16':
 								foreach ( $evlselect_back_button as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";    
 								}
 								echo $p . $r;   
 							?>    
@@ -2233,9 +2233,9 @@ case 'select17':
 								foreach ( $evlshare_this_button as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";  
 								}
 								echo $p . $r;   
 							?>    
@@ -2265,9 +2265,9 @@ case 'select18':
 								foreach ( $evlheader_meta as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";   
 								}
 								echo $p . $r;   
 							?>    
@@ -2297,9 +2297,9 @@ case 'select19':
 								foreach ( $evlselect_post_links as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+										$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";  
 								}
 								echo $p . $r;   
 							?>    
@@ -2328,9 +2328,9 @@ case 'select20':
 								foreach ( $evlselect_single_header as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+										$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";    
 								}
 								echo $p . $r;   
 							?>    
@@ -2360,9 +2360,9 @@ case 'select21':
 								foreach ( $evlselect_archives_header as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";   
 								}
 								echo $p . $r;   
 							?>    
@@ -2391,9 +2391,9 @@ case 'select22':
 								foreach ( $evlselect_tagline_pos as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+										$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";  
 								}
 								echo $p . $r;   
 							?>    
@@ -2423,9 +2423,9 @@ case 'select23':
 								foreach ( $evlselect_similar_posts as $option ) {
 									$label = $option['label'];
 									if ( $selected == $option['value'] ) // Make default first in list
-										$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+										$p = "\n\t<option style=\"padding-right: 10px;\" ".selected( $selected, $option['value'] )." value='" . esc_attr( $option['value'] ) . "'>$label</option>";
 									else
-										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";      
+										$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";  
 								}
 								echo $p . $r;   
 							?>    
@@ -2447,16 +2447,16 @@ case "checkbox":
 <tr>
 <td width="30%" rowspan="2" valign="middle"><strong><?php echo $value['name']; ?></strong></td>
 <td width="70%">
-<input type="checkbox" name="<?php echo 'evolve['.$value['id'].']'; ?>" id="<?php echo 'evolve['.$value['id'].']'; ?>" value="1" <?php checked( '1', $evloptions[$value['id']] ); ?>/>
+<input type="checkbox" name="<?php echo 'evolve['.$value['id'].']'; ?>" id="<?php echo 'evolve['.$value['id'].']'; ?>" value="1" <?php checked( '1', $evloptions[$value['id']] ); ?>>
 </td>
 </tr>
 
-
+                            
 
  
 <tr>
 <td><small><?php echo $value['desc']; ?></small></td>
-</tr><tr><td colspan="2" style="margin-bottom:5px;border-bottom:1px dotted #ddd;">&nbsp;</td></tr><tr><td colspan="2">&nbsp;</td></tr>
+</tr><tr><td colspan="2" style="margin-bottom:5px;border-bottom:1px dotted #ddd;">&nbsp;</td></tr><tr><td colspan="2">&nbsp;</td></tr>       
 
 <?php
 break;
@@ -2954,6 +2954,40 @@ if ( is_admin() && isset($_GET['activated'] ) && $pagenow ==	"themes.php" )
 if ($evloptions['evl_custom_background'] == "1") { 
 add_custom_background();
 }  
+
+function evolve_filter_wp_title( $title ) {
+    
+    global $page, $paged;
+    
+    // Get the Site Name
+    $site_name = get_bloginfo( 'name' );
+    // Prepend name
+    $filtered_title = $site_name . $title;
+    // Get the Site Description
+        $site_description = get_bloginfo( 'description' );
+    // If site front page, append description
+    if ( $site_description && ( is_home() || is_front_page() ) ) {
+        // Append Site Description to title
+        $filtered_title .= ' - ' .$site_description;
+        
+    }
+    if ( $paged >= 2 || $page >= 2 ) {
+        $filtered_title .= ' - ' . sprintf( __( 'Page %s', 'pure-line' ), max( $paged, $page ) );
+        }
+    // Return the modified title
+    return $filtered_title;
+}
+// Hook into 'wp_title'
+add_filter( 'wp_title', 'evolve_filter_wp_title' );
+
+
+function evolve_enqueue_comment_reply() {
+        if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) { 
+                wp_enqueue_script( 'comment-reply' ); 
+        }
+    }
+    add_action( 'wp_enqueue_scripts', 'evolve_enqueue_comment_reply' );
+
 
  // Share This Buttons
 

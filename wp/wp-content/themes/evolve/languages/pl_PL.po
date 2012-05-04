@@ -1,0 +1,521 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: EvoLve PL\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-30 11:00+0100\n"
+"PO-Revision-Date: 2012-04-30 13:59+0100\n"
+"Last-Translator: \n"
+"Language-Team: Hector <kontakt@poisonedcraft.pl>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../evolve/comments.php:10
+msgid "This post is password protected. Enter the password to view comments."
+msgstr "Ten post jest chroniony hasłem. Wpisz hasło, aby zobaczyć komentarze."
+
+#: ../evolve/comments.php:49
+msgid "No Comments Yet"
+msgstr "Brak komentarzy"
+
+#: ../evolve/footer.php:126
+msgid "Back to Top"
+msgstr "Wróć na górę"
+
+#: ../evolve/functions.php:95
+msgid "Right &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Prawy &nbsp;&nbsp;&nbsp;(domyślne)"
+
+#: ../evolve/functions.php:99
+#: ../evolve/functions.php:398
+msgid "Left"
+msgstr "Lewy"
+
+#: ../evolve/functions.php:103
+msgid "Left + Right"
+msgstr "Lewy + Prawy"
+
+#: ../evolve/functions.php:110
+msgid "Left &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Lewy &nbsp;&nbsp;&nbsp;(domyślne)"
+
+#: ../evolve/functions.php:114
+#: ../evolve/functions.php:402
+msgid "Right"
+msgstr "Prawy"
+
+#: ../evolve/functions.php:118
+#: ../evolve/functions.php:133
+#: ../evolve/functions.php:159
+#: ../evolve/functions.php:174
+#: ../evolve/functions.php:189
+#: ../evolve/functions.php:426
+#: ../evolve/functions.php:441
+#: ../evolve/functions.php:460
+#: ../evolve/functions.php:479
+msgid "Disable"
+msgstr "Wyłączony"
+
+#: ../evolve/functions.php:125
+#: ../evolve/functions.php:251
+msgid "1 &nbsp;&nbsp;&nbsp;(default)"
+msgstr "1 &nbsp;&nbsp;&nbsp;(domyślne)"
+
+#: ../evolve/functions.php:129
+#: ../evolve/functions.php:255
+#: ../evolve/functions.php:321
+#: ../evolve/functions.php:345
+msgid "2"
+msgstr "2"
+
+#: ../evolve/functions.php:140
+msgid "Fixed &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Stała &nbsp;&nbsp;&nbsp;(domyślne)"
+
+#: ../evolve/functions.php:144
+msgid "Fluid"
+msgstr "Zmienna"
+
+#: ../evolve/functions.php:151
+#: ../evolve/functions.php:166
+#: ../evolve/functions.php:181
+msgid "Search Field + Subscribe Buttons &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Pole wyszukiwania + Pole subskrypcji &nbsp;&nbsp;&nbsp;(domyślne)"
+
+#: ../evolve/functions.php:155
+#: ../evolve/functions.php:170
+#: ../evolve/functions.php:185
+msgid "Recent Posts + Search Field + Subscribe Buttons"
+msgstr "Popularne posty +Pole wyszukiwania + Przycisk subskrypcji"
+
+#: ../evolve/functions.php:197
+#: ../evolve/functions.php:208
+msgid "Light &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Jasny &nbsp;&nbsp;&nbsp;(domyślne)"
+
+#: ../evolve/functions.php:201
+#: ../evolve/functions.php:212
+msgid "Dark"
+msgstr "Ciemny"
+
+#: ../evolve/functions.php:220
+msgid "Dark Grey + Blue &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Ciemny szary + niebieski &nbsp;&nbsp;&nbsp;(domyślne)"
+
+#: ../evolve/functions.php:224
+msgid "Light Grey + Blue"
+msgstr "Jasny szary + Niebieski"
+
+#: ../evolve/functions.php:228
+msgid "Green + Yellow"
+msgstr "Zielony + Żółty"
+
+#: ../evolve/functions.php:232
+msgid "Red + Yellow"
+msgstr "Czerwony + Fioletowy"
+
+#: ../evolve/functions.php:236
+msgid "Pink + Purple"
+msgstr "Różowy + Fioletowy"
+
+#: ../evolve/functions.php:240
+msgid "Light Blue + Blue"
+msgstr "Jasny niebieski + Niebieski"
+
+#: ../evolve/functions.php:244
+msgid "Brown + Yellow"
+msgstr "Brązowy + Żółty"
+
+#: ../evolve/functions.php:259
+#: ../evolve/functions.php:325
+#: ../evolve/functions.php:349
+msgid "3"
+msgstr "3"
+
+#: ../evolve/functions.php:266
+#: ../evolve/functions.php:289
+msgid "Myriad Pro &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Myriad Pro &nbsp;&nbsp;&nbsp;(domyślne)"
+
+#: ../evolve/functions.php:270
+msgid "Tahoma"
+msgstr "Tahoma"
+
+#: ../evolve/functions.php:274
+#: ../evolve/functions.php:297
+msgid "Georgia"
+msgstr "Georgia"
+
+#: ../evolve/functions.php:278
+#: ../evolve/functions.php:293
+msgid "Arial"
+msgstr "Arial"
+
+#: ../evolve/functions.php:282
+#: ../evolve/functions.php:305
+msgid "Calibri"
+msgstr "Calibri"
+
+#: ../evolve/functions.php:301
+msgid "Segoe UI"
+msgstr "Segoe UI"
+
+#: ../evolve/functions.php:313
+#: ../evolve/functions.php:337
+#: ../evolve/functions.php:375
+#: ../evolve/functions.php:394
+#: ../evolve/functions.php:486
+msgid "Disable &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Wyłączony &nbsp;&nbsp;&nbsp;(domyślne)"
+
+#: ../evolve/functions.php:317
+#: ../evolve/functions.php:341
+msgid "1"
+msgstr "1"
+
+#: ../evolve/functions.php:329
+#: ../evolve/functions.php:353
+msgid "4"
+msgstr "4"
+
+#: ../evolve/functions.php:360
+msgid "After posts &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Po postach &nbsp;&nbsp;&nbsp;(domyślne)"
+
+#: ../evolve/functions.php:364
+msgid "Before posts"
+msgstr "Przed postami"
+
+#: ../evolve/functions.php:368
+#: ../evolve/functions.php:456
+msgid "Both"
+msgstr "Oba"
+
+#: ../evolve/functions.php:379
+msgid "Normal"
+msgstr "Normalny"
+
+#: ../evolve/functions.php:383
+msgid "Slow"
+msgstr "Wolny"
+
+#: ../evolve/functions.php:387
+msgid "Fast"
+msgstr "Szybki"
+
+#: ../evolve/functions.php:406
+msgid "Middle"
+msgstr "Środek"
+
+#: ../evolve/functions.php:414
+msgid "Single posts &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Pojedyńcze posty &nbsp;&nbsp;&nbsp;(domyślne)"
+
+#: ../evolve/functions.php:418
+msgid "Single posts + Archive pages"
+msgstr "Pojedyńcze posty + Archiwalne strony"
+
+#: ../evolve/functions.php:422
+msgid "All pages"
+msgstr "Wszystkie strony"
+
+#: ../evolve/functions.php:433
+msgid "Single posts + Archive pages &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Pojedyńcze posty + Archiwalne strony &nbsp;&nbsp;&nbsp;(domyślne)"
+
+#: ../evolve/functions.php:437
+msgid "Single posts"
+msgstr "Pojedyńcze posty"
+
+#: ../evolve/functions.php:448
+msgid "After post content &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Po treści posta &nbsp;&nbsp;&nbsp;(domyślne)"
+
+#: ../evolve/functions.php:452
+msgid "Before post content"
+msgstr "Przed treścią posta"
+
+#: ../evolve/functions.php:467
+msgid "Next to blog title &nbsp;&nbsp;&nbsp;(default)"
+msgstr "Obok tytułu bloga &nbsp;&nbsp;&nbsp;(domyślne)"
+
+#: ../evolve/functions.php:471
+msgid "Above blog title"
+msgstr "Nad tytułem bloga"
+
+#: ../evolve/functions.php:475
+msgid "Under blog title"
+msgstr "Pod tytułem bloga"
+
+#: ../evolve/functions.php:490
+msgid "Match by categories"
+msgstr "Dopasuj wg. kategorii"
+
+#: ../evolve/functions.php:494
+msgid "Match by tags"
+msgstr "Dopasuj wg. tagów"
+
+#: ../evolve/functions.php:2745
+msgid "Primary Menu"
+msgstr "Główne menu"
+
+#: ../evolve/functions.php:2801
+msgid "<div style=\"padding:5px;margin-bottom:40px;\"><h5 style=\"font-style:italic;\">Similar posts</h5><ul style=\"margin-bottom:0px;\">"
+msgstr "<div style=\"padding:5px;margin-bottom:40px;\"><h5 style=\"font-style:italic;\">Podobne posty</h5><ul style=\"margin-bottom:0px;\">"
+
+#: ../evolve/functions.php:2962
+msgid "SHARE THIS"
+msgstr "PODZIEL SIĘ"
+
+#: ../evolve/functions.php:2967
+msgid "E-mail"
+msgstr "E-mail"
+
+#: ../evolve/functions.php:2968
+msgid "More options"
+msgstr "Więcej opcji"
+
+#: ../evolve/header-content.php:28
+#: ../evolve/header-content.php:179
+msgid "Follow"
+msgstr "Kanał RSS"
+
+#: ../evolve/header-content.php:129
+msgid "Read more &raquo;"
+msgstr "Więcej... &raquo;"
+
+#: ../evolve/header-content.php:144
+msgid "Oops, please try to refresh the page"
+msgstr "Ups, spróbuj odświerzyć stronę"
+
+#: ../evolve/header.php:31
+#, php-format
+msgid "Page %s"
+msgstr "Strona %s"
+
+#: ../evolve/index.php:59
+#: ../evolve/index.php:208
+#: ../evolve/index.php:445
+#: ../evolve/index.php:469
+#: ../evolve/index.php:631
+#: ../evolve/index.php:661
+#: ../evolve/index.php:828
+#: ../evolve/no-sidebar.php:24
+msgid "Untitled"
+msgstr "Bez nazwy"
+
+#: ../evolve/index.php:68
+#: ../evolve/index.php:216
+#: ../evolve/index.php:520
+#: ../evolve/index.php:638
+msgid "Leave a Comment"
+msgstr "Napisz komentarz"
+
+#: ../evolve/index.php:68
+#: ../evolve/index.php:216
+#: ../evolve/index.php:520
+#: ../evolve/index.php:638
+msgid "1 Comment"
+msgstr "1 Komentarz"
+
+#: ../evolve/index.php:68
+#: ../evolve/index.php:216
+#: ../evolve/index.php:520
+#: ../evolve/index.php:638
+msgid "% Comments"
+msgstr "% Komentarzy"
+
+#: ../evolve/index.php:82
+msgid "By"
+msgstr "Przez"
+
+#: ../evolve/index.php:84
+#: ../evolve/index.php:233
+#: ../evolve/index.php:459
+#: ../evolve/index.php:655
+msgid "edit"
+msgstr "edytuj"
+
+#: ../evolve/index.php:95
+#: ../evolve/index.php:241
+#: ../evolve/index.php:474
+#: ../evolve/index.php:665
+#: ../evolve/index.php:832
+#: ../evolve/no-sidebar.php:28
+msgid "EDIT"
+msgstr "EDYTUJ"
+
+#: ../evolve/index.php:230
+#: ../evolve/index.php:457
+#: ../evolve/index.php:651
+msgid "Written by"
+msgstr "Napisany przez"
+
+#: ../evolve/index.php:264
+#: ../evolve/index.php:516
+#: ../evolve/index.php:700
+#: ../evolve/index.php:706
+#: ../evolve/index.php:841
+#: ../evolve/no-sidebar.php:37
+msgid "READ MORE &raquo;"
+msgstr "WIĘCEJ... &raquo;"
+
+#: ../evolve/index.php:265
+#: ../evolve/index.php:708
+msgid "<strong>Pages:</strong>"
+msgstr "<strong>Strony:</strong>"
+
+#: ../evolve/index.php:288
+#: ../evolve/index.php:722
+msgid "Posted in"
+msgstr "Napisano w"
+
+#: ../evolve/index.php:291
+#: ../evolve/index.php:726
+msgid "Tagged"
+msgstr "Otagowany"
+
+#: ../evolve/index.php:327
+#: ../evolve/index.php:567
+#: ../evolve/index.php:783
+#: ../evolve/index.php:867
+msgid "Not Found"
+msgstr "Nie znaleziono"
+
+#: ../evolve/index.php:333
+#: ../evolve/index.php:571
+#: ../evolve/index.php:787
+#: ../evolve/index.php:871
+msgid "Sorry, but you are looking for something that isn't here."
+msgstr "Przepraszamy, ale szukasz czegoś, czego tu nie ma."
+
+#: ../evolve/index.php:365
+msgid "Daily archives for"
+msgstr "Dzienne archiwum dla"
+
+#: ../evolve/index.php:367
+msgid "Monthly archives for"
+msgstr "Miesięczne archiwum dla"
+
+#: ../evolve/index.php:369
+msgid "Yearly archives for"
+msgstr "Roczne archiwum dla"
+
+#: ../evolve/index.php:373
+msgid "Posts in category"
+msgstr "Posty w kategorii"
+
+#: ../evolve/index.php:377
+msgid "Posts tagged"
+msgstr "Posty otagowane"
+
+#: ../evolve/index.php:383
+msgid "Search results for"
+msgstr "Wyniki wyszukiwania dla"
+
+#: ../evolve/index.php:388
+msgid "Posts by"
+msgstr "Posty napisane przez"
+
+#: ../evolve/index.php:547
+#: ../evolve/index.php:763
+msgid "Your search for"
+msgstr "Wyszukiwanie dla"
+
+#: ../evolve/index.php:547
+#: ../evolve/index.php:763
+msgid "did not match any entries"
+msgstr "nie pasuje do żadnego wpisu"
+
+#: ../evolve/index.php:552
+#: ../evolve/index.php:768
+msgid "Suggestions:"
+msgstr "Sugestie:"
+
+#: ../evolve/index.php:554
+#: ../evolve/index.php:770
+msgid "Make sure all words are spelled correctly."
+msgstr "Upewnij się, że prawidłowo napisałeś słowa."
+
+#: ../evolve/index.php:555
+#: ../evolve/index.php:771
+msgid "Try different keywords."
+msgstr "Użyj innych słów kluczowych."
+
+#: ../evolve/index.php:556
+#: ../evolve/index.php:772
+msgid "Try more general keywords."
+msgstr "Użyj ogólniejszych słów kluczowych."
+
+#: ../evolve/navigation.php:23
+msgid "<span class=\"nav-meta\">&larr;</span> Older Entries"
+msgstr "<span class=\"nav-meta\">&larr;</span> Starsze wpisy"
+
+#: ../evolve/navigation.php:24
+msgid "Newer Entries <span class=\"nav-meta\">&rarr;</span>"
+msgstr "Nowsze wpisy <span class=\"nav-meta\">&rarr;</span>"
+
+#: ../evolve/searchform.php:14
+msgid "Type your search"
+msgstr "Szukaj..."
+
+#: ../evolve/searchform.php:20
+msgid "Submit"
+msgstr "Dalej"
+
+#: ../evolve/sidebar-2.php:35
+msgid "Pages"
+msgstr "Strony"
+
+#: ../evolve/sidebar-2.php:45
+msgid "Categories"
+msgstr "Kategorie"
+
+#: ../evolve/sidebar-2.php:55
+msgid "RSS Syndication"
+msgstr "Kanał RSS"
+
+#: ../evolve/sidebar-2.php:57
+msgid "All posts"
+msgstr "Wszystkie posty"
+
+#: ../evolve/sidebar-2.php:58
+msgid "All comments"
+msgstr "Wszystkie komentarze"
+
+#: ../evolve/sidebar.php:34
+msgid "Recent Posts"
+msgstr "Popularne posty"
+
+#: ../evolve/sidebar.php:47
+msgid "Recent Comments"
+msgstr "Popularne komentarze"
+
+#: ../evolve/sidebar.php:80
+msgid "Calendar"
+msgstr "Kalendarz"
+
+#: ../evolve/sidebar.php:93
+msgid "Tags"
+msgstr "Tagi"
+
+#: ../evolve/sidebar.php:102
+msgid "Archives"
+msgstr "Archiwa"
+
+#: ../evolve/sidebar.php:112
+msgid "Meta"
+msgstr "Meta"
+
+#: ../evolve/library/functions/comments.php:33
+msgid "% Trackbacks"
+msgstr "% Trackbacków"
+
+#: ../evolve/library/functions/comments.php:35
+msgid "1 Trackback"
+msgstr "1 Trackback"
+

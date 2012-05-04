@@ -31,7 +31,7 @@
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
 <link href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-<?php wp_enqueue_style('responsive-style', get_stylesheet_uri(), false, '1.2.0');?>
+<?php wp_enqueue_style('responsive-style', get_stylesheet_uri(), false, '1.2.1');?>
 
 <?php wp_head(); ?>
 </head>

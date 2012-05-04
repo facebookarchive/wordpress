@@ -7,6 +7,14 @@ Changelog Legend:
 [x] = Deleted
 [!] = Bugs
 
+(05/01/2012) - Maintenance Version 1.5.0
+[+] missing textdomain for 'powered by' footer.php
+[*] featured-image DIV end (comment only) home.php
+[+] Instagram and Pinterest icons
+[+] custom styles in Theme Options
+[+] German translation
+[*] theme-options.css
+
 (04/24/2012) - Bug Fixes/Maintenance Version 1.4.8/9
 [!] dropdown menu clear background
 [!] no breadcrumb chevron on page levels

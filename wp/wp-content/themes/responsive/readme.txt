@@ -1,6 +1,6 @@
------------------------------------------------
-    Thank you for downloading Responsive!
------------------------------------------------
+-------------------------------------------------------
+    Thank you for downloading Responsive Theme!
+-------------------------------------------------------
 This and any other Theme provided by ThemeID should
 be free of bugs, however do note that we're only humans
 and if you spot a bug do us a favor and report here
@@ -10,9 +10,9 @@ Our forum is FREE and dedicated as well, if something
 goes wrong, or you need our assistance with anything
 just register and post your question(s).
 
------------------------------------------------
+-------------------------------------------------------
     Responsive Features:
------------------------------------------------
+-------------------------------------------------------
 
 - Theme Options
 From here you can customize your above the fold
@@ -47,9 +47,10 @@ footer area.
 What's great about this is that the other 3 are kind of on-demand,
 activate when needed, if not oh well...
 
------------------------------------------------
+-------------------------------------------------------
     License:
------------------------------------------------
+-------------------------------------------------------
+
 Yes I know, but we have to say few words about
 that.
 
@@ -64,3 +65,19 @@ good.
 - Placeholder - MIT/BSD, and GPL (c) 2010, Daniel Stocks
 - Respond - MIT/BSD (c) 2012: Scott Jehl, Paul Irish, Nicholas Zakas
 - FitVids - WTFPL license - http://sam.zoy.org/wtfpl/ (c) 2011, Chris Coyier and Dave Rupert
+
+-------------------------------------------------------
+    Adopting Responsive Theme (Theme Re-Distribution):
+-------------------------------------------------------
+
+It's GPL so yes you can base your Themes from Responsive
+please note that if you do the GPLv3 License needs to stay
+as well as all copyright notices included in all parts of
+this Theme as well as third-party addons as listed above.
+
+All derivative Themes must be much different from the original
+work, which includes the Theme design as well as all the codes
+from Responsive Theme.
+
+Show us your appreciation by donating and supporting the free
+open source projects http://themeid.com/donate

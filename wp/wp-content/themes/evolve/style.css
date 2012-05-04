@@ -1,8 +1,8 @@
 /* 
 Theme Name: EvoLve
 Theme URI: http://theme4press.com/evolve
-Version: 2.0.8
-Description: EvoLve is a premium WordPress theme with advanced features including lots of options. It features a modern design with up to 14 color variants, fully customizable layout, post excerpts with thumbnails, post boxes, author gravatar support, up to 10 subscribe/social customizable buttons, custom logo, header widgets, recent posts slideshow, footer widgets, custom footer, customizable font styles, custom CSS, ads spaces. The EvoLve theme also comes with custom Menus support and other cool features. Translated in Spanish, German, Swedish, Dutch, French, Russian, Turkish, Norwegian, Slovenian, Italian, Brazilian Portuguese, Danish. Tested with major browsers - Mozilla Firefox, Internet Explorer, Opera and Chrome. 
+Version: 2.1.0
+Description: EvoLve is a premium WordPress theme with advanced features including lots of options. It features a modern design with up to 14 color variants, fully customizable layout, post excerpts with thumbnails, post boxes, author gravatar support, up to 10 subscribe/social customizable buttons, custom logo, header widgets, recent posts slideshow, footer widgets, custom footer, customizable font styles, custom CSS, ads spaces. The EvoLve theme also comes with custom Menus support and other cool features. Translated in Spanish, German, Swedish, Dutch, French, Russian, Turkish, Norwegian, Slovenian, Italian, Brazilian Portuguese, Danish, Serbian, Polish. Tested with major browsers - Mozilla Firefox, Internet Explorer, Opera and Chrome. 
 Author: Theme4Press
 Author URI: http://theme4press.com
 Tags: two-columns, flexible-width, sticky-post, threaded-comments, microformats, custom-menu, black, blue, white, dark, right-sidebar, custom-header, custom-menu, theme-options, translation-ready
@@ -12,6 +12,13 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 
 /*-------- Changelog --------
+
+
+Version:         2.1.0  -  Added Polish translation
+Date:         4/5/12
+
+Version:         2.0.9  -  Functions and css fixes, added Serbian translation
+Date:         26/4/12
 
 Version:         2.0.8  -  Options fixes, added Danish translation
 Date:         14/4/12
@@ -90,8 +97,19 @@ Date:         11/1/11
 /* Apply base theme styles and colors */
 @import url( 'library/media/css/base.css' );
 
-/* Basic 2 Column Layout */
-@import url( 'library/media/layouts/2col-r.css' );
+/**
+ * Basic 2 column (content)(aside) fixed layout
+ * 
+ * @package WPEvoLve
+ * @subpackage Layouts
+ * @beta
+ */
+
+.container { width: 960px; margin: 20px auto; }
+#wrapper {width:990px;}
+.hfeed { width: 620px; float: left; }
+.aside { width: 320px; float: right; }
+.footer { clear: both; }
 
 .alignleft { float: left; margin: 5px 20px 10px 0; }
 .alignright { float: right; margin: 5px 0 10px 20px; }

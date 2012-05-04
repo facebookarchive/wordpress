@@ -1,5 +1,5 @@
 
-/* =responsive Responsive 12 Column Grid
+/* =Responsive 12 Column Grid
 -------------------------------------------------------------- */
 .grid {
 	float:left;
@@ -139,7 +139,21 @@ h3.active {
 }
 
 div.updated {
-	background-color:#f9edbe;
-	border:1px solid #f0c36d;
-	color:#212121;
+}
+
+/* =Inline CSS
+-------------------------------------------------------------- */
+.inline-css {
+	color:#1e1eff;
+	font-family:Consolas, "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important;
+}
+
+/* =Help Links
+-------------------------------------------------------------- */
+.help-links {
+	border-top:1px solid #ddd;
+	display:block;
+	font-size:12px;
+	margin-top:10px;
+	padding-top:10px;
 }

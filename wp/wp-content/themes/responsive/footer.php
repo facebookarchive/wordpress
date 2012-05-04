@@ -70,6 +70,14 @@
                 if ($options['google_plus_uid']) echo '<li class="google-plus-icon"><a href="' . $options['google_plus_uid'] . '">'
                     .'<img src="' . get_stylesheet_directory_uri() . '/icons/googleplus-icon.png" width="24" height="24" alt="Google Plus">'
                     .'</a></li>';
+					
+                if ($options['instagram_uid']) echo '<li class="instagram-icon"><a href="' . $options['instagram_uid'] . '">'
+                    .'<img src="' . get_stylesheet_directory_uri() . '/icons/instagram-icon.png" width="24" height="24" alt="Instagram">'
+                    .'</a></li>';
+					
+                if ($options['pinterest_uid']) echo '<li class="pinterest-icon"><a href="' . $options['pinterest_uid'] . '">'
+                    .'<img src="' . get_stylesheet_directory_uri() . '/icons/pinterest-icon.png" width="24" height="24" alt="Pinterest">'
+                    .'</a></li>';
              
                 echo '</ul><!-- end of .social-icons -->';
          ?>
@@ -84,9 +92,9 @@
         <div class="grid col-300 scroll-top"><a href="#scroll-top" title="<?php esc_attr_e( 'scroll to top', 'responsive' ); ?>"><?php _e( '&uarr;', 'responsive' ); ?></a></div>
         
         <div class="grid col-300 fit powered">
-            <a href="<?php echo esc_url(__('http://themeid.com/responsive-theme','responsive')); ?>" title="<?php esc_attr_e('Responsive Theme', 'responsive'); ?>">
+            <a href="<?php echo esc_url(__('http://themeid.com/responsive-theme/','responsive')); ?>" title="<?php esc_attr_e('Responsive Theme', 'responsive'); ?>">
                     <?php printf('Responsive Theme'); ?></a>
-            powered by <a href="<?php echo esc_url(__('http://wordpress.org','responsive')); ?>" title="<?php esc_attr_e('WordPress', 'responsive'); ?>">
+            <?php esc_attr_e('powered by', 'responsive'); ?> <a href="<?php echo esc_url(__('http://wordpress.org/','responsive')); ?>" title="<?php esc_attr_e('WordPress', 'responsive'); ?>">
                     <?php printf('WordPress'); ?></a>
         </div><!-- end .powered -->
         

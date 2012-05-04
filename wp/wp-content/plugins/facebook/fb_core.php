@@ -42,18 +42,20 @@ add_action('init','fb_channel_file');
 
 function fb_install_warning() {
 	$options = get_option('fb_options');
-	
+
 	$page = (isset($_GET['page']) ? $_GET['page'] : null);
-	
-	if ( ( empty($options["app_id"]) || empty($options["app_secret"])) && $page != 'facebook/fb_admin_menu.php' ) {
-		fb_admin_dialog( __( 'You must <a href="facebook">configure the plugin</a> to enable Facebook for WordPress.', 'facebook' ), true);
+
+	if ((empty($options["app_id"]) || empty($options["app_secret"])) &&
+	    $page != 'facebook/fb_admin_menu.php') {
+		fb_admin_dialog( __(
+		  'You must <a href="admin.php?page=facebook/fb_admin_menu.php">configure the plugin</a> to enable Facebook for WordPress.', 'facebook' ), true);
 	}
 }
 add_action('admin_notices', 'fb_install_warning');
 
 function fb_add_base_js($args = array()) {
 	$options = get_option('fb_options');
-	
+
 	fb_init($options['app_id'], $args);
 };
 
@@ -71,12 +73,12 @@ function fb_init($app_id, $args = array()) {
 	$defaults = array(
 		'appId'=>$app_id,
 		'channelUrl'=>home_url('?fb-channel-file=1'),
-		'status'=>true, 
-		'cookie'=>true, 
+		'status'=>true,
+		'cookie'=>true,
 		'xfbml'=>true,
 		'oauth'=>true,
 	);
-	
+
 	$args = wp_parse_args($args, $defaults);
 
 	echo '<div id="fb-root"></div>
@@ -118,20 +120,20 @@ function fb_get_locale() {
 	);
 
 	$locale = get_locale();
-	
+
 	// convert locales like "es" to "es_ES", in case that works for the given locale (sometimes it does)
 	if (strlen($locale) == 2) {
 		$locale = strtolower($locale).'_'.strtoupper($locale);
 	}
-	
+
 	// convert things like de-DE to de_DE
 	$locale = str_replace('-', '_', $locale);
-	
+
 	// check to see if the locale is a valid FB one, if not, use en_US as a fallback
 	if ( !in_array($locale, $fb_valid_fb_locales) ) {
 		$locale = 'en_US';
 	}
-	
+
 	return $locale;
 }
 

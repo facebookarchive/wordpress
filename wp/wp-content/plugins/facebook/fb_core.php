@@ -13,26 +13,53 @@ Author URI: http://developers.facebook.com/
 License: [TODO]
 */
 
+$options = get_option('fb_options');
+
+global $facebook;
+
+require_once('includes/facebook_php_sdk/src/facebook.php');
+
+// Create our Application instance (replace this with your appId and secret)
+if ((!empty($options["app_id"]) || !empty($options["app_secret"]))) {
+	$facebook = new Facebook(array(
+		'appId'  => $options["app_id"],
+		'secret' => $options["app_secret"],
+	));
+}
+
 require_once('fb_admin_menu.php');
 require_once('fb_open_graph.php');
 require_once('social_plugins/fb_social_plugins.php');
 require_once('fb_login.php');
 require_once('fb_social_publisher.php');
+require_once('fb_wp_helpers.php');
 
 add_action('wp_footer','fb_add_base_js',20);
 add_action('init','fb_channel_file');
 
-//add_filter('language_attributes','fb_lang_atts');
+function fb_install_warning() {
+	$options = get_option('fb_options');
+	
+	$page = (isset($_GET['page']) ? $_GET['page'] : null);
+	
+	if ( ( empty($options["app_id"]) || empty($options["app_secret"])) && $page != 'facebook/fb_admin_menu.php' ) {
+		fb_admin_dialog('You must <a href="facebook">configure the plugin</a> to enable Facebook for WordPress.', true);
+	}
+}
+add_action('admin_notices', 'fb_install_warning');
 
 function fb_add_base_js($args = array()) {
 	$options = get_option('fb_options');
+	
 	fb_init($options['app_id'], $args);
 };
+
+//add_filter('language_attributes','fb_lang_atts');
 
 /*
  //disabled so that the site is HTML5-compliant, and it's not needed for social plugins any more
  function fb_lang_atts($lang) {
-    return ' xmlns:fb="http://ogp.me/ns/fb#" xmlns:og="http://ogp.me/ns#" '. $lang;
+	return ' xmlns:fb="http://ogp.me/ns/fb#" xmlns:og="http://ogp.me/ns#" '. $lang;
 }*/
 
 function fb_init($app_id, $args = array()) {
@@ -60,7 +87,7 @@ function fb_init($app_id, $args = array()) {
 				 js = d.createElement("script"); js.id = id; js.async = true;
 				 js.src = "//connect.facebook.net/' .  $locale . '/all.js";
 				 d.getElementsByTagName("head")[0].appendChild(js);
-		 }(document));     
+		 }(document));
 	</script>';
 }
 

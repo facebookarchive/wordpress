@@ -32,7 +32,10 @@ function fb_get_comments($options = array()) {
 		$params .= $option . '="' . $value . '" ';
 	}
 	
-	return '<div class="fb-comments" ' . $params . '></div>';
+	$output = fb_get_fb_comments_seo();
+	$output .= '<div class="fb-comments" ' . $params . '></div>';
+	
+	return $output;
 }
 
 function fb_comments_automatic($content) {
@@ -42,7 +45,7 @@ function fb_comments_automatic($content) {
 		foreach($options['comments'] as $param => $val) {
 			$param = str_replace('_', '-', $param);
 				
-			$options['comments']['data-' . $param] =  $val;
+			$options['comments']['data-' . $param] = $val;
 		}
 		
 		$content .= fb_get_comments($options['comments']);
@@ -50,4 +53,40 @@ function fb_comments_automatic($content) {
 	
 	return $content;
 }
+
+function fb_get_fb_comments_seo() {
+	global $facebook;
+	
+	$url = get_permalink();
+	
+	try {
+		$comments = $facebook->api('/comments', array('ids' => $url));
+	}
+	catch (FacebookApiException $e) {
+		error_log($e);
+		$user = null;
+	}
+	
+	$output = '<noscript><ol class="commentlist">';
+	
+	foreach ($comments[$url]['comments']['data'] as $key => $comment_info) {
+		$unix_timestamp = strtotime($comment_info['created_time']);
+		$output .= '<li>
+			<a name="#comment-' . $key  . '"></a>
+			<p><a href="https://www.facebook.com/' . $comment_info['from']['id'] . '">' . $comment_info['from']['name'] . '</a>:</p>
+      <p class="metadata">' . date('F jS, Y', $unix_timestamp) . ' at ' . date('g:i a', $unix_timestamp) . '</p>
+      ' . $comment_info['message'] . '
+      </li>';
+	}
+	
+	$output .= '<ol class="commentlist"></noscript>';
+	
+	return $output;
+}
+
+//fetch comments for url from Facebook Graph API
+//https://graph.facebook.com/comments/?ids=http://developers.facebook.com/docs/reference/plugins/comments
+
+//put them in <noscript> so search engines can scrape them
+
 ?>

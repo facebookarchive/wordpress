@@ -42,7 +42,7 @@ class Facebook_Subscribe_Button extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 	 		'fb_subscribe', // Base ID
-			'Facebook_Subscribe_Button', // Name
+			'Facebook SubscribeButton', // Name
 			array( 'description' => __( "The Subscribe button lets a user subscribe to your public updates on Facebook.", 'text_domain' ), ) // Args
 		);
 	}

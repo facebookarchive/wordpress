@@ -1,42 +1,49 @@
 <?php
-function fb_get_send_button($options = array()) {
+function fb_get_subscribe_button($options = array()) {
 	$params = '';
-
+	
 	foreach ($options as $option => $value) {
 		$params .= $option . '="' . $value . '" ';
 	}
-
-	return '<div class="fb-send" ' . $params . '></div>';
+	
+	return '<div class="fb-subscribe" ' . $params . '></div>';
 }
 
-function fb_send_button_automatic($content) {
+function fb_subscribe_button_automatic($content) {
+	global $wpdb;
 	$options = get_option('fb_options');
-
-	foreach($options['send'] as $param => $val) {
+	
+	foreach($options['subscribe'] as $param => $val) {
 		$param = str_replace('_', '-', $param);
-
-		$options['send']['data-' . $param] =  $val;
+			
+		$options['subscribe']['data-' . $param] =  $val;
 	}
-
-	$content .= fb_get_send_button($options['send']);
-
+	
+	$table_name = $wpdb->prefix . "fb_users";
+	
+	$fb_username = $wpdb->get_var($wpdb->prepare("SELECT fb_username FROM $table_name WHERE wp_uid = %d", get_the_author_meta('ID')));
+	
+	$options['subscribe']['data-href'] = 'http://www.facebook.com/' . $fb_username;
+	
+	$content .= fb_get_subscribe_button($options['subscribe']);
+	
 	return $content;
 }
 
 
 /**
- * Adds the Send Button Social Plugin as a WordPress Widget
+ * Adds the Subscribe Button Social Plugin as a WordPress Widget
  */
-class Facebook_Send_Button extends WP_Widget {
+class Facebook_Subscribe_Button extends WP_Widget {
 
 	/**
 	 * Register widget with WordPress
 	 */
 	public function __construct() {
 		parent::__construct(
-	 		'fb_send', // Base ID
-			'Facebook Send Button', // Name
-			array( 'description' => __( "The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address.", 'text_domain' ), ) // Args
+	 		'fb_subscribe', // Base ID
+			'Facebook_Subscribe_Button', // Name
+			array( 'description' => __( "The Subscribe button lets a user subscribe to your public updates on Facebook.", 'text_domain' ), ) // Args
 		);
 	}
 
@@ -55,9 +62,9 @@ class Facebook_Send_Button extends WP_Widget {
 		echo $before_widget;
 		if ( ! empty( $title ) )
 			echo $before_title . $title . $after_title;
-
-		$options = array('data-href' => $instance['url']);
-		echo fb_get_send_button($options);
+		
+		$options = array('data-href' => $instance['url']);	
+		echo fb_get_subscribe_button($options);
 		echo $after_widget;
 	}
 
@@ -91,15 +98,15 @@ class Facebook_Send_Button extends WP_Widget {
 			$title = $instance[ 'title' ];
 		}
 		else {
-			$title = __( 'Send ' . esc_attr(get_bloginfo('name')) . ' on Facebook', 'text_domain' );
+			$title = __( 'Subscribe on Facebook', 'text_domain' );
 		}
 		?>
 		<p>
-		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
+		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
 		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
-
-		<?php
+		
+		<?php 
 		if ( isset( $instance[ 'url' ] ) ) {
 			$url = $instance[ 'url' ];
 		}
@@ -110,10 +117,30 @@ class Facebook_Send_Button extends WP_Widget {
 		<p>
 		<label for="<?php echo $this->get_field_id( 'url' ); ?>"><?php _e( 'Facebook Page URL:' ); ?></label>
 		<input class="widefat" id="<?php echo $this->get_field_id( 'url' ); ?>" name="<?php echo $this->get_field_name( 'url' ); ?>" type="text" value="<?php echo esc_attr( $url ); ?>" />
-		<p>Optional.  If you have a Page on Facebook that you want users to Send.  If you leave it blank, the user will send the current page that they're on.</p>
 		</p>
-
+		
+		
+		
+		
 		<?php
+		
+		//		<div class="fb-subscribe" data-subscribe="false" data-layout="button_count" data-width="454" data-show-faces="false" data-action="recommend" data-colorscheme="dark" data-font="segoe ui"></div>
+		
+		
+		//layout style
+		//width
+		//show faces
+		//verb to display
+		//color scheme
+		//font
+		
+		/*
+		dropdown
+		checkbox
+		field
+		*/
+		
+		
 	}
 }
 

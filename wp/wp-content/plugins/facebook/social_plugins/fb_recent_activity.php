@@ -1,11 +1,11 @@
 <?php
 function fb_get_recent_activity($options = array()) {
 	$params = '';
-	
+
 	foreach ($options as $option => $value) {
 		$params .= $option . '="' . $value . '" ';
 	}
-	
+
 	return '<div class="fb-activity" ' . $params . '></div>';
 }
 
@@ -20,7 +20,7 @@ class Facebook_Recent_Activity extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 	 		'fb_recent_activity', // Base ID
-			'Facebook_Recent_Activity', // Name
+			'Facebook Recent Activity', // Name
 			array( 'description' => __( "The Activity Feed plugin displays the most interesting recent activity taking place on your site.", 'text_domain' ), ) // Args
 		);
 	}
@@ -40,7 +40,7 @@ class Facebook_Recent_Activity extends WP_Widget {
 		echo $before_widget;
 		if ( ! empty( $title ) )
 			echo $before_title . $title . $after_title;
-			
+
 		echo fb_get_recent_activity();
 		echo $after_widget;
 	}

@@ -86,4 +86,33 @@ class Facebook_Recommendations extends WP_Widget {
 	}*/
 
 }
+
+function fb_get_recommendations_box_fields($placement = 'settings') {
+	$children = array(array('name' => 'width',
+													'field_type' => 'text',
+													'help_text' => 'The width of the plugin, in pixels.',
+													),
+										array('name' => 'height',
+													'field_type' => 'text',
+													'help_text' => 'The width of the plugin, in pixels.',
+													),
+										array('name' => 'colorscheme',
+													'field_type' => 'dropdown',
+													'options' => array('light', 'dark'),
+													'help_text' => 'The color scheme of the plugin.',
+													),
+										array('name' => 'border_color',
+													'field_type' => 'dropdown',
+													'options' => array('light', 'dark'),
+													'help_text' => 'The color scheme of the plugin.',
+													),
+										array('name' => 'font',
+													'field_type' => 'dropdown',
+													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
+													'help_text' => 'The font of the plugin.',
+													),
+										);
+	
+	fb_construct_fields($placement, $children);
+}
 ?>

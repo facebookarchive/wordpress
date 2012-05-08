@@ -75,38 +75,6 @@ function fb_settings_page() {
 	<?php
 }
 
-// validate our options
-function fb_options_validate($input) {
-	/*
-	if (!defined('FB_APP_SECRET')) {
-		// secrets are 32 bytes long and made of hex values
-		$input['app_secret'] = trim($input['app_secret']);
-		if(! preg_match('/^[a-f0-9]{32}$/i', $input['app_secret'])) {
-		  $input['app_secret'] = '';
-		}
-	}
-
-	if (!defined('FB_APP_ID')) {
-		// app ids are big integers
-		$input['app_id'] = trim($input['app_id']);
-		if(! preg_match('/^[0-9]+$/i', $input['app_id'])) {
-		  $input['app_id'] = '';
-		}
-	}
-
-	if (!defined('FB_FANPAGE')) {
-		// fanpage ids are big integers
-		$input['fanpage'] = trim($input['fanpage']);
-		if(! preg_match('/^[0-9]+$/i', $input['fanpage'])) {
-		  $input['fanpage'] = '';
-		}
-	}
-
-	$input = apply_filters('fb_validate_options',$input); // filter to let sub-plugins validate their options too
-	*/
-	return $input;
-}
-
 function fb_section_main() {
 	echo '<p></p>';
 }
@@ -141,171 +109,6 @@ function fb_get_main_settings_fields() {
 	fb_construct_fields('settings', $children);
 }
 
-function fb_get_like_fields() {
-	$parent = array('name' => 'like',
-									'field_type' => 'checkbox',
-									'help_text' => 'Click to learn more.',
-									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/like/',
-									);
-	
-	$children = array(array('name' => 'send',
-													'field_type' => 'checkbox',
-													'help_text' => 'Include a send button.',
-													),
-										array('name' => 'layout',
-													'field_type' => 'dropdown',
-													'options' => array('standard', 'button_count', 'box_count'),
-													'help_text' => 'Determines the size and amount of social context at the bottom.',
-													),
-										array('name' => 'width',
-													'field_type' => 'text',
-													'help_text' => 'The width of the plugin, in pixels.',
-													),
-										array('name' => 'show_faces',
-													'field_type' => 'checkbox',
-													'help_text' => 'Show profile pictures below the button.  Applicable to standard layout only.',
-													),
-										array('name' => 'position',
-													'field_type' => 'dropdown',
-													'options' => array('top', 'bottom', 'both'),
-													'help_text' => 'Where the button will display on the page or post.',
-													),
-										array('name' => 'action',
-													'field_type' => 'dropdown',
-													'options' => array('like', 'recommend'),
-													'help_text' => 'The verb to display in the button.',
-													),
-										array('name' => 'colorscheme',
-													'field_type' => 'dropdown',
-													'options' => array('light', 'dark'),
-													'help_text' => 'The color scheme of the button.',
-													),
-										array('name' => 'font',
-													'field_type' => 'dropdown',
-													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
-													'help_text' => 'The font of the button.',
-													),
-										);
-	
-	fb_construct_fields('settings', $children, $parent);
-}
-
-function fb_get_subscribe_fields() {
-	$parent = array('name' => 'subscribe',
-									'field_type' => 'checkbox',
-									'help_text' => 'Click to learn more.',
-									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
-									);
-	
-	$children = array(array('name' => 'layout',
-													'field_type' => 'dropdown',
-													'options' => array('standard', 'button_count', 'box_count'),
-													'help_text' => 'Determines the size and amount of social context at the bottom.',
-													),
-										array('name' => 'width',
-													'field_type' => 'text',
-													'help_text' => 'The width of the plugin, in pixels.',
-													),
-										array('name' => 'show_faces',
-													'field_type' => 'checkbox',
-													'help_text' => 'Show profile pictures below the button.  Applicable to standard layout only.',
-													),
-										array('name' => 'colorscheme',
-													'field_type' => 'dropdown',
-													'options' => array('light', 'dark'),
-													'help_text' => 'The color scheme of the plugin.',
-													),
-										array('name' => 'font',
-													'field_type' => 'dropdown',
-													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
-													'help_text' => 'The font of the plugin.',
-													),
-										);
-	
-	fb_construct_fields('settings', $children, $parent);
-}
-
-
-function fb_get_send_fields() {
-	$parent = array('name' => 'send',
-									'field_type' => 'checkbox',
-									'help_text' => 'Click to learn more.',
-									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/send/',
-									);
-	
-	$children = array(array('name' => 'colorscheme',
-													'field_type' => 'dropdown',
-													'options' => array('light', 'dark'),
-													'help_text' => 'The color scheme of the plugin.',
-													),
-										array('name' => 'font',
-													'field_type' => 'dropdown',
-													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
-													'help_text' => 'The font of the plugin.',
-													),
-										);
-	
-	fb_construct_fields('settings', $children, $parent);
-}
-
-
-
-
-function fb_get_comments_fields() {
-	$parent = array('name' => 'comments',
-									'field_type' => 'checkbox',
-									'help_text' => 'Click to learn more.',
-									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/comments/',
-									);
-	
-	$children = array(array('name' => 'num_posts',
-													'field_type' => 'text',
-													'help_text' => 'The number of posts to display by default.',
-													),
-										array('name' => 'width',
-													'field_type' => 'text',
-													'help_text' => 'The width of the plugin, in pixels.',
-													),
-										array('name' => 'colorscheme',
-													'field_type' => 'dropdown',
-													'options' => array('light', 'dark'),
-													'help_text' => 'The color scheme of the plugin.',
-													),
-										);
-	
-	fb_construct_fields('settings', $children, $parent);
-}
-
-function fb_get_recommendations_bar_fields() {
-	$parent = array('name' => 'recommendations_bar',
-									'field_type' => 'checkbox',
-									'help_text' => 'Click to learn more.',
-									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/recommendationsbar/',
-									);
-	
-	$children = array(array('name' => 'trigger',
-													'field_type' => 'text',
-													'help_text' => 'This specifies the percent of the page the user must scroll down before the plugin is expanded.',
-													),
-										array('name' => 'read_time',
-													'field_type' => 'text',
-													'help_text' => 'The number of seconds the plugin will wait until it expands.',
-													),
-										array('name' => 'action',
-													'field_type' => 'dropdown',
-													'options' => array('like', 'recommend'),
-													'help_text' => 'The verb to display in the button.',
-													),
-										array('name' => 'side',
-													'field_type' => 'dropdown',
-													'options' => array('left', 'right'),	
-													'help_text' => 'The side of the window that the plugin will display.',
-													),
-										);
-	
-	fb_construct_fields('settings', $children, $parent);
-}
-
 function fb_get_social_publisher_fields() {
 	$parent = array('name' => 'social_publisher',
 									'field_type' => 'checkbox',
@@ -327,68 +130,6 @@ function fb_get_social_publisher_fields() {
 	fb_construct_fields('settings', $children, $parent);
 }
 
-function fb_get_recommendations_box_fields() {
-	$children = array(array('name' => 'width',
-													'field_type' => 'text',
-													'help_text' => 'The width of the plugin, in pixels.',
-													),
-										array('name' => 'height',
-													'field_type' => 'text',
-													'help_text' => 'The width of the plugin, in pixels.',
-													),
-										array('name' => 'colorscheme',
-													'field_type' => 'dropdown',
-													'options' => array('light', 'dark'),
-													'help_text' => 'The color scheme of the plugin.',
-													),
-										array('name' => 'border_color',
-													'field_type' => 'dropdown',
-													'options' => array('light', 'dark'),
-													'help_text' => 'The color scheme of the plugin.',
-													),
-										array('name' => 'font',
-													'field_type' => 'dropdown',
-													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
-													'help_text' => 'The font of the plugin.',
-													),
-										);
-	
-	fb_construct_fields('settings', $children);
-}
-
-function fb_get_activity_feed_fields() {
-	$children = array(array('name' => 'width',
-													'field_type' => 'text',
-													'help_text' => 'The width of the plugin, in pixels.',
-													),
-										array('name' => 'height',
-													'field_type' => 'text',
-													'help_text' => 'The width of the plugin, in pixels.',
-													),
-										array('name' => 'colorscheme',
-													'field_type' => 'dropdown',
-													'options' => array('light', 'dark'),
-													'help_text' => 'The color scheme of the plugin.',
-													),
-										array('name' => 'border_color',
-													'field_type' => 'dropdown',
-													'options' => array('light', 'dark'),
-													'help_text' => 'The color scheme of the plugin.',
-													),
-										array('name' => 'font',
-													'field_type' => 'dropdown',
-													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
-													'help_text' => 'The font of the plugin.',
-													),
-										array('name' => 'recommendations',
-													'field_type' => 'checkbox',
-													'help_text' => 'Includes recommendations.',
-													),
-										);
-	
-	fb_construct_fields('settings', $children);
-}
-
 function fb_add_settings_pages() {
      add_submenu_page(
          'edit-comments.php',
@@ -401,5 +142,38 @@ function fb_add_settings_pages() {
 }
 add_action('admin_menu', 'fb_add_settings_pages', 10);
 
+
+
+// validate our options
+function fb_options_validate($input) {
+	/*
+	if (!defined('FB_APP_SECRET')) {
+		// secrets are 32 bytes long and made of hex values
+		$input['app_secret'] = trim($input['app_secret']);
+		if(! preg_match('/^[a-f0-9]{32}$/i', $input['app_secret'])) {
+		  $input['app_secret'] = '';
+		}
+	}
+
+	if (!defined('FB_APP_ID')) {
+		// app ids are big integers
+		$input['app_id'] = trim($input['app_id']);
+		if(! preg_match('/^[0-9]+$/i', $input['app_id'])) {
+		  $input['app_id'] = '';
+		}
+	}
+
+	if (!defined('FB_FANPAGE')) {
+		// fanpage ids are big integers
+		$input['fanpage'] = trim($input['fanpage']);
+		if(! preg_match('/^[0-9]+$/i', $input['fanpage'])) {
+		  $input['fanpage'] = '';
+		}
+	}
+
+	$input = apply_filters('fb_validate_options',$input); // filter to let sub-plugins validate their options too
+	*/
+	return $input;
+}
 
 ?>

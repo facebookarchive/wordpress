@@ -119,30 +119,43 @@ class Facebook_Subscribe_Button extends WP_Widget {
 		<input class="widefat" id="<?php echo $this->get_field_id( 'url' ); ?>" name="<?php echo $this->get_field_name( 'url' ); ?>" type="text" value="<?php echo esc_attr( $url ); ?>" />
 		</p>
 		
-		
-		
-		
 		<?php
-		
-		//		<div class="fb-subscribe" data-subscribe="false" data-layout="button_count" data-width="454" data-show-faces="false" data-action="recommend" data-colorscheme="dark" data-font="segoe ui"></div>
-		
-		
-		//layout style
-		//width
-		//show faces
-		//verb to display
-		//color scheme
-		//font
-		
-		/*
-		dropdown
-		checkbox
-		field
-		*/
-		
-		
-	}
+		}
 }
 
+function fb_get_subscribe_fields($placement = 'settings') {
+	$parent = array('name' => 'subscribe',
+									'field_type' => 'checkbox',
+									'help_text' => 'Click to learn more.',
+									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
+									);
+	
+	$children = array(array('name' => 'layout',
+													'field_type' => 'dropdown',
+													'options' => array('standard', 'button_count', 'box_count'),
+													'help_text' => 'Determines the size and amount of social context at the bottom.',
+													),
+										array('name' => 'width',
+													'field_type' => 'text',
+													'help_text' => 'The width of the plugin, in pixels.',
+													),
+										array('name' => 'show_faces',
+													'field_type' => 'checkbox',
+													'help_text' => 'Show profile pictures below the button.  Applicable to standard layout only.',
+													),
+										array('name' => 'colorscheme',
+													'field_type' => 'dropdown',
+													'options' => array('light', 'dark'),
+													'help_text' => 'The color scheme of the plugin.',
+													),
+										array('name' => 'font',
+													'field_type' => 'dropdown',
+													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
+													'help_text' => 'The font of the plugin.',
+													),
+										);
+	
+	fb_construct_fields($placement, $children, $parent);
+}
 
 ?>

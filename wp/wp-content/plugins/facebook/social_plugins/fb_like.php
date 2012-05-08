@@ -95,8 +95,14 @@ class Facebook_Like_Button extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
-		$instance['title'] = strip_tags( $new_instance['title'] );
-		$instance['url'] = strip_tags( $new_instance['url'] );
+		
+		$fields = fb_get_like_fields_array();
+		error_log(var_export($new_instance,1));
+		foreach ($fields['children'] as $field) {
+			if (isset($new_instance[$field['name']])) {
+				$instance[$field['name']] = $new_instance[$field['name']];
+			}
+		}
 
 		return $instance;
 	}
@@ -115,62 +121,64 @@ class Facebook_Like_Button extends WP_Widget {
 		else {
 			$title = __( 'Like ' . esc_attr(get_bloginfo('name')) . ' on Facebook', 'text_domain' );
 		}
-		?>
-		<p>
-		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
-		</p>
-
-		<?php
-		if ( isset( $instance[ 'url' ] ) ) {
-			$url = $instance[ 'url' ];
-		}
-		else {
-			$url = '';
-		}
-		?>
-		<p>
-		<label for="<?php echo $this->get_field_id( 'url' ); ?>"><?php _e( 'Facebook Page URL:' ); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'url' ); ?>" name="<?php echo $this->get_field_name( 'url' ); ?>" type="text" value="<?php echo esc_attr( $url ); ?>" />
-		<p>Optional.  If you have a Page on Facebook that you want users to Like.  If you leave it blank, the user will like the current page that they're on.</p>
-		</p>
-
-
-
-
-		<?php
-		//send button
-		if ( isset( $instance[ 'send' ] ) ) {
-			$send = $instance[ 'send' ];
-		}
-		else {
-			$send = '';
-		}
-		?>
-		<p>
-		<input type="checkbox" id="<?php echo $this->get_field_id( 'send' ); ?>" name="<?php echo $this->get_field_name( 'send' ); ?>" value="true" <?php checked(TRUE, (bool) $send);  print $send; ?> />
-		<label for="<?php echo $this->get_field_id( 'send' ); ?>"><?php _e( 'Enable send button' ); ?></label>
-		</p>
-
-		<?php
-
-		//		<div class="fb-like" data-send="false" data-layout="button_count" data-width="454" data-show-faces="false" data-action="recommend" data-colorscheme="dark" data-font="segoe ui"></div>
-
-
-		//layout style
-		//width
-		//show faces
-		//verb to display
-		//color scheme
-		//font
-
-		/*
-		dropdown
-		checkbox
-		field
-		*/
-
-
+		
+		fb_get_like_fields('widget', $this);
 	}
 }
+
+function fb_get_like_fields($placement = 'settings', $object = null) {
+	$fields_array = fb_get_like_fields_array();
+	
+	fb_construct_fields($placement, $fields_array['children'], $fields_array['parent'], $object);
+}
+
+function fb_get_like_fields_array() {
+	$array['parent'] = array('name' => 'like',
+									'field_type' => 'checkbox',
+									'help_text' => 'Click to learn more.',
+									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/like/',
+									);
+	
+	$array['children'] = array(array('name' => 'send',
+													'field_type' => 'checkbox',
+													'help_text' => 'Include a send button.',
+													),
+										array('name' => 'show_faces',
+													'field_type' => 'checkbox',
+													'help_text' => 'Show profile pictures below the button.  Applicable to standard layout only.',
+													),
+										array('name' => 'layout',
+													'field_type' => 'dropdown',
+													'options' => array('standard', 'button_count', 'box_count'),
+													'help_text' => 'Determines the size and amount of social context at the bottom.',
+													),
+										array('name' => 'width',
+													'field_type' => 'text',
+													'help_text' => 'The width of the plugin, in pixels.',
+													),
+										array('name' => 'position',
+													'field_type' => 'dropdown',
+													'options' => array('top', 'bottom', 'both'),
+													'help_text' => 'Where the button will display on the page or post.',
+													),
+										array('name' => 'action',
+													'field_type' => 'dropdown',
+													'options' => array('like', 'recommend'),
+													'help_text' => 'The verb to display in the button.',
+													),
+										array('name' => 'colorscheme',
+													'field_type' => 'dropdown',
+													'options' => array('light', 'dark'),
+													'help_text' => 'The color scheme of the button.',
+													),
+										array('name' => 'font',
+													'field_type' => 'dropdown',
+													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
+													'help_text' => 'The font of the button.',
+													),
+										);
+	
+	return $array;
+}
+
 ?>

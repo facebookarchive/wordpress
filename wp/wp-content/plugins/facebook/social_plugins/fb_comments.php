@@ -89,4 +89,29 @@ function fb_get_fb_comments_seo() {
 
 //put them in <noscript> so search engines can scrape them
 
+function fb_get_comments_fields($placement) {
+	$parent = array('name' => 'comments',
+									'field_type' => 'checkbox',
+									'help_text' => 'Click to learn more.',
+									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/comments/',
+									);
+	
+	$children = array(array('name' => 'num_posts',
+													'field_type' => 'text',
+													'help_text' => 'The number of posts to display by default.',
+													),
+										array('name' => 'width',
+													'field_type' => 'text',
+													'help_text' => 'The width of the plugin, in pixels.',
+													),
+										array('name' => 'colorscheme',
+													'field_type' => 'dropdown',
+													'options' => array('light', 'dark'),
+													'help_text' => 'The color scheme of the plugin.',
+													),
+										);
+	
+	fb_construct_fields($placement, $children, $parent);
+}
+
 ?>

@@ -117,5 +117,26 @@ class Facebook_Send_Button extends WP_Widget {
 	}
 }
 
+function fb_get_send_fields($placement = 'settings') {
+	$parent = array('name' => 'send',
+									'field_type' => 'checkbox',
+									'help_text' => 'Click to learn more.',
+									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/send/',
+									);
+	
+	$children = array(array('name' => 'colorscheme',
+													'field_type' => 'dropdown',
+													'options' => array('light', 'dark'),
+													'help_text' => 'The color scheme of the plugin.',
+													),
+										array('name' => 'font',
+													'field_type' => 'dropdown',
+													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
+													'help_text' => 'The font of the plugin.',
+													),
+										);
+	
+	fb_construct_fields($placement, $children, $parent);
+}
 
 ?>

@@ -18,6 +18,8 @@ class Suffusion {
 	}
 
 	function get_context() {
+		global $wp_query;
+
 		if (is_array($this->context)) {
 			return $this->context;
 		}
@@ -56,6 +58,7 @@ class Suffusion {
 		}
 		else if (is_archive()) {
 			$this->context[] = 'archive';
+
 			if (is_date()) {
 				$this->context[] = 'date';
 			}
@@ -69,6 +72,21 @@ class Suffusion {
 			}
 			else if (is_author()) {
 				$this->context[] = 'author';
+			}
+			else if (is_tax()) {
+				$this->context[] = 'taxonomy';
+				$tax = get_queried_object();
+				$taxonomy = get_taxonomy($tax->taxonomy);
+				$object_types = $taxonomy->object_type;
+				$diff = array_diff($object_types, array('post', 'page'));
+				if (count($diff) != 0) {
+					$this->context[] = 'custom-taxonomy';
+				}
+			}
+
+			if (is_post_type_archive()) {
+				$this->context[] = 'custom-post-archive';
+				$this->context[] = 'custom-post-archive-'.$wp_query->post_type;
 			}
 		}
 		else if (is_search()) {

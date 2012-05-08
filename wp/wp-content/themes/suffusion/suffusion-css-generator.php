@@ -414,18 +414,18 @@ col.nr-shelf-slot { width: $slot_width%; }";
 		if ($$position != 'corners' && $$position != 'line-top' && $$position != 'line-bottom') {
 			if ($$position == 'left-pullout') {
 				$ret .= "
-div.$type$sub_type_str .entry-container { padding-left: 150px; }";
+article.$type$sub_type_str .entry-container { padding-left: 150px; }";
 			}
 			else {
 				$ret .= "
-div.$type$sub_type_str .entry-container { padding-right: 150px; }";
+article.$type$sub_type_str .entry-container { padding-right: 150px; }";
 			}
 			$ret .= "
-div.$type$sub_type_str .entry { width: 100%; float: left; }";
+article.$type$sub_type_str .entry { width: 100%; float: left; }";
 		}
 		else if ($sub_type != '') {
 			$ret .= "
-div.$type$sub_type_str .entry-container { padding-left: 0; padding-right: 0; }";
+article.$type$sub_type_str .entry-container { padding-left: 0; padding-right: 0; }";
 		}
 		return $ret;
 	}
@@ -670,7 +670,7 @@ h2.suf-mag-headlines-title { text-align: $suf_mag_headline_main_title_alignment;
 		$ret = "";
 		if ($suf_post_bg_settings_def_cust == 'custom') {
 			$ret .= "
-.post, div.page {
+.post, article.page {
 	".$this->get_bg_information('suf_post_bg_settings')."
 }
 ";
@@ -761,8 +761,8 @@ $template_class .post .title { padding-left: 0; }
 .post .postdata .comments { float: $post_comment_align; }
 .tags { float: $tag_align; text-align: $tag_align; }
 .post span.author { float: $post_author_align; ".($post_author_align == "left" ? "padding-right: 10px; " : "padding-left: 10px; ")." }
-div.page .postdata .comments { float: $page_comment_align; }
-div.page span.author { float: $page_author_align; ".($page_author_align == "left" ? "padding-right: 10px; " : "padding-left: 10px; ")." }
+article.page .postdata .comments { float: $page_comment_align; }
+article.page span.author { float: $page_author_align; ".($page_author_align == "left" ? "padding-right: 10px; " : "padding-left: 10px; ")." }
 ";
 		}
 
@@ -935,15 +935,16 @@ h2.suf-tile-title { text-align: $suf_tile_title_alignment; }";
 	function get_icon_set_css() {
 		global $suf_iconset, $suf_little_icons_enabled;
 		$ret = "
-.postdata .category .icon, .postdata .author .icon, .postdata .tags .icon, .postdata .permalink .icon, .postdata .comments .icon, .postdata .edit .icon, .postdata .line-date .icon,
+.postdata .category .icon, .postdata .author .icon, .postdata .tax .icon, .postdata .permalink .icon, .postdata .comments .icon, .postdata .edit .icon, .postdata .line-date .icon,
 .previous-entries .icon, .next-entries .icon, .post-nav .previous .icon, .post-nav .next .icon, h3.comments .icon, #reply-title .icon, input.inside, .exif-button .icon,
 .bookdata .edit .icon, .bookdata .manage .icon, .page-nav-left a, .page-nav-right a, .mosaic-page-nav-right a, .mosaic-page-nav-left a, .mosaic-overlay a span,
-.meta-pullout .category .icon, .meta-pullout .author .icon, .meta-pullout .tags .icon, .meta-pullout .permalink .icon, .meta-pullout .comments .icon, .meta-pullout .edit .icon, .meta-pullout .pullout-date .icon,
+.meta-pullout .category .icon, .meta-pullout .author .icon, .meta-pullout .tax .icon, .meta-pullout .permalink .icon, .meta-pullout .comments .icon, .meta-pullout .edit .icon, .meta-pullout .pullout-date .icon,
 .controller-icons #sliderControl .sliderPrev, .controller-icons #sliderControl .sliderNext, .controller-icons .sliderControl .sliderPrev, .controller-icons .sliderControl .sliderNext, .user-profiles .icon {
 	background-image: url(".get_template_directory_uri()."/images/$suf_iconset.png);
 }
 ";
 		$icons = explode(',', $suf_little_icons_enabled);
+		$icons[] = 'tax';
 		$icon_selector = array();
 		if (is_array($icons)) {
 			foreach ($icons as $icon) {

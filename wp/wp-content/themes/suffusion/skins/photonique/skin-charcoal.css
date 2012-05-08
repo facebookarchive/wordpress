@@ -14,8 +14,8 @@ h1.posttitle a:hover, h2.posttitle a:hover, .blogtitle a, .blogtitle a:visited {
 a, a:visited, .suf-widget a, .suf-widget a:visited, div.sidebar-tab-content a { color: #0af;}
 code, pre { background-color: #222; }
 #wrapper { background: transparent; border: none; margin: 0 auto; }
-div.post, div.page { background: transparent; border: none; padding-left: 0; padding-right: 0; }
-div.suf-widget { background: transparent; border: none; color: #bbb; }
+article.post, article.page { background: transparent; border: none; padding-left: 0; padding-right: 0; }
+.suf-widget { background: transparent; border: none; color: #bbb; }
 #featured-posts, .suf-mosaic-img { background: transparent; border-color: #444; }
 .page-nav { background: transparent; border: none; }
 .page-nav a, .page-nav a:visited { color: #0af; }
@@ -96,7 +96,7 @@ input:focus, textarea:focus, #commentform input:focus, #commentform textarea:foc
 #subnav a:hover, #subnav li a:hover, #subnav .page_item:hover, #subnav li.current_page_item a, #subnav li.current_page_parent a, #subnav li.current_page_parent a:visited, #subnav li.current_page_ancestor a, #subnav li.current_page_ancestor a:visited,
 .hier-nav .current_page_item a, .hier-nav .current_page_item a:visited, .hier-nav .current_page_parent a, .hier-nav .current_page_parent a:visited, .hier-nav .current_page_ancestor a, .hier-nav .current_page_ancestor a:visited { color: #0af; }
 .hier-nav .current_page_item, .hier-nav .current_page_parent { background: transparent; border: none; }
-h2.suf-mag-headlines-title, .suf-mag-excerpts-header, .suf-mag-categories-header, .suf-tiles th {
+h2.suf-mag-headlines-title, .suf-mag-excerpts-header, .suf-mag-categories-header {
 	background: url(../../images/glyph.png) transparent center bottom no-repeat;
 	color: #bbb;
 	border: none;
@@ -154,15 +154,15 @@ div.sidebar-tab-content { background-color: #111; border: 1px solid #444; }
 .suf-twitter-avatar, .suf-twitter-rest ul li, img.suf-widget-thumb, .warea ul.suf-posts-thumbnail li, ul.suf-posts-thumbnail li, .full-display-users img.avatar { border-color: #444; }
 .suf-twitter-rest ul { margin-left: 0; }
 
-.button, .button:visited, input[type="submit"], a.excerpt-more-append, a.suf-mag-excerpt-full-story, a.suf-mag-category-all-posts, a.comment-response-types, span.comment-response-types,
-.suf-page-nav a, .suf-page-nav a:visited, .suf-page-nav span, div.page-links span, .wp-pagenavi a, .wp-pagenavi a:visited, .wp-pagenavi span, a.more-link {
+.button, .button:visited, input[type="submit"], a.excerpt-more-append, a.suf-mag-excerpt-full-story, a.suf-mag-category-all-posts, .comment-response-type, .response-type,
+.suf-page-nav a, .suf-page-nav a:visited, .suf-page-nav span, .page-links span, .wp-pagenavi a, .wp-pagenavi a:visited, .wp-pagenavi span, a.more-link {
 	font-weight: normal;
 	background: #111 url(../../images/bg-black.png) repeat-x top left;
 	color: #bbb;
 	border: 1px solid #222;
 }
-.button:hover, input[type="submit"]:hover, .button:active, input[type="submit"]:active, a.comment-response-types:hover, a.excerpt-more-append:hover, a.suf-mag-excerpt-full-story:hover, a.suf-mag-category-all-posts:hover,
-.suf-page-nav a.page-numbers:hover, .suf-page-nav span.current, div.page-links a:hover span, div.page-links > span, .wp-pagenavi a:hover, .wp-pagenavi span.current, a.more-link:hover {
+.button:hover, input[type="submit"]:hover, .button:active, input[type="submit"]:active, .comment-response-type:hover, a.excerpt-more-append:hover, a.suf-mag-excerpt-full-story:hover, a.suf-mag-category-all-posts:hover,
+.suf-page-nav a.page-numbers:hover, .suf-page-nav span.current, .page-links a:hover span, .page-links > span, .wp-pagenavi a:hover, .wp-pagenavi span.current, a.more-link:hover {
 	font-weight: normal;
 	color: #0af;
 	text-decoration: none;
@@ -187,8 +187,8 @@ div.sidebar-tab-content { background-color: #111; border: 1px solid #444; }
 input[type="submit"].searchsubmit { background-image: url(../../images/search-ph-solo.png); border-radius: 0; }
 .collapse .searchsubmit { display: none; }
 .collapse .searchfield:focus, .collapse .searchfield.search-focus { width: 160px; border: none; }
-div.comment-response-types { text-align: center; margin: 1.5em 0;}
-a.comment-response-types, span.comment-response-types { float: none; }
+.comment-response-types { text-align: center; margin: 1.5em 0;}
+.comment-response-type, .response-type { float: none; }
 
 .exif-button { background: #111 url(../../images/bg-black.png) repeat-x top left; border-color: #444; }
 .exif-button a { color: #bbb; }

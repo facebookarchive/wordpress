@@ -597,10 +597,12 @@ function suffusion_get_image($options = array()) {
 			case 'native':
 				$img = suffusion_get_image_by_post_thumbnail($size, $original, $get_original);
 				continue;
+
 			case 'custom-thumb':
 				$img = suffusion_get_image_from_custom_field('thumbnail');
 				$original[0] = $img;
 				continue;
+
 			case 'attachment':
 				if (isset($options['attachment-id'])) {
 					$attachment_id = $options['attachment-id'];
@@ -613,14 +615,20 @@ function suffusion_get_image($options = array()) {
 					$full_size = true;
 				}
 				continue;
+
 			case 'embedded':
 				$img = suffusion_get_image_from_embedded_url();
 				$original[0] = $img;
 				continue;
+
 			case 'custom-featured':
 				$img = suffusion_get_image_from_custom_field('featured_image');
 				$original[0] = $img;
 		        continue;
+
+			case 'category':
+				$img = suffusion_get_category_image();
+				continue;
 		}
 	}
 
@@ -635,6 +643,13 @@ function suffusion_get_image($options = array()) {
 		$height = isset($featured_height) ? $featured_height: $img[2];
 		$intermediate = $img[3];
 		$img = $img[0];
+	}
+
+	if (trim($img) == '' && current_theme_supports('category-images')) {
+		global $suf_fallback_to_category_image;
+		if ($suf_fallback_to_category_image) {
+			$img = suffusion_get_category_image();
+		}
 	}
 
 	if (!isset($width) || !isset($height)) {
@@ -793,6 +808,8 @@ function suffusion_get_image_from_attachment($size = 'thumbnail', &$original = a
  * Retrieves an image if a Native "Featured Image" is attached to the post.
  *
  * @param string $size
+ * @param array $original
+ * @param bool $get_original
  * @return array|bool|string
  */
 function suffusion_get_image_by_post_thumbnail($size = 'excerpt-thumbnail', &$original = array(), $get_original = false) {
@@ -951,4 +968,3 @@ function suffusion_get_audio_from_embedded_url() {
 	}
 	return $audios;
 }
-?>

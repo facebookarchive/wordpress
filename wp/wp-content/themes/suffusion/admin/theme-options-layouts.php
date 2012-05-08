@@ -141,8 +141,7 @@ $suffusion_layouts_options = array(
 
 	array("name" => "Custom value for page width",
 		"desc" => "If you have selected \"Custom width\" above, you can set the width here. Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 600 will be treated as 600. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"80%\" as the width.
-				Also note that if you are setting a width over here with the \"Custom width\" selection in place, the widths of the individual components like the main column, the sidebars etc. are auto-calculated",
+				Anything below 600 will be treated as 600. Note that if you are setting a width over here with the \"Custom width\" selection in place, the widths of the individual components like the main column, the sidebars etc. are auto-calculated",
 		"id" => "suf_wrapper_width",
 		"parent" => "default",
 		"grouping" => "size-fixed",
@@ -153,7 +152,7 @@ $suffusion_layouts_options = array(
 	array("name" => "Custom component width - Custom value for main column width",
 		"desc" => "If you have selected \"Custom width, but constructed from individual components\" above, you can set the width here for the main column.
 				Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 380 will be treated as 380. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"80%\" as the width. ",
+				Anything below 380 will be treated as 380. ",
 		"id" => "suf_main_col_width",
 		"parent" => "default",
 		"grouping" => "size-fixed",
@@ -170,7 +169,7 @@ $suffusion_layouts_options = array(
 	array("name" => "Custom component width - Custom value for width of first sidebar",
 		"desc" => "If you have fluid widths or fixed widths with \"Custom width, but constructed from individual components\" above, you can set the width here for the first sidebar.
 				Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 95 will be treated as 95. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"10%\" as the width. ",
+				Anything below 95 will be treated as 95. ",
 		"id" => "suf_sb_1_width",
 		"parent" => "default",
 		"grouping" => "size-sb",
@@ -181,7 +180,7 @@ $suffusion_layouts_options = array(
 	array("name" => "Custom component width - Custom value for width of second sidebar",
 		"desc" => "If you have fluid widths or fixed widths with \"Custom width, but constructed from individual components\" above, you can set the width here for the second sidebar.
 				Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 95 will be treated as 95. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"10%\" as the width. ",
+				Anything below 95 will be treated as 95. ",
 		"id" => "suf_sb_2_width",
 		"parent" => "default",
 		"grouping" => "size-sb",
@@ -292,8 +291,7 @@ $suffusion_layouts_options = array(
 
 	array("name" => "Custom value for page width",
 		"desc" => "If you have selected \"Custom width\" above, you can set the width here. Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 600 will be treated as 600. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"80%\" as the width.
-				Also note that if you are setting a width over here with the \"Custom width\" selection in place, the widths of the individual components like the main column, the sidebars etc. are auto-calculated",
+				Anything below 600 will be treated as 600. Note that if you are setting a width over here with the \"Custom width\" selection in place, the widths of the individual components like the main column, the sidebars etc. are auto-calculated",
 		"id" => "suf_1l_wrapper_width",
 		"parent" => "1l-sidebar",
 		"grouping" => "1l-size-fixed",
@@ -303,8 +301,7 @@ $suffusion_layouts_options = array(
 
 	array("name" => "Custom component width - Custom value for main column width",
 		"desc" => "If you have selected \"Custom width, but constructed from individual components\" above, you can set the width here for the main column.
-				Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 380 will be treated as 380. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"80%\" as the width. ",
+				Please enter the width in pixels. <b>Do not enter \"px\".</b> Anything below 380 will be treated as 380. ",
 		"id" => "suf_1l_main_col_width",
 		"parent" => "1l-sidebar",
 		"grouping" => "1l-size-fixed",
@@ -314,8 +311,7 @@ $suffusion_layouts_options = array(
 
 	array("name" => "Custom component width - Custom value for width of sidebar",
 		"desc" => "If you have selected \"Fluid width\" or \"Custom width, but constructed from individual components\" above, you can set the width here for the first sidebar.
-				Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 95 will be treated as 95. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"10%\" as the width. ",
+				Please enter the width in pixels. <b>Do not enter \"px\".</b> Anything below 95 will be treated as 95. ",
 		"id" => "suf_1l_sb_1_width",
 		"parent" => "1l-sidebar",
 		"type" => "text",
@@ -394,8 +390,7 @@ $suffusion_layouts_options = array(
 
 	array("name" => "Custom value for page width",
 		"desc" => "If you have selected \"Custom width\" above, you can set the width here. Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 600 will be treated as 600. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"80%\" as the width.
-				Also note that if you are setting a width over here with the \"Custom width\" selection in place, the widths of the individual components like the main column, the sidebars etc. are auto-calculated",
+				Anything below 600 will be treated as 600. Also note that if you are setting a width over here with the \"Custom width\" selection in place, the widths of the individual components like the main column, the sidebars etc. are auto-calculated",
 		"id" => "suf_1r_wrapper_width",
 		"parent" => "1r-sidebar",
 		"grouping" => "1r-size-fixed",
@@ -406,7 +401,7 @@ $suffusion_layouts_options = array(
 	array("name" => "Custom component width - Custom value for main column width",
 		"desc" => "If you have selected \"Custom width, but constructed from individual components\" above, you can set the width here for the main column.
 				Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 380 will be treated as 380. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"80%\" as the width. ",
+				Anything below 380 will be treated as 380. ",
 		"id" => "suf_1r_main_col_width",
 		"parent" => "1r-sidebar",
 		"grouping" => "1r-size-fixed",
@@ -417,7 +412,7 @@ $suffusion_layouts_options = array(
 	array("name" => "Custom component width - Custom value for width of sidebar",
 		"desc" => "If you have selected \"Fluid width\" or \"Custom width, but constructed from individual components\" above, you can set the width here for the first sidebar.
 				Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 95 will be treated as 95. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"10%\" as the width. ",
+				Anything below 95 will be treated as 95.",
 		"id" => "suf_1r_sb_1_width",
 		"parent" => "1r-sidebar",
 		"type" => "text",
@@ -496,8 +491,7 @@ $suffusion_layouts_options = array(
 
 	array("name" => "Custom value for page width",
 		"desc" => "If you have selected \"Custom width\" above, you can set the width here. Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 600 will be treated as 600. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"80%\" as the width.
-				Also note that if you are setting a width over here with the \"Custom width\" selection in place, the widths of the individual components like the main column, the sidebars etc. are auto-calculated",
+				Anything below 600 will be treated as 600. Also note that if you are setting a width over here with the \"Custom width\" selection in place, the widths of the individual components like the main column, the sidebars etc. are auto-calculated",
 		"id" => "suf_1l1r_wrapper_width",
 		"parent" => "1l1r-sidebar",
 		"grouping" => "1l1r-size-fixed",
@@ -508,7 +502,7 @@ $suffusion_layouts_options = array(
 	array("name" => "Custom component width - Custom value for main column width",
 		"desc" => "If you have selected \"Custom width, but constructed from individual components\" above, you can set the width here for the main column.
 				Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 380 will be treated as 380. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"80%\" as the width. ",
+				Anything below 380 will be treated as 380.",
 		"id" => "suf_1l1r_main_col_width",
 		"parent" => "1l1r-sidebar",
 		"grouping" => "1l1r-size-fixed",
@@ -525,7 +519,7 @@ $suffusion_layouts_options = array(
 	array("name" => "Custom component width - Custom value for width of left sidebar",
 		"desc" => "If you have selected \"Custom width, but constructed from individual components\" above, you can set the width here for the first sidebar.
 				Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 95 will be treated as 95. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"10%\" as the width. ",
+				Anything below 95 will be treated as 95.",
 		"id" => "suf_1l1r_sb_1_width",
 		"parent" => "1l1r-sidebar",
 		"grouping" => "1l1r-size-sb",
@@ -536,7 +530,7 @@ $suffusion_layouts_options = array(
 	array("name" => "Custom component width - Custom value for width of right sidebar",
 		"desc" => "If you have selected \"Custom width, but constructed from individual components\" above, you can set the width here for the second sidebar.
 				Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 95 will be treated as 95. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"10%\" as the width. ",
+				Anything below 95 will be treated as 95.",
 		"id" => "suf_1l1r_sb_2_width",
 		"parent" => "1l1r-sidebar",
 		"grouping" => "1l1r-size-sb",
@@ -616,8 +610,7 @@ $suffusion_layouts_options = array(
 
 	array("name" => "Custom value for page width",
 		"desc" => "If you have selected \"Custom width\" above, you can set the width here. Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 600 will be treated as 600. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"80%\" as the width.
-				Also note that if you are setting a width over here with the \"Custom width\" selection in place, the widths of the individual components like the main column, the sidebars etc. are auto-calculated",
+				Anything below 600 will be treated as 600. Also note that if you are setting a width over here with the \"Custom width\" selection in place, the widths of the individual components like the main column, the sidebars etc. are auto-calculated",
 		"id" => "suf_2l_wrapper_width",
 		"parent" => "2l-sidebars",
 		"grouping" => "2l-size-fixed",
@@ -628,7 +621,7 @@ $suffusion_layouts_options = array(
 	array("name" => "Custom component width - Custom value for main column width",
 		"desc" => "If you have selected \"Custom width, but constructed from individual components\" above, you can set the width here for the main column.
 				Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 380 will be treated as 380. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"80%\" as the width. ",
+				Anything below 380 will be treated as 380.",
 		"id" => "suf_2l_main_col_width",
 		"parent" => "2l-sidebars",
 		"grouping" => "2l-size-fixed",
@@ -645,7 +638,7 @@ $suffusion_layouts_options = array(
 	array("name" => "Custom component width - Custom value for width of first sidebar",
 		"desc" => "If you have selected \"Fluid width\" or \"Custom width, but constructed from individual components\" above, you can set the width here for the first sidebar.
 				Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 95 will be treated as 95. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"10%\" as the width. ",
+				Anything below 95 will be treated as 95.",
 		"id" => "suf_2l_sb_1_width",
 		"parent" => "2l-sidebars",
 		"grouping" => "2l-size-sb",
@@ -655,8 +648,7 @@ $suffusion_layouts_options = array(
 
 	array("name" => "Custom component width - Custom value for width of second sidebar",
 		"desc" => "If you have selected \"Fluid width\" or \"Custom width, but constructed from individual components\" above, you can set the width here for the second sidebar.
-				Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 95 will be treated as 95. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"10%\" as the width. ",
+				Please enter the width in pixels. <b>Do not enter \"px\".</b> Anything below 95 will be treated as 95.",
 		"id" => "suf_2l_sb_2_width",
 		"parent" => "2l-sidebars",
 		"grouping" => "2l-size-sb",
@@ -736,8 +728,7 @@ $suffusion_layouts_options = array(
 
 	array("name" => "Custom value for page width",
 		"desc" => "If you have selected \"Custom width\" above, you can set the width here. Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 600 will be treated as 600. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"80%\" as the width.
-				Also note that if you are setting a width over here with the \"Custom width\" selection in place, the widths of the individual components like the main column, the sidebars etc. are auto-calculated",
+				Anything below 600 will be treated as 600. Also note that if you are setting a width over here with the \"Custom width\" selection in place, the widths of the individual components like the main column, the sidebars etc. are auto-calculated",
 		"id" => "suf_2r_wrapper_width",
 		"parent" => "2r-sidebars",
 		"grouping" => "2r-size-fixed",
@@ -748,7 +739,7 @@ $suffusion_layouts_options = array(
 	array("name" => "Custom component width - Custom value for main column width",
 		"desc" => "If you have selected \"Custom width, but constructed from individual components\" above, you can set the width here for the main column.
 				Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 380 will be treated as 380. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"80%\" as the width. ",
+				Anything below 380 will be treated as 380.",
 		"id" => "suf_2r_main_col_width",
 		"parent" => "2r-sidebars",
 		"grouping" => "2r-size-fixed",
@@ -765,7 +756,7 @@ $suffusion_layouts_options = array(
 	array("name" => "Custom component width - Custom value for width of first sidebar",
 		"desc" => "If you have selected \"Fluid width\" or \"Custom width, but constructed from individual components\" above, you can set the width here for the first sidebar.
 				Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 95 will be treated as 95. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"10%\" as the width. ",
+				Anything below 95 will be treated as 95.",
 		"id" => "suf_2r_sb_1_width",
 		"parent" => "2r-sidebars",
 		"grouping" => "2r-size-sb",
@@ -776,7 +767,7 @@ $suffusion_layouts_options = array(
 	array("name" => "Custom component width - Custom value for width of second sidebar",
 		"desc" => "If you have selected \"Fluid width\" or \"Custom width, but constructed from individual components\" above, you can set the width here for the second sidebar.
 				Please enter the width in pixels. <b>Do not enter \"px\".</b>
-				Anything below 95 will be treated as 95. Note that this is a fixed width theme, not a fluid theme. What this means is that you cannot specify things like \"10%\" as the width. ",
+				Anything below 95 will be treated as 95.",
 		"id" => "suf_2r_sb_2_width",
 		"parent" => "2r-sidebars",
 		"grouping" => "2r-size-sb",
@@ -1047,15 +1038,16 @@ $suffusion_layouts_options = array(
 		"options" => array("show" => "Display Thumbnail, if available", "hide" => "Hide Thumbnail"),
 		"std" => "show"),
 
-	array("name" => "Show thumbnails for full content",
-		"desc" => "The thumbnail can be defined for both excerpts and full content.
-			For excerpts the previous setting takes effect. You can show thumbnails for posts by controlling the setting here.
-			Note that to use this feature your thumbnail must be defined in the \"Post Thumbnail\" section of your Edit Page or Edit Post screen:",
+	array("name" => "Show featured images for full content",
+		"desc" => "Note that to use this feature your thumbnail must be defined in the \"Featured Image\" section of your Edit Page or Edit Post screen:",
 		"id" => "suf_show_content_thumbnail",
 		"parent" => "excerpt-settings",
 		"grouping" => "excerpt-thumb",
 		"type" => "radio",
-		"options" => array("show" => "Display Thumbnail, if available", "hide" => "Hide Thumbnail"),
+		"options" => array(
+			"show" => "Display featured image, if available",
+			"hide" => "Don't show any image"
+		),
 		"std" => "show"),
 
 	array("name" => "Image preference order",

@@ -19,7 +19,7 @@ if (have_posts()) {
 		the_post();
 		$original_post = $post;
 	?>
-			<div id="post-<?php the_ID(); ?>" class="post fix hentry">
+			<article id="post-<?php the_ID(); ?>" class="post fix hentry">
 				<div class="entry fix">
 					<?php the_content(); ?>
 					<?php
@@ -85,7 +85,7 @@ if (have_posts()) {
 						comments_template();
 					?>
 				</div><!-- .entry -->
-			</div><!-- .post -->
+			</article><!-- .post -->
 <?php
 		}
 	}

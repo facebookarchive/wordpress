@@ -1,5 +1,5 @@
 /* JQuery UI, styled to look like WP defaults */
-#suf-meta-fields-tabs.ui-tabs { position: relative; font-size: 14px; }
+#suf-meta-fields-tabs.ui-tabs { position: relative; }
 #suf-meta-fields-tabs.ui-tabs .ui-tabs-nav { margin: 0; float: left; background: #ECECEC url('images/menu-shadow.png') repeat-y 100% 0; width: 160px; }
 #suf-meta-fields-tabs.ui-tabs .ui-tabs-nav li { list-style: none; line-height: 1em; }
 #suf-meta-fields-tabs.ui-tabs .ui-tabs-nav li a {

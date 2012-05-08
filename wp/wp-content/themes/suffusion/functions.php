@@ -7,7 +7,7 @@
  */
 
 if (!defined('SUFFUSION_THEME_VERSION')) {
-	define('SUFFUSION_THEME_VERSION', '4.0.7');
+	define('SUFFUSION_THEME_VERSION', '4.1.5.b4');
 }
 
 require_once(get_template_directory().'/functions/framework.php');
@@ -74,6 +74,7 @@ function suffusion_set_custom_post_type_globals() {
 			array('name' => 'query_var', 'desc' => 'Query Variable', 'type' => 'checkbox', 'default' => true),
 			array('name' => 'rewrite', 'desc' => 'Rewrite', 'type' => 'checkbox', 'default' => true),
 			array('name' => 'hierarchical', 'desc' => 'Hierarchical', 'type' => 'checkbox', 'default' => true),
+			array('name' => 'has_archive', 'desc' => 'Archives allowed', 'type' => 'checkbox', 'default' => true),
 			array('name' => 'exclude_from_search', 'desc' => 'Exclude from Search', 'type' => 'checkbox', 'default' => true),
 			array('name' => 'show_in_nav_menus', 'desc' => 'Show in Navigation menus', 'type' => 'checkbox', 'default' => true),
 			array('name' => 'menu_position', 'desc' => 'Menu Position', 'type' => 'text', 'default' => null),
@@ -252,6 +253,8 @@ function suffusion_setup_standard_actions_and_filters() {
 		add_filter('nav_menu_css_class', 'suffusion_mm_nav_css', 10, 3);
 
 		add_filter('body_class', 'suffusion_get_width_classes', 10, 2);
+
+		add_filter('pre_get_posts', 'suffusion_custom_taxonomy_contents');
 	}
 }
 
@@ -278,7 +281,6 @@ function suffusion_setup_custom_actions_and_filters() {
 
 	add_action('suffusion_before_begin_content', 'suffusion_build_breadcrumb');
 	add_action('suffusion_before_begin_content', 'suffusion_featured_posts');
-	add_filter('suffusion_before_begin_content', 'suffusion_remove_duplicate_featured_posts');
 	add_action('suffusion_after_begin_content', 'suffusion_template_specific_header');
 
 	add_action('suffusion_content', 'suffusion_excerpt_or_content');
@@ -307,8 +309,6 @@ function suffusion_setup_custom_actions_and_filters() {
 	add_action('suffusion_document_footer', 'suffusion_include_custom_js');
 
 	add_action('suffusion_skin_setup_photonique', 'suffusion_skin_setup_photonique');
-
-	add_action('suffusion_query_posts', 'suffusion_custom_taxonomy_contents');
 
 	///// FILTERS
 	add_filter('suffusion_can_display_attachment', 'suffusion_filter_attachment_display', 10, 4);
@@ -391,44 +391,6 @@ function suffusion_tab_array_prepositions() {
         $ret[$key] = $value['title'];
     }
     return $ret;
-}
-
-function suffusion_get_full_content_count() {
-	global $suffusion, $suf_category_fc_number, $suf_author_fc_number, $suf_tag_fc_number, $suf_search_fc_number, $suf_archive_fc_number, $suf_index_fc_number, $suf_pop_fc_number, $suf_fc_view_first_only;
-
-	if ($suf_fc_view_first_only == 'first' && is_paged()) {
-		return 0;
-	}
-
-	if (!isset($suffusion) || is_null($suffusion)) {
-		$suffusion = new Suffusion();
-	}
-	$context = $suffusion->get_context();
-	$full_post_count = 0;
-	if (in_array('category', $context)) {
-		$full_post_count = (int)$suf_category_fc_number;
-	}
-	else if (in_array('author', $context)) {
-		$full_post_count = (int)$suf_author_fc_number;
-	}
-	else if (in_array('tag', $context)) {
-		$full_post_count = (int)$suf_tag_fc_number;
-	}
-	else if (in_array('search', $context)) {
-		$full_post_count = (int)$suf_search_fc_number;
-	}
-	else if (in_array('date', $context)) {
-		$full_post_count = (int)$suf_archive_fc_number;
-	}
-	else if (in_array('home', $context) || in_array('blog', $context)) {
-		$full_post_count = (int)$suf_index_fc_number;
-	}
-	else if (in_array('page', $context)) {
-		if (in_array('posts.php', $context)) {
-			$full_post_count = (int)$suf_pop_fc_number;
-		}
-	}
-	return $full_post_count;
 }
 
 function suffusion_entity_prepositions($entity_type = 'nav') {
@@ -733,6 +695,7 @@ function suffusion_update_generated_css() {
 			$custom_css['theme-version'] = SUFFUSION_THEME_VERSION;
 			update_option('suffusion_generated_css', $custom_css);
 	}
+
 	return $custom_css;
 }
 
@@ -783,72 +746,10 @@ function suffusion_register_custom_types() {
 		return;
 	}
 
-	global $suffusion_post_type_labels, $suffusion_post_type_args, $suffusion_post_type_supports, $suffusion_taxonomy_labels, $suffusion_taxonomy_args;
 	$suffusion_post_types = get_option('suffusion_post_types');
 	$suffusion_taxonomies = get_option('suffusion_taxonomies');
-	if (is_array($suffusion_post_types)) {
-		foreach ($suffusion_post_types as $post_type) {
-			$args = array();
-			$labels = array();
-			$supports = array();
-			foreach ($suffusion_post_type_labels as $label) {
-				if (isset($post_type['labels'][$label['name']]) && $post_type['labels'][$label['name']] != '') {
-					$labels[$label['name']] = $post_type['labels'][$label['name']];
-				}
-			}
-			foreach ($suffusion_post_type_supports as $support) {
-				if (isset($post_type['supports'][$support['name']])) {
-					if ($post_type['supports'][$support['name']] == '1') {
-						$supports[] = $support['name'];
-					}
-				}
-			}
-			foreach ($suffusion_post_type_args as $arg) {
-				if (isset($post_type['args'][$arg['name']])) {
-					if ($arg['type'] == 'checkbox' && $post_type['args'][$arg['name']] == '1') {
-						$args[$arg['name']] = true;
-					}
-					else if ($arg['type'] != 'checkbox') {
-						$args[$arg['name']] = $post_type['args'][$arg['name']];
-					}
-				}
-			}
-			$args['labels'] = $labels;
-			$args['supports'] = $supports;
-			register_post_type($post_type['post_type'], $args);
-		}
-	}
-
-	if (is_array($suffusion_taxonomies)) {
-		foreach ($suffusion_taxonomies as $taxonomy) {
-			$labels = array();
-			$args = array();
-			foreach ($suffusion_taxonomy_labels as $label) {
-				if (isset($taxonomy['labels'][$label['name']]) && $taxonomy['labels'][$label['name']] != '') {
-					$labels[$label['name']] = $taxonomy['labels'][$label['name']];
-				}
-			}
-			foreach ($suffusion_taxonomy_args as $arg) {
-				if (isset($taxonomy['args'][$arg['name']])) {
-					if ($arg['type'] == 'checkbox' && $taxonomy['args'][$arg['name']] == '1') {
-						$args[$arg['name']] = true;
-					}
-					else if ($arg['type'] != 'checkbox') {
-						$args[$arg['name']] = $taxonomy['args'][$arg['name']];
-					}
-				}
-			}
-			$args['labels'] = $labels;
-			$object_type_str = $taxonomy['object_type'];
-			$object_type_array = explode(',',$object_type_str);
-			$object_types = array();
-			foreach ($object_type_array as $object_type) {
-				if (post_type_exists(trim($object_type))) {
-					$object_types[] = trim($object_type);
-				}
-			}
-			register_taxonomy($taxonomy['taxonomy'], $object_types, $args);
-		}
+	if (is_array($suffusion_post_types) || is_array($suffusion_taxonomies)) {
+		require_once(get_template_directory().'/functions/custom-post-types.php');
 	}
 }
 
@@ -1091,49 +992,36 @@ function suffusion_get_formatted_options_array($prefix, $options_array) {
     return $ret;
 }
 
-/**
- * Prints a mega menu corresponding to a menu tab. This essentially prints out the widget area associated with the menu tab.
- * Mega-menus are not applicable to any tab that is not at a root-level
- *
- * @param $item_output
- * @param $item
- * @param $depth
- * @param $args
- * @return string
- */
-function suffusion_mega_menu_walker($item_output, $item, $depth, $args) {
-	if ($depth == 0 && isset ($args->walker)) {
-		// If we don't check for the walker, the widget areas start affecting the "Custom Menu" widgets too.
-		// The Walker is associated only with the drop-downs, hence we verify before printing the widget areas
-		if (class_exists('Suffusion_MM_Walker') && is_a($args->walker, 'Suffusion_MM_Walker')) {
-			$warea = suffusion_get_post_meta($item->ID, 'suf_mm_warea', true);
-			if (isset($warea) && $warea != '' && !suffusion_is_sidebar_empty($warea)) {
-				ob_start(); // Need output buffering here, otherwise we cannot print the widget area in the menu.
-				$cols = suffusion_get_post_meta($item->ID, 'suf_mm_cols');
-				if ($cols == '' || $cols == 0 || $cols == '0') {
-					$cols = 5;
+function suffusion_get_associative_array($stored_value) {
+	if (!is_array($stored_value)) {
+		$converted = explode('||', $stored_value);
+		$stored_value = array();
+		foreach ($converted as $converted_string) {
+			$converted_pairs = explode('::', $converted_string);
+			$index = '';
+			$inner_ctr = 0;
+			$pair_array = array();
+			foreach ($converted_pairs as $pairs_string) {
+				$inner_ctr++;
+				if ($inner_ctr == 1) {
+					$index = $pairs_string;
+					continue;
 				}
-
-				$widget_height = suffusion_get_post_meta($item->ID, 'suf_mm_widget_height');
-				if ($widget_height) {
-					$mason_class = 'mm-'.$widget_height;
+				if (trim($pairs_string) != '') {
+					$pairs = explode(';', $pairs_string);
+					foreach ($pairs as $pair) {
+						$name_value = explode('=', $pair);
+						if (count($name_value) <= 1) {
+							continue;
+						}
+						$pair_array[$name_value[0]] = $name_value[1];
+					}
 				}
-				else {
-					$mason_class = 'mm-row-equal';
-				}
-
-				echo "<div class='mm-warea mm-warea-$cols mm-warea-{$item->ID}'>\n";
-				echo "<div class='$mason_class mm-row-$cols'>\n";
-				dynamic_sidebar('sidebar-'.$warea);
-				echo "</div>\n";
-				echo "</div>\n";
-				$content = ob_get_contents();
-				ob_end_clean();
-				return $item_output.$content;
 			}
+			$stored_value[$index] = $pair_array;
 		}
 	}
-	return $item_output;
+	return $stored_value;
 }
 
 /**
@@ -1173,3 +1061,27 @@ function suffusion_get_rotating_image($folder) {
 	return WP_CONTENT_URL."/".$folder."/".$files[$rand];
 }
 
+
+/**
+ * Returns an array of public custom post types. The name of the post type is the key and the label name is the value.
+ *
+ * @param bool $built_in
+ * @return array
+ */
+function suffusion_get_custom_post_types($built_in = false) {
+	$ret = array();
+	if ($built_in) {
+		$post_types = get_post_types(array('public' => true, '_builtin' => true), 'objects');
+		foreach ($post_types as $post_type) {
+			if ($post_type->name != 'attachment') {
+				$ret[$post_type->name] = $post_type->labels->name." (".$post_type->name.")";
+			}
+		}
+	}
+
+	$post_types = get_post_types(array('public' => true, '_builtin' => false), 'objects');
+	foreach ($post_types as $post_type) {
+		$ret[$post_type->name] = $post_type->labels->name." (".$post_type->name.")";
+	}
+	return $ret;
+}

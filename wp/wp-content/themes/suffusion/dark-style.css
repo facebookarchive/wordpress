@@ -25,7 +25,7 @@ fieldset {
 	background-color: #222;
 }
 
-div.suf-widget {
+.suf-widget {
 	background-color: #000;
 	border: 1px solid #555;
 }
@@ -118,7 +118,7 @@ div.suf-widget {
 	border: 1px solid #555;
 }
 
-.post, div.page {
+.post, article.page {
 	background-color: #000;
 	border: 1px solid #555;
 }
@@ -153,7 +153,7 @@ h2.posttitle {
 	color: #999;
 }
 
-div.page-links span {
+.page-links span {
 	border-color: #222222;
 }
 
@@ -219,7 +219,7 @@ a.comment-reply-link, a.comment-reply-login {
 	border: solid 1px #222222;
 }
 
-a.comment-response-types, span.comment-response-types {
+.comment-response-type, .response-type {
 	border: solid 1px #222222;
 }
 
@@ -281,8 +281,8 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, #postbox
 
 div.tab-box div.sidebar-tab-content a:hover,
 div.tab-box div.sidebar-tab-content a:active,
-div.suf-widget a:hover,
-div.suf-widget a:active {
+.suf-widget a:hover,
+.suf-widget a:active {
 	text-decoration: underline;
 }
 

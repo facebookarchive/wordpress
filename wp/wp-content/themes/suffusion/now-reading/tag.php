@@ -14,7 +14,7 @@ get_header();
 <?php suffusion_before_begin_content(); ?>
 	<div id="content">
 <?php suffusion_after_begin_content(); ?>
-		<div class="post fix nr-post">
+		<article <?php post_class('post fix nr-post'); ?>>
 		<h1 class="posttitle">Books tagged with <?php the_tag(); ?></h1>
 
 		<div class="bookdata fix">
@@ -36,7 +36,7 @@ $nr_book_query = "tag={$GLOBALS['nr_tag']}&num=-1";
 get_template_part('now-reading/nr-shelf');
 ?>
 		</div><!-- /.booklisting -->
-		</div><!-- /.nr-post -->
+		</article><!-- /.nr-post -->
 	</div><!-- /#content -->
 </div><!-- /#main-col -->
 

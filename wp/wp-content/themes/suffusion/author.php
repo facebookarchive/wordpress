@@ -8,9 +8,9 @@
  */
 
 global $suffusion, $suf_author_excerpt;
-$suffusion->set_content_layout($suf_author_excerpt);
 
 get_header();
+$suffusion->set_content_layout($suf_author_excerpt);
 suffusion_query_posts();
 ?>
 

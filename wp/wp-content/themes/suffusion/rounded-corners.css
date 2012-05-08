@@ -15,16 +15,16 @@
     border-radius: 0;
 }
 
-a.comment-reply-link, a.comment-reply-login, a.comment-response-types, span.comment-response-types, .wp-caption, .exif-button,
+a.comment-reply-link, a.comment-reply-login, .comment-response-type, .response-type, .wp-caption, .exif-button,
 .suf-mag-headline-block li.suf-mag-headline a.tab-current, .widget-suf-cat-posts li.suf-cat-post:hover,
 .suf-mag-category li.suf-mag-catblock-post:hover, .activity-meta a, ul.item-list span.activity {
     border-radius: 3px;
 }
 
-.cl-widget, .suf-widget, .post, div.page, .non-wp-post, #subnav, .hier-nav, .page-nav, .post-nav, .flattened, .author-profile, .info-tag,
+.cl-widget, .suf-widget, .post, article.page, .non-wp-post, #subnav, .hier-nav, .page-nav, .post-nav, .flattened, .author-profile, .info-tag,
 .info-category, #featured-posts, h3#comments, h3.comments, h3#respond, h3.respond, #reply-title, textarea, .author-info, blockquote, pre,
 input[type="text"], input[type="password"], .commentlist li, .suf-mag-category, .suf-mag-excerpt, .suf-tile,
-h2.suf-mag-headlines-title, .suf-mag-excerpts-header, .suf-tiles th, .suf-mag-categories-header, #recaptcha_response_field, #language-selector ul li,
+h2.suf-mag-headlines-title, .suf-mag-excerpts-header, .suf-mag-categories-header, #recaptcha_response_field, #language-selector ul li,
 #language-selector ul li a, #language-selector ul li a:visited, .download, .announcement, .warning, .note, .suf-mag-headlines,
 .nr-post h3, .nr_widget h4, .post form#whats-new-form #whats-new-textarea, .post form#whats-new-form, ul.item-list li, .standard-form, fieldset {
 	border-radius: 5px;

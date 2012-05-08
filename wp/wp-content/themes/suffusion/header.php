@@ -5,7 +5,6 @@
  * @package Suffusion
  * @subpackage Templates
  */
-
 global $suffusion_unified_options, $suffusion_interactive_text_fields, $suffusion_translatable_fields, $suffusion_skin_dependence, $suf_color_scheme;
 if (function_exists('icl_t')) {
 	foreach ($suffusion_unified_options as $id => $value) {
@@ -47,22 +46,22 @@ if ($queried_id != 0) {
 	}
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <!--[if IE 6]>
-<html id="ie6" xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
+<html id="ie6" <?php language_attributes(); ?>>
 <![endif]-->
 <!--[if IE 7]>
-<html id="ie7" xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
+<html id="ie7" <?php language_attributes(); ?>>
 <![endif]-->
 <!--[if IE 8]>
-<html id="ie8" xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
+<html id="ie8" <?php language_attributes(); ?>>
 <![endif]-->
 <!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
-<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?>>
 <!--<![endif]-->
 
-<head profile="http://gmpg.org/xfn/11">
-	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
+<head>
+	<meta charset="<?php bloginfo('charset'); ?>" />
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
 <?php
@@ -77,7 +76,23 @@ if ($queried_id != 0) {
 		$extra_classes = array_merge($extra_classes, $suffusion_skin_dependence[$skin]);
 	}
 	$extra_classes[] = $skin;
+
+	if (is_page_template('template-custom-post-type-archive.php')) {
+		$extra_classes[] = 'custom-post-type-archive';
+		$cpt_name = suffusion_get_post_meta($queried_id, 'suf_cpt_post_type', true);
+		$extra_classes[] = 'custom-post-type-archive-'.$cpt_name;
+	}
 	$extra_classes = array_merge($extra_classes, $hidden_elements);
+?>
+	<!--[if lt IE 9]>
+	<script src="<?php echo get_template_directory_uri(); ?>/scripts/html5.js" type="text/javascript"></script>
+	<![endif]-->
+<?php
+	global $suf_cpt_layouts, $suffusion_cpt_layouts;
+	if (isset($suf_cpt_layouts)) {
+		$suffusion_cpt_layouts = suffusion_get_associative_array($suf_cpt_layouts);
+	}
+
 	wp_head();
 ?>
 </head>

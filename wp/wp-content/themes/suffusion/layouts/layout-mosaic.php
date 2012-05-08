@@ -9,6 +9,7 @@
 
 global $query_string, $wp_query, $suffusion_current_post_index, $suffusion_full_post_count_for_view, $suffusion_mosaic_layout, $suffusion_duplicate_posts, $suffusion, $post;
 global $suf_mosaic_constrain_row, $suf_mosaic_constrain_by_count, $suf_cat_info_enabled, $suf_author_info_enabled, $suf_tag_info_enabled;
+global $suffusion_cpt_post_id;
 $suffusion_mosaic_layout = true;
 
 remove_action('suffusion_before_end_content', 'suffusion_pagination');
@@ -25,13 +26,29 @@ if (have_posts()) {
 		$page_title = $temp_title;
 	}
 }
-query_posts($query_string);
+
+$hide_title = false;
+if (isset($suffusion_cpt_post_id)) {
+	$page_title = get_the_title($suffusion_cpt_post_id);
+	$hide_title = suffusion_get_post_meta($suffusion_cpt_post_id, 'suf_hide_page_title', true);
+}
+
+//query_posts($query_string);
+$wp_query->rewind_posts();
 
 $context = $suffusion->get_context();
 
 if (have_posts()) {
 	$suffusion_current_post_index = 0;
 	$suffusion_full_post_count_for_view = suffusion_get_full_content_count();
+
+	$custom_classes = array();
+	if (isset($suffusion_cpt_post_id)) {
+		add_action('suffusion_add_taxonomy_bylines_line', 'suffusion_cpt_line_taxonomies', 10, 2);
+		add_action('suffusion_add_taxonomy_bylines_pullout', 'suffusion_cpt_line_taxonomies', 10, 4);
+		$cpt_meta_position = suffusion_get_post_meta($suffusion_cpt_post_id, 'suf_cpt_byline_type', true);
+		$custom_classes[] = $cpt_meta_position;
+	}
 
 	if ($suffusion_full_post_count_for_view > 0) {
 		suffusion_after_begin_content();
@@ -51,7 +68,7 @@ if (have_posts()) {
 			continue;
 		}
 ?>
-	<div <?php post_class();?> id="post-<?php the_ID(); ?>">
+	<article <?php post_class($custom_classes);?> id="post-<?php the_ID(); ?>">
 <?php
 		suffusion_after_begin_post();
 ?>
@@ -68,7 +85,7 @@ if (have_posts()) {
 <?php
 		suffusion_before_end_post();
 ?>
-	</div><!--post -->
+	</article><!--post -->
 <?php
 	}
 
@@ -90,20 +107,37 @@ if (have_posts()) {
 
 	if ($suffusion_full_post_count_for_view == 0) {
 ?>
-	<div class='post <?php echo $class; ?> fix'>
-		<h2 class="posttitle"><?php echo $page_title; ?></h2>
+	<section class='post <?php echo $class; ?> fix'>
+<?php
+		if (!$hide_title) {
+?>
+		<header>
+			<h2 class="posttitle"><?php echo $page_title; ?></h2>
+		</header>
+<?php
+		}
+?>
 		<div class="entry fix">
 <?php
 		echo $information;
 	}
 	else if ($total > 0) {
 ?>
-	<div class='post <?php echo $class; ?> fix'>
+	<section class='post <?php echo $class; ?> fix'>
 		<div class="entry fix">
 <?php
 	}
 
 	if ($total > 0) {
+		$col_class = '';
+		if (isset($suffusion_cpt_post_id)) {
+			$cpt_posts_per_row = suffusion_get_post_meta($suffusion_cpt_post_id, 'suf_cpt_posts_per_row', true);
+			$col_class = 'suf-gallery-'.$cpt_posts_per_row.'c';
+		}
+		else if (isset($suf_mosaic_constrain_row) && isset($suf_mosaic_constrain_by_count) && $suf_mosaic_constrain_row == 'count') {
+			$col_class = 'suf-gallery-'.$suf_mosaic_constrain_by_count.'c';
+		}
+
 		$ret = "";
 		echo "<div class='suf-mosaic fix'>";
 		echo "<div class='suf-mosaic-thumbs fix'>";
@@ -111,11 +145,6 @@ if (have_posts()) {
 			the_post();
 			if (in_array($post->ID, $suffusion_duplicate_posts)) {
 				continue;
-			}
-
-			$col_class = '';
-			if (isset($suf_mosaic_constrain_row) && isset($suf_mosaic_constrain_by_count) && $suf_mosaic_constrain_row == 'count') {
-				$col_class = 'suf-gallery-'.$suf_mosaic_constrain_by_count.'c';
 			}
 
 			$ret .= "\t<div class='suf-mosaic-thumb-container $col_class'>\n";
@@ -159,7 +188,7 @@ if (have_posts()) {
 		echo "</div><!-- /.suf-mosaic -->";
 ?>
 		</div> <!-- /.entry -->
-	</div> <!-- /.post -->
+	</section> <!-- /.post -->
 <?php
 	}
 }

@@ -657,3 +657,209 @@ function suffusion_get_author_profile_links($id = 0) {
 	}
 	return apply_filters('suffusion_author_profile_links', $ret);
 }
+
+/**
+ * Returns the count for the number of posts to be displayed as full posts.
+ *
+ * @return int
+ */
+function suffusion_get_full_content_count() {
+	global $suffusion, $suf_category_fc_number, $suf_author_fc_number, $suf_tag_fc_number, $suf_search_fc_number, $suf_archive_fc_number, $suf_index_fc_number, $suf_pop_fc_number, $suf_fc_view_first_only;
+	global $suffusion_cpt_post_id;
+
+	if (isset($suffusion_cpt_post_id)) {
+		$not_first_page_only = suffusion_get_post_meta($suffusion_cpt_post_id, 'suf_cpt_full_posts_fp_only', true);
+		if (!$not_first_page_only && is_paged()) {
+			return 0;
+		}
+
+		$full_post_count = suffusion_get_post_meta($suffusion_cpt_post_id, 'suf_cpt_full_posts', true);
+		$total_posts = suffusion_get_post_meta($suffusion_cpt_post_id, 'suf_cpt_total_posts', true);
+		if (!$total_posts || !is_integer($total_posts)) {
+			$total_posts = get_option('posts_per_page');
+		}
+
+		if (suffusion_admin_check_integer($full_post_count) && $full_post_count > $total_posts) {
+			return $total_posts;
+		}
+		else if (suffusion_admin_check_integer($full_post_count)) {
+			return $full_post_count;
+		}
+		else {
+			return 0;
+		}
+	}
+
+	if ($suf_fc_view_first_only == 'first' && is_paged()) {
+		return 0;
+	}
+
+	if (!isset($suffusion) || is_null($suffusion)) {
+		$suffusion = new Suffusion();
+	}
+	$context = $suffusion->get_context();
+	$full_post_count = 0;
+	if (in_array('category', $context)) {
+		$full_post_count = (int)$suf_category_fc_number;
+	}
+	else if (in_array('author', $context)) {
+		$full_post_count = (int)$suf_author_fc_number;
+	}
+	else if (in_array('tag', $context)) {
+		$full_post_count = (int)$suf_tag_fc_number;
+	}
+	else if (in_array('search', $context)) {
+		$full_post_count = (int)$suf_search_fc_number;
+	}
+	else if (in_array('date', $context)) {
+		$full_post_count = (int)$suf_archive_fc_number;
+	}
+	else if (in_array('custom-type', $context)) {
+		//
+	}
+	else if (in_array('home', $context) || in_array('blog', $context)) {
+		$full_post_count = (int)$suf_index_fc_number;
+	}
+	else if (in_array('page', $context)) {
+		if (in_array('posts.php', $context)) {
+			$full_post_count = (int)$suf_pop_fc_number;
+		}
+	}
+
+	return $full_post_count;
+}
+
+/**
+ * Prints a mega menu corresponding to a menu tab. This essentially prints out the widget area associated with the menu tab.
+ * Mega-menus are not applicable to any tab that is not at a root-level
+ *
+ * @param $item_output
+ * @param $item
+ * @param $depth
+ * @param $args
+ * @return string
+ */
+function suffusion_mega_menu_walker($item_output, $item, $depth, $args) {
+	if ($depth == 0 && isset ($args->walker)) {
+		// If we don't check for the walker, the widget areas start affecting the "Custom Menu" widgets too.
+		// The Walker is associated only with the drop-downs, hence we verify before printing the widget areas
+		if (class_exists('Suffusion_MM_Walker') && is_a($args->walker, 'Suffusion_MM_Walker')) {
+			$warea = suffusion_get_post_meta($item->ID, 'suf_mm_warea', true);
+			if (isset($warea) && $warea != '' && !suffusion_is_sidebar_empty($warea)) {
+				ob_start(); // Need output buffering here, otherwise we cannot print the widget area in the menu.
+				$cols = suffusion_get_post_meta($item->ID, 'suf_mm_cols');
+				if ($cols == '' || $cols == 0 || $cols == '0') {
+					$cols = 5;
+				}
+
+				$widget_height = suffusion_get_post_meta($item->ID, 'suf_mm_widget_height');
+				if ($widget_height) {
+					$mason_class = 'mm-'.$widget_height;
+				}
+				else {
+					$mason_class = 'mm-row-equal';
+				}
+
+				echo "<div class='mm-warea mm-warea-$cols mm-warea-{$item->ID}'>\n";
+				echo "<div class='$mason_class mm-row-$cols'>\n";
+				dynamic_sidebar('sidebar-'.$warea);
+				echo "</div>\n";
+				echo "</div>\n";
+				$content = ob_get_contents();
+				ob_end_clean();
+				return $item_output.$content;
+			}
+		}
+	}
+	return $item_output;
+}
+
+/**
+ * Returns the byline position for a custom post type archive display.
+ *
+ * @param $byline_position
+ * @return bool|mixed
+ */
+function suffusion_cpt_byline_position($byline_position) {
+	global $suffusion_cpt_post_id;
+	if (!isset($suffusion_cpt_post_id)) {
+		return $byline_position;
+	}
+
+	$cpt_byline_position = suffusion_get_post_meta($suffusion_cpt_post_id, 'suf_cpt_byline_type', true);
+	if ($cpt_byline_position) {
+		return $cpt_byline_position;
+	}
+	return $byline_position;
+}
+
+/**
+ * Prints custom taxonomies in the byline for the tiled layout. Two filters are provided, <code>suffusion_before_tax_term_list</code>
+ * and <code>suffusion_after_tax_term_list</code> to let child themes print things before and after taxonomy list. An additional filter
+ * <code>suffusion_tax_term_separator</code> is provided to override the default "," separator.
+ *
+ * @param $post_id
+ * @param string $ret_trailer
+ * @return string
+ */
+function suffusion_cpt_tile_taxonomies($post_id, $ret_trailer = '') {
+	$taxonomies = suffusion_get_post_meta($post_id, 'suf_cpt_byline_taxonomies', true);
+	if ($taxonomies) {
+		global $post;
+		$taxonomies = explode(',', $taxonomies);
+		$taxonomies = array_map('trim', $taxonomies);
+		foreach ($taxonomies as $taxonomy) {
+			$taxonomy = get_taxonomy($taxonomy);
+			$terms = get_the_term_list($post->ID, $taxonomy->name, apply_filters('suffusion_before_tax_term_list', '', 'tile', $taxonomy->name), apply_filters('suffusion_tax_term_separator', ', ', 'tile', $taxonomy->name), apply_filters('suffusion_after_tax_term_list', '', 'tile', $taxonomy->name));
+			if (strlen(trim($terms)) != 0) {
+				$icon_a = "<a id='suf-tile-tax-{$taxonomy->name}-{$post->ID}' class='suf-tile-tax-{$taxonomy->name}-icon suf-tile-tax-icon suf-tile-icon' href='#' title=\"".esc_attr($taxonomy->label)."\"><span>&nbsp;</span></a>";
+				echo "<li>$icon_a</li>\n";
+				$ret_trailer .= "<li id='suf-tile-tax-{$taxonomy->name}-text-{$post->ID}' class='suf-tile-tax-{$taxonomy->name}-icon-text suf-tile-tax-icon-text suf-tile-icon-text'><span class='icon'>&nbsp;</span>";
+				$ret_trailer .= $terms;
+				$ret_trailer .= "</li>\n";
+			}
+		}
+	}
+	return $ret_trailer;
+}
+
+/**
+ * Prints custom taxonomies in the byline where the byline is styled as a line. Two filters are provided, <code>suffusion_before_tax_term_list</code>
+ * and <code>suffusion_after_tax_term_list</code> to let child themes print things before and after taxonomy list. An additional filter
+ * <code>suffusion_tax_term_separator</code> is provided to override the default "," separator.
+ *
+ * @param $post_id
+ * @param bool $is_single_cpt
+ * @param string $before
+ * @param string $after
+ */
+function suffusion_cpt_line_taxonomies($post_id, $is_single_cpt = false, $before = '', $after = '') {
+	global $post, $suffusion_cpt_layouts;
+	if (!$is_single_cpt) {
+		$taxonomies = suffusion_get_post_meta($post_id, 'suf_cpt_byline_taxonomies', true);
+		if ($taxonomies) {
+			global $post;
+			$taxonomies = explode(',', $taxonomies);
+			$taxonomies = array_map('trim', $taxonomies);
+		}
+	}
+	else {
+		if ($post->post_type != 'post' && isset($suffusion_cpt_layouts[$post->post_type]) && isset($suffusion_cpt_layouts[$post->post_type]['tax']) && trim($suffusion_cpt_layouts[$post->post_type]['tax']) != '') {
+			$taxonomies = explode(',', $suffusion_cpt_layouts[$post->post_type]['tax']);
+			$taxonomies = array_map('trim', $taxonomies);
+		}
+	}
+	if (isset($taxonomies) && is_array($taxonomies)) {
+		foreach ($taxonomies as $taxonomy) {
+			$taxonomy = get_taxonomy($taxonomy);
+			$terms = get_the_term_list($post->ID, $taxonomy->name, apply_filters('suffusion_before_tax_term_list', '', 'line', $taxonomy->name), apply_filters('suffusion_tax_term_separator', ', ', 'line', $taxonomy->name), apply_filters('suffusion_after_tax_term_list', '', 'line', $taxonomy->name));
+			if (strlen(trim($terms)) != 0) {
+				echo $before;
+				echo "<span class='tax-{$taxonomy->name} tax'><span class='icon'>&nbsp;</span>";
+				echo $terms;
+				echo "</span>";
+				echo $after;
+			}
+		}
+	}
+}

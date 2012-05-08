@@ -38,6 +38,7 @@ require_once( $facebook_plugin_directory . '/fb_wp_helpers.php' );
 unset( $facebook_plugin_directory );
 
 add_action('wp_footer','fb_add_base_js',20);
+add_action('admin_footer','fb_add_base_js',20);
 add_action('init','fb_channel_file');
 
 function fb_install_warning() {
@@ -45,10 +46,8 @@ function fb_install_warning() {
 
 	$page = (isset($_GET['page']) ? $_GET['page'] : null);
 
-	if ((empty($options["app_id"]) || empty($options["app_secret"])) &&
-	    $page != 'facebook/fb_admin_menu.php') {
-		fb_admin_dialog( __(
-		  'You must <a href="admin.php?page=facebook/fb_admin_menu.php">configure the plugin</a> to enable Facebook for WordPress.', 'facebook' ), true);
+	if ((empty($options["app_id"]) || empty($options["app_secret"])) && $page != 'facebook/fb_admin_menu.php') {
+		fb_admin_dialog( __('You must <a href="admin.php?page=facebook/fb_admin_menu.php">configure the plugin</a> to enable Facebook for WordPress.', 'facebook' ), true);
 	}
 }
 add_action('admin_notices', 'fb_install_warning');

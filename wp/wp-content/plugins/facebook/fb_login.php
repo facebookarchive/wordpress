@@ -6,14 +6,14 @@ function fb_install() {
 	global $wpdb;
 	global $fb_db_version;
 
-	$table_name = $wpdb->prefix . "users";
+	$table_name = $wpdb->prefix . "fb_users";
 	 
 	$sql = "CREATE TABLE $table_name (
 		id bigint(20) NOT NULL AUTO_INCREMENT,
 		time int(11) NOT NULL,
 		fb_uid bigint(20) NOT NULL,
 		wp_uid bigint(20) NOT NULL,
-		fb_vanity varchar(255) NOT NULL,
+		fb_username varchar(255) NOT NULL,
 		UNIQUE KEY id (id)
 		);";
 
@@ -25,35 +25,49 @@ function fb_install() {
 
 register_activation_hook(__FILE__,'fb_install');
 
-function fb_install_data() {
+function fb_check_connected_accounts() {
 	global $wpdb;
-	$welcome_name = "Mr. WordPress";
-	$welcome_text = "Congratulations, you just completed the installation!";
-
-	$rows_affected = $wpdb->insert( $table_name, array( 'time' => current_time('mysql'), 'name' => $welcome_name, 'text' => $welcome_text ) );
+	$table_name = $wpdb->prefix . "fb_users";
+	
+	//get current wordpress user
+	global $current_user;
+	get_currentuserinfo();
+	
+	//see if they have connected their account to facebook
+	$fb_uid = $wpdb->get_var($wpdb->prepare("SELECT fb_uid FROM $table_name WHERE wp_uid = %d", $current_user->ID));
+	
+	//if no, show message prompting to connect
+	if (empty($fb_uid)) {
+		$fb_user = fb_get_current_user();
+		
+		if ($fb_user) {
+			$rows_affected = $wpdb->insert( $table_name, array( 'time' => time(), 'fb_uid' => $fb_user['id'], 'wp_uid' => $current_user->ID, 'fb_username' => $fb_user['username'] ) );
+		}
+		else {
+			fb_admin_dialog( __('The Facebook plugin is enabled.  <a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a> to get full Facebook functionality.  [TODO]Click here to learn more.', 'facebook' ), true);
+		}
+	}
+	else {
+		
+	}
 }
 
-register_activation_hook(__FILE__,'fb_install_data');
+add_action('admin_notices', 'fb_check_connected_accounts');
 
-/*
-if ( current_user_can('update_core') ) {
-	$msg = sprintf( __('<a href="http://codex.wordpress.org/Version_%1$s">WordPress %1$s</a> is available! <a href="%2$s">Please update now</a>.'), $cur->current, network_admin_url( 'update-core.php' ) );
-} else {
-	$msg = sprintf( __('<a href="http://codex.wordpress.org/Version_%1$s">WordPress %1$s</a> is available! Please notify the site administrator.'), $cur->current );
+function fb_get_current_user() {
+	global $facebook;
+	
+	try {
+		$user = $facebook->api('/me');
+		
+		return $user;
+	}
+	catch (FacebookApiException $e) {
+		//error_log('The Facebook user must be logged in.');
+	}
 }
-	echo "<div class='update-nag'>$msg</div>";
-add_action( 'admin_notices', 'update_nag', 3 );
-*/
 
-//get current user
 
-//see if they have connected their account
-
-//if no, show message prompting to connect
-
-//once connected, associate accounts
-
-//update subscribe to point to their vanity
 
 
 ?>

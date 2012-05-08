@@ -6,10 +6,11 @@ function fb_get_subscribe_button($options = array()) {
 		$params .= $option . '="' . $value . '" ';
 	}
 	
-	return '<div class="fb-subscribe" ' . $params . '></div> to ' . get_the_author();
+	return '<div class="fb-subscribe" ' . $params . '></div>';
 }
 
 function fb_subscribe_button_automatic($content) {
+	global $wpdb;
 	$options = get_option('fb_options');
 	
 	foreach($options['subscribe'] as $param => $val) {
@@ -17,6 +18,12 @@ function fb_subscribe_button_automatic($content) {
 			
 		$options['subscribe']['data-' . $param] =  $val;
 	}
+	
+	$table_name = $wpdb->prefix . "fb_users";
+	
+	$fb_username = $wpdb->get_var($wpdb->prepare("SELECT fb_username FROM $table_name WHERE wp_uid = %d", get_the_author_meta('ID')));
+	
+	$options['subscribe']['data-href'] = 'http://www.facebook.com/' . $fb_username;
 	
 	$content .= fb_get_subscribe_button($options['subscribe']);
 	

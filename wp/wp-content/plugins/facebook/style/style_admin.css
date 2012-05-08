@@ -1,6 +1,6 @@
 .facebook-logo {
 		float: left;
-		background: transparent url(images/logo.png);
+		background: url(../images/logo.png) no-repeat;
 		width: 34px;
 		height: 34px;
 		margin: 7px 8px 0 0;

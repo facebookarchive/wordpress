@@ -1,7 +1,7 @@
 <?php
 // create custom plugin settings menu
 add_action( 'admin_init', 'fb_admin_menu_settings' );
-add_action('admin_menu', 'fb_create_menu');
+add_action( 'admin_menu', 'fb_create_menu' );
 
 function fb_create_menu() {
 	//create new top-level menu
@@ -13,7 +13,7 @@ function fb_create_menu() {
 }
 
 function fb_admin_style() {
-	wp_enqueue_style('fb_admin');
+	wp_enqueue_style( 'fb_admin', plugins_url('style/style_admin.css', __FILE__), array(), '1.0' );
 }
 
 function fb_admin_scripts( $hook_suffix ) {
@@ -22,9 +22,7 @@ function fb_admin_scripts( $hook_suffix ) {
 
 // __return_false for no desc
 function fb_admin_menu_settings() {
-	wp_register_style('fb_admin', plugins_url('style/style_admin.css', __FILE__));
-
-	register_setting( 'fb_options', 'fb_options', 'fb_options_validate');
+	register_setting( 'fb_options', 'fb_options', 'fb_options_validate' );
 }
 
 function fb_settings_page() {

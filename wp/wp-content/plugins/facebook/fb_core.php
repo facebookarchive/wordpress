@@ -37,8 +37,7 @@ require_once( $facebook_plugin_directory . '/fb_social_publisher.php' );
 require_once( $facebook_plugin_directory . '/fb_wp_helpers.php' );
 unset( $facebook_plugin_directory );
 
-add_action( 'wp_footer', 'fb_add_base_js', 20 );
-add_action( 'admin_footer','fb_add_base_js', 20 );
+add_action( 'init', 'fb_init' );
 add_action( 'init','fb_channel_file' );
 
 function fb_install_warning() {
@@ -46,17 +45,11 @@ function fb_install_warning() {
 
 	$page = (isset($_GET['page']) ? $_GET['page'] : null);
 
-	if ((empty($options["app_id"]) || empty($options["app_secret"])) && $page != 'facebook/fb_admin_menu.php') {
+	if ((empty($options['app_id']) || empty($options['app_secret'])) && $page != 'facebook/fb_admin_menu.php') {
 		fb_admin_dialog( sprintf( __('You must <a href="%s">configure the plugin</a> to enable Facebook for WordPress.', 'facebook' ), 'admin.php?page=facebook/fb_admin_menu.php' ), true);
 	}
 }
 add_action('admin_notices', 'fb_install_warning');
-
-function fb_add_base_js($args = array()) {
-	$options = get_option('fb_options');
-	if ( isset( $options['app_id'] ) )
-		fb_init( $options['app_id'], $args );
-};
 
 //add_filter('language_attributes','fb_lang_atts');
 
@@ -66,40 +59,75 @@ function fb_add_base_js($args = array()) {
 	return ' xmlns:fb="http://ogp.me/ns/fb#" xmlns:og="http://ogp.me/ns#" '. $lang;
 }*/
 
-function fb_init($app_id, $args = array()) {
+/**
+ * Adds a script block to <head>, queues a script in footer, and adds a target element for that script
+ *
+ * @since 1.0
+ */
+function fb_js_sdk_setup() {
+	$options = get_option( 'fb_options' );
+	if ( ! isset( $options['app_id'] ) )
+		return;
+
+	$app_id = $options['app_id'];
+
+	$args = apply_filters( 'fb_init', array(
+		'appId' => $app_id,
+		'channelUrl' => add_query_arg( 'fb-channel-file', 1, site_url( '/' ) ),
+		'status' => true,
+		'cookie' => true,
+		'xfbml' => true,
+		'oauth' => true
+	) );
+
+	// enforce minimum requirements
+	if ( ! isset( $args['appId'] ) )
+		return;
+
+	echo '<script type="text/javascript">window.fbAsyncInit=function(){FB.init(' . json_encode( $args ) . ');';
+	do_action( 'fb_async_init', $args );
+	echo '}</script>';
+
 	$locale = fb_get_locale();
+	if ( ! $locale )
+		return;
+	wp_enqueue_script( 'fb-connect', ( is_ssl() ? 'https' : 'http' ) . '://connect.facebook.net/' . $locale . '/all.js', array(), null, true );
 
-	$defaults = array(
-		'appId'=>$app_id,
-		'channelUrl'=>home_url('?fb-channel-file=1'),
-		'status'=>true,
-		'cookie'=>true,
-		'xfbml'=>true,
-		'oauth'=>true,
-	);
+	add_action( 'wp_footer', 'fb_root' );
+}
 
-	$args = wp_parse_args($args, $defaults);
+/**
+ * Add a root element for Faecbook JavaScript API
+ *
+ * @since 1.0
+ */
+function fb_root() {
+	echo '<div id="fb-root"></div>';
+}
 
-	echo '<div id="fb-root"></div>
-	<script type="text/javascript">
-		window.fbAsyncInit = function() {
-			FB.init(' .  json_encode($args) . ');
-			' . do_action('fb_async_init') . '
-		};
-		(function(d){
-				 var js, id = "facebook-jssdk"; if (d.getElementById(id)) {return;}
-				 js = d.createElement("script"); js.id = id; js.async = true;
-				 js.src = "//connect.facebook.net/' .  $locale . '/all.js";
-				 d.getElementsByTagName("head")[0].appendChild(js);
-		 }(document));
-	</script>';
+/**
+ * Initialize the plugin and its hooks
+ * Run during init action
+ *
+ * @since 1.0
+ */
+function fb_init() {
+	// public-facing only
+	if ( is_admin() )
+		return;
+
+	$options = get_option( 'fb_options' );
+	if ( ! isset( $options['app_id'] ) )
+		return;
+
+	add_action( 'wp_head', 'fb_js_sdk_setup' );
 }
 
 function fb_channel_file() {
 	if (!empty($_GET['fb-channel-file'])) {
 		$cache_expire = 60 * 60 * 24 * 365;
-		header("Pragma: public");
-		header("Cache-Control: max-age=".$cache_expire);
+		header('Pragma: public');
+		header('Cache-Control: max-age='.$cache_expire);
 		header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $cache_expire) . ' GMT');
 		echo '<script src="//connect.facebook.net/' . fb_get_locale() . '/all.js"></script>';
 		exit;

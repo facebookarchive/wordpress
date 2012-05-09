@@ -49,7 +49,7 @@ blockquote{
 .border{
 	border: 1px solid #ccc;
 }
-div.suf-widget{
+.suf-widget{
 	border: none;
 }
 
@@ -156,27 +156,27 @@ div.suf-widget{
 	border-left: 1px solid #D8D8D8;
 }
 
-.post, div.page {
+.post, article.page {
 	border: none;
 	border-bottom: 3px solid #333;
 	padding: 2em 1em 1.5em;
 }
-div.post, div.page {
+article.post, article.page {
 	border-radius: 0;
 }
-.post:last-child, div.page:last-child {
+.post:last-child, article.page:last-child {
 	border-bottom: none;
 }
-div.page-links span {
+.page-links span {
 	border: 1px solid;
 	padding: 3px;
 }
 
-div.page-links a, div.page-links a:visited, div.page-links a:hover {
+.page-links a, .page-links a:visited, .page-links a:hover {
 	text-decoration: none;
 }
 
-div.page-links > span, div.page-links a:hover span {
+.page-links > span, .page-links a:hover span {
 	background: #444;
 	color: #eee;
 }
@@ -222,7 +222,7 @@ a.comment-reply-link, a.comment-reply-login {
 	border: solid 1px #999999;
 }
 
-a.comment-response-types, span.comment-response-types {
+.comment-response-type, .response-type {
 	border: solid 1px #999999;
 }
 
@@ -349,23 +349,13 @@ div.sidebar-tab-content {
 	border: none;
 }
 
-.suf-mag-excerpts td,
-.suf-tiles td {
-	border-width: 1px;
-	border-style: solid;
-	border-color: #e7e7e7;
-}
-
 h2.suf-mag-excerpt-title,
 h2.suf-tile-title {
 	border-top: 1px dotted #e7e7e7;
 	border-bottom: 1px dotted #e7e7e7;
 }
 
-h2.suf-mag-headlines-title,
-.suf-mag-excerpts th,
-.suf-mag-categories th,
-.suf-tiles th {
+h2.suf-mag-headlines-title {
 	font-family: Arial, sans-serif;
 	border-width: 1px;
 	border-style: solid;
@@ -374,11 +364,6 @@ h2.suf-mag-headlines-title,
 .suf-mag-headline-block li.suf-mag-headline a.tab-current {
 	background: #444;
 	color: #eee;
-}
-.suf-mag-categories td {
-	border-width: 1px;
-	border-style: solid;
-	border-color: #e7e7e7;
 }
 .widget-suf-cat-posts ul.suf-cat-posts-list { margin-left: 0; }
 .widget-suf-cat-posts li.suf-cat-post,
@@ -491,7 +476,6 @@ ol.commentlist li.comment.author-below:first-child, ol.commentlist li.pingback.a
 	border: none;
 }
 
-.dbx-box{border:none;}
 .dbx-handle{border-bottom:1px dotted #aaa}
 .dbx-tooltip{border:1px solid #000; font:normal normal normal 0.85em Georgia, serif;}
 *[class="dbx-tooltip"]:lang(en){border-color:InfoText}

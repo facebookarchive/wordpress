@@ -7,9 +7,9 @@
  */
 
 global $suffusion, $suf_search_excerpt;
-$suffusion->set_content_layout($suf_search_excerpt);
 
 get_header();
+$suffusion->set_content_layout($suf_search_excerpt);
 suffusion_query_posts();
 ?>
     <div id="main-col">

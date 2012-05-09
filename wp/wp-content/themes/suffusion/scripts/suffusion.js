@@ -10,11 +10,11 @@
 (function($){$.fn.bgIframe=$.fn.bgiframe=function(s){if($.browser.msie&&parseInt($.browser.version)<=6){s=$.extend({top:'auto',left:'auto',width:'auto',height:'auto',opacity:true,src:'javascript:false;'},s||{});var prop=function(n){return n&&n.constructor==Number?n+'px':n;},html='<iframe class="bgiframe"frameborder="0"tabindex="-1"src="'+s.src+'"'+'style="display:block;position:absolute;z-index:-1;'+(s.opacity!==false?'filter:Alpha(Opacity=\'0\');':'')+'top:'+(s.top=='auto'?'expression(((parseInt(this.parentNode.currentStyle.borderTopWidth)||0)*-1)+\'px\')':prop(s.top))+';'+'left:'+(s.left=='auto'?'expression(((parseInt(this.parentNode.currentStyle.borderLeftWidth)||0)*-1)+\'px\')':prop(s.left))+';'+'width:'+(s.width=='auto'?'expression(this.parentNode.offsetWidth+\'px\')':prop(s.width))+';'+'height:'+(s.height=='auto'?'expression(this.parentNode.offsetHeight+\'px\')':prop(s.height))+';'+'"/>';return this.each(function(){if($('> iframe.bgiframe',this).length==0)this.insertBefore(document.createElement(html),this.firstChild);});}return this;};if(!$.browser.version)$.browser.version=navigator.userAgent.toLowerCase().match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/)[1];})(jQuery);
 
 /*************************************************
-**  jQuery Masonry version 1.3.2
+**  jQuery Masonry version v2.1.04
 **  Copyright David DeSandro, licensed MIT
 **  http://desandro.com/resources/jquery-masonry
 **************************************************/
-(function(e){var n=e.event,o;n.special.smartresize={setup:function(){e(this).bind("resize",n.special.smartresize.handler)},teardown:function(){e(this).unbind("resize",n.special.smartresize.handler)},handler:function(j,l){var g=this,d=arguments;j.type="smartresize";o&&clearTimeout(o);o=setTimeout(function(){jQuery.event.handle.apply(g,d)},l==="execAsap"?0:100)}};e.fn.smartresize=function(j){return j?this.bind("smartresize",j):this.trigger("smartresize",["execAsap"])};e.fn.masonry=function(j,l){var g={getBricks:function(d,b,a){var c=a.itemSelector===undefined;b.$bricks=a.appendedContent===undefined?c?d.children():d.find(a.itemSelector):c?a.appendedContent:a.appendedContent.filter(a.itemSelector)},placeBrick:function(d,b,a,c,h){b=Math.min.apply(Math,a);for(var i=b+d.outerHeight(true),f=a.length,k=f,m=c.colCount+1-f;f--;)if(a[f]==b)k=f;d.applyStyle({left:c.colW*k+c.posLeft,top:b},e.extend(true,{},h.animationOptions));for(f=0;f<m;f++)c.colY[k+f]=i},setup:function(d,b,a){g.getBricks(d,a,b);if(a.masoned)a.previousData=d.data("masonry");a.colW=b.columnWidth===undefined?a.masoned?a.previousData.colW:a.$bricks.outerWidth(true):b.columnWidth;a.colCount=Math.floor(d.width()/a.colW);a.colCount=Math.max(a.colCount,1)},arrange:function(d,b,a){var c;if(!a.masoned||b.appendedContent!==undefined)a.$bricks.css("position","absolute");if(a.masoned){a.posTop=a.previousData.posTop;a.posLeft=a.previousData.posLeft}else{d.css("position","relative");var h=e(document.createElement("div"));d.prepend(h);a.posTop=Math.round(h.position().top);a.posLeft=Math.round(h.position().left);h.remove()}if(a.masoned&&b.appendedContent!==undefined){a.colY=a.previousData.colY;for(c=a.previousData.colCount;c<a.colCount;c++)a.colY[c]=a.posTop}else{a.colY=[];for(c=a.colCount;c--;)a.colY.push(a.posTop)}e.fn.applyStyle=a.masoned&&b.animate?e.fn.animate:e.fn.css;b.singleMode?a.$bricks.each(function(){var i=e(this);g.placeBrick(i,a.colCount,a.colY,a,b)}):a.$bricks.each(function(){var i=e(this),f=Math.ceil(i.outerWidth(true)/a.colW);f=Math.min(f,a.colCount);if(f===1)g.placeBrick(i,a.colCount,a.colY,a,b);else{var k=a.colCount+1-f,m=[];for(c=0;c<k;c++){var p=a.colY.slice(c,c+f);m[c]=Math.max.apply(Math,p)}g.placeBrick(i,k,m,a,b)}});a.wallH=Math.max.apply(Math,a.colY);d.applyStyle({height:a.wallH-a.posTop},e.extend(true,[],b.animationOptions));a.masoned||setTimeout(function(){d.addClass("masoned")},1);l.call(a.$bricks);d.data("masonry",a)},resize:function(d,b,a){a.masoned=!!d.data("masonry");var c=d.data("masonry").colCount;g.setup(d,b,a);a.colCount!=c&&g.arrange(d,b,a)}};return this.each(function(){var d=e(this),b={};b.masoned=!!d.data("masonry");var a=b.masoned?d.data("masonry").options:{},c=e.extend({},e.fn.masonry.defaults,a,j),h=a.resizeable;b.options=c.saveOptions?c:a;l=l||function(){};g.getBricks(d,b,c);if(!b.$bricks.length)return this;g.setup(d,c,b);g.arrange(d,c,b);!h&&c.resizeable&&e(window).bind("smartresize.masonry",function(){g.resize(d,c,b)});h&&!c.resizeable&&e(window).unbind("smartresize.masonry")})};e.fn.masonry.defaults={singleMode:false,columnWidth:undefined,itemSelector:undefined,appendedContent:undefined,saveOptions:true,resizeable:true,animate:false,animationOptions:{}}})(jQuery);
+(function(a,b,c){"use strict";var d=b.event,e;d.special.smartresize={setup:function(){b(this).bind("resize",d.special.smartresize.handler)},teardown:function(){b(this).unbind("resize",d.special.smartresize.handler)},handler:function(a,b){var c=this,d=arguments;a.type="smartresize",e&&clearTimeout(e),e=setTimeout(function(){jQuery.event.handle.apply(c,d)},b==="execAsap"?0:100)}},b.fn.smartresize=function(a){return a?this.bind("smartresize",a):this.trigger("smartresize",["execAsap"])},b.Mason=function(a,c){this.element=b(c),this._create(a),this._init()},b.Mason.settings={isResizable:!0,isAnimated:!1,animationOptions:{queue:!1,duration:500},gutterWidth:0,isRTL:!1,isFitWidth:!1,containerStyle:{position:"relative"}},b.Mason.prototype={_filterFindBricks:function(a){var b=this.options.itemSelector;return b?a.filter(b).add(a.find(b)):a},_getBricks:function(a){var b=this._filterFindBricks(a).css({position:"absolute"}).addClass("masonry-brick");return b},_create:function(c){this.options=b.extend(!0,{},b.Mason.settings,c),this.styleQueue=[];var d=this.element[0].style;this.originalStyle={height:d.height||""};var e=this.options.containerStyle;for(var f in e)this.originalStyle[f]=d[f]||"";this.element.css(e),this.horizontalDirection=this.options.isRTL?"right":"left",this.offset={x:parseInt(this.element.css("padding-"+this.horizontalDirection),10),y:parseInt(this.element.css("padding-top")+16,10)},this.isFluid=this.options.columnWidth&&typeof this.options.columnWidth=="function";var g=this;setTimeout(function(){g.element.addClass("masonry")},0),this.options.isResizable&&b(a).bind("smartresize.masonry",function(){g.resize()}),this.reloadItems()},_init:function(a){this._getColumns(),this._reLayout(a)},option:function(a,c){b.isPlainObject(a)&&(this.options=b.extend(!0,this.options,a))},layout:function(a,b){for(var c=0,d=a.length;c<d;c++)this._placeBrick(a[c]);var e={};e.height=Math.max.apply(Math,this.colYs);if(this.options.isFitWidth){var f=0;c=this.cols;while(--c){if(this.colYs[c]!==0)break;f++}e.width=(this.cols-f)*this.columnWidth-this.options.gutterWidth}this.styleQueue.push({$el:this.element,style:e});var g=this.isLaidOut?this.options.isAnimated?"animate":"css":"css",h=this.options.animationOptions,i;for(c=0,d=this.styleQueue.length;c<d;c++)i=this.styleQueue[c],i.$el[g](i.style,h);this.styleQueue=[],b&&b.call(a),this.isLaidOut=!0},_getColumns:function(){var a=this.options.isFitWidth?this.element.parent():this.element,b=a.width();this.columnWidth=this.isFluid?this.options.columnWidth(b):this.options.columnWidth||this.$bricks.outerWidth(!0)||b,this.columnWidth+=this.options.gutterWidth,this.cols=Math.floor((b+this.options.gutterWidth)/this.columnWidth),this.cols=Math.max(this.cols,1)},_placeBrick:function(a){var c=b(a),d,e,f,g,h;d=Math.ceil(c.outerWidth(!0)/(this.columnWidth+this.options.gutterWidth)),d=Math.min(d,this.cols);if(d===1)f=this.colYs;else{e=this.cols+1-d,f=[];for(h=0;h<e;h++)g=this.colYs.slice(h,h+d),f[h]=Math.max.apply(Math,g)}var i=Math.min.apply(Math,f),j=0;for(var k=0,l=f.length;k<l;k++)if(f[k]===i){j=k;break}var m={top:i+this.offset.y};m[this.horizontalDirection]=this.columnWidth*j+this.offset.x,this.styleQueue.push({$el:c,style:m});var n=i+c.outerHeight(!0),o=this.cols+1-l;for(k=0;k<o;k++)this.colYs[j+k]=n},resize:function(){var a=this.cols;this._getColumns(),(this.isFluid||this.cols!==a)&&this._reLayout()},_reLayout:function(a){var b=this.cols;this.colYs=[];while(b--)this.colYs.push(0);this.layout(this.$bricks,a)},reloadItems:function(){this.$bricks=this._getBricks(this.element.children())},reload:function(a){this.reloadItems(),this._init(a)},appended:function(a,b,c){if(b){this._filterFindBricks(a).css({top:this.element.height()});var d=this;setTimeout(function(){d._appended(a,c)},1)}else this._appended(a,c)},_appended:function(a,b){var c=this._getBricks(a);this.$bricks=this.$bricks.add(c),this.layout(c,b)},remove:function(a){this.$bricks=this.$bricks.not(a),a.remove()},destroy:function(){this.$bricks.removeClass("masonry-brick").each(function(){this.style.position="",this.style.top="",this.style.left=""});var c=this.element[0].style;for(var d in this.originalStyle)c[d]=this.originalStyle[d];this.element.unbind(".masonry").removeClass("masonry").removeData("masonry"),b(a).unbind(".masonry")}},b.fn.imagesLoaded=function(a){function i(a){var c=a.target;c.src!==f&&b.inArray(c,g)===-1&&(g.push(c),--e<=0&&(setTimeout(h),d.unbind(".imagesLoaded",i)))}function h(){a.call(c,d)}var c=this,d=c.find("img").add(c.filter("img")),e=d.length,f="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",g=[];e||h(),d.bind("load.imagesLoaded error.imagesLoaded",i).each(function(){var a=this.src;this.src=f,this.src=a});return c};var f=function(b){a.console&&a.console.error(b)};b.fn.masonry=function(a){if(typeof a=="string"){var c=Array.prototype.slice.call(arguments,1);this.each(function(){var d=b.data(this,"masonry");if(!d)f("cannot call methods on masonry prior to initialization; attempted to call method '"+a+"'");else{if(!b.isFunction(d[a])||a.charAt(0)==="_"){f("no such method '"+a+"' for masonry instance");return}d[a].apply(d,c)}})}else this.each(function(){var c=b.data(this,"masonry");c?(c.option(a||{}),c._init()):b.data(this,"masonry",new b.Mason(a,this))});return this}})(window,jQuery);
 
 /*!
  * jQuery Fancy Letter Plugin v1.1
@@ -40,6 +40,25 @@ b);c.prependTo(this)}}});return this};g.fn.fancyletter.defaults={commonClass:"fa
  */
 
 $j = jQuery.noConflict();
+
+/**
+ * jQuery.support.cssProperty
+ * To verify that a CSS property is supported (or any of its browser-specific implementations)
+ *
+ * @param string p - css property name
+ * [@param] bool rp - optional, if set to true, the css property name will be returned, instead of a boolean support indicator
+ *
+ * @Author: Axel Jack Fuchs (Cologne, Germany)
+ * @Date: 08-29-2010 18:43
+ *
+ * Example: $.support.cssProperty('boxShadow');
+ * Returns: true
+ *
+ * Example: $.support.cssProperty('boxShadow', true);
+ * Returns: 'MozBoxShadow' (On Firefox4 beta4)
+ * Returns: 'WebkitBoxShadow' (On Safari 5)
+ */
+$j.support.cssProperty=function(){function a(a,b){var c=document.body||document.documentElement,d=c.style;if(typeof d=="undefined"){return false}if(typeof d[a]=="string"){return b?a:true}v=["Moz","Webkit","Khtml","O","ms","Icab"],a=a.charAt(0).toUpperCase()+a.substr(1);for(var e=0;e<v.length;e++){if(typeof d[v[e]+a]=="string"){return b?v[e]+a:true}}}return a}();
 
 $j.fn.extend({
 	highlight: function(search, insensitive, hls_class){
@@ -69,13 +88,13 @@ function sufHtmlDecode(value){
 
 $j(document).ready(function() {
     /* Magazine JS, for the headline section */
-	$j('div.suf-mag-headlines div.suf-mag-headline-photo').hide();
+	$j('.suf-mag-headlines div.suf-mag-headline-photo').hide();
 	$j('div.suf-mag-headline-photo-first').show();
 	$j('div.suf-mag-headline-block ul.mag-headlines li.suf-mag-headline-first a').addClass('tab-current');
 
 	$j('div.suf-mag-headline-block ul.mag-headlines li a').hover(function(){
 		var thisClass = this.className.substring(17, this.className.indexOf(" "));
-		$j('div.suf-mag-headlines div.suf-mag-headline-photo').hide();
+		$j('.suf-mag-headlines div.suf-mag-headline-photo').hide();
 		$j('div.suf-mag-headline-block ul.mag-headlines li a').removeClass('tab-current');
         $j('div.suf-mag-headline-photo-' + thisClass).show();
 		$j(this).addClass('tab-current');
@@ -83,15 +102,15 @@ $j(document).ready(function() {
     /* End Magazine JS */
 
     /* Tabbed Widgets */
-    $j('div.tab-box div.sidebar-tab-content').hide();
+    $j('.tab-box div.sidebar-tab-content').hide();
     $j('div.sbtab-content-first').show();
-    $j('div.tab-box ul.sidebar-tabs li.sbtab-first a').addClass('tab-current');
+    $j('.tab-box ul.sidebar-tabs li.sbtab-first a').addClass('tab-current');
 
-    $j('div.tab-box ul.sidebar-tabs li a').click(function(){
+    $j('.tab-box ul.sidebar-tabs li a').click(function(){
         var thisClass = this.className.substring(6, this.className.indexOf(" "));
-        $j('div.tab-box div.sidebar-tab-content').hide();
-        $j('div.tab-box div.sbtab-content-' + thisClass).show();
-        $j('div.tab-box ul.sidebar-tabs li a').removeClass('tab-current');
+        $j('.tab-box div.sidebar-tab-content').hide();
+        $j('.tab-box div.sbtab-content-' + thisClass).show();
+        $j('.tab-box ul.sidebar-tabs li a').removeClass('tab-current');
         $j(this).addClass('tab-current');
     });
     /* End Tabbed Widgets */
@@ -593,10 +612,10 @@ $j(document).ready(function() {
 				break;
 			}
 		}
-		if (wareaColumns < len) {
+		if (wareaColumns <= len && !$j(this).hasClass('cl-warea-masonry') && !$j(this).hasClass('cl-warea-all')) {
 			var rows = Math.ceil(len / wareaColumns);
 			for (var j=1; j<=rows; j++) {
-				$j(this).append("<div class='cl-warea-row-" + j + " fix'></div>");
+				$j(this).append("<div class='cl-warea-row cl-warea-row-" + j + " fix'></div>");
 			}
 		}
 
@@ -611,107 +630,32 @@ $j(document).ready(function() {
 	});
 
 	$j(window).resize(function() {
-		$j('.suf-tile-row, .cl-warea, .mm-row-equal').each(function() {
-			var children = $j(this).find('.suf-tile, .suf-mag-excerpt, .suf-mag-category, .cl-widget, .mm-widget');
-			var len = children.length;
-			var wareaColumns = 0;
-			if ($j(this).hasClass('cl-warea') || $j(this).hasClass('mm-row-equal')) {
-				for (var k=1; k<=10; k++) {
-					if ($j(this).hasClass('cl-warea-' + k) || $j(this).hasClass('mm-row-' + k)) {
-						len = k;
-						wareaColumns = k;
-						break;
-					}
-				}
+		if (!$j.support.cssProperty('columnCount')) {
+			suffusion_balance_widths('.suf-tile-row, .cl-warea, .mm-row-equal');
+		}
+		suffusion_balance_heights('.suf-tile-row, .cl-warea, .mm-row-equal');
+		suffusion_balance_widths('.cl-warea-masonry');
+/*
+		$j('.cl-warea-masonry').masonry({
+			columnWidth: function(containerWidth) {
+				return containerWidth / 3;
 			}
-
-			var splits = len * 2 - 2;
-			var singleWidth, widthDiff, splitWidth;
-
-			if (len > 0 && !$j(this).hasClass('mm-row-equal')) {
-				if (len > 1) {
-					$j(children[0]).css({
-						'margin-left': 0
-					});
-					$j(children[len - 1]).css({
-						'margin-right': 0
-					});
-				}
-
-				if (len == 1) {
-					var widthDiff1C = $j(children[0]).outerWidth() - $j(children[0]).innerWidth() + 2;
-					$j(children[0]).css({
-						width: Math.floor($j(this).outerWidth()) - widthDiff1C
-					});
-				}
-
-				if (len > 1) {
-					$j(children[len - 1]).css({
-						'float': 'right'
-					});
-					singleWidth = $j(children[0]).outerWidth() + 1; // Adding a pixel to adjust for corner cases.
-					widthDiff = $j(this).parent().innerWidth() - singleWidth * len;
-					splitWidth = Math.floor(widthDiff / splits);
-
-					for (var i=0; i<len - 1; i++) {
-						$j(children[i]).css({
-							'margin-right': splitWidth
-						});
-					}
-					for (var j=len-1; j>0; j--) {
-						$j(children[j]).css({
-							'margin-left': splitWidth
-						});
-					}
-				}
-			}
-
-			if ($j(this).hasClass('cl-warea-all-row') || $j(this).hasClass('cl-warea-all') || $j(this).hasClass('mm-row-equal')) {
-				for (var m = 0; m * wareaColumns < children.length; m = m + 1) {
-					var slice = children.slice(m * wareaColumns, (m + 1) * wareaColumns);
-					if (!$j(this).hasClass('mm-row-equal')) {
-						$j(slice[0]).css({
-							'margin-left': 0
-						});
-						$j(slice[slice.length - 1]).css({
-							'margin-right': 0,
-							'float': 'right'
-						});
-
-						if (slice.length > 1) {
-							singleWidth = $j(slice[0]).outerWidth() + 1;
-							widthDiff = $j(this).parent().innerWidth() - singleWidth * len;
-							splitWidth = Math.floor(widthDiff / splits);
-
-							for (var i=0; i<slice.length - 1; i++) {
-								$j(slice[i]).css({
-									'margin-right': splitWidth
-								});
-							}
-							for (var j=slice.length-1; j>0; j--) {
-								$j(slice[j]).css({
-									'margin-left': splitWidth
-								});
-							}
-						}
-					}
-
-					if ($j(this).hasClass('cl-warea-all-row') || $j(this).hasClass('mm-row-equal')) {
-						suffusion_make_tiles_equal(slice);
-					}
-				}
-				if ($j(this).hasClass('cl-warea-all')) {
-					suffusion_make_tiles_equal(children);
-				}
-			}
-			else if ($j(this).hasClass('cl-warea-masonry')) {
-				$j(this).masonry();
-			}
-
-			suffusion_make_tiles_equal($j(this).children('.suf-tile, .suf-mag-excerpt, .suf-mag-category'));
 		});
+*/
 	});
-	$j(window).resize();
+
+	if (!$j.support.cssProperty('columnCount')) {
+		suffusion_balance_widths('.suf-tile-row, .cl-warea, .mm-row-equal');
+	}
+	suffusion_balance_heights('.suf-tile-row, .cl-warea, .mm-row-equal');
+	suffusion_balance_widths('.cl-warea-masonry');
+/*
+	$j('.cl-warea-masonry').masonry({
+		columnWidth: function(containerWidth) {
+			return containerWidth / 3;
+		}
+	});
+*/
 
 	$j('.suf-tile-image').each(function() {
 		$j(this).css({
@@ -744,6 +688,175 @@ $j(document).ready(function() {
 		});
 		tiles.css({
 			'height': tallest
+		});
+	}
+
+	function suffusion_balance_heights(selector) {
+		$j(selector).each(function() {
+			var children = $j(this).find('.suf-tile, .suf-mag-excerpt, .suf-mag-category, .cl-widget, .mm-widget');
+			var wareaColumns = 0;
+			if ($j(this).hasClass('cl-warea') || $j(this).hasClass('mm-row-equal')) {
+				for (var k=1; k<=10; k++) {
+					if ($j(this).hasClass('cl-warea-' + k) || $j(this).hasClass('mm-row-' + k)) {
+						wareaColumns = k;
+						break;
+					}
+				}
+			}
+
+			if ($j(this).hasClass('cl-warea-all-row') || $j(this).hasClass('cl-warea-all') || $j(this).hasClass('mm-row-equal')) {
+				for (var m = 0; m * wareaColumns < children.length; m = m + 1) {
+					var slice = children.slice(m * wareaColumns, (m + 1) * wareaColumns);
+					if ($j(this).hasClass('cl-warea-all-row') || $j(this).hasClass('mm-row-equal')) {
+						suffusion_make_tiles_equal(slice);
+					}
+				}
+				if ($j(this).hasClass('cl-warea-all')) {
+					suffusion_make_tiles_equal(children);
+				}
+			}
+			else if ($j(this).hasClass('cl-warea-masonry')) {
+//				$j(this).masonry();
+				$j(this).masonry({
+					itemSelector: '.cl-widget'
+				});
+			}
+			suffusion_make_tiles_equal($j(this).children('.suf-tile, .suf-mag-excerpt, .suf-mag-category'));
+		});
+	}
+
+	function suffusion_balance_widths(selector) {
+		$j(selector).each(function() {
+			var children = $j(this).find('.suf-tile, .suf-mag-excerpt, .suf-mag-category, .cl-widget, .mm-widget');
+			var len = children.length;
+			var wareaColumns = 0;
+			if ($j(this).hasClass('cl-warea') || $j(this).hasClass('mm-row-equal') || $j(this).hasClass('suf-tile-row')) {
+				for (var k=1; k<=10; k++) {
+					if ($j(this).hasClass('cl-warea-' + k) || $j(this).hasClass('mm-row-' + k) || $j(this).hasClass('suf-tile-row-' + k + '-cols')) {
+						len = k;
+						wareaColumns = k;
+						break;
+					}
+				}
+			}
+
+			var widths = [
+				'100%',	// 0
+				'100%',	// 1
+				'49%',	// 2
+				'32%',	// 3
+				'24%',	// 4
+				'19%',	// 5
+				'16%',	// 6
+				'13%',	// 7
+				'12%',	// 8
+				'10.5%',// 9
+				'9.5%'	// 10
+			];
+
+			$j(children).css({
+				'width': widths[wareaColumns]
+			});
+			var splits = len * 2 - 2;
+
+			var singleWidth, widthDiff, splitWidth, masonMargin;
+			masonMargin = 0;
+
+			if (len > 0 && !$j(this).hasClass('mm-row-equal')) {
+				if (len > 1) {
+					$j(children[0]).css({
+						'margin-left': 0
+					});
+					if (len == wareaColumns && !$j(this).hasClass('cl-warea-masonry')) {
+						$j(children[len - 1]).css({
+							'margin-right': 0
+						});
+					}
+				}
+
+				if (len == 1) {
+					var widthDiff1C = $j(children[0]).outerWidth() - $j(children[0]).innerWidth() + 2;
+					$j(children[0]).css({
+						width: Math.floor($j(this).outerWidth()) - widthDiff1C
+					});
+				}
+
+				if (len > 1) {
+					if (len == wareaColumns && !$j(this).hasClass('cl-warea-masonry')) {
+						$j(children[len - 1]).css({
+							'float': 'right'
+						});
+					}
+					singleWidth = $j(children[0]).outerWidth() + 1; // Adding a pixel to adjust for corner cases.
+					widthDiff = $j(this).parent().innerWidth() - singleWidth * len;
+					splitWidth = Math.floor(widthDiff / splits);
+					masonMargin = splitWidth * 2;
+
+					for (var i=0; i<len - 1; i++) {
+						$j(children[i]).css({
+							'margin-right': splitWidth,
+							'float': 'left'
+						});
+						if ($j(this).hasClass('cl-warea-masonry')) {
+							$j(children[i]).css({
+								'margin-left': splitWidth
+							});
+						}
+					}
+					for (var j=len-1; j>0; j--) {
+						$j(children[j]).css({
+							'margin-left': splitWidth
+						});
+						if ($j(this).hasClass('cl-warea-masonry')) {
+							$j(children[j]).css({
+								'margin-right': splitWidth
+							});
+						}
+					}
+				}
+			}
+
+			if ($j(this).hasClass('cl-warea-all-row') || $j(this).hasClass('cl-warea-all') || $j(this).hasClass('mm-row-equal')) {
+				for (var m = 0; m * wareaColumns < children.length; m = m + 1) {
+					var slice = children.slice(m * wareaColumns, (m + 1) * wareaColumns);
+					if (!$j(this).hasClass('mm-row-equal')) {
+						$j(slice[0]).css({
+							'margin-left': 0,
+							'float': 'left'
+						});
+						if (slice.length - 1 != 0 && slice.length == wareaColumns) {
+							$j(slice[slice.length - 1]).css({
+								'margin-right': 0,
+								'float': 'right'
+							});
+						}
+
+						if (slice.length > 1) {
+							singleWidth = $j(slice[0]).outerWidth() + 1;
+							widthDiff = $j(this).parent().innerWidth() - singleWidth * len;
+							splitWidth = Math.floor(widthDiff / splits);
+
+							for (var i=0; i<slice.length - 1; i++) {
+								$j(slice[i]).css({
+									'margin-right': splitWidth,
+									'float': 'left'
+								});
+							}
+							for (var j=slice.length-1; j>0; j--) {
+								$j(slice[j]).css({
+									'margin-left': splitWidth
+								});
+							}
+						}
+					}
+				}
+			}
+			else if ($j(this).hasClass('cl-warea-masonry')) {
+				$j(this).masonry({
+					itemSelector: '.cl-widget',
+					gutterWidth: masonMargin
+				});
+			}
 		});
 	}
 });

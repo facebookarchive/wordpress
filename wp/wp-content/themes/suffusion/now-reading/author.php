@@ -14,8 +14,10 @@ get_header();
 <?php suffusion_before_begin_content(); ?>
 	<div id="content">
 <?php suffusion_after_begin_content(); ?>
-		<div class="post fix nr-post">
-			<h1 class="posttitle"><?php echo the_book_author(false); ?></h1>
+		<article <?php post_class('post fix nr-post'); ?>>
+			<header>
+				<h1 class="posttitle"><?php echo the_book_author(false); ?></h1>
+			</header>
 
 			<div class="bookdata fix">
 <?php
@@ -35,7 +37,7 @@ $nr_book_query = "author={$GLOBALS['nr_author']}&num=-1";
 get_template_part('now-reading/nr-shelf');
 ?>
 			</div><!-- /.booklisting -->
-		</div><!-- /.nr-post -->
+		</article><!-- /.nr-post -->
 	</div><!-- /#content -->
 </div><!-- /#main-col -->
 

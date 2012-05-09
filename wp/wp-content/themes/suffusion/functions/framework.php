@@ -21,7 +21,7 @@ class Suffusion_Framework {
 	 * @return void
 	 */
 	function globals() {
-		global $content_width, $suffusion_locale, $suffusion_reevaluate_styles, $suffusion_safe_font_faces, $suffusion_options, $suffusion_theme_name, $suffusion_theme_hierarchy;
+		global $content_width, $suffusion_locale, $suffusion_safe_font_faces, $suffusion_options, $suffusion_theme_name, $suffusion_theme_hierarchy;
 		global $suffusion_default_theme_name, $suffusion_pages_array, $suffusion_categories_array, $suffusion_comment_types, $suffusion_sidebar_tabs;
 		global $suffusion_404_title, $suffusion_404_content, $suffusion_comment_label_name, $suffusion_comment_label_req, $suffusion_comment_label_email;
 		global $suffusion_comment_label_uri, $suffusion_comment_label_your_comment, $suffusion_social_networks, $suffusion_sidebar_context_presets;
@@ -34,7 +34,6 @@ class Suffusion_Framework {
 		do_action('suffusion_load_additional_text_domains');
 
 		if (!isset($content_width)) $content_width = 695; // 725 - 30px padding
-		$suffusion_reevaluate_styles = false;
 
 		$suffusion_safe_font_faces = array (
 			"Arial, Helvetica, sans-serif" => "<span style=\"font-family: Arial, Helvetica, sans-serif\">Arial, <span class='mac'>Arial, Helvetica,</span> <i>sans-serif</i></span>",

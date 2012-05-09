@@ -170,16 +170,16 @@ h2.posttitle a:hover {
 	color: #d05e0b;
 }
 
-div.page-links span {
+.page-links span {
 	border-color: #d05e0b;
 }
 
-div.page-links > span {
+.page-links > span {
 	background-color: #d05e0b;
 	color: #fff;
 }
 
-div.page-links a:hover {
+.page-links a:hover {
 	background-color: #d05e0b;
 	color: #fff;
 }
@@ -224,16 +224,16 @@ h3#respond, h3.respond, #reply-title {
 .commentlist cite a, .commentlist cite a:visited { color: #d05e0b; }
 .commentlist li.alt { background-color: #f0f0f0; }
 
-div.comment-response-types span {
+.comment-response-types span {
 	border-color: #d05e0b;
 }
 
-div.comment-response-types > span {
+.comment-response-types > span {
 	background-color: #d05e0b;
 	color: #fff;
 }
 
-div.comment-response-types a:hover {
+.comment-response-types a:hover {
 	background-color: #d05e0b;
 	color: #fff;
 }

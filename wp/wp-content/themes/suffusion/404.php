@@ -13,8 +13,9 @@ get_header();
     <div id="main-col">
   	<div id="content">
 
-    <div class="post">
-	<h2 class="posttitle">
+    <article class="post">
+	    <header>
+		    <h2 class="posttitle">
 <?php
 if (trim($suf_404_title) == '') {
 	echo $suffusion_404_title;
@@ -24,7 +25,9 @@ else {
 	$title = do_shortcode($title);
 	echo $title;
 }
-?></h2>
+?>
+		    </h2>
+	    </header>
 
 		<div class="entry">
 		<p>
@@ -43,7 +46,7 @@ else {
 			<?php get_search_form(); ?>
 		</div><!--/entry -->
 
-		</div><!--/post -->
+		</article><!--/post -->
       </div><!-- /content -->
     </div><!-- main col -->
 <?php get_footer(); ?>

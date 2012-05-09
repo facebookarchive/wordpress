@@ -44,7 +44,7 @@ else {
 
 if ($post->post_type == 'post') {
 	?>
-<div class='title-container fix'>
+<header class='title-container fix'>
 	<div class="title">
 		<<?php echo $header_tag;?> class="posttitle"><?php echo suffusion_get_post_title_and_link(); ?></<?php echo $header_tag;?>>
 	<?php
@@ -108,7 +108,7 @@ if ($post->post_type == 'post') {
 			$tags = get_the_tags();
 			if (is_array($tags) && count($tags) > 0) {
 			?>
-			<span class="tags"><span class="icon">&nbsp;</span><?php the_tags(__('Tagged with: ', 'suffusion'), ', ', '<br />'); ?></span>
+			<span class="tags tax"><span class="icon">&nbsp;</span><?php the_tags(__('Tagged with: ', 'suffusion'), ', ', '<br />'); ?></span>
 			<?php
 			}
 		}
@@ -128,7 +128,7 @@ if ($post->post_type == 'post') {
 
 	}
 	?>
-</div><!-- /.title-container -->
+</header><!-- /.title-container -->
 	<?php
 
 }

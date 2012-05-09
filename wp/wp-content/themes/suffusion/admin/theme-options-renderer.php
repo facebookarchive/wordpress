@@ -986,6 +986,123 @@ class Suffusion_Options_Renderer {
 	}
 
 	/**
+	 * Renders an option whose type is "sortable-list". Invoked by add_settings_field.
+	 *
+	 * @param  $value
+	 * @return void
+	 */
+	function create_section_for_associative_array($value) {
+		global $suffusion_options;
+		$this->create_opening_tag($value);
+
+		if (!isset($suffusion_options[$value['id']])) {
+			$stored_value = $value['std'];
+		}
+		else {
+			$stored_value = $suffusion_options[$value['id']];
+		}
+
+		$stored_value = suffusion_get_associative_array($stored_value);
+
+		if (isset($value['options']) && is_array($value['options'])) {
+			$associative_array = $value['options'];
+			$counter = 0;
+			$total = count($associative_array);
+			if ($total > 0) {
+				echo "<table class='suf-associative-array-options opt-sub-table opt-sub-table-".($total + 1)."'>\n";
+				echo "<col class='opt-sub-table-col-".($total + 1)."1'/>";
+				for ($i=1; $i<$total+1; $i++) {
+					echo "<col class='opt-sub-table-col-".($total + 1)."'/>";
+				}
+				$key_values = array();
+				$associations = array();
+				$column_keys = array();
+				echo "<tr>\n";
+				echo "<th>#</th>\n";
+				foreach ($associative_array as $header => $details) {
+					$counter++;
+					echo "<th>$header</th>\n";
+					if ($counter == 1) {
+						$key_values = $details;
+					}
+					else {
+						$associations[] = $details;
+						$column_keys[] = $details['name'];
+					}
+				}
+				echo "</tr>\n";
+/*				foreach ($stored_value as $stored_key => $stored_pairs) {
+					if (!isset($key_values[$stored_key])) {
+						unset($stored_value[$stored_key]);
+					}
+					else {
+						foreach ($associations as $association) {
+							//
+						}
+					}
+				}*/
+				$counter = 0;
+				$key_value_list = array();
+
+				foreach ($key_values as $key => $key_value) {
+					$counter++;
+					if (isset($stored_value[$key])) {
+						$stored_associations = $stored_value[$key];
+					}
+					else {
+						$stored_associations = array();
+					}
+					echo "<tr>\n";
+					echo "<td valign='top'>$counter</td>\n";
+					echo "<td valign='top'>$key_value</td>\n";
+					$assoc_list = array();
+					foreach ($associations as $association) {
+						echo "<td valign='top'>\n";
+						if (isset($stored_associations[$association['name']])) {
+							$to_check = $stored_associations[$association['name']];
+						}
+						else {
+							$to_check = '';
+						}
+						switch ($association['type']) {
+							case 'select':
+								echo "<select name='{$value['id']}-$key-{$association['name']}' id='{$value['id']}-$key-{$association['name']}' >\n";
+								foreach ($association['options'] as $choice_key => $choice_text) {
+									echo "<option value='$choice_key' ".selected($to_check, $choice_key, false).">$choice_text</option>";
+								}
+								echo "</select>\n";
+								break;
+
+							case 'text':
+								echo "<input name='{$value['id']}-$key-{$association['name']}' id='{$value['id']}-$key-{$association['name']}' type='text' value='$to_check'/>\n";
+								break;
+
+							case 'multi-select':
+								$checkboxes = explode(',', $to_check);
+								foreach ($association['options'] as $choice_key => $choice_text) {
+									echo "<label><input type='checkbox' name='{$value['id']}-$key-{$association['name']}[$choice_key]' id='{$value['id']}-$key-{$association['name']}[$choice_key]' ".checked(in_array($choice_key, $checkboxes), true, false).">$choice_text</option></label><br/>\n";
+								}
+								break;
+
+						}
+						echo "</td>\n";
+						$assoc_list[] = $association['name'].'='.$to_check;
+					}
+					$assoc_str = implode(';', $assoc_list);
+					$key_value_list[] = $key.'::'.$assoc_str;
+					echo "</tr>\n";
+				}
+				echo "</table>\n";
+				$key_value_str = implode('||', $key_value_list);
+				echo "<input type='hidden' id='{$value['id']}-rows' value='".implode(',', array_keys($key_values))."'/>";
+				echo "<input type='hidden' id='{$value['id']}-columns' value='".implode(',', $column_keys)."'/>";
+				echo "<input type='hidden' id='{$value['id']}' value='$key_value_str' name='suffusion_options[{$value['id']}]' />";
+			}
+		}
+		$this->create_closing_tag($value);
+	}
+
+	/**
 	 * Renders an option whose type is "blurb". Invoked by add_settings_field.
 	 *
 	 * @param  $value
@@ -1247,6 +1364,10 @@ class Suffusion_Options_Renderer {
 					add_settings_field($value['id'], '', array(&$this, "create_section_for_font"), $parent, $section, $value);
 					break;
 
+				case "associative-array":
+					add_settings_field($value['id'], '', array(&$this, 'create_section_for_associative_array'), $parent, $section, $value);
+					break;
+
 				case "blurb":
 					add_settings_field($section.'-'.$ctr, '', array(&$this, "create_section_for_blurb"), $parent, $section, $value);
 					break;
@@ -1400,6 +1521,7 @@ class Suffusion_Options_Renderer {
 					case "font":
 					case "upload":
 					case "template":
+					case "associative-array":
 						$options[$option] = esc_attr($option_value);
 						break;
 
@@ -1738,7 +1860,7 @@ class Suffusion_Options_Renderer {
 	 * @return array
 	 */
 	function import_settings($options) {
-		global $suffusion_reevaluate_styles, $suffusion_unified_options, $suffusion_exported_options;
+		global $suffusion_exported_options;
 		$template_path = get_template_directory();
 
 		if (file_exists($template_path."/admin/import/suffusion-options.php")) {
@@ -1746,7 +1868,6 @@ class Suffusion_Options_Renderer {
 			foreach ($suffusion_exported_options as $option => $option_value) {
 				$options[$option] = $option_value;
 			}
-			$suffusion_reevaluate_styles = true;
 		}
 		return $options;
 	}

@@ -22,14 +22,14 @@ global $post, $suf_mag_content_enabled, $suf_mag_entity_order, $suf_mag_headline
 
 		<?php while (have_posts()) : the_post(); ?>
 
-        <div class="post fix" id="post-<?php the_ID(); ?>">
+        <article class="post fix" id="post-<?php the_ID(); ?>">
 <?php suffusion_after_begin_post(); ?>
 
           <div class="entry fix">
 			<?php suffusion_content(); ?>
           </div><!--entry -->
 		<?php suffusion_before_end_post(); ?>
-		</div><!--post -->
+		</article><!--post -->
 		<?php endwhile; ?>
 		<?php suffusion_before_end_content(); ?>
 	<?php endif; ?>
@@ -54,7 +54,7 @@ foreach ($sequence as $entity) {
 		<?php
 		}
 		?>
-		<div class='suf-mag-headlines fix'>
+		<section class='suf-mag-headlines fix'>
 			<div class='suf-mag-headline-block'>
 		<?php
 			$headlines = suffusion_get_headlines();
@@ -105,7 +105,7 @@ foreach ($sequence as $entity) {
 			}
 		?>
 			</div>
-		</div><!-- /.suf-mag-headlines -->
+		</section><!-- /.suf-mag-headlines -->
 		<?php
 	}
 	else if ($suf_mag_excerpts_enabled == 'show' && $entity == 'excerpts') {
@@ -118,7 +118,7 @@ foreach ($sequence as $entity) {
 		}
 		if ($total > 0) {
 			global $suf_mag_excerpts_per_row, $suf_mag_excerpts_title, $suf_mag_total_excerpts;
-			echo "<div class='suf-mag-excerpts'>\n";
+			echo "<section class='suf-mag-excerpts'>\n";
 
 			if (trim($suf_mag_excerpts_title) != '') {
 				global $suf_mag_excerpts_main_title_alignment;
@@ -136,10 +136,10 @@ foreach ($sequence as $entity) {
 						}
 						$query->the_post();
 						if ($ctr%$suf_mag_excerpts_per_row == 0) {
-							echo "<div class='suf-tile-row fix'>\n";
 							if ($total - 1 - $ctr < $suf_mag_excerpts_per_row) {
 								$cols_per_row = $total - $ctr;
 							}
+							echo "<div class='suf-tile-row suf-tile-row-{$cols_per_row}-cols fix'>\n";
 						}
 
 						global $post, $suf_mag_excerpt_full_story_text, $suf_mag_excerpts_images_enabled, $suf_mag_excerpt_full_story_position, $suf_mag_excerpt_title_alignment;
@@ -176,7 +176,7 @@ foreach ($sequence as $entity) {
 				}
 			}
 
-			echo "</div>\n";
+			echo "</section>\n";
 		}
 	}
 	else if ($suf_mag_categories_enabled == 'show' && $entity == 'categories') {
@@ -184,7 +184,7 @@ foreach ($sequence as $entity) {
 		if ($categories != null && is_array($categories) && count($categories) > 0) {
 			$total = count($categories);
 			global $suf_mag_catblocks_per_row, $suf_mag_catblocks_title, $suf_mag_excerpt_full_story_position;
-			echo "<div class='suf-mag-categories'>\n";
+			echo "<section class='suf-mag-categories'>\n";
 
 			if (trim($suf_mag_catblocks_title) != '') {
 				global $suf_mag_catblocks_main_title_alignment;
@@ -197,10 +197,10 @@ foreach ($sequence as $entity) {
 				$cols_per_row = $suf_mag_catblocks_per_row;
 				foreach ($categories as $category) {
 					if ($ctr%$suf_mag_catblocks_per_row == 0) {
-						echo "<div class='suf-tile-row fix'>\n";
 						if ($total - 1 - $ctr < $suf_mag_catblocks_per_row) {
 							$cols_per_row = $total - $ctr;
 						}
+						echo "<div class='suf-tile-row suf-tile-row-{$cols_per_row}-cols fix'>\n";
 					}
 
 					global $suf_mag_catblocks_images_enabled, $suf_mag_catblocks_desc_enabled, $suf_mag_catblocks_posts_enabled, $suf_mag_catblocks_num_posts;
@@ -267,18 +267,15 @@ foreach ($sequence as $entity) {
 					}
 
 					echo "\t</div>\n";
-//					echo "</td>\n";
 
 					if ($ctr == $total - 1 || $ctr%$suf_mag_catblocks_per_row == $suf_mag_catblocks_per_row - 1) {
-//						echo "</tr>\n";
 						echo "</div>\n";
 					}
 					$ctr++;
 				}
 			}
 
-//			echo "</table>\n";
-			echo "</div>\n";
+			echo "</section>\n";
 		}
 	}
 }

@@ -81,68 +81,92 @@ function suffusion_display_featured_posts($echo = true) {
     $stickies = get_option('sticky_posts');
     $featured_categories = suffusion_get_allowed_categories('suf_featured_selected_categories');
     $featured_pages = suffusion_get_allowed_pages('suf_featured_selected_pages');
-    if (is_array($stickies) && count($stickies) > 0 && $suf_featured_allow_sticky == "show") {
-        $sticky_query = new WP_query(array('post__in' => $stickies));
-    }
-    if ($suf_featured_show_latest == 'show') {
-        if (!$suf_featured_num_latest_posts) {
-            $number_of_latest_posts = 5;
-        }
-        else {
-            $number_of_latest_posts = $suf_featured_num_latest_posts;
-        }
-        $latest_query = new WP_query(array('post__not_in' => $stickies, 'posts_per_page' => $number_of_latest_posts, 'order' => 'DESC', 'ignore_sticky_posts' => 1));
-    }
-    if (is_array($featured_categories) && count($featured_categories) > 0) {
-        $query_cats = array();
-        foreach ($featured_categories as $featured_category) {
-            $query_cats[count($query_cats)] = $featured_category->cat_ID;
-        }
-        $query_posts = implode(",", array_values($query_cats));
-        $cat_query = new WP_query(array('cat' => $query_posts, 'post__not_in' => $stickies, 'posts_per_page' => $suf_featured_num_posts));
-    }
-    if (is_array($featured_pages) && count($featured_pages) > 0) {
-        $query_pages = array();
-        foreach ($featured_pages as $featured_page) {
-            $query_pages[count($query_pages)] = $featured_page->ID;
-        }
-        $page_query = new WP_query(array('post_type' => 'page', 'post__in' => $query_pages, 'posts_per_page' => $suf_featured_num_posts, 'ignore_sticky_posts' => 1, 'orderby' => 'menu_order', 'order' => 'ASC'));
-    }
-	if (isset($suf_featured_selected_posts) && trim($suf_featured_selected_posts) != '') {
-		$trim_featured_posts = str_replace(' ', '', $suf_featured_selected_posts);
-		$query_posts = explode(',', $trim_featured_posts);
-		$post_query = new WP_query(array('post_type' => 'post', 'post__in' => $query_posts, 'posts_per_page' => $suf_featured_num_posts, 'ignore_sticky_posts' => 1));
+	$count_so_far = 0;
+	if (is_array($stickies) && count($stickies) > 0 && $suf_featured_allow_sticky == "show") {
+		$sticky_query = new WP_query(array('post__in' => $stickies));
+		$count_so_far += $sticky_query->post_count;
 	}
-	if (isset($suf_featured_selected_tags) && trim($suf_featured_selected_tags) != '') {
+
+	if ($suf_featured_show_latest == 'show' && $count_so_far < $suf_featured_num_posts) {
+		if (!$suf_featured_num_latest_posts) {
+			$number_of_latest_posts = 5;
+		}
+		else {
+			$number_of_latest_posts = $suf_featured_num_latest_posts;
+		}
+		$latest_query = new WP_query(array('post__not_in' => $stickies, 'posts_per_page' => $number_of_latest_posts, 'order' => 'DESC', 'ignore_sticky_posts' => 1));
+		$count_so_far += $latest_query->post_count;
+    }
+
+	if (is_array($featured_categories) && count($featured_categories) > 0 && $count_so_far < $suf_featured_num_posts) {
+		$query_cats = array();
+		foreach ($featured_categories as $featured_category) {
+			$query_cats[] = $featured_category->cat_ID;
+		}
+		$cat_query = array(
+			'taxonomy' => 'category',
+			'field' => 'id',
+			'terms' => $query_cats,
+		);
+	}
+
+	if (isset($suf_featured_selected_tags) && trim($suf_featured_selected_tags) != '' && $count_so_far < $suf_featured_num_posts) {
 		$featured_tags = explode(',', trim($suf_featured_selected_tags));
 		$trim_featured_tags = array();
 		foreach ($featured_tags as $tag) {
 			$tag = str_replace('  ', ' ', $tag);
 			$trim_featured_tags[] = str_replace(' ', '-', $tag);
 		}
-		$trim_featured_tags = implode(',',$trim_featured_tags);
-		$tag_query = new WP_query(array('tag' => $trim_featured_tags, 'posts_per_page' => $suf_featured_num_posts));
+		$tag_query = array(
+			'taxonomy' => 'post_tag',
+			'field' => 'slug',
+			'terms' => $trim_featured_tags,
+		);
 	}
 
-    $total_count = 0;
-    if (isset($sticky_query->posts) && is_array($sticky_query->posts)) {
-        $total_count += count($sticky_query->posts);
-    }
-    if (isset($latest_query->posts) && is_array($latest_query->posts)) {
-        $total_count += count($latest_query->posts);
-    }
-    if (isset($cat_query->posts) && is_array($cat_query->posts)) {
-        $total_count += count($cat_query->posts);
-    }
-    if (isset($page_query->posts) && is_array($page_query->posts)) {
-        $total_count += count($page_query->posts);
-    }
-	if (isset($post_query) && isset($post_query->posts) && is_array($post_query->posts)) {
-		$total_count += count($post_query->posts);
+	if (isset($tag_query) || isset($cat_query)) {
+		$cat_tag_query_args = array('post__not_in' => $stickies, 'posts_per_page' => $suf_featured_num_posts);
+		if (isset($tag_query) && isset($cat_query)) {
+			$cat_tag_query_args['tax_query'] = array(
+				'relation' => 'OR',
+				$cat_query,
+				$tag_query,
+			);
+		}
+		else if (isset($cat_query)) {
+			$cat_tag_query_args['tax_query'] = array(
+				$cat_query,
+			);
+		}
+		else if (isset($tag_query)) {
+			$cat_tag_query_args['tax_query'] = array(
+				$tag_query,
+			);
+		}
 	}
-	if (isset($tag_query) && isset($tag_query->posts) && is_array($tag_query->posts)) {
-		$total_count += count($tag_query->posts);
+
+	if (isset($cat_tag_query_args)) {
+		$cat_tag_query = new WP_Query($cat_tag_query_args);
+		$count_so_far += $cat_tag_query->post_count;
 	}
+
+	if (is_array($featured_pages) && count($featured_pages) > 0 && $count_so_far < $suf_featured_num_posts) {
+        $query_pages = array();
+        foreach ($featured_pages as $featured_page) {
+            $query_pages[count($query_pages)] = $featured_page->ID;
+        }
+        $page_query = new WP_query(array('post_type' => 'page', 'post__in' => $query_pages, 'posts_per_page' => $suf_featured_num_posts, 'ignore_sticky_posts' => 1, 'orderby' => 'menu_order', 'order' => 'ASC'));
+		$count_so_far += $page_query->post_count;
+    }
+
+	if (isset($suf_featured_selected_posts) && trim($suf_featured_selected_posts) != '' && $count_so_far < $suf_featured_num_posts) {
+		$trim_featured_posts = str_replace(' ', '', $suf_featured_selected_posts);
+		$query_posts = explode(',', $trim_featured_posts);
+		$post_query = new WP_query(array('post_type' => 'post', 'post__in' => $query_posts, 'posts_per_page' => $suf_featured_num_posts, 'ignore_sticky_posts' => 1));
+		$count_so_far += $post_query->post_count;
+	}
+
+	$total_count = $count_so_far;
 	if ($total_count > 0) {
 		$suffusion_fc_alt_tb = array("top", "bottom");
         $suffusion_fc_alt_lr = array("left", "right");
@@ -168,18 +192,16 @@ function suffusion_display_featured_posts($echo = true) {
         if (isset($latest_query)) {
             $ret .= suffusion_parse_featured_query_results($latest_query, $do_not_duplicate);
         }
-        if (isset($cat_query)) {
-	        $ret .= suffusion_parse_featured_query_results($cat_query, $do_not_duplicate);
-        }
+		if (isset($cat_tag_query)) {
+			$ret .= suffusion_parse_featured_query_results($cat_tag_query, $do_not_duplicate);
+		}
         if (isset($page_query)) {
 	        $ret .= suffusion_parse_featured_query_results($page_query, $do_not_duplicate);
         }
         if (isset($post_query)) {
 	        $ret .= suffusion_parse_featured_query_results($post_query, $do_not_duplicate);
         }
-        if (isset($tag_query)) {
-	        $ret .= suffusion_parse_featured_query_results($tag_query, $do_not_duplicate);
-        }
+
         $ret .= "\t\t</ul>";
         $ret .= "\t</div>";
         $ret .= suffusion_display_featured_pager($echo);
@@ -212,7 +234,7 @@ function suffusion_parse_featured_query_results($query, &$do_not_duplicate) {
                 continue;
             }
             else {
-                $do_not_duplicate[count($do_not_duplicate)] = $post->ID;
+	            $do_not_duplicate[] = $post->ID;
             }
 			if ($suf_featured_excerpt_position == "rotate") {
 				$suffusion_fc_excerpt_position = $suffusion_fc_rotation[$suffusion_fc_feautred_excerpt_position%4];

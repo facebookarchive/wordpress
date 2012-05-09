@@ -73,10 +73,6 @@ h2.posttitle a:hover {
 	border-color: #222222;
 }
 
-div.dbx-box {
-	border: 1px solid #222222;
-}
-
 .dbx-handle {
 	border-bottom: 1px dotted #222222;
 }
@@ -208,11 +204,7 @@ div.sidebar-tab-content {
 }
 
 /* Magazine */
-.suf-mag-headlines,
-.suf-mag-excerpts td,
-.suf-tiles td,
-.suf-mag-categories th,
-.suf-mag-categories td {
+.suf-mag-headlines {
 	border: 1px solid #222;
 }
 

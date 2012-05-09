@@ -11,10 +11,15 @@ global $suffusion, $query_string, $wp_query, $suffusion_current_post_index, $suf
 $suffusion_blog_layout = true;
 if (!isset($suffusion_duplicate_posts)) $suffusion_duplicate_posts = array();
 
-global $post;
+global $post, $suffusion_cpt_post_id;
 if (have_posts()) {
 	$suffusion_current_post_index = 0;
 	$suffusion_full_post_count_for_view = suffusion_get_full_content_count();
+	if (isset($suffusion_cpt_post_id)) {
+		add_action('suffusion_add_taxonomy_bylines_line', 'suffusion_cpt_line_taxonomies', 10, 2);
+		add_action('suffusion_add_taxonomy_bylines_pullout', 'suffusion_cpt_line_taxonomies', 10, 4);
+		$cpt_meta_position = suffusion_get_post_meta($suffusion_cpt_post_id, 'suf_cpt_byline_type', true);
+	}
 	while (have_posts()) {
 		the_post();
 		$original_post = $post;
@@ -38,9 +43,14 @@ if (have_posts()) {
 		else {
 			$classes = array('full-content');
 		}
+		if (isset($cpt_meta_position) && $cpt_meta_position) {
+			$classes[] = $cpt_meta_position;
+		}
+		$classes[] = 'fix';
 
+		do_action('suffusion_before_post', $post->ID, 'blog', $suffusion_current_post_index);
 ?>
-	<div <?php post_class($classes);?> id="post-<?php the_ID(); ?>">
+	<article <?php post_class($classes);?> id="post-<?php the_ID(); ?>">
 <?php
 		suffusion_after_begin_post();
 ?>
@@ -59,8 +69,9 @@ if (have_posts()) {
 <?php
 		suffusion_before_end_post();
 ?>
-	</div><!--post -->
+	</article><!--post -->
 <?php
+		do_action('suffusion_after_post', $post->ID, 'blog', $suffusion_current_post_index);
 	}
 	suffusion_before_end_content();
 }

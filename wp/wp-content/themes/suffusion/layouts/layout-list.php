@@ -7,7 +7,7 @@
  * @subpackage Templates
  */
 
-global $suffusion, $query_string, $suffusion_current_post_index, $suffusion_full_post_count_for_view, $page_of_posts, $suffusion_list_layout, $suffusion_duplicate_posts;
+global $suffusion, $suffusion_current_post_index, $suffusion_full_post_count_for_view, $page_of_posts, $suffusion_list_layout, $suffusion_duplicate_posts, $suffusion_cpt_post_id;
 global $post, $page_title, $wp_query, $suf_excerpt_list_count, $suf_cat_info_enabled, $suf_author_info_enabled, $suf_tag_info_enabled, $suf_excerpt_list_style;
 
 $context = $suffusion->get_context();
@@ -24,14 +24,22 @@ if (have_posts()) {
 	}
 }
 
+$hide_title = false;
+if (isset($suffusion_cpt_post_id)) {
+	$page_title = get_the_title($suffusion_cpt_post_id);
+	$hide_title = suffusion_get_post_meta($suffusion_cpt_post_id, 'suf_hide_page_title', true);
+}
+
 if ($suf_excerpt_list_count == 'all' && !$page_of_posts) {
-	query_posts($query_string.'&posts_per_page=-1');
+	$query_args = $wp_query->query;
+	$query_args['posts_per_page'] = -1;
+	$wp_query = new WP_Query($query_args);
 }
 else if ($page_of_posts) {
 	query_posts('posts_per_page=-1');
 }
 else { // Not resetting the query_posts results skips the first entry
-	query_posts($query_string);
+	$wp_query->rewind_posts();
 }
 
 if (have_posts()) {
@@ -54,7 +62,7 @@ if (have_posts()) {
 			continue;
 		}
 ?>
-	<div class="post fix <?php if (is_sticky()) { echo " sticky-post "; } ?>" id="post-<?php the_ID(); ?>">
+	<article class="post fix <?php if (is_sticky()) { echo " sticky-post "; } ?>" id="post-<?php the_ID(); ?>">
 <?php
 		suffusion_after_begin_post();
 ?>
@@ -73,7 +81,7 @@ if (have_posts()) {
 <?php
 		suffusion_before_end_post();
 ?>
-	</div><!--post -->
+	</article><!--post -->
 <?php
 	}
 
@@ -95,15 +103,23 @@ if (have_posts()) {
 
 	if ($suffusion_full_post_count_for_view == 0) {
 ?>
-	<div class='post <?php echo $class; ?> fix'>
-		<h2 class="posttitle"><?php echo $page_title; ?></h2>
+	<section class='post <?php echo $class; ?> fix'>
+<?php
+		if (!$hide_title) {
+?>
+		<header>
+			<h2 class="posttitle"><?php echo $page_title; ?></h2>
+		</header>
+<?php
+		}
+?>
 		<div class="entry fix">
 <?php
 		echo $information;
 	}
 	else if ($total > 0) {
 ?>
-	<div class='post <?php echo $class; ?> fix'>
+	<section class='post <?php echo $class; ?> fix'>
 		<div class="entry fix">
 <?php
 	}
@@ -122,7 +138,7 @@ if (have_posts()) {
 		echo "</$suf_excerpt_list_style>\n";
 ?>
 		</div> <!-- /.entry -->
-	</div> <!-- /.post -->
+	</section> <!-- /.post -->
 <?php
 	}
 

@@ -23,7 +23,7 @@ if (have_posts()) {
 		the_post();
 		$original_post = $post;
 ?>
-		<div <?php post_class('fix'); ?> id="post-<?php the_ID(); ?>">
+		<article <?php post_class('fix'); ?> id="post-<?php the_ID(); ?>">
 			<?php suffusion_after_begin_post(); ?>
 			<div class="entry-container fix">
 				<div class="entry fix">
@@ -40,7 +40,7 @@ if (have_posts()) {
 
 			<?php comments_template(); ?>
 
-		</div><!--/post -->
+		</article><!--/post -->
 
 <?php
 	}

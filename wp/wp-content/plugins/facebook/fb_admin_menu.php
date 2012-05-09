@@ -9,7 +9,7 @@ function fb_create_menu() {
 
 	//call register settings function
 	add_action( 'admin_print_styles-' . $page, 'fb_admin_style');
-	add_action( 'admin_enqueue_scripts', 'fb_admin_scripts' );
+	add_action( 'admin_print_scripts-' . $page, 'fb_admin_scripts' );
 }
 
 function fb_admin_style() {

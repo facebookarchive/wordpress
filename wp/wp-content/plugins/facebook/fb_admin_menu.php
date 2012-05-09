@@ -22,10 +22,8 @@ function fb_admin_scripts( $hook_suffix ) {
 
 // __return_false for no desc
 function fb_admin_menu_settings() {
-	$options = get_option('fb_options');
-	
 	wp_register_style('fb_admin', plugins_url('style/style_admin.css', __FILE__));
-	
+
 	register_setting( 'fb_options', 'fb_options', 'fb_options_validate');
 }
 

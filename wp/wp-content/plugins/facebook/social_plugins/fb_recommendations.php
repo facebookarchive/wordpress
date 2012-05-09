@@ -55,17 +55,7 @@ class Facebook_Recommendations extends WP_Widget {
 	 * @return array Updated safe values to be saved.
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance = array();
-		
-		$fields = fb_get_recommendations_box_fields_array();
-		
-		foreach ($fields['children'] as $field) {
-			if (isset($new_instance[$field['name']])) {
-				$instance[$field['name']] = $new_instance[$field['name']];
-			}
-		}
-
-		return $instance;
+		return $new_instance;
 	}
 
 	/**

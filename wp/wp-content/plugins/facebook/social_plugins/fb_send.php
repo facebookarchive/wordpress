@@ -53,7 +53,8 @@ class Facebook_Send_Button extends WP_Widget {
 
 		echo $before_widget;
 
-		//$options = array('data-href' => $instance['url']);
+		if ( ! empty( $instance['title'] ) )
+			echo $before_title . $instance['title'] . $after_title;
 		
 		echo fb_get_send_button($instance);
 		echo $after_widget;
@@ -72,7 +73,7 @@ class Facebook_Send_Button extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
 		
-		$fields = fb_get_send_fields_array();
+		$fields = fb_get_send_fields_array($placement);
 		
 		foreach ($fields['children'] as $field) {
 			if (isset($new_instance[$field['name']])) {
@@ -97,12 +98,12 @@ class Facebook_Send_Button extends WP_Widget {
 
 
 function fb_get_send_fields($placement = 'settings', $object = null) {
-	$fields_array = fb_get_send_fields_array();
+	$fields_array = fb_get_send_fields_array($placement);
 	
 	fb_construct_fields($placement, $fields_array['children'], $fields_array['parent'], $object);
 }
 
-function fb_get_send_fields_array() {
+function fb_get_send_fields_array($placement) {
 	$array['parent'] = array('name' => 'send',
 									'field_type' => 'checkbox',
 									'help_text' => 'Click to learn more.',
@@ -120,6 +121,26 @@ function fb_get_send_fields_array() {
 													'help_text' => 'The font of the plugin.',
 													),
 										);
+	
+	if ($placement == 'settings') {
+		$array['children'][] = array('name' => 'position',
+													'field_type' => 'dropdown',
+													'options' => array('top', 'bottom', 'both'),
+													'help_text' => 'Where the button will display on the page or post.',
+													);
+	}
+	
+	if ($placement == 'widget') {
+		$array['children'][] = array('name' => 'href',
+													'field_type' => 'text',
+													'help_text' => 'The URL the Like button will point to.',
+													);
+		
+		$array['children'][] = array('name' => 'title',
+													'field_type' => 'text',
+													'help_text' => 'The title above the button.',
+													);
+	}
 	
 	return $array;
 }

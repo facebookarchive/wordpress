@@ -5,7 +5,7 @@ add_action('admin_menu', 'fb_create_menu');
 
 function fb_create_menu() {
 	//create new top-level menu
-	$page = add_menu_page( sprintf( __( '%s Plugin Settings', 'facebook' ), 'Facebook'), 'Facebook', 'administrator', __FILE__, 'fb_settings_page', plugins_url('/images/icon.png', __FILE__));
+	$page = add_menu_page( sprintf( __( '%s Plugin Settings', 'facebook' ), 'Facebook'), 'Facebook', 'manage_options', __FILE__, 'fb_settings_page', plugins_url('/images/icon.png', __FILE__));
 
 	//call register settings function
 	add_action( 'admin_print_styles-' . $page, 'fb_admin_style');

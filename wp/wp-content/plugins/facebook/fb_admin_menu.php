@@ -36,31 +36,30 @@ function fb_settings_page() {
 			<?php
 			settings_fields( 'fb_options' );
 			
-			print "<h3>Main Settings</h3>
-			<p></p>";
+			echo '<h3>' . __( 'Main Settings', 'facebook' ) . '</h3><p></p>'
 			fb_get_main_settings_fields();
 			
-			print "<h3>Like Button</h3>
+			echo "<h3>Like Button</h3>
 			<p>The Like button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user's friends' News Feed with a link back to your website.</p>";
 			fb_get_like_fields();
 			
-			print '<h3>Subscribe Button</h3>
+			echo '<h3>Subscribe Button</h3>
 			<p>The Subscribe button lets a user subscribe to your public updates on Facebook.</p>';
 			fb_get_subscribe_fields();
 			
-			print '<h3>Send Button</h3>
+			echo '<h3>Send Button</h3>
 			<p>The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address.</p>';
 			fb_get_send_fields();
 			
-			print '<h3>Comments</h3>
+			echo '<h3>Comments</h3>
 			<p>Comments Box is a social plugin that enables user commenting on your site. Features include moderation tools and distribution.</p>';
 			fb_get_comments_fields();
 			
-			print '<h3>Recommendation Bar</h3>
+			echo '<h3>Recommendation Bar</h3>
 			<p>The Recommendations Bar allows users to like content, get recommendations, and share what they\'re reading with their friends.</p>';
 			fb_get_recommendations_bar_fields();
 			
-			print '<h3>Social Publisher</h3>';
+			echo '<h3>Social Publisher</h3>';
 			fb_get_social_publisher_fields();
 			
 			submit_button();

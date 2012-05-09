@@ -36,7 +36,7 @@ function fb_settings_page() {
 			<?php
 			settings_fields( 'fb_options' );
 			
-			echo '<h3>' . __( 'Main Settings', 'facebook' ) . '</h3><p></p>'
+			echo '<h3>' . __( 'Main Settings', 'facebook' ) . '</h3><p></p>';
 			fb_get_main_settings_fields();
 			
 			echo "<h3>Like Button</h3>

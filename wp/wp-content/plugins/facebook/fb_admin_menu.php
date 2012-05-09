@@ -76,12 +76,18 @@ function fb_section_main() {
 
 function fb_field_app_id() {
 	$options = get_option('fb_options');
-	echo '<a href="#" target="_new" title="TODO">[?]</a>&nbsp; <input type="text" name="fb_options[app_id]" value="' . $options['app_id'] . '" size="40" />';
+	echo '<a href="#" target="_new" title="TODO">[?]</a>&nbsp; <input type="text" name="fb_options[app_id]"';
+	if ( isset( $options['app_id'] ) )
+		echo ' value="' . esc_attr( $options['app_id'] ) . '"';
+	echo ' size="40" />';
 }
 
 function fb_field_app_secret() {
 	$options = get_option('fb_options');
-	echo '<a href="#" target="_new" title="TODO">[?]</a>&nbsp; <input type="text" name="fb_options[app_secret]" value="' . $options['app_secret'] . '" size="40" />';
+	echo '<a href="#" target="_new" title="TODO">[?]</a>&nbsp; <input type="text" name="fb_options[app_secret]"';
+	if ( isset( $options['app_secret'] ) )
+		echo ' value="' . esc_attr( $options['app_secret'] ) . '"';
+	echo ' size="40" />';
 }
 
 function fb_field_enable_fb() {

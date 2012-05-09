@@ -84,19 +84,21 @@ function fb_get_fb_comments_seo() {
 	return $output;
 }
 
-//fetch comments for url from Facebook Graph API
-//https://graph.facebook.com/comments/?ids=http://developers.facebook.com/docs/reference/plugins/comments
 
-//put them in <noscript> so search engines can scrape them
+function fb_get_comments_fields($placement = 'settings', $object = null) {
+	$fields_array = fb_get_comments_fields_array();
+	
+	fb_construct_fields($placement, $fields_array['children'], $fields_array['parent'], $object);
+}
 
-function fb_get_comments_fields($placement) {
-	$parent = array('name' => 'comments',
+function fb_get_comments_fields_array() {
+	$array['parent'] = array('name' => 'comments',
 									'field_type' => 'checkbox',
 									'help_text' => 'Click to learn more.',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/comments/',
 									);
 	
-	$children = array(array('name' => 'num_posts',
+	$array['children'] = array(array('name' => 'num_posts',
 													'field_type' => 'text',
 													'help_text' => 'The number of posts to display by default.',
 													),
@@ -111,7 +113,7 @@ function fb_get_comments_fields($placement) {
 													),
 										);
 	
-	fb_construct_fields($placement, $children, $parent);
+	return $array;
 }
 
 ?>

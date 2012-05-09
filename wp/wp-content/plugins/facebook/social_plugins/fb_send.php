@@ -50,14 +50,12 @@ class Facebook_Send_Button extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 		extract( $args );
-		$title = apply_filters( 'widget_title', $instance['title'] );
 
 		echo $before_widget;
-		if ( ! empty( $title ) )
-			echo $before_title . $title . $after_title;
 
-		$options = array('data-href' => $instance['url']);
-		echo fb_get_send_button($options);
+		//$options = array('data-href' => $instance['url']);
+		
+		echo fb_get_send_button($instance);
 		echo $after_widget;
 	}
 
@@ -73,8 +71,14 @@ class Facebook_Send_Button extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
-		$instance['title'] = strip_tags( $new_instance['title'] );
-		$instance['url'] = strip_tags( $new_instance['url'] );
+		
+		$fields = fb_get_send_fields_array();
+		
+		foreach ($fields['children'] as $field) {
+			if (isset($new_instance[$field['name']])) {
+				$instance[$field['name']] = $new_instance[$field['name']];
+			}
+		}
 
 		return $instance;
 	}
@@ -87,44 +91,25 @@ class Facebook_Send_Button extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		if ( isset( $instance[ 'title' ] ) ) {
-			$title = $instance[ 'title' ];
-		}
-		else {
-			$title = __( 'Send ' . esc_attr(get_bloginfo('name')) . ' on Facebook', 'text_domain' );
-		}
-		?>
-		<p>
-		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
-		</p>
-
-		<?php
-		if ( isset( $instance[ 'url' ] ) ) {
-			$url = $instance[ 'url' ];
-		}
-		else {
-			$url = '';
-		}
-		?>
-		<p>
-		<label for="<?php echo $this->get_field_id( 'url' ); ?>"><?php _e( 'Facebook Page URL:' ); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'url' ); ?>" name="<?php echo $this->get_field_name( 'url' ); ?>" type="text" value="<?php echo esc_attr( $url ); ?>" />
-		<p>Optional.  If you have a Page on Facebook that you want users to Send.  If you leave it blank, the user will send the current page that they're on.</p>
-		</p>
-
-		<?php
+		fb_get_send_fields('widget', $this);
 	}
 }
 
-function fb_get_send_fields($placement = 'settings') {
-	$parent = array('name' => 'send',
+
+function fb_get_send_fields($placement = 'settings', $object = null) {
+	$fields_array = fb_get_send_fields_array();
+	
+	fb_construct_fields($placement, $fields_array['children'], $fields_array['parent'], $object);
+}
+
+function fb_get_send_fields_array() {
+	$array['parent'] = array('name' => 'send',
 									'field_type' => 'checkbox',
 									'help_text' => 'Click to learn more.',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/send/',
 									);
 	
-	$children = array(array('name' => 'colorscheme',
+	$array['children'] = array(array('name' => 'colorscheme',
 													'field_type' => 'dropdown',
 													'options' => array('light', 'dark'),
 													'help_text' => 'The color scheme of the plugin.',
@@ -136,7 +121,7 @@ function fb_get_send_fields($placement = 'settings') {
 													),
 										);
 	
-	fb_construct_fields($placement, $children, $parent);
+	return $array;
 }
 
 ?>

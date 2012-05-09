@@ -58,7 +58,7 @@ class Facebook_Like_Button extends WP_Widget {
 		parent::__construct(
 	 		'fb_like', // Base ID
 			'Facebook Like Button', // Name
-			array( 'description' => __( "The Like button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user's friends' News Feed with a link back to your website.", 'text_domain' ), ) // Args
+			array( 'description' => __( "Lets a user share your content with friends on Facebook.", 'text_domain' ), ) // Args
 		);
 	}
 
@@ -72,14 +72,12 @@ class Facebook_Like_Button extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 		extract( $args );
-		$title = apply_filters( 'widget_title', $instance['title'] );
 
 		echo $before_widget;
-		if ( ! empty( $title ) )
-			echo $before_title . $title . $after_title;
 
-		$options = array('data-href' => $instance['url']);
-		echo fb_get_like_button($options);
+		//$options = array('data-href' => $instance['url']);
+		
+		echo fb_get_like_button($instance);
 		echo $after_widget;
 	}
 
@@ -97,7 +95,7 @@ class Facebook_Like_Button extends WP_Widget {
 		$instance = array();
 		
 		$fields = fb_get_like_fields_array();
-		error_log(var_export($new_instance,1));
+		
 		foreach ($fields['children'] as $field) {
 			if (isset($new_instance[$field['name']])) {
 				$instance[$field['name']] = $new_instance[$field['name']];
@@ -115,13 +113,6 @@ class Facebook_Like_Button extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		if ( isset( $instance[ 'title' ] ) ) {
-			$title = $instance[ 'title' ];
-		}
-		else {
-			$title = __( 'Like ' . esc_attr(get_bloginfo('name')) . ' on Facebook', 'text_domain' );
-		}
-		
 		fb_get_like_fields('widget', $this);
 	}
 }

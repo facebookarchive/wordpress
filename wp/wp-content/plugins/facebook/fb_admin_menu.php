@@ -17,8 +17,7 @@ function fb_admin_style() {
 }
 
 function fb_admin_scripts( $hook_suffix ) {
-	wp_register_script( 'fb_admin', plugins_url('/scripts/fb_admin.js', __FILE__) );
-	wp_enqueue_script( 'fb_admin' );
+	wp_enqueue_script( 'fb_admin', plugins_url( '/scripts/fb_admin.js', __FILE__ ), array(), '1.0', true );
 }
 
 // __return_false for no desc

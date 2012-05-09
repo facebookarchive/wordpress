@@ -56,7 +56,10 @@ add_action('admin_notices', 'fb_check_connected_accounts');
 
 function fb_get_current_user() {
 	global $facebook;
-	
+
+	if ( ! isset( $facebook ) )
+		return;
+
 	try {
 		$user = $facebook->api('/me');
 		

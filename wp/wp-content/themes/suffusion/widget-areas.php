@@ -46,13 +46,13 @@ global $suf_widget_area_below_header_columns, $suf_widget_area_above_footer_colu
 $sidebar_definitions = array(
 	'sidebar-1' => array(
 		'boxed' => array(
-			'before_widget' => '<!--widget start --><div id="%1$s" class="dbx-box suf-widget %2$s"><div class="dbx-content">',
-			'after_widget' => '</div></div><!--widget end -->',
+			'before_widget' => '<!--widget start --><aside id="%1$s" class="dbx-box suf-widget %2$s"><div class="dbx-content">',
+			'after_widget' => '</div></aside><!--widget end -->',
 			'before_title' => '<h3 class="dbx-handle '.(isset($suf_sidebar_header) ? $suf_sidebar_header : '').'">',
 			'after_title' => '</h3>'),
 		'flattened' => array(
-			'before_widget' => '<!--widget start --><div id="%1$s" class="suf-flat-widget %2$s">',
-			'after_widget' => '</div><!--widget end -->',
+			'before_widget' => '<!--widget start --><aside id="%1$s" class="suf-flat-widget %2$s">',
+			'after_widget' => '</aside><!--widget end -->',
 			'before_title' => "<h3>",
 			'after_title' => "</h3>"),
 		'tabbed' => array(
@@ -63,13 +63,13 @@ $sidebar_definitions = array(
 	),
 	'sidebar-2' => array(
 		'boxed' => array(
-			'before_widget' => '<!--widget start --><div id="%1$s" class="dbx-box suf-widget %2$s"><div class="dbx-content">',
-			'after_widget' => '</div></div><!--widget end -->',
+			'before_widget' => '<!--widget start --><aside id="%1$s" class="dbx-box suf-widget %2$s"><div class="dbx-content">',
+			'after_widget' => '</div></aside><!--widget end -->',
 			'before_title' => '<h3 class="dbx-handle '.(isset($suf_sidebar_header) ? $suf_sidebar_header : '').'">',
 			'after_title' => '</h3>'),
 		'flattened' => array(
-			'before_widget' => '<!--widget start --><div id="%1$s" class="suf-flat-widget %2$s">',
-			'after_widget' => '</div><!--widget end -->',
+			'before_widget' => '<!--widget start --><aside id="%1$s" class="suf-flat-widget %2$s">',
+			'after_widget' => '</aside><!--widget end -->',
 			'before_title' => "<h3>",
 			'after_title' => "</h3>"),
 		'tabbed' => array(
@@ -102,24 +102,24 @@ $sidebar_definitions = array(
 			'after_title' => '')),
 	'widget-area-below-header' => array(
 		'boxed' => array(
-			"before_widget" => '<!-- widget start --><div id="%1$s" class="suf-widget suf-horizontal-widget suf-widget-'.$suf_widget_area_below_header_columns.'c %2$s"><div class="dbx-content">',
-			"after_widget" => '</div></div><!-- widget end -->',
+			"before_widget" => '<!-- widget start --><aside id="%1$s" class="suf-widget suf-horizontal-widget suf-widget-'.$suf_widget_area_below_header_columns.'c %2$s"><div class="dbx-content">',
+			"after_widget" => '</div></aside><!-- widget end -->',
 			'before_title' => '<h3 class="dbx-handle '.(isset($suf_header_for_widgets_below_header) ? $suf_header_for_widgets_below_header : '').'">',
 			'after_title' => '</h3>'),
 		'flattened' => array(
-			"before_widget" => '<!-- widget start --><div id="%1$s" class="suf-flat-widget suf-horizontal-widget suf-widget-'.$suf_widget_area_below_header_columns.'c %2$s">',
-			"after_widget" => '</div><!-- widget end -->',
+			"before_widget" => '<!-- widget start --><aside id="%1$s" class="suf-flat-widget suf-horizontal-widget suf-widget-'.$suf_widget_area_below_header_columns.'c %2$s">',
+			"after_widget" => '</aside><!-- widget end -->',
 			'before_title' => '<h3>',
 			'after_title' => '</h3>')),
 	'widget-area-above-footer' => array(
 		'boxed' => array(
-			"before_widget" => '<!-- widget start --><div id="%1$s" class="suf-widget suf-horizontal-widget suf-widget-'.$suf_widget_area_above_footer_columns.'c %2$s "><div class="dbx-content">',
-			"after_widget" => '</div></div><!-- widget end -->',
+			"before_widget" => '<!-- widget start --><aside id="%1$s" class="suf-widget suf-horizontal-widget suf-widget-'.$suf_widget_area_above_footer_columns.'c %2$s "><div class="dbx-content">',
+			"after_widget" => '</div></aside><!-- widget end -->',
 			'before_title' => '<h3 class="dbx-handle '.(isset($suf_header_for_widgets_above_footer) ? $suf_header_for_widgets_above_footer : '').'">',
 			'after_title' => '</h3>'),
 		'flattened' => array(
-			"before_widget" => '<!-- widget start --><div id="%1$s" class="suf-flat-widget suf-horizontal-widget suf-widget-'.$suf_widget_area_above_footer_columns.'c %2$s">',
-			"after_widget" => '</div><!-- widget end -->',
+			"before_widget" => '<!-- widget start --><aside id="%1$s" class="suf-flat-widget suf-horizontal-widget suf-widget-'.$suf_widget_area_above_footer_columns.'c %2$s">',
+			"after_widget" => '</aside><!-- widget end -->',
 			'before_title' => '<h3>',
 			'after_title' => '</h3>')),
 	'widget-area-above-content' => array(
@@ -158,30 +158,30 @@ $sidebar_definitions = array(
 			"before_title" => ' ',
 			"after_title" => ' '),
 		'sliding-panel' => array(
-			"before_widget" => '<!-- widget start --><div id="%1$s" class="suf-panel-widget suf-widget-'.$suf_wa_tbrh_columns.'c %2$s">',
-			"after_widget" => '</div><!-- widget end -->',
+			"before_widget" => '<!-- widget start --><aside id="%1$s" class="suf-panel-widget suf-widget-'.$suf_wa_tbrh_columns.'c %2$s">',
+			"after_widget" => '</aside><!-- widget end -->',
 			"before_title" => '<h3>',
 			"after_title" => '</h3>'),
 		'spanel-boxed' => array(
-			"before_widget" => '<!-- widget start --><div id="%1$s" class="suf-widget suf-widget-'.$suf_wa_tbrh_columns.'c %2$s"><div class="dbx-content">',
-			"after_widget" => '</div></div><!-- widget end -->',
+			"before_widget" => '<!-- widget start --><aside id="%1$s" class="suf-widget suf-widget-'.$suf_wa_tbrh_columns.'c %2$s"><div class="dbx-content">',
+			"after_widget" => '</div></aside><!-- widget end -->',
 			"before_title" => '<h3 class="dbx-handle '.(isset($suf_header_for_trbh) ? $suf_header_for_trbh : '').'">',
 			"after_title" => '</h3>'),
 		'spanel-flat' => array(
-			"before_widget" => '<!-- widget start --><div id="%1$s" class="suf-flat-widget suf-widget-'.$suf_wa_tbrh_columns.'c %2$s">',
-			"after_widget" => '</div><!-- widget end -->',
+			"before_widget" => '<!-- widget start --><aside id="%1$s" class="suf-flat-widget suf-widget-'.$suf_wa_tbrh_columns.'c %2$s">',
+			"after_widget" => '</aside><!-- widget end -->',
 			"before_title" => '<h3>',
 			"after_title" => '</h3>'),
 	),
 	'wsidebar-top' => array(
 		'boxed' => array(
-			'before_widget' => '<!--widget start --><div id="%1$s" class="dbx-box suf-widget %2$s"><div class="dbx-content">',
-			'after_widget' => '</div></div><!--widget end -->',
+			'before_widget' => '<!--widget start --><aside id="%1$s" class="dbx-box suf-widget %2$s"><div class="dbx-content">',
+			'after_widget' => '</div></aside><!--widget end -->',
 			'before_title' => '<h3 class="dbx-handle '.(isset($suf_sidebar_header) ? $suf_sidebar_header : '').'">',
 			'after_title' => '</h3>'),
 		'flattened' => array(
-			'before_widget' => '<!--widget start --><div id="%1$s" class="suf-flat-widget %2$s">',
-			'after_widget' => '</div><!--widget end -->',
+			'before_widget' => '<!--widget start --><aside id="%1$s" class="suf-flat-widget %2$s">',
+			'after_widget' => '</aside><!--widget end -->',
 			'before_title' => "<h3>",
 			'after_title' => "</h3>"),
 		'tabbed' => array(
@@ -192,13 +192,13 @@ $sidebar_definitions = array(
 	),
 	'wsidebar-bottom' => array(
 		'boxed' => array(
-			'before_widget' => '<!--widget start --><div id="%1$s" class="dbx-box suf-widget %2$s"><div class="dbx-content">',
-			'after_widget' => '</div></div><!--widget end -->',
+			'before_widget' => '<!--widget start --><aside id="%1$s" class="dbx-box suf-widget %2$s"><div class="dbx-content">',
+			'after_widget' => '</div></aside><!--widget end -->',
 			'before_title' => '<h3 class="dbx-handle '.(isset($suf_sidebar_header) ? $suf_sidebar_header : '').'">',
 			'after_title' => '</h3>'),
 		'flattened' => array(
-			'before_widget' => '<!--widget start --><div id="%1$s" class="suf-flat-widget %2$s">',
-			'after_widget' => '</div><!--widget end -->',
+			'before_widget' => '<!--widget start --><aside id="%1$s" class="suf-flat-widget %2$s">',
+			'after_widget' => '</aside><!--widget end -->',
 			'before_title' => "<h3>",
 			'after_title' => "</h3>"),
 		'tabbed' => array(
@@ -408,52 +408,21 @@ register_sidebar(array (
 	'before_title' => $sidebar_definitions['left-header-widgets'][$sidebar_style]['before_title'],
 	'after_title' => $sidebar_definitions['left-header-widgets'][$sidebar_style]['after_title'],
 ));
-global $suf_adhoc1_columns, $suf_adhoc2_columns, $suf_adhoc3_columns, $suf_adhoc4_columns, $suf_adhoc5_columns;
-register_sidebar(array(
-	"name" => "Ad Hoc Widgets 1",
-	'id' => 'sidebar-13',
-	"description" => "This is an ad-hoc widget area that can be invoked with the short code [suffusion-widgets id='1'].",
-	"before_widget" => '<!-- widget start --><div id="%1$s" class="%2$s suf-widget suf-widget-'.$suf_adhoc1_columns.'c">',
-	"after_widget" => '</div><!-- widget end -->',
-	"before_title" => '<h3>',
-	"after_title" => '</h3>'
-));
-register_sidebar(array(
-	"name" => "Ad Hoc Widgets 2",
-	'id' => 'sidebar-14',
-	"description" => "This is an ad-hoc widget area that can be invoked with the short code [suffusion-widgets id='2'].",
-	"before_widget" => '<!-- widget start --><div id="%1$s" class="%2$s suf-widget suf-widget-'.$suf_adhoc2_columns.'c">',
-	"after_widget" => '</div><!-- widget end -->',
-	"before_title" => '<h3>',
-	"after_title" => '</h3>'
-));
-register_sidebar(array(
-	"name" => "Ad Hoc Widgets 3",
-	'id' => 'sidebar-15',
-	"description" => "This is an ad-hoc widget area that can be invoked with the short code [suffusion-widgets id='3'].",
-	"before_widget" => '<!-- widget start --><div id="%1$s" class="%2$s suf-widget suf-widget-'.$suf_adhoc3_columns.'c">',
-	"after_widget" => '</div><!-- widget end -->',
-	"before_title" => '<h3>',
-	"after_title" => '</h3>'
-));
-register_sidebar(array(
-	"name" => "Ad Hoc Widgets 4",
-	'id' => 'sidebar-16',
-	"description" => "This is an ad-hoc widget area that can be invoked with the short code [suffusion-widgets id='4'].",
-	"before_widget" => '<!-- widget start --><div id="%1$s" class="%2$s suf-widget suf-widget-'.$suf_adhoc4_columns.'c">',
-	"after_widget" => '</div><!-- widget end -->',
-	"before_title" => '<h3>',
-	"after_title" => '</h3>'
-));
-register_sidebar(array(
-	"name" => "Ad Hoc Widgets 5",
-	'id' => 'sidebar-17',
-	"description" => "This is an ad-hoc widget area that can be invoked with the short code [suffusion-widgets id='5'].",
-	"before_widget" => '<!-- widget start --><div id="%1$s" class="%2$s suf-widget suf-widget-'.$suf_adhoc5_columns.'c">',
-	"after_widget" => '</div><!-- widget end -->',
-	"before_title" => '<h3>',
-	"after_title" => '</h3>'
-));
+
+$adhoc_count = apply_filters('suffusion_adhoc_count', 5);
+for ($i = 1; $i <= $adhoc_count; $i++) {
+	$adhoc_columns = "suf_adhoc{$i}_columns";
+	global $$adhoc_columns;
+	register_sidebar(array(
+		"name" => "Ad Hoc Widgets $i",
+		'id' => 'sidebar-'.(12 + $i),
+		"description" => "This is an ad-hoc widget area that can be invoked with the short code [suffusion-widgets id='$i'].",
+		"before_widget" => '<!-- widget start --><aside id="%1$s" class="%2$s suf-widget suf-widget-'.$$adhoc_columns.'c">',
+		"after_widget" => '</aside><!-- widget end -->',
+		"before_title" => '<h3>',
+		"after_title" => '</h3>'
+	));
+}
 
 for ($i = 1; $i <= 5; $i++) {
 	register_sidebar(
@@ -461,8 +430,8 @@ for ($i = 1; $i <= 5; $i++) {
 			'name' => 'Custom Layout Widget Area '.$i,
 			'id' => 'sidebar-cl-'.$i,
 			'description' => "The contents of this widget area displayed if you use a custom layout template. Use a plugin such as Widget Logic to control what widget shows up in which page.",
-			'before_widget' => '<!-- widget start --><div id="%1$s" class="%2$s cl-widget"><div class="cl-content">',
-			"after_widget" => '</div></div><!-- widget end -->',
+			'before_widget' => '<!-- widget start --><section id="%1$s" class="%2$s cl-widget"><div class="cl-content">',
+			"after_widget" => '</div></section><!-- widget end -->',
 			"before_title" => '<h3>',
 			"after_title" => '</h3>'
 		)

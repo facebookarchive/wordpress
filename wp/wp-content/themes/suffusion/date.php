@@ -7,9 +7,9 @@
  */
 
 global $suffusion, $suf_archive_excerpt;
+get_header();
 $suffusion->set_content_layout($suf_archive_excerpt);
 
-get_header();
 suffusion_query_posts();
 ?>
 

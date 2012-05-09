@@ -34,8 +34,8 @@ function suffusion_set_more_link($more_link_text) {
 
 function suffusion_pages_link($content) {
 	$args = array(
-		'before' => '<div class="page-links"><strong>'.__('Pages:', 'suffusion').'</strong>',
-		'after' => '</div>',
+		'before' => '<nav class="page-links"><strong>'.__('Pages:', 'suffusion').'</strong>',
+		'after' => '</nav>',
 		'link_before' => '<span class="page-num">',
 		'link_after' => '</span>',
 		'next_or_number' => 'number',
@@ -146,10 +146,10 @@ function suffusion_split_comments() {
 			$request_comment_type = suffusion_get_comment_type_from_request();
 			if ($request_comment_type != $comment_type) {
 				$page_link = add_query_arg("comment_type", $comment_type, $page_link);
-				echo "<a href=\"$page_link#comments\" class=\"comment-response-types\">".$pretty_comment_type." ($type_number)</a> ";
+				echo "<a href=\"$page_link#comments\" class=\"comment-response-type\">".$pretty_comment_type." ($type_number)</a> ";
 			}
 			else {
-				echo "<span class=\"comment-response-types\">".$pretty_comment_type." ($type_number)</span> ";
+				echo "<span class=\"response-type\">".$pretty_comment_type." ($type_number)</span> ";
 			}
 		}
 	}
@@ -458,15 +458,14 @@ function suffusion_mm_nav_css($classes, $item, $args = array()) {
  * and returns no matches.
  *
  * @since 4.0.0
+ * @param $query
  */
-function suffusion_custom_taxonomy_contents() {
-	if (is_tax()) {
+function suffusion_custom_taxonomy_contents($query) {
+	if (is_tax() && $query->is_main_query()) {
 		$tax = get_queried_object();
 		$taxonomy = get_taxonomy($tax->taxonomy);
 
-		global $wp_query;
-		$args = array_merge($wp_query->query, array('post_type' => $taxonomy->object_type));
-		query_posts($args);
+		$query->set('post_type', $taxonomy->object_type);
 	}
 }
 
@@ -520,4 +519,15 @@ function suffusion_get_width_classes($classes = array(), $class = '') {
 		$classes[] = 'preset-'.$$width_preset.'px';
 	}
 	return $classes;
+}
+
+function suffusion_single_cpt_byline_position($byline_position) {
+	global $post, $suffusion_cpt_layouts;
+	$post_type = $post->post_type;
+	if (is_single() && $post_type != 'post') {
+		if (isset($suffusion_cpt_layouts[$post_type]) && isset($suffusion_cpt_layouts[$post_type]['byline'])) {
+			return $suffusion_cpt_layouts[$post_type]['byline'];
+		}
+	}
+	return $byline_position;
 }

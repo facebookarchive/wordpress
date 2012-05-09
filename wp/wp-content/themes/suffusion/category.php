@@ -7,8 +7,8 @@
  */
 
 global $suf_cat_info_enabled, $suf_category_excerpt, $suffusion;
-$suffusion->set_content_layout($suf_category_excerpt);
 get_header();
+$suffusion->set_content_layout($suf_category_excerpt);
 suffusion_query_posts();
 ?>
 

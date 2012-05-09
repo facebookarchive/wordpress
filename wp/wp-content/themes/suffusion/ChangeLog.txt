@@ -1,3 +1,30 @@
+Version 4.2.0 - 27th Apr 2012
+=============================
+1.  Moved from XHTML Transitional to HTML 5:
+	a.  The site header (#header) is a <header> instead of <div>
+	b.  Navigation bars are <nav> instead of <div>
+	c.  The title container (.title-container) is <header> instead of <div>
+	d.  The post footer (.post-footer) is <footer> instead of <div>
+	e.  Page links (.page-links), Post navigation (.post-nav) are <nav> instead of <div>
+	f.  Posts (div.post) and pages (div.page) are <article> instead of <div>
+	g.  Author Profiles (.author-profile), Category Information (.info-category), Tag Information (.info-tag) and Search preface are <section> instead of <div>
+	h.  The comments section is a <section> instead of a <div>
+	i.  The Magazine layout sections for headlines (.suf-mag-headlines), excerpts (.suf-mag-excerpts) and categories (.suf-mag-categories) are <section>
+	j.  Custom Layout widget areas are now <section> elements
+	k.  Sidebar elements are <aside> instead of <div> (#sidebar, #sidebar-2, #horizontal-outer-widgets-1, #horizontal-outer-widgets-2,
+		#widgets-above-header, #left-header-widgets, #right-header-widgets, #header-widgets, #top-bar-left-widgets, #sidebar-1-b,
+		#sidebar-2-b, #wsidebar-top, #wsidebar-bottom, #ad-hoc-1 to 5)
+2.  Cleaned up some CSS declarations
+3.  Moved the following functions:
+	a.  suffusion_get_full_content_count from functions.php to template.php
+	b.  suffusion_mega_menu_walker from functions.php to template.php
+4.  Added new action hooks: suffusion_before_post, suffusion_after_post
+5.  Changed from a JS-based layout for Custom Layouts, Magazine and tiles to using the CSS3 attribute column-count
+6.  Added a new "Custom Post Type Archive" template, which lets users pick a post type and display an archive of its posts in various layouts
+7.  Added options in the Custom Post Types section to let users pick layout options for custom post types.
+8.  Upgraded embedded JQuery Masonry script to latest version.
+9.  Fixed a problem with the "duplicate posts" from the featured content interfering with different layouts.
+
 Version 4.0.7 - 20th Apr 2012
 =============================
 1.  Fixed a problem with the tile layout, where having duplicates from the static Featured Content was breaking the layout.

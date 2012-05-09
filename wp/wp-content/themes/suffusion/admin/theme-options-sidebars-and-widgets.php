@@ -149,8 +149,7 @@ $suffusion_sidebars_and_widgets_options = array(
 		"std" => "1"),
 
 	array("name" => "Width of Widget Area in Header",
-		"desc" => "Please enter the width in pixels. <b>Do not enter px.</b> Note that this is a fixed width theme, not a fluid theme.
-			What this means is that you cannot specify things like 80% as the width. ",
+		"desc" => "Please enter the width in pixels. <b>Do not enter px.</b>",
 		"id" => "suf_wih_width",
 		"parent" => "sidebar-setup-wih",
 		"type" => "text",

@@ -7,24 +7,24 @@
  * @package Suffusion
  * @subpackage Templates
  */
-
-global $suf_index_excerpt, $suffusion;
-$suffusion->set_content_layout($suf_index_excerpt);
+global $suf_index_excerpt, $suffusion, $suffusion_cpt_layouts;
 get_header();
+$suffusion->set_content_layout($suf_index_excerpt);
 suffusion_query_posts();
+$layout = $suffusion->get_content_layout();
 ?>
 	<div id="main-col">
 <?php suffusion_before_begin_content(); ?>
 		<div id="content" class="hfeed">
 <?php
-if ($suf_index_excerpt == 'list') {
+if ($layout == 'list') {
 	get_template_part('layouts/layout-list');
 }
-else if ($suf_index_excerpt == 'tiles') {
+else if ($layout == 'tiles') {
 	suffusion_after_begin_content();
 	get_template_part('layouts/layout-tiles');
 }
-else if ($suf_index_excerpt == 'mosaic') {
+else if ($layout == 'mosaic') {
 	get_template_part('layouts/layout-mosaic');
 }
 else {

@@ -18,14 +18,14 @@ if (suffusion_post_count() > 1) {
 		$in_same_cat = false;
 	}
 ?>
-<div class='post-nav'>
+<nav class='post-nav fix'>
 <table>
 <tr>
 	<td class='previous'><?php previous_post_link('<span class="icon">&nbsp;</span> %link', '%title', $in_same_cat) ?></td>
 	<td class='next'><?php next_post_link('<span class="icon">&nbsp;</span> %link', '%title', $in_same_cat) ?></td>
 </tr>
 </table>
-</div>
+</nav>
 <?php
 }
 

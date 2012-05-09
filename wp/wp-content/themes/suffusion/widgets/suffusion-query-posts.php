@@ -175,9 +175,9 @@ class Suffusion_Category_Posts extends WP_Widget {
 					$image = suffusion_get_image(array('widget-thumb' => 'widget-'.$post_thumbnail_size, 'no-link' => true));
 					$ret .= "<li class='suf-widget-mosaic'><div class='suf-widget-thumb'><a href='".get_permalink()."' title=\"".esc_attr(get_the_title())."\">".$image."</a></div></li>\n";
 				}
-                else {
-                    $ret .= "<li><a href='".get_permalink()."'>".get_the_title()."</a></li>\n";
-                }
+				else {
+					$ret .= "<li><a href='".get_permalink()."'>".get_the_title()."</a></li>\n";
+				}
 			}
 			wp_reset_query();
 			$ret .= "</ul>";
@@ -317,7 +317,7 @@ class Suffusion_Category_Posts extends WP_Widget {
 <?php
 		$order_bys = array(
 			'date' => __('Creation date', 'suffusion'),
-			'id' => __('Post id', 'suffusion'),
+			'ID' => __('Post id', 'suffusion'),
 			'author' => __('Post author', 'suffusion'),
 			'title' => __('Post title', 'suffusion'),
 			'modified' => __('Modification date', 'suffusion'),

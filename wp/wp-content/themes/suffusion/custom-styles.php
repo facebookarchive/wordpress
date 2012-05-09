@@ -9,12 +9,10 @@
 header("Content-type: text/css; charset=UTF-8");
 header("Cache-Control: must-revalidate");
 
-global $suffusion_unified_options, $suffusion_theme_name, $content_width, $suffusion_reevaluate_styles;
+global $suffusion_unified_options, $suffusion_theme_name, $content_width;
 global $suf_size_options, $suf_sidebar_count, $suf_autogen_css;
 
-if ($suffusion_reevaluate_styles) {
-	$suffusion_unified_options = suffusion_get_unified_options();
-}
+$suffusion_unified_options = suffusion_get_unified_options();
 
 if ($suffusion_unified_options['suf_autogen_css'] == 'autogen' || $suffusion_unified_options['suf_autogen_css'] == 'autogen-inline') {
 	$custom_css = get_option('suffusion_generated_css');

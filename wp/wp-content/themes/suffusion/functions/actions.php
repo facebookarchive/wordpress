@@ -190,7 +190,7 @@ function suffusion_display_header() {
 		$header_tag = "h2";
 	}
 ?>
-	<div id="header" class="fix">
+	<header id="header" class="fix">
 	<?php
 	$header = ($suf_header_fg_image_type == 'image' && trim($suf_header_fg_image) != '') ? "<img src='$suf_header_fg_image' alt='".esc_attr(get_bloginfo('name'))."'/>" : get_bloginfo('name', 'display');
 	$home_link = home_url();
@@ -210,7 +210,7 @@ function suffusion_display_header() {
 <?php
 	}
 	?>
-    </div><!-- /header -->
+    </header><!-- /header -->
 <?php
 	if ($suf_header_alignment != 'right') {
 		suffusion_display_widgets_in_header();
@@ -222,7 +222,7 @@ function suffusion_display_main_navigation() {
 	$display = apply_filters('suffusion_can_display_main_navigation', true);
 	if ($display) {
 ?>
- 	<div id="nav" class="<?php echo $suf_nav_item_type; ?> fix">
+ 	<nav id="nav" class="<?php echo $suf_nav_item_type; ?> fix">
 		<div class='col-control <?php echo $suf_nav_dd_pos; ?>'>
 <?php
 	suffusion_display_left_header_widgets();
@@ -232,7 +232,7 @@ function suffusion_display_main_navigation() {
 	}
 ?>
 		</div><!-- /col-control -->
-	</div><!-- /nav -->
+	</nav><!-- /nav -->
 <?php
 	}
 }
@@ -265,7 +265,7 @@ function suffusion_display_top_navigation() {
 		$display = apply_filters('suffusion_can_display_top_navigation', true);
 		if ($display) {
 ?>
-	<div id='nav-top' class='<?php echo $suf_navt_item_type; ?> fix'>
+	<nav id='nav-top' class='<?php echo $suf_navt_item_type; ?> fix'>
 		<div class='col-control <?php echo $suf_navt_dd_pos; ?>'>
 <?php
 			get_sidebar('nav-top-left');
@@ -295,7 +295,7 @@ function suffusion_display_top_navigation() {
 		suffusion_create_navigation_html(true, 'top', 'suf_navt_pages', 'suf_navt_cats', 'suf_navt_links', 'suf_navt_menus');
 ?>
 		</div><!-- /.col-control -->
-	</div><!-- /#nav-top -->
+	</nav><!-- /#nav-top -->
 <?php
 		}
 	}
@@ -731,15 +731,25 @@ function suffusion_get_siblings_in_nav($ancestors, $index, $exclusion_list, $exc
 
 function suffusion_excerpt_or_content() {
 	global $suf_category_excerpt, $suf_tag_excerpt, $suf_archive_excerpt, $suf_index_excerpt, $suf_search_excerpt, $suf_author_excerpt, $suf_show_excerpt_thumbnail, $suffusion_current_post_index, $suffusion_full_post_count_for_view, $suf_pop_excerpt, $page_of_posts;
+	global $suffusion_cpt_post_id;
 
-	if (($suffusion_current_post_index > $suffusion_full_post_count_for_view) && ((is_category() && $suf_category_excerpt == "excerpt") ||
+	if (isset($suffusion_cpt_post_id)) {
+		$cpt_excerpt = suffusion_get_post_meta($suffusion_cpt_post_id, 'suf_cpt_post_type_layout', true);
+		$cpt_image = suffusion_get_post_meta($suffusion_cpt_post_id, 'suf_cpt_show_excerpt_thumb', true);
+	}
+	else {
+		$cpt_excerpt = false;
+	}
+
+	if (($suffusion_current_post_index > $suffusion_full_post_count_for_view) && ($cpt_excerpt ||
+		(is_category() && $suf_category_excerpt == "excerpt") ||
 		(is_tag() && $suf_tag_excerpt == "excerpt") ||
 		(is_search() && $suf_search_excerpt == "excerpt") ||
 		(is_author() && $suf_author_excerpt == "excerpt") ||
 		((is_date() || is_year() || is_month() || is_day() || is_time())&& $suf_archive_excerpt == "excerpt") ||
 		(isset($page_of_posts) && $page_of_posts && $suf_pop_excerpt == "excerpt") ||
 		(!(is_singular() || is_category() || is_tag() || is_search() || is_author() || is_date() || is_year() || is_month() || is_day() || is_time()) && $suf_index_excerpt == "excerpt"))) {
-		$show_image = $suf_show_excerpt_thumbnail == "show" ? true : false;
+		$show_image = isset($cpt_image) ? $cpt_image : ($suf_show_excerpt_thumbnail == "show" ? true : false);
 		suffusion_excerpt($show_image);
 	}
 	else {
@@ -893,38 +903,40 @@ function suffusion_include_featured_js() {
 function suffusion_template_specific_header() {
 	global $suf_cat_info_enabled, $suf_author_info_enabled, $suf_tag_info_enabled, $suf_search_info_enabled, $suffusion_mosaic_layout;
 	if (is_category() && ($suf_cat_info_enabled == 'enabled') && apply_filters('suffusion_can_display_category_information', true)) { ?>
-		<div class="info-category fix">
+		<section class="info-category fix">
 			<h2 class="category-title"><?php single_cat_title(); ?></h2>
 <?php echo suffusion_get_category_information(); ?>
-		</div><!-- .info-category -->
+		</section><!-- .info-category -->
 <?php
 	}
 	else if (is_author() && ($suf_author_info_enabled == 'enabled') && apply_filters('suffusion_can_display_author_information', true)) {
 		$id = get_query_var('author'); ?>
-		<div id="author-profile-<?php the_author_meta('user_nicename', $id); ?>" class="author-profile author-even fix">
+		<section id="author-profile-<?php the_author_meta('user_nicename', $id); ?>" class="author-profile author-even fix">
 			<h2 class="author-title"><?php the_author_meta('display_name', $id); ?></h2>
 			<?php echo suffusion_get_author_information();?>
-		</div><!-- /.author-profile -->
+		</section><!-- /.author-profile -->
 <?php
 	}
 	else if (is_tag() && ($suf_tag_info_enabled == 'enabled') && apply_filters('suffusion_can_display_tag_information', true)) { ?>
-		<div class="info-tag fix">
+		<section class="info-tag fix">
 			<h2 class="tag-title"><?php single_tag_title(); ?></h2>
 		<?php echo tag_description(get_query_var('tag_id')); ?>
-		</div><!-- .info-tag -->
+		</section><!-- .info-tag -->
 <?php
 	}
 	else if (is_search() && $suf_search_info_enabled == 'enabled' && apply_filters('suffusion_can_display_search_information', true)) {
 		if (have_posts()) {	?>
-		<div class='post fix'>
-			<h2 class='posttitle'><?php $title = wp_title(':', false); $title = trim($title); if (substr($title, 0, 1) == ':') { $title = substr($title, 1);} echo $title; ?></h2>
+		<section class='post fix'>
+			<header>
+				<h2 class='posttitle'><?php $title = wp_title(':', false); $title = trim($title); if (substr($title, 0, 1) == ':') { $title = substr($title, 1);} echo $title; ?></h2>
+			</header>
 			<form method="get" action="<?php echo home_url(); ?>/" class='search-info' id='search-info'>
 				<input class="search-hl checkbox" name="search-hl" id="search-hl" type="checkbox"/>
 				<label class='search-hl' for='search-hl'><?php _e('Highlight matching results below', 'suffusion');?></label>
 				<input type='hidden' name='search-term' id='search-term' value="<?php $search_term = get_search_query(); echo esc_attr($search_term);?>"/>
 			</form>
 			<?php get_search_form(); ?>
-		</div>
+		</section>
 <?php
 		}
 	}
@@ -1283,7 +1295,7 @@ function suffusion_meta_pullout() {
 		}
 		$meta_position = 'suf_post_' . $format . 'meta_position';
 		global $$meta_position;
-		$post_meta_position = $$meta_position;
+		$post_meta_position = apply_filters('suffusion_byline_position', $$meta_position);
 
 		if ($post_meta_position == 'left-pullout' || $post_meta_position == 'right-pullout') {
 			get_template_part('custom/pullout', $original_format);
@@ -1355,8 +1367,9 @@ function suffusion_print_line_byline($position) {
 			$format = $original_format . '_';
 		}
 		$meta_position = 'suf_post_' . $format . 'meta_position';
+
 		global $$meta_position;
-		$post_meta_position = $$meta_position;
+		$post_meta_position = apply_filters('suffusion_byline_position', $$meta_position);
 
 		if ($post_meta_position == $position) {
 			get_template_part('custom/byline-line', $original_format);
@@ -1376,18 +1389,3 @@ function suffusion_print_line_byline($position) {
 function suffusion_print_post_updated_information() {
 	echo "<span class='updated' title='".get_the_time('c')."'></span>";
 }
-
-/**
- * If an archive view has featured posts, this function removes duplicate posts from the archive if the appropriate option has
- * been set under Other Graphical Elements &rarr; Featured Content.
- *
- */
-function suffusion_remove_duplicate_featured_posts() {
-	global $suf_featured_show_dupes, $suffusion_duplicate_posts, $wp_query;
-	if ($suf_featured_show_dupes == 'hide' && $wp_query->is_main_query() && isset($suffusion_duplicate_posts) && is_array($suffusion_duplicate_posts) && count($suffusion_duplicate_posts) > 0) {
-		$args = $wp_query->query;
-		$args['post__not_in'] = $suffusion_duplicate_posts;
-		$wp_query = new WP_Query($args);
-	}
-}
-

@@ -1,6 +1,8 @@
 <?php
 /**
  * Single book template for the Now Reading plugin.
+ * This is NOT the template file for single posts. This file applies to the Now Reading plugin support within Suffusion.
+ * If you want to edit the file a single post via the WP File Editor, see this: http://aquoid.com/forum/viewtopic.php?f=4&t=1499&p=6754#p6754
  *
  * @package Suffusion
  * @subpackage NowReading
@@ -14,7 +16,7 @@ global $nr_id, $suf_nr_single_added_show, $suf_nr_single_added_text, $suf_nr_sin
 <?php suffusion_before_begin_content(); ?>
 	<div id="content">
 <?php suffusion_after_begin_content(); ?>
-        <div class="post fix nr-post">
+        <article <?php post_class('post fix nr-post'); ?>>
 <?php
 if( have_books(intval($nr_id)) ) {
 	while ( have_books(intval($nr_id)) ) {
@@ -115,14 +117,16 @@ if( have_books(intval($nr_id)) ) {
 }
 else {
 ?>
-		<h2 class='posttitle'><?php _e("Not Found", "suffusion"); ?></h2>
+		<header>
+			<h2 class='posttitle'><?php _e("Not Found", "suffusion"); ?></h2>
+		</header>
 		<div class='entry'>
 			<p><?php _e("Sorry, but you are looking for something that isn't here", "suffusion"); ?></p>
 		</div>
 <?php
 }
 ?>
-	</div><!-- post -->
+	</article><!-- post -->
 
 	</div><!-- content -->
 </div><!-- main-col -->

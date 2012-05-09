@@ -8,7 +8,7 @@
  * @subpackage Custom
  */
 
-global $post, $suf_page_show_comment, $suf_page_show_posted_by, $suf_page_meta_position, $suf_date_box_show;
+global $post, $suf_page_show_comment, $suf_page_show_posted_by, $suf_page_meta_position, $suf_date_box_show, $suffusion_cpt_post_id, $suffusion_cpt_layouts;
 $format = suffusion_get_post_format();
 if ($format == 'standard') {
 	$format = '';
@@ -16,36 +16,46 @@ if ($format == 'standard') {
 else {
 	$format = $format . '_';
 }
+if (is_single() && $post->post_type != 'post') {
+	$is_cpt = true;
+}
+else {
+	$is_cpt = false;
+}
+
 $show_cats = 'suf_post_' . $format . 'show_cats';
-$show_posted_by = 'suf_post_' . $format . 'show_posted_by';
 $show_tags = 'suf_post_' . $format . 'show_tags';
-$show_comment = 'suf_post_' . $format . 'show_comment';
-$show_perm = 'suf_post_' . $format . 'show_perm';
+$show_posted_by = (!isset($suffusion_cpt_post_id) && !$is_cpt) ? 'suf_post_' . $format . 'show_posted_by' : 'suf_cpt_bylines_posted_by';
+$show_comment = (!isset($suffusion_cpt_post_id) && !$is_cpt) ? 'suf_post_' . $format . 'show_comment' : 'suf_cpt_bylines_comments';
+$show_perm = (!isset($suffusion_cpt_post_id) && !$is_cpt) ? 'suf_post_' . $format . 'show_perm' : 'suf_cpt_bylines_permalinks';
 $with_title_show_perm = 'suf_post_' . $format . 'with_title_show_perm';
 
-global $$show_cats, $$show_posted_by, $$show_tags, $$show_comment, $$show_perm, $$with_title_show_perm;
+global $$show_cats, $$show_posted_by, $$show_tags, $$show_comment, $$show_perm, $$with_title_show_perm, $suf_cpt_bylines_post_date;
 $post_show_cats = $$show_cats;
 $post_show_posted_by = $$show_posted_by;
 $post_show_tags = $$show_tags;
 $post_show_comment = $$show_comment;
 $post_show_perm = $$show_perm;
 $post_with_title_show_perm = $$with_title_show_perm;
+$show_date = (!isset($suffusion_cpt_post_id) && !$is_cpt) ? ($suf_date_box_show != 'hide' || ($suf_date_box_show == 'hide-search' && !is_search())) : $suf_cpt_bylines_post_date;
 
-if (($suf_date_box_show != 'hide' || ($suf_date_box_show == 'hide-search' && !is_search())) || $post_show_cats != 'hide' ||
+if ($show_date || $post_show_cats != 'hide' ||
 	$post_show_posted_by != 'hide' || $post_show_tags != 'hide' || $post_show_comment != 'hide' || $post_show_perm != 'hide' || $post_with_title_show_perm != 'hide') { ?>
 <div class='postdata line'>
 	<?php
 		$title = get_the_title();
-		if (($post_show_perm == 'show-tleft' || $post_show_perm == 'show-tright') && (($title == '' || !$title) || (!($title == '' || !$title) && $post_with_title_show_perm != 'hide'))) {
+		if (($post_show_perm && $post_show_perm != 'hide' && (isset($suffusion_cpt_post_id) || $is_cpt)) ||
+				(!isset($suffusion_cpt_post_id) && !$is_cpt && $post_show_perm != 'hide' && (($title == '' || !$title) || (!($title == '' || !$title) && $post_with_title_show_perm != 'hide')))) {
 			$permalink_text = apply_filters('suffusion_permalink_text', __('Permalink', 'suffusion'));
 			echo "<span class='permalink'><span class='icon'>&nbsp;</span>" . suffusion_get_post_title_and_link($permalink_text) . "</span>\n";
 		}
-	if ($suf_date_box_show != 'hide' || ($suf_date_box_show == 'hide-search' && !is_search())) {
+	if ($show_date && $show_date != 'hide') {
 		echo "<span class='line-date'><span class='icon'>&nbsp;</span>" . get_the_time(get_option('date_format')) . "</span>\n";
 	}
-	if ($post_show_posted_by != 'hide') {
+	if ($post_show_posted_by && 'hide' != $post_show_posted_by) {
 		suffusion_print_author_byline();
 	}
+
 	if ($post_show_cats != 'hide') {
 		$categories = get_the_category();
 		if (is_array($categories) && count($categories) > 0) {
@@ -57,12 +67,17 @@ if (($suf_date_box_show != 'hide' || ($suf_date_box_show == 'hide-search' && !is
 	if ($post_show_tags != 'hide') {
 		$tags = get_the_tags();
 		if (is_array($tags) && count($tags) > 0) {
-			echo '<span class="tags"><span class="icon">&nbsp;</span>';
+			echo '<span class="tags tax"><span class="icon">&nbsp;</span>';
 			the_tags('', ', ');
 			echo '</span>';
 		}
 	}
-	if (is_singular() && $post_show_comment != 'hide') {
+
+	if (isset($suffusion_cpt_post_id) || $is_cpt) {
+		do_action('suffusion_add_taxonomy_bylines_line', $suffusion_cpt_post_id, $is_cpt);
+	}
+
+	if (is_singular() && $post_show_comment && $post_show_comment != 'hide') {
 		if ('open' == $post->comment_status) {
 			if (is_attachment()) {
 				$mime = get_post_mime_type();
@@ -89,7 +104,7 @@ if (($suf_date_box_show != 'hide' || ($suf_date_box_show == 'hide-search' && !is
 			}
 		}
 	}
-	else if ($post_show_comment != 'hide') {
+	else if ($post_show_comment && $post_show_comment != 'hide') {
 		echo "<span class='comments'><span class='icon'>&nbsp;</span>";
 		comments_popup_link(__('No Responses', 'suffusion') . ' &#187;', __('1 Response', 'suffusion') . ' &#187;', __('% Responses', 'suffusion') . ' &#187;');
 		echo "</span>";

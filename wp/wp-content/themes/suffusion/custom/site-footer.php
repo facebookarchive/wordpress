@@ -14,6 +14,9 @@ $display = apply_filters('suffusion_can_display_site_footer', true);
 if (!$display) {
 	return;
 }
+?>
+<footer>
+<?php
 if ($suf_footer_layout_style != 'in-align') {
 	?>
 	<div id='page-footer'>
@@ -40,4 +43,5 @@ if ($suf_footer_layout_style != 'in-align') {
 
 }
 ?>
+</footer>
 <!-- <?php echo get_num_queries(); ?> queries, <?php suffusion_get_memory_usage(); ?> in <?php timer_stop(1); ?> seconds. -->

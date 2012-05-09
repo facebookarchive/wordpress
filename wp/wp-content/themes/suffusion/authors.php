@@ -22,7 +22,7 @@ if (have_posts()) {
 		the_post(); 
 		$original_post = $post;
 ?>
-    <div <?php post_class('post fix'); ?> id="post-<?php the_ID(); ?>">
+	<article <?php post_class('post fix'); ?> id="post-<?php the_ID(); ?>">
 <?php suffusion_after_begin_post(); ?>
 
         <div class="entry fix">
@@ -34,16 +34,13 @@ if (have_posts()) {
 		foreach ($authors as $author) {
 			$id = $author->ID; 
 			if ($i%2 == 0) {
-?>
-		<div id="author-profile-<?php the_author_meta('user_nicename', $id); ?>" class="author-profile author-even fix">
-<?php
+				$odd_or_even = 'even';
 			}
 			else {
-?>
-		<div id="author-profile-<?php the_author_meta('user_nicename', $id); ?>" class="author-profile author-odd fix">
-<?php
+				$odd_or_even = 'odd';
 			}
 ?>
+		<section id="author-profile-<?php the_author_meta('user_nicename', $id); ?>" class="author-profile author-<?php echo $odd_or_even; ?> fix">
 			<h2 class="author-title fn n"><?php the_author_meta('display_name', $id); ?></h2>
 			<div class="author-description">
 				<?php echo get_avatar(get_the_author_meta('user_email', $id), '96'); ?>
@@ -51,7 +48,7 @@ if (have_posts()) {
 					<?php the_author_meta('description', $id); ?>
 				</p><!-- /.author-bio -->
 			</div><!-- /.author-description -->
-		</div><!-- /.author-profile -->
+		</section><!-- /.author-profile -->
 
 <?php
 			$i++;
@@ -61,7 +58,7 @@ if (have_posts()) {
 		suffusion_before_end_post();
 		comments_template();
 ?>
-		</div><!-- post -->
+		</article><!-- post -->
 <?php
 	}
 }

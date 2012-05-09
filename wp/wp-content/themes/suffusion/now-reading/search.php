@@ -13,8 +13,10 @@ get_header();
 <?php suffusion_before_begin_content(); ?>
 	<div id="content">
 <?php suffusion_after_begin_content(); ?>
-		<div class="post fix nr-post">
-			<h1 class="posttitle">Search Results for <?php search_query(); ?></h1>
+		<article <?php post_class('post fix nr-post'); ?>>
+			<header>
+				<h1 class="posttitle">Search Results for <?php search_query(); ?></h1>
+			</header>
 			<div class="bookdata fix">
 <?php
 if( can_now_reading_admin() ) {
@@ -34,7 +36,7 @@ $nr_book_query = "status=all&num=-1&search={$GLOBALS['query']}";
 get_template_part('now-reading/nr-shelf');
 ?>
 			</div> <!-- /.booklisting -->
-		</div><!-- /.nr-post -->
+		</article><!-- /.nr-post -->
 	</div><!-- /#content -->
 </div>
 <?php

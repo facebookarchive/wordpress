@@ -317,7 +317,7 @@ div.reply {
 	text-align: left;
 }
 
-a.comment-response-types, span.comment-response-types {
+.comment-response-type, .response-type {
 	float: right;
 }
 

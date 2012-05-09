@@ -27,7 +27,7 @@ $show_perm = 'suf_post_'.$format.'show_perm';
 $with_title_show_perm = 'suf_post_'.$format.'with_title_show_perm';
 
 global $$meta_position, $$show_cats, $$show_posted_by, $$show_tags, $$show_comment, $$show_perm, $$with_title_show_perm;
-$post_meta_position = $$meta_position;
+$post_meta_position = apply_filters('suffusion_byline_position', $$meta_position);
 $post_show_cats = $$show_cats;
 $post_show_posted_by = $$show_posted_by;
 $post_show_tags = $$show_tags;
@@ -35,7 +35,7 @@ $post_show_comment = $$show_comment;
 $post_show_perm = $$show_perm;
 $post_with_title_show_perm = $$with_title_show_perm;
 ?>
-<div class="post-footer postdata fix">
+<footer class="post-footer postdata fix">
 <?php
 $title = get_the_title();
 if (($post_show_perm == 'show-bleft' || $post_show_perm == 'show-bright') && (($title == '' || !$title) || (!($title == '' || !$title) && $post_with_title_show_perm != 'hide'))) {
@@ -96,9 +96,9 @@ if (!is_page() && $post_meta_position == 'corners' && ($post_show_tags == 'show'
 	$tags = get_the_tags();
 	if (is_array($tags) && count($tags) > 0) {
 	?>
-		<span class="tags"><span class="icon">&nbsp;</span><?php the_tags(__('Tagged with: ', 'suffusion'),', ','<br />'); ?></span>
+		<span class="tags tax"><span class="icon">&nbsp;</span><?php the_tags(__('Tagged with: ', 'suffusion'),', ','<br />'); ?></span>
 	<?php
 	}
 }
 ?>
-</div><!-- .post-footer -->
+</footer><!-- .post-footer -->

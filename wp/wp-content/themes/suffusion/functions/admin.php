@@ -78,6 +78,9 @@ function suffusion_meta_fields($post, $args = array()) {
 	if ($type == 'page' && isset($post->page_template) && 'template-custom-layout.php' == $post->page_template) {
 		echo "<li><a href='#suf-meta-tabs-custom-template'>".__('Custom Template', 'suffusion')."</a></li>";
 	}
+	if ($type == 'page' && isset($post->page_template) && 'template-custom-post-type-archive.php' == $post->page_template) {
+		echo "<li><a href='#suf-meta-tabs-cpt-archive'>".__('Custom Post Type Archive', 'suffusion')."</a></li>";
+	}
 ?>
 		</ul>
 <?php
@@ -225,22 +228,187 @@ function suffusion_meta_fields($post, $args = array()) {
 				<td>
 					<select id="suf_cpt_wa<?php echo $i;?>_widget_height" name="suf_cpt_wa<?php echo $i;?>_widget_height">
 						<option value="" <?php selected(get_post_meta($post->ID, "suf_cpt_wa{$i}_widget_height", true), ''); ?>><?php _e("Default", 'suffusion'); ?></option>
-						<option value="all" <?php selected(get_post_meta($post->ID, "suf_cpt_wa{$i}_widget_height", true), 'same'); ?>><?php _e("All same height", 'suffusion'); ?></option>
-						<option value="all-row" <?php selected(get_post_meta($post->ID, "suf_cpt_wa{$i}_widget_height", true), 'same-row'); ?>><?php _e("All same height if in the same row", 'suffusion'); ?></option>
+						<option value="all" <?php selected(get_post_meta($post->ID, "suf_cpt_wa{$i}_widget_height", true), 'all'); ?>><?php _e("All same height", 'suffusion'); ?></option>
+						<option value="all-row" <?php selected(get_post_meta($post->ID, "suf_cpt_wa{$i}_widget_height", true), 'all-row'); ?>><?php _e("All same height if in the same row", 'suffusion'); ?></option>
 						<option value="original" <?php selected(get_post_meta($post->ID, "suf_cpt_wa{$i}_widget_height", true), 'original'); ?>><?php _e("All original height", 'suffusion'); ?></option>
-						<option value="masonry" <?php selected(get_post_meta($post->ID, "suf_cpt_wa{$i}_widget_height", true), 'original-masonry'); ?>><?php _e("All original height, but auto-arranged", 'suffusion'); ?></option>
+						<option value="masonry" <?php selected(get_post_meta($post->ID, "suf_cpt_wa{$i}_widget_height", true), 'masonry'); ?>><?php _e("All original height, but auto-arranged", 'suffusion'); ?></option>
 					</select>
 				</td>
 			</tr>
 		</table>
-	</p>
 <?php
 		}
 ?>
 	</div>
 <?php
 	}
+
+	if ($type == 'page' && isset($post->page_template) && 'template-custom-post-type-archive.php' == $post->page_template) {
 ?>
+	<div id='suf-meta-tabs-cpt-archive' class="suf-meta-tabs">
+		<h3><?php _e('Custom Post Type Archive', 'suffusion'); ?></h3>
+		<table>
+			<tr>
+				<td valign='top'><label for="suf_cpt_post_type"><?php _e('Post type', 'suffusion'); ?></label></td>
+				<td valign='top'>
+					<select id='suf_cpt_post_type' name='suf_cpt_post_type'>
+<?php
+		$post_types = suffusion_get_custom_post_types(true);
+		foreach ($post_types as $post_type => $display) {
+			echo "<option value='$post_type' ".selected(get_post_meta($post->ID, "suf_cpt_post_type", true), $post_type).">$display</option>";
+		}
+?>
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td valign='top'><label for="suf_cpt_total_posts"><?php _e('Total posts per page', 'suffusion');?></label></td>
+				<td valign='top'>
+					<input type="text" id="suf_cpt_total_posts" name="suf_cpt_total_posts" value="<?php echo esc_attr(get_post_meta($post->ID, "suf_cpt_total_posts", true)); ?>"/><br/>
+					<em><?php _e('Leave blank or 0 for default value from Settings &rarr; Reading, -1 for all matching posts, any other positive number otherwise', 'suffusion'); ?></em>
+				</td>
+			</tr>
+
+			<tr>
+				<td valign='top'><label for="suf_cpt_post_type_layout"><?php _e('Layout', 'suffusion'); ?></label></td>
+				<td valign='top'>
+					<select id='suf_cpt_post_type_layout' name='suf_cpt_post_type_layout'>
+<?php
+		$display_types = array(
+			'full-post' => 'Full posts',
+			'excerpt' => 'Excerpts',
+			'tiles' => 'Tiles',
+			'list' => 'List',
+			'mosaic' => 'Mosaic',
+		);
+		foreach ($display_types as $display_type => $display) {
+			echo "<option value='$display_type' ".selected(get_post_meta($post->ID, "suf_cpt_post_type_layout", true), $display_type).">$display</option>";
+		}
+?>
+					</select>
+				</td>
+			</tr>
+
+			<tr>
+				<td valign='top'><label for="suf_cpt_full_posts"><?php _e('Number of posts to display in full (Only if Layout is not "Full Posts")', 'suffusion');?></label></td>
+				<td valign='top'>
+					<input type="text" id="suf_cpt_full_posts" name="suf_cpt_full_posts" value="<?php echo esc_attr(get_post_meta($post->ID, "suf_cpt_full_posts", true)); ?>"/><br/>
+					<em><?php _e('Leave blank or 0 to show no full posts', 'suffusion'); ?></em>
+				</td>
+			</tr>
+
+			<tr>
+				<td valign='top'><label for="suf_cpt_full_posts_fp_only"><?php _e('Full posts on first page or all pages', 'suffusion');?></label></td>
+				<td valign='top'>
+					<label><input type="checkbox" id="suf_cpt_full_posts_fp_only" name="suf_cpt_full_posts_fp_only" <?php checked(get_post_meta($post->ID, "suf_cpt_full_posts_fp_only", true), 'on'); ?> /> <?php _e('Show the above number of full posts on all pages, not just the first page', 'suffusion'); ?></label>
+				</td>
+			</tr>
+
+			<tr>
+				<td valign='top'><label for="suf_cpt_posts_per_row"><?php _e('Posts per row', 'suffusion');?></label></td>
+				<td valign='top'>
+					<input type="text" id="suf_cpt_posts_per_row" name="suf_cpt_posts_per_row" value="<?php echo esc_attr(get_post_meta($post->ID, "suf_cpt_posts_per_row", true)); ?>"/><br/>
+					<em><?php _e('Tiles and Mosaic layouts only', 'suffusion'); ?></em>
+				</td>
+			</tr>
+
+			<tr>
+				<td valign='top'><label for="suf_cpt_byline_type"><?php _e('Layout', 'suffusion'); ?></label></td>
+				<td valign='top'>
+					<select id='suf_cpt_byline_type' name='suf_cpt_byline_type'>
+<?php
+		$byline_types = array(
+			'none' => 'No bylines',
+			'line-top' => 'Single line below post title',
+			'line-bottom' => 'Single line below post',
+			'left-pullout' => 'Pullout on the left',
+			'right-pullout' => 'Pullout on the right',
+		);
+		foreach ($byline_types as $byline_type => $display) {
+			echo "<option value='$byline_type' ".selected(get_post_meta($post->ID, "suf_cpt_byline_type", true), $byline_type).">$display</option>";
+		}
+?>
+					</select>
+				</td>
+			</tr>
+
+			<tr>
+				<td valign='top'><?php _e('Byline Control', 'suffusion');?></td>
+				<td valign='top'>
+					<label><input type="checkbox" id="suf_cpt_bylines_post_date" name="suf_cpt_bylines_post_date" <?php checked(get_post_meta($post->ID, "suf_cpt_bylines_post_date", true), 'on'); ?> /> <?php _e('Show date', 'suffusion'); ?></label><br/>
+					<label><input type="checkbox" id="suf_cpt_bylines_posted_by" name="suf_cpt_bylines_posted_by" <?php checked(get_post_meta($post->ID, "suf_cpt_bylines_posted_by", true), 'on'); ?> /> <?php _e('Show author', 'suffusion'); ?></label><br/>
+					<label><input type="checkbox" id="suf_cpt_bylines_comments" name="suf_cpt_bylines_comments" <?php checked(get_post_meta($post->ID, "suf_cpt_bylines_comments", true), 'on'); ?> /> <?php _e('Show comment link', 'suffusion'); ?></label><br/>
+					<label><input type="checkbox" id="suf_cpt_bylines_permalinks" name="suf_cpt_bylines_permalinks" <?php checked(get_post_meta($post->ID, "suf_cpt_bylines_permalinks", true), 'on'); ?> /> <?php _e('Show permalink', 'suffusion'); ?></label><br/>
+					<label><input type="checkbox" id="suf_cpt_show_tile_byline" name="suf_cpt_show_tile_byline" <?php checked(get_post_meta($post->ID, "suf_cpt_show_tile_byline", true), 'on'); ?> /> <?php _e('Show bylines in tiles', 'suffusion'); ?></label><br/>
+				</td>
+			</tr>
+
+			<tr>
+				<td valign='top'><label for="suf_cpt_byline_taxonomies"><?php _e('Taxonomies in byline', 'suffusion');?></label></td>
+				<td valign='top'>
+					<input type="text" id="suf_cpt_byline_taxonomies" name="suf_cpt_byline_taxonomies" value="<?php echo esc_attr(get_post_meta($post->ID, "suf_cpt_byline_taxonomies", true)); ?>" style="width: 90%; "/><br/>
+					<em><?php _e('Comma-separated list of taxonomy types', 'suffusion'); ?></em>
+				</td>
+			</tr>
+
+			<tr>
+				<td valign='top'><?php _e('Thumbnails', 'suffusion');?></td>
+				<td valign='top'>
+					<label><input type="checkbox" id="suf_cpt_show_full_thumb" name="suf_cpt_show_full_thumb" <?php checked(get_post_meta($post->ID, "suf_cpt_show_full_thumb", true), 'on'); ?> /> <?php _e('Show thumbnails for full posts in the archive', 'suffusion'); ?></label><br/>
+					<label><input type="checkbox" id="suf_cpt_show_excerpt_thumb" name="suf_cpt_show_excerpt_thumb" <?php checked(get_post_meta($post->ID, "suf_cpt_show_excerpt_thumb", true), 'on'); ?> /> <?php _e('Show thumbnails for excerpts', 'suffusion'); ?></label><br/>
+					<label><input type="checkbox" id="suf_cpt_show_tile_thumb" name="suf_cpt_show_tile_thumb" <?php checked(get_post_meta($post->ID, "suf_cpt_show_tile_thumb", true), 'on'); ?> /> <?php _e('Show thumbnails for tiles', 'suffusion'); ?></label><br/>
+				</td>
+			</tr>
+
+			<tr>
+				<td valign='top'><label for="suf_cpt_order_by"><?php _e('Order by:', 'suffusion'); ?></label></td>
+				<td valign='top'>
+					<select id='suf_cpt_order_by' name='suf_cpt_order_by'>
+<?php
+		$order_bys = array(
+			'date' => __('Creation date', 'suffusion'),
+			'ID' => __('Post id', 'suffusion'),
+			'author' => __('Post author', 'suffusion'),
+			'title' => __('Post title', 'suffusion'),
+			'modified' => __('Modification date', 'suffusion'),
+			'comment_count' => __('Popularity (comment count)', 'suffusion'),
+			'rand' => __('Random', 'suffusion'),
+			'none' => __('No order', 'suffusion'),
+			'parent' => __('Parent id', 'suffusion'),
+			'menu_order' => __('Menu order', 'suffusion'),
+		);
+		foreach ($order_bys as $order_by => $display) {
+			echo "<option value='$order_by' ".selected(get_post_meta($post->ID, "suf_cpt_order_by", true), $order_by).">$display</option>";
+		}
+?>
+					</select>
+				</td>
+			</tr>
+
+			<tr>
+				<td valign='top'><label for="suf_cpt_order"><?php _e('Order:', 'suffusion'); ?></label></td>
+				<td valign='top'>
+				<select id="suf_cpt_order" name="suf_cpt_order">
+	<?php
+		$orders = array(
+			'DESC' => __('Descending', 'suffusion'),
+			'ASC' => __('Ascending', 'suffusion'),
+		);
+		foreach ($orders as $order => $display) {
+			echo "<option value='$order' ".selected(get_post_meta($post->ID, "suf_cpt_order", true), $order).">$display</option>";
+		}
+	?>
+				</select>
+				</td>
+			</tr>
+
+		</table>
+	</div>
+<?php
+	}
+?>
+
 	<input type='hidden' id='suffusion_post_meta' name='suffusion_post_meta' value='suffusion_post_meta'/>
 	</div>
 	<script type="text/javascript">
@@ -261,7 +429,10 @@ function suffusion_meta_fields($post, $args = array()) {
 function suffusion_save_post_fields($post_id) {
 	$suffusion_post_fields = array('thumbnail', 'featured_image', 'suf_magazine_headline', 'suf_magazine_excerpt', 'suf_alt_page_title',
 		'meta_description', 'meta_keywords', 'suf_nav_unlinked', 'suf_pseudo_template', 'suf_hide_page_title', 'suf_toggle_breadcrumb',
-		'suf_hide_top_navigation', 'suf_hide_header', 'suf_hide_main_navigation', 'suf_hide_footer',
+		'suf_hide_top_navigation', 'suf_hide_header', 'suf_hide_main_navigation', 'suf_hide_footer', 'suf_cpt_post_type', 'suf_cpt_total_posts',
+		'suf_cpt_post_type_layout', 'suf_cpt_full_posts', 'suf_cpt_full_posts_fp_only', 'suf_cpt_byline_type', 'suf_cpt_bylines_post_date',
+		'suf_cpt_posts_per_row', 'suf_cpt_bylines_posted_by', 'suf_cpt_bylines_comments', 'suf_cpt_bylines_permalinks', 'suf_cpt_byline_taxonomies',
+		'suf_cpt_show_tile_byline', 'suf_cpt_show_full_thumb', 'suf_cpt_show_excerpt_thumb', 'suf_cpt_show_tile_thumb', 'suf_cpt_order', 'suf_cpt_order_by'
 	);
 	for ($i = 1; $i <= 5; $i++) {
 		$suffusion_post_fields[] = "suf_cpt_wa{$i}_cols";

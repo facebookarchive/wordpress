@@ -180,16 +180,16 @@ h2.posttitle a:hover {
 	color: #787878;
 }
 
-div.page-links span {
+.page-links span {
 	border-color: #787878;
 }
 
-div.page-links > span {
+.page-links > span {
 	background-color: #787878;
 	color: #fff;
 }
 
-div.page-links a:hover {
+.page-links a:hover {
 	background-color: #787878;
 	color: #fff;
 }
@@ -235,16 +235,16 @@ h3#respond, h3.respond, #reply-title {
 .commentlist cite a, .commentlist cite a:visited { color: #787878; }
 .commentlist li.alt { background-color: #f0f0f0; }
 
-div.comment-response-types span {
+.comment-response-types span {
 	border-color: #787878;
 }
 
-div.comment-response-types > span {
+.comment-response-types > span {
 	background-color: #787878;
 	color: #fff;
 }
 
-div.comment-response-types a:hover {
+.comment-response-types a:hover {
 	background-color: #787878;
 	color: #fff;
 }

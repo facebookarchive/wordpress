@@ -56,9 +56,9 @@ h2.posttitle a:hover {
 	color: #97cafe;
 }
 
-div.tab-box div.sidebar-tab-content a:hover,
-div.tab-box div.sidebar-tab-content a:focus,
-div.tab-box div.sidebar-tab-content a:active,
+.tab-box div.sidebar-tab-content a:hover,
+.tab-box div.sidebar-tab-content a:focus,
+.tab-box div.sidebar-tab-content a:active,
 .suf-widget a:hover,
 .suf-widget a:focus,
 .suf-widget a:active,

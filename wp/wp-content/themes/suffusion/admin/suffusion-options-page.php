@@ -73,6 +73,7 @@ function suffusion_render_options() {
 			}
 		}
 	}
+	suffusion_get_custom_post_types();
 ?>
 	<div class="wrapper">
 		<div class="suf-tabbed-options">

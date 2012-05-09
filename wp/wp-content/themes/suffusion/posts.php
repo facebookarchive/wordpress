@@ -9,10 +9,10 @@
  */
 
 global $wp_query, $page_of_posts, $suf_pop_excerpt, $suffusion;
-$suffusion->set_content_layout($suf_pop_excerpt);
 $page_of_posts = true;
 
 get_header();
+$suffusion->set_content_layout($suf_pop_excerpt);
 $paged = get_query_var('paged');
 if (!isset($paged) || empty($paged)) {
 	$paged = 1;

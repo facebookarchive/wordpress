@@ -830,6 +830,47 @@ $j(document).ready(function() {
 		$j('#' + thisId).val(border);
 	});
 
+	$j('.suf-associative-array-options input[type="text"], .suf-associative-array-options select, .suf-associative-array-options input[type="checkbox"]').change(function(event) {
+		var thisId = event.currentTarget.name;
+		thisId = thisId.substring(0, thisId.indexOf('-'));
+		var rows = $j('#' + thisId + '-rows').val();
+		var columns = $j('#' + thisId + '-columns').val();
+		rows = rows.split(',');
+		columns = columns.split(',');
+		var assoc_array = '';
+		for (var i=0; i<rows.length; i++) {
+			var row_major = '';
+			for (var j=0; j<columns.length; j++) {
+				if ($j('#' + thisId + '-' + rows[i] + '-' + columns[j]).length) {
+					row_major += columns[j] + '=' + $j('#' + thisId + '-' + rows[i] + '-' + columns[j]).val() + ';';
+				}
+				else {
+					row_major += columns[j] + '=';
+					$j('input[name^=' + thisId + '-' + rows[i] + '-' + columns[j] +']').each(function() {
+						if ($j(this).is(':checked')) {
+							var checked_item = $j(this).attr('name').substring((thisId + '-' + rows[i] + '-' + columns[j]).length);
+							row_major += checked_item.substring(1, checked_item.length - 1) + ',';
+						}
+					});
+					if (row_major.lastIndexOf(',') == row_major.length - 1) {
+						row_major = row_major.substr(0, row_major.length - 1);
+					}
+					row_major += ';';
+				}
+			}
+			var last_semi = row_major.lastIndexOf(';');
+			if (last_semi == row_major.length - 1) {
+				row_major = row_major.substr(0, last_semi);
+			}
+			assoc_array += rows[i] + '::' + row_major + '||';
+		}
+		var last_pipe = assoc_array.lastIndexOf('||');
+		if (last_pipe == assoc_array.length - 2) {
+			assoc_array = assoc_array.substr(0, last_pipe);
+		}
+		$j('#' + thisId).val(assoc_array);
+	});
+
 	$j(".suffusion-options-form :input[type='submit']").click(function() {
 		//This is needed, otherwise the event handler cannot figure out which button was clicked.
 		suffusion_submit_button = $j(this);

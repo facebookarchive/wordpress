@@ -25,14 +25,21 @@ function fb_recommendations_bar_automatic($content) {
 	return $content;
 }
 
-function fb_get_recommendations_bar_fields($placement = 'settings') {
-	$parent = array('name' => 'recommendations_bar',
+
+function fb_get_recommendations_bar_fields($placement = 'settings', $object = null) {
+	$fields_array = fb_get_recommendations_bar_fields_array();
+	
+	fb_construct_fields($placement, $fields_array['children'], $fields_array['parent'], $object);
+}
+
+function fb_get_recommendations_bar_fields_array() {
+	$array['parent'] = array('name' => 'recommendations_bar',
 									'field_type' => 'checkbox',
 									'help_text' => 'Click to learn more.',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/recommendationsbar/',
 									);
 	
-	$children = array(array('name' => 'trigger',
+	$array['children'] = array(array('name' => 'trigger',
 													'field_type' => 'text',
 													'help_text' => 'This specifies the percent of the page the user must scroll down before the plugin is expanded.',
 													),
@@ -52,7 +59,7 @@ function fb_get_recommendations_bar_fields($placement = 'settings') {
 													),
 										);
 	
-	fb_construct_fields($placement, $children, $parent);
+	return $array;
 }
 
 ?>

@@ -43,7 +43,7 @@ class Facebook_Subscribe_Button extends WP_Widget {
 		parent::__construct(
 	 		'fb_subscribe', // Base ID
 			'Facebook Subscribe Button', // Name
-			array( 'description' => __( "The Subscribe button lets a user subscribe to your public updates on Facebook.", 'text_domain' ), ) // Args
+			array( 'description' => __( "Lets a user subscribe to your public updates on Facebook.", 'text_domain' ), ) // Args
 		);
 	}
 
@@ -57,14 +57,13 @@ class Facebook_Subscribe_Button extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 		extract( $args );
-		$title = apply_filters( 'widget_title', $instance['title'] );
 
 		echo $before_widget;
-		if ( ! empty( $title ) )
-			echo $before_title . $title . $after_title;
+
+		if ( ! empty( $instance['title'] ) )
+			echo $before_title . $instance['title'] . $after_title;
 		
-		$options = array('data-href' => $instance['url']);	
-		echo fb_get_subscribe_button($options);
+		echo fb_get_subscribe_button($instance);
 		echo $after_widget;
 	}
 
@@ -80,8 +79,14 @@ class Facebook_Subscribe_Button extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
-		$instance['title'] = strip_tags( $new_instance['title'] );
-		$instance['url'] = strip_tags( $new_instance['url'] );
+		
+		$fields = fb_get_subscribe_button_fields_array($placement);
+		
+		foreach ($fields['children'] as $field) {
+			if (isset($new_instance[$field['name']])) {
+				$instance[$field['name']] = $new_instance[$field['name']];
+			}
+		}
 
 		return $instance;
 	}
@@ -94,43 +99,25 @@ class Facebook_Subscribe_Button extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		if ( isset( $instance[ 'title' ] ) ) {
-			$title = $instance[ 'title' ];
-		}
-		else {
-			$title = __( 'Subscribe on Facebook', 'text_domain' );
-		}
-		?>
-		<p>
-		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
-		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
-		</p>
-		
-		<?php 
-		if ( isset( $instance[ 'url' ] ) ) {
-			$url = $instance[ 'url' ];
-		}
-		else {
-			$url = '';
-		}
-		?>
-		<p>
-		<label for="<?php echo $this->get_field_id( 'url' ); ?>"><?php _e( 'Facebook Page URL:' ); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'url' ); ?>" name="<?php echo $this->get_field_name( 'url' ); ?>" type="text" value="<?php echo esc_attr( $url ); ?>" />
-		</p>
-		
-		<?php
-		}
+		fb_get_subscribe_fields('widget', $this);
+	}
 }
 
-function fb_get_subscribe_fields($placement = 'settings') {
-	$parent = array('name' => 'subscribe',
+
+function fb_get_subscribe_fields($placement = 'settings', $object = null) {
+	$fields_array = fb_get_subscribe_fields_array($placement);
+	
+	fb_construct_fields($placement, $fields_array['children'], $fields_array['parent'], $object);
+}
+
+function fb_get_subscribe_fields_array($placement) {
+	$array['parent'] = array('name' => 'subscribe',
 									'field_type' => 'checkbox',
 									'help_text' => 'Click to learn more.',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
 									);
 	
-	$children = array(array('name' => 'layout',
+	$array['children'] = array(array('name' => 'layout',
 													'field_type' => 'dropdown',
 													'options' => array('standard', 'button_count', 'box_count'),
 													'help_text' => 'Determines the size and amount of social context at the bottom.',
@@ -155,7 +142,27 @@ function fb_get_subscribe_fields($placement = 'settings') {
 													),
 										);
 	
-	fb_construct_fields($placement, $children, $parent);
+	if ($placement == 'settings') {
+		$array['children'][] = array('name' => 'position',
+													'field_type' => 'dropdown',
+													'options' => array('top', 'bottom', 'both'),
+													'help_text' => 'Where the button will display on the page or post.',
+													);
+	}
+	
+	if ($placement == 'widget') {
+		$array['children'][] = array('name' => 'href',
+													'field_type' => 'text',
+													'help_text' => 'The URL the Like button will point to.',
+													);
+		
+		$array['children'][] = array('name' => 'title',
+													'field_type' => 'text',
+													'help_text' => 'The title above the button.',
+													);
+	}
+	
+	return $array;
 }
 
 ?>

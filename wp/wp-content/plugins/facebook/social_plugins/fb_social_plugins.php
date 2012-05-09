@@ -2,7 +2,7 @@
 require_once('fb_like.php');
 require_once('fb_send.php');
 require_once('fb_subscribe.php');
-require_once('fb_recent_activity.php');
+require_once('fb_activity_feed.php');
 require_once('fb_recommendations.php');
 require_once('fb_recommendations_bar.php');
 require_once('fb_comments.php');
@@ -10,7 +10,7 @@ require_once('fb_comments.php');
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Like_Button" );'));
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Send_Button" );'));
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Subscribe_Button" );'));
-add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Recent_Activity" );'));
+add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Activity_Feed" );'));
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Recommendations" );'));
 
 function fb_apply_filters() {

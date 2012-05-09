@@ -1,8 +1,6 @@
 <?php
 function fb_admin_dialog($message, $error = false) {
-		global $wp_version;
-
-		echo '<div ' . ( $error ? 'id="disqus_warning" ' : '') . 'class="updated fade' . '"><p><strong>'. $message . '</strong></p></div>';
+		echo '<div ' . ( $error ? 'id="facebook_warning" ' : '') . 'class="updated fade' . '"><p><strong>'. $message . '</strong></p></div>';
 }
 
 function fb_construct_fields($placement, $children, $parent = null, $object = null) {

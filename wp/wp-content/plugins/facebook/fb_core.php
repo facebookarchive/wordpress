@@ -37,9 +37,9 @@ require_once( $facebook_plugin_directory . '/fb_social_publisher.php' );
 require_once( $facebook_plugin_directory . '/fb_wp_helpers.php' );
 unset( $facebook_plugin_directory );
 
-add_action('wp_footer','fb_add_base_js',20);
-add_action('admin_footer','fb_add_base_js',20);
-add_action('init','fb_channel_file');
+add_action( 'wp_footer', 'fb_add_base_js', 20 );
+add_action( 'admin_footer','fb_add_base_js', 20 );
+add_action( 'init','fb_channel_file' );
 
 function fb_install_warning() {
 	$options = get_option('fb_options');
@@ -47,15 +47,15 @@ function fb_install_warning() {
 	$page = (isset($_GET['page']) ? $_GET['page'] : null);
 
 	if ((empty($options["app_id"]) || empty($options["app_secret"])) && $page != 'facebook/fb_admin_menu.php') {
-		fb_admin_dialog( __('You must <a href="admin.php?page=facebook/fb_admin_menu.php">configure the plugin</a> to enable Facebook for WordPress.', 'facebook' ), true);
+		fb_admin_dialog( sprintf( __('You must <a href="%s">configure the plugin</a> to enable Facebook for WordPress.', 'facebook' ), 'admin.php?page=facebook/fb_admin_menu.php' ), true);
 	}
 }
 add_action('admin_notices', 'fb_install_warning');
 
 function fb_add_base_js($args = array()) {
 	$options = get_option('fb_options');
-
-	fb_init($options['app_id'], $args);
+	if ( isset( $options['app_id'] ) )
+		fb_init( $options['app_id'], $args );
 };
 
 //add_filter('language_attributes','fb_lang_atts');

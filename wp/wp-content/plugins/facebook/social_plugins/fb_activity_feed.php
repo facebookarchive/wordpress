@@ -6,6 +6,8 @@ function fb_get_activity_feed($options = array()) {
 		$params .= $option . '="' . $value . '" ';
 	}
 
+	$params .= 'data-ref="wp" ';
+
 	return '<div class="fb-activity fb-social-plugin" ' . $params . '></div>';
 }
 
@@ -80,28 +82,34 @@ function fb_get_activity_feed_fields($placement = 'settings', $object = null) {
 function fb_get_activity_feed_fields_array() {
 	$array['children'] = array(array('name' => 'width',
 													'field_type' => 'text',
+													'field_type' => '250',
 													'help_text' => 'The width of the plugin, in pixels.',
 													),
 										array('name' => 'height',
 													'field_type' => 'text',
+													'field_type' => '450',
 													'help_text' => 'The width of the plugin, in pixels.',
 													),
 										array('name' => 'colorscheme',
 													'field_type' => 'dropdown',
+													'field_type' => 'light',
 													'options' => array('light', 'dark'),
 													'help_text' => 'The color scheme of the plugin.',
 													),
 										array('name' => 'border_color',
 													'field_type' => 'text',
+													'field_type' => '#aaa',
 													'help_text' => 'The color scheme of the plugin.',
 													),
 										array('name' => 'font',
 													'field_type' => 'dropdown',
+													'field_type' => 'arial',
 													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
 													'help_text' => 'The font of the plugin.',
 													),
 										array('name' => 'recommendations',
 													'field_type' => 'checkbox',
+													'field_type' => false,
 													'help_text' => 'Includes recommendations.',
 													),
 										);

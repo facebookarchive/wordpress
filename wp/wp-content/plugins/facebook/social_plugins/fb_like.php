@@ -20,6 +20,8 @@ function fb_get_like_button($options = array()) {
 		$params .= $option . '="' . $value . '" ';
 	}
 
+	$params .= 'data-ref="wp" ';
+
 	return '<div class="fb-like fb-social-plugin" ' . $params . ' ></div>';
 }
 
@@ -123,33 +125,40 @@ function fb_get_like_fields_array($placement) {
 
 	$array['children'] = array(array('name' => 'send',
 													'field_type' => 'checkbox',
+													'default' => true,
 													'help_text' => 'Include a send button.',
 													),
 										array('name' => 'show_faces',
 													'field_type' => 'checkbox',
+													'default' => true,
 													'help_text' => 'Show profile pictures below the button.  Applicable to standard layout only.',
 													),
 										array('name' => 'layout',
 													'field_type' => 'dropdown',
+													'default' => 'standard',
 													'options' => array('standard', 'button_count', 'box_count'),
 													'help_text' => 'Determines the size and amount of social context at the bottom.',
 													),
 										array('name' => 'width',
 													'field_type' => 'text',
+													'default' => '450',
 													'help_text' => 'The width of the plugin, in pixels.',
 													),
 										array('name' => 'action',
 													'field_type' => 'dropdown',
+													'default' => 'like',
 													'options' => array('like', 'recommend'),
 													'help_text' => 'The verb to display in the button.',
 													),
 										array('name' => 'colorscheme',
 													'field_type' => 'dropdown',
+													'default' => 'light',
 													'options' => array('light', 'dark'),
 													'help_text' => 'The color scheme of the button.',
 													),
 										array('name' => 'font',
 													'field_type' => 'dropdown',
+													'default' => 'arial',
 													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
 													'help_text' => 'The font of the button.',
 													),

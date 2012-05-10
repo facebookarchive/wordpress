@@ -32,6 +32,8 @@ function fb_get_comments($options = array()) {
 		$params .= $option . '="' . $value . '" ';
 	}
 
+	$params .= 'data-ref="wp" ';
+
 	$output = fb_get_fb_comments_seo();
 	$output .= '<div class="fb-comments fb-social-plugin" ' . $params . '></div>';
 

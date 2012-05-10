@@ -7,14 +7,47 @@
 //publish to fan page, if defined
 
 
+function fb_post_to_fb_page() {
+	$options = get_option('fb_options');
+
+	$options['social_publisher']['publish_to_fan_page'];
+}
 
 
+function fb_get_social_publisher_fields() {
+	$parent = array('name' => 'social_publisher',
+									'field_type' => 'checkbox',
+									'help_text' => 'Click to learn more.',
+									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
+									);
 
-/*
-Server Side Rendering
+	$children = array(array('name' => 'publish_to_authors_facebook_profile',
+													'field_type' => 'dropdown',
+													'options' => array('standard', 'button_count', 'box_count'),
+													'help_text' => 'Determines the size and amount of social context at the bottom.',
+													),
+										array('name' => 'publish_to_fan_page',
+													'field_type' => 'text',
+													'help_text' => 'The width of the plugin, in pixels.',
+													),
+										);
 
-Comment Sync
+	fb_construct_fields('settings', $children, $parent);
+}
 
-*/
+add_action( 'transition_post_status', 'fb_publish_later',10,3);
+function fb_publish_later($new_status, $old_status, $post) {
+    // check that the new status is "publish" and that the old status was not "publish"
+    if ($new_status == 'publish' && $old_status != 'publish') {
+        // only publish "public" post types
+        $post_types = get_post_types( array('public' => true), 'objects' );
+        foreach ( $post_types as $post_type ) {
+            if ( $post->post_type == $post_type->name ) {
+                // code to talk to FB goes here
+                break;
+            }
+        }
+    }
+}
 
 ?>

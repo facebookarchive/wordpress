@@ -109,27 +109,6 @@ function fb_get_main_settings_fields() {
 	fb_construct_fields('settings', $children);
 }
 
-function fb_get_social_publisher_fields() {
-	$parent = array('name' => 'social_publisher',
-									'field_type' => 'checkbox',
-									'help_text' => 'Click to learn more.',
-									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
-									);
-
-	$children = array(array('name' => 'publish_to_authors_facebook_profile',
-													'field_type' => 'dropdown',
-													'options' => array('standard', 'button_count', 'box_count'),
-													'help_text' => 'Determines the size and amount of social context at the bottom.',
-													),
-										array('name' => 'publish_to_fan_page',
-													'field_type' => 'text',
-													'help_text' => 'The width of the plugin, in pixels.',
-													),
-										);
-
-	fb_construct_fields('settings', $children, $parent);
-}
-
 function fb_add_settings_pages() {
      add_submenu_page(
          'edit-comments.php',

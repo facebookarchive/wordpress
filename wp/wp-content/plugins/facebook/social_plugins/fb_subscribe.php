@@ -6,6 +6,8 @@ function fb_get_subscribe_button($options = array()) {
 		$params .= $option . '="' . $value . '" ';
 	}
 
+	$params .= 'data-ref="wp" ';
+
 	return '<div class="fb-subscribe fb-social-plugin" ' . $params . '></div>';
 }
 
@@ -106,24 +108,29 @@ function fb_get_subscribe_fields_array($placement) {
 
 	$array['children'] = array(array('name' => 'layout',
 													'field_type' => 'dropdown',
+													'default' => 'standard',
 													'options' => array('standard', 'button_count', 'box_count'),
 													'help_text' => 'Determines the size and amount of social context at the bottom.',
 													),
 										array('name' => 'width',
 													'field_type' => 'text',
+													'default' => '450',
 													'help_text' => 'The width of the plugin, in pixels.',
 													),
 										array('name' => 'show_faces',
 													'field_type' => 'checkbox',
+													'default' => true,
 													'help_text' => 'Show profile pictures below the button.  Applicable to standard layout only.',
 													),
 										array('name' => 'colorscheme',
 													'field_type' => 'dropdown',
+													'default' => 'light',
 													'options' => array('light', 'dark'),
 													'help_text' => 'The color scheme of the plugin.',
 													),
 										array('name' => 'font',
 													'field_type' => 'dropdown',
+													'default' => 'arial',
 													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
 													'help_text' => 'The font of the plugin.',
 													),

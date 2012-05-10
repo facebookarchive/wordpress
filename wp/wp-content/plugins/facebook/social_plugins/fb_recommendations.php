@@ -5,6 +5,7 @@ function fb_get_recommendations_box($options = array()) {
 	foreach ($options as $option => $value) {
 		$params .= $option . '="' . $value . '" ';
 	}
+	$params .= 'data-ref="wp" ';
 
 	return '<div class="fb-recommendations fb-social-plugin" ' . $params . '></div>';
 }
@@ -80,23 +81,28 @@ function fb_get_recommendations_box_fields($placement = 'settings', $object = nu
 function fb_get_recommendations_box_fields_array() {
 	$array['children'] = array(array('name' => 'width',
 													'field_type' => 'text',
+													'default' => '250',
 													'help_text' => 'The width of the plugin, in pixels.',
 													),
 										array('name' => 'height',
 													'field_type' => 'text',
+													'default' => '450',
 													'help_text' => 'The width of the plugin, in pixels.',
 													),
 										array('name' => 'colorscheme',
 													'field_type' => 'dropdown',
+													'default' => 'light',
 													'options' => array('light', 'dark'),
 													'help_text' => 'The color scheme of the plugin.',
 													),
 										array('name' => 'border_color',
 													'field_type' => 'text',
-													'help_text' => 'The color scheme of the plugin.',
+													'default' => '#aaa',
+													'help_text' => 'The color scheme of the plugin (hex or text value).',
 													),
 										array('name' => 'font',
 													'field_type' => 'dropdown',
+													'default' => 'arial',
 													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
 													'help_text' => 'The font of the plugin.',
 													),

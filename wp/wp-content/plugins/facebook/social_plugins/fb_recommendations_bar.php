@@ -6,6 +6,8 @@ function fb_get_recommendations_bar($options = array()) {
 		$params .= $option . '="' . $value . '" ';
 	}
 
+	$params .= 'data-ref="wp" ';
+
 	return '<div class="fb-recommendations-bar fb-social-plugin" ' . $params . '></div>';
 }
 
@@ -41,19 +43,23 @@ function fb_get_recommendations_bar_fields_array() {
 
 	$array['children'] = array(array('name' => 'trigger',
 													'field_type' => 'text',
+													'default' => '50',
 													'help_text' => 'This specifies the percent of the page the user must scroll down before the plugin is expanded.',
 													),
 										array('name' => 'read_time',
 													'field_type' => 'text',
+													'default' => '20',
 													'help_text' => 'The number of seconds the plugin will wait until it expands.',
 													),
 										array('name' => 'action',
 													'field_type' => 'dropdown',
+													'default' => 'like',
 													'options' => array('like', 'recommend'),
 													'help_text' => 'The verb to display in the button.',
 													),
 										array('name' => 'side',
 													'field_type' => 'dropdown',
+													'default' => 'right',
 													'options' => array('left', 'right'),
 													'help_text' => 'The side of the window that the plugin will display.',
 													),

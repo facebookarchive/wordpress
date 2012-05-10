@@ -6,6 +6,8 @@ function fb_get_send_button($options = array()) {
 		$params .= $option . '="' . $value . '" ';
 	}
 
+	$params .= 'data-ref="wp" ';
+
 	return '<div class="fb-send fb-social-plugin" ' . $params . '></div>';
 }
 

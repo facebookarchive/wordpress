@@ -6,7 +6,7 @@ function fb_get_send_button($options = array()) {
 		$params .= $option . '="' . $value . '" ';
 	}
 
-	return '<div class="fb-send" ' . $params . '></div>';
+	return '<div class="fb-send fb-social-plugin" ' . $params . '></div>';
 }
 
 function fb_send_button_automatic($content) {
@@ -55,7 +55,7 @@ class Facebook_Send_Button extends WP_Widget {
 
 		if ( ! empty( $instance['title'] ) )
 			echo $before_title . $instance['title'] . $after_title;
-		
+
 		echo fb_get_send_button($instance);
 		echo $after_widget;
 	}
@@ -89,7 +89,7 @@ class Facebook_Send_Button extends WP_Widget {
 
 function fb_get_send_fields($placement = 'settings', $object = null) {
 	$fields_array = fb_get_send_fields_array($placement);
-	
+
 	fb_construct_fields($placement, $fields_array['children'], $fields_array['parent'], $object);
 }
 
@@ -99,7 +99,7 @@ function fb_get_send_fields_array($placement) {
 									'help_text' => 'Click to learn more.',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/send/',
 									);
-	
+
 	$array['children'] = array(array('name' => 'colorscheme',
 													'field_type' => 'dropdown',
 													'options' => array('light', 'dark'),
@@ -111,7 +111,7 @@ function fb_get_send_fields_array($placement) {
 													'help_text' => 'The font of the plugin.',
 													),
 										);
-	
+
 	if ($placement == 'settings') {
 		$array['children'][] = array('name' => 'position',
 													'field_type' => 'dropdown',
@@ -119,19 +119,19 @@ function fb_get_send_fields_array($placement) {
 													'help_text' => 'Where the button will display on the page or post.',
 													);
 	}
-	
+
 	if ($placement == 'widget') {
 		$array['children'][] = array('name' => 'href',
 													'field_type' => 'text',
 													'help_text' => 'The URL the Like button will point to.',
 													);
-		
+
 		$array['children'][] = array('name' => 'title',
 													'field_type' => 'text',
 													'help_text' => 'The title above the button.',
 													);
 	}
-	
+
 	return $array;
 }
 

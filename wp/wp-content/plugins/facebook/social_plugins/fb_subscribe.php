@@ -6,7 +6,7 @@ function fb_get_subscribe_button($options = array()) {
 		$params .= $option . '="' . $value . '" ';
 	}
 
-	return '<div class="fb-subscribe" ' . $params . '></div>';
+	return '<div class="fb-subscribe fb-social-plugin" ' . $params . '></div>';
 }
 
 function fb_subscribe_button_automatic($content) {

@@ -57,7 +57,7 @@ function fb_settings_page() {
 
 			/*echo '<h3>Recommendation Bar</h3>
 			<p>The Recommendations Bar allows users to like content, get recommendations, and share what they\'re reading with their friends.</p>';
-			fb_get_recommendations_bar_fields();*
+			fb_get_recommendations_bar_fields();*/
 
 			echo '<h3>Social Publisher</h3>';
 			fb_get_social_publisher_fields();

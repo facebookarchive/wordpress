@@ -15,23 +15,23 @@ add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Reco
 
 function fb_apply_filters() {
 	$options = get_option('fb_options');
-	
-	if (isset($options['recommendations_bar'])) {
+
+	/*if (isset($options['recommendations_bar'])) {
 		add_filter('the_content', 'fb_recommendations_bar_automatic', 30);
-	}
-	
+	}*/
+
 	if (isset($options['like'])) {
 		add_filter('the_content', 'fb_like_button_automatic', 30);
 	}
-	
+
 	if (isset($options['send'])) {
 		add_filter('the_content', 'fb_send_button_automatic', 30);
 	}
-	
+
 	if (isset($options['subscribe'])) {
 		add_filter('the_content', 'fb_subscribe_button_automatic', 30);
 	}
-	
+
 	if (isset($options['comments'])) {
 		add_filter('the_content', 'fb_comments_automatic', 30);
 		add_filter('comments_array', 'fb_close_wp_comments');

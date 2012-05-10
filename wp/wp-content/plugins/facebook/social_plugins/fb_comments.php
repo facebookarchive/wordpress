@@ -25,40 +25,40 @@ function fb_get_comments($options = array()) {
 	if (isset($options['data-href']) == '') {
 		$options['data-href'] = get_permalink();
 	}
-	
+
 	$params = '';
-	
+
 	foreach ($options as $option => $value) {
 		$params .= $option . '="' . $value . '" ';
 	}
-	
+
 	$output = fb_get_fb_comments_seo();
-	$output .= '<div class="fb-comments" ' . $params . '></div>';
-	
+	$output .= '<div class="fb-comments fb-social-plugin" ' . $params . '></div>';
+
 	return $output;
 }
 
 function fb_comments_automatic($content) {
 	if (!is_home()) {
 		$options = get_option('fb_options');
-		
+
 		foreach($options['comments'] as $param => $val) {
 			$param = str_replace('_', '-', $param);
-				
+
 			$options['comments']['data-' . $param] = $val;
 		}
-		
+
 		$content .= fb_get_comments($options['comments']);
 	}
-	
+
 	return $content;
 }
 
 function fb_get_fb_comments_seo() {
 	global $facebook;
-	
+
 	$url = get_permalink();
-	
+
 	try {
 		$comments = $facebook->api('/comments', array('ids' => $url));
 	}
@@ -66,9 +66,9 @@ function fb_get_fb_comments_seo() {
 		error_log($e);
 		$user = null;
 	}
-	
+
 	$output = '<noscript><ol class="commentlist">';
-	
+
 	foreach ($comments[$url]['comments']['data'] as $key => $comment_info) {
 		$unix_timestamp = strtotime($comment_info['created_time']);
 		$output .= '<li>
@@ -78,16 +78,16 @@ function fb_get_fb_comments_seo() {
       ' . $comment_info['message'] . '
       </li>';
 	}
-	
+
 	$output .= '<ol class="commentlist"></noscript>';
-	
+
 	return $output;
 }
 
 
 function fb_get_comments_fields($placement = 'settings', $object = null) {
 	$fields_array = fb_get_comments_fields_array();
-	
+
 	fb_construct_fields($placement, $fields_array['children'], $fields_array['parent'], $object);
 }
 
@@ -97,7 +97,7 @@ function fb_get_comments_fields_array() {
 									'help_text' => 'Click to learn more.',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/comments/',
 									);
-	
+
 	$array['children'] = array(array('name' => 'num_posts',
 													'field_type' => 'text',
 													'help_text' => 'The number of posts to display by default.',
@@ -112,7 +112,7 @@ function fb_get_comments_fields_array() {
 													'help_text' => 'The color scheme of the plugin.',
 													),
 										);
-	
+
 	return $array;
 }
 

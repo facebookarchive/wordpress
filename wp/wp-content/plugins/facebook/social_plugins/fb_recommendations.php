@@ -6,7 +6,7 @@ function fb_get_recommendations_box($options = array()) {
 		$params .= $option . '="' . $value . '" ';
 	}
 
-	return '<div class="fb-recommendations" ' . $params . '></div>';
+	return '<div class="fb-recommendations fb-social-plugin" ' . $params . '></div>';
 }
 
 /**
@@ -39,7 +39,7 @@ class Facebook_Recommendations extends WP_Widget {
 		echo $before_widget;
 
 		//$options = array('data-href' => $instance['url']);
-		
+
 		echo fb_get_recommendations_box($instance);
 		echo $after_widget;
 	}
@@ -73,7 +73,7 @@ class Facebook_Recommendations extends WP_Widget {
 
 function fb_get_recommendations_box_fields($placement = 'settings', $object = null) {
 	$fields_array = fb_get_recommendations_box_fields_array();
-	
+
 	fb_construct_fields($placement, $fields_array['children'], null, $object);
 }
 
@@ -101,7 +101,7 @@ function fb_get_recommendations_box_fields_array() {
 													'help_text' => 'The font of the plugin.',
 													),
 										);
-	
+
 	return $array;
 }
 ?>

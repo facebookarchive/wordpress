@@ -6,7 +6,7 @@ function fb_get_activity_feed($options = array()) {
 		$params .= $option . '="' . $value . '" ';
 	}
 
-	return '<div class="fb-activity" ' . $params . '></div>';
+	return '<div class="fb-activity fb-social-plugin" ' . $params . '></div>';
 }
 
 /**
@@ -39,7 +39,7 @@ class Facebook_Activity_Feed extends WP_Widget {
 		echo $before_widget;
 
 		//$options = array('data-href' => $instance['url']);
-		
+
 		echo fb_get_activity_feed($instance);
 		echo $after_widget;
 	}
@@ -73,7 +73,7 @@ class Facebook_Activity_Feed extends WP_Widget {
 
 function fb_get_activity_feed_fields($placement = 'settings', $object = null) {
 	$fields_array = fb_get_activity_feed_fields_array();
-	
+
 	fb_construct_fields($placement, $fields_array['children'], null, $object);
 }
 
@@ -105,7 +105,7 @@ function fb_get_activity_feed_fields_array() {
 													'help_text' => 'Includes recommendations.',
 													),
 										);
-	
+
 	return $array;
 }
 

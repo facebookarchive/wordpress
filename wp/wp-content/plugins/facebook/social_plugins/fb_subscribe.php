@@ -1,32 +1,29 @@
 <?php
 function fb_get_subscribe_button($options = array()) {
 	$params = '';
-	
+
 	foreach ($options as $option => $value) {
 		$params .= $option . '="' . $value . '" ';
 	}
-	
+
 	return '<div class="fb-subscribe" ' . $params . '></div>';
 }
 
 function fb_subscribe_button_automatic($content) {
-	global $wpdb;
 	$options = get_option('fb_options');
-	
+
 	foreach($options['subscribe'] as $param => $val) {
 		$param = str_replace('_', '-', $param);
-			
+
 		$options['subscribe']['data-' . $param] =  $val;
 	}
-	
-	$table_name = $wpdb->prefix . "fb_users";
-	
-	$fb_username = $wpdb->get_var($wpdb->prepare("SELECT fb_username FROM $table_name WHERE wp_uid = %d", get_the_author_meta('ID')));
-	
-	$options['subscribe']['data-href'] = 'http://www.facebook.com/' . $fb_username;
-	
+
+	$fb_data = get_user_meta(get_the_author_meta('ID'), 'fb_data', true);
+
+	$options['subscribe']['data-href'] = 'http://www.facebook.com/' . $fb_data['username'];
+
 	$content .= fb_get_subscribe_button($options['subscribe']);
-	
+
 	return $content;
 }
 
@@ -62,7 +59,7 @@ class Facebook_Subscribe_Button extends WP_Widget {
 
 		if ( ! empty( $instance['title'] ) )
 			echo $before_title . $instance['title'] . $after_title;
-		
+
 		echo fb_get_subscribe_button($instance);
 		echo $after_widget;
 	}
@@ -96,7 +93,7 @@ class Facebook_Subscribe_Button extends WP_Widget {
 
 function fb_get_subscribe_fields($placement = 'settings', $object = null) {
 	$fields_array = fb_get_subscribe_fields_array($placement);
-	
+
 	fb_construct_fields($placement, $fields_array['children'], $fields_array['parent'], $object);
 }
 
@@ -106,7 +103,7 @@ function fb_get_subscribe_fields_array($placement) {
 									'help_text' => 'Click to learn more.',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
 									);
-	
+
 	$array['children'] = array(array('name' => 'layout',
 													'field_type' => 'dropdown',
 													'options' => array('standard', 'button_count', 'box_count'),
@@ -131,7 +128,7 @@ function fb_get_subscribe_fields_array($placement) {
 													'help_text' => 'The font of the plugin.',
 													),
 										);
-	
+
 	if ($placement == 'settings') {
 		$array['children'][] = array('name' => 'position',
 													'field_type' => 'dropdown',
@@ -139,19 +136,19 @@ function fb_get_subscribe_fields_array($placement) {
 													'help_text' => 'Where the button will display on the page or post.',
 													);
 	}
-	
+
 	if ($placement == 'widget') {
 		$array['children'][] = array('name' => 'href',
 													'field_type' => 'text',
 													'help_text' => 'The URL the Like button will point to.',
 													);
-		
+
 		$array['children'][] = array('name' => 'title',
 													'field_type' => 'text',
 													'help_text' => 'The title above the button.',
 													);
 	}
-	
+
 	return $array;
 }
 

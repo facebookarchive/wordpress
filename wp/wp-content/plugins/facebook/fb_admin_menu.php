@@ -13,7 +13,7 @@ function fb_create_menu() {
 }
 
 function fb_admin_style() {
-	wp_enqueue_style( 'fb_admin', plugins_url('style/style_admin.css', __FILE__), array(), '1.0' );
+	wp_enqueue_style( 'fb_admin', plugins_url( '/style/style_admin.css', __FILE__), array(), '1.0' );
 }
 
 function fb_admin_scripts( $hook_suffix ) {
@@ -29,37 +29,37 @@ function fb_settings_page() {
 	?>
 	<div class="wrap">
 		<div class="facebook-logo"></div>
-		<h2>Facebook for WordPress Settings</h2>
-		<p>The official Facebook for WordPress plugin.</p>
+		<h2><?php echo esc_html__( 'Facebook for WordPress Settings', 'facebook' ); ?></h2>
+		<p><?php echo esc_html__( 'The official Facebook for WordPress plugin.', 'facebook' ); ?></p>
 		<?php settings_errors(); ?>
 		<form method="post" action="options.php">
 			<?php
 			settings_fields( 'fb_options' );
 
-			echo '<h3>' . __( 'Main Settings', 'facebook' ) . '</h3><p></p>';
+			echo '<h3>' . esc_html__( 'Main Settings', 'facebook' ) . '</h3><p></p>';
 			fb_get_main_settings_fields();
 
-			echo "<h3>Like Button</h3>
-			<p>The Like button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user's friends' News Feed with a link back to your website.</p>";
+			echo '<h3>' . esc_html__( 'Like Button', 'facebook' ) . '</h3>';
+			echo '<p>' . esc_html__( 'The Like button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user\'s friends\' News Feed with a link back to your website.', 'facebook' ) . '</p>';
 			fb_get_like_fields();
 
-			echo '<h3>Subscribe Button</h3>
-			<p>The Subscribe button lets a user subscribe to your public updates on Facebook.</p>';
+			echo '<h3>' . esc_html__( 'Subscribe Button', 'facebook' ) . '</h3>';
+			echo '<p>' . esc_html__( 'The Subscribe button lets a user subscribe to your public updates on Facebook.', 'facebook' ) . '</p>';
 			fb_get_subscribe_fields();
 
-			echo '<h3>Send Button</h3>
-			<p>The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address.</p>';
+			echo '<h3>' . esc_html__( 'Send Button', 'facebook' ) . '</h3>';
+			echo '<p>' . esc_html__( 'The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address.', 'facebook' ) . '</p>';
 			fb_get_send_fields();
 
-			echo '<h3>Comments</h3>
-			<p>Comments Box is a social plugin that enables user commenting on your site. Features include moderation tools and distribution.</p>';
+			echo '<h3>'. esc_html__( 'Comments', 'facebook' ) . '</h3>';
+			echo '<p>' . esc_html__( 'Comments Box is a social plugin that enables user commenting on your site. Features include moderation tools and distribution.', 'facebook' ) . '</p>';
 			fb_get_comments_fields();
 
 			/*echo '<h3>Recommendation Bar</h3>
 			<p>The Recommendations Bar allows users to like content, get recommendations, and share what they\'re reading with their friends.</p>';
 			fb_get_recommendations_bar_fields();*/
 
-			echo '<h3>Social Publisher</h3>';
+			echo '<h3>' . esc_html__( 'Social Publisher', 'facebook' ) . '</h3>';
 			fb_get_social_publisher_fields();
 
 			submit_button();
@@ -98,11 +98,11 @@ function fb_field_enable_fb() {
 function fb_get_main_settings_fields() {
 	$children = array(array('name' => 'app_id',
 													'field_type' => 'text',
-													'help_text' => 'Your app id.',
+													'help_text' => __( 'Your app id.', 'facebook' ),
 													),
 										array('name' => 'app_secret',
 													'field_type' => 'text',
-													'help_text' => 'Your app secret.',
+													'help_text' => __( 'Your app secret.', 'facebook' ),
 													),
 										);
 

@@ -52,7 +52,7 @@ function fb_friend_autocomplete() {
 		else {
 			if (!empty($results)) {
 				foreach ($results as $result) {
-					echo '<img src="http://graph.facebook.com/' . $result[1] . '/picture/" width="25" height="25">' . $result[0] . "\n";
+					echo '<img src="http://graph.facebook.com/' . $result[1] . '/picture/" width="25" height="25"> &nbsp;' . $result[0] . "\n";
 				}
 			}
 		}

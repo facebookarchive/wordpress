@@ -38,7 +38,7 @@ require_once( $facebook_plugin_directory . '/fb_wp_helpers.php' );
 unset( $facebook_plugin_directory );
 
 add_action( 'init', 'fb_init' );
-add_action( 'init','fb_channel_file' );
+add_action( 'init', 'fb_channel_file' );
 
 function fb_install_warning() {
 	$options = get_option('fb_options');
@@ -66,6 +66,7 @@ add_action('admin_notices', 'fb_install_warning');
  */
 function fb_js_sdk_setup() {
 	$options = get_option( 'fb_options' );
+
 	if ( ! isset( $options['app_id'] ) )
 		return;
 
@@ -112,15 +113,13 @@ function fb_root() {
  * @since 1.0
  */
 function fb_init() {
-	// public-facing only
-	if ( is_admin() )
-		return;
-
 	$options = get_option( 'fb_options' );
+
 	if ( ! isset( $options['app_id'] ) )
 		return;
 
 	add_action( 'wp_head', 'fb_js_sdk_setup' );
+	add_action( 'admin_head', 'fb_js_sdk_setup' );
 }
 
 function fb_channel_file() {

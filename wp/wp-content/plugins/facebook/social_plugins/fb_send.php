@@ -104,11 +104,13 @@ function fb_get_send_fields_array($placement) {
 
 	$array['children'] = array(array('name' => 'colorscheme',
 													'field_type' => 'dropdown',
+													'default' => 'light',
 													'options' => array('light', 'dark'),
 													'help_text' => 'The color scheme of the plugin.',
 													),
 										array('name' => 'font',
 													'field_type' => 'dropdown',
+													'default' => 'arial',
 													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
 													'help_text' => 'The font of the plugin.',
 													),
@@ -117,6 +119,7 @@ function fb_get_send_fields_array($placement) {
 	if ($placement == 'settings') {
 		$array['children'][] = array('name' => 'position',
 													'field_type' => 'dropdown',
+													'default' => 'both',
 													'options' => array('top', 'bottom', 'both'),
 													'help_text' => 'Where the button will display on the page or post.',
 													);

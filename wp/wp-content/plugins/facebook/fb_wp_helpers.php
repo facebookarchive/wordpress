@@ -45,7 +45,7 @@ function fb_construct_fields_children($placement, $children, $parent = null, $ob
 			if (isset($instance[$object_id][$child['name']])) {
 				$child_value = $instance[$object_id][$child['name']];
 			}
-			elseif ($child['default']) {
+			elseif (isset($child['default'])) {
 				$child_value = $child['default'];
 			}
 			else {

@@ -40,6 +40,10 @@ function fb_get_comments($options = array()) {
 	return $output;
 }
 
+function fb_get_comments_count() {
+		return '<iframe src="http://www.facebook.com/plugins/comments.php?href=' . get_permalink() . '&permalink=1" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:130px; height:16px;" allowTransparency="true"></iframe>';
+}
+
 function fb_comments_automatic($content) {
 	if (!is_home()) {
 		$options = get_option('fb_options');
@@ -51,6 +55,9 @@ function fb_comments_automatic($content) {
 		}
 
 		$content .= fb_get_comments($options['comments']);
+	}
+	else {
+		$content .= fb_get_comments_count();
 	}
 
 	return $content;

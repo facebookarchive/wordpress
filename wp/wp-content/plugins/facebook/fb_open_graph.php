@@ -13,7 +13,6 @@ function fb_add_og_protocol() {
 	$meta_tags['http://ogp.me/ns#locale'] = fb_get_locale();
 	$meta_tags['http://ogp.me/ns#site_name'] = get_bloginfo( 'name' );
 	$meta_tags['http://ogp.me/ns#type'] = 'article';
-	$meta_tags['http://ogp.me/ns#site_name'] = get_bloginfo('name');
 	$meta_tags['http://ogp.me/ns#url'] = get_permalink();
 	$meta_tags['http://ogp.me/ns#title'] = get_the_title();
 	$meta_tags['http://ogp.me/ns#description'] = get_bloginfo('description', 'display');

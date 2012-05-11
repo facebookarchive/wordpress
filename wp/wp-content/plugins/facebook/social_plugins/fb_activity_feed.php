@@ -22,8 +22,8 @@ class Facebook_Activity_Feed extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 	 		'fb_activity_feed', // Base ID
-			'Facebook Recent Activity', // Name
-			array( 'description' => __( "Displays the most interesting recent activity taking place on your site.", 'text_domain' ), ) // Args
+			__( 'Facebook Recent Activity', 'facebook' ), // Name
+			array( 'description' => __( 'Displays the most interesting recent activity taking place on your site.', 'facebook' ), ) // Args
 		);
 	}
 
@@ -83,34 +83,34 @@ function fb_get_activity_feed_fields_array() {
 	$array['children'] = array(array('name' => 'width',
 													'field_type' => 'text',
 													'default' => '250',
-													'help_text' => 'The width of the plugin, in pixels.',
+													'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
 													),
 										array('name' => 'height',
 													'field_type' => 'text',
 													'default' => '450',
-													'help_text' => 'The width of the plugin, in pixels.',
+													'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
 													),
 										array('name' => 'colorscheme',
 													'field_type' => 'dropdown',
 													'default' => 'light',
 													'options' => array('light', 'dark'),
-													'help_text' => 'The color scheme of the plugin.',
+													'help_text' => __( 'The color scheme of the plugin.', 'facebook' ),
 													),
 										array('name' => 'border_color',
 													'field_type' => 'text',
 													'default' => '#aaa',
-													'help_text' => 'The color scheme of the plugin.',
+													'help_text' => __( 'The color scheme of the plugin.', 'facebook' ),
 													),
 										array('name' => 'font',
 													'field_type' => 'dropdown',
 													'default' => 'arial',
 													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
-													'help_text' => 'The font of the plugin.',
+													'help_text' => __( 'The font of the plugin.', 'facebook' ),
 													),
 										array('name' => 'recommendations',
 													'field_type' => 'checkbox',
 													'default' => false,
-													'help_text' => 'Includes recommendations.',
+													'help_text' => __( 'Includes recommendations.', 'facebook' ),
 													),
 										);
 

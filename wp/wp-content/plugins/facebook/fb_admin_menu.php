@@ -40,19 +40,19 @@ function fb_settings_page() {
 			fb_get_main_settings_fields();
 
 			echo '<h3>' . esc_html__( 'Like Button', 'facebook' ) . '</h3>';
-			echo '<p>' . esc_html__( 'The Like button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user\'s friends\' News Feed with a link back to your website.', 'facebook' ) . '</p>';
+			echo '<p>' . sprintf( esc_html__( 'The %s lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user\'s friends\' News Feed with a link back to your website.', 'facebook' ), '<a href="https://developers.facebook.com/docs/reference/plugins/like/">' . esc_html__( 'Like button', 'facebook' ) . '</a>' ) . '</p>';
 			fb_get_like_fields();
 
 			echo '<h3>' . esc_html__( 'Subscribe Button', 'facebook' ) . '</h3>';
-			echo '<p>' . esc_html__( 'The Subscribe button lets a user subscribe to your public updates on Facebook.', 'facebook' ) . '</p>';
+			echo '<p>' . sprintf( esc_html__( 'The %s lets a user subscribe to your public updates on Facebook.', 'facebook' ), '<a href="https://developers.facebook.com/docs/reference/plugins/subscribe/">' . esc_html__( 'Subscribe button', 'facebook' ) . '</a>' ) . '</p>';
 			fb_get_subscribe_fields();
 
 			echo '<h3>' . esc_html__( 'Send Button', 'facebook' ) . '</h3>';
-			echo '<p>' . esc_html__( 'The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address.', 'facebook' ) . '</p>';
+			echo '<p>' . sprintf( esc_html__( 'The %s allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address.', 'facebook' ), '<a href="https://developers.facebook.com/docs/reference/plugins/send/">' . esc_html__( 'Send button', 'facebook' ) . '</a>' ) . '</p>';
 			fb_get_send_fields();
 
 			echo '<h3>'. esc_html__( 'Comments', 'facebook' ) . '</h3>';
-			echo '<p>' . esc_html__( 'Comments Box is a social plugin that enables user commenting on your site. Features include moderation tools and distribution.', 'facebook' ) . '</p>';
+			echo '<p>' . sprintf( esc_html__( '%s is a social plugin that enables user commenting on your site. Features include moderation tools and distribution.', 'facebook' ), '<a href="https://developers.facebook.com/docs/reference/plugins/comments/">' . esc_html__( 'Comments Box', 'facebook' ) . '</a>' ) . '</p>';
 			fb_get_comments_fields();
 
 			/*echo '<h3>Recommendation Bar</h3>

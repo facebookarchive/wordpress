@@ -156,18 +156,18 @@ function fb_post_to_fb_page($post_id) {
 function fb_get_social_publisher_fields() {
 	$parent = array('name' => 'social_publisher',
 									'field_type' => 'checkbox',
-									'help_text' => 'Click to learn more.',
+									'help_text' => __( 'Click to learn more.', 'facebook' ),
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
 									);
 
 	$children = array(array('name' => 'publish_to_authors_facebook_profile',
 													'field_type' => 'dropdown',
 													'options' => array('standard', 'button_count', 'box_count'),
-													'help_text' => 'Determines the size and amount of social context at the bottom.',
+													'help_text' => __( 'Determines the size and amount of social context at the bottom.', 'facebook' ),
 													),
 										array('name' => 'publish_to_fan_page',
 													'field_type' => 'text',
-													'help_text' => 'The width of the plugin, in pixels.',
+													'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
 													),
 										);
 

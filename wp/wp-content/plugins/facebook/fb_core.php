@@ -165,8 +165,8 @@ function fb_get_locale() {
 }
 
 function fb_style() {
-	 wp_register_style( 'fb', plugins_url('style/style.css', __FILE__) );
-	 wp_enqueue_style( 'fb', plugins_url('style/style.css', __FILE__), array(), '1.0' );
+	 wp_register_style( 'fb', plugins_url( 'style/style.css', __FILE__) );
+	 wp_enqueue_style( 'fb', plugins_url( 'style/style.css', __FILE__), array(), '1.0' );
 }
 add_action( 'wp_enqueue_scripts', 'fb_style' );
 

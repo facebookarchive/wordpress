@@ -9,7 +9,7 @@ function fb_insights_page() {
 	$options = get_option('fb_options');
 
 	if (!empty($options["app_id"])) {
-		echo '<script>window.location = "https://www.facebook.com/insights/?sk=ao_' . $options["app_id"] . '";</script>';
+		echo '<script>window.location = ' . json_encode( 'https://www.facebook.com/insights/?' . http_build_query( array( 'sk' => 'ao_' . $options['app_id'] ) ) ) . ';</script>';
 	}
 }
 
@@ -50,11 +50,11 @@ function fb_get_comments($options = array()) {
 }
 
 function fb_get_comments_count() {
-		return '<iframe src="http://www.facebook.com/plugins/comments.php?href=' . get_permalink() . '&permalink=1" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:130px; height:16px;" allowTransparency="true"></iframe>';
+		return '<iframe src="' . ( is_ssl() ? 'https' : 'http' ) . '://www.facebook.com/plugins/comments.php?' . http_build_query( array( 'href' => get_permalink(), 'permalink' => 1 ) ) . '" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:130px; height:16px;" allowTransparency="true"></iframe>';
 }
 
 function fb_comments_automatic($content) {
-	if (!is_home()) {
+	if ( is_singular() ) {
 		$options = get_option('fb_options');
 
 		foreach($options['comments'] as $param => $val) {
@@ -85,21 +85,21 @@ function fb_get_fb_comments_seo() {
 		$user = null;
 	}
 
+	if ( ! isset( $comments[$url] ) )
+		return '';
+
 	$output = '<noscript><ol class="commentlist">';
 
-	if (isset($comments[$url])) {
-		foreach ($comments[$url]['comments']['data'] as $key => $comment_info) {
-			$unix_timestamp = strtotime($comment_info['created_time']);
-			$output .= '<li>
-				<a name="#comment-' . $key  . '"></a>
-				<p><a href="https://www.facebook.com/' . $comment_info['from']['id'] . '">' . $comment_info['from']['name'] . '</a>:</p>
-				<p class="metadata">' . date('F jS, Y', $unix_timestamp) . ' at ' . date('g:i a', $unix_timestamp) . '</p>
-				' . $comment_info['message'] . '
-				</li>';
-		}
+	foreach ($comments[$url]['comments']['data'] as $key => $comment_info) {
+		$unix_timestamp = strtotime($comment_info['created_time']);
+		$output .= '<li id="' . esc_attr( 'comment-' . $key ) . '">
+			<p><a href="' . esc_url( 'https://www.facebook.com/' . $comment_info['from']['id'], array( 'http', 'https' ) ) . '">' . esc_html( $comment_info['from']['name'] ) . '</a>:</p>
+			<p class="metadata">' . date('F jS, Y', $unix_timestamp) . ' at ' . date('g:i a', $unix_timestamp) . '</p>
+			' . $comment_info['message'] . '
+			</li>';
 	}
 
-	$output .= '<ol class="commentlist"></noscript>';
+	$output .= '</ol></noscript>';
 
 	return $output;
 }
@@ -114,7 +114,7 @@ function fb_get_comments_fields($placement = 'settings', $object = null) {
 function fb_get_comments_fields_array() {
 	$array['parent'] = array('name' => 'comments',
 									'field_type' => 'checkbox',
-									'help_text' => 'Click to learn more.',
+									'help_text' => __( 'Click to learn more.', 'facebook' ),
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/comments/',
 									);
 

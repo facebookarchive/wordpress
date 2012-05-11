@@ -5,7 +5,7 @@ add_action( 'admin_menu', 'fb_create_menu' );
 
 function fb_create_menu() {
 	//create new top-level menu
-	$page = add_menu_page( sprintf( __( '%s Plugin Settings', 'facebook' ), 'Facebook'), 'Facebook', 'manage_options', __FILE__, 'fb_settings_page', plugins_url('/images/icon.png', __FILE__));
+	$page = add_menu_page( sprintf( __( '%s Plugin Settings', 'facebook' ), 'Facebook'), 'Facebook', 'manage_options', __FILE__, 'fb_settings_page', plugins_url( 'images/icon.png', __FILE__) );
 
 	//call register settings function
 	add_action( 'admin_print_styles-' . $page, 'fb_admin_style');
@@ -13,11 +13,11 @@ function fb_create_menu() {
 }
 
 function fb_admin_style() {
-	wp_enqueue_style( 'fb_admin', plugins_url( '/style/style_admin.css', __FILE__), array(), '1.0' );
+	wp_enqueue_style( 'fb_admin', plugins_url( 'style/style_admin.css', __FILE__), array(), '1.0' );
 }
 
 function fb_admin_scripts( $hook_suffix ) {
-	wp_enqueue_script( 'fb_admin', plugins_url( '/scripts/fb_admin.js', __FILE__ ), array(), '1.0', true );
+	wp_enqueue_script( 'fb_admin', plugins_url( 'scripts/fb_admin.js', __FILE__ ), array(), '1.0', true );
 }
 
 // __return_false for no desc

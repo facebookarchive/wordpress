@@ -21,8 +21,8 @@ class Facebook_Recommendations extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 	 		'fb_recommendations', // Base ID
-			'Facebook Recommendations', // Name
-			array( 'description' => __( "Shows personalized recommendations to your users.", 'text_domain' ), ) // Args
+			__( 'Facebook Recommendations', 'facebook' ), // Name
+			array( 'description' => __( 'Shows personalized recommendations to your users.', 'facebook' ), ) // Args
 		);
 	}
 
@@ -82,29 +82,29 @@ function fb_get_recommendations_box_fields_array() {
 	$array['children'] = array(array('name' => 'width',
 													'field_type' => 'text',
 													'default' => '250',
-													'help_text' => 'The width of the plugin, in pixels.',
+													'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
 													),
 										array('name' => 'height',
 													'field_type' => 'text',
 													'default' => '450',
-													'help_text' => 'The width of the plugin, in pixels.',
+													'help_text' => __( 'The height of the plugin, in pixels.', 'facebook' ),
 													),
 										array('name' => 'colorscheme',
 													'field_type' => 'dropdown',
 													'default' => 'light',
 													'options' => array('light', 'dark'),
-													'help_text' => 'The color scheme of the plugin.',
+													'help_text' => __( 'The color scheme of the plugin.', 'facebook' ),
 													),
 										array('name' => 'border_color',
 													'field_type' => 'text',
 													'default' => '#aaa',
-													'help_text' => 'The color scheme of the plugin (hex or text value).',
+													'help_text' => __( 'The border color scheme of the plugin (hex or text value).', 'facebook' ),
 													),
 										array('name' => 'font',
 													'field_type' => 'dropdown',
 													'default' => 'arial',
 													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
-													'help_text' => 'The font of the plugin.',
+													'help_text' => __( 'The font of the plugin.', 'facebook' ),
 													),
 										);
 

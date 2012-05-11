@@ -84,13 +84,13 @@ function fb_construct_fields_children($placement, $children, $parent = null, $ob
 					break;
 				case 'checkbox':
 					$children_output .= $help_link . '<input class="checkbox" id="' . $object->get_field_id( $child['name'] ) . '" name="' . $object->get_field_name( $child['name'] ) . '" type="checkbox" value="true"' . checked($child_value, 'true', false) . '>';
-					$children_output .= ' <label for="' . $object->get_field_id( $child['name'] ) . '">' . ucwords(str_replace("_", " ", $child['name'])) . '</label><br>';
+					$children_output .= ' <label for="' . $object->get_field_id( $child['name'] ) . '">' . ucwords(str_replace('_', ' ', $child['name'])) . '</label><br>';
 
 					break;
 				case 'text':
 					$text_field_value = '';
 
-					$children_output .= $help_link . ' <label for="' . $object->get_field_id( $child['name'] ) . '">' . ucwords(str_replace("_", " ", $child['name'])) . '</label> &nbsp;';
+					$children_output .= $help_link . ' <label for="' . $object->get_field_id( $child['name'] ) . '">' . ucwords(str_replace('_', ' ', $child['name'])) . '</label> &nbsp;';
 
 					$children_output .= '<input id="' . $object->get_field_id( $child['name'] ) . '" name="' . $object->get_field_name( $child['name'] ) . '" type="text" value="' . $child_value . '">';
 
@@ -129,7 +129,7 @@ function fb_construct_fields_children($placement, $children, $parent = null, $ob
 				$help_link = '<a href="#" target="_new" title="' . $child['help_text'] . '" onclick="return false;" style="color: #aaa; text-decoration: none;">[?]</a>';
 			}
 			else {
-				$help_link = '<a href="' . $child['help_link'] . '" target="_new" title="' . $child['help_text'] . '" style=" text-decoration: none;">[?]</a>';
+				$help_link = '<a href="' . $child['help_link'] . '" target="_new" title="' . $child['help_text'] . '" style="text-decoration: none;">[?]</a>';
 			}
 
 			$parent_js_array = '';
@@ -171,7 +171,7 @@ function fb_construct_fields_children($placement, $children, $parent = null, $ob
 					break;
 				case 'checkbox':
 					$children_output .= '	<tr valign="top"' . $display . ' id="' . $parent['name'] . '_' . $child['name'] . '">
-							<th scope="row">' . ucwords(str_replace("_", " ", $child['name'])) . '</th>
+							<th scope="row">' . ucwords(str_replace('_', ' ', $child['name'])) . '</th>
 							<td>' . $help_link . '&nbsp; <input type="checkbox" name="fb_options' . $parent_js_array . '[' . $child['name'] . ']" value="true"' . checked(isset($child_value), 1, false) . '></td>
 							</tr>';
 					break;
@@ -183,7 +183,7 @@ function fb_construct_fields_children($placement, $children, $parent = null, $ob
 					}
 
 					$children_output .= '	<tr valign="top"' . $display . ' id="' . $parent['name'] . '_' . $child['name'] . '">
-							<th scope="row">' . ucwords(str_replace("_", " ", $child['name'])) . '</th>
+							<th scope="row">' . ucwords(str_replace('_', ' ', $child['name'])) . '</th>
 							<td>' . $help_link . '&nbsp; <input type="text" name="fb_options' . $parent_js_array . '[' . $child['name'] . ']" value="' . $text_field_value . '"></td>
 							</tr>';
 					break;

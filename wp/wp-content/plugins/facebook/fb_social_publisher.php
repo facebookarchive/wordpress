@@ -7,10 +7,24 @@
 //publish to fan page, if defined
 
 
-function fb_post_to_fb_page() {
+function fb_post_to_fb_page($post_id) {
+	global $facebook;
+
 	$options = get_option('fb_options');
 
-	$options['social_publisher']['publish_to_fan_page'];
+	$fan_page_fb_id = $options['social_publisher']['publish_to_fan_page'];
+
+	if ( ! isset( $facebook ) )
+		return;
+
+	try {
+		$publish = $facebook->api('/' . $fan_page_fb_id . '/feed', 'POST', array('from' => $fan_page_fb_id, 'source' => get_permalink($post_id)));
+
+		return $user;
+	}
+	catch (FacebookApiException $e) {
+		error_log(var_export($e));
+	}
 }
 
 
@@ -35,19 +49,20 @@ function fb_get_social_publisher_fields() {
 	fb_construct_fields('settings', $children, $parent);
 }
 
-add_action( 'transition_post_status', 'fb_publish_later',10,3);
+//add_action( 'transition_post_status', 'fb_publish_later',10,3);
 function fb_publish_later($new_status, $old_status, $post) {
-    // check that the new status is "publish" and that the old status was not "publish"
-    if ($new_status == 'publish' && $old_status != 'publish') {
-        // only publish "public" post types
-        $post_types = get_post_types( array('public' => true), 'objects' );
-        foreach ( $post_types as $post_type ) {
-            if ( $post->post_type == $post_type->name ) {
-                // code to talk to FB goes here
-                break;
-            }
-        }
-    }
+	// check that the new status is "publish" and that the old status was not "publish"
+	if ($new_status == 'publish' && $old_status != 'publish') {
+		// only publish "public" post types
+		$post_types = get_post_types( array('public' => true), 'objects' );
+		foreach ( $post_types as $post_type ) {
+			if ( $post->post_type == $post_type->name ) {
+				fb_post_to_fb_page($post->ID);
+
+				break;
+			}
+		}
+	}
 }
 
 ?>

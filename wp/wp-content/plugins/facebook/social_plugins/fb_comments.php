@@ -71,14 +71,16 @@ function fb_get_fb_comments_seo() {
 
 	$output = '<noscript><ol class="commentlist">';
 
-	foreach ($comments[$url]['comments']['data'] as $key => $comment_info) {
-		$unix_timestamp = strtotime($comment_info['created_time']);
-		$output .= '<li>
-			<a name="#comment-' . $key  . '"></a>
-			<p><a href="https://www.facebook.com/' . $comment_info['from']['id'] . '">' . $comment_info['from']['name'] . '</a>:</p>
-      <p class="metadata">' . date('F jS, Y', $unix_timestamp) . ' at ' . date('g:i a', $unix_timestamp) . '</p>
-      ' . $comment_info['message'] . '
-      </li>';
+	if (isset($comments[$url])) {
+		foreach ($comments[$url]['comments']['data'] as $key => $comment_info) {
+			$unix_timestamp = strtotime($comment_info['created_time']);
+			$output .= '<li>
+				<a name="#comment-' . $key  . '"></a>
+				<p><a href="https://www.facebook.com/' . $comment_info['from']['id'] . '">' . $comment_info['from']['name'] . '</a>:</p>
+				<p class="metadata">' . date('F jS, Y', $unix_timestamp) . ' at ' . date('g:i a', $unix_timestamp) . '</p>
+				' . $comment_info['message'] . '
+				</li>';
+		}
 	}
 
 	$output .= '<ol class="commentlist"></noscript>';

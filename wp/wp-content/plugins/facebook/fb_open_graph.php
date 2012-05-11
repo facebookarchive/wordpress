@@ -10,8 +10,6 @@ function fb_add_og_protocol() {
 
 	$meta_tags = array();
 
-	$options = get_option( 'fb_options' );
-
 	$meta_tags['og:type'] = 'article';
 	$meta_tags['og:site_name'] = get_bloginfo('name');
 	$meta_tags['og:url'] = get_permalink();
@@ -22,6 +20,24 @@ function fb_add_og_protocol() {
 	$meta_tags['article:author'] = get_author_posts_url( get_the_author_meta('ID') );
 	$meta_tags['article:section'] = '';
 	$meta_tags['article:tag'] = '';
+
+	$cat_ids = get_the_category();
+	if ( ! empty( $cat_ids ) ) {
+		$cat = get_category( $cat_ids[0] );
+		if ( ! empty( $cat ) )
+			$meta_tags['article:section'] = $cat->name;
+
+		/*
+		TODO: output the rest of the categories as tags
+		unset( $cat_ids[0] );
+		if ( ! empty( $cat_ids ) ) {
+			foreach( $cat_ids as $cat_id ) {
+				$cat = get_category( $cat_id );
+				$article->addTag( $cat->name );
+				unset( $cat );
+			}
+		} */
+	}
 
 	// does theme support post thumbnails?
 	if ( function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {
@@ -38,8 +54,9 @@ function fb_add_og_protocol() {
 	}
 
 	$meta_tags['og:site_name'] = get_bloginfo( 'name' );
-	
-	if ( ! empty($options['app_id'] ) )
+
+	$options = get_option( 'fb_options' );
+	if ( ! empty( $options['app_id'] ) )
 		$meta_tags['fb:app_id'] = $options['app_id'];
 	$meta_tags['og:locale'] = fb_get_locale();
 	

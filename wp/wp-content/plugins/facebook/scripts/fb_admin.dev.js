@@ -1,6 +1,6 @@
 function toggleOptions(parentOption, childOptions) {
 	var display = '';
-	
+
 	if (document.getElementById(parentOption).checked == false) {
 		display = 'none';
 	}
@@ -20,3 +20,8 @@ function authFacebook() {
 		}
 	});
 }
+
+jQuery(function() {
+	jQuery("#suggest").suggest("/?fb-friends=1",{
+	onSelect: function() {alert("You selected: " + this.value)}});
+});

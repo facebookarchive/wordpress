@@ -6,10 +6,6 @@ add_action( 'admin_menu', 'fb_create_menu' );
 function fb_create_menu() {
 	//create new top-level menu
 	$page = add_menu_page( sprintf( __( '%s Plugin Settings', 'facebook' ), 'Facebook'), 'Facebook', 'manage_options', __FILE__, 'fb_settings_page', plugins_url('/images/icon.png', __FILE__));
-
-	//call register settings function
-	add_action( 'admin_print_styles-' . $page, 'fb_admin_style');
-	add_action( 'admin_print_scripts-' . $page, 'fb_admin_scripts' );
 }
 
 function fb_admin_style() {
@@ -23,6 +19,10 @@ function fb_admin_scripts( $hook_suffix ) {
 // __return_false for no desc
 function fb_admin_menu_settings() {
 	register_setting( 'fb_options', 'fb_options', 'fb_options_validate' );
+
+	//call register settings function
+	add_action( 'admin_print_styles', 'fb_admin_style');
+	add_action( 'admin_print_scripts', 'fb_admin_scripts' );
 }
 
 function fb_settings_page() {

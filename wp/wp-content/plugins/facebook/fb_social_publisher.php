@@ -6,13 +6,131 @@
 
 //publish to fan page, if defined
 
-add_action( 'edit_tag_form', 'fb_add_friend_tagging' );
-add_action( 'edit_tag_form_pre', 'fb_add_friend_tagging' );
-add_action( 'add_meta_boxes', 'fb_add_friend_tagging' );
 
-function fb_add_friend_tagging() {
-	echo 'rofl';
+add_action( 'init','fb_friend_autocomplete' );
+
+function fb_friend_autocomplete() {
+	if (!empty($_GET['fb-friends'])) {
+		global $facebook;
+
+		if ( ! isset( $facebook ) )
+			return;
+
+		try {
+			$friends = $facebook->api('/me/friends');
+
+			foreach($friends['data'] as $friend) {
+				$friends_clean[$friend['name']] = $friend['id'];
+			}
+		}
+		catch (FacebookApiException $e) {
+			error_log(var_export($e));
+		}
+
+
+
+		if (isset($_GET['q'])) {
+			$q = strtolower($_GET['q']);
+
+			if ($q) {
+				foreach ($friends_clean as $key => $value) {
+					if (strpos(strtolower($key), $q) !== false) {
+						$results[] = array($key, $value);
+					}
+				}
+			}
+		}
+
+		$output = 'autocomplete';
+		if (isset($_GET['output'])) {
+			$output = strtolower($_GET['output']);
+		}
+
+		if ($output === 'json') {
+			echo json_encode($results);
+		}
+		else {
+			if (!empty($results)) {
+				foreach ($results as $result) {
+					echo '<img src="http://graph.facebook.com/' . $result[1] . '/picture/" width="25" height="25">' . $result[0] . "\n";
+				}
+			}
+		}
+
+		exit;
+	}
 }
+
+add_action( 'add_meta_boxes', 'fb_add_friend_tag_box' );
+add_action( 'save_post', 'fb_add_friend_tag_box_save' );
+
+function fb_add_friend_tag_box() {
+    add_meta_box(
+        'fb_friend_tag_box_id',
+        __( 'Tag Facebook Friends', 'fb_friend_tag_box_id_textdomain' ),
+        'fb_add_friend_tag_box_content',
+        'post'
+    );
+    add_meta_box(
+        'fb_friend_tag_box_id',
+        __( 'Tag Facebook Friends', 'fb_friend_tag_box_id_textdomain' ),
+        'fb_add_friend_tag_box_content',
+        'page'
+    );
+}
+
+function fb_add_friend_tag_box_content( $post ) {
+	wp_enqueue_script('suggest');
+
+  // Use nonce for verification
+  wp_nonce_field( plugin_basename( __FILE__ ), 'fb_friend_tag_box_noncename' );
+
+  // The actual fields for data entry
+  echo '<label for="fb_friend_tag_box_new_field">';
+       _e("", 'fb_friend_tag_box_textdomain' );
+  echo '</label> ';
+  echo '<input type="text" id="suggest" autocomplete="off" name="fb_friend_tag_box_new_field" value="" size="25" />';
+}
+
+function fb_add_friend_tag_box_save( $post_id ) {
+  // verify if this is an auto save routine.
+  // If it is our form has not been submitted, so we dont want to do anything
+  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+      return;
+
+  // verify this came from the our screen and with proper authorization,
+  // because save_post can be triggered at other times
+
+  if ( empty($_POST['fb_friend_tag_box_noncename']) || !wp_verify_nonce( $_POST['fb_friend_tag_box_noncename'], plugin_basename( __FILE__ ) ) )
+      return;
+
+
+  // Check permissions
+  if ( 'page' == $_POST['post_type'] )
+  {
+    if ( !current_user_can( 'edit_page', $post_id ) )
+        return;
+  }
+  else
+  {
+    if ( !current_user_can( 'edit_post', $post_id ) )
+        return;
+  }
+
+  // OK, we're authenticated: we need to find and save the data
+
+  $data = $_POST['fb_friend_tag_box_new_field'];
+
+  // probably using add_post_meta(), update_post_meta(), or
+  // a custom table (see Further Reading section below)
+}
+
+
+
+
+
+
+
 
 function fb_post_to_fb_page($post_id) {
 	global $facebook;

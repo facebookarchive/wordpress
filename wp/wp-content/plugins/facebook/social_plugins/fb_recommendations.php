@@ -5,6 +5,11 @@ function fb_get_recommendations_box($options = array()) {
 	foreach ($options as $option => $value) {
 		$params .= $option . '="' . $value . '" ';
 	}
+
+	if (empty($options['header'])) {
+		$params .= 'data-header="false" ';
+	}
+
 	$params .= 'data-ref="wp" ';
 
 	return '<div class="fb-recommendations fb-social-plugin" ' . $params . '></div>';
@@ -39,7 +44,8 @@ class Facebook_Recommendations extends WP_Widget {
 
 		echo $before_widget;
 
-		//$options = array('data-href' => $instance['url']);
+		if ( ! empty( $instance['title'] ) )
+			echo $before_title . $instance['title'] . $after_title;
 
 		echo fb_get_recommendations_box($instance);
 		echo $after_widget;
@@ -73,12 +79,12 @@ class Facebook_Recommendations extends WP_Widget {
 
 
 function fb_get_recommendations_box_fields($placement = 'settings', $object = null) {
-	$fields_array = fb_get_recommendations_box_fields_array();
+	$fields_array = fb_get_recommendations_box_fields_array($placement);
 
 	fb_construct_fields($placement, $fields_array['children'], null, $object);
 }
 
-function fb_get_recommendations_box_fields_array() {
+function fb_get_recommendations_box_fields_array($placement) {
 	$array['children'] = array(array('name' => 'width',
 													'field_type' => 'text',
 													'default' => '250',
@@ -107,6 +113,19 @@ function fb_get_recommendations_box_fields_array() {
 													'help_text' => 'The font of the plugin.',
 													),
 										);
+
+	if ($placement == 'widget') {
+		$array['children'][] = array('name' => 'header',
+													'field_type' => 'checkbox',
+													'default' => true,
+													'help_text' => 'Show the default Facebook title header.',
+													);
+
+		$array['children'][] = array('name' => 'title',
+													'field_type' => 'text',
+													'help_text' => 'The title above the button.',
+													);
+	}
 
 	return $array;
 }

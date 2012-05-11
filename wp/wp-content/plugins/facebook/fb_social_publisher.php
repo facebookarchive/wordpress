@@ -6,6 +6,13 @@
 
 //publish to fan page, if defined
 
+add_action( 'edit_tag_form', 'fb_add_friend_tagging' );
+add_action( 'edit_tag_form_pre', 'fb_add_friend_tagging' );
+add_action( 'add_meta_boxes', 'fb_add_friend_tagging' );
+
+function fb_add_friend_tagging() {
+	echo 'rofl';
+}
 
 function fb_post_to_fb_page($post_id) {
 	global $facebook;

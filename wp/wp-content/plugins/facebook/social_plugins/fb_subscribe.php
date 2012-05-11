@@ -41,8 +41,8 @@ class Facebook_Subscribe_Button extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 	 		'fb_subscribe', // Base ID
-			'Facebook Subscribe Button', // Name
-			array( 'description' => __( "Lets a user subscribe to your public updates on Facebook.", 'text_domain' ), ) // Args
+			__( 'Facebook Subscribe Button', 'facebook' ), // Name
+			array( 'description' => __( 'Lets a user subscribe to your public updates on Facebook.', 'facebook' ) ) // Args
 		);
 	}
 
@@ -102,7 +102,7 @@ function fb_get_subscribe_fields($placement = 'settings', $object = null) {
 function fb_get_subscribe_fields_array($placement) {
 	$array['parent'] = array('name' => 'subscribe',
 									'field_type' => 'checkbox',
-									'help_text' => 'Click to learn more.',
+									'help_text' => __( 'Click to learn more.', 'facebook' ),
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
 									);
 
@@ -110,29 +110,29 @@ function fb_get_subscribe_fields_array($placement) {
 													'field_type' => 'dropdown',
 													'default' => 'standard',
 													'options' => array('standard', 'button_count', 'box_count'),
-													'help_text' => 'Determines the size and amount of social context at the bottom.',
+													'help_text' => __( 'Determines the size and amount of social context at the bottom.', 'facebook' ),
 													),
 										array('name' => 'width',
 													'field_type' => 'text',
 													'default' => '450',
-													'help_text' => 'The width of the plugin, in pixels.',
+													'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
 													),
 										array('name' => 'show_faces',
 													'field_type' => 'checkbox',
 													'default' => true,
-													'help_text' => 'Show profile pictures below the button.  Applicable to standard layout only.',
+													'help_text' => __( 'Show profile pictures below the button.  Applicable to standard layout only.', 'facebook' ),
 													),
 										array('name' => 'colorscheme',
 													'field_type' => 'dropdown',
 													'default' => 'light',
 													'options' => array('light', 'dark'),
-													'help_text' => 'The color scheme of the plugin.',
+													'help_text' => __( 'The color scheme of the plugin.', 'facebook' ),
 													),
 										array('name' => 'font',
 													'field_type' => 'dropdown',
 													'default' => 'arial',
 													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
-													'help_text' => 'The font of the plugin.',
+													'help_text' => __( 'The font of the plugin.', 'facebook' ),
 													),
 										);
 
@@ -140,19 +140,19 @@ function fb_get_subscribe_fields_array($placement) {
 		$array['children'][] = array('name' => 'position',
 													'field_type' => 'dropdown',
 													'options' => array('top', 'bottom', 'both'),
-													'help_text' => 'Where the button will display on the page or post.',
+													'help_text' => __( 'Where the button will display on the page or post.', 'facebook' ),
 													);
 	}
 
 	if ($placement == 'widget') {
 		$array['children'][] = array('name' => 'href',
 													'field_type' => 'text',
-													'help_text' => 'The URL the Like button will point to.',
+													'help_text' => __( 'The URL the Like button will point to.', 'facebook' ),
 													);
 
 		$array['children'][] = array('name' => 'title',
 													'field_type' => 'text',
-													'help_text' => 'The title above the button.',
+													'help_text' => __( 'The title above the button.', 'facebook' ),
 													);
 	}
 

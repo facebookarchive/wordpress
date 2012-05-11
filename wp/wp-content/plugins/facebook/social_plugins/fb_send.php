@@ -38,7 +38,7 @@ class Facebook_Send_Button extends WP_Widget {
 		parent::__construct(
 	 		'fb_send', // Base ID
 			'Facebook Send Button', // Name
-			array( 'description' => __( "The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address.", 'text_domain' ), ) // Args
+			array( 'description' => __( 'The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address.', 'facebook' ), ) // Args
 		);
 	}
 
@@ -98,7 +98,7 @@ function fb_get_send_fields($placement = 'settings', $object = null) {
 function fb_get_send_fields_array($placement) {
 	$array['parent'] = array('name' => 'send',
 									'field_type' => 'checkbox',
-									'help_text' => 'Click to learn more.',
+									'help_text' => __( 'Click to learn more.', 'facebook' ),
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/send/',
 									);
 
@@ -106,13 +106,13 @@ function fb_get_send_fields_array($placement) {
 													'field_type' => 'dropdown',
 													'default' => 'light',
 													'options' => array('light', 'dark'),
-													'help_text' => 'The color scheme of the plugin.',
+													'help_text' => __( 'The color scheme of the plugin.', 'facebook' ),
 													),
 										array('name' => 'font',
 													'field_type' => 'dropdown',
 													'default' => 'arial',
 													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
-													'help_text' => 'The font of the plugin.',
+													'help_text' => __( 'The font of the plugin.', 'facebook' ),
 													),
 										);
 
@@ -121,19 +121,19 @@ function fb_get_send_fields_array($placement) {
 													'field_type' => 'dropdown',
 													'default' => 'both',
 													'options' => array('top', 'bottom', 'both'),
-													'help_text' => 'Where the button will display on the page or post.',
+													'help_text' => __( 'Where the button will display on the page or post.', 'facebook' ),
 													);
 	}
 
 	if ($placement == 'widget') {
 		$array['children'][] = array('name' => 'href',
 													'field_type' => 'text',
-													'help_text' => 'The URL the Like button will point to.',
+													'help_text' => __( 'The URL the Like button will point to.', 'facebook' ),
 													);
 
 		$array['children'][] = array('name' => 'title',
 													'field_type' => 'text',
-													'help_text' => 'The title above the button.',
+													'help_text' => __( 'The title above the button.', 'facebook' ),
 													);
 	}
 

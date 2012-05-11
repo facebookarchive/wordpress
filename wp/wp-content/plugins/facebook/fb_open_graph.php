@@ -15,7 +15,7 @@ function fb_add_og_protocol() {
 	$meta_tags['http://ogp.me/ns#type'] = 'article';
 	$meta_tags['http://ogp.me/ns#url'] = get_permalink();
 	$meta_tags['http://ogp.me/ns#title'] = get_the_title();
-	$meta_tags['http://ogp.me/ns#description'] = get_bloginfo('description', 'display');
+	$meta_tags['http://ogp.me/ns#description'] = apply_filters( 'the_excerpt', get_the_excerpt() );
 	$meta_tags['http://ogp.me/ns/article#published_time'] = get_the_date('c'); 
 	$meta_tags['http://ogp.me/ns/article#modified_time'] = get_the_modified_date('c'); 
 	$meta_tags['http://ogp.me/ns/article#author'] = get_author_posts_url( get_the_author_meta('ID') );

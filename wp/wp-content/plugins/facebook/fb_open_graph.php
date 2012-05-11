@@ -24,7 +24,7 @@ function fb_add_og_protocol() {
 	$meta_tags['article:tag'] = '';
 
 	// does theme support post thumbnails?
-	if ( function_exists( 'get_post_thumbnail_id' ) ) {
+	if ( function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {
 		list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
 		if ( ! empty( $post_thumbnail_url ) ) {
 			$meta_tags['og:image'] = $post_thumbnail_url;

@@ -5,6 +5,15 @@ wp_insert_comment
 <noscript></noscript>
 */
 
+function fb_insights_page() {
+	$options = get_option('fb_options');
+
+	if (!empty($options["app_id"])) {
+		echo '<script>window.location = "https://www.facebook.com/insights/?sk=ao_' . $options["app_id"] . '";</script>';
+	}
+}
+
+
 function fb_hide_wp_comments() {
 	print "<script>document.getElementById('comments').style.display = 'none';</script>";
 }

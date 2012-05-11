@@ -115,13 +115,19 @@ function fb_add_settings_pages() {
          'Facebook',
          'Facebook',
          'moderate_comments',
-         'fb',
+         'fb_comments',
          'fb_settings_page'
+     );
+     add_submenu_page(
+         'facebook/fb_admin_menu.php',
+         'Insights',
+         'Insights',
+         'publish_posts',
+         'fb_insights',
+         'fb_insights_page'
      );
 }
 add_action('admin_menu', 'fb_add_settings_pages', 10);
-
-
 
 // validate our options
 function fb_options_validate($input) {

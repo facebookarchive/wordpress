@@ -56,26 +56,34 @@ function fb_add_og_protocol() {
 		if ( is_multi_author() && post_type_supports( $post_type, 'author' ) )
 			$meta_tags['http://ogp.me/ns/article#author'] = get_author_posts_url( get_the_author_meta('ID') );
 
+		// add the first category as a section. all other categories as tags
 		$cat_ids = get_the_category();
 		if ( ! empty( $cat_ids ) ) {
 			$cat = get_category( $cat_ids[0] );
 			if ( ! empty( $cat ) )
 				$meta_tags['http://ogp.me/ns/article#section'] = $cat->name;
 
-			/*
-			TODO: output the rest of the categories as tags
+			//output the rest of the categories as tags
 			unset( $cat_ids[0] );
+			$meta_tags['http://ogp.me/ns/article#tag'] = array();
 			if ( ! empty( $cat_ids ) ) {
 				foreach( $cat_ids as $cat_id ) {
 					$cat = get_category( $cat_id );
-					$article->addTag( $cat->name );
+					$meta_tags['http://ogp.me/ns/article#tag'][] = $cat->name;
 					unset( $cat );
 				}
-			} */
+			}
 		}
 
-		// TODO: add tags. treat tags as lower priority than multiple categories
-		// $meta_tags['http://ogp.me/ns/article#tag'] = '';
+		// add tags. treat tags as lower priority than multiple categories
+		$tags = get_the_tags();
+		if ( $tags ) {
+			if ( ! array_key_exists( 'http://ogp.me/ns/article#tag', $meta_tags ) )
+				$meta_tags['http://ogp.me/ns/article#tag'] = array();
+			foreach ( $tags as $tag ) {
+				$meta_tags['http://ogp.me/ns/article#tag'][] = $tag->name;
+			}
+		}
 
 		// does current post type and the current theme support post thumbnails?
 		if ( post_type_supports( $post_type, 'thumbnail' ) && function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {

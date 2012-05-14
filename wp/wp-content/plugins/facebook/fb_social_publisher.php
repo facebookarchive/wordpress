@@ -154,8 +154,7 @@ function fb_add_friend_tag_box_save( $post_id ) {
 
 	add_post_meta($post_id, 'fb_tagged_friends', $friends_details_meta, true);
 }
-$options = get_option('fb_options');
-error_log(var_export($options,1));
+
 function fb_post_to_fb_page($post_id) {
 	global $facebook;
 
@@ -181,11 +180,23 @@ function fb_post_to_fb_page($post_id) {
 function fb_post_to_author_fb_timeline($post_id) {
 	global $facebook;
 
+	$options = get_option('fb_options');
+	$fb_tagged_friends = get_post_meta($post_id, 'fb_tagged_friends', true);
+	error_log(var_export($fb_tagged_friends,1));
+
+	$tags = '';
+
+	foreach($fb_tagged_friends as $friend) {
+		error_log(var_export($friend,1));
+		$tags .= $friend['id'] . ",";
+	}
+	error_log(var_export($tags,1));
+
 	if ( ! isset( $facebook ) )
 		return;
 
 	try {
-		$publish = $facebook->api('/me/matt-wp-plugin:publish', 'POST', array('article' => get_permalink($post_id)));
+		$publish = $facebook->api('/me/' . $options["app_namespace"] . ':publish', 'POST', array('tags' => $tags, 'article' => get_permalink($post_id)));
 	}
 	catch (FacebookApiException $e) {
 		error_log(var_export($e,1));

@@ -154,18 +154,24 @@ function fb_add_friend_tag_box_save( $post_id ) {
 
 	add_post_meta($post_id, 'fb_tagged_friends', $friends_details_meta, true);
 }
-
+$options = get_option('fb_options');
+print_r($options['social_publisher']);
 function fb_post_to_fb_page($post_id) {
 	global $facebook;
 
 	$options = get_option('fb_options');
-	$fan_page_fb_id = $options['social_publisher']['publish_to_fan_page'];
+
+	$app_id = $options["app_id"];
+
+	preg_match_all("/(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
+
+	error_log(var_export($fan_page_info,1));
 
 	if ( ! isset( $facebook ) )
 		return;
 
 	try {
-		$publish = $facebook->api('/' . $fan_page_fb_id . '/feed', 'POST', array('from' => $fan_page_fb_id, 'source' => get_permalink($post_id)));
+		$publish = $facebook->api('/' . $fan_page_info[0][1] . '/feed', 'POST', array('access_token' => $fan_page_info[0][2], 'from' => $fan_page_info[0][1], 'source' => get_permalink($post_id)));
 	}
 	catch (FacebookApiException $e) {
 		error_log(var_export($e,1));
@@ -185,7 +191,8 @@ function fb_get_social_publisher_fields() {
 	$accounts_options = array();
 
 	foreach($accounts as $account) {
-		$accounts_options[$account['id']] = $account['name'];
+		$account_options_key = $account['id'] . "@@!!" . $account['access_token'];
+		$accounts_options[$account_options_key] = $account['name'];
 	}
 
 	$parent = array('name' => 'social_publisher',

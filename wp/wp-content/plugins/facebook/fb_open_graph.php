@@ -1,5 +1,4 @@
 <?php
-add_action( 'wp_head','fb_add_og_protocol' );
 
 /**
  * Recursively build RDFa <meta> elements used for Open Graph protocol
@@ -99,6 +98,10 @@ function fb_add_og_protocol() {
 				$meta_tags['http://ogp.me/ns#image'] = array( $image );
 			}
 		}
+	} else if ( is_author() && isset( $post->post_author ) ) {
+		$meta_tags['http://ogp.me/ns#type'] = 'profile';
+		$meta_tags['http://ogp.me/ns/profile#first_name'] = get_the_author_meta( 'first_name', $post->post_author );
+		$meta_tags['http://ogp.me/ns/profile#last_name'] = get_the_author_meta( 'last_name', $post->post_author );
 	}
 
 	$options = get_option( 'fb_options' );
@@ -111,5 +114,5 @@ function fb_add_og_protocol() {
 		fb_output_og_protocol( $property, $content );
 	}
 }
-
+add_action( 'wp_head', 'fb_add_og_protocol' );
 ?>

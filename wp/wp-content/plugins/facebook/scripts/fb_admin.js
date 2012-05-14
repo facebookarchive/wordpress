@@ -18,7 +18,7 @@ function authFacebook() {
 		} else {
 			console.log('User cancelled login or did not fully authorize.');
 		}
-	});
+	}, {scope: 'manage_pages, publish_actions, publish_stream'});
 }
 
 jQuery(function() {

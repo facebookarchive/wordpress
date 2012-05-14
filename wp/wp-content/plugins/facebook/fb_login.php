@@ -4,11 +4,13 @@ function fb_check_connected_accounts() {
 	global $current_user;
 	get_currentuserinfo();
 
+	$options = get_option('fb_options');
+
 	//see if they have connected their account to facebook
 	$fb_data = get_user_meta($current_user->ID, 'fb_data', true);
 
 	//if no, show message prompting to connect
-	if (empty($fb_data['uid'])) {
+	if (empty($fb_data['uid']) && $options['social_publisher']['enabled']) {
 		$fb_user = fb_get_current_user();
 
 		if ($fb_user) {
@@ -17,7 +19,7 @@ function fb_check_connected_accounts() {
 			update_user_meta($current_user->ID, 'fb_data', $fb_user_data);
 		}
 		else {
-			fb_admin_dialog( __('The Facebook plugin is enabled. <a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a> to get full Facebook functionality.', 'facebook' ), true);
+			fb_admin_dialog( __('Facebook social publishing is enabled. <a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a> to get full functionality, including adding new Posts to your Timeline.', 'facebook' ), true);
 		}
 	}
 	else {

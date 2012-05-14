@@ -6,7 +6,6 @@
 
 //publish to fan page, if defined
 
-
 add_action( 'init','fb_friend_autocomplete' );
 
 function fb_friend_autocomplete() {
@@ -24,10 +23,8 @@ function fb_friend_autocomplete() {
 			}
 		}
 		catch (FacebookApiException $e) {
-			error_log(var_export($e));
+			error_log(var_export($e, 1));
 		}
-
-
 
 		if (isset($_GET['q'])) {
 			$q = strtolower($_GET['q']);
@@ -52,7 +49,7 @@ function fb_friend_autocomplete() {
 		else {
 			if (!empty($results)) {
 				foreach ($results as $result) {
-					echo '<img src="http://graph.facebook.com/' . $result[1] . '/picture/" width="25" height="25"> &nbsp;' . $result[0] . "\n";
+					echo '<img src="http://graph.facebook.com/' . $result[1] . '/picture/" width="25" height="25"> &nbsp;' . $result[0] . '<span style="display: none;">(' . $result[1] . ')</span>' . "\n";
 				}
 			}
 		}
@@ -61,82 +58,107 @@ function fb_friend_autocomplete() {
 	}
 }
 
+function fb_get_user_pages() {
+	global $facebook;
+
+	$accounts = array();
+
+	if ( ! isset( $facebook ) )
+			return $accounts;
+
+	try {
+		$accounts = $facebook->api('/me/accounts');
+	}
+	catch (FacebookApiException $e) {
+		error_log(var_export($e, 1));
+
+		return $accounts;
+	}
+
+	return $accounts['data'];
+}
+
 add_action( 'add_meta_boxes', 'fb_add_friend_tag_box' );
 add_action( 'save_post', 'fb_add_friend_tag_box_save' );
 
 function fb_add_friend_tag_box() {
-    add_meta_box(
-        'fb_friend_tag_box_id',
-        __( 'Tag Facebook Friends', 'fb_friend_tag_box_id_textdomain' ),
-        'fb_add_friend_tag_box_content',
-        'post'
-    );
-    add_meta_box(
-        'fb_friend_tag_box_id',
-        __( 'Tag Facebook Friends', 'fb_friend_tag_box_id_textdomain' ),
-        'fb_add_friend_tag_box_content',
-        'page'
-    );
+		add_meta_box(
+				'fb_friend_tag_box_id',
+			  __( 'Tag Facebook Friends', 'fb_friend_tag_box_id_textdomain' ),
+				'fb_add_friend_tag_box_content',
+				'post'
+		);
+		add_meta_box(
+				'fb_friend_tag_box_id',
+				__( 'Tag Facebook Friends', 'fb_friend_tag_box_id_textdomain' ),
+				'fb_add_friend_tag_box_content',
+				'page'
+		);
 }
 
 function fb_add_friend_tag_box_content( $post ) {
 	wp_enqueue_script('suggest');
 
-  // Use nonce for verification
-  wp_nonce_field( plugin_basename( __FILE__ ), 'fb_friend_tag_box_noncename' );
+	// Use nonce for verification
+	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_friend_tag_box_noncename' );
 
-  // The actual fields for data entry
-  echo '<label for="fb_friend_tag_box_new_field">';
-       _e("", 'fb_friend_tag_box_textdomain' );
-  echo '</label> ';
-  echo '<input type="text" id="suggest" autocomplete="off" name="fb_friend_tag_box_new_field" value="" size="25" />';
+	// The actual fields for data entry
+	echo '<label for="fb_friend_tag_box_new_field">';
+			 _e("", 'fb_friend_tag_box_textdomain' );
+	echo '</label> ';
+	echo '<input type="text" id="suggest" autocomplete="off" name="fb_friend_tag_box_new_field" value="" size="25" />';
 }
 
 function fb_add_friend_tag_box_save( $post_id ) {
-  // verify if this is an auto save routine.
-  // If it is our form has not been submitted, so we dont want to do anything
-  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
-      return;
+	// verify if this is an auto save routine.
+	// If it is our form has not been submitted, so we dont want to do anything
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+			return;
 
-  // verify this came from the our screen and with proper authorization,
-  // because save_post can be triggered at other times
+	// verify this came from the our screen and with proper authorization,
+	// because save_post can be triggered at other times
 
-  if ( empty($_POST['fb_friend_tag_box_noncename']) || !wp_verify_nonce( $_POST['fb_friend_tag_box_noncename'], plugin_basename( __FILE__ ) ) )
-      return;
+	if ( empty($_POST['fb_friend_tag_box_noncename']) || !wp_verify_nonce( $_POST['fb_friend_tag_box_noncename'], plugin_basename( __FILE__ ) ) )
+			return;
 
 
-  // Check permissions
-  if ( 'page' == $_POST['post_type'] )
-  {
-    if ( !current_user_can( 'edit_page', $post_id ) )
-        return;
-  }
-  else
-  {
-    if ( !current_user_can( 'edit_post', $post_id ) )
-        return;
-  }
+	// Check permissions
+	if ( 'page' == $_POST['post_type'] ) {
+		if ( !current_user_can( 'edit_page', $post_id ) )
+			return;
+	}
+	else {
+		if ( !current_user_can( 'edit_post', $post_id ) )
+			return;
+	}
 
-  // OK, we're authenticated: we need to find and save the data
+	// OK, we're authenticated: we need to find and save the data
 
-  $data = $_POST['fb_friend_tag_box_new_field'];
+	$data = $_POST['fb_friend_tag_box_new_field'];
 
-  // probably using add_post_meta(), update_post_meta(), or
-  // a custom table (see Further Reading section below)
+	preg_match_all(
+		"/([A-Z].*?)\((.*?)\)/s",
+		$data,
+		$friend_details,
+		PREG_SET_ORDER // formats data into an array of posts
+	);
+
+	// probably using add_post_meta(), update_post_meta(), or
+	// a custom table (see Further Reading section below)
+
+	$friends_details_meta = array();
+
+	foreach($friend_details as $friend_detail) {
+		$friends_details_meta[] = array('id' => $friend_detail[2], 'name' => $friend_detail[1]);
+	}
+
+	add_post_meta($post_id, 'fb_tagged_friends', $friends_details_meta, true);
 }
-
-
-
-
-
-
-
 
 function fb_post_to_fb_page($post_id) {
 	global $facebook;
 
 	$options = get_option('fb_options');
-
 	$fan_page_fb_id = $options['social_publisher']['publish_to_fan_page'];
 
 	if ( ! isset( $facebook ) )
@@ -144,37 +166,51 @@ function fb_post_to_fb_page($post_id) {
 
 	try {
 		$publish = $facebook->api('/' . $fan_page_fb_id . '/feed', 'POST', array('from' => $fan_page_fb_id, 'source' => get_permalink($post_id)));
-
-		return $user;
 	}
 	catch (FacebookApiException $e) {
-		error_log(var_export($e));
+		error_log(var_export($e,1));
 	}
+}
+
+function fb_post_to_author_fb_timeline() {
+
 }
 
 
 function fb_get_social_publisher_fields() {
+	global $facebook;
+
+	$accounts = fb_get_user_pages();
+
+	$accounts_options = array();
+
+	foreach($accounts as $account) {
+		$accounts_options[$account['id']] = $account['name'];
+	}
+
 	$parent = array('name' => 'social_publisher',
 									'field_type' => 'checkbox',
 									'help_text' => __( 'Click to learn more.', 'facebook' ),
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
 									);
 
-	$children = array(array('name' => 'publish_to_authors_facebook_profile',
-													'field_type' => 'dropdown',
-													'options' => array('standard', 'button_count', 'box_count'),
-													'help_text' => __( 'Determines the size and amount of social context at the bottom.', 'facebook' ),
+
+	$children = array(array('name' => 'publish_to_authors_facebook_timeline',
+													'field_type' => 'checkbox',
+													'default' => true,
+													'help_text' => __( 'Publish new posts to the author\'s Facebook Timeline and allow tagging friends.', 'facebook' ),
 													),
 										array('name' => 'publish_to_fan_page',
-													'field_type' => 'text',
-													'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
+													'field_type' => 'dropdown',
+													'options' => $accounts_options,
+													'help_text' => __( 'New posts will be publish to this Facebook Page.', 'facebook' ),
 													),
 										);
 
 	fb_construct_fields('settings', $children, $parent);
 }
 
-//add_action( 'transition_post_status', 'fb_publish_later',10,3);
+add_action( 'transition_post_status', 'fb_publish_later',10,3);
 function fb_publish_later($new_status, $old_status, $post) {
 	// check that the new status is "publish" and that the old status was not "publish"
 	if ($new_status == 'publish' && $old_status != 'publish') {
@@ -183,6 +219,8 @@ function fb_publish_later($new_status, $old_status, $post) {
 		foreach ( $post_types as $post_type ) {
 			if ( $post->post_type == $post_type->name ) {
 				fb_post_to_fb_page($post->ID);
+
+				fb_post_to_author_fb_timeline();
 
 				break;
 			}

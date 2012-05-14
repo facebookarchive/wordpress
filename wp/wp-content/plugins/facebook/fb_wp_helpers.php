@@ -69,13 +69,13 @@ function fb_construct_fields_children($placement, $children, $parent = null, $ob
 					$children_output .= '<select name="' . $object->get_field_name( $child['name'] ) . '" id="' . $object->get_field_id( $child['name'] ) . '">';
 
 					if (isset($child_value)) {
-						foreach ($child['options'] as $option) {
-							$children_output .= '<option value="' . $option . '" ' . selected( $child_value, $option, false ) . '>' . $option . '</option>';
+						foreach ($child['options'] as $key => $val) {
+							$children_output .= '<option value="' . $key . '" ' . selected( $child_value, $key, false ) . '>' . $val . '</option>';
 						}
 					}
 					else {
-						foreach ($child['options'] as $option) {
-							$children_output .= '<option value="' . $option . '">' . $option . '</option>';
+						foreach ($child['options'] as $key => $val) {
+							$children_output .= '<option value="' . $key . '">' . $val . '</option>';
 						}
 					}
 
@@ -156,13 +156,13 @@ function fb_construct_fields_children($placement, $children, $parent = null, $ob
 					$children_output .= '<select name="fb_options' . $parent_js_array . '[' . $child['name'] . ']">';
 
 					if (isset($child_value)) {
-						foreach ($child['options'] as $option) {
-							$children_output .= '<option value="' . $option . '" ' . selected( $child_value, $option, false ) . '>' . $option . '</option>';
+						foreach ($child['options'] as $key => $val) {
+							$children_output .= '<option value="' . $key . '" ' . selected( $child_value, $key, false ) . '>' . $val . '</option>';
 						}
 					}
 					else {
-						foreach ($child['options'] as $option) {
-							$children_output .= '<option value="' . $option . '">' . $option . '</option>';
+						foreach ($child['options'] as $key => $val) {
+							$children_output .= '<option value="' . $key . '">' . $val . '</option>';
 						}
 					}
 

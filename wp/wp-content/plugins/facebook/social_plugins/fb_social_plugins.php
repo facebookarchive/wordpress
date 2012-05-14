@@ -36,8 +36,8 @@ function fb_apply_filters() {
 		add_filter('the_content', 'fb_comments_automatic', 30);
 		add_filter('comments_array', 'fb_close_wp_comments');
 		add_filter('the_posts', 'fb_set_wp_comment_status');
-		add_filter('comments_open', 'fb_close_wp_comments', 10, 2);
-		add_filter('pings_open', 'fb_close_wp_comments', 10, 2);
+		//add_filter('comments_open', 'fb_close_wp_comments', 10, 2);
+		//add_filter('pings_open', 'fb_close_wp_comments', 10, 2);
 		add_action('wp_footer', 'fb_hide_wp_comments', 30);
 	}
 }

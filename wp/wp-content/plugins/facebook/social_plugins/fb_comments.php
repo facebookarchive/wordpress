@@ -54,19 +54,21 @@ function fb_get_comments_count() {
 }
 
 function fb_comments_automatic($content) {
-	if ( is_singular() ) {
-		$options = get_option('fb_options');
+	if ( comments_open( get_the_ID() ) && post_type_supports( get_post_type(), 'comments' ) ) {
+		if ( is_singular() ) {
+			$options = get_option('fb_options');
 
-		foreach($options['comments'] as $param => $val) {
-			$param = str_replace('_', '-', $param);
+			foreach($options['comments'] as $param => $val) {
+				$param = str_replace('_', '-', $param);
 
-			$options['comments']['data-' . $param] = $val;
+				$options['comments']['data-' . $param] = $val;
+			}
+
+			$content .= fb_get_comments($options['comments']);
 		}
-
-		$content .= fb_get_comments($options['comments']);
-	}
-	else {
-		$content .= fb_get_comments_count();
+		else {
+			$content .= fb_get_comments_count();
+		}
 	}
 
 	return $content;

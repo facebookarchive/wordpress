@@ -53,8 +53,8 @@ function fb_add_og_protocol() {
 			$meta_tags['http://ogp.me/ns#description'] = apply_filters( 'the_excerpt', get_the_excerpt() );
 		$meta_tags['http://ogp.me/ns/article#published_time'] = get_the_date('c');
 		$meta_tags['http://ogp.me/ns/article#modified_time'] = get_the_modified_date('c');
-		if ( is_multi_author() && post_type_supports( $post_type, 'author' ) )
-			$meta_tags['http://ogp.me/ns/article#author'] = get_author_posts_url( get_the_author_meta('ID') );
+		if ( post_type_supports( $post_type, 'author' ) && isset( $post->post_author ) )
+			$meta_tags['http://ogp.me/ns/article#author'] = get_author_posts_url( $post->post_author );
 
 		// add the first category as a section. all other categories as tags
 		$cat_ids = get_the_category();
@@ -65,8 +65,8 @@ function fb_add_og_protocol() {
 
 			//output the rest of the categories as tags
 			unset( $cat_ids[0] );
-			$meta_tags['http://ogp.me/ns/article#tag'] = array();
 			if ( ! empty( $cat_ids ) ) {
+				$meta_tags['http://ogp.me/ns/article#tag'] = array();
 				foreach( $cat_ids as $cat_id ) {
 					$cat = get_category( $cat_id );
 					$meta_tags['http://ogp.me/ns/article#tag'][] = $cat->name;

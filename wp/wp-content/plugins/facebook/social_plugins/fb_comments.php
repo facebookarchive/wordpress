@@ -128,7 +128,7 @@ function fb_get_comments_fields_array() {
 													),
 										array('name' => 'colorscheme',
 													'field_type' => 'dropdown',
-													'options' => array('light', 'dark'),
+													'options' => array('light' => 'light', 'dark' => 'dark'),
 													'help_text' => 'The color scheme of the plugin.',
 													),
 										);

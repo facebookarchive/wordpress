@@ -155,7 +155,7 @@ function fb_add_friend_tag_box_save( $post_id ) {
 	add_post_meta($post_id, 'fb_tagged_friends', $friends_details_meta, true);
 }
 $options = get_option('fb_options');
-print_r($options['social_publisher']);
+error_log(var_export($options,1));
 function fb_post_to_fb_page($post_id) {
 	global $facebook;
 
@@ -178,8 +178,18 @@ function fb_post_to_fb_page($post_id) {
 	}
 }
 
-function fb_post_to_author_fb_timeline() {
+function fb_post_to_author_fb_timeline($post_id) {
+	global $facebook;
 
+	if ( ! isset( $facebook ) )
+		return;
+
+	try {
+		$publish = $facebook->api('/me/matt-wp-plugin:publish', 'POST', array('article' => get_permalink($post_id)));
+	}
+	catch (FacebookApiException $e) {
+		error_log(var_export($e,1));
+	}
 }
 
 
@@ -200,7 +210,6 @@ function fb_get_social_publisher_fields() {
 									'help_text' => __( 'Click to learn more.', 'facebook' ),
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
 									);
-
 
 	$children = array(array('name' => 'publish_to_authors_facebook_timeline',
 													'field_type' => 'checkbox',
@@ -227,7 +236,7 @@ function fb_publish_later($new_status, $old_status, $post) {
 			if ( $post->post_type == $post_type->name ) {
 				fb_post_to_fb_page($post->ID);
 
-				fb_post_to_author_fb_timeline();
+				fb_post_to_author_fb_timeline($post->ID);
 
 				break;
 			}

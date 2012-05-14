@@ -109,7 +109,7 @@ function fb_get_subscribe_fields_array($placement) {
 	$array['children'] = array(array('name' => 'layout',
 													'field_type' => 'dropdown',
 													'default' => 'standard',
-													'options' => array('standard', 'button_count', 'box_count'),
+													'options' => array('standard' => 'standard', 'button_count' => 'button_count', 'box_count' => 'box_count'),
 													'help_text' => __( 'Determines the size and amount of social context at the bottom.', 'facebook' ),
 													),
 										array('name' => 'width',
@@ -125,13 +125,13 @@ function fb_get_subscribe_fields_array($placement) {
 										array('name' => 'colorscheme',
 													'field_type' => 'dropdown',
 													'default' => 'light',
-													'options' => array('light', 'dark'),
+													'options' => array('light' => 'light', 'dark' => 'dark'),
 													'help_text' => __( 'The color scheme of the plugin.', 'facebook' ),
 													),
 										array('name' => 'font',
 													'field_type' => 'dropdown',
 													'default' => 'arial',
-													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
+													'options' => array('arial' => 'arial', 'lucida grande' => 'lucida grande', 'segoe ui' => 'segoe ui', 'tahoma' => 'tahoma', 'trebuchet ms' => 'trebuchet ms', 'verdana' => 'verdana'),
 													'help_text' => __( 'The font of the plugin.', 'facebook' ),
 													),
 										);
@@ -139,7 +139,7 @@ function fb_get_subscribe_fields_array($placement) {
 	if ($placement == 'settings') {
 		$array['children'][] = array('name' => 'position',
 													'field_type' => 'dropdown',
-													'options' => array('top', 'bottom', 'both'),
+													'options' => array('top' => 'top', 'bottom' => 'bottom', 'both' => 'both'),
 													'help_text' => __( 'Where the button will display on the page or post.', 'facebook' ),
 													);
 	}

@@ -98,7 +98,7 @@ function fb_get_recommendations_box_fields_array($placement) {
 										array('name' => 'colorscheme',
 													'field_type' => 'dropdown',
 													'default' => 'light',
-													'options' => array('light', 'dark'),
+													'options' => array('light' => 'light', 'dark' => 'dark'),
 													'help_text' => __( 'The color scheme of the plugin.', 'facebook' ),
 													),
 										array('name' => 'border_color',
@@ -109,7 +109,7 @@ function fb_get_recommendations_box_fields_array($placement) {
 										array('name' => 'font',
 													'field_type' => 'dropdown',
 													'default' => 'arial',
-													'options' => array('arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'),
+													'options' => array('arial' => 'arial', 'lucida grande' => 'lucida grande', 'segoe ui' => 'segoe ui', 'tahoma' => 'tahoma', 'trebuchet ms' => 'trebuchet ms', 'verdana' => 'verdana'),
 													'help_text' => __( 'The font of the plugin.', 'facebook' ),
 													),
 										);

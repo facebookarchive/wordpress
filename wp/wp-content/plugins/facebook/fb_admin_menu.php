@@ -108,6 +108,10 @@ function fb_get_main_settings_fields() {
 													'field_type' => 'text',
 													'help_text' => __( 'Your app secret.', 'facebook' ),
 													),
+										array('name' => 'app_namespace',
+													'field_type' => 'text',
+													'help_text' => __( 'Your app namespace.', 'facebook' ),
+													),
 										);
 
 	fb_construct_fields('settings', $children);

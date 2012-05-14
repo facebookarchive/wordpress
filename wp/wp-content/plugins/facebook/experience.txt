@@ -22,6 +22,7 @@ FB
   js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=413161128711224";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
+- Open Graph tool and tutorials are daunting.  We need a 'quick and dirty' sample/tut.
 
 
 
@@ -29,7 +30,7 @@ FB
 
 
 
-Bug count: 
+Bug count:
 
 https://developers.facebook.com/apps/413161128711224/summary?web_hosting=1
 https://blazing-rain-7743.herokuapp.com/

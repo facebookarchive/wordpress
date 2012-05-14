@@ -1,3 +1,5 @@
 # local WP config
-
 wp-config.php
+
+# WP uploads dir
+uploads/

@@ -102,6 +102,8 @@ function fb_add_og_protocol() {
 		$meta_tags['http://ogp.me/ns#type'] = 'profile';
 		$meta_tags['http://ogp.me/ns/profile#first_name'] = get_the_author_meta( 'first_name', $post->post_author );
 		$meta_tags['http://ogp.me/ns/profile#last_name'] = get_the_author_meta( 'last_name', $post->post_author );
+		if ( is_multi_author() )
+			$meta_tags['http://ogp.me/ns/profile#username'] = get_the_author_meta( 'login', $post->post_author );
 	}
 
 	$options = get_option( 'fb_options' );

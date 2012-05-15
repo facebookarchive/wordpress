@@ -20,7 +20,18 @@ function fb_send_button_automatic($content) {
 		$options['send']['data-' . $param] =  $val;
 	}
 
-	$content .= fb_get_send_button($options['send']);
+	switch ($options['send']['position']) {
+		case 'top':
+			$content = fb_get_send_button($options['send']) . $content;
+			break;
+		case 'bottom':
+			$content .= fb_get_send_button($options['send']);
+			break;
+		case 'both':
+			$content = fb_get_send_button($options['send']) . $content;
+			$content .= fb_get_send_button($options['send']);
+			break;
+	}
 
 	return $content;
 }

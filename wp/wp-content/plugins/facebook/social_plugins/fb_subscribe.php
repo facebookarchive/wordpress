@@ -25,7 +25,18 @@ function fb_subscribe_button_automatic($content) {
 	if (isset($fb_data['username'])) {
 		$options['subscribe']['data-href'] = 'http://www.facebook.com/' . $fb_data['username'];
 
-		$content .= fb_get_subscribe_button($options['subscribe']);
+		switch ($options['subscribe']['position']) {
+			case 'top':
+				$content = fb_get_subscribe_button($options['subscribe']) . $content;
+				break;
+			case 'bottom':
+				$content .= fb_get_subscribe_button($options['subscribe']);
+				break;
+			case 'both':
+				$content = fb_get_subscribe_button($options['subscribe']) . $content;
+				$content .= fb_get_subscribe_button($options['subscribe']);
+				break;
+		}
 	}
 
 	return $content;

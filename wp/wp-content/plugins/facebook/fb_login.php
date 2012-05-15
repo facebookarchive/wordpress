@@ -6,6 +6,10 @@ function fb_check_connected_accounts() {
 
 	$options = get_option('fb_options');
 
+	// check if we have enough info to handle the authFacebook function
+	if ( ! $options || empty( $options['app_id'] ) || empty( $options['app_secret'] ) )
+		return;
+
 	//see if they have connected their account to facebook
 	$fb_data = get_user_meta($current_user->ID, 'fb_data', true);
 

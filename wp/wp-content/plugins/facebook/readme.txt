@@ -1,3 +1,5 @@
+Copyright Facebook
+
 [TODO]
 === Plugin Name ===
 Contributors: markjaquith, mdawaffe (this should be a list of wordpress.org userid's)

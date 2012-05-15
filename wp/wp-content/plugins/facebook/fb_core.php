@@ -6,10 +6,10 @@
 /*
 Plugin Name: Facebook
 Plugin URI: [TODO]
-Description: [TODO]
-Author: Facebook: Matt Kelly (matthwk)
+Description: The official Facebook for WordPress plugin.  Deep social integration in just a couple of clicks.
+Author: Facebook
 Version: 1.0
-Author URI: http://developers.facebook.com/
+Author URI: [TODO]
 License: [TODO]
 */
 

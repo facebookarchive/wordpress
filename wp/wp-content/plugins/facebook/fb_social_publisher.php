@@ -170,7 +170,9 @@ function fb_post_to_fb_page($post_id) {
 		return;
 
 	try {
-		$publish = $facebook->api('/' . $fan_page_info[0][1] . '/feed', 'POST', array('access_token' => $fan_page_info[0][2], 'from' => $fan_page_info[0][1], 'source' => get_permalink($post_id)));
+		$publish_result = $facebook->api('/' . $fan_page_info[0][1] . '/feed', 'POST', array('access_token' => $fan_page_info[0][2], 'from' => $fan_page_info[0][1], 'source' => get_permalink($post_id)));
+
+		add_post_meta($post_id, 'fb_fan_page_post_id', $publish_result['id'], true);
 	}
 	catch (FacebookApiException $e) {
 		error_log(var_export($e,1));
@@ -222,16 +224,27 @@ function fb_get_social_publisher_fields() {
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
 									);
 
+	if (empty($accounts_options)) {
+		$fan_page_option = array('name' => 'publish_to_fan_page',
+													'field_type' => 'disabled_text',
+													'disabled_text' => '<a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a>',
+													'help_text' => __( 'New posts will be publish to this Facebook Page.', 'facebook' ),
+													);
+	}
+	else {
+		$fan_page_option = array('name' => 'publish_to_fan_page',
+													'field_type' => 'dropdown',
+													'options' => $accounts_options,
+													'help_text' => __( 'New posts will be publish to this Facebook Page.', 'facebook' ),
+													);
+	}
+
 	$children = array(array('name' => 'publish_to_authors_facebook_timeline',
 													'field_type' => 'checkbox',
 													'default' => true,
 													'help_text' => __( 'Publish new posts to the author\'s Facebook Timeline and allow tagging friends.', 'facebook' ),
 													),
-										array('name' => 'publish_to_fan_page',
-													'field_type' => 'dropdown',
-													'options' => $accounts_options,
-													'help_text' => __( 'New posts will be publish to this Facebook Page.', 'facebook' ),
-													),
+										$fan_page_option
 										);
 
 	fb_construct_fields('settings', $children, $parent);
@@ -253,6 +266,28 @@ function fb_publish_later($new_status, $old_status, $post) {
 			}
 		}
 	}
+}
+
+add_action('delete_post', 'fb_delete_social_posts', 10);
+
+function fb_delete_social_posts($post_id) {
+	$fb_page_post_id = get_post_meta($post_id, 'fb_fan_page_post_id', true);
+
+	try {
+		$delete_result = $facebook->api('/' . $fb_page_post_id, 'DELETE');
+	}
+	catch (FacebookApiException $e) {
+		error_log(var_export($e,1));
+	}
+
+	/*$fb_timeline_post_id = get_post_meta($post_id, 'fb_timeline_post_id', true);
+
+	try {
+		$delete_result = $facebook->api('/' . $fb_page_post_id, 'DELETE');
+	}
+	catch (FacebookApiException $e) {
+		error_log(var_export($e,1));
+	}*/
 }
 
 ?>

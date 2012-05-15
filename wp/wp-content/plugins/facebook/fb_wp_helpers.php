@@ -95,6 +95,14 @@ function fb_construct_fields_children($placement, $children, $parent = null, $ob
 					$children_output .= '<input id="' . $object->get_field_id( $child['name'] ) . '" name="' . $object->get_field_name( $child['name'] ) . '" type="text" value="' . $child_value . '">';
 
 					break;
+				case 'disabled_text':
+					$text_field_value = '';
+
+					$children_output .= $help_link . ' <label for="' . $object->get_field_id( $child['name'] ) . '">' . ucwords(str_replace('_', ' ', $child['name'])) . '</label> &nbsp;';
+
+					$children_output .= $child['disabled_text'];
+
+					break;
 			}
 
 			$children_output .= '</p>';
@@ -140,10 +148,22 @@ function fb_construct_fields_children($placement, $children, $parent = null, $ob
 				if (isset($options[$parent['name']][$child['name']])) {
 					$child_value = $options[$parent['name']][$child['name']];
 				}
+				elseif (isset($child['default'])) {
+					$child_value = $child['default'];
+				}
+				else {
+					$child_value = '';
+				}
 			}
 			else {
 				if (isset($options[$child['name']])) {
 					$child_value = $options[$child['name']];
+				}
+				elseif (isset($child['default'])) {
+					$child_value = $child['default'];
+				}
+				else {
+					$child_value = '';
 				}
 			}
 
@@ -185,6 +205,12 @@ function fb_construct_fields_children($placement, $children, $parent = null, $ob
 					$children_output .= '	<tr valign="top"' . $display . ' id="' . $parent['name'] . '_' . $child['name'] . '">
 							<th scope="row">' . ucwords(str_replace('_', ' ', $child['name'])) . '</th>
 							<td>' . $help_link . '&nbsp; <input type="text" name="fb_options' . $parent_js_array . '[' . $child['name'] . ']" value="' . $text_field_value . '"></td>
+							</tr>';
+					break;
+				case 'disabled_text':
+					$children_output .= '	<tr valign="top"' . $display . ' id="' . $parent['name'] . '_' . $child['name'] . '">
+							<th scope="row">' . ucwords(str_replace('_', ' ', $child['name'])) . '</th>
+							<td>' . $help_link . '&nbsp; ' . $child['disabled_text'] . '</td>
 							</tr>';
 					break;
 			}

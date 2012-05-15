@@ -67,7 +67,7 @@ add_action('admin_notices', 'fb_install_warning');
 function fb_js_sdk_setup() {
 	$options = get_option( 'fb_options' );
 
-	if ( ! isset( $options['app_id'] ) )
+	if ( empty( $options['app_id'] ) )
 		return;
 
 	$app_id = $options['app_id'];
@@ -82,7 +82,7 @@ function fb_js_sdk_setup() {
 	) );
 
 	// enforce minimum requirements
-	if ( ! isset( $args['appId'] ) )
+	if ( empty( $args['appId'] ) )
 		return;
 
 	echo '<script type="text/javascript">window.fbAsyncInit=function(){FB.init(' . json_encode( $args ) . ');';
@@ -115,7 +115,7 @@ function fb_root() {
 function fb_init() {
 	$options = get_option( 'fb_options' );
 
-	if ( ! isset( $options['app_id'] ) )
+	if ( empty( $options['app_id'] ) )
 		return;
 
 	add_action( 'wp_head', 'fb_js_sdk_setup' );

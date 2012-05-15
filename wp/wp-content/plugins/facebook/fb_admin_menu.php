@@ -48,7 +48,7 @@ function fb_settings_page() {
 			fb_get_like_fields();
 
 			echo '<h3>' . esc_html__( 'Subscribe Button', 'facebook' ) . '</h3>';
-			echo '<p>' . sprintf( esc_html__( 'The %s lets a user subscribe to your public updates on Facebook.', 'facebook' ), '<a href="https://developers.facebook.com/docs/reference/plugins/subscribe/">' . esc_html__( 'Subscribe button', 'facebook' ) . '</a>' ) . '</p>';
+			echo '<p>' . sprintf( esc_html__( 'The %s lets a user subscribe to your public updates on Facebook.  Each WordPress author must authenticate with Facebook in order for the Subscribe button to appear on their Posts.', 'facebook' ), '<a href="https://developers.facebook.com/docs/reference/plugins/subscribe/">' . esc_html__( 'Subscribe button', 'facebook' ) . '</a>' ) . '</p>';
 			fb_get_subscribe_fields();
 
 			echo '<h3>' . esc_html__( 'Send Button', 'facebook' ) . '</h3>';

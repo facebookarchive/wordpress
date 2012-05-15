@@ -38,7 +38,7 @@ class Facebook_Send_Button extends WP_Widget {
 		parent::__construct(
 	 		'fb_send', // Base ID
 			'Facebook Send Button', // Name
-			array( 'description' => __( 'The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address.', 'facebook' ), ) // Args
+			array( 'description' => __( 'The Send Button allows users to easily send content to their friends.', 'facebook' ), ) // Args
 		);
 	}
 

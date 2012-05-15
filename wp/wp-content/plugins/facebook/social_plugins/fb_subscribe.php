@@ -22,9 +22,11 @@ function fb_subscribe_button_automatic($content) {
 
 	$fb_data = get_user_meta(get_the_author_meta('ID'), 'fb_data', true);
 
-	$options['subscribe']['data-href'] = 'http://www.facebook.com/' . $fb_data['username'];
+	if (isset($fb_data['username'])) {
+		$options['subscribe']['data-href'] = 'http://www.facebook.com/' . $fb_data['username'];
 
-	$content .= fb_get_subscribe_button($options['subscribe']);
+		$content .= fb_get_subscribe_button($options['subscribe']);
+	}
 
 	return $content;
 }

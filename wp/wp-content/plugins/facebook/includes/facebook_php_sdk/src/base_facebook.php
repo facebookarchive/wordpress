@@ -22,6 +22,7 @@ if (!function_exists('json_decode')) {
   throw new Exception('Facebook needs the JSON PHP extension.');
 }
 
+if ( ! class_exists( 'FacebookApiException' ) ):
 /**
  * Thrown when an API call returns an exception.
  *
@@ -105,7 +106,9 @@ class FacebookApiException extends Exception
     return $str . $this->message;
   }
 }
+endif;
 
+if ( ! class_exists( 'BaseFacebook' ) ):
 /**
  * Provides access to the Facebook Platform.  This class provides
  * a majority of the functionality needed, but the class is abstract
@@ -1267,3 +1270,4 @@ abstract class BaseFacebook
    */
   abstract protected function clearAllPersistentData();
 }
+endif;

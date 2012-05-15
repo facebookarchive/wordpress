@@ -64,7 +64,10 @@ class Facebook_Subscribe_Button extends WP_Widget {
 		if ( ! empty( $instance['title'] ) )
 			echo $before_title . $instance['title'] . $after_title;
 
-		echo fb_get_subscribe_button($instance);
+		if ($instance['href']) {
+			echo fb_get_subscribe_button($instance);
+		}
+
 		echo $after_widget;
 	}
 

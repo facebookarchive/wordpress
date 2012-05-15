@@ -15,7 +15,9 @@
  * under the License.
  */
 
-require_once "base_facebook.php";
+require_once( dirname(__FILE__) . '/base_facebook.php' );
+
+if ( ! class_exists( 'Facebook' ) ):
 
 /**
  * Extends the BaseFacebook class with the intent of using
@@ -91,3 +93,4 @@ class Facebook extends BaseFacebook
                               $key));
   }
 }
+endif;

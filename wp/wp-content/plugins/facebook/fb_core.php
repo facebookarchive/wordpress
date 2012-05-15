@@ -45,7 +45,7 @@ function fb_install_warning() {
 
 	$page = (isset($_GET['page']) ? $_GET['page'] : null);
 
-	if ((empty($options['app_id']) || empty($options['app_secret'])) && $page != 'facebook/fb_admin_menu.php') {
+	if ((empty($options['app_id']) || empty($options['app_secret'])) && $page != 'facebook/fb_admin_menu.php' && current_user_can( 'manage_options' ) ) {
 		fb_admin_dialog( sprintf( __('You must <a href="%s">configure the plugin</a> to enable Facebook for WordPress.', 'facebook' ), 'admin.php?page=facebook/fb_admin_menu.php' ), true);
 	}
 }
@@ -67,7 +67,7 @@ add_action('admin_notices', 'fb_install_warning');
 function fb_js_sdk_setup() {
 	$options = get_option( 'fb_options' );
 
-	if ( ! isset( $options['app_id'] ) )
+	if ( empty( $options['app_id'] ) )
 		return;
 
 	$app_id = $options['app_id'];
@@ -82,7 +82,7 @@ function fb_js_sdk_setup() {
 	) );
 
 	// enforce minimum requirements
-	if ( ! isset( $args['appId'] ) )
+	if ( empty( $args['appId'] ) )
 		return;
 
 	echo '<script type="text/javascript">window.fbAsyncInit=function(){FB.init(' . json_encode( $args ) . ');';
@@ -115,7 +115,7 @@ function fb_root() {
 function fb_init() {
 	$options = get_option( 'fb_options' );
 
-	if ( ! isset( $options['app_id'] ) )
+	if ( empty( $options['app_id'] ) )
 		return;
 
 	add_action( 'wp_head', 'fb_js_sdk_setup' );
@@ -164,8 +164,7 @@ function fb_get_locale() {
 }
 
 function fb_style() {
-	 wp_register_style( 'fb', plugins_url( 'style/style.css', __FILE__) );
-	 wp_enqueue_style( 'fb', plugins_url( 'style/style.css', __FILE__), array(), '1.0' );
+	wp_enqueue_style( 'fb', plugins_url( 'style/style.css', __FILE__), array(), '1.0' );
 }
 add_action( 'wp_enqueue_scripts', 'fb_style' );
 

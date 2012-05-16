@@ -270,7 +270,12 @@ function fb_publish_later($new_status, $old_status, $post) {
 
 add_action('delete_post', 'fb_delete_social_posts', 10);
 
-function fb_delete_social_posts($post_id) {
+function fb_delete_social_posts( $post_id ) {
+	global $facebook;
+
+	if ( ! isset( $facebook ) || ! is_object( $facebook ) || ! method_exists( $facebook, 'api' ) )
+		return;
+
 	$fb_page_post_id = get_post_meta($post_id, 'fb_fan_page_post_id', true);
 
 	try {

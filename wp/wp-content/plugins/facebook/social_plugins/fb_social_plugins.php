@@ -26,6 +26,8 @@ require_once( dirname(__FILE__) . '/fb_comments.php' );
  */
 function fb_apply_filters() {
 	$options = get_option('fb_options');
+	if ( ! is_array( $options ) )
+		return;
 
 	/*if (isset($options['recommendations_bar'])) {
 		add_filter('the_content', 'fb_recommendations_bar_automatic', 30);

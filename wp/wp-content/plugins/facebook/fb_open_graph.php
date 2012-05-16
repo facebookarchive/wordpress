@@ -41,6 +41,7 @@ function fb_add_og_protocol() {
 	);
 
 	if ( is_home() || is_front_page() ) {
+		$meta_tags['http://ogp.me/ns#title'] = get_bloginfo( 'name' );
 		$meta_tags['http://ogp.me/ns#description'] = get_bloginfo( 'description' );
 	} else if ( is_single() ) {
 		$post_type = get_post_type();

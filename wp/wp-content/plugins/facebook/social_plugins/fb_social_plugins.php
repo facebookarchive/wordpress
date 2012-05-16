@@ -36,11 +36,7 @@ function fb_apply_filters() {
 	if ( array_key_exists( 'like', $options ) && array_key_exists( 'enabled', $options['like'] ) && $options['like']['enabled'] ) {
 		add_filter( 'the_content', 'fb_like_button_automatic', 30 );
 	}
-
-	if ( array_key_exists( 'like', $options ) && array_key_exists( 'enabled', $options['like'] ) && $options['like']['enabled'] ) {
-		add_filter( 'the_content', 'fb_like_button_automatic', 30 );
-	}
-
+	
 	if ( array_key_exists( 'send', $options ) && array_key_exists( 'enabled', $options['send'] ) && $options['send']['enabled'] ) {
 		add_filter( 'the_content', 'fb_send_button_automatic', 30 );
 	}

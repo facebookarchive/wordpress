@@ -32,17 +32,26 @@ function fb_like_button_automatic($content) {
 		$options['like']['data-' . $param] =  $val;
 	}
 
+	$new_content = '';
+
 	switch ($options['like']['position']) {
 		case 'top':
-			$content = fb_get_like_button($options['like']) . $content;
+			$new_content = fb_get_like_button($options['like']) . $content;
 			break;
 		case 'bottom':
-			$content .= fb_get_like_button($options['like']);
+			$new_content .= fb_get_like_button($options['like']);
 			break;
 		case 'both':
-			$content = fb_get_like_button($options['like']) . $content;
-			$content .= fb_get_like_button($options['like']);
+			$new_content = fb_get_like_button($options['like']) . $content;
+			$new_content .= fb_get_like_button($options['like']);
 			break;
+	}
+
+	if ( empty( $options['like']['show_on_homepage'] ) && is_singular() ) {
+		$content = $new_content;
+	}
+	elseif ( isset($options['like']['show_on_homepage']) ) {
+		$content = $new_content;
 	}
 
 	return $content;
@@ -167,21 +176,29 @@ function fb_get_like_fields_array($placement) {
 	if ($placement == 'settings') {
 		$array['children'][] = array('name' => 'position',
 													'field_type' => 'dropdown',
+													'default' => 'both',
 													'options' => array('top' => 'top', 'bottom' => 'bottom', 'both' => 'both'),
 													'help_text' => __( 'Where the button will display on the page or post.', 'facebook' ),
+													);
+		$array['children'][] = array('name' => 'show_on_homepage',
+													'field_type' => 'checkbox',
+													'default' => true,
+													'help_text' => __( 'If the plugin should appear on the homepage as part of the Post previews.  If unchecked, the plugin will only display on the Post itself.', 'facebook' ),
 													);
 	}
 
 	if ($placement == 'widget') {
-		$array['children'][] = array('name' => 'href',
-													'field_type' => 'text',
-													'help_text' => __( 'The URL the Like button will point to.', 'facebook' ),
-													);
-
-		$array['children'][] = array('name' => 'title',
+		$title_array = array('name' => 'title',
 													'field_type' => 'text',
 													'help_text' => __( 'The title above the button.', 'facebook' ),
 													);
+		$text_array = array('name' => 'href',
+													'field_type' => 'text',
+													'default' => get_site_url(),
+													'help_text' => __( 'The URL the Like button will point to.', 'facebook' ),
+													);
+
+		array_unshift($array['children'], $title_array, $text_array);
 	}
 
 	return $array;

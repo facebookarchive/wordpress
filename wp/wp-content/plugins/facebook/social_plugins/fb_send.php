@@ -20,17 +20,26 @@ function fb_send_button_automatic($content) {
 		$options['send']['data-' . $param] =  $val;
 	}
 
+	$new_content = '';
+
 	switch ($options['send']['position']) {
 		case 'top':
-			$content = fb_get_send_button($options['send']) . $content;
+			$new_content = fb_get_send_button($options['send']) . $content;
 			break;
 		case 'bottom':
-			$content .= fb_get_send_button($options['send']);
+			$new_content .= fb_get_send_button($options['send']);
 			break;
 		case 'both':
-			$content = fb_get_send_button($options['send']) . $content;
-			$content .= fb_get_send_button($options['send']);
+			$new_content = fb_get_send_button($options['send']) . $content;
+			$new_content .= fb_get_send_button($options['send']);
 			break;
+	}
+
+	if ( empty( $options['send']['show_on_homepage'] ) && is_singular() ) {
+		$content = $new_content;
+	}
+	elseif ( isset($options['send']['show_on_homepage']) ) {
+		$content = $new_content;
 	}
 
 	return $content;
@@ -134,18 +143,25 @@ function fb_get_send_fields_array($placement) {
 													'options' => array('top' => 'top', 'bottom' => 'bottom', 'both' => 'both'),
 													'help_text' => __( 'Where the button will display on the page or post.', 'facebook' ),
 													);
+		$array['children'][] = array('name' => 'show_on_homepage',
+													'field_type' => 'checkbox',
+													'default' => true,
+													'help_text' => __( 'If the plugin should appear on the homepage as part of the Post previews.  If unchecked, the plugin will only display on the Post itself.', 'facebook' ),
+													);
 	}
 
 	if ($placement == 'widget') {
-		$array['children'][] = array('name' => 'href',
-													'field_type' => 'text',
-													'help_text' => __( 'The URL the Like button will point to.', 'facebook' ),
-													);
-
-		$array['children'][] = array('name' => 'title',
+		$title_array = array('name' => 'title',
 													'field_type' => 'text',
 													'help_text' => __( 'The title above the button.', 'facebook' ),
 													);
+		$text_array = array('name' => 'href',
+													'field_type' => 'text',
+													'default' => get_site_url(),
+													'help_text' => __( 'The URL the Sebd button will point to.', 'facebook' ),
+													);
+
+		array_unshift($array['children'], $title_array, $text_array);
 	}
 
 	return $array;

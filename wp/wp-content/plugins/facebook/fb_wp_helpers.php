@@ -45,7 +45,7 @@ function fb_construct_fields_children($placement, $children, $parent = null, $ob
 			if (isset($instance[$object_id][$child['name']])) {
 				$child_value = $instance[$object_id][$child['name']];
 			}
-			elseif (isset($child['default'])) {
+			elseif (isset($child['default']) && !$parent['enable']) {
 				$child_value = $child['default'];
 			}
 			else {
@@ -148,7 +148,7 @@ function fb_construct_fields_children($placement, $children, $parent = null, $ob
 				if (isset($options[$parent['name']][$child['name']])) {
 					$child_value = $options[$parent['name']][$child['name']];
 				}
-				elseif (isset($child['default'])) {
+				elseif (isset($child['default']) && $options[$parent['name']]['enabled'] != 'true') {
 					$child_value = $child['default'];
 				}
 				else {
@@ -192,7 +192,7 @@ function fb_construct_fields_children($placement, $children, $parent = null, $ob
 				case 'checkbox':
 					$children_output .= '	<tr valign="top"' . $display . ' id="' . $parent['name'] . '_' . $child['name'] . '">
 							<th scope="row">' . ucwords(str_replace('_', ' ', $child['name'])) . '</th>
-							<td>' . $help_link . '&nbsp; <input type="checkbox" name="fb_options' . $parent_js_array . '[' . $child['name'] . ']" value="true"' . checked(isset($child_value), 1, false) . '></td>
+							<td>' . $help_link . '&nbsp; <input type="checkbox" name="fb_options' . $parent_js_array . '[' . $child['name'] . ']" value="true"' . checked($child_value, 'true', false) . '></td>
 							</tr>';
 					break;
 				case 'text':

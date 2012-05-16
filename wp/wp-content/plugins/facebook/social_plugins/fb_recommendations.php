@@ -115,16 +115,17 @@ function fb_get_recommendations_box_fields_array($placement) {
 										);
 
 	if ($placement == 'widget') {
-		$array['children'][] = array('name' => 'header',
+		$title_array = array('name' => 'title',
+													'field_type' => 'text',
+													'help_text' => 'The title above the button.',
+													);
+		$header_array = array('name' => 'header',
 													'field_type' => 'checkbox',
 													'default' => true,
 													'help_text' => 'Show the default Facebook title header.',
 													);
 
-		$array['children'][] = array('name' => 'title',
-													'field_type' => 'text',
-													'help_text' => 'The title above the button.',
-													);
+		array_unshift($array['children'], $title_array, $header_array);
 	}
 
 	return $array;

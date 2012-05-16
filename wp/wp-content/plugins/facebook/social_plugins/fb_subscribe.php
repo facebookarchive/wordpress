@@ -22,21 +22,30 @@ function fb_subscribe_button_automatic($content) {
 
 	$fb_data = get_user_meta(get_the_author_meta('ID'), 'fb_data', true);
 
+	$new_content = '';
+
 	if (isset($fb_data['username'])) {
 		$options['subscribe']['data-href'] = 'http://www.facebook.com/' . $fb_data['username'];
 
 		switch ($options['subscribe']['position']) {
 			case 'top':
-				$content = fb_get_subscribe_button($options['subscribe']) . $content;
+				$new_content = fb_get_subscribe_button($options['subscribe']) . $content;
 				break;
 			case 'bottom':
-				$content .= fb_get_subscribe_button($options['subscribe']);
+				$new_content .= fb_get_subscribe_button($options['subscribe']);
 				break;
 			case 'both':
-				$content = fb_get_subscribe_button($options['subscribe']) . $content;
-				$content .= fb_get_subscribe_button($options['subscribe']);
+				$new_content = fb_get_subscribe_button($options['subscribe']) . $content;
+				$new_content .= fb_get_subscribe_button($options['subscribe']);
 				break;
 		}
+	}
+
+	if ( empty( $options['subscribe']['show_on_homepage'] ) && is_singular() ) {
+		$content = $new_content;
+	}
+	elseif ( isset($options['subscribe']['show_on_homepage']) ) {
+		$content = $new_content;
 	}
 
 	return $content;
@@ -155,21 +164,29 @@ function fb_get_subscribe_fields_array($placement) {
 	if ($placement == 'settings') {
 		$array['children'][] = array('name' => 'position',
 													'field_type' => 'dropdown',
+													'default' => 'both',
 													'options' => array('top' => 'top', 'bottom' => 'bottom', 'both' => 'both'),
 													'help_text' => __( 'Where the button will display on the page or post.', 'facebook' ),
+													);
+		$array['children'][] = array('name' => 'show_on_homepage',
+													'field_type' => 'checkbox',
+													'default' => true,
+													'help_text' => __( 'If the plugin should appear on the homepage as part of the Post previews.  If unchecked, the plugin will only display on the Post itself.', 'facebook' ),
 													);
 	}
 
 	if ($placement == 'widget') {
-		$array['children'][] = array('name' => 'href',
-													'field_type' => 'text',
-													'help_text' => __( 'The URL the Like button will point to.', 'facebook' ),
-													);
-
-		$array['children'][] = array('name' => 'title',
+		$title_array = array('name' => 'title',
 													'field_type' => 'text',
 													'help_text' => __( 'The title above the button.', 'facebook' ),
 													);
+		$text_array = array('name' => 'href',
+													'field_type' => 'text',
+													'default' => get_site_url(),
+													'help_text' => __( 'The URL the Subscribe button will point to.', 'facebook' ),
+													);
+
+		array_unshift($array['children'], $title_array, $text_array);
 	}
 
 	return $array;

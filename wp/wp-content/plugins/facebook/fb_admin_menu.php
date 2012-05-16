@@ -25,7 +25,7 @@ function fb_admin_menu_settings() {
 	register_setting( 'fb_options', 'fb_options', 'fb_options_validate' );
 
 	//call register settings function
-	add_action( 'admin_print_styles', 'fb_admin_style');
+	add_action( 'admin_print_styles', 'fb_admin_style' );
 	add_action( 'admin_print_scripts', 'fb_admin_scripts' );
 }
 
@@ -42,6 +42,9 @@ function fb_settings_page() {
 
 			echo '<h3>' . esc_html__( 'Main Settings', 'facebook' ) . '</h3><p></p>';
 			fb_get_main_settings_fields();
+
+			echo '<h3>' . esc_html__( 'Social Publisher', 'facebook' ) . '</h3>';
+			fb_get_social_publisher_fields();
 
 			echo '<h3>' . esc_html__( 'Like Button', 'facebook' ) . '</h3>';
 			echo '<p>' . sprintf( esc_html__( 'The %s lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user\'s friends\' News Feed with a link back to your website.', 'facebook' ), '<a href="https://developers.facebook.com/docs/reference/plugins/like/">' . esc_html__( 'Like button', 'facebook' ) . '</a>' ) . '</p>';
@@ -62,9 +65,6 @@ function fb_settings_page() {
 			/*echo '<h3>Recommendation Bar</h3>
 			<p>The Recommendations Bar allows users to like content, get recommendations, and share what they\'re reading with their friends.</p>';
 			fb_get_recommendations_bar_fields();*/
-
-			echo '<h3>' . esc_html__( 'Social Publisher', 'facebook' ) . '</h3>';
-			fb_get_social_publisher_fields();
 
 			submit_button();
 			?>

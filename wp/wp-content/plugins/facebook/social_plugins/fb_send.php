@@ -6,7 +6,7 @@ function fb_get_send_button($options = array()) {
 		$params .= $option . '="' . $value . '" ';
 	}
 
-	$params .= 'data-ref="wp" ';
+	$params .= 'data-ref="fbwpp" ';
 
 	return '<div class="fb-send fb-social-plugin" ' . $params . '></div>';
 }
@@ -27,7 +27,7 @@ function fb_send_button_automatic($content) {
 			$new_content = fb_get_send_button($options['send']) . $content;
 			break;
 		case 'bottom':
-			$new_content .= fb_get_send_button($options['send']);
+			$new_content = $content . fb_get_send_button($options['send']);
 			break;
 		case 'both':
 			$new_content = fb_get_send_button($options['send']) . $content;

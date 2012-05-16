@@ -10,7 +10,7 @@ function fb_get_recommendations_box($options = array()) {
 		$params .= 'data-header="false" ';
 	}
 
-	$params .= 'data-ref="wp" ';
+	$params .= 'data-ref="fbwpp" ';
 
 	return '<div class="fb-recommendations fb-social-plugin" ' . $params . '></div>';
 }

@@ -10,7 +10,7 @@ function fb_get_activity_feed($options = array()) {
 		$params .= 'data-header="false" ';
 	}
 
-	$params .= 'data-ref="wp" ';
+	$params .= 'data-ref="fbwpp" ';
 
 	return '<div class="fb-activity fb-social-plugin" ' . $params . '></div>';
 }

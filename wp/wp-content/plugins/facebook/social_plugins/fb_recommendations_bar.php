@@ -6,7 +6,7 @@ function fb_get_recommendations_bar($options = array()) {
 		$params .= $option . '="' . $value . '" ';
 	}
 
-	$params .= 'data-ref="wp" ';
+	$params .= 'data-ref="fbwpp" ';
 
 	return '<div class="fb-recommendations-bar fb-social-plugin" ' . $params . '></div>';
 }

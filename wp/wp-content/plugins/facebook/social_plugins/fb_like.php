@@ -39,7 +39,7 @@ function fb_like_button_automatic($content) {
 			$new_content = fb_get_like_button($options['like']) . $content;
 			break;
 		case 'bottom':
-			$new_content .= fb_get_like_button($options['like']);
+			$new_content = $content . fb_get_like_button($options['like']);
 			break;
 		case 'both':
 			$new_content = fb_get_like_button($options['like']) . $content;

@@ -8,12 +8,13 @@ WP
 - confusing what action hooks and filters I should use
 - IRC pretty helpful
 - Need guides for building forms (for widgets and via menus)
+- Not entirely clear when I should use actions vs filters
 
 FB
 - Why do I still get captcha’d when I create an app?  I’ve built on Platform for 5 years and have 100+ apps.
-- BUG: Heroku doesn’t send intro email
-- BUG: Can keep spinning up Heroku instances
-- Why do we use mixed parentheses?
+- BUG: Heroku doesn’t send intro email (https://our.intern.facebook.com/intern/tasks/?t=1012653)
+- BUG: Can keep spinning up Heroku instances (https://our.intern.facebook.com/intern/tasks/?t=1012653)
+- JS SDK init randomly changes in each doc. E.g.,
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -23,20 +24,11 @@ FB
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 - Open Graph tool and tutorials are daunting.  We need a 'quick and dirty' sample/tut.
-
-
-
-- Really need to clean up Getting Started pages to be more high level, like https://developers.facebook.com/docs/guides/mobile/ (not saying this is perfect, but it draws you into the value prop)
-
-
-
-Bug count:
-
-https://developers.facebook.com/apps/413161128711224/summary?web_hosting=1
-https://blazing-rain-7743.herokuapp.com/
-
-
-mediaslave
-jeffsebring
-
-http://wpengineer.com/2230/removing-comments-absolutely-wordpress/
+- Bizarre scraper bugs: https://our.intern.facebook.com/intern/tasks/?t=1071278
+- Really need to clean up product intro pages to be more high level, like https://developers.facebook.com/docs/guides/mobile/ (not saying this is perfect, but it draws you into the value prop)
+- Not clear that tagging is meant for physical places
+- PHP SDK examples are poor.  Not obvious how to do even simple things like publishing to the graph.  We need to spoonfeed developers.
+- No easy way to develop what's sent via cURL in error_log (this is very useful for debugging).
+- Posting to /feed/ doesn't get OG tags scraped
+- Our Platform instrumentation isn't set up for this
+- Our Platform is not set up for thi

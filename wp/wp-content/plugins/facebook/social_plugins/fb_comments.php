@@ -95,7 +95,7 @@ function fb_get_fb_comments_seo() {
 	foreach ($comments[$url]['comments']['data'] as $key => $comment_info) {
 		$unix_timestamp = strtotime($comment_info['created_time']);
 		$output .= '<li id="' . esc_attr( 'comment-' . $key ) . '">
-			<p><a href="' . esc_url( 'https://www.facebook.com/' . $comment_info['from']['id'], array( 'http', 'https' ) ) . '">' . esc_html( $comment_info['from']['name'] ) . '</a>:</p>
+			<p><a href="' . esc_url( 'http://www.facebook.com/' . $comment_info['from']['id'], array( 'http', 'https' ) ) . '">' . esc_html( $comment_info['from']['name'] ) . '</a>:</p>
 			<p class="metadata">' . date('F jS, Y', $unix_timestamp) . ' at ' . date('g:i a', $unix_timestamp) . '</p>
 			' . $comment_info['message'] . '
 			</li>';

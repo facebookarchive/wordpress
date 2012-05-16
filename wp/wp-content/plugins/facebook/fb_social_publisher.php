@@ -180,7 +180,11 @@ function fb_post_to_fb_page($post_id) {
 }
 
 function fb_post_to_author_fb_timeline($post_id) {
+	global $post;
 	global $facebook;
+
+	if ( ! isset( $facebook ) )
+		return;
 
 	$options = get_option('fb_options');
 	$fb_tagged_friends = get_post_meta($post_id, 'fb_tagged_friends', true);
@@ -190,15 +194,28 @@ function fb_post_to_author_fb_timeline($post_id) {
 
 	foreach($fb_tagged_friends as $friend) {
 		error_log(var_export($friend,1));
+
+		try {
+			list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
+
+			$publish_result = $facebook->api('/' . $friend['id'] . '/feed', 'POST',
+																			 array('link' => apply_filters( 'rel_canonical', get_permalink()),
+																						 'picture' => $post_thumbnail_url,
+																						 'name' => get_the_title(),
+																						 'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+																						 'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+																						 ));
+		}
+		catch (FacebookApiException $e) {
+			error_log(var_export($e,1));
+		}
+
 		$tags .= $friend['id'] . ",";
 	}
 	error_log(var_export($tags,1));
 
-	if ( ! isset( $facebook ) )
-		return;
-
 	try {
-		$publish = $facebook->api('/me/' . $options["app_namespace"] . ':publish', 'POST', array('tags' => $tags, 'article' => get_permalink($post_id)));
+		$publish = $facebook->api('/me/' . $options["app_namespace"] . ':publish', 'POST', array('article' => get_permalink($post_id)));
 	}
 	catch (FacebookApiException $e) {
 		error_log(var_export($e,1));
@@ -214,8 +231,10 @@ function fb_get_social_publisher_fields() {
 	$accounts_options = array();
 
 	foreach($accounts as $account) {
-		$account_options_key = $account['id'] . "@@!!" . $account['access_token'];
-		$accounts_options[$account_options_key] = $account['name'];
+		if (isset($account['name'])) {
+			$account_options_key = $account['id'] . "@@!!" . $account['access_token'];
+			$accounts_options[$account_options_key] = $account['name'];
+		}
 	}
 
 	$parent = array('name' => 'social_publisher',

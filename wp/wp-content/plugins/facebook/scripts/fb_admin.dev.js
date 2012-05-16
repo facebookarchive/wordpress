@@ -18,10 +18,22 @@ function authFacebook() {
 		} else {
 			console.log('User cancelled login or did not fully authorize.');
 		}
-	});
+	}, {scope: 'manage_pages, publish_actions, publish_stream'});
 }
 
 jQuery(function() {
-	jQuery("#suggest").suggest("/?fb-friends=1",{
-	onSelect: function() {alert("You selected: " + this.value)}});
+	jQuery("#suggest").suggest("?fb-friends=1",{
+		minChars: 1,
+		useDelimiter: true,
+		selectFirst: true,
+		autoFill: true,
+		multiple: true,
+		//onSelect: function() {alert("You selected: " + this.value)},
+    processData: function(data) {
+			var i, processed = [];
+			for (i=0; i < data.length; i++) {
+				processed.push([data[i][0] + " - " + data[i][1]]);
+			}
+			return processed;
+		}});
 });

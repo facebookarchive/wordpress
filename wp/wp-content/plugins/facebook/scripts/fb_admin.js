@@ -22,7 +22,24 @@ function authFacebook() {
 }
 
 jQuery(function() {
-	jQuery("#suggest").suggest("?fb-friends=1",{
+	jQuery("#suggest-friends").suggest("?fb-friends=1",{
+		minChars: 1,
+		useDelimiter: true,
+		selectFirst: true,
+		autoFill: true,
+		multiple: true,
+		//onSelect: function() {alert("You selected: " + this.value)},
+    processData: function(data) {
+			var i, processed = [];
+			for (i=0; i < data.length; i++) {
+				processed.push([data[i][0] + " - " + data[i][1]]);
+			}
+			return processed;
+		}});
+});
+
+jQuery(function() {
+	jQuery("#suggest-pages").suggest("?fb-pages=1",{
 		minChars: 1,
 		useDelimiter: true,
 		selectFirst: true,

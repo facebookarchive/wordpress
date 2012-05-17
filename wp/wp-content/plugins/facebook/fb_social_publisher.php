@@ -6,9 +6,9 @@
 
 //publish to fan page, if defined
 
-add_action( 'init','fb_friend_autocomplete' );
+add_action( 'init','fb_friend_page_autocomplete' );
 
-function fb_friend_autocomplete() {
+function fb_friend_page_autocomplete() {
 	if (!empty($_GET['fb-friends'])) {
 		global $facebook;
 
@@ -43,14 +43,59 @@ function fb_friend_autocomplete() {
 			$output = strtolower($_GET['output']);
 		}
 
-		if ($output === 'json') {
-			echo json_encode($results);
+		if (!empty($results)) {
+			foreach ($results as $result) {
+				echo '<img src="http://graph.facebook.com/' . $result[1] . '/picture/" width="25" height="25"> &nbsp;' . $result[0] . '<span style="display: none;">(' . $result[1] . ')</span>' . "\n";
+			}
 		}
-		else {
-			if (!empty($results)) {
-				foreach ($results as $result) {
-					echo '<img src="http://graph.facebook.com/' . $result[1] . '/picture/" width="25" height="25"> &nbsp;' . $result[0] . '<span style="display: none;">(' . $result[1] . ')</span>' . "\n";
+
+		exit;
+	}
+
+
+	if (!empty($_GET['fb-pages'])) {
+		global $facebook;
+
+		if ( ! isset( $facebook ) )
+			return;
+
+		try {
+			$pages = $facebook->api( '/search', 'GET', array( 'q' => $_GET['q'], 'type' => 'page', 'fields' => 'picture,name,id,likes' ) );
+
+			if ( isset($pages['data']) ) {
+				foreach($pages['data'] as $page) {
+					$pages_clean[$page['name']] = array($page['picture'], $page['name'], $page['id'], $page['likes']);
 				}
+			}
+			else {
+				echo 'Error returning results.';
+				exit;
+			}
+		}
+		catch (FacebookApiException $e) {
+			error_log(var_export($e, 1));
+		}
+
+		if (isset($_GET['q'])) {
+			$q = strtolower($_GET['q']);
+
+			if ($q) {
+				foreach ($pages_clean as $key => $value) {
+					if (strpos(strtolower($key), $q) !== false) {
+						$results[] = array($key, $value);
+					}
+				}
+			}
+		}
+
+		$output = 'autocomplete';
+		if (isset($_GET['output'])) {
+			$output = strtolower($_GET['output']);
+		}
+
+		if (!empty($results)) {
+			foreach ($results as $result) {
+				echo '<img src="' . $result[1][0] . '" width="25" height="25"> &nbsp;' . $result[1][1] . '(' . number_format($result[1][3]) . ' likes) <span style="display: none;">(' . $result[1][2] . ')</span>' . "\n";
 			}
 		}
 
@@ -78,6 +123,129 @@ function fb_get_user_pages() {
 	return $accounts['data'];
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+add_action( 'add_meta_boxes', 'fb_add_page_tag_box' );
+add_action( 'save_post', 'fb_add_page_tag_box_save' );
+
+function fb_add_page_tag_box() {
+		add_meta_box(
+				'fb_page_tag_box_id',
+			  __( 'Tag Facebook Pages', 'fb_page_tag_box_id_textdomain' ),
+				'fb_add_page_tag_box_content',
+				'post'
+		);
+		add_meta_box(
+				'fb_page_tag_box_id',
+				__( 'Tag Facebook Pages', 'fb_page_tag_box_id_textdomain' ),
+				'fb_add_page_tag_box_content',
+				'page'
+		);
+}
+
+function fb_add_page_tag_box_content( $post ) {
+	wp_enqueue_script('suggest');
+
+	// Use nonce for verification
+	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_page_tag_box_noncename' );
+
+	// The actual fields for data entry
+	echo '<label for="fb_page_tag_box_new_field">';
+			 _e("Page Name", 'fb_page_tag_box_textdomain' );
+	echo '</label> ';
+	echo '<input type="text" class="widefat" id="suggest-pages" autocomplete="off" name="fb_page_tag_box_new_field" value="" size="25" />';
+	echo '<p>This will post the Timeline of each Facebook Page tagged.</p>';
+}
+
+function fb_add_page_tag_box_save( $post_id ) {
+	// verify if this is an auto save routine.
+	// If it is our form has not been submitted, so we dont want to do anything
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+			return;
+
+	// verify this came from the our screen and with proper authorization,
+	// because save_post can be triggered at other times
+
+	if ( empty($_POST['fb_page_tag_box_noncename']) || !wp_verify_nonce( $_POST['fb_page_tag_box_noncename'], plugin_basename( __FILE__ ) ) )
+			return;
+
+
+	// Check permissions
+	if ( 'page' == $_POST['post_type'] ) {
+		if ( !current_user_can( 'edit_page', $post_id ) )
+			return;
+	}
+	else {
+		if ( !current_user_can( 'edit_post', $post_id ) )
+			return;
+	}
+
+	// OK, we're authenticated: we need to find and save the data
+
+	$data = $_POST['fb_page_tag_box_new_field'];
+
+	preg_match_all(
+		"/([A-Z].*?)\((.*?)\)/s",
+		$data,
+		$page_details,
+		PREG_SET_ORDER // formats data into an array of posts
+	);
+
+	// probably using add_post_meta(), update_post_meta(), or
+	// a custom table (see Further Reading section below)
+
+	$pages_details_meta = array();
+
+	foreach($page_details as $page_detail) {
+		$pages_details_meta[] = array('id' => $page_detail[2], 'name' => $page_detail[1]);
+	}
+
+	add_post_meta($post_id, 'fb_tagged_pages', $pages_details_meta, true);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 add_action( 'add_meta_boxes', 'fb_add_friend_tag_box' );
 add_action( 'save_post', 'fb_add_friend_tag_box_save' );
 
@@ -104,9 +272,10 @@ function fb_add_friend_tag_box_content( $post ) {
 
 	// The actual fields for data entry
 	echo '<label for="fb_friend_tag_box_new_field">';
-			 _e("", 'fb_friend_tag_box_textdomain' );
+			 _e("Friend's Name", 'fb_friend_tag_box_textdomain' );
 	echo '</label> ';
-	echo '<input type="text" id="suggest" autocomplete="off" name="fb_friend_tag_box_new_field" value="" size="25" />';
+	echo '<input type="text" class="widefat" id="suggest-friends" autocomplete="off" name="fb_friend_tag_box_new_field" value="" size="25" />';
+	echo '<p>This will post the Timeline of each Facebook friend tagged.</p>';
 }
 
 function fb_add_friend_tag_box_save( $post_id ) {

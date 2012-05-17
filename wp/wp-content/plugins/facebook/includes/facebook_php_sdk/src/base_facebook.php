@@ -855,7 +855,9 @@ abstract class BaseFacebook
     if (!$ch) {
       $ch = curl_init();
     }
-error_log(var_export($params,1));
+
+    error_log(var_export($params,1));
+
     $opts = self::$CURL_OPTS;
     if ($this->getFileUploadSupport()) {
       $opts[CURLOPT_POSTFIELDS] = $params;
@@ -863,7 +865,7 @@ error_log(var_export($params,1));
       $opts[CURLOPT_POSTFIELDS] = http_build_query($params, null, '&');
     }
     $opts[CURLOPT_URL] = $url;
-error_log(var_export($opts,1));
+
     // disable the 'Expect: 100-continue' behaviour. This causes CURL to wait
     // for 2 seconds if the server does not support this header.
     if (isset($opts[CURLOPT_HTTPHEADER])) {

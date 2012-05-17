@@ -34,3 +34,4 @@ FB
 - Our Platform is not set up for this type of dev (plugins)
 - Like button pop in is really bad https://our.intern.facebook.com/intern/tasks/?t=484605#
 - Our search API is nearly unusable-- this query takes ~20 secs to complete: https://graph.facebook.com/search?q=platform&type=page&fields=picture,name,id,likes
+- debugging PHP is big pain in the ass

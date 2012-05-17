@@ -123,20 +123,6 @@ function fb_get_user_pages() {
 	return $accounts['data'];
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 add_action( 'add_meta_boxes', 'fb_add_page_tag_box' );
 add_action( 'save_post', 'fb_add_page_tag_box_save' );
 
@@ -197,7 +183,7 @@ function fb_add_page_tag_box_save( $post_id ) {
 	$data = $_POST['fb_page_tag_box_new_field'];
 
 	preg_match_all(
-		"/([A-Z].*?)\((.*?)\)/s",
+		"/([A-Z].*?)\(.*?\((.*?)\)/s",
 		$data,
 		$page_details,
 		PREG_SET_ORDER // formats data into an array of posts
@@ -214,37 +200,6 @@ function fb_add_page_tag_box_save( $post_id ) {
 
 	add_post_meta($post_id, 'fb_tagged_pages', $pages_details_meta, true);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 add_action( 'add_meta_boxes', 'fb_add_friend_tag_box' );
 add_action( 'save_post', 'fb_add_friend_tag_box_save' );
@@ -334,12 +289,33 @@ function fb_post_to_fb_page($post_id) {
 	preg_match_all("/(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
 
 	error_log(var_export($fan_page_info,1));
+	list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
+
+	if ($post_thumbnail_url == null) {
+		$args = array('access_token' => $fan_page_info[0][2],
+									'from' => $fan_page_info[0][1],
+									'link' => apply_filters( 'rel_canonical', get_permalink()),
+									'name' => get_the_title(),
+									'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+									'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+									);
+	}
+	else {
+		$args = array('access_token' => $fan_page_info[0][2],
+									'from' => $fan_page_info[0][1],
+									'link' => apply_filters( 'rel_canonical', get_permalink()),
+									'picture' => $post_thumbnail_url,
+									'name' => get_the_title(),
+									'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+									'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+									);
+	}
 
 	if ( ! isset( $facebook ) )
 		return;
 
 	try {
-		$publish_result = $facebook->api('/' . $fan_page_info[0][1] . '/feed', 'POST', array('access_token' => $fan_page_info[0][2], 'from' => $fan_page_info[0][1], 'source' => get_permalink($post_id)));
+		$publish_result = $facebook->api('/' . $fan_page_info[0][1] . '/feed', 'POST', $args);
 
 		add_post_meta($post_id, 'fb_fan_page_post_id', $publish_result['id'], true);
 	}
@@ -357,31 +333,72 @@ function fb_post_to_author_fb_timeline($post_id) {
 
 	$options = get_option('fb_options');
 	$fb_tagged_friends = get_post_meta($post_id, 'fb_tagged_friends', true);
-	error_log(var_export($fb_tagged_friends,1));
 
-	$tags = '';
+	//$tags = '';
+
+	list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
 
 	foreach($fb_tagged_friends as $friend) {
-		error_log(var_export($friend,1));
 
 		try {
-			list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
+			if ($post_thumbnail_url == null) {
+				$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
+											'name' => get_the_title(),
+											'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+											'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+											);
+			}
+			else {
+				$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
+											'picture' => $post_thumbnail_url,
+											'name' => get_the_title(),
+											'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+											'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+											);
+			}
 
-			$publish_result = $facebook->api('/' . $friend['id'] . '/feed', 'POST',
-																			 array('link' => apply_filters( 'rel_canonical', get_permalink()),
-																						 'picture' => $post_thumbnail_url,
-																						 'name' => get_the_title(),
-																						 'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-																						 'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-																						 ));
+			$publish_result = $facebook->api('/' . $friend['id'] . '/feed', 'POST', $args);
 		}
 		catch (FacebookApiException $e) {
 			error_log(var_export($e,1));
 		}
 
-		$tags .= $friend['id'] . ",";
+		//$tags .= $friend['id'] . ",";
 	}
-	error_log(var_export($tags,1));
+	//error_log(var_export($tags,1));
+
+	$fb_tagged_pages = get_post_meta($post_id, 'fb_tagged_pages', true);
+
+	//$tags = '';
+
+	foreach($fb_tagged_pages as $page) {
+		try {
+			if ($post_thumbnail_url == null) {
+				$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
+											'name' => get_the_title(),
+											'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+											'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+											);
+			}
+			else {
+				$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
+											'picture' => $post_thumbnail_url,
+											'name' => get_the_title(),
+											'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+											'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+											);
+			}
+
+			$publish_result = $facebook->api('/' . $page['id'] . '/feed', 'POST', $args);
+		}
+		catch (FacebookApiException $e) {
+			error_log(var_export($e,1));
+		}
+
+		//$tags .= $page['id'] . ",";
+	}
+	//error_log(var_export($tags,1));
+
 
 	try {
 		$publish = $facebook->api('/me/' . $options["app_namespace"] . ':publish', 'POST', array('article' => get_permalink($post_id)));

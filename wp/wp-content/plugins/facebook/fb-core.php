@@ -19,7 +19,7 @@ global $facebook;
 
 $facebook_plugin_directory = dirname(__FILE__);
 
-require_once( $facebook_plugin_directory . '/includes/facebook_php_sdk/src/facebook.php');
+require_once( $facebook_plugin_directory . '/includes/facebook-php-sdk/facebook.php');
 
 // Create our Application instance (replace this with your appId and secret)
 if ((!empty($options["app_id"]) || !empty($options["app_secret"]))) {
@@ -29,12 +29,12 @@ if ((!empty($options["app_id"]) || !empty($options["app_secret"]))) {
 	));
 }
 
-require_once( $facebook_plugin_directory . '/fb_admin_menu.php');
-require_once( $facebook_plugin_directory . '/fb_open_graph.php');
-require_once( $facebook_plugin_directory . '/social_plugins/fb_social_plugins.php');
-require_once( $facebook_plugin_directory . '/fb_login.php' );
-require_once( $facebook_plugin_directory . '/fb_social_publisher.php' );
-require_once( $facebook_plugin_directory . '/fb_wp_helpers.php' );
+require_once( $facebook_plugin_directory . '/fb-admin-menu.php');
+require_once( $facebook_plugin_directory . '/fb-open-graph.php');
+require_once( $facebook_plugin_directory . '/social-plugins/fb-social-plugins.php');
+require_once( $facebook_plugin_directory . '/fb-login.php' );
+require_once( $facebook_plugin_directory . '/fb-social-publisher.php' );
+require_once( $facebook_plugin_directory . '/fb-wp-helpers.php' );
 unset( $facebook_plugin_directory );
 
 add_action( 'init', 'fb_init' );

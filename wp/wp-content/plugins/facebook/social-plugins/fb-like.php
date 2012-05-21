@@ -87,7 +87,7 @@ class Facebook_Like_Button extends WP_Widget {
 		echo $before_widget;
 
 		if ( ! empty( $instance['title'] ) )
-			echo $before_title . $instance['title'] . $after_title;
+			echo $before_title . esc_attr($instance['title']) . $after_title;
 
 		echo fb_get_like_button($instance);
 		echo $after_widget;

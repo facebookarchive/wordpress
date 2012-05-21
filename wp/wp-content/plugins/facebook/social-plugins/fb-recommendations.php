@@ -45,7 +45,7 @@ class Facebook_Recommendations extends WP_Widget {
 		echo $before_widget;
 
 		if ( ! empty( $instance['title'] ) )
-			echo $before_title . $instance['title'] . $after_title;
+			echo $before_title . esc_attr($instance['title']) . $after_title;
 
 		echo fb_get_recommendations_box($instance);
 		echo $after_widget;

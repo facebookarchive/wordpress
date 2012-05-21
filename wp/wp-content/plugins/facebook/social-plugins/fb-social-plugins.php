@@ -1,24 +1,21 @@
 <?php
 
-require_once('fb_activity_feed.php');
+require_once('fb-activity-feed.php');
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Activity_Feed" );'));
 
-require_once('fb_recommendations.php');
+require_once('fb-recommendations.php');
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Recommendations" );'));
 
-require_once( dirname(__FILE__) . '/fb_like.php' );
+require_once( dirname(__FILE__) . '/fb-like.php' );
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Like_Button" );') );
 
-require_once( dirname(__FILE__) . '/fb_like.php' );
-add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Like_Button" );') );
-
-require_once( dirname(__FILE__) . '/fb_send.php' );
+require_once( dirname(__FILE__) . '/fb-send.php' );
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Send_Button" );') );
 
-require_once( dirname(__FILE__) . '/fb_subscribe.php' );
+require_once( dirname(__FILE__) . '/fb-subscribe.php' );
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Subscribe_Button" );') );
 
-require_once( dirname(__FILE__) . '/fb_comments.php' );
+require_once( dirname(__FILE__) . '/fb-comments.php' );
 
 /**
  * Add social plugins through filters
@@ -31,14 +28,14 @@ function fb_apply_filters() {
 
 	/*if (isset($options['recommendations_bar'])) {
 		add_filter('the_content', 'fb_recommendations_bar_automatic', 30);
-		require_once('fb_recommendations_bar.php');
+		require_once('fb-recommendations-bar.php');
 	}
 	*/
 
 	if ( array_key_exists( 'like', $options ) && array_key_exists( 'enabled', $options['like'] ) && $options['like']['enabled'] ) {
 		add_filter( 'the_content', 'fb_like_button_automatic', 30 );
 	}
-	
+
 	if ( array_key_exists( 'send', $options ) && array_key_exists( 'enabled', $options['send'] ) && $options['send']['enabled'] ) {
 		add_filter( 'the_content', 'fb_send_button_automatic', 30 );
 	}

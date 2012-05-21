@@ -1,5 +1,5 @@
 <?php
-require_once( $facebook_plugin_directory . '/fb_social_publisher_tagging.php');
+require_once( $facebook_plugin_directory . '/fb-social-publisher-tagging.php');
 
 $options = get_option('fb_options');
 

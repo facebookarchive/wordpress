@@ -39,7 +39,7 @@ function fb_get_current_user() {
 		return;
 
 	try {
-		$user = $facebook->api('/me');
+		$user = $facebook->api('/me', 'GET', array('ref' => 'fbwpp'));
 
 		return $user;
 	}

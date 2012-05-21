@@ -150,7 +150,7 @@ function fb_get_like_fields_array($placement) {
 													),
 										array('name' => 'width',
 													'field_type' => 'text',
-													'default' => '450',
+													'default' => '250',
 													'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
 													),
 										array('name' => 'action',

@@ -148,7 +148,7 @@ function fb_construct_fields_children($placement, $children, $parent = null, $ob
 				if (isset($options[$parent['name']][$child['name']])) {
 					$child_value = $options[$parent['name']][$child['name']];
 				}
-				elseif (isset($child['default']) && $options[$parent['name']]['enabled'] != 'true') {
+				elseif (isset($child['default']) && empty($options[$parent['name']]['enabled'])) {
 					$child_value = $child['default'];
 				}
 				else {

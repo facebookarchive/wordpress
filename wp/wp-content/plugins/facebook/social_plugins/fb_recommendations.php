@@ -92,7 +92,7 @@ function fb_get_recommendations_box_fields_array($placement) {
 													),
 										array('name' => 'height',
 													'field_type' => 'text',
-													'default' => '450',
+													'default' => '250',
 													'help_text' => __( 'The height of the plugin, in pixels.', 'facebook' ),
 													),
 										array('name' => 'colorscheme',

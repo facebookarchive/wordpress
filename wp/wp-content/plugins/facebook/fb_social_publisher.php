@@ -3,7 +3,7 @@ require_once( $facebook_plugin_directory . '/fb_social_publisher_tagging.php');
 
 $options = get_option('fb_options');
 
-if ( $options['social_publisher']['publish_to_authors_facebook_timeline'] ) {
+if ( isset($options['social_publisher']['publish_to_authors_facebook_timeline']) ) {
 		add_action( 'add_meta_boxes', 'fb_add_author_message_box' );
 		add_action( 'save_post', 'fb_add_author_message_box_save' );
 }
@@ -63,16 +63,7 @@ function fb_add_author_message_box_save( $post_id ) {
 	add_post_meta($post_id, 'fb_author_message', $_POST['fb_author_message_box_message'], true);
 }
 
-
-
-
-
-
-
-
-
-
-if ( $options['social_publisher']['publish_to_fan_page'] ) {
+if ( $options['social_publisher']['publish_to_fan_page'] !== 'disabled' ) {
 		add_action( 'add_meta_boxes', 'fb_add_fan_page_message_box' );
 		add_action( 'save_post', 'fb_add_fan_page_message_box_save' );
 }
@@ -132,15 +123,13 @@ function fb_add_fan_page_message_box_save( $post_id ) {
 	add_post_meta($post_id, 'fb_fan_page_message', $_POST['fb_fan_page_message_box_message'], true);
 }
 
-
-
-
 function fb_post_to_fb_page($post_id) {
 	global $facebook;
 
 	$options = get_option('fb_options');
 
-	$app_id = $options["app_id"];
+	if ($options['social_publisher']['publish_to_fan_page'] == 'disabled')
+		return;
 
 	preg_match_all("/(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
 
@@ -290,7 +279,7 @@ function fb_get_social_publisher_fields() {
 
 	$accounts = fb_get_user_pages();
 
-	$accounts_options = array();
+	$accounts_options = array('disabled' => '[Disabled]');
 
 	foreach($accounts as $account) {
 		if (isset($account['name'])) {

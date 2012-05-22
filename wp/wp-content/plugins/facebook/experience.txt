@@ -41,3 +41,5 @@ FB
 - https://our.intern.facebook.com/intern/tasks/?t=1082030
 - https://our.intern.facebook.com/intern/tasks/?t=1082119
 - Reco bar bugs: https://our.intern.facebook.com/intern/tasks/?t=1048363 and https://our.intern.facebook.com/intern/tasks/?t=1083915
+- We need a global publish action
+- 

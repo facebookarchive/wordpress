@@ -2,7 +2,13 @@
 // create custom plugin settings menu
 add_action( 'admin_init', 'fb_admin_menu_settings' );
 add_action( 'admin_menu', 'fb_create_menu' );
+add_action('admin_menu', 'fb_add_settings_pages', 10);
 
+/**
+ * Create the Settings menu in the admin control panel
+ *
+ * @since 1.0
+ */
 function fb_create_menu() {
 	//create new top-level menu
 	$page = add_menu_page( sprintf( __( '%s Plugin Settings', 'facebook' ), 'Facebook'), 'Facebook', 'manage_options', __FILE__, 'fb_settings_page', plugins_url( 'images/icon.png', __FILE__) );
@@ -12,15 +18,29 @@ function fb_create_menu() {
 	add_action( 'admin_print_scripts-' . $page, 'fb_admin_scripts' );
 }
 
+/**
+ * Add admin styles to the head
+ *
+ * @since 1.0
+ */
 function fb_admin_style() {
 	wp_enqueue_style( 'fb_admin', plugins_url( 'style/style-admin.css', __FILE__), array(), '1.0' );
 }
 
+/**
+ * Add admin scripts to the head
+ *
+ * @since 1.0
+ */
 function fb_admin_scripts( $hook_suffix ) {
 	wp_enqueue_script( 'fb_admin', plugins_url( 'scripts/fb-admin.js', __FILE__ ), array(), '1.0', true );
 }
 
-// __return_false for no desc
+/**
+ * Queue scripts and styles up
+ *
+ * @since 1.0
+ */
 function fb_admin_menu_settings() {
 	register_setting( 'fb_options', 'fb_options', 'fb_options_validate' );
 
@@ -29,22 +49,31 @@ function fb_admin_menu_settings() {
 	add_action( 'admin_print_scripts', 'fb_admin_scripts' );
 }
 
+/**
+ * The settings page
+ *
+ * @since 1.0
+ */
 function fb_settings_page() {
 	?>
 	<div class="wrap">
 		<div class="facebook-logo"></div>
 		<h2><?php echo esc_html__( 'Facebook for WordPress Settings', 'facebook' ); ?></h2>
-		<p><?php echo esc_html__( 'The official Facebook for WordPress plugin.', 'facebook' ); ?></p>
 		<?php settings_errors(); ?>
 		<form method="post" action="options.php">
 			<?php
 			settings_fields( 'fb_options' );
 
-			echo '<h3>' . esc_html__( 'Main Settings', 'facebook' ) . '</h3><p></p>';
+			echo '<h3>' . esc_html__( 'Main Settings', 'facebook' ) . '</h3>';
+			echo 'Get your App ID, Secret, and Namespace at <a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>.';
 			fb_get_main_settings_fields();
 
 			echo '<h3>' . esc_html__( 'Social Publisher', 'facebook' ) . '</h3>';
 			fb_get_social_publisher_fields();
+
+			echo '<h3>'. esc_html__( 'Recommendations Bar', 'facebook' ) . '</h3>';
+			echo '<p>' . sprintf( esc_html__( 'You must be whitelisted by Facebook to use this experimental feature.  The %s allows users to like content, get recommendations, and share what they\'re reading with their friends.', 'facebook' ), '<a href="https://developers.facebook.com/docs/reference/plugins/comments/">' . esc_html__( 'Recommendations Bar', 'facebook' ) . '</a>' ) . '</p>';
+			fb_get_recommendations_bar_fields();
 
 			echo '<h3>' . esc_html__( 'Like Button', 'facebook' ) . '</h3>';
 			echo '<p>' . sprintf( esc_html__( 'The %s lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user\'s friends\' News Feed with a link back to your website.', 'facebook' ), '<a href="https://developers.facebook.com/docs/reference/plugins/like/">' . esc_html__( 'Like button', 'facebook' ) . '</a>' ) . '</p>';
@@ -62,10 +91,6 @@ function fb_settings_page() {
 			echo '<p>' . sprintf( esc_html__( '%s is a social plugin that enables user commenting on your site. Features include moderation tools and distribution.', 'facebook' ), '<a href="https://developers.facebook.com/docs/reference/plugins/comments/">' . esc_html__( 'Comments Box', 'facebook' ) . '</a>' ) . '</p>';
 			fb_get_comments_fields();
 
-			/*echo '<h3>Recommendation Bar</h3>
-			<p>The Recommendations Bar allows users to like content, get recommendations, and share what they\'re reading with their friends.</p>';
-			fb_get_recommendations_bar_fields();*/
-
 			submit_button();
 			?>
 		</form>
@@ -73,50 +98,29 @@ function fb_settings_page() {
 	<?php
 }
 
-function fb_section_main() {
-	echo '<p></p>';
-}
-
-function fb_field_app_id() {
-	$options = get_option('fb_options');
-	echo '<a href="#" target="_new" title="TODO">[?]</a>&nbsp; <input type="text" name="fb_options[app_id]"';
-	if ( isset( $options['app_id'] ) )
-		echo ' value="' . esc_attr( $options['app_id'] ) . '"';
-	echo ' size="40" />';
-}
-
-function fb_field_app_secret() {
-	$options = get_option('fb_options');
-	echo '<a href="#" target="_new" title="TODO">[?]</a>&nbsp; <input type="text" name="fb_options[app_secret]"';
-	if ( isset( $options['app_secret'] ) )
-		echo ' value="' . esc_attr( $options['app_secret'] ) . '"';
-	echo ' size="40" />';
-}
-
-function fb_field_enable_fb() {
-	$options = get_option('fb_options');
-
-	echo '<input type="checkbox" name="fb_options[enable_fb]" value="true" ' . checked(isset($options['enable_fb']), 1, false) . '" />';
-}
-
 function fb_get_main_settings_fields() {
 	$children = array(array('name' => 'app_id',
 													'field_type' => 'text',
-													'help_text' => __( 'Your app id.', 'facebook' ),
+													'help_text' => __( 'Your App ID.', 'facebook' ),
 													),
 										array('name' => 'app_secret',
 													'field_type' => 'text',
-													'help_text' => __( 'Your app secret.', 'facebook' ),
+													'help_text' => __( 'Your App Secret.', 'facebook' ),
 													),
 										array('name' => 'app_namespace',
 													'field_type' => 'text',
-													'help_text' => __( 'Your app namespace.', 'facebook' ),
+													'help_text' => __( 'Your App Namespace.', 'facebook' ),
 													),
 										);
 
 	fb_construct_fields('settings', $children);
 }
 
+/**
+ * Add Facebook options to other sub-menus
+ *
+ * @since 1.0
+ */
 function fb_add_settings_pages() {
      add_submenu_page(
          'edit-comments.php',
@@ -135,9 +139,12 @@ function fb_add_settings_pages() {
          'fb_insights_page'
      );
 }
-add_action('admin_menu', 'fb_add_settings_pages', 10);
 
-// validate our options
+/**
+ * Validate all of the settings
+ *
+ * @since 1.0
+ */
 function fb_options_validate($input) {
 	/*
 	if (!defined('FB_APP_SECRET')) {

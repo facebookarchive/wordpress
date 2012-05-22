@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Recursively build RDFa <meta> elements used for Open Graph protocol
  *

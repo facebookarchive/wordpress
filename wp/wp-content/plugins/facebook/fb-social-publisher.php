@@ -1,13 +1,21 @@
 <?php
-require_once( $facebook_plugin_directory . '/fb-social-publisher-tagging.php');
-
-$options = get_option('fb_options');
+require_once( $facebook_plugin_directory . '/fb-social-publisher-mentioning.php');
 
 if ( isset($options['social_publisher']['publish_to_authors_facebook_timeline']) ) {
 		add_action( 'add_meta_boxes', 'fb_add_author_message_box' );
 		add_action( 'save_post', 'fb_add_author_message_box_save' );
 }
 
+if ( $options['social_publisher']['publish_to_fan_page'] !== 'disabled' ) {
+		add_action( 'add_meta_boxes', 'fb_add_fan_page_message_box' );
+		add_action( 'save_post', 'fb_add_fan_page_message_box_save' );
+}
+
+/**
+ * Add meta boxes for a custom Status that is used when posting to an Author's Timeline
+ *
+ * @since 1.0
+ */
 function fb_add_author_message_box() {
 		add_meta_box(
 				'fb_author_message_box_id',
@@ -23,18 +31,30 @@ function fb_add_author_message_box() {
 		);
 }
 
+/**
+ * Add meta boxes for a custom Status that is used when posting to an Author's Timeline
+ *
+ * @since 1.0
+ */
 function fb_add_author_message_box_content( $post ) {
-		// Use nonce for verification
+	// Use nonce for verification
 	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_author_message_box_noncename' );
 
 	// The actual fields for data entry
+	/*
 	echo '<label for="fb_author_message_box_message">';
 			 _e("Message", 'fb_author_message_box_message_textdomain' );
 	echo '</label> ';
-	echo '<input type="text" class="widefat" id="friends-tag-message" name="fb_author_message_box_message" value="" size="44" />';
+	*/
+	echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_author_message_box_message" value="" size="44" placeholder="What\'s on your mind?" />';
 	echo '<p>This message will show as part of the post on the Author\'s Facebook Timeline.</p>';
 }
 
+/**
+ * Save the custom Status, used when posting to an Author's Timeline
+ *
+ * @since 1.0
+ */
 function fb_add_author_message_box_save( $post_id ) {
 	// verify if this is an auto save routine.
 	// If it is our form has not been submitted, so we dont want to do anything
@@ -59,15 +79,14 @@ function fb_add_author_message_box_save( $post_id ) {
 	}
 
 	// OK, we're authenticated: we need to find and save the data
-
 	add_post_meta($post_id, 'fb_author_message', $_POST['fb_author_message_box_message'], true);
 }
 
-if ( $options['social_publisher']['publish_to_fan_page'] !== 'disabled' ) {
-		add_action( 'add_meta_boxes', 'fb_add_fan_page_message_box' );
-		add_action( 'save_post', 'fb_add_fan_page_message_box_save' );
-}
-
+/**
+ * Add meta boxes for a custom Status that is used when posting to a Fan Page's Timeline
+ *
+ * @since 1.0
+ */
 function fb_add_fan_page_message_box() {
 		add_meta_box(
 				'fb_fan_page_message_box_id',
@@ -83,18 +102,30 @@ function fb_add_fan_page_message_box() {
 		);
 }
 
+/**
+ * Add meta boxes for a custom Status that is used when posting to a Fan Page's Timeline
+ *
+ * @since 1.0
+ */
 function fb_add_fan_page_message_box_content( $post ) {
 		// Use nonce for verification
 	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_fan_page_message_box_noncename' );
 
 	// The actual fields for data entry
+	/*
 	echo '<label for="fb_fan_page_message_box_message">';
 			 _e("Message", 'fb_fan_page_message_box_message_textdomain' );
 	echo '</label> ';
-	echo '<input type="text" class="widefat" id="friends-tag-message" name="fb_fan_page_message_box_message" value="" size="44" />';
+	*/
+	echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_fan_page_message_box_message" value="" size="44" placeholder="Write something..." />';
 	echo '<p>This message will show as part of the post on the Fan Page\'s Facebook Timeline.</p>';
 }
 
+/**
+ * Save the custom Status, used when posting to an Fan Page's Timeline
+ *
+ * @since 1.0
+ */
 function fb_add_fan_page_message_box_save( $post_id ) {
 	// verify if this is an auto save routine.
 	// If it is our form has not been submitted, so we dont want to do anything
@@ -123,6 +154,12 @@ function fb_add_fan_page_message_box_save( $post_id ) {
 	add_post_meta($post_id, 'fb_fan_page_message', $_POST['fb_fan_page_message_box_message'], true);
 }
 
+/**
+ * Posts a published WordPress post to a Facebook Page's Timeline
+ *
+ * @since 1.0
+ * @param int $post_id The post ID that will be posted
+ */
 function fb_post_to_fb_page($post_id) {
 	global $facebook;
 
@@ -133,7 +170,6 @@ function fb_post_to_fb_page($post_id) {
 
 	preg_match_all("/(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
 
-	error_log(var_export($fan_page_info,1));
 	list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
 
 	$fan_page_message = get_post_meta($post_id, 'fb_fan_page_message', true);
@@ -175,6 +211,12 @@ function fb_post_to_fb_page($post_id) {
 	}
 }
 
+/**
+ * Posts an Open Graph action to an author's Facebook Timeline
+ *
+ * @since 1.0
+ * @param int $post_id The post ID that will be posted
+ */
 function fb_post_to_author_fb_timeline($post_id) {
 	global $post;
 	global $facebook;
@@ -183,15 +225,15 @@ function fb_post_to_author_fb_timeline($post_id) {
 		return;
 
 	$options = get_option('fb_options');
-	$fb_tagged_friends = get_post_meta($post_id, 'fb_tagged_friends', true);
+	$fb_mentioned_friends = get_post_meta($post_id, 'fb_mentioned_friends', true);
 
-	//$tags = '';
+	//$mentions = '';
 
 	list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
 
-	$tagged_friends_message = get_post_meta($post_id, 'fb_tagged_friends_message', true);
+	$mentioned_friends_message = get_post_meta($post_id, 'fb_mentioned_friends_message', true);
 
-	foreach($fb_tagged_friends as $friend) {
+	foreach($fb_mentioned_friends as $friend) {
 
 		try {
 			if ($post_thumbnail_url == null) {
@@ -199,7 +241,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 											'name' => get_the_title(),
 											'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
 											'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-											'message' => $tagged_friends_message,
+											'message' => $mentioned_friends_message,
 											);
 			}
 			else {
@@ -208,7 +250,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 											'name' => get_the_title(),
 											'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
 											'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-											'message' => $tagged_friends_message,
+											'message' => $mentioned_friends_message,
 											);
 			}
 
@@ -220,24 +262,23 @@ function fb_post_to_author_fb_timeline($post_id) {
 			error_log(var_export($e,1));
 		}
 
-		//$tags .= $friend['id'] . ",";
+		//$mentions .= $friend['id'] . ",";
 	}
-	//error_log(var_export($tags,1));
 
-	$fb_tagged_pages = get_post_meta($post_id, 'fb_tagged_pages', true);
+	$fb_mentioned_pages = get_post_meta($post_id, 'fb_mentioned_pages', true);
 
-	$tagged_pages_message = get_post_meta($post_id, 'fb_tagged_pages_message', true);
+	$mentioned_pages_message = get_post_meta($post_id, 'fb_mentioned_pages_message', true);
 
-	//$tags = '';
+	//$mentions = '';
 
-	foreach($fb_tagged_pages as $page) {
+	foreach($fb_mentioned_pages as $page) {
 		try {
 			if ($post_thumbnail_url == null) {
 				$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
 											'name' => get_the_title(),
 											'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
 											'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-											'message' => $tagged_pages_message,
+											'message' => $mentioned_pages_message,
 
 											);
 			}
@@ -247,7 +288,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 											'name' => get_the_title(),
 											'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
 											'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-											'message' => $tagged_pages_message,
+											'message' => $mentioned_pages_message,
 											);
 			}
 
@@ -259,9 +300,8 @@ function fb_post_to_author_fb_timeline($post_id) {
 			error_log(var_export($e,1));
 		}
 
-		//$tags .= $page['id'] . ",";
+		//$mentions .= $page['id'] . ",";
 	}
-	//error_log(var_export($tags,1));
 
 	$author_message = get_post_meta($post_id, 'fb_author_message', true);
 
@@ -312,7 +352,7 @@ function fb_get_social_publisher_fields() {
 	$children = array(array('name' => 'publish_to_authors_facebook_timeline',
 													'field_type' => 'checkbox',
 													'default' => true,
-													'help_text' => __( 'Publish new posts to the author\'s Facebook Timeline and allow tagging friends.', 'facebook' ),
+													'help_text' => __( 'Publish new posts to the author\'s Facebook Timeline and allow mentioning friends.', 'facebook' ),
 													),
 										$fan_page_option
 										);

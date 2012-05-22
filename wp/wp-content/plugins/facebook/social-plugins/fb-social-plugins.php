@@ -16,6 +16,7 @@ require_once( dirname(__FILE__) . '/fb-subscribe.php' );
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Subscribe_Button" );') );
 
 require_once( dirname(__FILE__) . '/fb-comments.php' );
+require_once( dirname(__FILE__) . '/fb-recommendations-bar.php' );
 
 /**
  * Add social plugins through filters
@@ -26,11 +27,10 @@ function fb_apply_filters() {
 	if ( ! is_array( $options ) )
 		return;
 
-	/*if (isset($options['recommendations_bar'])) {
+
+	if ( array_key_exists( 'recommendations_bar', $options ) && array_key_exists( 'enabled', $options['recommendations_bar'] ) && $options['recommendations_bar']['enabled'] ) {
 		add_filter('the_content', 'fb_recommendations_bar_automatic', 30);
-		require_once('fb-recommendations-bar.php');
 	}
-	*/
 
 	if ( array_key_exists( 'like', $options ) && array_key_exists( 'enabled', $options['like'] ) && $options['like']['enabled'] ) {
 		add_filter( 'the_content', 'fb_like_button_automatic', 30 );

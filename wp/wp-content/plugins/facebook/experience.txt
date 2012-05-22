@@ -14,7 +14,9 @@ FB
 - Why do I still get captcha’d when I create an app?  I’ve built on Platform for 5 years and have 100+ apps.
 - BUG: Heroku doesn’t send intro email (https://our.intern.facebook.com/intern/tasks/?t=1012653)
 - BUG: Can keep spinning up Heroku instances (https://our.intern.facebook.com/intern/tasks/?t=1012653)
-- JS SDK init randomly changes in each doc. E.g.,
+- https://developers.facebook.com/docs/reference/api/ is long and daunting
+- We don't have any sections for plugins (like PhoneGap, WP, etc)
+- JS SDK init not consistent in all docs. E.g.,
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -37,3 +39,5 @@ FB
 - debugging PHP is big pain in the ass
 - https://our.intern.facebook.com/intern/tasks/?t=1081883
 - https://our.intern.facebook.com/intern/tasks/?t=1082030
+- https://our.intern.facebook.com/intern/tasks/?t=1082119
+- Reco bar bugs: https://our.intern.facebook.com/intern/tasks/?t=1048363 and https://our.intern.facebook.com/intern/tasks/?t=1083915

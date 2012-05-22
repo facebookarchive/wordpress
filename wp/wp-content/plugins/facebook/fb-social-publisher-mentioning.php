@@ -1,5 +1,6 @@
 <?php
 add_action( 'init','fb_friend_page_autocomplete' );
+add_filter( 'the_content', 'fb_social_publisher_mentioning_output', 30 );
 
 function fb_friend_page_autocomplete() {
 	if (!empty($_GET['fb-friends'])) {
@@ -116,43 +117,45 @@ function fb_get_user_pages() {
 	return $accounts['data'];
 }
 
-add_action( 'add_meta_boxes', 'fb_add_page_tag_box' );
-add_action( 'save_post', 'fb_add_page_tag_box_save' );
+add_action( 'add_meta_boxes', 'fb_add_page_mention_box' );
+add_action( 'save_post', 'fb_add_page_mention_box_save' );
 
-function fb_add_page_tag_box() {
+function fb_add_page_mention_box() {
 		add_meta_box(
-				'fb_page_tag_box_id',
-			  __( 'Tag Facebook Pages', 'fb_page_tag_box_id_textdomain', 'facebook' ),
-				'fb_add_page_tag_box_content',
-				'post'
+				'fb_page_mention_box_id',
+			  __( 'Mention Facebook Pages', 'fb_page_mention_box_id_textdomain', 'facebook' ),
+				'fb_add_page_mention_box_content',
+				'post',
+				'side'
 		);
 		add_meta_box(
-				'fb_page_tag_box_id',
-			  __( 'Tag Facebook Pages', 'fb_page_tag_box_id_textdomain', 'facebook' ),
-				'fb_add_page_tag_box_content',
-				'page'
+				'fb_page_mention_box_id',
+			  __( 'Mention Facebook Pages', 'fb_page_mention_box_id_textdomain', 'facebook' ),
+				'fb_add_page_mention_box_content',
+				'page',
+				'side'
 		);
 }
 
-function fb_add_page_tag_box_content( $post ) {
+function fb_add_page_mention_box_content( $post ) {
 	wp_enqueue_script('suggest');
 
 	// Use nonce for verification
-	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_page_tag_box_noncename' );
+	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_page_mention_box_noncename' );
 
 	// The actual fields for data entry
-	echo '<label for="fb_page_tag_box_autocomplete">';
-			 _e("Page Name", 'fb_page_tag_box_textdomain' );
+	echo '<label for="fb_page_mention_box_autocomplete">';
+			 _e("Page's Name", 'fb_page_mention_box_textdomain' );
 	echo '</label> ';
-	echo '<input type="text" class="widefat" id="suggest-pages" autocomplete="off" name="fb_page_tag_box_autocomplete" value="" size="44" />';
-	echo '<label for="fb_page_tag_box_message">';
-			 _e("Message", 'fb_page_tag_box_message_textdomain' );
+	echo '<input type="text" class="widefat" id="suggest-pages" autocomplete="off" name="fb_page_mention_box_autocomplete" value="" size="44" placeholder="Type to find a friend." />';
+	echo '<label for="fb_page_mention_box_message">';
+			 _e("Message", 'fb_page_mention_box_message_textdomain' );
 	echo '</label> ';
-	echo '<input type="text" class="widefat" id="pages-tag-message" name="fb_page_tag_box_message" value="" size="44" />';
-	echo '<p>This will post the Timeline of each Facebook Page tagged.</p>';
+	echo '<input type="text" class="widefat" id="pages-mention-message" name="fb_page_mention_box_message" value="" size="44" placeholder="Write something..." />';
+	echo '<p>This will post to the Timeline of each Facebook Page mentioned.</p>';
 }
 
-function fb_add_page_tag_box_save( $post_id ) {
+function fb_add_page_mention_box_save( $post_id ) {
 	// verify if this is an auto save routine.
 	// If it is our form has not been submitted, so we dont want to do anything
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
@@ -161,7 +164,7 @@ function fb_add_page_tag_box_save( $post_id ) {
 	// verify this came from the our screen and with proper authorization,
 	// because save_post can be triggered at other times
 
-	if ( empty($_POST['fb_page_tag_box_noncename']) || !wp_verify_nonce( $_POST['fb_page_tag_box_noncename'], plugin_basename( __FILE__ ) ) )
+	if ( empty($_POST['fb_page_mention_box_noncename']) || !wp_verify_nonce( $_POST['fb_page_mention_box_noncename'], plugin_basename( __FILE__ ) ) )
 			return;
 
 
@@ -177,7 +180,7 @@ function fb_add_page_tag_box_save( $post_id ) {
 
 	// OK, we're authenticated: we need to find and save the data
 
-	$autocomplete_data = $_POST['fb_page_tag_box_autocomplete'];
+	$autocomplete_data = $_POST['fb_page_mention_box_autocomplete'];
 
 	preg_match_all(
 		"/([A-Z].*?)\(.*?\((.*?)\)/s",
@@ -195,48 +198,50 @@ function fb_add_page_tag_box_save( $post_id ) {
 		$pages_details_meta[] = array('id' => $page_detail[2], 'name' => $page_detail[1]);
 	}
 
-	add_post_meta($post_id, 'fb_tagged_pages', $pages_details_meta, true);
+	add_post_meta($post_id, 'fb_mentioned_pages', $pages_details_meta, true);
 
-	add_post_meta($post_id, 'fb_tagged_pages_message', $_POST['fb_page_tag_box_message'], true);
+	add_post_meta($post_id, 'fb_mentioned_pages_message', $_POST['fb_page_mention_box_message'], true);
 }
 
-add_action( 'add_meta_boxes', 'fb_add_friend_tag_box' );
-add_action( 'save_post', 'fb_add_friend_tag_box_save' );
+add_action( 'add_meta_boxes', 'fb_add_friend_mention_box' );
+add_action( 'save_post', 'fb_add_friend_mention_box_save' );
 
-function fb_add_friend_tag_box() {
+function fb_add_friend_mention_box() {
 		add_meta_box(
-				'fb_friend_tag_box_id',
-			  __( 'Tag Facebook Friends', 'facebook' ),
-				'fb_add_friend_tag_box_content',
-				'post'
+				'fb_friend_mention_box_id',
+			  __( 'Mention Facebook Friends', 'facebook' ),
+				'fb_add_friend_mention_box_content',
+				'post',
+				'side'
 		);
 		add_meta_box(
-				'fb_friend_tag_box_id',
-			  __( 'Tag Facebook Friends', 'facebook' ),
-				'fb_add_friend_tag_box_content',
-				'page'
+				'fb_friend_mention_box_id',
+			  __( 'Mention Facebook Friends', 'facebook' ),
+				'fb_add_friend_mention_box_content',
+				'page',
+				'side'
 		);
 }
 
-function fb_add_friend_tag_box_content( $post ) {
+function fb_add_friend_mention_box_content( $post ) {
 	wp_enqueue_script('suggest');
 
 	// Use nonce for verification
-	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_friend_tag_box_noncename' );
+	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_friend_mention_box_noncename' );
 
 	// The actual fields for data entry
-	echo '<label for="fb_friend_tag_box_autocomplete">';
-			 _e("Friend's Name", 'fb_friend_tag_box_textdomain' );
+	echo '<label for="fb_friend_mention_box_autocomplete">';
+			 _e("Friend's Name", 'fb_friend_mention_box_textdomain' );
 	echo '</label> ';
-	echo '<input type="text" class="widefat" id="suggest-friends" autocomplete="off" name="fb_friend_tag_box_autocomplete" value="" size="44" />';
-	echo '<label for="fb_friend_tag_box_message">';
-			 _e("Message", 'fb_friend_tag_box_message_textdomain' );
+	echo '<input type="text" class="widefat" id="suggest-friends" autocomplete="off" name="fb_friend_mention_box_autocomplete" value="" size="44" placeholder="Type to find a friend." />';
+	echo '<label for="fb_friend_mention_box_message">';
+			 _e("Message", 'fb_friend_mention_box_message_textdomain' );
 	echo '</label> ';
-	echo '<input type="text" class="widefat" id="friends-tag-message" name="fb_friend_tag_box_message" value="" size="44" />';
-	echo '<p>This will post the Timeline of each Facebook friend tagged.</p>';
+	echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_friend_mention_box_message" value="" size="44" placeholder="Write something..." />';
+	echo '<p>This will post to the Timeline of each Facebook friend mentioned.</p>';
 }
 
-function fb_add_friend_tag_box_save( $post_id ) {
+function fb_add_friend_mention_box_save( $post_id ) {
 	// verify if this is an auto save routine.
 	// If it is our form has not been submitted, so we dont want to do anything
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
@@ -245,7 +250,7 @@ function fb_add_friend_tag_box_save( $post_id ) {
 	// verify this came from the our screen and with proper authorization,
 	// because save_post can be triggered at other times
 
-	if ( empty($_POST['fb_friend_tag_box_noncename']) || !wp_verify_nonce( $_POST['fb_friend_tag_box_noncename'], plugin_basename( __FILE__ ) ) )
+	if ( empty($_POST['fb_friend_mention_box_noncename']) || !wp_verify_nonce( $_POST['fb_friend_mention_box_noncename'], plugin_basename( __FILE__ ) ) )
 			return;
 
 
@@ -261,7 +266,7 @@ function fb_add_friend_tag_box_save( $post_id ) {
 
 	// OK, we're authenticated: we need to find and save the data
 
-	$autocomplete_data = $_POST['fb_friend_tag_box_autocomplete'];
+	$autocomplete_data = $_POST['fb_friend_mention_box_autocomplete'];
 
 	preg_match_all(
 		"/([A-Z].*?)\((.*?)\)/s",
@@ -279,7 +284,30 @@ function fb_add_friend_tag_box_save( $post_id ) {
 		$friends_details_meta[] = array('id' => $friend_detail[2], 'name' => $friend_detail[1]);
 	}
 
-	add_post_meta($post_id, 'fb_tagged_friends', $friends_details_meta, true);
+	add_post_meta($post_id, 'fb_mentioned_friends', $friends_details_meta, true);
 
-	add_post_meta($post_id, 'fb_tagged_friends_message', $_POST['fb_friend_tag_box_message'], true);
+	add_post_meta($post_id, 'fb_mentioned_friends_message', $_POST['fb_friend_mention_box_message'], true);
+}
+
+
+
+function fb_social_publisher_mentioning_output($content) {
+	global $post;
+
+	$fb_mentioned_pages   = get_post_meta($post->ID, 'fb_mentioned_pages', true);
+	$fb_mentioned_friends = get_post_meta($post->ID, 'fb_mentioned_friends', true);
+
+	$fb_profiles = array_merge($fb_mentioned_pages, $fb_mentioned_friends);
+
+	$mentions = '';
+
+	foreach( $fb_profiles as $fb_profile ) {
+		$mentions .= '<a href="http://www.facebook.com/' . $fb_profile['id'] . '"><img src="http://graph.facebook.com/' . $fb_profile['id'] . '/picture" width="16" height="16"> ' . $fb_profile['name'] . '</a> &nbsp;';
+	}
+
+	$mentions .= 'mentioned in this post.';
+
+	$new_content = $mentions . $content;
+
+	return $new_content;
 }

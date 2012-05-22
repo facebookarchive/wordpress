@@ -297,7 +297,9 @@ function fb_social_publisher_mentioning_output($content) {
 	$fb_mentioned_pages   = get_post_meta($post->ID, 'fb_mentioned_pages', true);
 	$fb_mentioned_friends = get_post_meta($post->ID, 'fb_mentioned_friends', true);
 
-	$fb_profiles = array_merge($fb_mentioned_pages, $fb_mentioned_friends);
+	if (isset($fb_mentioned_pages) && isset($fb_mentioned_friends)) {
+		$fb_profiles = array_merge($fb_mentioned_pages, $fb_mentioned_friends);
+	}
 
 	$mentions = '';
 

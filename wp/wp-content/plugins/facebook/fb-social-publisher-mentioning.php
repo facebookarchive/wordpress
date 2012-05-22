@@ -297,14 +297,14 @@ function fb_social_publisher_mentioning_output($content) {
 	$fb_mentioned_pages   = get_post_meta($post->ID, 'fb_mentioned_pages', true);
 	$fb_mentioned_friends = get_post_meta($post->ID, 'fb_mentioned_friends', true);
 
-	if (isset($fb_mentioned_pages) && isset($fb_mentioned_friends)) {
-		$fb_profiles = array_merge($fb_mentioned_pages, $fb_mentioned_friends);
-	}
-
 	$mentions = '';
 
-	foreach( $fb_profiles as $fb_profile ) {
-		$mentions .= '<a href="http://www.facebook.com/' . $fb_profile['id'] . '"><img src="http://graph.facebook.com/' . $fb_profile['id'] . '/picture" width="16" height="16"> ' . $fb_profile['name'] . '</a> &nbsp;';
+	foreach( $fb_mentioned_pages as $fb_mentioned_page ) {
+		$mentions .= '<a href="http://www.facebook.com/' . $fb_mentioned_page['id'] . '"><img src="http://graph.facebook.com/' . $fb_mentioned_page['id'] . '/picture" width="16" height="16"> ' . $fb_mentioned_page['name'] . '</a> &nbsp;';
+	}
+
+	foreach( $fb_mentioned_friends as $fb_mentioned_friend ) {
+		$mentions .= '<a href="http://www.facebook.com/' . $fb_mentioned_friend['id'] . '"><img src="http://graph.facebook.com/' . $fb_mentioned_friend['id'] . '/picture" width="16" height="16"> ' . $fb_mentioned_friend['name'] . '</a> &nbsp;';
 	}
 
 	$mentions .= 'mentioned in this post.';

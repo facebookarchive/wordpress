@@ -58,15 +58,19 @@ function fb_settings_page() {
 	?>
 	<div class="wrap">
 		<div class="facebook-logo"></div>
-		<h2><?php echo esc_html__( 'Facebook for WordPress Settings', 'facebook' ); ?></h2>
+		<h2><?php echo esc_html__( 'Facebook for WordPress', 'facebook' ); ?></h2>
 		<?php settings_errors(); ?>
 		<form method="post" action="options.php">
 			<?php
 			settings_fields( 'fb_options' );
 
-			echo '<h3>' . esc_html__( 'Main Settings', 'facebook' ) . '</h3>';
+			echo '<h2>' . esc_html__( 'Main Settings', 'facebook' ) . '</h2>';
 			echo 'Get your App ID, Secret, and Namespace at <a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>.';
 			fb_get_main_settings_fields();
+
+			echo '<h2>' . esc_html__( 'Post and Page Settings', 'facebook' ) . '</h2>';
+
+			echo 'Additional Social Plugins are also available in the Widgets settings.';
 
 			echo '<h3>' . esc_html__( 'Social Publisher', 'facebook' ) . '</h3>';
 			fb_get_social_publisher_fields();

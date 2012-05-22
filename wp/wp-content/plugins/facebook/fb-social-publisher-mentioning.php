@@ -310,8 +310,9 @@ function fb_social_publisher_mentioning_output($content) {
 			$mentions .= '<a href="http://www.facebook.com/' . $fb_mentioned_friend['id'] . '"><img src="http://graph.facebook.com/' . $fb_mentioned_friend['id'] . '/picture" width="16" height="16"> ' . $fb_mentioned_friend['name'] . '</a> &nbsp;';
 		}
 	}
-	
-	$mentions .= 'mentioned in this post.';
+
+	if ($mentions)
+		$mentions .= 'mentioned in this post.';
 
 	$new_content = $mentions . $content;
 

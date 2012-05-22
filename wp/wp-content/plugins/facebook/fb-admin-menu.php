@@ -70,7 +70,7 @@ function fb_settings_page() {
 
 			echo '<h2>' . esc_html__( 'Post and Page Settings', 'facebook' ) . '</h2>';
 
-			echo 'Additional Social Plugins are also available in the Widgets settings.';
+			echo 'These settings affect Pages and Posts only.  Additional Social Plugins are also available in the Widgets settings.';
 
 			echo '<h3>' . esc_html__( 'Social Publisher', 'facebook' ) . '</h3>';
 			fb_get_social_publisher_fields();

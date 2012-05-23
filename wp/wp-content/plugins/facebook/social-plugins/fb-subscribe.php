@@ -136,6 +136,7 @@ function fb_get_subscribe_fields_array($placement) {
 													'help_text' => __( 'Show profile pictures below the button.  Applicable to standard layout only.', 'facebook' ),
 													),
 										array('name' => 'colorscheme',
+													'label' => 'Color scheme',
 													'field_type' => 'dropdown',
 													'default' => 'light',
 													'options' => array('light' => 'light', 'dark' => 'dark'),

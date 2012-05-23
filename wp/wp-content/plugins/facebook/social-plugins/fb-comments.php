@@ -115,6 +115,7 @@ function fb_get_comments_fields_array() {
 									);
 
 	$array['children'] = array(array('name' => 'num_posts',
+													'label' => 'Number of posts',
 													'field_type' => 'text',
 													'default' => 20,
 													'help_text' => 'The number of posts to display by default.',
@@ -125,6 +126,7 @@ function fb_get_comments_fields_array() {
 													'help_text' => 'The width of the plugin, in pixels.',
 													),
 										array('name' => 'colorscheme',
+													'label' => 'Color scheme',
 													'field_type' => 'dropdown',
 													'default' => 'light',
 													'options' => array('light' => 'light', 'dark' => 'dark'),

@@ -150,6 +150,7 @@ function fb_get_like_fields_array($placement) {
 													'help_text' => __( 'The verb to display in the button.', 'facebook' ),
 													),
 										array('name' => 'colorscheme',
+													'label' => 'Color scheme',
 													'field_type' => 'dropdown',
 													'default' => 'light',
 													'options' => array('light' => 'light', 'dark' => 'dark'),
@@ -183,6 +184,7 @@ function fb_get_like_fields_array($placement) {
 													'help_text' => __( 'The title above the button.', 'facebook' ),
 													);
 		$text_array = array('name' => 'href',
+													'full_name' => 'URL',
 													'field_type' => 'text',
 													'default' => get_site_url(),
 													'help_text' => __( 'The URL the Like button will point to.', 'facebook' ),

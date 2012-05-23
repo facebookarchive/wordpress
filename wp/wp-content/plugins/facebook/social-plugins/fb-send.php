@@ -7,7 +7,7 @@ function fb_get_send_button($options = array()) {
 
 function fb_send_button_automatic($content) {
 	$options = get_option('fb_options');
-	
+
 	$new_content = '';
 
 	switch ($options['send']['position']) {
@@ -111,6 +111,7 @@ function fb_get_send_fields_array($placement) {
 									);
 
 	$array['children'] = array(array('name' => 'colorscheme',
+													'label' => 'Color scheme',
 													'field_type' => 'dropdown',
 													'default' => 'light',
 													'options' => array('light' => 'light', 'dark' => 'dark'),
@@ -144,9 +145,10 @@ function fb_get_send_fields_array($placement) {
 													'help_text' => __( 'The title above the button.', 'facebook' ),
 													);
 		$text_array = array('name' => 'href',
+													'label' => 'URL',
 													'field_type' => 'text',
 													'default' => get_site_url(),
-													'help_text' => __( 'The URL the Sebd button will point to.', 'facebook' ),
+													'help_text' => __( 'The URL the Send button will point to.', 'facebook' ),
 													);
 
 		array_unshift($array['children'], $title_array, $text_array);

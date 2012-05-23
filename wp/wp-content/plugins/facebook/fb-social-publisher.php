@@ -350,6 +350,7 @@ function fb_get_social_publisher_fields() {
 	}
 
 	$children = array(array('name' => 'publish_to_authors_facebook_timeline',
+													'label' => "Publish to author's Timeline",
 													'field_type' => 'checkbox',
 													'default' => true,
 													'help_text' => __( 'Publish new posts to the author\'s Facebook Timeline and allow mentioning friends.', 'facebook' ),

@@ -1,2 +1,0 @@
-10:57:07: /Users/Paul/Sites/wp311/wp-content/themes/atahualpa375/atahualpa.pot:44: 'msgstr' is not a valid PHP format string, unlike 'msgid'. Reason: In the directive number 1, the character 'k' is not a valid conversion specifier.
-10:57:07: /Applications/Poedit.app/Contents/MacOS/msgfmt: found 1 fatal error

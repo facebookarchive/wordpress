@@ -35,13 +35,7 @@ function fb_get_comments($options = array()) {
 		$options['data-href'] = get_permalink();
 	}
 
-	$params = '';
-
-	foreach ($options as $option => $value) {
-		$params .= $option . '="' . $value . '" ';
-	}
-
-	$params .= 'data-ref="fbwpp" ';
+	$params = fb_build_social_plugin_params($options);
 
 	$output = fb_get_fb_comments_seo();
 	$output .= '<div class="fb-comments fb-social-plugin" ' . $params . '></div>';
@@ -61,10 +55,10 @@ function fb_comments_automatic($content) {
 			foreach($options['comments'] as $param => $val) {
 				$param = str_replace('_', '-', $param);
 
-				$options['comments']['data-' . $param] = $val;
+				$params['data-' . $param] = $val;
 			}
 
-			$content .= fb_get_comments($options['comments']);
+			$content .= fb_get_comments($params);
 		}
 		else {
 			$content .= fb_get_comments_count();

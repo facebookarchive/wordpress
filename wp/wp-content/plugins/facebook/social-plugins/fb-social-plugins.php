@@ -54,4 +54,18 @@ function fb_apply_filters() {
 	}
 }
 add_action( 'init', 'fb_apply_filters' );
+
+function fb_build_social_plugin_params($options) {
+	$params = '';
+
+	foreach ($options as $option => $value) {
+		$option = str_replace('_', '-', $option);
+
+		$params .= 'data-' . $option . '="' . $value . '" ';
+	}
+
+	$params .= 'data-ref="wp" ';
+
+	return $params;
+}
 ?>

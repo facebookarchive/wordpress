@@ -1,25 +1,13 @@
 <?php
 function fb_get_send_button($options = array()) {
-	$params = '';
-
-	foreach ($options as $option => $value) {
-		$params .= $option . '="' . $value . '" ';
-	}
-
-	$params .= 'data-ref="fbwpp" ';
+	$params = fb_build_social_plugin_params($options);
 
 	return '<div class="fb-send fb-social-plugin" ' . $params . '></div>';
 }
 
 function fb_send_button_automatic($content) {
 	$options = get_option('fb_options');
-
-	foreach($options['send'] as $param => $val) {
-		$param = str_replace('_', '-', $param);
-
-		$options['send']['data-' . $param] =  $val;
-	}
-
+	
 	$new_content = '';
 
 	switch ($options['send']['position']) {

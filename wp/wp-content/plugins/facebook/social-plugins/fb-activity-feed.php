@@ -1,16 +1,10 @@
 <?php
 function fb_get_activity_feed($options = array()) {
-	$params = '';
-
-	foreach ($options as $option => $value) {
-		$params .= $option . '="' . $value . '" ';
-	}
-
 	if (empty($options['header'])) {
-		$params .= 'data-header="false" ';
+		$options['data-header'] = 'false';
 	}
 
-	$params .= 'data-ref="fbwpp" ';
+	$params = fb_build_social_plugin_params($options);
 
 	return '<div class="fb-activity fb-social-plugin" ' . $params . '></div>';
 }

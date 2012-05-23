@@ -10,9 +10,8 @@ function fb_friend_page_autocomplete() {
 			return;
 
 		try {
-			error_log('API CALL SENT!!!!!!!!!!!!!!');
 			$friends = $facebook->api('/me/friends', 'GET', array('ref' => 'fbwpp'));
-			error_log('API CALL FINISHED!!!!!!!!!!!!!!');
+
 			foreach($friends['data'] as $friend) {
 				$friends_clean[$friend['name']] = $friend['id'];
 			}
@@ -54,7 +53,9 @@ function fb_friend_page_autocomplete() {
 
 			if ( isset($pages['data']) ) {
 				foreach($pages['data'] as $page) {
-					$pages_clean[$page['name']] = array($page['picture'], $page['name'], $page['id'], $page['likes']);
+					if (isset($page['name']) && isset($page['picture']) && isset($page['id']) && isset($page['likes'])) {
+						$pages_clean[$page['name']] = array($page['picture'], $page['name'], $page['id'], $page['likes']);
+					}
 				}
 			}
 			else {
@@ -80,13 +81,21 @@ function fb_friend_page_autocomplete() {
 
 		if (!empty($results)) {
 			foreach ($results as $result) {
-				echo '<img src="' . $result[1][0] . '" width="25" height="25"> &nbsp;' . $result[1][1] . ' (' . number_format($result[1][3]) . ' likes) <span style="display: none;">(' . $result[1][2] . ')</span>' . "\n";
+				echo '<img src="' . $result[1][0] . '" width="25" height="25"> &nbsp;' . $result[1][1] . ' (' . fb_short_number($result[1][3]) . ' likes) <span style="display: none;">(' . $result[1][2] . ')</span>' . "\n";
 			}
 		}
 
 		exit;
 	}
 }
+
+function fb_short_number($num) {
+	if($num>1000000) return round(($num/1000000),0).'m';
+	else if($num>1000) return round(($num/1000),0).'k';
+
+	return number_format($num);
+}
+
 
 function fb_get_user_pages() {
 	global $facebook;
@@ -138,7 +147,7 @@ function fb_add_page_mention_box_content( $post ) {
 	echo '<label for="fb_page_mention_box_autocomplete">';
 			 _e("Page's Name", 'fb_page_mention_box_textdomain' );
 	echo '</label> ';
-	echo '<input type="text" class="widefat" id="suggest-pages" autocomplete="off" name="fb_page_mention_box_autocomplete" value="" size="44" placeholder="Type to find a friend." />';
+	echo '<input type="text" class="widefat" id="suggest-pages" autocomplete="off" name="fb_page_mention_box_autocomplete" value="" size="44" placeholder="Type to find a page." />';
 	echo '<label for="fb_page_mention_box_message">';
 			 _e("Message", 'fb_page_mention_box_message_textdomain' );
 	echo '</label> ';
@@ -285,27 +294,50 @@ function fb_add_friend_mention_box_save( $post_id ) {
 function fb_social_publisher_mentioning_output($content) {
 	global $post;
 
+	$options = get_option('fb_options');
+
 	$fb_mentioned_pages   = get_post_meta($post->ID, 'fb_mentioned_pages', true);
 	$fb_mentioned_friends = get_post_meta($post->ID, 'fb_mentioned_friends', true);
 
-	$mentions = '';
+	$mentions = '<div class="fb-mentions">';
 
 	if (!empty($fb_mentioned_pages)){
 		foreach( $fb_mentioned_pages as $fb_mentioned_page ) {
-			$mentions .= '<a href="http://www.facebook.com/' . $fb_mentioned_page['id'] . '"><img src="http://graph.facebook.com/' . $fb_mentioned_page['id'] . '/picture" width="16" height="16"> ' . $fb_mentioned_page['name'] . '</a> &nbsp;';
+			$mentions .= '<a href="http://www.facebook.com/' . $fb_mentioned_page['id'] . '"><img src="http://graph.facebook.com/' . $fb_mentioned_page['id'] . '/picture" width="16" height="16"> ' . $fb_mentioned_page['name'] . '</a> ';
 		}
 	}
 
 	if (!empty($fb_mentioned_friends)){
 		foreach( $fb_mentioned_friends as $fb_mentioned_friend ) {
-			$mentions .= '<a href="http://www.facebook.com/' . $fb_mentioned_friend['id'] . '"><img src="http://graph.facebook.com/' . $fb_mentioned_friend['id'] . '/picture" width="16" height="16"> ' . $fb_mentioned_friend['name'] . '</a> &nbsp;';
+			$mentions .= '<a href="http://www.facebook.com/' . $fb_mentioned_friend['id'] . '"><img src="http://graph.facebook.com/' . $fb_mentioned_friend['id'] . '/picture" width="16" height="16"> ' . $fb_mentioned_friend['name'] . '</a> ';
 		}
 	}
 
-	if ($mentions)
-		$mentions .= 'mentioned in this post.';
+	if ($mentions) {
+		$mentions .= 'mentioned in this post.</div>';
 
-	$new_content = $mentions . $content;
+		$new_content = '';
 
-	return $new_content;
+		switch ($options['social_publisher']['mentions_position']) {
+			case 'top':
+				$new_content = $mentions . $content;
+				break;
+			case 'bottom':
+				$new_content = $content . $mentions;
+				break;
+			case 'both':
+				$new_content = $mentions . $content;
+				$new_content .= $mentions;
+				break;
+		}
+	}
+
+	if ( empty( $options['social_publisher']['mentions_show_on_homepage'] ) && is_singular() ) {
+		$content = $new_content;
+	}
+	elseif ( isset($options['social_publisher']['mentions_show_on_homepage']) ) {
+		$content = $new_content;
+	}
+
+	return $content;
 }

@@ -14,23 +14,13 @@
  */
 
 function fb_get_like_button($options = array()) {
-	$params = '';
-
-	foreach ($options as $option => $value) {
-		$params .= $option . '="' . $value . '" ';
-	}
-
-	$params .= 'data-ref="wp" ';
+	$params = fb_build_social_plugin_params($options);
 
 	return '<div class="fb-like fb-social-plugin" ' . $params . ' ></div>';
 }
 
 function fb_like_button_automatic($content) {
 	$options = get_option('fb_options');
-
-	foreach($options['like'] as $param => $val) {
-		$options['like']['data-' . $param] =  $val;
-	}
 
 	$new_content = '';
 

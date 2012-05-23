@@ -1,16 +1,10 @@
 <?php
 function fb_get_recommendations_box($options = array()) {
-	$params = '';
-
-	foreach ($options as $option => $value) {
-		$params .= $option . '="' . $value . '" ';
-	}
-
 	if (empty($options['header'])) {
-		$params .= 'data-header="false" ';
+		$options['header'] = 'false';
 	}
 
-	$params .= 'data-ref="fbwpp" ';
+	$params = fb_build_social_plugin_params($options);
 
 	return '<div class="fb-recommendations fb-social-plugin" ' . $params . '></div>';
 }

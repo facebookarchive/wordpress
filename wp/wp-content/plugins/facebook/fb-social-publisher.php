@@ -354,8 +354,21 @@ function fb_get_social_publisher_fields() {
 													'default' => true,
 													'help_text' => __( 'Publish new posts to the author\'s Facebook Timeline and allow mentioning friends.', 'facebook' ),
 													),
-										$fan_page_option
+										$fan_page_option,
+										array('name' => 'mentions_show_on_homepage',
+													'field_type' => 'checkbox',
+													'default' => true,
+													'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.  Enable this to show mentions on the homepage as part of the post previews.  If unchecked, mentions will only display on the post itself.', 'facebook' ),
+													),
+										array('name' => 'mentions_position',
+													'field_type' => 'dropdown',
+													'default' => 'both',
+													'options' => array('top' => 'top', 'bottom' => 'bottom', 'both' => 'both'),
+													'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.  This controls where mentions will be displayed in the posts.', 'facebook' ),
+													),
 										);
+
+
 
 	fb_construct_fields('settings', $children, $parent);
 }

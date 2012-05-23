@@ -1,12 +1,6 @@
 <?php
 function fb_get_subscribe_button($options = array()) {
-	$params = '';
-
-	foreach ($options as $option => $value) {
-		$params .= $option . '="' . $value . '" ';
-	}
-
-	$params .= 'data-ref="fbwpp" ';
+	$params = fb_build_social_plugin_params($options);
 
 	return '<div class="fb-subscribe fb-social-plugin" ' . $params . '></div>';
 }
@@ -14,29 +8,23 @@ function fb_get_subscribe_button($options = array()) {
 function fb_subscribe_button_automatic($content) {
 	$options = get_option('fb_options');
 
-	foreach($options['subscribe'] as $param => $val) {
-		$param = str_replace('_', '-', $param);
-
-		$params['data-' . $param] =  $val;
-	}
-print_r($params);
 	$fb_data = get_user_meta(get_the_author_meta('ID'), 'fb_data', true);
+
+	$options['subscribe']['href'] = 'http://www.facebook.com/' . $fb_data['username'];
 
 	$new_content = '';
 
 	if (isset($fb_data['username'])) {
-		$params['data-href'] = 'http://www.facebook.com/' . $fb_data['username'];
-
 		switch ($options['subscribe']['position']) {
 			case 'top':
-				$new_content = fb_get_subscribe_button($params) . $content;
+				$new_content = fb_get_subscribe_button($options['subscribe']) . $content;
 				break;
 			case 'bottom':
-				$new_content = $content . fb_get_subscribe_button($params);
+				$new_content = $content . fb_get_subscribe_button($options['subscribe']);
 				break;
 			case 'both':
-				$new_content = fb_get_subscribe_button($params) . $content;
-				$new_content .= fb_get_subscribe_button($params);
+				$new_content = fb_get_subscribe_button($options['subscribe']) . $content;
+				$new_content .= fb_get_subscribe_button($options['subscribe']);
 				break;
 		}
 	}

@@ -17,34 +17,34 @@ function fb_subscribe_button_automatic($content) {
 	foreach($options['subscribe'] as $param => $val) {
 		$param = str_replace('_', '-', $param);
 
-		$options['subscribe']['data-' . $param] =  $val;
+		$params['data-' . $param] =  $val;
 	}
-
+print_r($params);
 	$fb_data = get_user_meta(get_the_author_meta('ID'), 'fb_data', true);
 
 	$new_content = '';
 
 	if (isset($fb_data['username'])) {
-		$options['subscribe']['data-href'] = 'http://www.facebook.com/' . $fb_data['username'];
+		$params['data-href'] = 'http://www.facebook.com/' . $fb_data['username'];
 
 		switch ($options['subscribe']['position']) {
 			case 'top':
-				$new_content = fb_get_subscribe_button($options['subscribe']) . $content;
+				$new_content = fb_get_subscribe_button($params) . $content;
 				break;
 			case 'bottom':
-				$new_content = $content . fb_get_subscribe_button($options['subscribe']);
+				$new_content = $content . fb_get_subscribe_button($params);
 				break;
 			case 'both':
-				$new_content = fb_get_subscribe_button($options['subscribe']) . $content;
-				$new_content .= fb_get_subscribe_button($options['subscribe']);
+				$new_content = fb_get_subscribe_button($params) . $content;
+				$new_content .= fb_get_subscribe_button($params);
 				break;
 		}
 	}
 
-	if ( empty( $options['subscribe']['show_on_homepage'] ) && is_singular() ) {
+	if ( empty( $params['show_on_homepage'] ) && is_singular() ) {
 		$content = $new_content;
 	}
-	elseif ( isset($options['subscribe']['show_on_homepage']) ) {
+	elseif ( isset($params['show_on_homepage']) ) {
 		$content = $new_content;
 	}
 

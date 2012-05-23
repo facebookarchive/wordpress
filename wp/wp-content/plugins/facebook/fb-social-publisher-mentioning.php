@@ -10,8 +10,9 @@ function fb_friend_page_autocomplete() {
 			return;
 
 		try {
+			error_log('API CALL SENT!!!!!!!!!!!!!!');
 			$friends = $facebook->api('/me/friends', 'GET', array('ref' => 'fbwpp'));
-
+			error_log('API CALL FINISHED!!!!!!!!!!!!!!');
 			foreach($friends['data'] as $friend) {
 				$friends_clean[$friend['name']] = $friend['id'];
 			}
@@ -32,11 +33,6 @@ function fb_friend_page_autocomplete() {
 			}
 		}
 
-		$output = 'autocomplete';
-		if (isset($_GET['output'])) {
-			$output = strtolower($_GET['output']);
-		}
-
 		if (!empty($results)) {
 			foreach ($results as $result) {
 				echo '<img src="http://graph.facebook.com/' . $result[1] . '/picture/" width="25" height="25"> &nbsp;' . $result[0] . '<span style="display: none;">(' . $result[1] . ')</span>' . "\n";
@@ -54,7 +50,7 @@ function fb_friend_page_autocomplete() {
 			return;
 
 		try {
-			$pages = $facebook->api( '/search', 'GET', array( 'q' => $_GET['q'], 'type' => 'page', 'fields' => 'picture,name,id,likes', 'ref' => 'fbwpp' ) );
+			$pages = $facebook->api( '/search', 'GET', array( 'access_token' => '', 'q' => $_GET['q'], 'type' => 'page', 'fields' => 'picture,name,id,likes', 'ref' => 'fbwpp' ) );
 
 			if ( isset($pages['data']) ) {
 				foreach($pages['data'] as $page) {
@@ -82,14 +78,9 @@ function fb_friend_page_autocomplete() {
 			}
 		}
 
-		$output = 'autocomplete';
-		if (isset($_GET['output'])) {
-			$output = strtolower($_GET['output']);
-		}
-
 		if (!empty($results)) {
 			foreach ($results as $result) {
-				echo '<img src="' . $result[1][0] . '" width="25" height="25"> &nbsp;' . $result[1][1] . '(' . number_format($result[1][3]) . ' likes) <span style="display: none;">(' . $result[1][2] . ')</span>' . "\n";
+				echo '<img src="' . $result[1][0] . '" width="25" height="25"> &nbsp;' . $result[1][1] . ' (' . number_format($result[1][3]) . ' likes) <span style="display: none;">(' . $result[1][2] . ')</span>' . "\n";
 			}
 		}
 

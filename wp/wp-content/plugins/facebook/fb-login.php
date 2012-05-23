@@ -1,4 +1,10 @@
 <?php
+/**
+ * Check to see if the active admin has authenticated with Facebook
+ * If not, display a warning message
+ *
+ * @since 1.0
+ */
 function fb_check_connected_accounts() {
 	//get current wordpress user
 	global $current_user;
@@ -32,6 +38,11 @@ function fb_check_connected_accounts() {
 }
 add_action('admin_notices', 'fb_check_connected_accounts');
 
+/**
+ * Gets and returns the current, active Facebook user
+ *
+ * @since 1.0
+ */
 function fb_get_current_user() {
 	global $facebook;
 
@@ -39,7 +50,7 @@ function fb_get_current_user() {
 		return;
 
 	try {
-		$user = $facebook->api('/me');
+		$user = $facebook->api('/me', 'GET', array('ref' => 'fbwpp'));
 
 		return $user;
 	}

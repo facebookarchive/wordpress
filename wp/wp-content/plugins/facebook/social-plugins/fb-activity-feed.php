@@ -1,16 +1,10 @@
 <?php
 function fb_get_activity_feed($options = array()) {
-	$params = '';
-
-	foreach ($options as $option => $value) {
-		$params .= $option . '="' . $value . '" ';
-	}
-
 	if (empty($options['header'])) {
-		$params .= 'data-header="false" ';
+		$options['data-header'] = 'false';
 	}
 
-	$params .= 'data-ref="wp" ';
+	$params = fb_build_social_plugin_params($options);
 
 	return '<div class="fb-activity fb-social-plugin" ' . $params . '></div>';
 }
@@ -45,7 +39,7 @@ class Facebook_Activity_Feed extends WP_Widget {
 		echo $before_widget;
 
 		if ( ! empty( $instance['title'] ) )
-			echo $before_title . $instance['title'] . $after_title;
+			echo $before_title . esc_attr($instance['title']) . $after_title;
 
 		echo fb_get_activity_feed($instance);
 		echo $after_widget;
@@ -92,7 +86,7 @@ function fb_get_activity_feed_fields_array($placement) {
 													),
 										array('name' => 'height',
 													'field_type' => 'text',
-													'default' => '450',
+													'default' => '250',
 													'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
 													),
 										array('name' => 'colorscheme',

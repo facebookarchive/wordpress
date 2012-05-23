@@ -1,75 +1,58 @@
 <?php
-/**
- * Display the Like button.
- * More info at https://developers.facebook.com/docs/reference/plugins/like/
- *
- * @param array $enable_send      Enable send button (bool).
- * @param array $layout_style     Layout style, 'standard', 'button_count', or 'box_count'.
- * @param array $width            Width of button area.
- * @param array $show_faces       Show photos of friends that have like the URL.
- * @param array $verb_to_display  Verb to display, 'like' or 'recommend'.
- * @param array $color_scheme     Color scheme, 'light' or 'dark'.
- * @param array $font             Font, 'arial', 'lucida grande', 'segoe ui', 'tahoma', trebuchet ms', 'verdana'.
- * @param array $url              Optional. If not provided, current URL used.
- */
+function fb_get_subscribe_button($options = array()) {
+	$params = fb_build_social_plugin_params($options);
 
-function fb_get_like_button($options = array()) {
-	$params = '';
-
-	foreach ($options as $option => $value) {
-		$params .= $option . '="' . $value . '" ';
-	}
-
-	$params .= 'data-ref="wp" ';
-
-	return '<div class="fb-like fb-social-plugin" ' . $params . ' ></div>';
+	return '<div class="fb-subscribe fb-social-plugin" ' . $params . '></div>';
 }
 
-function fb_like_button_automatic($content) {
+function fb_subscribe_button_automatic($content) {
 	$options = get_option('fb_options');
 
-	foreach($options['like'] as $param => $val) {
-		$options['like']['data-' . $param] =  $val;
-	}
+	$fb_data = get_user_meta(get_the_author_meta('ID'), 'fb_data', true);
+
+	$options['subscribe']['href'] = 'http://www.facebook.com/' . $fb_data['username'];
 
 	$new_content = '';
 
-	switch ($options['like']['position']) {
-		case 'top':
-			$new_content = fb_get_like_button($options['like']) . $content;
-			break;
-		case 'bottom':
-			$new_content .= fb_get_like_button($options['like']);
-			break;
-		case 'both':
-			$new_content = fb_get_like_button($options['like']) . $content;
-			$new_content .= fb_get_like_button($options['like']);
-			break;
+	if (isset($fb_data['username'])) {
+		switch ($options['subscribe']['position']) {
+			case 'top':
+				$new_content = fb_get_subscribe_button($options['subscribe']) . $content;
+				break;
+			case 'bottom':
+				$new_content = $content . fb_get_subscribe_button($options['subscribe']);
+				break;
+			case 'both':
+				$new_content = fb_get_subscribe_button($options['subscribe']) . $content;
+				$new_content .= fb_get_subscribe_button($options['subscribe']);
+				break;
+		}
 	}
 
-	if ( empty( $options['like']['show_on_homepage'] ) && is_singular() ) {
+	if ( empty( $params['show_on_homepage'] ) && is_singular() ) {
 		$content = $new_content;
 	}
-	elseif ( isset($options['like']['show_on_homepage']) ) {
+	elseif ( isset($params['show_on_homepage']) ) {
 		$content = $new_content;
 	}
 
 	return $content;
 }
 
+
 /**
- * Adds the Like Button Social Plugin as a WordPress Widget
+ * Adds the Subscribe Button Social Plugin as a WordPress Widget
  */
-class Facebook_Like_Button extends WP_Widget {
+class Facebook_Subscribe_Button extends WP_Widget {
 
 	/**
 	 * Register widget with WordPress
 	 */
 	public function __construct() {
 		parent::__construct(
-	 		'fb_like', // Base ID
-			__( 'Facebook Like Button', 'facebook' ), // Name
-			array( 'description' => __( 'Lets a user share your content with friends on Facebook.', 'facebook' ), ) // Args
+	 		'fb_subscribe', // Base ID
+			__( 'Facebook Subscribe Button', 'facebook' ), // Name
+			array( 'description' => __( 'Lets a user subscribe to your public updates on Facebook.', 'facebook' ) ) // Args
 		);
 	}
 
@@ -87,9 +70,12 @@ class Facebook_Like_Button extends WP_Widget {
 		echo $before_widget;
 
 		if ( ! empty( $instance['title'] ) )
-			echo $before_title . $instance['title'] . $after_title;
+			echo $before_title . esc_attr($instance['title']) . $after_title;
 
-		echo fb_get_like_button($instance);
+		if ($instance['href']) {
+			echo fb_get_subscribe_button($instance);
+		}
+
 		echo $after_widget;
 	}
 
@@ -115,34 +101,25 @@ class Facebook_Like_Button extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		fb_get_like_fields('widget', $this);
+		fb_get_subscribe_fields('widget', $this);
 	}
 }
 
-function fb_get_like_fields($placement = 'settings', $object = null) {
-	$fields_array = fb_get_like_fields_array($placement);
+
+function fb_get_subscribe_fields($placement = 'settings', $object = null) {
+	$fields_array = fb_get_subscribe_fields_array($placement);
 
 	fb_construct_fields($placement, $fields_array['children'], $fields_array['parent'], $object);
 }
 
-function fb_get_like_fields_array($placement) {
-	$array['parent'] = array('name' => 'like',
+function fb_get_subscribe_fields_array($placement) {
+	$array['parent'] = array('name' => 'subscribe',
 									'field_type' => 'checkbox',
 									'help_text' => __( 'Click to learn more.', 'facebook' ),
-									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/like/',
+									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
 									);
 
-	$array['children'] = array(array('name' => 'send',
-													'field_type' => 'checkbox',
-													'default' => true,
-													'help_text' => __( 'Include a send button.', 'facebook' ),
-													),
-										array('name' => 'show_faces',
-													'field_type' => 'checkbox',
-													'default' => true,
-													'help_text' => __( 'Show profile pictures below the button.  Applicable to standard layout only.', 'facebook' ),
-													),
-										array('name' => 'layout',
+	$array['children'] = array(array('name' => 'layout',
 													'field_type' => 'dropdown',
 													'default' => 'standard',
 													'options' => array('standard' => 'standard', 'button_count' => 'button_count', 'box_count' => 'box_count'),
@@ -150,26 +127,25 @@ function fb_get_like_fields_array($placement) {
 													),
 										array('name' => 'width',
 													'field_type' => 'text',
-													'default' => '450',
+													'default' => '250',
 													'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
 													),
-										array('name' => 'action',
-													'field_type' => 'dropdown',
-													'default' => 'like',
-													'options' => array('like' => 'like', 'recommend' => 'recommend'),
-													'help_text' => __( 'The verb to display in the button.', 'facebook' ),
+										array('name' => 'show_faces',
+													'field_type' => 'checkbox',
+													'default' => true,
+													'help_text' => __( 'Show profile pictures below the button.  Applicable to standard layout only.', 'facebook' ),
 													),
 										array('name' => 'colorscheme',
 													'field_type' => 'dropdown',
 													'default' => 'light',
 													'options' => array('light' => 'light', 'dark' => 'dark'),
-													'help_text' => __( 'The color scheme of the button.', 'facebook' ),
+													'help_text' => __( 'The color scheme of the plugin.', 'facebook' ),
 													),
 										array('name' => 'font',
 													'field_type' => 'dropdown',
 													'default' => 'arial',
 													'options' => array('arial' => 'arial', 'lucida grande' => 'lucida grande', 'segoe ui' => 'segoe ui', 'tahoma' => 'tahoma', 'trebuchet ms' => 'trebuchet ms', 'verdana' => 'verdana'),
-													'help_text' => __( 'The font of the button.', 'facebook' ),
+													'help_text' => __( 'The font of the plugin.', 'facebook' ),
 													),
 										);
 
@@ -195,7 +171,7 @@ function fb_get_like_fields_array($placement) {
 		$text_array = array('name' => 'href',
 													'field_type' => 'text',
 													'default' => get_site_url(),
-													'help_text' => __( 'The URL the Like button will point to.', 'facebook' ),
+													'help_text' => __( 'The URL the Subscribe button will point to.', 'facebook' ),
 													);
 
 		array_unshift($array['children'], $title_array, $text_array);

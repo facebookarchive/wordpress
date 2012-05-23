@@ -856,6 +856,8 @@ abstract class BaseFacebook
       $ch = curl_init();
     }
 
+    error_log(var_export($params,1));
+
     $opts = self::$CURL_OPTS;
     if ($this->getFileUploadSupport()) {
       $opts[CURLOPT_POSTFIELDS] = $params;

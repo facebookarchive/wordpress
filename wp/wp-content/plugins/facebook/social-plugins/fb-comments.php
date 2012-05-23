@@ -35,13 +35,7 @@ function fb_get_comments($options = array()) {
 		$options['data-href'] = get_permalink();
 	}
 
-	$params = '';
-
-	foreach ($options as $option => $value) {
-		$params .= $option . '="' . $value . '" ';
-	}
-
-	$params .= 'data-ref="wp" ';
+	$params = fb_build_social_plugin_params($options);
 
 	$output = fb_get_fb_comments_seo();
 	$output .= '<div class="fb-comments fb-social-plugin" ' . $params . '></div>';
@@ -61,10 +55,10 @@ function fb_comments_automatic($content) {
 			foreach($options['comments'] as $param => $val) {
 				$param = str_replace('_', '-', $param);
 
-				$options['comments']['data-' . $param] = $val;
+				$params['data-' . $param] = $val;
 			}
 
-			$content .= fb_get_comments($options['comments']);
+			$content .= fb_get_comments($params);
 		}
 		else {
 			$content .= fb_get_comments_count();
@@ -95,7 +89,7 @@ function fb_get_fb_comments_seo() {
 	foreach ($comments[$url]['comments']['data'] as $key => $comment_info) {
 		$unix_timestamp = strtotime($comment_info['created_time']);
 		$output .= '<li id="' . esc_attr( 'comment-' . $key ) . '">
-			<p><a href="' . esc_url( 'https://www.facebook.com/' . $comment_info['from']['id'], array( 'http', 'https' ) ) . '">' . esc_html( $comment_info['from']['name'] ) . '</a>:</p>
+			<p><a href="' . esc_url( 'http://www.facebook.com/' . $comment_info['from']['id'], array( 'http', 'https' ) ) . '">' . esc_html( $comment_info['from']['name'] ) . '</a>:</p>
 			<p class="metadata">' . date('F jS, Y', $unix_timestamp) . ' at ' . date('g:i a', $unix_timestamp) . '</p>
 			' . $comment_info['message'] . '
 			</li>';

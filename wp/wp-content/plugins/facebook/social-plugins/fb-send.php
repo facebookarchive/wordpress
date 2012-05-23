@@ -1,50 +1,32 @@
 <?php
-function fb_get_subscribe_button($options = array()) {
-	$params = '';
+function fb_get_send_button($options = array()) {
+	$params = fb_build_social_plugin_params($options);
 
-	foreach ($options as $option => $value) {
-		$params .= $option . '="' . $value . '" ';
-	}
-
-	$params .= 'data-ref="wp" ';
-
-	return '<div class="fb-subscribe fb-social-plugin" ' . $params . '></div>';
+	return '<div class="fb-send fb-social-plugin" ' . $params . '></div>';
 }
 
-function fb_subscribe_button_automatic($content) {
+function fb_send_button_automatic($content) {
 	$options = get_option('fb_options');
-
-	foreach($options['subscribe'] as $param => $val) {
-		$param = str_replace('_', '-', $param);
-
-		$options['subscribe']['data-' . $param] =  $val;
-	}
-
-	$fb_data = get_user_meta(get_the_author_meta('ID'), 'fb_data', true);
-
+	
 	$new_content = '';
 
-	if (isset($fb_data['username'])) {
-		$options['subscribe']['data-href'] = 'http://www.facebook.com/' . $fb_data['username'];
-
-		switch ($options['subscribe']['position']) {
-			case 'top':
-				$new_content = fb_get_subscribe_button($options['subscribe']) . $content;
-				break;
-			case 'bottom':
-				$new_content .= fb_get_subscribe_button($options['subscribe']);
-				break;
-			case 'both':
-				$new_content = fb_get_subscribe_button($options['subscribe']) . $content;
-				$new_content .= fb_get_subscribe_button($options['subscribe']);
-				break;
-		}
+	switch ($options['send']['position']) {
+		case 'top':
+			$new_content = fb_get_send_button($options['send']) . $content;
+			break;
+		case 'bottom':
+			$new_content = $content . fb_get_send_button($options['send']);
+			break;
+		case 'both':
+			$new_content = fb_get_send_button($options['send']) . $content;
+			$new_content .= fb_get_send_button($options['send']);
+			break;
 	}
 
-	if ( empty( $options['subscribe']['show_on_homepage'] ) && is_singular() ) {
+	if ( empty( $options['send']['show_on_homepage'] ) && is_singular() ) {
 		$content = $new_content;
 	}
-	elseif ( isset($options['subscribe']['show_on_homepage']) ) {
+	elseif ( isset($options['send']['show_on_homepage']) ) {
 		$content = $new_content;
 	}
 
@@ -53,18 +35,18 @@ function fb_subscribe_button_automatic($content) {
 
 
 /**
- * Adds the Subscribe Button Social Plugin as a WordPress Widget
+ * Adds the Send Button Social Plugin as a WordPress Widget
  */
-class Facebook_Subscribe_Button extends WP_Widget {
+class Facebook_Send_Button extends WP_Widget {
 
 	/**
 	 * Register widget with WordPress
 	 */
 	public function __construct() {
 		parent::__construct(
-	 		'fb_subscribe', // Base ID
-			__( 'Facebook Subscribe Button', 'facebook' ), // Name
-			array( 'description' => __( 'Lets a user subscribe to your public updates on Facebook.', 'facebook' ) ) // Args
+	 		'fb_send', // Base ID
+			'Facebook Send Button', // Name
+			array( 'description' => __( 'The Send Button allows users to easily send content to their friends.', 'facebook' ), ) // Args
 		);
 	}
 
@@ -82,12 +64,9 @@ class Facebook_Subscribe_Button extends WP_Widget {
 		echo $before_widget;
 
 		if ( ! empty( $instance['title'] ) )
-			echo $before_title . $instance['title'] . $after_title;
+			echo $before_title . esc_attr($instance['title']) . $after_title;
 
-		if ($instance['href']) {
-			echo fb_get_subscribe_button($instance);
-		}
-
+		echo fb_get_send_button($instance);
 		echo $after_widget;
 	}
 
@@ -113,41 +92,25 @@ class Facebook_Subscribe_Button extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		fb_get_subscribe_fields('widget', $this);
+		fb_get_send_fields('widget', $this);
 	}
 }
 
 
-function fb_get_subscribe_fields($placement = 'settings', $object = null) {
-	$fields_array = fb_get_subscribe_fields_array($placement);
+function fb_get_send_fields($placement = 'settings', $object = null) {
+	$fields_array = fb_get_send_fields_array($placement);
 
 	fb_construct_fields($placement, $fields_array['children'], $fields_array['parent'], $object);
 }
 
-function fb_get_subscribe_fields_array($placement) {
-	$array['parent'] = array('name' => 'subscribe',
+function fb_get_send_fields_array($placement) {
+	$array['parent'] = array('name' => 'send',
 									'field_type' => 'checkbox',
 									'help_text' => __( 'Click to learn more.', 'facebook' ),
-									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
+									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/send/',
 									);
 
-	$array['children'] = array(array('name' => 'layout',
-													'field_type' => 'dropdown',
-													'default' => 'standard',
-													'options' => array('standard' => 'standard', 'button_count' => 'button_count', 'box_count' => 'box_count'),
-													'help_text' => __( 'Determines the size and amount of social context at the bottom.', 'facebook' ),
-													),
-										array('name' => 'width',
-													'field_type' => 'text',
-													'default' => '450',
-													'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
-													),
-										array('name' => 'show_faces',
-													'field_type' => 'checkbox',
-													'default' => true,
-													'help_text' => __( 'Show profile pictures below the button.  Applicable to standard layout only.', 'facebook' ),
-													),
-										array('name' => 'colorscheme',
+	$array['children'] = array(array('name' => 'colorscheme',
 													'field_type' => 'dropdown',
 													'default' => 'light',
 													'options' => array('light' => 'light', 'dark' => 'dark'),
@@ -183,7 +146,7 @@ function fb_get_subscribe_fields_array($placement) {
 		$text_array = array('name' => 'href',
 													'field_type' => 'text',
 													'default' => get_site_url(),
-													'help_text' => __( 'The URL the Subscribe button will point to.', 'facebook' ),
+													'help_text' => __( 'The URL the Sebd button will point to.', 'facebook' ),
 													);
 
 		array_unshift($array['children'], $title_array, $text_array);

@@ -13,13 +13,13 @@ Author URI: [TODO]
 License: [TODO]
 */
 
-$options = get_option('fb_options');
-
 global $facebook;
+
+$options = get_option( 'fb_options' );
 
 $facebook_plugin_directory = dirname(__FILE__);
 
-require_once( $facebook_plugin_directory . '/includes/facebook_php_sdk/src/facebook.php');
+require_once( $facebook_plugin_directory . '/includes/facebook-php-sdk/facebook.php');
 
 // Create our Application instance (replace this with your appId and secret)
 if ((!empty($options["app_id"]) || !empty($options["app_secret"]))) {
@@ -29,17 +29,24 @@ if ((!empty($options["app_id"]) || !empty($options["app_secret"]))) {
 	));
 }
 
-require_once( $facebook_plugin_directory . '/fb_admin_menu.php');
-require_once( $facebook_plugin_directory . '/fb_open_graph.php');
-require_once( $facebook_plugin_directory . '/social_plugins/fb_social_plugins.php');
-require_once( $facebook_plugin_directory . '/fb_login.php' );
-require_once( $facebook_plugin_directory . '/fb_social_publisher.php' );
-require_once( $facebook_plugin_directory . '/fb_wp_helpers.php' );
+require_once( $facebook_plugin_directory . '/fb-admin-menu.php');
+require_once( $facebook_plugin_directory . '/fb-open-graph.php');
+require_once( $facebook_plugin_directory . '/social-plugins/fb-social-plugins.php');
+require_once( $facebook_plugin_directory . '/fb-login.php' );
+require_once( $facebook_plugin_directory . '/fb-social-publisher.php' );
+require_once( $facebook_plugin_directory . '/fb-wp-helpers.php' );
 unset( $facebook_plugin_directory );
 
 add_action( 'init', 'fb_init' );
 add_action( 'init', 'fb_channel_file' );
+add_action( 'admin_notices', 'fb_install_warning' );
+add_action( 'wp_enqueue_scripts', 'fb_style' );
 
+/**
+ * Display an admin-facing warning if the current user hasn't authenticated with Facebook yet
+ *
+ * @since 1.0
+ */
 function fb_install_warning() {
 	$options = get_option('fb_options');
 
@@ -49,18 +56,9 @@ function fb_install_warning() {
 		fb_admin_dialog( sprintf( __('You must <a href="%s">configure the plugin</a> to enable Facebook for WordPress.', 'facebook' ), 'admin.php?page=facebook/fb_admin_menu.php' ), true);
 	}
 }
-add_action('admin_notices', 'fb_install_warning');
-
-//add_filter('language_attributes','fb_lang_atts');
-
-/*
- //disabled so that the site is HTML5-compliant, and it's not needed for social plugins any more
- function fb_lang_atts($lang) {
-	return ' xmlns:fb="http://ogp.me/ns/fb#" xmlns:og="http://ogp.me/ns#" '. $lang;
-}*/
 
 /**
- * Adds a script block to <head>, queues a script in footer, and adds a target element for that script
+ * Inits the Facebook JavaScript SDK.
  *
  * @since 1.0
  */
@@ -98,7 +96,8 @@ function fb_js_sdk_setup() {
 }
 
 /**
- * Add a root element for Faecbook JavaScript API
+ * Adds a root element for the Facebook JavaScript SDK
+ * This is required
  *
  * @since 1.0
  */
@@ -107,8 +106,7 @@ function fb_root() {
 }
 
 /**
- * Initialize the plugin and its hooks
- * Run during init action
+ * Initialize the plugin and its hooks.
  *
  * @since 1.0
  */
@@ -122,6 +120,11 @@ function fb_init() {
 	add_action( 'admin_head', 'fb_js_sdk_setup' );
 }
 
+/**
+ * Expose the cross-domain channel needed to make Facebook Platform API calls
+ *
+ * @since 1.0
+ */
 function fb_channel_file() {
 	if (!empty($_GET['fb-channel-file'])) {
 		$cache_expire = 60 * 60 * 24 * 365;
@@ -133,6 +136,11 @@ function fb_channel_file() {
 	}
 }
 
+/**
+ * Get the locale and set it for the Facebook SDK
+ *
+ * @since 1.0
+ */
 function fb_get_locale() {
 	$fb_valid_fb_locales = array(
 		'ca_ES', 'cs_CZ', 'cy_GB', 'da_DK', 'de_DE', 'eu_ES', 'en_PI', 'en_UD', 'ck_US', 'en_US', 'es_LA', 'es_CL', 'es_CO', 'es_ES', 'es_MX',
@@ -163,9 +171,13 @@ function fb_get_locale() {
 	return $locale;
 }
 
+/**
+ * Set styles for elements like Social Plugins
+ *
+ * @since 1.0
+ */
 function fb_style() {
 	wp_enqueue_style( 'fb', plugins_url( 'style/style.css', __FILE__), array(), '1.0' );
 }
-add_action( 'wp_enqueue_scripts', 'fb_style' );
 
 ?>

@@ -65,7 +65,7 @@ function fb_settings_page() {
 			settings_fields( 'fb_options' );
 
 			echo '<h2>' . esc_html__( 'Main Settings', 'facebook' ) . '</h2>';
-			echo 'Get your App ID, Secret, and Namespace at <a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>.';
+			echo 'Get your App ID, Secret, and Namespace at <a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>. <strong>If you already have a Facebook app for this website, it\'s important that you use the same information below</strong>.';
 			fb_get_main_settings_fields();
 
 			echo '<h2>' . esc_html__( 'Post and Page Settings', 'facebook' ) . '</h2>';

@@ -299,22 +299,22 @@ function fb_social_publisher_mentioning_output($content) {
 	$fb_mentioned_pages   = get_post_meta($post->ID, 'fb_mentioned_pages', true);
 	$fb_mentioned_friends = get_post_meta($post->ID, 'fb_mentioned_friends', true);
 
-	$mentions = '<div class="fb-mentions">';
-
-	if (!empty($fb_mentioned_pages)){
-		foreach( $fb_mentioned_pages as $fb_mentioned_page ) {
-			$mentions .= '<a href="http://www.facebook.com/' . $fb_mentioned_page['id'] . '"><img src="http://graph.facebook.com/' . $fb_mentioned_page['id'] . '/picture" width="16" height="16"> ' . $fb_mentioned_page['name'] . '</a> ';
-		}
-	}
+	$mentions_entities = '';
 
 	if (!empty($fb_mentioned_friends)){
 		foreach( $fb_mentioned_friends as $fb_mentioned_friend ) {
-			$mentions .= '<a href="http://www.facebook.com/' . $fb_mentioned_friend['id'] . '"><img src="http://graph.facebook.com/' . $fb_mentioned_friend['id'] . '/picture" width="16" height="16"> ' . $fb_mentioned_friend['name'] . '</a> ';
+			$mentions_entities .= '<a href="http://www.facebook.com/' . $fb_mentioned_friend['id'] . '"><img src="http://graph.facebook.com/' . $fb_mentioned_friend['id'] . '/picture" width="16" height="16"> ' . $fb_mentioned_friend['name'] . '</a> ';
 		}
 	}
 
-	if ($mentions) {
-		$mentions .= 'mentioned in this post.</div>';
+	if (!empty($fb_mentioned_pages)){
+		foreach( $fb_mentioned_pages as $fb_mentioned_page ) {
+			$mentions_entities .= '<a href="http://www.facebook.com/' . $fb_mentioned_page['id'] . '"><img src="http://graph.facebook.com/' . $fb_mentioned_page['id'] . '/picture" width="16" height="16"> ' . $fb_mentioned_page['name'] . '</a> ';
+		}
+	}
+
+	if ($mentions_entities) {
+		$mentions = '<div class="fb-mentions entry-meta">' . $mentions_entities . 'mentioned in this post.</div>';
 
 		$new_content = '';
 
@@ -329,14 +329,16 @@ function fb_social_publisher_mentioning_output($content) {
 				$new_content = $mentions . $content;
 				$new_content .= $mentions;
 				break;
+			default:
+				$new_content = $content;
 		}
-	}
 
-	if ( empty( $options['social_publisher']['mentions_show_on_homepage'] ) && is_singular() ) {
-		$content = $new_content;
-	}
-	elseif ( isset($options['social_publisher']['mentions_show_on_homepage']) ) {
-		$content = $new_content;
+		if ( empty( $options['social_publisher']['mentions_show_on_homepage'] ) && is_singular() ) {
+			$content = $new_content;
+		}
+		elseif ( isset($options['social_publisher']['mentions_show_on_homepage']) ) {
+			$content = $new_content;
+		}
 	}
 
 	return $content;

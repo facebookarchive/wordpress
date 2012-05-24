@@ -233,6 +233,8 @@ function fb_post_to_author_fb_timeline($post_id) {
 
 	$mentioned_friends_message = get_post_meta($post_id, 'fb_mentioned_friends_message', true);
 
+	$publish_ids_friends = array();
+
 	foreach($fb_mentioned_friends as $friend) {
 
 		try {
@@ -278,6 +280,8 @@ error_log('pub result friends!');
 	$mentioned_pages_message = get_post_meta($post_id, 'fb_mentioned_pages_message', true);
 
 	//$mentions = '';
+
+	$publish_ids_pages = array();
 
 	foreach($fb_mentioned_pages as $page) {
 		try {
@@ -420,44 +424,52 @@ function fb_delete_social_posts( $post_id ) {
 
 	$fb_page_post_id = get_post_meta($post_id, 'fb_fan_page_post_id', true);
 
-	try {
-		$delete_result = $facebook->api('/' . $fb_page_post_id, 'DELETE', array('ref' => 'fbwpp'));
-	}
-	catch (FacebookApiException $e) {
-		error_log(var_export($e,1));
+	if ($fb_page_post_id) {
+		try {
+			$delete_result = $facebook->api('/' . $fb_page_post_id, 'DELETE', array('ref' => 'fbwpp'));
+		}
+		catch (FacebookApiException $e) {
+			error_log(var_export($e,1));
+		}
 	}
 	
 	$fb_author_post_id = get_post_meta($post_id, 'fb_author_post_id', true);
 
-	try {
-		$delete_result = $facebook->api('/' . $fb_author_post_id, 'DELETE', array('ref' => 'fbwpp'));
-	}
-	catch (FacebookApiException $e) {
-		error_log(var_export($e,1));
-	}
-
-	$fb_mentioned_pages_post_ids = get_post_meta($post_id, 'fb_mentioned_pages_post_ids', true);
-
-	foreach($fb_mentioned_pages_post_ids as $page_post_ids) {
+	if ($fb_author_post_id) {
 		try {
-				$delete_result = $facebook->api('/' . $page_post_ids, 'DELETE', array('ref' => 'fbwpp'));
+			$delete_result = $facebook->api('/' . $fb_author_post_id, 'DELETE', array('ref' => 'fbwpp'));
 		}
 		catch (FacebookApiException $e) {
 			error_log(var_export($e,1));
+		}
+
+	}
+	
+	$fb_mentioned_pages_post_ids = get_post_meta($post_id, 'fb_mentioned_pages_post_ids', true);
+
+	if ($fb_mentioned_pages_post_ids) {
+		foreach($fb_mentioned_pages_post_ids as $page_post_ids) {
+			try {
+					$delete_result = $facebook->api('/' . $page_post_ids, 'DELETE', array('ref' => 'fbwpp'));
+			}
+			catch (FacebookApiException $e) {
+				error_log(var_export($e,1));
+			}
 		}
 	}
 
 	$fb_mentioned_friends_post_ids = get_post_meta($post_id, 'fb_mentioned_friends_post_ids', true);
 
-	foreach($fb_mentioned_friends_post_ids as $page_post_ids) {
-		try {
-				$delete_result = $facebook->api('/' . $page_post_ids, 'DELETE', array('ref' => 'fbwpp'));
-		}
-		catch (FacebookApiException $e) {
-			error_log(var_export($e,1));
+	if ($fb_mentioned_friends_post_ids) {
+		foreach($fb_mentioned_friends_post_ids as $page_post_ids) {
+			try {
+					$delete_result = $facebook->api('/' . $page_post_ids, 'DELETE', array('ref' => 'fbwpp'));
+			}
+			catch (FacebookApiException $e) {
+				error_log(var_export($e,1));
+			}
 		}
 	}
-
 
 	/*$fb_timeline_post_id = get_post_meta($post_id, 'fb_timeline_post_id', true);
 

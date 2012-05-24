@@ -1,10 +1,4 @@
 <?php
-/*
-wp_insert_comment
-
-<noscript></noscript>
-*/
-
 function fb_insights_page() {
 	$options = get_option('fb_options');
 

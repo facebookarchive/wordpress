@@ -31,13 +31,19 @@ function fb_friend_page_autocomplete() {
 				}
 			}
 		}
-
-		if (!empty($results)) {
+    
+    if (!empty($results)) {
+      $count = 0;
+      
 			foreach ($results as $result) {
-				echo '<img src="http://graph.facebook.com/' . $result[1] . '/picture/" width="25" height="25"> &nbsp;' . $result[0] . '<span style="display: none;">(' . $result[1] . ')</span>' . "\n";
+        $output[$count]['id'] = '[' . $result[1] . '|' . $result[0] . ']';
+        $output[$count]['name'] = '<img src="http://graph.facebook.com/' . $result[1] . '/picture/" width="25" height="25"> &nbsp;' . $result[0];
+        
+        $count++;
 			}
 		}
-
+    
+    print json_encode($output);
 		exit;
 	}
 
@@ -80,11 +86,17 @@ function fb_friend_page_autocomplete() {
 		}
 
 		if (!empty($results)) {
+      $count = 0;
+      
 			foreach ($results as $result) {
-				echo '<img src="' . $result[1][0] . '" width="25" height="25"> &nbsp;' . $result[1][1] . ' (' . fb_short_number($result[1][3]) . ' likes) <span style="display: none;">(' . $result[1][2] . ')</span>' . "\n";
+        $output[$count]['id'] = '[' . $result[1][2] . '|' . $result[1][1] . ']';
+        $output[$count]['name'] = '<img src="' . $result[1][0] . '" width="25" height="25"> &nbsp;' . $result[1][1] . ' (' . fb_short_number($result[1][3]) . ' likes)';
+        
+        $count++;
 			}
 		}
-
+    
+    print json_encode($output);
 		exit;
 	}
 }
@@ -138,7 +150,7 @@ function fb_add_page_mention_box() {
 }
 
 function fb_add_page_mention_box_content( $post ) {
-	wp_enqueue_script('suggest');
+	//wp_enqueue_script('suggest');
 
 	// Use nonce for verification
 	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_page_mention_box_noncename' );
@@ -181,9 +193,10 @@ function fb_add_page_mention_box_save( $post_id ) {
 	// OK, we're authenticated: we need to find and save the data
 
 	$autocomplete_data = $_POST['fb_page_mention_box_autocomplete'];
-
+  error_log('wtf');
+error_log(var_export($autocomplete_data,1));
 	preg_match_all(
-		"/([A-Z].*?)\(.*?\((.*?)\)/s",
+		"/\[(.*?)\|(.*?)\]/s",
 		$autocomplete_data,
 		$page_details,
 		PREG_SET_ORDER // formats data into an array of posts
@@ -195,7 +208,7 @@ function fb_add_page_mention_box_save( $post_id ) {
 	$pages_details_meta = array();
 
 	foreach($page_details as $page_detail) {
-		$pages_details_meta[] = array('id' => $page_detail[2], 'name' => $page_detail[1]);
+		$pages_details_meta[] = array('id' => $page_detail[1], 'name' => $page_detail[2]);
 	}
 
 	add_post_meta($post_id, 'fb_mentioned_pages', $pages_details_meta, true);
@@ -268,8 +281,10 @@ function fb_add_friend_mention_box_save( $post_id ) {
 
 	$autocomplete_data = $_POST['fb_friend_mention_box_autocomplete'];
 
+error_log(var_export($autocomplete_data,1));
+
 	preg_match_all(
-		"/([A-Z].*?)\((.*?)\)/s",
+		"/\[(.*?)\|(.*?)\]/s",
 		$autocomplete_data,
 		$friend_details,
 		PREG_SET_ORDER // formats data into an array of posts
@@ -281,7 +296,7 @@ function fb_add_friend_mention_box_save( $post_id ) {
 	$friends_details_meta = array();
 
 	foreach($friend_details as $friend_detail) {
-		$friends_details_meta[] = array('id' => $friend_detail[2], 'name' => $friend_detail[1]);
+		$friends_details_meta[] = array('id' => $friend_detail[1], 'name' => $friend_detail[2]);
 	}
 
 	add_post_meta($post_id, 'fb_mentioned_friends', $friends_details_meta, true);

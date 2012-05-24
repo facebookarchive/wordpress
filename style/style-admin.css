@@ -36,3 +36,27 @@ p {
     color: #aaa;
     cursor: pointer;
 }
+
+.token-input-token-facebook img {
+    vertical-align: middle;
+    border-radius: 3px;
+    width: 16px;
+    height: 16px;
+    margin: 0px 0px 1px -1px;
+}
+
+.token-input-dropdown-item2-facebook img {
+    vertical-align: middle;
+    border-radius: 3px;
+    width: 16px;
+    height: 16px;
+    margin: 0px 0px 1px 2px;
+}
+
+.token-input-dropdown-item-facebook img {
+    vertical-align: middle;
+    border-radius: 3px;
+    width: 16px;
+    height: 16px;
+    margin: 0px 0px 1px 2px;
+}

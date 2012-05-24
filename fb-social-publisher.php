@@ -257,6 +257,11 @@ function fb_post_to_author_fb_timeline($post_id) {
 			$args['ref'] = 'fbwpp';
 
 			$publish_result = $facebook->api('/' . $friend['id'] . '/feed', 'POST', $args);
+			error_log('pub result friends!');
+error_log(var_export($publish_result,1));
+error_log('pub result friends!');
+			$publish_ids_friends[] = $publish_result['id'];
+
 		}
 		catch (FacebookApiException $e) {
 			error_log(var_export($e,1));
@@ -264,6 +269,9 @@ function fb_post_to_author_fb_timeline($post_id) {
 
 		//$mentions .= $friend['id'] . ",";
 	}
+
+	add_post_meta($post_id, 'fb_mentioned_friends_post_ids', $publish_ids_friends, true);
+
 
 	$fb_mentioned_pages = get_post_meta($post_id, 'fb_mentioned_pages', true);
 
@@ -295,6 +303,10 @@ function fb_post_to_author_fb_timeline($post_id) {
 			$args['ref'] = 'fbwpp';
 
 			$publish_result = $facebook->api('/' . $page['id'] . '/feed', 'POST', $args);
+error_log('pub result friends!');
+error_log(var_export($publish_result,1));
+error_log('pub result friends!');
+			$publish_ids_pages[] = $publish_result['id'];
 		}
 		catch (FacebookApiException $e) {
 			error_log(var_export($e,1));
@@ -303,10 +315,14 @@ function fb_post_to_author_fb_timeline($post_id) {
 		//$mentions .= $page['id'] . ",";
 	}
 
+	add_post_meta($post_id, 'fb_mentioned_pages_post_ids', $publish_ids_pages, true);
+
 	$author_message = get_post_meta($post_id, 'fb_author_message', true);
 
 	try {
-		$publish = $facebook->api('/me/' . $options["app_namespace"] . ':publish', 'POST', array('message' => $author_message, 'article' => get_permalink($post_id)));
+		$publish_result = $facebook->api('/me/' . $options["app_namespace"] . ':publish', 'POST', array('message' => $author_message, 'article' => get_permalink($post_id)));
+		
+		add_post_meta($post_id, 'fb_author_post_id', $publish_result['id'], true);
 	}
 	catch (FacebookApiException $e) {
 		error_log(var_export($e,1));
@@ -394,7 +410,7 @@ function fb_publish_later($new_status, $old_status, $post) {
 	}
 }
 
-add_action('delete_post', 'fb_delete_social_posts', 10);
+add_action('before_delete_post', 'fb_delete_social_posts', 10);
 
 function fb_delete_social_posts( $post_id ) {
 	global $facebook;
@@ -410,6 +426,38 @@ function fb_delete_social_posts( $post_id ) {
 	catch (FacebookApiException $e) {
 		error_log(var_export($e,1));
 	}
+	
+	$fb_author_post_id = get_post_meta($post_id, 'fb_author_post_id', true);
+
+	try {
+		$delete_result = $facebook->api('/' . $fb_author_post_id, 'DELETE', array('ref' => 'fbwpp'));
+	}
+	catch (FacebookApiException $e) {
+		error_log(var_export($e,1));
+	}
+
+	$fb_mentioned_pages_post_ids = get_post_meta($post_id, 'fb_mentioned_pages_post_ids', true);
+
+	foreach($fb_mentioned_pages_post_ids as $page_post_ids) {
+		try {
+				$delete_result = $facebook->api('/' . $page_post_ids, 'DELETE', array('ref' => 'fbwpp'));
+		}
+		catch (FacebookApiException $e) {
+			error_log(var_export($e,1));
+		}
+	}
+
+	$fb_mentioned_friends_post_ids = get_post_meta($post_id, 'fb_mentioned_friends_post_ids', true);
+
+	foreach($fb_mentioned_friends_post_ids as $page_post_ids) {
+		try {
+				$delete_result = $facebook->api('/' . $page_post_ids, 'DELETE', array('ref' => 'fbwpp'));
+		}
+		catch (FacebookApiException $e) {
+			error_log(var_export($e,1));
+		}
+	}
+
 
 	/*$fb_timeline_post_id = get_post_meta($post_id, 'fb_timeline_post_id', true);
 

@@ -321,7 +321,7 @@ function fb_social_publisher_mentioning_output($content) {
 			$noun = 'post';
 		}
 
-		$mentions = '<div class="fb-mentions entry-meta">' . $mentions_entities . 'mentioned in this ' . $noun . ' via Facebook.</div>';
+		$mentions = '<div class="fb-mentions entry-meta">' . $mentions_entities . 'mentioned in this ' . $noun . '.</div>';
 
 		$new_content = '';
 

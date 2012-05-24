@@ -9,6 +9,9 @@ function fb_subscribe_button_automatic($content) {
 	$options = get_option('fb_options');
 
 	$fb_data = get_user_meta(get_the_author_meta('ID'), 'fb_data', true);
+	if (!$fb_data) {
+		return $content;
+	}
 
 	$options['subscribe']['href'] = 'http://www.facebook.com/' . $fb_data['username'];
 

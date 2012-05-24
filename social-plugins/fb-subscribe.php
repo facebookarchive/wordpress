@@ -114,36 +114,38 @@ function fb_get_subscribe_fields($placement = 'settings', $object = null) {
 
 function fb_get_subscribe_fields_array($placement) {
 	$array['parent'] = array('name' => 'subscribe',
-									'field_type' => 'checkbox',
-									'help_text' => __( 'Click to learn more.', 'facebook' ),
+									'label' => 'Subscribe Button',
+									'description' => 'The Subscribe Button lets a user subscribe to your public updates on Facebook.  Each WordPress author must authenticate with Facebook in order for the Subscribe button to appear on their Posts.',
+									'type' => 'checkbox',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
+									'image' => 'https://developers.facebook.com/attachment/Subscribe2.png'
 									);
 
 	$array['children'] = array(array('name' => 'layout',
-													'field_type' => 'dropdown',
+													'type' => 'dropdown',
 													'default' => 'standard',
 													'options' => array('standard' => 'standard', 'button_count' => 'button_count', 'box_count' => 'box_count'),
 													'help_text' => __( 'Determines the size and amount of social context at the bottom.', 'facebook' ),
 													),
 										array('name' => 'width',
-													'field_type' => 'text',
+													'type' => 'text',
 													'default' => '250',
 													'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
 													),
 										array('name' => 'show_faces',
-													'field_type' => 'checkbox',
+													'type' => 'checkbox',
 													'default' => true,
 													'help_text' => __( 'Show profile pictures below the button.  Applicable to standard layout only.', 'facebook' ),
 													),
 										array('name' => 'colorscheme',
 													'label' => 'Color scheme',
-													'field_type' => 'dropdown',
+													'type' => 'dropdown',
 													'default' => 'light',
 													'options' => array('light' => 'light', 'dark' => 'dark'),
 													'help_text' => __( 'The color scheme of the plugin.', 'facebook' ),
 													),
 										array('name' => 'font',
-													'field_type' => 'dropdown',
+													'type' => 'dropdown',
 													'default' => 'arial',
 													'options' => array('arial' => 'arial', 'lucida grande' => 'lucida grande', 'segoe ui' => 'segoe ui', 'tahoma' => 'tahoma', 'trebuchet ms' => 'trebuchet ms', 'verdana' => 'verdana'),
 													'help_text' => __( 'The font of the plugin.', 'facebook' ),
@@ -152,13 +154,13 @@ function fb_get_subscribe_fields_array($placement) {
 
 	if ($placement == 'settings') {
 		$array['children'][] = array('name' => 'position',
-													'field_type' => 'dropdown',
+													'type' => 'dropdown',
 													'default' => 'both',
 													'options' => array('top' => 'top', 'bottom' => 'bottom', 'both' => 'both'),
 													'help_text' => __( 'Where the button will display on the page or post.', 'facebook' ),
 													);
 		$array['children'][] = array('name' => 'show_on_homepage',
-													'field_type' => 'checkbox',
+													'type' => 'checkbox',
 													'default' => true,
 													'help_text' => __( 'If the plugin should appear on the homepage as part of the Post previews.  If unchecked, the plugin will only display on the Post itself.', 'facebook' ),
 													);
@@ -166,11 +168,11 @@ function fb_get_subscribe_fields_array($placement) {
 
 	if ($placement == 'widget') {
 		$title_array = array('name' => 'title',
-													'field_type' => 'text',
+													'type' => 'text',
 													'help_text' => __( 'The title above the button.', 'facebook' ),
 													);
 		$text_array = array('name' => 'href',
-													'field_type' => 'text',
+													'type' => 'text',
 													'default' => get_site_url(),
 													'help_text' => __( 'The URL the Subscribe button will point to.', 'facebook' ),
 													);

@@ -103,25 +103,27 @@ function fb_get_comments_fields($placement = 'settings', $object = null) {
 
 function fb_get_comments_fields_array() {
 	$array['parent'] = array('name' => 'comments',
-									'field_type' => 'checkbox',
-									'help_text' => __( 'Click to learn more.', 'facebook' ),
+									'type' => 'checkbox',
+									'label' => 'Comments',
+									'description' => 'The Comments Box is a social plugin that enables user commenting on your site. Features include moderation tools and distribution.',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/comments/',
+									'image' => 'https://developers.facebook.com/attachment/comments.png'
 									);
 
 	$array['children'] = array(array('name' => 'num_posts',
 													'label' => 'Number of posts',
-													'field_type' => 'text',
+													'type' => 'text',
 													'default' => 20,
 													'help_text' => 'The number of posts to display by default.',
 													),
 										array('name' => 'width',
-													'field_type' => 'text',
+													'type' => 'text',
 													'default' => '470',
 													'help_text' => 'The width of the plugin, in pixels.',
 													),
 										array('name' => 'colorscheme',
 													'label' => 'Color scheme',
-													'field_type' => 'dropdown',
+													'type' => 'dropdown',
 													'default' => 'light',
 													'options' => array('light' => 'light', 'dark' => 'dark'),
 													'help_text' => 'The color scheme of the plugin.',

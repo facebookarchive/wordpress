@@ -105,20 +105,22 @@ function fb_get_send_fields($placement = 'settings', $object = null) {
 
 function fb_get_send_fields_array($placement) {
 	$array['parent'] = array('name' => 'send',
-									'field_type' => 'checkbox',
-									'help_text' => __( 'Click to learn more.', 'facebook' ),
+									'type' => 'checkbox',
+									'label' => 'Send Button',
+									'description' => 'The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address.',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/send/',
+									'image' => 'https://developers.facebook.com/attachment/send.png'
 									);
 
 	$array['children'] = array(array('name' => 'colorscheme',
 													'label' => 'Color scheme',
-													'field_type' => 'dropdown',
+													'type' => 'dropdown',
 													'default' => 'light',
 													'options' => array('light' => 'light', 'dark' => 'dark'),
 													'help_text' => __( 'The color scheme of the plugin.', 'facebook' ),
 													),
 										array('name' => 'font',
-													'field_type' => 'dropdown',
+													'type' => 'dropdown',
 													'default' => 'arial',
 													'options' => array('arial' => 'arial', 'lucida grande' => 'lucida grande', 'segoe ui' => 'segoe ui', 'tahoma' => 'tahoma', 'trebuchet ms' => 'trebuchet ms', 'verdana' => 'verdana'),
 													'help_text' => __( 'The font of the plugin.', 'facebook' ),
@@ -127,13 +129,13 @@ function fb_get_send_fields_array($placement) {
 
 	if ($placement == 'settings') {
 		$array['children'][] = array('name' => 'position',
-													'field_type' => 'dropdown',
+													'type' => 'dropdown',
 													'default' => 'both',
 													'options' => array('top' => 'top', 'bottom' => 'bottom', 'both' => 'both'),
 													'help_text' => __( 'Where the button will display on the page or post.', 'facebook' ),
 													);
 		$array['children'][] = array('name' => 'show_on_homepage',
-													'field_type' => 'checkbox',
+													'type' => 'checkbox',
 													'default' => true,
 													'help_text' => __( 'If the plugin should appear on the homepage as part of the Post previews.  If unchecked, the plugin will only display on the Post itself.', 'facebook' ),
 													);
@@ -141,12 +143,12 @@ function fb_get_send_fields_array($placement) {
 
 	if ($placement == 'widget') {
 		$title_array = array('name' => 'title',
-													'field_type' => 'text',
+													'type' => 'text',
 													'help_text' => __( 'The title above the button.', 'facebook' ),
 													);
 		$text_array = array('name' => 'href',
 													'label' => 'URL',
-													'field_type' => 'text',
+													'type' => 'text',
 													'default' => get_site_url(),
 													'help_text' => __( 'The URL the Send button will point to.', 'facebook' ),
 													);

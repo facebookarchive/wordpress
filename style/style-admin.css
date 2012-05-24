@@ -10,6 +10,29 @@ h3 {
     margin: 1.5em 0 0.5em;
 }
 
+h3 input {
+    vertical-align: bottom !important;
+}
 p {
     margin: 0;
+}
+
+.fb_admin_image {
+    margin-left:84px;
+}
+
+.fb_admin_image img {
+    float:left;
+    margin-left:-84px;
+    border:1px solid #CCC;
+    width:64px
+}
+
+.wp_help_link {
+    text-decoration: none;
+}
+
+.wp_help_hover {
+    color: #aaa;
+    cursor: pointer;
 }

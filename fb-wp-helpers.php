@@ -7,221 +7,218 @@ function fb_construct_fields($placement, $children, $parent = null, $object = nu
 	$options = get_option('fb_options');
 
 	if ($placement == 'widget') {
-		$children_fields = fb_construct_fields_children('widget', $children, null, $object);
+		echo fb_construct_fields_children('widget', $children, null, $object);
 
 		echo $children_fields['output'];
 	}
 	else if ($placement == 'settings') {
-		$children_fields = fb_construct_fields_children('settings', $children, $parent);
-
-		echo '<table class="form-table">
-						<tbody>';
 
 		if ($parent) {
-			echo '	<tr valign="top">
-								<th scope="row"><strong>Enable</strong></th>
-								<td><a href="' . $parent['help_link'] . '" target="_new" title="' . $parent['help_text'] . '" style=" text-decoration: none;">[?]</a>&nbsp; <input type="checkbox" name="fb_options[' . $parent['name'] . '][enabled]" value="true" id="' . $parent['name'] . '" ' . checked(isset($options[$parent['name']]['enabled']), 1, false) . ' onclick="toggleOptions(\'' . $parent['name'] . '\', [\'' . implode("','", $children_fields['names']) . '\'])"></td>
-								</tr>';
+			$enabled = isset($options[$parent['name']]['enabled']);
+			if (isset($parent['image'])) {
+				echo '<div class="fb_admin_image">';
+				echo '<img src="' . $parent['image'] . '"/>';
+			} else {
+				echo '<div>';
+			}
+			echo '<h3>';
+			echo '<input type="checkbox" name="fb_options[' . $parent['name'] . '][enabled]" value="true" id="' . $parent['name'] . '" ' . checked($enabled, 1, false) . ' onclick="toggleOptions(\'' . $parent['name'] . '\', [\'' . $parent['name'] . '_table\'])">';
+			echo ' <label for="' . $parent['name'] . '">' . $parent['label'] . '</label></h3>';
+			echo '<p class="description">' . $parent['description'] . ' <a href="' . $parent['help_link'] . '" target="_new" title="' . $parent['help_text'] . '">Read more</a></p>';
+		} else {
+			$enabled = true;
+			echo '<div>';
 		}
 
-		echo $children_fields['output'];
+		echo '<table class="form-table" id="' . $parent['name'] . '_table" style="display:' . ($enabled?'block':'none') . '">
+						<tbody>';
+
+		echo fb_construct_fields_children('settings', $children, $parent);
 
 		echo '</tbody>
 					</table>';
+			echo '</div>';
+
 	}
 }
 
-function fb_construct_fields_children($placement, $children, $parent = null, $object = null) {
-	$return = '';
-	$checkbox = '<input class="checkbox"';
+function fb_construct_fields_children($place, $fields, $parent = null, $object = null) {
 
-	if ( $placement == 'widget' ) {
-		$children_output = '';
+	if ( $place == 'widget' ) {
+		$options = $object->get_settings();
+		$parent_name = $object->number;
+	} elseif ($place == 'settings') {
+		$options = get_option('fb_options');
+		$parent_name = $parent['name'];
+	}
 
-		$instance = $object->get_settings();
-
-		foreach ( $children as $child ) {
-			$object_id = $object->number;
-
-			$name = $child['name'];
-		  $name_label = isset($child['label']) ? $child['label'] : ucfirst(str_replace("_", " ", $name));
-			$name_field_id = $object->get_field_id( $name );
-			$name_field_name = $object->get_field_name( $name );
-			$help = $child['help_text'];
-
-			$value = '';
-			if ( isset($instance[$object_id][$name]) ) {
-				$value = $instance[$object_id][$name];
-			}
-			elseif ( isset($child['default']) && !$parent['enable'] ) {
-				$value = $child['default'];
-			}
-			$value = esc_attr($value);
-
-			$help_link = '';
-			if (!isset($child['help_link'])) {
-				$help_link = '<a href="#" target="_new" title="' . $help . '" onclick="return false;" style="color: #aaa; text-decoration: none;">[?]</a>';
-			}
-			else {
-				$help_link = '<a href="' . $child['help_link'] . '" target="_new" title="' . $help . '" style=" text-decoration: none;">[?]</a>';
-			}
-
-			$label = '<label for="' . $name_field_id . '">' . $name_label . '</label>';
-
-			$children_output .= '<p>';
-			switch ($child['field_type']) {
-
-				case 'dropdown':
-					$children_output .= "$label: $help_link<br />";
-					$children_output .= '<select name="' . $name_field_name . '" id="' . $name_field_id . '" class="widefat">';
-					foreach ($child['options'] as $key => $val) {
-						$children_output .= '<option value="' . $key . '" ' . selected( $value, $key, false ) . '>' . ucfirst(str_replace("_", " ", $val)) . '</option>';
-					}
-					$children_output .= "</select>";
-					break;
-
-				case 'checkbox':
-					$children_output .= $checkbox . ' id="' . $name_field_id . '" name="' . $name_field_name . '" type="checkbox" value="true"' . checked($value, 'true', false) . '>';
-					$children_output .= " $label $help_link<br/>";
-					break;
-
-				case 'text':
-					$text_field_value = '';
-					$children_output .= "$label: $help_link<br />";
-					$children_output .= '<input id="' . $name_field_id . '" name="' . $name_field_name . '" type="text" value="' . $value . '" class="widefat">';
-					break;
-
-				case 'disabled_text':
-					$text_field_value = '';
-					$children_output .= "$help_link $label &nbsp;";
-					$children_output .= $child['disabled_text'];
-					break;
-			}
-			$children_output .= '</p>';
-
-			$children_output = str_replace('<br/></p><p>$checkbox', '<br/>$checkbox', $children_output);
-			// Tighly group checkboxes.
-
-			$return['output'] = $children_output;
+	if ( $place == 'widget' ) {
+		foreach ( $fields as $c => $field ) {
+			$field['value'] = fb_array_default(
+				$options, $parent_name, $field['name'], (
+					empty($parent['name']['enabled']) ?
+						fb_array_default($field, 'default', '') : ''
+				)
+			);
+			$field['name'] = $object->get_field_name( $field['name'] );
+			$fields[$c] = $field;
 		}
 	}
-	elseif ($placement == 'settings') {
-		$options = get_option('fb_options');
-
-		print '<!--';
-		print_r($options);
-		print '-->';
-
-		$display = ' style="display: none" ';
-
-		if ($parent) {
-			if (isset($options[$parent['name']]['enabled']) && $options[$parent['name']]['enabled'] == 'true') {
-				$display = '';
-			}
-		}
-		else {
-			$display = '';
-		}
-
-		$children_output = '';
-
-		foreach ($children as $child) {
-			$help_link = '';
-
-			if (!isset($child['help_link'])) {
-				$help_link = '<a href="#" target="_new" title="' . $child['help_text'] . '" onclick="return false;" style="color: #aaa; text-decoration: none;">[?]</a>';
+	elseif ($place == 'settings') {
+		foreach ($fields as $c => $field) {
+			if ($parent) {
+				$value = fb_array_default(
+					$options, $parent['name'], $field['name'], (
+						empty($options[$parent['name']]['enabled']) ?
+							fb_array_default($field, 'default', '') : ''
+					)
+				);
 			}
 			else {
-				$help_link = '<a href="' . $child['help_link'] . '" target="_new" title="' . $child['help_text'] . '" style="text-decoration: none;">[?]</a>';
+				$value = fb_array_default(
+					$options, $field['name'],
+					fb_array_default($field, 'default', '')
+				);
 			}
 
 			$parent_js_array = '';
-
 			if ($parent) {
 				$parent_js_array = '[' . $parent['name'] . ']';
-
-				if (isset($options[$parent['name']][$child['name']])) {
-					$value = $options[$parent['name']][$child['name']];
-				}
-				elseif (isset($child['default']) && empty($options[$parent['name']]['enabled'])) {
-					$value = $child['default'];
-				}
-				else {
-					$value = '';
-				}
-			}
-			else {
-				if (isset($options[$child['name']])) {
-					$value = $options[$child['name']];
-				}
-				elseif (isset($child['default'])) {
-					$value = $child['default'];
-				}
-				else {
-					$value = '';
-				}
 			}
 
-			switch ($child['field_type']) {
-				case 'dropdown':
-					$children_output .= '	<tr valign="top"' . $display . ' id="' . $parent['name'] . '_' . $child['name'] . '">
-							<th scope="row">' . ucwords(str_replace("_", " ", $child['name'])) . '</th>
-							<td>' . $help_link . '&nbsp;';
+			$field['value'] = $value;
+			$field['name'] = "fb_options$parent_js_array"."[" . $field['name'] ."]";
+			$fields[$c] = $field;
 
-					$children_output .= '<select name="fb_options' . $parent_js_array . '[' . $child['name'] . ']">';
-
-					if (isset($value)) {
-						foreach ($child['options'] as $key => $val) {
-							$children_output .= '<option value="' . $key . '" ' . selected( $value, $key, false ) . '>' . $val . '</option>';
-						}
-					}
-					else {
-						foreach ($child['options'] as $key => $val) {
-							$children_output .= '<option value="' . $key . '">' . $val . '</option>';
-						}
-					}
-
-					$children_output .= '</select></td></tr>';
-
-					break;
-				case 'checkbox':
-					$children_output .= '	<tr valign="top"' . $display . ' id="' . $parent['name'] . '_' . $child['name'] . '">
-							<th scope="row">' . ucwords(str_replace('_', ' ', $child['name'])) . '</th>
-							<td>' . $help_link . '&nbsp; <input type="checkbox" name="fb_options' . $parent_js_array . '[' . $child['name'] . ']" value="true"' . checked($value, 'true', false) . '></td>
-							</tr>';
-					break;
-				case 'text':
-					$text_field_value = '';
-
-					if (isset($value)) {
-						$text_field_value = $value;
-					}
-
-					$children_output .= '	<tr valign="top"' . $display . ' id="' . $parent['name'] . '_' . $child['name'] . '">
-							<th scope="row">' . ucwords(str_replace('_', ' ', $child['name'])) . '</th>
-							<td>' . $help_link . '&nbsp; <input type="text" name="fb_options' . $parent_js_array . '[' . $child['name'] . ']" value="' . $text_field_value . '"></td>
-							</tr>';
-					break;
-				case 'disabled_text':
-					$children_output .= '	<tr valign="top"' . $display . ' id="' . $parent['name'] . '_' . $child['name'] . '">
-							<th scope="row">' . ucwords(str_replace('_', ' ', $child['name'])) . '</th>
-							<td>' . $help_link . '&nbsp; ' . $child['disabled_text'] . '</td>
-							</tr>';
-					break;
-			}
-
-			if ($parent['name']) {
-				$children_names[] = $parent['name'] . '_' . $child['name'];
-			}
-			else {
-				$children_names[] = $child['name'];
-			}
 		}
-
-		$return['output'] = $children_output;
-		$return['names'] = $children_names;
 	}
 
-	return $return;
+	return fb_fields($fields, $place);
 }
+
+function fb_array_default() { // $array, $keys..., $default
+	$keys = func_get_args();
+	$array = array_shift($keys);
+	$default = array_pop($keys);
+	$key = array_shift($keys);
+	if (!isset($array[$key])) {
+		return $default;
+	}
+	$array = $array[$key];
+	if (sizeof($keys)>0) {
+		array_unshift($keys, $array);
+		array_push($keys, $default);
+		return call_user_func_array('fb_array_default', $keys);
+	}
+	return $array;
+}
+
+function fb_fields($fields, $place='settings') {
+	$buffer = '';
+	foreach ($fields as $field) {
+		$buffer .= fb_field($field, $place);
+	}
+	return $buffer;
+}
+
+function fb_field($field, $place='settings') {
+	extract($field);
+
+	if (!isset($label)) {
+		$label = trim(
+			ucfirst(
+				str_replace(
+					array("_", "]"), " ",
+					array_pop(
+						explode('[', $name)
+					)
+				)
+			)
+		);
+	}
+	$label = sprintf(
+		'<label for="%1$s">%2$s</label>',
+		esc_attr($label),
+		esc_html($label)
+	);
+
+	if (isset($help_link)) {
+		$help = sprintf(
+			'<a href="%s" target="_new" title="%s" class="wp_help_link">[?]</a>',
+			esc_attr($help_link),
+			esc_attr($help_text)
+		);
+	} else {
+		$help = sprintf(
+			'<span title="%s" class="wp_help_hover">[?]</span>',
+			esc_attr($help_text)
+		);
+	}
+
+	$widget = call_user_func("fb_field_$type", $field, $place);
+
+	switch ($place) {
+		case 'widget':
+			if ($type=='checkbox') {
+				$field_pattern = '<p>%3$s %1$s %2$s</p>';
+			} else {
+				$field_pattern = '<p>%1$s: %2$s<br />%3$s</p>';
+			}
+			break;
+		case 'settings':
+			$field_pattern = '<tr valign="top"><th scope="row">%1$s %2$s</th><td>%3$s</td></tr>';
+			break;
+	}
+
+	return sprintf(
+		$field_pattern,
+		$label,
+		$help,
+		$widget
+	);
+
+}
+
+function fb_field_text($field, $place='settings') {
+	return sprintf(
+		'<input type="text" id="%1$s" name="%1$s" value="%2$s" %3$s/>',
+		esc_attr($field['name']),
+		esc_attr($field['value']),
+		$place=='widget' ? 'class="widefat"' : ""
+	);
+}
+
+function fb_field_checkbox($field, $place='settings') {
+	return sprintf(
+		'<input type="checkbox" id="%1$s" name="%1$s" value="true" %2$s />',
+		esc_attr($field['name']),
+		checked($field['value'], 'true', false)
+	);
+}
+
+function fb_field_dropdown($field, $place='settings') {
+	$buffer = sprintf(
+		'<select id="%1$s" name="%1$s" %2$s>',
+		esc_attr($field['name']),
+		$place=='widget' ? 'class="widefat"' : ""
+	);
+
+	foreach ($field['options'] as $option_value => $option_label) {
+		$buffer .= sprintf(
+			'<option value="%1$s" %2$s>%3$s</option>',
+			esc_attr($option_value),
+			selected($field['value'], $option_value, false),
+			esc_html($option_label)
+		);
+	}
+
+	$buffer .= '</select>';
+	return $buffer;
+}
+
+function fb_field_disabled_text($field, $place='settings') {
+	return esc_html($field['value'] || $field['disabled_text']);
+}
+
+
 ?>

@@ -24,7 +24,7 @@ function fb_construct_fields($placement, $children, $parent = null, $object = nu
 			echo '<h3>';
 			echo '<input type="checkbox" name="fb_options[' . $parent['name'] . '][enabled]" value="true" id="' . $parent['name'] . '" ' . checked($enabled, 1, false) . ' onclick="toggleOptions(\'' . $parent['name'] . '\', [\'' . $parent['name'] . '_table\'])">';
 			echo ' <label for="' . $parent['name'] . '">' . $parent['label'] . '</label></h3>';
-			echo '<p class="description">' . $parent['description'] . ' <a href="' . $parent['help_link'] . '" target="_new" title="' . $parent['help_text'] . '">Read more</a></p>';
+			echo '<p class="description">' . $parent['description'] . ' <a href="' . $parent['help_link'] . '" target="_new" title="' . $parent['description'] . '">Read more</a></p>';
 		} else {
 			$enabled = true;
 			echo '<div>';

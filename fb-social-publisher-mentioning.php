@@ -314,7 +314,14 @@ function fb_social_publisher_mentioning_output($content) {
 	}
 
 	if ($mentions_entities) {
-		$mentions = '<div class="fb-mentions entry-meta">' . $mentions_entities . 'mentioned in this post.</div>';
+		if ( is_page() ) {
+			$noun = 'page';
+		}
+		else {
+			$noun = 'post';
+		}
+
+		$mentions = '<div class="fb-mentions entry-meta">' . $mentions_entities . 'mentioned in this ' . $noun . ' via Facebook.</div>';
 
 		$new_content = '';
 

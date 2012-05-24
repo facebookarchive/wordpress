@@ -72,27 +72,11 @@ function fb_settings_page() {
 
 			echo 'These settings affect Pages and Posts only.  Additional Social Plugins are also available in the Widgets settings.';
 
-			echo '<h3>' . esc_html__( 'Social Publisher', 'facebook' ) . '</h3>';
 			fb_get_social_publisher_fields();
-
-			echo '<h3>'. esc_html__( 'Recommendations Bar', 'facebook' ) . '</h3>';
-			echo '<p>' . sprintf( esc_html__( 'You must be whitelisted by Facebook to use this experimental feature.  The %s allows users to like content, get recommendations, and share what they\'re reading with their friends.', 'facebook' ), '<a href="https://developers.facebook.com/docs/reference/plugins/comments/">' . esc_html__( 'Recommendations Bar', 'facebook' ) . '</a>' ) . '</p>';
 			fb_get_recommendations_bar_fields();
-
-			echo '<h3>' . esc_html__( 'Like Button', 'facebook' ) . '</h3>';
-			echo '<p>' . sprintf( esc_html__( 'The %s lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user\'s friends\' News Feed with a link back to your website.', 'facebook' ), '<a href="https://developers.facebook.com/docs/reference/plugins/like/">' . esc_html__( 'Like button', 'facebook' ) . '</a>' ) . '</p>';
 			fb_get_like_fields();
-
-			echo '<h3>' . esc_html__( 'Subscribe Button', 'facebook' ) . '</h3>';
-			echo '<p>' . sprintf( esc_html__( 'The %s lets a user subscribe to your public updates on Facebook.  Each WordPress author must authenticate with Facebook in order for the Subscribe button to appear on their Posts.', 'facebook' ), '<a href="https://developers.facebook.com/docs/reference/plugins/subscribe/">' . esc_html__( 'Subscribe button', 'facebook' ) . '</a>' ) . '</p>';
 			fb_get_subscribe_fields();
-
-			echo '<h3>' . esc_html__( 'Send Button', 'facebook' ) . '</h3>';
-			echo '<p>' . sprintf( esc_html__( 'The %s allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address.', 'facebook' ), '<a href="https://developers.facebook.com/docs/reference/plugins/send/">' . esc_html__( 'Send button', 'facebook' ) . '</a>' ) . '</p>';
 			fb_get_send_fields();
-
-			echo '<h3>'. esc_html__( 'Comments', 'facebook' ) . '</h3>';
-			echo '<p>' . sprintf( esc_html__( '%s is a social plugin that enables user commenting on your site. Features include moderation tools and distribution.', 'facebook' ), '<a href="https://developers.facebook.com/docs/reference/plugins/comments/">' . esc_html__( 'Comments Box', 'facebook' ) . '</a>' ) . '</p>';
 			fb_get_comments_fields();
 
 			submit_button();
@@ -104,15 +88,15 @@ function fb_settings_page() {
 
 function fb_get_main_settings_fields() {
 	$children = array(array('name' => 'app_id',
-													'field_type' => 'text',
+													'type' => 'text',
 													'help_text' => __( 'Your App ID.', 'facebook' ),
 													),
 										array('name' => 'app_secret',
-													'field_type' => 'text',
+													'type' => 'text',
 													'help_text' => __( 'Your App Secret.', 'facebook' ),
 													),
 										array('name' => 'app_namespace',
-													'field_type' => 'text',
+													'type' => 'text',
 													'help_text' => __( 'Your App Namespace.', 'facebook' ),
 													),
 										);

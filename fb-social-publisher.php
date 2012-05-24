@@ -329,21 +329,22 @@ function fb_get_social_publisher_fields() {
 	}
 
 	$parent = array('name' => 'social_publisher',
-									'field_type' => 'checkbox',
-									'help_text' => __( 'Click to learn more.', 'facebook' ),
+									'type' => 'checkbox',
+									'label' => 'Social Publisher',
+									'description' => '',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
 									);
 
 	if (empty($accounts_options)) {
 		$fan_page_option = array('name' => 'publish_to_fan_page',
-													'field_type' => 'disabled_text',
+													'type' => 'disabled_text',
 													'disabled_text' => '<a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a>',
 													'help_text' => __( 'New posts will be published to this Facebook Page.', 'facebook' ),
 													);
 	}
 	else {
 		$fan_page_option = array('name' => 'publish_to_fan_page',
-													'field_type' => 'dropdown',
+													'type' => 'dropdown',
 													'options' => $accounts_options,
 													'help_text' => __( 'New posts will be publish to this Facebook Page.', 'facebook' ),
 													);
@@ -351,18 +352,18 @@ function fb_get_social_publisher_fields() {
 
 	$children = array(array('name' => 'publish_to_authors_facebook_timeline',
 													'label' => "Publish to author's Timeline",
-													'field_type' => 'checkbox',
+													'type' => 'checkbox',
 													'default' => true,
 													'help_text' => __( 'Publish new posts to the author\'s Facebook Timeline and allow mentioning friends.', 'facebook' ),
 													),
 										$fan_page_option,
 										array('name' => 'mentions_show_on_homepage',
-													'field_type' => 'checkbox',
+													'type' => 'checkbox',
 													'default' => true,
 													'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.  Enable this to show mentions on the homepage as part of the post previews.  If unchecked, mentions will only display on the post itself.', 'facebook' ),
 													),
 										array('name' => 'mentions_position',
-													'field_type' => 'dropdown',
+													'type' => 'dropdown',
 													'default' => 'both',
 													'options' => array('top' => 'top', 'bottom' => 'bottom', 'both' => 'both'),
 													'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.  This controls where mentions will be displayed in the posts.', 'facebook' ),

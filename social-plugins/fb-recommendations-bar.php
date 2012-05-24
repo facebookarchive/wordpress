@@ -27,7 +27,7 @@ function fb_get_recommendations_bar_fields_array() {
 													 'label' => 'Recommendations Bar',
 														'help_link' => 'https://developers.facebook.com/docs/reference/plugins/recommendationsbar/',
 														'description' => 'The Recommendations Bar allows users to like content, get recommendations, and share what they\'re reading with their friends. You must be whitelisted by Facebook to use this experimental feature. ',
-														'image' => 'https://developers.facebook.com/attachment/recommendations.png'
+														'image' => plugins_url( '/images/settings_recommendations_bar.png', dirname(__FILE__))
 									);
 
 	$array['children'] = array(array('name' => 'trigger',

@@ -118,7 +118,7 @@ function fb_get_subscribe_fields_array($placement) {
 									'description' => 'The Subscribe Button lets a user subscribe to your public updates on Facebook.  Each WordPress author must authenticate with Facebook in order for the Subscribe button to appear on their Posts.',
 									'type' => 'checkbox',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
-									'image' => 'https://developers.facebook.com/attachment/Subscribe2.png'
+									'image' => plugins_url( '/images/settings_subscribe_button.png', dirname(__FILE__))
 									);
 
 	$array['children'] = array(array('name' => 'layout',

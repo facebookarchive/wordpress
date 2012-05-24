@@ -109,7 +109,7 @@ function fb_get_send_fields_array($placement) {
 									'label' => 'Send Button',
 									'description' => 'The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address.',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/send/',
-									'image' => 'https://developers.facebook.com/attachment/send.png'
+									'image' => plugins_url( '/images/settings_send_button.png', dirname(__FILE__))
 									);
 
 	$array['children'] = array(array('name' => 'colorscheme',

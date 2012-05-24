@@ -331,8 +331,9 @@ function fb_get_social_publisher_fields() {
 	$parent = array('name' => 'social_publisher',
 									'type' => 'checkbox',
 									'label' => 'Social Publisher',
-									'description' => '',
-									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
+									'description' => 'Social Publisher allows you to publish to an Author\'s Facebook Timeline, auto-publish to a Fan Page of your choosing, and mention Facebook friends and pages. ',
+									'help_link' => 'http://developers.facebook.com/wordpress',
+									'image' => plugins_url( 'images/settings_social_publisher.png', __FILE__)
 									);
 
 	if (empty($accounts_options)) {
@@ -360,7 +361,7 @@ function fb_get_social_publisher_fields() {
 										array('name' => 'mentions_show_on_homepage',
 													'type' => 'checkbox',
 													'default' => true,
-													'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.  Enable this to show mentions on the homepage as part of the post previews.  If unchecked, mentions will only display on the post itself.', 'facebook' ),
+													'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.  Enable this to show mentions on the homepage, as part of the post previews.', 'facebook' ),
 													),
 										array('name' => 'mentions_position',
 													'type' => 'dropdown',

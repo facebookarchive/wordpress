@@ -107,7 +107,7 @@ function fb_get_comments_fields_array() {
 									'label' => 'Comments',
 									'description' => 'The Comments Box is a social plugin that enables user commenting on your site. Features include moderation tools and distribution.',
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/comments/',
-									'image' => 'https://developers.facebook.com/attachment/comments.png'
+									'image' => plugins_url( '/images/settings_comments.png', dirname(__FILE__))
 									);
 
 	$array['children'] = array(array('name' => 'num_posts',

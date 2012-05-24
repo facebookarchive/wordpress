@@ -118,7 +118,7 @@ function fb_get_like_fields($placement = 'settings', $object = null) {
 function fb_get_like_fields_array($placement) {
 	$array['parent'] = array('name' => 'like',
 														'label' => 'Like Button',
-														'image' => 'https://developers.facebook.com/attachment/like.png',
+														'image' => plugins_url( '/images/settings_like_button.png', dirname(__FILE__)),
 														'description' => 'The Like Button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user\'s friends\' News Feed with a link back to your website.',
 														'help_link' => 'https://developers.facebook.com/docs/reference/plugins/like/',
 														);

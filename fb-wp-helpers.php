@@ -138,7 +138,7 @@ function fb_field($field, $place='settings') {
 	}
 	$label = sprintf(
 		'<label for="%1$s">%2$s</label>',
-		esc_attr($label),
+		esc_attr($name),
 		esc_html($label)
 	);
 

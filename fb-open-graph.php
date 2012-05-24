@@ -105,6 +105,7 @@ function fb_add_og_protocol() {
 		if ( is_multi_author() )
 			$meta_tags['http://ogp.me/ns/profile#username'] = get_the_author_meta( 'login', $post->post_author );
 	} else if ( is_page() ) {
+		$meta_tags['http://ogp.me/ns#type'] = 'article';
 		$meta_tags['http://ogp.me/ns#title'] = get_the_title();
 		$meta_tags['http://ogp.me/ns#url'] = apply_filters( 'rel_canonical', get_permalink() );
 	}

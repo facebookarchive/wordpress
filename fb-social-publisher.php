@@ -396,7 +396,7 @@ function fb_get_social_publisher_fields() {
 	fb_construct_fields('settings', $children, $parent);
 }
 
-add_action( 'transition_post_status', 'fb_publish_later',10,3);
+add_action( 'transition_post_status', 'fb_publish_later', 10, 3);
 function fb_publish_later($new_status, $old_status, $post) {
 	// check that the new status is "publish" and that the old status was not "publish"
 	if ($new_status == 'publish' && $old_status != 'publish') {
@@ -479,6 +479,16 @@ function fb_delete_social_posts( $post_id ) {
 	catch (FacebookApiException $e) {
 		error_log(var_export($e,1));
 	}*/
+}
+
+//add_action('post_updated', 'fb_update_social_posts', 10);
+
+function fb_update_social_posts($post_ID, $post_after, $post_before) {
+	//get post's meta for friends
+	
+	//loop through post's meta for friends
+	
+	//get post's meta for pages
 }
 
 ?>

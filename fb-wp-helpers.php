@@ -8,8 +8,6 @@ function fb_construct_fields($placement, $children, $parent = null, $object = nu
 
 	if ($placement == 'widget') {
 		echo fb_construct_fields_children('widget', $children, null, $object);
-
-		echo $children_fields['output'];
 	}
 	else if ($placement == 'settings') {
 

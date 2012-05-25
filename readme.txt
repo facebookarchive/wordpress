@@ -1,4 +1,4 @@
-=== Facebook for WordPress ===
+=== Facebook ===
 Contributors: facebook, mattwkelly, niallkennedy, jamesgpearce, Otto42
 Tags: facebook, comments, social, friends, like, like button, social plugins, facebook platform
 Requires at least: 3.1.1

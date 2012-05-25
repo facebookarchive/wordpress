@@ -1,16 +1,16 @@
 <?php
 /**
- * @package Facebook for WordPress
+ * @package Facebook
  * @version 1.0
  */
 /*
 Plugin Name: Facebook
-Plugin URI: [TODO]
-Description: The official Facebook for WordPress plugin.  Deep social integration in just a couple of clicks.
-Author: Facebook
+Plugin URI: http://wordpress.org/extend/plugins/facebook/
+Description: Facebook for WordPress.  Deep social integration in just a couple of clicks.
+Author: facebook, mattwkelly, niallkennedy, jamesgpearce, Otto42
 Version: 1.0
-Author URI: [TODO]
-License: [TODO]
+Author URI: http://developers.facebook.com/wordpress
+License: GPL
 */
 
 global $facebook;

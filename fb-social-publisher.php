@@ -24,13 +24,13 @@ function fb_add_author_message_box() {
   
 		add_meta_box(
 				'fb_author_message_box_id',
-				__( 'Facebook Status on Author\'s Timeline', 'facebook' ),
+				__( 'Facebook Status on Your Timeline', 'facebook' ),
 				'fb_add_author_message_box_content',
 				'post'
 		);
 		add_meta_box(
 				'fb_author_message_box_id',
-				__( 'Facebook Message on Author\'s Timeline', 'fb_add_author_message_box_textdomain' ),
+				__( 'Facebook Status on Your Timeline', 'fb_add_author_message_box_textdomain' ),
 				'fb_add_author_message_box_content',
 				'page'
 		);
@@ -52,7 +52,7 @@ function fb_add_author_message_box_content( $post ) {
 	echo '</label> ';
 	*/
 	echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_author_message_box_message" value="" size="44" placeholder="What\'s on your mind?" />';
-	echo '<p class="howto">This message will show as part of the post on the Author\'s Facebook Timeline.</p>';
+	echo '<p class="howto">This message will show as part of the story on your Facebook Timeline.</p>';
 }
 
 /**
@@ -95,18 +95,22 @@ function fb_add_author_message_box_save( $post_id ) {
 function fb_add_fan_page_message_box() {
   global $post;
   
+  $options = get_option('fb_options');
+  
+  preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
+  
   if ($post->post_status == 'publish')  
     return;
   
 		add_meta_box(
 				'fb_fan_page_message_box_id',
-				__( 'Facebook Status on Fan Page\'s Timeline', 'facebook' ),
+				__( 'Facebook Status on ' . $fan_page_info[0][1] . '\'s Timeline', 'fb_add_fan_page_message_box_textdomain' ),
 				'fb_add_fan_page_message_box_content',
 				'post'
 		);
 		add_meta_box(
 				'fb_fan_page_message_box_id',
-				__( 'Facebook Message on Fan Page\'s Timeline', 'fb_add_fan_page_message_box_textdomain' ),
+				__( 'Facebook Status on ' . $fan_page_info[0][1] . '\'s Timeline', 'fb_add_fan_page_message_box_textdomain' ),
 				'fb_add_fan_page_message_box_content',
 				'page'
 		);
@@ -117,7 +121,11 @@ function fb_add_fan_page_message_box() {
  *
  * @since 1.0
  */
-function fb_add_fan_page_message_box_content( $post ) { 
+function fb_add_fan_page_message_box_content( $post ) {
+  $options = get_option('fb_options');
+  
+  preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
+  
 		// Use nonce for verification
 	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_fan_page_message_box_noncename' );
 
@@ -128,7 +136,7 @@ function fb_add_fan_page_message_box_content( $post ) {
 	echo '</label> ';
 	*/
 	echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_fan_page_message_box_message" value="" size="44" placeholder="Write something..." />';
-	echo '<p class="howto">This message will show as part of the post on the Fan Page\'s Facebook Timeline.</p>';
+	echo '<p class="howto">This message will show as part of the story on ' . $fan_page_info[0][1] . '\'s Timeline.</p>';
 }
 
 /**
@@ -178,15 +186,15 @@ function fb_post_to_fb_page($post_id) {
 	if ($options['social_publisher']['publish_to_fan_page'] == 'disabled')
 		return;
 
-	preg_match_all("/(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
+	preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
 
 	list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
 
 	$fan_page_message = get_post_meta($post_id, 'fb_fan_page_message', true);
 
 	if ($post_thumbnail_url == null) {
-		$args = array('access_token' => $fan_page_info[0][2],
-									'from' => $fan_page_info[0][1],
+		$args = array('access_token' => $fan_page_info[0][3],
+									'from' => $fan_page_info[0][2],
 									'link' => apply_filters( 'rel_canonical', get_permalink()),
 									'name' => get_the_title(),
 									'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
@@ -195,8 +203,8 @@ function fb_post_to_fb_page($post_id) {
 									);
 	}
 	else {
-		$args = array('access_token' => $fan_page_info[0][2],
-									'from' => $fan_page_info[0][1],
+		$args = array('access_token' => $fan_page_info[0][3],
+									'from' => $fan_page_info[0][2],
 									'link' => apply_filters( 'rel_canonical', get_permalink()),
 									'picture' => $post_thumbnail_url,
 									'name' => get_the_title(),
@@ -212,7 +220,7 @@ function fb_post_to_fb_page($post_id) {
 		return;
 
 	try {
-		$publish_result = $facebook->api('/' . $fan_page_info[0][1] . '/feed', 'POST', $args);
+		$publish_result = $facebook->api('/' . $fan_page_info[0][2] . '/feed', 'POST', $args);
 
 		add_post_meta($post_id, 'fb_fan_page_post_id', $publish_result['id'], true);
 	}
@@ -347,7 +355,7 @@ function fb_get_social_publisher_fields() {
 
 	foreach($accounts as $account) {
 		if (isset($account['name']) && isset($account['category']) && $account['category'] != 'Application') {
-			$account_options_key = $account['id'] . "@@!!" . $account['access_token'];
+			$account_options_key = $account['name'] . "@@!!" . $account['id'] . "@@!!" . $account['access_token'];
 			$accounts_options[$account_options_key] = $account['name'];
 		}
 	}
@@ -385,7 +393,7 @@ function fb_get_social_publisher_fields() {
 										array('name' => 'mentions_show_on_homepage',
 													'type' => 'checkbox',
 													'default' => true,
-													'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.  Enable this to show mentions on the homepage, as part of the post previews.', 'facebook' ),
+													'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.  Enable this to show mentions on the homepage, as part of the post and page previews.', 'facebook' ),
 													),
 										array('name' => 'mentions_position',
 													'type' => 'dropdown',

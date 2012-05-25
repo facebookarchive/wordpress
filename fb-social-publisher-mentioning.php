@@ -160,6 +160,13 @@ function fb_add_page_mention_box_content( $post ) {
 	// Use nonce for verification
 	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_page_mention_box_noncename' );
 
+  if ( is_page() ) {
+    $noun = 'page';
+  }
+  else {
+    $noun = 'post';
+  }
+
 	// The actual fields for data entry
 	echo '<label for="fb_page_mention_box_autocomplete">';
 			 _e("Page's Name", 'fb_page_mention_box_textdomain' );
@@ -169,7 +176,7 @@ function fb_add_page_mention_box_content( $post ) {
 			 _e("Message", 'fb_page_mention_box_message_textdomain' );
 	echo '</label> ';
 	echo '<input type="text" class="widefat" id="pages-mention-message" name="fb_page_mention_box_message" value="" size="44" placeholder="Write something..." />';
-	echo '<p class="howto">This will post to the Timeline of each Facebook Page mentioned.</p>';
+	echo '<p class="howto">This will add the ' . $noun . ' to the Timeline of each Facebook Page mentioned.  They will also appear in the contents of the ' . $noun . '.</p>';
 }
 
 function fb_add_page_mention_box_save( $post_id ) {
@@ -252,6 +259,13 @@ function fb_add_friend_mention_box_content( $post ) {
 	// Use nonce for verification
 	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_friend_mention_box_noncename' );
 
+  if ( is_page() ) {
+    $noun = 'page';
+  }
+  else {
+    $noun = 'post';
+  }
+  
 	// The actual fields for data entry
 	echo '<label for="fb_friend_mention_box_autocomplete">';
 			 _e("Friend's Name", 'fb_friend_mention_box_textdomain' );
@@ -261,7 +275,7 @@ function fb_add_friend_mention_box_content( $post ) {
 			 _e("Message", 'fb_friend_mention_box_message_textdomain' );
 	echo '</label> ';
 	echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_friend_mention_box_message" value="" size="44" placeholder="Write something..." />';
-	echo '<p class="howto">This will post to the Timeline of each Facebook friend mentioned.</p>';
+	echo '<p class="howto">This will add the ' . $noun . ' to the Timeline of each friend mentioned.  They will also appear on the ' . $noun . '.</p>';
 }
 
 function fb_add_friend_mention_box_save( $post_id ) {

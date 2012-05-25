@@ -10,6 +10,8 @@ function fb_check_connected_accounts() {
 	global $current_user;
 	get_currentuserinfo();
 
+	global $facebook;
+
 	$options = get_option('fb_options');
 
 	// check if we have enough info to handle the authFacebook function
@@ -29,7 +31,7 @@ function fb_check_connected_accounts() {
 			update_user_meta($current_user->ID, 'fb_data', $fb_user_data);
 		}
 		else {
-			fb_admin_dialog( __('Facebook social publishing is enabled. <a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a> to get full functionality, including adding new Posts to your Timeline.', 'facebook' ), true);
+			fb_admin_dialog( __('Facebook social publishing is enabled. <a href="' . $facebook->getLoginUrl(array('scope' => 'manage_pages, publish_actions, publish_stream', 'display' => 'popup' )) . '" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a> to get full functionality, including adding new Posts to your Timeline.', 'facebook' ), true);
 		}
 	}
 	else {

@@ -2,7 +2,7 @@
 // create custom plugin settings menu
 add_action( 'admin_init', 'fb_admin_menu_settings' );
 add_action( 'admin_menu', 'fb_create_menu' );
-add_action('admin_menu', 'fb_add_settings_pages', 10);
+add_action( 'admin_menu', 'fb_add_settings_pages', 10 );
 
 /**
  * Create the Settings menu in the admin control panel
@@ -73,7 +73,7 @@ function fb_settings_page() {
 
 			echo '<h2>' . esc_html__( 'Post and Page Settings', 'facebook' ) . '</h2>';
 
-			echo 'These settings affect Pages and Posts only.  Additional Social Plugins are also available in the Widgets settings.';
+			echo 'These settings affect Pages and Posts only.  Additional Social Plugins are also available in the <a href="widgets.php">Widgets settings</a>.';
 
 			fb_get_social_publisher_fields();
 			fb_get_recommendations_bar_fields();

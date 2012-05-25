@@ -17,6 +17,11 @@ if ( $options['social_publisher']['publish_to_fan_page'] !== 'disabled' ) {
  * @since 1.0
  */
 function fb_add_author_message_box() {
+  global $post;
+  
+  if ($post->post_status == 'publish')  
+    return;
+  
 		add_meta_box(
 				'fb_author_message_box_id',
 				__( 'Facebook Status on Author\'s Timeline', 'facebook' ),
@@ -47,7 +52,7 @@ function fb_add_author_message_box_content( $post ) {
 	echo '</label> ';
 	*/
 	echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_author_message_box_message" value="" size="44" placeholder="What\'s on your mind?" />';
-	echo '<p>This message will show as part of the post on the Author\'s Facebook Timeline.</p>';
+	echo '<p class="howto">This message will show as part of the post on the Author\'s Facebook Timeline.</p>';
 }
 
 /**
@@ -88,6 +93,11 @@ function fb_add_author_message_box_save( $post_id ) {
  * @since 1.0
  */
 function fb_add_fan_page_message_box() {
+  global $post;
+  
+  if ($post->post_status == 'publish')  
+    return;
+  
 		add_meta_box(
 				'fb_fan_page_message_box_id',
 				__( 'Facebook Status on Fan Page\'s Timeline', 'facebook' ),
@@ -107,7 +117,7 @@ function fb_add_fan_page_message_box() {
  *
  * @since 1.0
  */
-function fb_add_fan_page_message_box_content( $post ) {
+function fb_add_fan_page_message_box_content( $post ) { 
 		// Use nonce for verification
 	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_fan_page_message_box_noncename' );
 
@@ -118,7 +128,7 @@ function fb_add_fan_page_message_box_content( $post ) {
 	echo '</label> ';
 	*/
 	echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_fan_page_message_box_message" value="" size="44" placeholder="Write something..." />';
-	echo '<p>This message will show as part of the post on the Fan Page\'s Facebook Timeline.</p>';
+	echo '<p class="howto">This message will show as part of the post on the Fan Page\'s Facebook Timeline.</p>';
 }
 
 /**
@@ -227,8 +237,6 @@ function fb_post_to_author_fb_timeline($post_id) {
 	$options = get_option('fb_options');
 	$fb_mentioned_friends = get_post_meta($post_id, 'fb_mentioned_friends', true);
 
-	//$mentions = '';
-
 	list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
 
 	$mentioned_friends_message = get_post_meta($post_id, 'fb_mentioned_friends_message', true);
@@ -239,7 +247,8 @@ function fb_post_to_author_fb_timeline($post_id) {
 
 		try {
 			if ($post_thumbnail_url == null) {
-				$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
+				$args = array('access_token' => $facebook->getApplicationAccessToken(),
+                      'link' => apply_filters( 'rel_canonical', get_permalink()),
 											'name' => get_the_title(),
 											'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
 											'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
@@ -247,7 +256,8 @@ function fb_post_to_author_fb_timeline($post_id) {
 											);
 			}
 			else {
-				$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
+				$args = array('access_token' => $facebook->getApplicationAccessToken(),
+                      'link' => apply_filters( 'rel_canonical', get_permalink()),
 											'picture' => $post_thumbnail_url,
 											'name' => get_the_title(),
 											'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
@@ -259,17 +269,13 @@ function fb_post_to_author_fb_timeline($post_id) {
 			$args['ref'] = 'fbwpp';
 
 			$publish_result = $facebook->api('/' . $friend['id'] . '/feed', 'POST', $args);
-			error_log('pub result friends!');
-error_log(var_export($publish_result,1));
-error_log('pub result friends!');
+      
 			$publish_ids_friends[] = $publish_result['id'];
 
 		}
 		catch (FacebookApiException $e) {
 			error_log(var_export($e,1));
 		}
-
-		//$mentions .= $friend['id'] . ",";
 	}
 
 	add_post_meta($post_id, 'fb_mentioned_friends_post_ids', $publish_ids_friends, true);
@@ -307,9 +313,7 @@ error_log('pub result friends!');
 			$args['ref'] = 'fbwpp';
 
 			$publish_result = $facebook->api('/' . $page['id'] . '/feed', 'POST', $args);
-error_log('pub result friends!');
-error_log(var_export($publish_result,1));
-error_log('pub result friends!');
+      
 			$publish_ids_pages[] = $publish_result['id'];
 		}
 		catch (FacebookApiException $e) {
@@ -342,7 +346,7 @@ function fb_get_social_publisher_fields() {
 	$accounts_options = array('disabled' => '[Disabled]');
 
 	foreach($accounts as $account) {
-		if (isset($account['name'])) {
+		if (isset($account['name']) && isset($account['category']) && $account['category'] != 'Application') {
 			$account_options_key = $account['id'] . "@@!!" . $account['access_token'];
 			$accounts_options[$account_options_key] = $account['name'];
 		}
@@ -351,7 +355,7 @@ function fb_get_social_publisher_fields() {
 	$parent = array('name' => 'social_publisher',
 									'type' => 'checkbox',
 									'label' => 'Social Publisher',
-									'description' => 'Social Publisher allows you to publish to an Author\'s Facebook Timeline, auto-publish to a Fan Page of your choosing, and mention Facebook friends and pages. ',
+									'description' => 'Social Publisher allows you to publish to an Author\'s Facebook Timeline and Fan Page.  Authors can also mention Facebook friends and pages. ',
 									'help_link' => 'http://developers.facebook.com/wordpress',
 									'image' => plugins_url( 'images/settings_social_publisher.png', __FILE__)
 									);
@@ -360,7 +364,7 @@ function fb_get_social_publisher_fields() {
 		$fan_page_option = array('name' => 'publish_to_fan_page',
 													'type' => 'disabled_text',
 													'disabled_text' => '<a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a>',
-													'help_text' => __( 'New posts will be published to this Facebook Page.', 'facebook' ),
+													'help_text' => __( 'All new posts will be automatically published to this Facebook Page.', 'facebook' ),
 													);
 	}
 	else {
@@ -470,16 +474,9 @@ function fb_delete_social_posts( $post_id ) {
 			}
 		}
 	}
-
-	/*$fb_timeline_post_id = get_post_meta($post_id, 'fb_timeline_post_id', true);
-
-	try {
-		$delete_result = $facebook->api('/' . $fb_page_post_id, 'DELETE');
-	}
-	catch (FacebookApiException $e) {
-		error_log(var_export($e,1));
-	}*/
 }
+
+//TODO: currently, updating mentions don't work-- we should fix this
 
 //add_action('post_updated', 'fb_update_social_posts', 10);
 

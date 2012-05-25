@@ -1,7 +1,7 @@
 /* Example tokeninput style #2: Facebook style */
 ul.token-input-list-facebook {
     overflow: hidden;
-    border: 1px solid #8496ba;
+    border: 1px solid #dfdfdf;
     cursor: text;
     font-size: 12px;
     font-family: Verdana;

@@ -133,20 +133,25 @@ add_action( 'add_meta_boxes', 'fb_add_page_mention_box' );
 add_action( 'save_post', 'fb_add_page_mention_box_save' );
 
 function fb_add_page_mention_box() {
-		add_meta_box(
-				'fb_page_mention_box_id',
-			  __( 'Mention Facebook Pages', 'fb_page_mention_box_id_textdomain', 'facebook' ),
-				'fb_add_page_mention_box_content',
-				'post',
-				'side'
-		);
-		add_meta_box(
-				'fb_page_mention_box_id',
-			  __( 'Mention Facebook Pages', 'fb_page_mention_box_id_textdomain', 'facebook' ),
-				'fb_add_page_mention_box_content',
-				'page',
-				'side'
-		);
+  global $post;
+  
+  if ($post->post_status == 'publish')  
+    return;
+  
+  add_meta_box(
+      'fb_page_mention_box_id',
+      __( 'Mention Facebook Pages', 'fb_page_mention_box_id_textdomain', 'facebook' ),
+      'fb_add_page_mention_box_content',
+      'post',
+      'side'
+  );
+  add_meta_box(
+      'fb_page_mention_box_id',
+      __( 'Mention Facebook Pages', 'fb_page_mention_box_id_textdomain', 'facebook' ),
+      'fb_add_page_mention_box_content',
+      'page',
+      'side'
+  );
 }
 
 function fb_add_page_mention_box_content( $post ) {
@@ -164,7 +169,7 @@ function fb_add_page_mention_box_content( $post ) {
 			 _e("Message", 'fb_page_mention_box_message_textdomain' );
 	echo '</label> ';
 	echo '<input type="text" class="widefat" id="pages-mention-message" name="fb_page_mention_box_message" value="" size="44" placeholder="Write something..." />';
-	echo '<p>This will post to the Timeline of each Facebook Page mentioned.</p>';
+	echo '<p class="howto">This will post to the Timeline of each Facebook Page mentioned.</p>';
 }
 
 function fb_add_page_mention_box_save( $post_id ) {
@@ -220,20 +225,25 @@ add_action( 'add_meta_boxes', 'fb_add_friend_mention_box' );
 add_action( 'save_post', 'fb_add_friend_mention_box_save' );
 
 function fb_add_friend_mention_box() {
-		add_meta_box(
-				'fb_friend_mention_box_id',
-			  __( 'Mention Facebook Friends', 'facebook' ),
-				'fb_add_friend_mention_box_content',
-				'post',
-				'side'
-		);
-		add_meta_box(
-				'fb_friend_mention_box_id',
-			  __( 'Mention Facebook Friends', 'facebook' ),
-				'fb_add_friend_mention_box_content',
-				'page',
-				'side'
-		);
+  global $post;
+  
+  if ($post->post_status == 'publish')  
+    return;
+  
+  add_meta_box(
+      'fb_friend_mention_box_id',
+      __( 'Mention Facebook Friends', 'facebook' ),
+      'fb_add_friend_mention_box_content',
+      'post',
+      'side'
+  );
+  add_meta_box(
+      'fb_friend_mention_box_id',
+      __( 'Mention Facebook Friends', 'facebook' ),
+      'fb_add_friend_mention_box_content',
+      'page',
+      'side'
+  );
 }
 
 function fb_add_friend_mention_box_content( $post ) {
@@ -251,7 +261,7 @@ function fb_add_friend_mention_box_content( $post ) {
 			 _e("Message", 'fb_friend_mention_box_message_textdomain' );
 	echo '</label> ';
 	echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_friend_mention_box_message" value="" size="44" placeholder="Write something..." />';
-	echo '<p>This will post to the Timeline of each Facebook friend mentioned.</p>';
+	echo '<p class="howto">This will post to the Timeline of each Facebook friend mentioned.</p>';
 }
 
 function fb_add_friend_mention_box_save( $post_id ) {

@@ -10,3 +10,8 @@
 	width: 100%;
 	margin: 10px 0px 10px 0px;
 }
+
+.fb-mentions img {
+	vertical-align: middle;
+	margin-bottom: 2px;
+}

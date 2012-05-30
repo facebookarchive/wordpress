@@ -287,6 +287,40 @@ abstract class BaseFacebook
   public function getAppSecret() {
     return $this->appSecret;
   }
+  
+  // Non-standard PHP SDK
+  // Gets an extended access token
+  // Thanks to http://stackoverflow.com/questions/486896/adding-a-parameter-to-the-url-with-javascript for the workaround
+  public function getExtendedAccessToken() {
+    try {
+      // need to circumvent json_decode by calling _oauthRequest
+      // directly, since response isn't JSON format.
+      $access_token_response =
+        $this->_oauthRequest(
+          $this->getUrl('graph', '/oauth/access_token'),
+          $params = array(    'client_id' => $this->getAppId(),
+          'client_secret' => $this->getAppSecret(),
+          'grant_type'=>'fb_exchange_token',
+          'fb_exchange_token'=>$this->getAccessToken(),
+        ));
+      } catch (FacebookApiException $e) {
+        // most likely that user very recently revoked authorization.
+        // In any event, we don't have an access token, so say so.
+        return false;
+      }
+  
+      if (empty($access_token_response)) {
+        return false;
+      }
+  
+      $response_params = array();
+      parse_str($access_token_response, $response_params);
+      if (!isset($response_params['access_token'])) {
+        return false;
+      }
+      
+      $this->setPersistentData('access_token', $response_params['access_token']);
+  }
 
   /**
    * Set the file upload support status.
@@ -855,8 +889,6 @@ abstract class BaseFacebook
     if (!$ch) {
       $ch = curl_init();
     }
-
-    error_log(var_export($params,1));
 
     $opts = self::$CURL_OPTS;
     if ($this->getFileUploadSupport()) {

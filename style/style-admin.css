@@ -1,62 +1,62 @@
 .facebook-logo {
-		float: left;
-		background: url(../images/logo.png) no-repeat;
-		width: 34px;
-		height: 34px;
-		margin: 7px 8px 0 0;
+	float: left;
+	background: url(../images/logo.png) no-repeat;
+	width: 34px;
+	height: 34px;
+	margin: 7px 8px 0 0;
 }
 
 h3 {
-    margin: 1.5em 0 0.5em;
+	margin: 1.5em 0 0.5em;
 }
 
 h3 input {
-    vertical-align: bottom !important;
+	vertical-align: bottom !important;
 }
 p {
-    margin: 0;
+	margin: 0;
 }
 
 .fb_admin_image {
-    margin-left:84px;
+	margin-left:84px;
 }
 
 .fb_admin_image img {
-    float:left;
-    margin-left:-84px;
-    border:1px solid #CCC;
-    width:64px
+	float:left;
+	margin-left:-84px;
+	border:1px solid #CCC;
+	width:64px
 }
 
 .wp_help_link {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 .wp_help_hover {
-    color: #aaa;
-    cursor: pointer;
+	color: #aaa;
+	cursor: pointer;
 }
 
 .token-input-token-facebook img {
-    vertical-align: middle;
-    border-radius: 3px;
-    width: 16px;
-    height: 16px;
-    margin: 0px 0px 1px -1px;
+	vertical-align: middle;
+	border-radius: 3px;
+	width: 16px;
+	height: 16px;
+	margin: 0px 0px 1px -1px;
 }
 
 .token-input-dropdown-item2-facebook img {
-    vertical-align: middle;
-    border-radius: 3px;
-    width: 16px;
-    height: 16px;
-    margin: 0px 0px 1px 2px;
+	vertical-align: middle;
+	border-radius: 3px;
+	width: 16px;
+	height: 16px;
+	margin: 0px 0px 1px 2px;
 }
 
 .token-input-dropdown-item-facebook img {
-    vertical-align: middle;
-    border-radius: 3px;
-    width: 16px;
-    height: 16px;
-    margin: 0px 0px 1px 2px;
+	vertical-align: middle;
+	border-radius: 3px;
+	width: 16px;
+	height: 16px;
+	margin: 0px 0px 1px 2px;
 }

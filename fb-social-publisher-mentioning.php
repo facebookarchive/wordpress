@@ -3,6 +3,8 @@ add_action( 'init','fb_friend_page_autocomplete' );
 add_filter( 'the_content', 'fb_social_publisher_mentioning_output', 30 );
 
 function fb_friend_page_autocomplete() {
+  $output = '';
+  
 	if (!empty($_GET['fb-friends'])) {
 		global $facebook;
 
@@ -205,8 +207,7 @@ function fb_add_page_mention_box_save( $post_id ) {
 	// OK, we're authenticated: we need to find and save the data
 
 	$autocomplete_data = $_POST['fb_page_mention_box_autocomplete'];
-  error_log('wtf');
-error_log(var_export($autocomplete_data,1));
+
 	preg_match_all(
 		"/\[(.*?)\|(.*?)\]/s",
 		$autocomplete_data,

@@ -183,11 +183,17 @@ function fb_post_to_fb_page($post_id) {
 
 	$options = get_option('fb_options');
 
+
+
 	if ($options['social_publisher']['publish_to_fan_page'] == 'disabled')
 		return;
 
 	preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
+error_log('FAN PAGE OPTION!!!!!!!!!!');
+error_log($options['social_publisher']['publish_to_fan_page']);
+error_log($fan_page_info[0][3]);
 
+error_log('FAN PAGE OPTION!!!!!!!!!!');
 	list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
 
 	$fan_page_message = get_post_meta($post_id, 'fb_fan_page_message', true);
@@ -255,8 +261,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 
 		try {
 			if ($post_thumbnail_url == null) {
-				$args = array('access_token' => $facebook->getApplicationAccessToken(),
-                      'link' => apply_filters( 'rel_canonical', get_permalink()),
+				$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
 											'name' => get_the_title(),
 											'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
 											'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
@@ -264,8 +269,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 											);
 			}
 			else {
-				$args = array('access_token' => $facebook->getApplicationAccessToken(),
-                      'link' => apply_filters( 'rel_canonical', get_permalink()),
+				$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
 											'picture' => $post_thumbnail_url,
 											'name' => get_the_title(),
 											'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),

@@ -58,6 +58,8 @@ function fb_admin_menu_settings() {
  * @since 1.0
  */
 function fb_settings_page() {
+  global $facebook;
+  
 	?>
 	<div class="wrap">
 		<div class="facebook-logo"></div>
@@ -66,21 +68,37 @@ function fb_settings_page() {
 		<form method="post" action="options.php">
 			<?php
 			settings_fields( 'fb_options' );
-
-			echo '<h2>' . esc_html__( 'Main Settings', 'facebook' ) . '</h2>';
-			echo 'Get your App ID, Secret, and Namespace at <a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>. <strong>If you already have a Facebook app for this website, it\'s important that you use the same information below</strong>.';
-			fb_get_main_settings_fields();
-
-			echo '<h2>' . esc_html__( 'Post and Page Settings', 'facebook' ) . '</h2>';
-
-			echo 'These settings affect Pages and Posts only.  Additional Social Plugins are also available in the <a href="widgets.php">Widgets settings</a>.';
-
-			fb_get_social_publisher_fields();
-			fb_get_recommendations_bar_fields();
-			fb_get_like_fields();
-			fb_get_subscribe_fields();
-			fb_get_send_fields();
-			fb_get_comments_fields();
+      
+      if ( !isset( $facebook ) ) {
+        echo '<h2>Step 1: Create an App</h2>';
+        echo '<p><strong>If you already have a Facebook app for this website, skip to <a href="#step-2">Step 2</a>.</strong></p><br>';
+        echo '<p>If you don\'t already have an app for this website, go to <a href="https://developers.facebook.com/apps" target="_blank">https://developers.facebook.com/apps</a> and click the "Create New App" button.  You\'ll see a dialog like the one below.  Fill this in and click "Continue".';
+        echo '<p><img src="' . plugins_url( 'images/nux_create_app.png', __FILE__ ) . '"></p>';
+        
+        echo '<a name="step-2"></a><h2>Step 2: Set up the App</h2>';
+        echo '<p>Next, set up your app so that it looks like the settings below.  Make sure you set your app\'s icon and image, too.  If you already have an app and skipped Step 1, you can view your app settings by going to <a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>.</p>';
+        echo '<p><img src="' . plugins_url( 'images/nux_app_settings.png', __FILE__ ) . '"></p>';
+        
+        echo '<h2>Step 3: WordPress settings</h2>';
+        echo 'Now, based on what you entered in Step 2, fill in the settings below and Save.  Once saved, additional options will appear on this page.';
+        fb_get_main_settings_fields();
+      }
+      else {
+        echo '<h2>' . esc_html__( 'Main Settings', 'facebook' ) . '</h2>';
+        echo 'Get your App ID, Secret, and Namespace at <a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>. <strong>If you already have a Facebook app for this website, it\'s important that you use the same information below</strong>.';
+        fb_get_main_settings_fields();
+      
+        echo '<h2>' . esc_html__( 'Post and Page Settings', 'facebook' ) . '</h2>';
+  
+        echo 'These settings affect Pages and Posts only.  Additional Social Plugins are also available in the <a href="widgets.php">Widgets settings</a>.';
+  
+        fb_get_social_publisher_fields();
+        fb_get_recommendations_bar_fields();
+        fb_get_like_fields();
+        fb_get_subscribe_fields();
+        fb_get_send_fields();
+        fb_get_comments_fields();
+      }
 
 			submit_button();
 			?>

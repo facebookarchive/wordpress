@@ -169,16 +169,23 @@ function fb_add_page_mention_box_content( $post ) {
     $noun = 'post';
   }
 
-	// The actual fields for data entry
-	echo '<label for="fb_page_mention_box_autocomplete">';
-			 _e("Page's Name", 'fb_page_mention_box_textdomain' );
-	echo '</label> ';
-	echo '<input type="text" class="widefat" id="suggest-pages" autocomplete="off" name="fb_page_mention_box_autocomplete" value="" size="44" placeholder="Type to find a page." />';
-	echo '<label for="fb_page_mention_box_message">';
-			 _e("Message", 'fb_page_mention_box_message_textdomain' );
-	echo '</label> ';
-	echo '<input type="text" class="widefat" id="pages-mention-message" name="fb_page_mention_box_message" value="" size="44" placeholder="Write something..." />';
-	echo '<p class="howto">This will add the ' . $noun . ' to the Timeline of each Facebook Page mentioned.  They will also appear in the contents of the ' . $noun . '.</p>';
+  $fb_user = fb_get_current_user();
+  
+  if ($fb_user) {
+    // The actual fields for data entry
+    echo '<label for="fb_page_mention_box_autocomplete">';
+         _e("Page's Name", 'fb_page_mention_box_textdomain' );
+    echo '</label> ';
+    echo '<input type="text" class="widefat" id="suggest-pages" autocomplete="off" name="fb_page_mention_box_autocomplete" value="" size="44" placeholder="Type to find a page." />';
+    echo '<label for="fb_page_mention_box_message">';
+         _e("Message", 'fb_page_mention_box_message_textdomain' );
+    echo '</label> ';
+    echo '<input type="text" class="widefat" id="pages-mention-message" name="fb_page_mention_box_message" value="" size="44" placeholder="Write something..." />';
+    echo '<p class="howto">This will add the ' . $noun . ' to the Timeline of each Facebook Page mentioned.  They will also appear in the contents of the ' . $noun . '.</p>';
+  }
+  else {
+    echo '<p>Facebook social publishing is enabled.</p><br><p><strong><a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a></strong> to get full functionality, including adding new Posts to your Timeline and mentioning friends Facebook Pages.</p>';
+  }
 }
 
 function fb_add_page_mention_box_save( $post_id ) {
@@ -186,6 +193,11 @@ function fb_add_page_mention_box_save( $post_id ) {
 	// If it is our form has not been submitted, so we dont want to do anything
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
 			return;
+
+  $fb_user = fb_get_current_user();
+  
+  if (!$fb_user)
+    return;
 
 	// verify this came from the our screen and with proper authorization,
 	// because save_post can be triggered at other times
@@ -234,6 +246,7 @@ add_action( 'save_post', 'fb_add_friend_mention_box_save' );
 
 function fb_add_friend_mention_box() {
   global $post;
+  global $facebook;
   
   if ($post->post_status == 'publish')  
     return;
@@ -259,24 +272,31 @@ function fb_add_friend_mention_box_content( $post ) {
 
 	// Use nonce for verification
 	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_friend_mention_box_noncename' );
-
-  if ( is_page() ) {
-    $noun = 'page';
+  
+  $fb_user = fb_get_current_user();
+  
+  if ($fb_user) {
+    if ( is_page() ) {
+      $noun = 'page';
+    }
+    else {
+      $noun = 'post';
+    }
+    
+    // The actual fields for data entry
+    echo '<label for="fb_friend_mention_box_autocomplete">';
+         _e("Friend's Name", 'fb_friend_mention_box_textdomain' );
+    echo '</label> ';
+    echo '<input type="text" class="widefat" id="suggest-friends" autocomplete="off" name="fb_friend_mention_box_autocomplete" value="" size="44" placeholder="Type to find a friend." />';
+    echo '<label for="fb_friend_mention_box_message">';
+         _e("Message", 'fb_friend_mention_box_message_textdomain' );
+    echo '</label> ';
+    echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_friend_mention_box_message" value="" size="44" placeholder="Write something..." />';
+    echo '<p class="howto">This will add the ' . $noun . ' to the Timeline of each friend mentioned.  They will also appear on the ' . $noun . '.</p>';
   }
   else {
-    $noun = 'post';
+    echo '<p>Facebook social publishing is enabled.</p><br><p><strong><a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a></strong> to get full functionality, including adding new Posts to your Timeline and mentioning friends Facebook Pages.</p>';
   }
-  
-	// The actual fields for data entry
-	echo '<label for="fb_friend_mention_box_autocomplete">';
-			 _e("Friend's Name", 'fb_friend_mention_box_textdomain' );
-	echo '</label> ';
-	echo '<input type="text" class="widefat" id="suggest-friends" autocomplete="off" name="fb_friend_mention_box_autocomplete" value="" size="44" placeholder="Type to find a friend." />';
-	echo '<label for="fb_friend_mention_box_message">';
-			 _e("Message", 'fb_friend_mention_box_message_textdomain' );
-	echo '</label> ';
-	echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_friend_mention_box_message" value="" size="44" placeholder="Write something..." />';
-	echo '<p class="howto">This will add the ' . $noun . ' to the Timeline of each friend mentioned.  They will also appear on the ' . $noun . '.</p>';
 }
 
 function fb_add_friend_mention_box_save( $post_id ) {
@@ -284,6 +304,11 @@ function fb_add_friend_mention_box_save( $post_id ) {
 	// If it is our form has not been submitted, so we dont want to do anything
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
 			return;
+  
+  $fb_user = fb_get_current_user();
+  
+  if (!$fb_user)
+    return;
 
 	// verify this came from the our screen and with proper authorization,
 	// because save_post can be triggered at other times

@@ -14,7 +14,7 @@ function toggleOptions(parentOption, childOptions) {
 function authFacebook() {
 	FB.login(function(response) {
 		if (response.authResponse) {
-			insertParam('fb_extended_token', 1);
+			redirectWithParam('fb_extended_token', 1);
 		} else {
 			console.log('User cancelled login or did not fully authorize.');
 		}

@@ -12,10 +12,11 @@ function fb_check_connected_accounts() {
 
 	global $facebook;
 	
-	if (isset($_GET['fb_extended_token'])) {
-		$facebook->getExtendedAccessToken();
-	}
-
+	if ( ! isset( $facebook ) )
+    return;
+	
+	$facebook->getExtendedAccessToken();
+	
 	$options = get_option('fb_options');
 
 	// check if we have enough info to handle the authFacebook function
@@ -26,7 +27,7 @@ function fb_check_connected_accounts() {
 	$fb_data = get_user_meta($current_user->ID, 'fb_data', true);
 
 	//if no, show message prompting to connect
-	if (empty($fb_data['uid']) && $options['social_publisher']['enabled']) {
+	if (empty($fb_data['uid']) && isset($options['social_publisher']) && $options['social_publisher']['enabled']) {
 		$fb_user = fb_get_current_user();
 
 		if ($fb_user) {

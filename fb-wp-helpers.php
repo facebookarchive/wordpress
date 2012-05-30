@@ -187,9 +187,16 @@ function fb_field_text($field, $place='settings') {
 }
 
 function fb_field_checkbox($field, $place='settings') {
+	$onclick = '';	
+		
+	if (isset($field['onclick'])) {
+		$onclick = $field['onclick'];
+	}
+		
 	return sprintf(
-		'<input type="checkbox" id="%1$s" name="%1$s" value="true" %2$s />',
+		'<input type="checkbox" id="%1$s" name="%1$s" onclick="%2$s" value="true" %3$s />',
 		esc_attr($field['name']),
+		$onclick,
 		checked($field['value'], 'true', false)
 	);
 }
@@ -215,7 +222,7 @@ function fb_field_dropdown($field, $place='settings') {
 }
 
 function fb_field_disabled_text($field, $place='settings') {
-	return esc_html($field['value'] || $field['disabled_text']);
+	return $field['disabled_text'];
 }
 
 

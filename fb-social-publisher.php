@@ -1,12 +1,12 @@
 <?php
 require_once( $facebook_plugin_directory . '/fb-social-publisher-mentioning.php');
 
-if ( isset($options['social_publisher']['publish_to_authors_facebook_timeline']) ) {
+if ( isset($options['social_publisher']) && isset($options['social_publisher']['publish_to_authors_facebook_timeline']) ) {
 		add_action( 'add_meta_boxes', 'fb_add_author_message_box' );
 		add_action( 'save_post', 'fb_add_author_message_box_save' );
 }
 
-if ( $options['social_publisher']['publish_to_fan_page'] !== 'disabled' ) {
+if ( isset($options['social_publisher']) && isset($options['social_publisher']['publish_to_fan_page']) && $options['social_publisher']['publish_to_fan_page'] !== 'disabled' ) {
 		add_action( 'add_meta_boxes', 'fb_add_fan_page_message_box' );
 		add_action( 'save_post', 'fb_add_fan_page_message_box_save' );
 }
@@ -185,15 +185,11 @@ function fb_post_to_fb_page($post_id) {
 
 
 
-	if ($options['social_publisher']['publish_to_fan_page'] == 'disabled')
+	if (!isset($options['social_publisher']) || !isset($options['social_publisher']['publish_to_fan_page']) || $options['social_publisher']['publish_to_fan_page'] == 'disabled')
 		return;
 
 	preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
-error_log('FAN PAGE OPTION!!!!!!!!!!');
-error_log($options['social_publisher']['publish_to_fan_page']);
-error_log($fan_page_info[0][3]);
-
-error_log('FAN PAGE OPTION!!!!!!!!!!');
+  
 	list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
 
 	$fan_page_message = get_post_meta($post_id, 'fb_fan_page_message', true);
@@ -292,7 +288,6 @@ function fb_post_to_author_fb_timeline($post_id) {
 
 	add_post_meta($post_id, 'fb_mentioned_friends_post_ids', $publish_ids_friends, true);
 
-
 	$fb_mentioned_pages = get_post_meta($post_id, 'fb_mentioned_pages', true);
 
 	$mentioned_pages_message = get_post_meta($post_id, 'fb_mentioned_pages_message', true);
@@ -343,15 +338,27 @@ function fb_post_to_author_fb_timeline($post_id) {
 		$publish_result = $facebook->api('/me/' . $options["app_namespace"] . ':publish', 'POST', array('message' => $author_message, 'article' => get_permalink($post_id)));
 		
 		add_post_meta($post_id, 'fb_author_post_id', $publish_result['id'], true);
+    
 	}
 	catch (FacebookApiException $e) {
 		error_log(var_export($e,1));
+    
+    //Unset the option to publish to an author's Timeline, since the likely failure is because the admin didn't set up the proper OG action and object in their App Settings
+    //if it's a token issue, it's because the Author hasn't auth'd the WP site yet, so don't unset the option (since that will turn it off for all authors)
+    if ($e->getType() != 'OAuthException') {
+      $options['social_publisher']['publish_to_authors_facebook_timeline'] = false;
+    
+      update_option( 'fb_options', $options );
+    }
 	}
 }
 
 
 function fb_get_social_publisher_fields() {
 	global $facebook;
+
+  if ( ! isset( $facebook ) )
+    return;
 
 	$accounts = fb_get_user_pages();
 
@@ -372,10 +379,10 @@ function fb_get_social_publisher_fields() {
 									'image' => plugins_url( 'images/settings_social_publisher.png', __FILE__)
 									);
 
-	if (empty($accounts_options)) {
+	if (count($accounts_options) < 2) {
 		$fan_page_option = array('name' => 'publish_to_fan_page',
 													'type' => 'disabled_text',
-													'disabled_text' => '<a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a>',
+													'disabled_text' => '<a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account to enable.</a>',
 													'help_text' => __( 'All new posts will be automatically published to this Facebook Page.', 'facebook' ),
 													);
 	}
@@ -391,7 +398,9 @@ function fb_get_social_publisher_fields() {
 													'label' => "Publish to author's Timeline",
 													'type' => 'checkbox',
 													'default' => true,
-													'help_text' => __( 'Publish new posts to the author\'s Facebook Timeline and allow mentioning friends.', 'facebook' ),
+                          'onclick' => "window.open('http://developers.facebook.com/wordpress#author-og-setup', 'Open Graph Setup', 'fullscreen=no');",
+													'help_text' => __( 'Publish new posts to the author\'s Facebook Timeline and allow mentioning friends. You must setup Open Graph in your App Settings. Enable the feature to learn how.', 'facebook' ),
+                          'help_link' => 'http://developers.facebook.com/wordpress#author-og-setup',
 													),
 										$fan_page_option,
 										array('name' => 'mentions_show_on_homepage',

@@ -1,7 +1,7 @@
 <?php
 function fb_get_activity_feed($options = array()) {
 	if (empty($options['header'])) {
-		$options['data-header'] = 'false';
+		$options['header'] = 'false';
 	}
 
 	$params = fb_build_social_plugin_params($options);

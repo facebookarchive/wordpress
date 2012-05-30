@@ -1,22 +1,20 @@
 <?php
 
-require_once('fb-activity-feed.php');
-add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Activity_Feed" );'));
-
-require_once('fb-recommendations.php');
-add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Recommendations" );'));
-
+require_once( dirname(__FILE__) . '/fb-activity-feed.php');
+require_once( dirname(__FILE__) . '/fb-recommendations.php');
 require_once( dirname(__FILE__) . '/fb-like.php' );
-add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Like_Button" );') );
-
 require_once( dirname(__FILE__) . '/fb-send.php' );
-add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Send_Button" );') );
-
 require_once( dirname(__FILE__) . '/fb-subscribe.php' );
-add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Subscribe_Button" );') );
-
 require_once( dirname(__FILE__) . '/fb-comments.php' );
 require_once( dirname(__FILE__) . '/fb-recommendations-bar.php' );
+
+if ( isset( $facebook ) ) {
+	add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Subscribe_Button" );') );
+	add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Send_Button" );') );
+	add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Like_Button" );') );
+	add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Recommendations" );'));
+	add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Activity_Feed" );'));
+}
 
 /**
  * Add social plugins through filters
@@ -24,6 +22,7 @@ require_once( dirname(__FILE__) . '/fb-recommendations-bar.php' );
  */
 function fb_apply_filters() {
 	$options = get_option('fb_options');
+	
 	if ( ! is_array( $options ) )
 		return;
 

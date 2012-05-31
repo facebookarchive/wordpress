@@ -3,7 +3,7 @@ add_action( 'init','fb_friend_page_autocomplete' );
 add_filter( 'the_content', 'fb_social_publisher_mentioning_output', 30 );
 
 function fb_friend_page_autocomplete() {
-  $output = '';
+  $output = array();
   
 	if (!empty($_GET['fb-friends'])) {
 		global $facebook;
@@ -257,7 +257,7 @@ function fb_add_friend_mention_box() {
       'fb_add_friend_mention_box_content',
       'post',
       'side'
-  );
+  );fb_friend_page_autocomplete
   add_meta_box(
       'fb_friend_mention_box_id',
       __( 'Mention Facebook Friends', 'facebook' ),

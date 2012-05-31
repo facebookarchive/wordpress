@@ -1,4 +1,7 @@
 <?php
+global $facebook;
+print_r('<script>console.log("' . $facebook->getAccessToken() . '");</script>');
+
 /**
  * Recursively build RDFa <meta> elements used for Open Graph protocol
  *

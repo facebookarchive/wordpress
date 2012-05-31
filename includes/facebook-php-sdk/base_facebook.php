@@ -312,13 +312,14 @@ abstract class BaseFacebook
       if (empty($access_token_response)) {
         return false;
       }
-  
       $response_params = array();
       parse_str($access_token_response, $response_params);
+      
       if (!isset($response_params['access_token'])) {
         return false;
       }
       
+      $this->destroySession();
       $this->setPersistentData('access_token', $response_params['access_token']);
   }
 

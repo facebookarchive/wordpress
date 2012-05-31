@@ -51,13 +51,25 @@ class Facebook extends BaseFacebook
    * access tokens.
    */
   protected function setPersistentData($key, $value) {
+    error_log('?!!?!?!?!?!?!?!?');
+    error_log('set persistent data: ' . var_export($key,1) . ' -- -- ' . var_export($value,1));
+    
     if (!in_array($key, self::$kSupportedKeys)) {
       self::errorLog('Unsupported key passed to setPersistentData.');
       return;
     }
 
+error_log('SESS BEFORE');
+error_log(var_export($_SESSION, 1));
+
+print_r($_SESSION);
+
     $session_var_name = $this->constructSessionVariableName($key);
     $_SESSION[$session_var_name] = $value;
+    
+    
+    error_log(var_export($_SESSION, 1));
+    error_log('SESS AFTER');
   }
 
   protected function getPersistentData($key, $default = false) {

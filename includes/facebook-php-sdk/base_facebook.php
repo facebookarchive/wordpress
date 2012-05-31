@@ -288,9 +288,10 @@ abstract class BaseFacebook
     return $this->appSecret;
   }
   
-  // Non-standard PHP SDK
-  // Gets an extended access token
-  // Thanks to http://stackoverflow.com/questions/486896/adding-a-parameter-to-the-url-with-javascript for the workaround
+  /**
+   * Extend an access token, while removing the short-lived token that might have been generated via client-side flow.
+   * Thanks to http://stackoverflow.com/questions/486896/adding-a-parameter-to-the-url-with-javascript for the workaround
+   */
   public function getExtendedAccessToken() {
     try {
       // need to circumvent json_decode by calling _oauthRequest
@@ -312,6 +313,7 @@ abstract class BaseFacebook
       if (empty($access_token_response)) {
         return false;
       }
+      
       $response_params = array();
       parse_str($access_token_response, $response_params);
       
@@ -320,6 +322,7 @@ abstract class BaseFacebook
       }
       
       $this->destroySession();
+      
       $this->setPersistentData('access_token', $response_params['access_token']);
   }
 

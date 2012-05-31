@@ -15,13 +15,6 @@
  * under the License.
  */
 
-if (!function_exists('curl_init')) {
-  throw new Exception('Facebook needs the CURL PHP extension.');
-}
-if (!function_exists('json_decode')) {
-  throw new Exception('Facebook needs the JSON PHP extension.');
-}
-
 if ( ! class_exists( 'FacebookApiException' ) ):
 /**
  * Thrown when an API call returns an exception.

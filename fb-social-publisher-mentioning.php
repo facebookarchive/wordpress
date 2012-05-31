@@ -257,7 +257,7 @@ function fb_add_friend_mention_box() {
       'fb_add_friend_mention_box_content',
       'post',
       'side'
-  );fb_friend_page_autocomplete
+  );
   add_meta_box(
       'fb_friend_mention_box_id',
       __( 'Mention Facebook Friends', 'facebook' ),

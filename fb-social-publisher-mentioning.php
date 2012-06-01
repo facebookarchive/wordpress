@@ -159,6 +159,8 @@ function fb_add_page_mention_box() {
 function fb_add_page_mention_box_content( $post ) {
 	//wp_enqueue_script('suggest');
 
+  global $facebook;
+
 	// Use nonce for verification
 	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_page_mention_box_noncename' );
 
@@ -172,8 +174,8 @@ function fb_add_page_mention_box_content( $post ) {
   $fb_user = fb_get_current_user();
   
   if ($fb_user) {
-			$perms = $facebook->api('/me/permissions', 'GET', array('ref' => 'fbwpp'));
-		}
+    $perms = $facebook->api('/me/permissions', 'GET', array('ref' => 'fbwpp'));
+  }
   
   if ($fb_user && isset($perms['data'][0]['manage_pages']) && isset($perms['data'][0]['publish_actions']) && isset($perms['data'][0]['publish_stream'])) {
     // The actual fields for data entry
@@ -272,6 +274,8 @@ function fb_add_friend_mention_box() {
 }
 
 function fb_add_friend_mention_box_content( $post ) {
+  global $facebook;
+  
 	wp_enqueue_script('suggest');
 
 	// Use nonce for verification

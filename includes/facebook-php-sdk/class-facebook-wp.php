@@ -10,14 +10,6 @@ if ( ! class_exists( 'Facebook' ) )
  */
 class Facebook_WP extends Facebook {
 	/**
-	 * Version
-	 *
-	 * @since 1.0
-	 * @var string
-	 */
-	const VERSION = '3.1.1-wp';
-
-	/**
 	 * Override Facebook PHP SDK cURL function with WP_HTTP
 	 * Facebook PHP SDK is POST-only
 	 *

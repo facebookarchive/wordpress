@@ -29,8 +29,12 @@ function fb_check_connected_accounts() {
 	//if no, show message prompting to connect
 	if (empty($fb_data['uid']) && isset($options['social_publisher']) && $options['social_publisher']['enabled']) {
 		$fb_user = fb_get_current_user();
-
+		
 		if ($fb_user) {
+			$perms = $facebook->api('/me/permissions', 'GET', array('ref' => 'fbwpp'));
+		}
+		
+		if ($fb_user && isset($perms['data'][0]['manage_pages']) && isset($perms['data'][0]['publish_actions']) && isset($perms['data'][0]['publish_stream'])) {
 			$fb_user_data = array('fb_uid' => $fb_user['id'], 'username' => $fb_user['username'], 'activation_time' => time());
 
 			update_user_meta($current_user->ID, 'fb_data', $fb_user_data);

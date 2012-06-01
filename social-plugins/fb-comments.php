@@ -25,8 +25,8 @@ function fb_close_wp_comments($comments) {
 }
 
 function fb_get_comments($options = array()) {
-	if (isset($options['data-href']) == '') {
-		$options['data-href'] = get_permalink();
+	if (isset($options['href']) == '') {
+		$options['href'] = get_permalink();
 	}
 
 	$params = fb_build_social_plugin_params($options);

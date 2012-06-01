@@ -3,7 +3,7 @@ add_action( 'init','fb_friend_page_autocomplete' );
 add_filter( 'the_content', 'fb_social_publisher_mentioning_output', 30 );
 
 function fb_friend_page_autocomplete() {
-  $output = '';
+  $output = array();
   
 	if (!empty($_GET['fb-friends'])) {
 		global $facebook;
@@ -172,6 +172,10 @@ function fb_add_page_mention_box_content( $post ) {
   $fb_user = fb_get_current_user();
   
   if ($fb_user) {
+			$perms = $facebook->api('/me/permissions', 'GET', array('ref' => 'fbwpp'));
+		}
+  
+  if ($fb_user && isset($perms['data'][0]['manage_pages']) && isset($perms['data'][0]['publish_actions']) && isset($perms['data'][0]['publish_stream'])) {
     // The actual fields for data entry
     echo '<label for="fb_page_mention_box_autocomplete">';
          _e("Page's Name", 'fb_page_mention_box_textdomain' );
@@ -276,6 +280,10 @@ function fb_add_friend_mention_box_content( $post ) {
   $fb_user = fb_get_current_user();
   
   if ($fb_user) {
+			$perms = $facebook->api('/me/permissions', 'GET', array('ref' => 'fbwpp'));
+		}
+  
+  if ($fb_user && isset($perms['data'][0]['manage_pages']) && isset($perms['data'][0]['publish_actions']) && isset($perms['data'][0]['publish_stream'])) {
     if ( is_page() ) {
       $noun = 'page';
     }

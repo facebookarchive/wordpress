@@ -24,7 +24,7 @@ class Facebook_WP extends Facebook {
 		global $wp_version;
 
 		if ( empty( $url ) || empty( $params ) )
-			return '';
+			throw new FacebookApiException( array( 'error_code' => 400, 'error_msg' => 'Invalid parameters and/or URI passed to makeRequest' ) );
 
 		$params = array(
 			'redirection' => 0,
@@ -37,8 +37,10 @@ class Facebook_WP extends Facebook {
 		);
 
 		$response = wp_remote_post( $url, $params );
-		if ( is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) != '200' )
-			return '';
+		if ( is_wp_error( $response ) )
+			throw new FacebookApiException( array( 'error_code' => $response->get_error_code(), 'error_msg' => $response->get_error_message() ) );
+		else if ( wp_remote_retrieve_response_code( $response ) != '200' )
+			throw new FacebookApiException( array( 'error_code' => wp_remote_retrieve_response_code( $response ), 'error_msg' => 'HTTP Status not OK' ) );
 
 		return wp_remote_retrieve_body( $response );
 	}

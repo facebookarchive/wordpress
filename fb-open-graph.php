@@ -49,7 +49,7 @@ function fb_add_og_protocol() {
 		if ( post_type_supports( $post_type, 'title' ) )
 			$meta_tags['http://ogp.me/ns#title'] = get_the_title();
 		if ( post_type_supports( $post_type, 'excerpt' ) )
-			$meta_tags['http://ogp.me/ns#description'] = apply_filters( 'the_excerpt', get_the_excerpt() );
+			$meta_tags['http://ogp.me/ns#description'] = str_replace( array( "\r\n", "\r", "\n" ), ' ', wp_strip_all_tags( strip_shortcodes( apply_filters( 'the_excerpt', get_the_excerpt() ) ) ) );
 		$meta_tags['http://ogp.me/ns/article#published_time'] = get_the_date('c');
 		$meta_tags['http://ogp.me/ns/article#modified_time'] = get_the_modified_date('c');
 		if ( post_type_supports( $post_type, 'author' ) && isset( $post->post_author ) )

@@ -31,7 +31,6 @@ class Facebook_WP extends Facebook {
 	protected function makeRequest( $url, $params, $ch=null ) {
 		global $wp_version;
 
-		var_dump( $wp_version );
 		if ( empty( $url ) || empty( $params ) )
 			return '';
 

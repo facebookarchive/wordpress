@@ -361,6 +361,8 @@ function fb_get_social_publisher_fields() {
     return;
 
 	$accounts = fb_get_user_pages();
+	if ( empty( $accounts ) )
+		return;
 
 	$accounts_options = array('disabled' => '[Disabled]');
 

@@ -19,13 +19,14 @@ $options = get_option( 'fb_options' );
 
 $facebook_plugin_directory = dirname(__FILE__);
 
-require_once( $facebook_plugin_directory . '/includes/facebook-php-sdk/facebook.php');
+if ( ! class_exists( 'Facebook_WP' ) )
+	require_once( $facebook_plugin_directory . '/includes/facebook-php-sdk/class-facebook-wp.php' );
 
-// Create our Application instance (replace this with your appId and secret)
-if ((!empty($options["app_id"]) || !empty($options["app_secret"]))) {
-	$facebook = new Facebook(array(
-		'appId'  => $options["app_id"],
-		'secret' => $options["app_secret"],
+// appId and secret are required by BaseFacebook
+if ( ( ! empty( $options['app_id'] ) && ! empty( $options['app_secret'] ) ) ) {
+	$facebook = new Facebook_WP(array(
+		'appId'  => $options['app_id'],
+		'secret' => $options['app_secret'],
 	));
 }
 
@@ -68,10 +69,8 @@ function fb_js_sdk_setup() {
 	if ( empty( $options['app_id'] ) )
 		return;
 
-	$app_id = $options['app_id'];
-
 	$args = apply_filters( 'fb_init', array(
-		'appId' => $app_id,
+		'appId' => $options['app_id'],
 		'channelUrl' => add_query_arg( 'fb-channel-file', 1, site_url( '/' ) ),
 		'status' => true,
 		'cookie' => true,

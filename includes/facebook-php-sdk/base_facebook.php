@@ -15,13 +15,6 @@
  * under the License.
  */
 
-if (!function_exists('curl_init')) {
-  throw new Exception('Facebook needs the CURL PHP extension.');
-}
-if (!function_exists('json_decode')) {
-  throw new Exception('Facebook needs the JSON PHP extension.');
-}
-
 if ( ! class_exists( 'FacebookApiException' ) ):
 /**
  * Thrown when an API call returns an exception.
@@ -124,16 +117,6 @@ abstract class BaseFacebook
    * Version.
    */
   const VERSION = '3.1.1';
-
-  /**
-   * Default options for curl.
-   */
-  public static $CURL_OPTS = array(
-    CURLOPT_CONNECTTIMEOUT => 10,
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_TIMEOUT        => 60,
-    CURLOPT_USERAGENT      => 'facebook-php-3.1',
-  );
 
   /**
    * List of query parameters that get automatically dropped when rebuilding

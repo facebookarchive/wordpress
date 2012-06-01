@@ -119,16 +119,6 @@ abstract class BaseFacebook
   const VERSION = '3.1.1';
 
   /**
-   * Default options for curl.
-   */
-  public static $CURL_OPTS = array(
-    CURLOPT_CONNECTTIMEOUT => 10,
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_TIMEOUT        => 60,
-    CURLOPT_USERAGENT      => 'facebook-php-3.1',
-  );
-
-  /**
    * List of query parameters that get automatically dropped when rebuilding
    * the current URL.
    */

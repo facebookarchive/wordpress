@@ -15,8 +15,6 @@ function fb_check_connected_accounts() {
 	if ( ! isset( $facebook ) )
     return;
 	
-	$facebook->getExtendedAccessToken();
-	
 	$options = get_option('fb_options');
 
 	// check if we have enough info to handle the authFacebook function
@@ -48,6 +46,14 @@ function fb_check_connected_accounts() {
 	}
 }
 add_action('admin_notices', 'fb_check_connected_accounts');
+
+
+add_action('init', 'fb_extend_access_token');
+function fb_extend_access_token() {
+	global $facebook;
+	
+	$facebook->getExtendedAccessToken();
+}
 
 /**
  * Gets and returns the current, active Facebook user

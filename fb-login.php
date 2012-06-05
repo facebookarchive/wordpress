@@ -25,9 +25,9 @@ function fb_check_connected_accounts() {
 
 	//see if they have connected their account to facebook
 	$fb_data = get_user_meta($current_user->ID, 'fb_data', true);
-
+	
 	//if no, show message prompting to connect
-	if (empty($fb_data['uid']) && isset($options['social_publisher']) && $options['social_publisher']['enabled']) {
+	if (empty($fb_data['fb_uid']) && isset($options['social_publisher']) && $options['social_publisher']['enabled']) {
 		$fb_user = fb_get_current_user();
 		
 		if ($fb_user) {

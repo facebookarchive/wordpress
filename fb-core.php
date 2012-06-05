@@ -14,6 +14,9 @@ License: GPL
 */
 
 global $facebook;
+global $fb_ver;
+
+$fb_ver = '1.0';
 
 $options = get_option( 'fb_options' );
 
@@ -102,6 +105,21 @@ function fb_js_sdk_setup() {
  */
 function fb_root() {
 	echo '<div id="fb-root"></div>';
+}
+
+add_action( 'admin_footer', 'fb_insights' );
+add_action( 'wp_footer', 'fb_insights' );
+
+function fb_insights() {
+  global $fb_ver;
+
+ 	$options = get_option('fb_options');
+
+  $params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST']);
+
+	if (isset($options['app_id'])) {
+    echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&params=" . json_encode($params) . "'>";
+  }
 }
 
 /**

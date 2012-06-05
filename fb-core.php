@@ -116,9 +116,45 @@ function fb_insights() {
 
  	$options = get_option('fb_options');
 
+  $enabled_options = array();
 
+  if (isset($options) && isset($options['social_publisher'])){
+    $enabled_options['social_publisher'] = $options['social_publisher'];
+  }
+
+  if (isset($options) && isset($options['recommendations_bar'])){
+    $enabled_options['recommendations_bar'] = $options['recommendations_bar'];
+  }
+
+  if (isset($options) && isset($options['subscribe'])){
+    $enabled_options['subscribe'] = $options['subscribe'];
+  }
+
+  if (isset($options) && isset($options['comments'])){
+    $enabled_options['comments'] = $options['comments'];
+  }
+
+  if (isset($options) && isset($options['send'])){
+    $enabled_options['send'] = $options['send'];
+  }
+
+  $sidebar_widgets = wp_get_sidebars_widgets();
+  
+  $fb_sidebar_widgets = array();
+  
+  $sidebars = array( 'sidebar-1', 'sidebar-2', 'sidebar-3', 'sidebar-4', 'sidebar-5' );
+  
+  foreach ($sidebars as $sidebar) {
+    foreach($sidebar_widgets[$sidebar] as $key => $val) {
+      if (strpos($val, 'fb_') !== false){
+        $fb_sidebar_widgets[$sidebar][] = $val;
+      }
+    }
+  }
+  
   $params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST']);
 
+  $params = array_merge($fb_sidebar_widgets, $params, $enabled_options);
 
 	if (isset($options['app_id'])) {
     echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&payload=" . json_encode($params) . "'>";

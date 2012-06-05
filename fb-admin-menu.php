@@ -19,6 +19,23 @@ function fb_create_menu() {
 }
 
 /**
+ * Link to settings from the plugin listing page
+ *
+ * @since 1.0
+ * @param array $links links displayed under the plugin
+ * @param string $file plugin main file path relative to plugin dir
+ * @return array links array passed in, possibly with our settings link added
+ */
+function fb_plugin_action_links( $links, $file ) {
+	$plugin_basename = plugin_basename( dirname(__FILE__) . '/fb-core.php' );
+	if ( $file === plugin_basename( dirname(__FILE__) . '/fb-core.php' ) )
+		$links[] = '<a href="' . esc_url( admin_url( 'admin.php' ) . '?' . http_build_query( array( 'page' => plugin_basename( __FILE__ ) ) ) ) . '">' . __( 'Settings' ) . '</a>';
+	return $links;
+}
+// Customize plugins listing
+add_filter( 'plugin_action_links', 'fb_plugin_action_links', 10, 2 );
+
+/**
  * Add admin styles to the head
  *
  * @since 1.0

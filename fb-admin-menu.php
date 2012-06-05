@@ -11,7 +11,7 @@ add_action( 'admin_menu', 'fb_add_settings_pages', 10 );
  */
 function fb_create_menu() {
 	//create new top-level menu
-	$page = add_menu_page( sprintf( __( '%s Plugin Settings', 'facebook' ), 'Facebook'), 'Facebook', 'manage_options', __FILE__, 'fb_settings_page', plugins_url( 'images/icon.png', __FILE__) );
+	$page = add_menu_page( sprintf( __( '%s Plugin Settings', 'facebook' ), 'Facebook'), 'Facebook', 'manage_options', __FILE__, 'fb_settings_page', plugins_url( 'images/icon-bw.png', __FILE__) );
 
 	//call register settings function
 	add_action( 'admin_print_styles-' . $page, 'fb_admin_style');
@@ -42,7 +42,28 @@ add_filter( 'plugin_action_links', 'fb_plugin_action_links', 10, 2 );
  */
 function fb_admin_style() {
 	wp_enqueue_style( 'fb_admin', plugins_url( 'style/style-admin.css', __FILE__), array(), '1.0' );
-  wp_enqueue_style( 'fb_loopj', plugins_url( 'scripts/loopj-jquery-tokeninput/styles/token-input-facebook.css', __FILE__ ), array(), '1.0' );
+	wp_enqueue_style( 'fb_loopj', plugins_url( 'scripts/loopj-jquery-tokeninput/styles/token-input-facebook.css', __FILE__ ), array(), '1.0' );
+}
+
+/**
+ * Gray icon swapped out with color icon onhover
+ *
+ * @since 1.0
+ */
+function fb_admin_menu_style() { ?>
+<style type="text/css">
+#toplevel_page_fb-hacks-fb-admin-menu img {
+  display: none;
+}
+#toplevel_page_fb-hacks-fb-admin-menu .wp-menu-image {
+  background-image: url(<?php echo esc_url( plugins_url( 'images/icon-bw.png', __FILE__ ) ); ?>);
+  background-repeat: no-repeat;
+  background-position: 6px 6px;
+}
+#toplevel_page_fb-hacks-fb-admin-menu .wp-menu-image:hover {
+  background-image: url( <?php echo esc_url( plugins_url( 'images/icon.png', __FILE__ ) ); ?> );
+}
+</style><?php
 }
 
 /**

@@ -6,11 +6,12 @@
 /*
 Plugin Name: Facebook
 Plugin URI: http://wordpress.org/extend/plugins/facebook/
-Description: Facebook for WordPress.  Deep social integration in just a couple of clicks.
-Author: facebook, mattwkelly, niallkennedy, jamesgpearce, ravi.grover, Otto42
+Description: Facebook for WordPress. Deep social integration in just a couple of clicks.
+Author: Facebook
+Author URI: https://developers.facebook.com/wordpress/
 Version: 1.0
-Author URI: http://developers.facebook.com/wordpress
-License: GPL
+License: GPL2
+License URI: license.txt
 */
 
 global $facebook;

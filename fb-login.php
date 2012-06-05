@@ -52,6 +52,9 @@ add_action('init', 'fb_extend_access_token');
 function fb_extend_access_token() {
 	global $facebook;
 	
+	if (!$facebook)
+		return;
+	
 	$facebook->getExtendedAccessToken();
 }
 

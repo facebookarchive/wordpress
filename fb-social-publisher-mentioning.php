@@ -107,7 +107,7 @@ function fb_short_number($num) {
 	if($num>1000000) return round(($num/1000000),0).'m';
 	else if($num>1000) return round(($num/1000),0).'k';
 
-	return number_format($num);
+	return number_format_i18n($num);
 }
 
 add_action( 'add_meta_boxes', 'fb_add_page_mention_box' );

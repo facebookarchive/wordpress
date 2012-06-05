@@ -7,7 +7,7 @@
 Plugin Name: Facebook
 Plugin URI: http://wordpress.org/extend/plugins/facebook/
 Description: Facebook for WordPress.  Deep social integration in just a couple of clicks.
-Author: facebook, mattwkelly, niallkennedy, jamesgpearce, Otto42
+Author: facebook, mattwkelly, niallkennedy, jamesgpearce, ravi.grover, Otto42
 Version: 1.0
 Author URI: http://developers.facebook.com/wordpress
 License: GPL
@@ -18,12 +18,13 @@ global $fb_ver;
 
 $fb_ver = '1.0';
 
-$options = get_option( 'fb_options' );
-
 $facebook_plugin_directory = dirname(__FILE__);
 
+// incldue the Facebook PHP SDK
 if ( ! class_exists( 'Facebook_WP' ) )
 	require_once( $facebook_plugin_directory . '/includes/facebook-php-sdk/class-facebook-wp.php' );
+
+$options = get_option( 'fb_options' );
 
 // appId and secret are required by BaseFacebook
 if ( ( ! empty( $options['app_id'] ) && ! empty( $options['app_secret'] ) ) ) {
@@ -57,7 +58,7 @@ function fb_install_warning() {
 	$page = (isset($_GET['page']) ? $_GET['page'] : null);
 
 	if ((empty($options['app_id']) || empty($options['app_secret'])) && $page != 'facebook/fb-admin-menu.php' && current_user_can( 'manage_options' ) ) {
-		fb_admin_dialog( sprintf( __('You must <a href="%s">configure the plugin</a> to enable Facebook for WordPress.', 'facebook' ), 'admin.php?page=facebook/fb-admin-menu.php' ), true);
+		fb_admin_dialog( sprintf( __('You must %sconfigure the plugin</a> to enable Facebook for WordPress.', 'facebook' ), 'admin.php?page=facebook/fb-admin-menu.php' ), true);
 	}
 }
 
@@ -115,10 +116,12 @@ function fb_insights() {
 
  	$options = get_option('fb_options');
 
+
   $params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST']);
 
+
 	if (isset($options['app_id'])) {
-    echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&params=" . json_encode($params) . "'>";
+    echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&payload=" . json_encode($params) . "'>";
   }
 }
 

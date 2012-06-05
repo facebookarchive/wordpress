@@ -183,8 +183,6 @@ function fb_post_to_fb_page($post_id) {
 
 	$options = get_option('fb_options');
 
-
-
 	if (!isset($options['social_publisher']) || !isset($options['social_publisher']['publish_to_fan_page']) || $options['social_publisher']['publish_to_fan_page'] == 'disabled')
 		return;
 
@@ -363,14 +361,26 @@ function fb_get_social_publisher_fields() {
 	$accounts = fb_get_user_pages();
 
 	$accounts_options = array('disabled' => '[Disabled]');
+  
+  $options = get_option('fb_options');
+
+	if (isset($options['social_publisher']) && isset($options['social_publisher']['publish_to_fan_page']) && $options['social_publisher']['publish_to_fan_page'] != 'disabled') {
+    preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER); 
+  }
 
 	foreach($accounts as $account) {
 		if (isset($account['name']) && isset($account['category']) && $account['category'] != 'Application') {
 			$account_options_key = $account['name'] . "@@!!" . $account['id'] . "@@!!" . $account['access_token'];
 			$accounts_options[$account_options_key] = $account['name'];
+      
+      if ($account['id'] == $fan_page_info[0][2]) {
+        $options['social_publisher']['publish_to_fan_page'] = $account_options_key;
+      
+        update_option( 'fb_options', $options );
+      }
 		}
 	}
-
+  
 	$parent = array('name' => 'social_publisher',
 									'type' => 'checkbox',
 									'label' => 'Social Publisher',
@@ -507,6 +517,26 @@ function fb_update_social_posts($post_ID, $post_after, $post_before) {
 	//loop through post's meta for friends
 	
 	//get post's meta for pages
+}
+
+function fb_get_user_pages() {
+	global $facebook;
+
+	$accounts = array();
+
+	if ( ! isset( $facebook ) )
+			return $accounts;
+
+	try {
+		$accounts = $facebook->api('/me/accounts', 'GET', array('ref' => 'fbwpp'));
+	}
+	catch (FacebookApiException $e) {
+		error_log(var_export($e, 1));
+
+		return $accounts;
+	}
+
+	return $accounts['data'];
 }
 
 ?>

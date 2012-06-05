@@ -110,27 +110,6 @@ function fb_short_number($num) {
 	return number_format($num);
 }
 
-
-function fb_get_user_pages() {
-	global $facebook;
-
-	$accounts = array();
-
-	if ( ! isset( $facebook ) )
-			return $accounts;
-
-	try {
-		$accounts = $facebook->api('/me/accounts', 'GET', array('ref' => 'fbwpp'));
-	}
-	catch (FacebookApiException $e) {
-		error_log(var_export($e, 1));
-
-		return $accounts;
-	}
-
-	return $accounts['data'];
-}
-
 add_action( 'add_meta_boxes', 'fb_add_page_mention_box' );
 add_action( 'save_post', 'fb_add_page_mention_box_save' );
 

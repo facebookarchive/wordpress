@@ -108,10 +108,10 @@ function fb_root() {
 	echo '<div id="fb-root"></div>';
 }
 
-add_action( 'admin_footer', 'fb_insights' );
+add_action( 'admin_footer', 'fb_insights_admin' );
 add_action( 'wp_footer', 'fb_insights' );
 
-function fb_insights() {
+function fb_insights_admin() {
   global $fb_ver;
 
  	$options = get_option('fb_options');
@@ -155,6 +155,18 @@ function fb_insights() {
   $params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST']);
 
   $params = array_merge($fb_sidebar_widgets, $params, $enabled_options);
+
+	if (isset($options['app_id'])) {
+    echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&payload=" . json_encode($params) . "'>";
+  }
+}
+
+function fb_insights() {
+  global $fb_ver;
+
+ 	$options = get_option('fb_options');
+  
+  $params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST']);
 
 	if (isset($options['app_id'])) {
     echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&payload=" . json_encode($params) . "'>";

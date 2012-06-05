@@ -74,7 +74,7 @@ function fb_admin_menu_style() { ?>
 function fb_admin_scripts( $hook_suffix ) {
 	wp_enqueue_script( 'fb_admin', plugins_url( 'scripts/fb-admin.js', __FILE__ ), array(), '1.0', true );
 	wp_enqueue_script( 'fb_loopj', plugins_url( 'scripts/loopj-jquery-tokeninput/jquery.tokeninput.js', __FILE__ ), array(), '1.0', true );
-	
+
 }
 
 /**
@@ -97,7 +97,7 @@ function fb_admin_menu_settings() {
  */
 function fb_settings_page() {
   global $facebook;
-  
+
 	?>
 	<div class="wrap">
 		<div class="facebook-logo"></div>
@@ -106,33 +106,33 @@ function fb_settings_page() {
 		<form method="post" action="options.php">
 			<?php
 			settings_fields( 'fb_options' );
-      
+
       if ( !isset( $facebook ) ) {
         //sprintf( esc_html( __( 'Hello %s', 'facebook' ) ), 'world' )
-        
+
         echo '<h2>' . esc_html__( 'Step 1: Create an App', 'facebook' ) . '</h2>';
         echo '<p><strong>' . sprintf( esc_html( __( 'If you already have a Facebook app for this website, skip to %sStep 2%s.', 'facebook' ) ), '<a href="#step-2">', '</a>' ) . '</strong></p><br>';
         echo '<p>' . sprintf( esc_html( __( 'If you don\'t already have an app for this website, go to %s and click the "Create New App" button.  You\'ll see a dialog like the one below.  Fill this in and click "Continue".', 'facebook' ) ), '<a href="https://developers.facebook.com/apps" target="_blank">https://developers.facebook.com/apps</a>' );
         echo '<p><img src="' . plugins_url( 'images/nux_create_app.png', __FILE__ ) . '"></p>';
-        
-        echo '<a name="step-2"></a><h2>' . esc_html__( '%sStep 2: Set up the App%s', 'facebook' ) . '</h2>';
+
+        echo '<a name="step-2"></a><h2>' . esc_html__( 'Step 2: Set up the App', 'facebook' ) . '</h2>';
         echo sprintf( esc_html( __( 'Next, set up your app so that it looks like the settings below.  Make sure you set your app\'s icon and image, too.  If you already have an app and skipped Step 1, you can view your app settings by going to %s', 'facebook' ) ), '<a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>.</p>' );
         echo '<p><img src="' . plugins_url( 'images/nux_app_settings.png', __FILE__ ) . '"></p>';
-        
+
         echo '<h2>' . esc_html__( 'Step 3: WordPress settings', 'facebook' ) . '</h2>';
         echo '<p>' . esc_html__( 'Now, based on what you entered in Step 2, fill in the settings below and Save.  Once saved, additional options will appear on this page.', 'facebook' ) . '</p>';
         fb_get_main_settings_fields();
       }
       else {
         echo '<h2>' . esc_html__( 'Main Settings', 'facebook' ) . '</h2>';
-        
+
         echo '<p>' . sprintf( esc_html( __( 'Get your App ID, Secret, and Namespace at %s. %sIf you already have a Facebook app for this website, it\'s important that you use the same information below%s.', 'facebook' ) ), '<a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>', '<strong>', '</strong>' ) . '</p>';
         fb_get_main_settings_fields();
-      
+
         echo '<h2>' . esc_html__( 'Post and Page Settings', 'facebook' ) . '</h2>';
-  
+
         echo '<p>' . sprintf( esc_html( __( 'These settings affect Pages and Posts only.  Additional Social Plugins are also available in the %sWidgets settings%s.', 'facebook' ) ), '<a href="widgets.php">', '</a>' );
-  
+
         fb_get_social_publisher_fields();
         fb_get_recommendations_bar_fields();
         fb_get_like_fields();

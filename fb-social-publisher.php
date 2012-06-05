@@ -373,11 +373,15 @@ function fb_get_social_publisher_fields() {
 			$account_options_key = $account['name'] . "@@!!" . $account['id'] . "@@!!" . $account['access_token'];
 			$accounts_options[$account_options_key] = $account['name'];
       
-      if ($account['id'] == $fan_page_info[0][2]) {
-        $options['social_publisher']['publish_to_fan_page'] = $account_options_key;
-      
-        update_option( 'fb_options', $options );
+      if (isset($fan_page_info)) {
+        if ($account['id'] == $fan_page_info[0][2]) {
+          $options['social_publisher']['publish_to_fan_page'] = $account_options_key;
+        
+          update_option( 'fb_options', $options );
+        }
       }
+      
+      
 		}
 	}
   

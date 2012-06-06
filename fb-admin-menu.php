@@ -157,6 +157,7 @@ function fb_settings_page() {
  */
 function fb_get_main_settings_fields() {
 	$children = array(array('name' => 'app_id',
+													'label' => 'App ID',
 													'type' => 'text',
 													'help_text' => __( 'Your App ID.', 'facebook' ),
 													),
@@ -197,40 +198,131 @@ function fb_add_settings_pages() {
      );
 }
 
-/**
- * Validate all of the settings
- *
- * @since 1.0
- */
+
 function fb_options_validate($input) {
-	/*
-	if (!defined('FB_APP_SECRET')) {
-		// secrets are 32 bytes long and made of hex values
-		$input['app_secret'] = trim($input['app_secret']);
-		if(! preg_match('/^[a-f0-9]{32}$/i', $input['app_secret'])) {
-		  $input['app_secret'] = '';
+	// TODO wire this up to field definitions!
+	foreach ($input as $key=>$value) {
+		switch ($key) {
+			case 'app_id':
+				$label = 'App ID';
+				if (fb_options_validate_present($value, $label)) {
+					$value = fb_options_validate_integer($value, $label);
+				}
+				break;
+			case 'app_secret':
+				$label = 'App secret';
+				if (fb_options_validate_present($value, $label)) {
+					$value = fb_options_validate_hex($value, $label);
+				}
+				break;
+			case 'app_namespace':
+				$label = 'App namespace';
+				$value = fb_options_validate_namespace($value, $label);
+				break;
+			case 'social_publisher':
+				$label_prefix = "The Social Publisher's";
+				$value = fb_options_validate_plugin($value, $label_prefix);
+				break;
+			case 'recommendations_bar':
+				$label_prefix = "The Recommendations Bar's";
+				$value = fb_options_validate_plugin($value, $label_prefix);
+				break;
+			case 'like':
+				$label_prefix = "The Like Button's";
+				$value = fb_options_validate_plugin($value, $label_prefix);
+				break;
+			case 'subscribe':
+				$label_prefix = "The Subscribe Button's";
+				$value = fb_options_validate_plugin($value, $label_prefix);
+				break;
+			case 'send':
+				$label_prefix = "The Send Button's";
+				$value = fb_options_validate_plugin($value, $label_prefix);
+				break;
+			case 'comments':
+				$label_prefix = "The Comments Box's";
+				$value = fb_options_validate_plugin($value, $label_prefix);
+				break;
 		}
+		$input[$key] = $value;
 	}
-
-	if (!defined('FB_APP_ID')) {
-		// app ids are big integers
-		$input['app_id'] = trim($input['app_id']);
-		if(! preg_match('/^[0-9]+$/i', $input['app_id'])) {
-		  $input['app_id'] = '';
-		}
-	}
-
-	if (!defined('FB_FANPAGE')) {
-		// fanpage ids are big integers
-		$input['fanpage'] = trim($input['fanpage']);
-		if(! preg_match('/^[0-9]+$/i', $input['fanpage'])) {
-		  $input['fanpage'] = '';
-		}
-	}
-
-	$input = apply_filters('fb_validate_options',$input); // filter to let sub-plugins validate their options too
-	*/
 	return $input;
+}
+
+function fb_options_validate_present($value, $label) {
+	if ($value == '') {
+		add_settings_error(fb_options, '', "$label must be present");
+		return false;
+	}
+	return true;
+}
+
+function fb_options_validate_integer($value, $label, $sanitize=true) {
+	if ($sanitize) {
+		$value = fb_options_sanitize($value);
+	}
+	if (!preg_match('/^[0-9]+$/', $value)) {
+		add_settings_error(fb_options, '', "$label must be an integer");
+	}
+	return $value;
+}
+
+function fb_options_validate_hex($value, $label, $sanitize=true) {
+	if ($sanitize) {
+		$value = fb_options_sanitize($value);
+	}
+	if (!preg_match('/^[0-9a-f]+$/i', $value)) {
+		add_settings_error(fb_options, '', "$label must be a hex string");
+	}
+	return $value;
+}
+
+function fb_options_validate_namespace($value, $label, $sanitize=true) {
+	if ($sanitize) {
+		$value = fb_options_sanitize($value);
+	}
+	if ($value != '' && !preg_match('/^[-_a-z]+$/', $value)) {
+		add_settings_error(fb_options, '', "$label can contain only lowercase letters, dashes and underscores");
+	}
+	return $value;
+}
+
+function fb_options_validate_plugin($array, $label_prefix, $sanitize=true) {
+	// TODO desperately needs to be driven from plugin definitions
+	if ($sanitize) {
+		foreach($array as $key=>$value) {
+			$array[$key] = fb_options_sanitize($value);
+		}
+	}
+	if (!isset($array['enabled']) || !$array['enabled']) {
+		return $array;
+	}
+	foreach($array as $key=>$value) {
+		$label = '';
+		switch ($key) {
+			case 'trigger':
+				$label = "$label_prefix trigger";
+				break;
+			case 'read_time':
+				$label = "$label_prefix read time";
+				break;
+			case 'width':
+				$label = "$label_prefix width";
+				break;
+			case 'num_posts':
+				$label = "$label_prefix number of posts";
+				break;
+		}
+		if ($label != '' && fb_options_validate_present($value, $label)) {
+			$value = fb_options_validate_integer($value, $label);
+		}
+		$array[$key] = $value;
+	}
+	return $array;
+}
+
+function fb_options_sanitize($value) {
+	return trim($value);
 }
 
 ?>

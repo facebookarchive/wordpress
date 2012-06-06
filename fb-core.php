@@ -108,9 +108,11 @@ function fb_root() {
 	echo '<div id="fb-root"></div>';
 }
 
-add_action( 'admin_footer', 'fb_insights_admin' );
-add_action( 'wp_footer', 'fb_insights' );
-
+/**
+ * Used for Facebook insights purposes
+ *
+ * @since 1.0
+ */
 function fb_insights_admin() {
   global $fb_ver;
 
@@ -161,6 +163,12 @@ function fb_insights_admin() {
   }
 }
 
+/**
+ * Used for Facebook insights purposes
+ *
+ * @since 1.0
+ */
+add_action( 'wp_footer', 'fb_insights' );
 function fb_insights() {
   global $fb_ver;
 

@@ -15,20 +15,20 @@ function fb_construct_fields($placement, $children, $parent = null, $object = nu
 			$enabled = isset($options[$parent['name']]['enabled']);
 			if (isset($parent['image'])) {
 				echo '<div class="fb_admin_image">';
-				echo '<img src="' . $parent['image'] . '"/>';
+				echo '<img src="' . sanitize_text_field($parent['image']) . '"/>';
 			} else {
 				echo '<div>';
 			}
 			echo '<h3>';
-			echo '<input type="checkbox" name="fb_options[' . $parent['name'] . '][enabled]" value="true" id="' . $parent['name'] . '" ' . checked($enabled, 1, false) . ' onclick="toggleOptions(\'' . $parent['name'] . '\', [\'' . $parent['name'] . '_table\'])">';
-			echo ' <label for="' . $parent['name'] . '">' . $parent['label'] . '</label></h3>';
-			echo '<p class="description">' . $parent['description'] . ' <a href="' . $parent['help_link'] . '" target="_new" title="' . $parent['description'] . '">Read more</a></p>';
+			echo '<input type="checkbox" name="fb_options[' . sanitize_text_field($parent['name']). '][enabled]" value="true" id="' . sanitize_text_field($parent['name']) . '" ' . checked(sanitize_text_field($enabled), 1, false) . ' onclick="toggleOptions(\'' . sanitize_text_field($parent['name']) . '\', [\'' . $parent['name'] . '_table\'])">';
+			echo ' <label for="' . sanitize_text_field($parent['name']) . '">' . sanitize_text_field($parent['label']) . '</label></h3>';
+			echo '<p class="description">' . sanitize_text_field($parent['description']) . ' <a href="' . sanitize_text_field($parent['help_link']) . '" target="_new" title="' . sanitize_text_field($parent['description']) . '">Read more</a></p>';
 		} else {
 			$enabled = true;
 			echo '<div>';
 		}
 
-		echo '<table class="form-table" id="' . $parent['name'] . '_table" style="display:' . ($enabled?'block':'none') . '">
+		echo '<table class="form-table" id="' . sanitize_text_field($parent['name']) . '_table" style="display:' . (sanitize_text_field($enabled)?'block':'none') . '">
 						<tbody>';
 
 		echo fb_construct_fields_children('settings', $children, $parent);

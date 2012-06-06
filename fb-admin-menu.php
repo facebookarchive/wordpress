@@ -59,6 +59,8 @@ function fb_admin_menu_settings() {
  */
 function fb_settings_page() {
   global $facebook;
+  
+  add_action( 'admin_footer', 'fb_insights_admin' );
 
 	?>
 	<div class="wrap">

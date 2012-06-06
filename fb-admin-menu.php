@@ -11,12 +11,29 @@ add_action( 'admin_menu', 'fb_add_settings_pages', 10 );
  */
 function fb_create_menu() {
 	//create new top-level menu
-	$page = add_menu_page( sprintf( __( '%s Plugin Settings', 'facebook' ), 'Facebook'), 'Facebook', 'manage_options', __FILE__, 'fb_settings_page', plugins_url( 'images/icon.png', __FILE__) );
+	$page = add_menu_page( sprintf( __( '%s Plugin Settings', 'facebook' ), 'Facebook'), 'Facebook', 'manage_options', __FILE__, 'fb_settings_page', plugins_url( 'images/icon-bw.png', __FILE__) );
 
 	//call register settings function
 	add_action( 'admin_print_styles-' . $page, 'fb_admin_style');
 	add_action( 'admin_print_scripts-' . $page, 'fb_admin_scripts' );
 }
+
+/**
+ * Link to settings from the plugin listing page
+ *
+ * @since 1.0
+ * @param array $links links displayed under the plugin
+ * @param string $file plugin main file path relative to plugin dir
+ * @return array links array passed in, possibly with our settings link added
+ */
+function fb_plugin_action_links( $links, $file ) {
+	$plugin_basename = plugin_basename( dirname(__FILE__) . '/fb-core.php' );
+	if ( $file === plugin_basename( dirname(__FILE__) . '/fb-core.php' ) )
+		$links[] = '<a href="' . esc_url( admin_url( 'admin.php' ) . '?' . http_build_query( array( 'page' => plugin_basename( __FILE__ ) ) ) ) . '">' . __( 'Settings' ) . '</a>';
+	return $links;
+}
+// Customize plugins listing
+add_filter( 'plugin_action_links', 'fb_plugin_action_links', 10, 2 );
 
 /**
  * Add admin styles to the head
@@ -25,7 +42,28 @@ function fb_create_menu() {
  */
 function fb_admin_style() {
 	wp_enqueue_style( 'fb_admin', plugins_url( 'style/style-admin.css', __FILE__), array(), '1.0' );
-  wp_enqueue_style( 'fb_loopj', plugins_url( 'scripts/loopj-jquery-tokeninput/styles/token-input-facebook.css', __FILE__ ), array(), '1.0' );
+	wp_enqueue_style( 'fb_loopj', plugins_url( 'scripts/loopj-jquery-tokeninput/styles/token-input-facebook.css', __FILE__ ), array(), '1.0' );
+}
+
+/**
+ * Gray icon swapped out with color icon onhover
+ *
+ * @since 1.0
+ */
+function fb_admin_menu_style() { ?>
+<style type="text/css">
+#toplevel_page_fb-hacks-fb-admin-menu img {
+  display: none;
+}
+#toplevel_page_fb-hacks-fb-admin-menu .wp-menu-image {
+  background-image: url(<?php echo esc_url( plugins_url( 'images/icon-bw.png', __FILE__ ) ); ?>);
+  background-repeat: no-repeat;
+  background-position: 6px 6px;
+}
+#toplevel_page_fb-hacks-fb-admin-menu .wp-menu-image:hover {
+  background-image: url( <?php echo esc_url( plugins_url( 'images/icon.png', __FILE__ ) ); ?> );
+}
+</style><?php
 }
 
 /**

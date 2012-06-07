@@ -44,7 +44,7 @@ require_once( $facebook_plugin_directory . '/fb-wp-helpers.php' );
 unset( $facebook_plugin_directory );
 
 add_action( 'init', 'fb_init' );
-add_action( 'init', 'fb_channel_file' );
+add_action( 'template_redirect', 'fb_channel_file');
 add_action( 'admin_notices', 'fb_install_warning' );
 add_action( 'wp_enqueue_scripts', 'fb_style' );
 
@@ -202,15 +202,16 @@ function fb_init() {
  *
  * @since 1.0
  */
+
 function fb_channel_file() {
-	if (!empty($_GET['fb-channel-file'])) {
-		$cache_expire = 60 * 60 * 24 * 365;
+  if ( $_SERVER['REQUEST_URI'] == '/fb-channel-page/' ) {
+    $cache_expire = 60 * 60 * 24 * 365;
 		header('Pragma: public');
 		header('Cache-Control: max-age='.$cache_expire);
 		header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $cache_expire) . ' GMT');
 		echo '<script src="//connect.facebook.net/' . fb_get_locale() . '/all.js"></script>';
-		exit;
-	}
+    die();
+  }
 }
 
 /**

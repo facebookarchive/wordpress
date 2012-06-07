@@ -15,7 +15,6 @@ License URI: license.txt
 */
 
 global $fb_ver;
-
 $fb_ver = '1.0';
 
 $facebook_plugin_directory = dirname(__FILE__);
@@ -33,7 +32,6 @@ require_once( $facebook_plugin_directory . '/fb-wp-helpers.php' );
 unset( $facebook_plugin_directory );
 
 add_action( 'init', 'fb_init' );
-add_action( 'template_redirect', 'fb_channel_file');
 add_action( 'admin_notices', 'fb_install_warning' );
 add_action( 'wp_enqueue_scripts', 'fb_style' );
 
@@ -177,8 +175,8 @@ function fb_insights() {
  * @since 1.0
  */
 function fb_init() {
-	
 	global $facebook;
+  
 	$options = get_option( 'fb_options' );
 
 	if ( empty( $options['app_id'] ) )
@@ -198,21 +196,41 @@ function fb_init() {
 
 }
 
+
 /**
  * Expose the cross-domain channel needed to make Facebook Platform API calls
  *
  * @since 1.0
  */
+add_action( 'init', 'fb_register_rewrite_rule' );
+function fb_register_rewrite_rule() {
+	add_rewrite_rule( '^fb-channel-file/?', 'index.php?fb-channel-file=true', 'top' );
+}
 
-function fb_channel_file() {
-  if ( $_SERVER['REQUEST_URI'] == '/fb-channel-page/' ) {
-    $cache_expire = 60 * 60 * 24 * 365;
+add_action( 'query_vars', 'fb_filter_query_vars' );
+function fb_filter_query_vars( $query_vars ) {
+	$query_vars[] = 'fb-channel-file';
+	return $query_vars;
+}
+
+add_action( 'template_redirect', 'fb_handle_channel_file' );
+function fb_handle_channel_file() {
+	if ( get_query_var( 'fb-channel-file' ) ) {
+		$cache_expire = 60 * 60 * 24 * 365;
 		header('Pragma: public');
 		header('Cache-Control: max-age='.$cache_expire);
 		header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $cache_expire) . ' GMT');
-		echo '<script src="//connect.facebook.net/' . fb_get_locale() . '/all.js"></script>';
-    die();
-  }
+		echo '<script src="//connect.facebook.net/en/all.js"></script>';
+		die();
+	}
+}
+
+function fb_channel_file_link() {
+	global $wp_rewrite;
+	if ( $wp_rewrite->using_permalinks() )
+		echo home_url( '/fb-channel-file/' );
+	else
+		echo add_query_arg( 'fb-channel-file', 'true', home_url() );
 }
 
 /**

@@ -225,7 +225,7 @@ function fb_post_to_fb_page($post_id) {
 		add_post_meta($post_id, 'fb_fan_page_post_id', $publish_result['id'], true);
 	}
 	catch (FacebookApiException $e) {
-		error_log(var_export($e,1));
+		//error_log(var_export($e,1));
 	}
 }
 
@@ -280,7 +280,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 
 		}
 		catch (FacebookApiException $e) {
-			error_log(var_export($e,1));
+			//error_log(var_export($e,1));
 		}
 	}
 
@@ -322,7 +322,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 			$publish_ids_pages[] = $publish_result['id'];
 		}
 		catch (FacebookApiException $e) {
-			error_log(var_export($e,1));
+			//error_log(var_export($e,1));
 		}
 
 		//$mentions .= $page['id'] . ",";
@@ -339,7 +339,7 @@ function fb_post_to_author_fb_timeline($post_id) {
     
 	}
 	catch (FacebookApiException $e) {
-		error_log(var_export($e,1));
+		//error_log(var_export($e,1));
     
     //Unset the option to publish to an author's Timeline, since the likely failure is because the admin didn't set up the proper OG action and object in their App Settings
     //if it's a token issue, it's because the Author hasn't auth'd the WP site yet, so don't unset the option (since that will turn it off for all authors)
@@ -468,7 +468,7 @@ function fb_delete_social_posts( $post_id ) {
 			$delete_result = $facebook->api('/' . $fb_page_post_id, 'DELETE', array('ref' => 'fbwpp'));
 		}
 		catch (FacebookApiException $e) {
-			error_log(var_export($e,1));
+			//error_log(var_export($e,1));
 		}
 	}
 	
@@ -479,7 +479,7 @@ function fb_delete_social_posts( $post_id ) {
 			$delete_result = $facebook->api('/' . $fb_author_post_id, 'DELETE', array('ref' => 'fbwpp'));
 		}
 		catch (FacebookApiException $e) {
-			error_log(var_export($e,1));
+			//error_log(var_export($e,1));
 		}
 
 	}
@@ -492,7 +492,7 @@ function fb_delete_social_posts( $post_id ) {
 					$delete_result = $facebook->api('/' . $page_post_ids, 'DELETE', array('ref' => 'fbwpp'));
 			}
 			catch (FacebookApiException $e) {
-				error_log(var_export($e,1));
+				//error_log(var_export($e,1));
 			}
 		}
 	}
@@ -505,7 +505,7 @@ function fb_delete_social_posts( $post_id ) {
 					$delete_result = $facebook->api('/' . $page_post_ids, 'DELETE', array('ref' => 'fbwpp'));
 			}
 			catch (FacebookApiException $e) {
-				error_log(var_export($e,1));
+				//error_log(var_export($e,1));
 			}
 		}
 	}
@@ -535,7 +535,7 @@ function fb_get_user_pages() {
 		$accounts = $facebook->api('/me/accounts', 'GET', array('ref' => 'fbwpp'));
 	}
 	catch (FacebookApiException $e) {
-		error_log(var_export($e, 1));
+		//error_log(var_export($e,1));
 
 		return $accounts;
 	}

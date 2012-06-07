@@ -71,7 +71,7 @@ function fb_get_fb_comments_seo() {
 		$comments = $facebook->api('/comments', array('ids' => $url));
 	}
 	catch (FacebookApiException $e) {
-		error_log($e);
+		//error_log(var_export($e,1));
 		$user = null;
 	}
 

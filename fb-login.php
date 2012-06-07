@@ -8,7 +8,7 @@
 function fb_check_connected_accounts() {
 	//get current wordpress user
 	global $current_user;
-	get_currentuserinfo();
+	wp_get_current_user();
 
 	global $facebook;
 	

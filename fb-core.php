@@ -143,13 +143,16 @@ function fb_insights_admin() {
   $sidebars = array( 'sidebar-1', 'sidebar-2', 'sidebar-3', 'sidebar-4', 'sidebar-5' );
   
   foreach ($sidebars as $sidebar) {
+    if (empty($sidebar_widgets[$sidebar])) {
+      continue;
+    }
     foreach($sidebar_widgets[$sidebar] as $key => $val) {
       if (strpos($val, 'fb_') !== false){
         $fb_sidebar_widgets[$sidebar][] = $val;
       }
     }
   }
-  
+
   $params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST'], 'context' => 'admin' );
 
   $params = array_merge($fb_sidebar_widgets, $params, $enabled_options);
@@ -284,4 +287,5 @@ function fb_get_locale() {
 function fb_style() {
 	wp_enqueue_style( 'fb', plugins_url( 'style/style.css', __FILE__), array(), '1.0' );
 }
+
 ?>

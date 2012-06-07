@@ -6,14 +6,14 @@
 /*
 Plugin Name: Facebook
 Plugin URI: http://wordpress.org/extend/plugins/facebook/
-Description: Facebook for WordPress.  Deep social integration in just a couple of clicks.
-Author: facebook, mattwkelly, niallkennedy, jamesgpearce, ravi.grover, Otto42
+Description: Facebook for WordPress. Deep social integration in just a couple of clicks.
+Author: Facebook
+Author URI: https://developers.facebook.com/wordpress/
 Version: 1.0
-Author URI: http://developers.facebook.com/wordpress
-License: GPL
+License: GPL2
+License URI: license.txt
 */
 
-global $facebook;
 global $fb_ver;
 
 $fb_ver = '1.0';
@@ -23,16 +23,6 @@ $facebook_plugin_directory = dirname(__FILE__);
 // incldue the Facebook PHP SDK
 if ( ! class_exists( 'Facebook_WP' ) )
 	require_once( $facebook_plugin_directory . '/includes/facebook-php-sdk/class-facebook-wp.php' );
-
-$options = get_option( 'fb_options' );
-
-// appId and secret are required by BaseFacebook
-if ( ( ! empty( $options['app_id'] ) && ! empty( $options['app_secret'] ) ) ) {
-	$facebook = new Facebook_WP(array(
-		'appId'  => $options['app_id'],
-		'secret' => $options['app_secret'],
-	));
-}
 
 require_once( $facebook_plugin_directory . '/fb-admin-menu.php');
 require_once( $facebook_plugin_directory . '/fb-open-graph.php');
@@ -108,9 +98,11 @@ function fb_root() {
 	echo '<div id="fb-root"></div>';
 }
 
-add_action( 'admin_footer', 'fb_insights_admin' );
-add_action( 'wp_footer', 'fb_insights' );
-
+/**
+ * Used for Facebook insights purposes
+ *
+ * @since 1.0
+ */
 function fb_insights_admin() {
   global $fb_ver;
 
@@ -139,11 +131,11 @@ function fb_insights_admin() {
   }
 
   $sidebar_widgets = wp_get_sidebars_widgets();
-
+  
   $fb_sidebar_widgets = array();
-
+  
   $sidebars = array( 'sidebar-1', 'sidebar-2', 'sidebar-3', 'sidebar-4', 'sidebar-5' );
-
+  
   foreach ($sidebars as $sidebar) {
     if (empty($sidebar_widgets[$sidebar])) {
       continue;
@@ -164,6 +156,12 @@ function fb_insights_admin() {
   }
 }
 
+/**
+ * Used for Facebook insights purposes
+ *
+ * @since 1.0
+ */
+add_action( 'wp_footer', 'fb_insights' );
 function fb_insights() {
   global $fb_ver;
 
@@ -182,13 +180,25 @@ function fb_insights() {
  * @since 1.0
  */
 function fb_init() {
+	
+	global $facebook;
 	$options = get_option( 'fb_options' );
 
 	if ( empty( $options['app_id'] ) )
 		return;
+	
+	
+	// appId and secret are required by BaseFacebook
+	if ( ( ! empty( $options['app_id'] ) && ! empty( $options['app_secret'] ) ) ) {
+	 $facebook = new Facebook_WP(array(
+		'appId'  => $options['app_id'],
+		'secret' => $options['app_secret'],
+	 ));
+	}
 
 	add_action( 'wp_head', 'fb_js_sdk_setup' );
 	add_action( 'admin_head', 'fb_js_sdk_setup' );
+
 }
 
 /**

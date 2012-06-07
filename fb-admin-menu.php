@@ -11,12 +11,29 @@ add_action( 'admin_menu', 'fb_add_settings_pages', 10 );
  */
 function fb_create_menu() {
 	//create new top-level menu
-	$page = add_menu_page( sprintf( __( '%s Plugin Settings', 'facebook' ), 'Facebook'), 'Facebook', 'manage_options', __FILE__, 'fb_settings_page', plugins_url( 'images/icon.png', __FILE__) );
+	$page = add_menu_page( sprintf( __( '%s Plugin Settings', 'facebook' ), 'Facebook'), 'Facebook', 'manage_options', __FILE__, 'fb_settings_page', plugins_url( 'images/icon-bw.png', __FILE__) );
 
 	//call register settings function
 	add_action( 'admin_print_styles-' . $page, 'fb_admin_style');
 	add_action( 'admin_print_scripts-' . $page, 'fb_admin_scripts' );
 }
+
+/**
+ * Link to settings from the plugin listing page
+ *
+ * @since 1.0
+ * @param array $links links displayed under the plugin
+ * @param string $file plugin main file path relative to plugin dir
+ * @return array links array passed in, possibly with our settings link added
+ */
+function fb_plugin_action_links( $links, $file ) {
+	$plugin_basename = plugin_basename( dirname(__FILE__) . '/fb-core.php' );
+	if ( $file === plugin_basename( dirname(__FILE__) . '/fb-core.php' ) )
+		$links[] = '<a href="' . esc_url( admin_url( 'admin.php' ) . '?' . http_build_query( array( 'page' => plugin_basename( __FILE__ ) ) ) ) . '">' . __( 'Settings' ) . '</a>';
+	return $links;
+}
+// Customize plugins listing
+add_filter( 'plugin_action_links', 'fb_plugin_action_links', 10, 2 );
 
 /**
  * Add admin styles to the head
@@ -25,7 +42,28 @@ function fb_create_menu() {
  */
 function fb_admin_style() {
 	wp_enqueue_style( 'fb_admin', plugins_url( 'style/style-admin.css', __FILE__), array(), '1.0' );
-  wp_enqueue_style( 'fb_loopj', plugins_url( 'scripts/loopj-jquery-tokeninput/styles/token-input-facebook.css', __FILE__ ), array(), '1.0' );
+	wp_enqueue_style( 'fb_loopj', plugins_url( 'scripts/loopj-jquery-tokeninput/styles/token-input-facebook.css', __FILE__ ), array(), '1.0' );
+}
+
+/**
+ * Gray icon swapped out with color icon onhover
+ *
+ * @since 1.0
+ */
+function fb_admin_menu_style() { ?>
+<style type="text/css">
+#toplevel_page_fb-hacks-fb-admin-menu img {
+  display: none;
+}
+#toplevel_page_fb-hacks-fb-admin-menu .wp-menu-image {
+  background-image: url(<?php echo esc_url( plugins_url( 'images/icon-bw.png', __FILE__ ) ); ?>);
+  background-repeat: no-repeat;
+  background-position: 6px 6px;
+}
+#toplevel_page_fb-hacks-fb-admin-menu .wp-menu-image:hover {
+  background-image: url( <?php echo esc_url( plugins_url( 'images/icon.png', __FILE__ ) ); ?> );
+}
+</style><?php
 }
 
 /**
@@ -59,6 +97,8 @@ function fb_admin_menu_settings() {
  */
 function fb_settings_page() {
   global $facebook;
+  
+  add_action( 'admin_footer', 'fb_insights_admin' );
 
 	?>
 	<div class="wrap">
@@ -117,6 +157,7 @@ function fb_settings_page() {
  */
 function fb_get_main_settings_fields() {
 	$children = array(array('name' => 'app_id',
+													'label' => 'App ID',
 													'type' => 'text',
 													'help_text' => __( 'Your App ID.', 'facebook' ),
 													),
@@ -157,40 +198,131 @@ function fb_add_settings_pages() {
      );
 }
 
-/**
- * Validate all of the settings
- *
- * @since 1.0
- */
+
 function fb_options_validate($input) {
-	/*
-	if (!defined('FB_APP_SECRET')) {
-		// secrets are 32 bytes long and made of hex values
-		$input['app_secret'] = trim($input['app_secret']);
-		if(! preg_match('/^[a-f0-9]{32}$/i', $input['app_secret'])) {
-		  $input['app_secret'] = '';
+	// TODO wire this up to field definitions!
+	foreach ($input as $key=>$value) {
+		switch ($key) {
+			case 'app_id':
+				$label = 'App ID';
+				if (fb_options_validate_present($value, $label)) {
+					$value = fb_options_validate_integer($value, $label);
+				}
+				break;
+			case 'app_secret':
+				$label = 'App secret';
+				if (fb_options_validate_present($value, $label)) {
+					$value = fb_options_validate_hex($value, $label);
+				}
+				break;
+			case 'app_namespace':
+				$label = 'App namespace';
+				$value = fb_options_validate_namespace($value, $label);
+				break;
+			case 'social_publisher':
+				$label_prefix = "The Social Publisher's";
+				$value = fb_options_validate_plugin($value, $label_prefix);
+				break;
+			case 'recommendations_bar':
+				$label_prefix = "The Recommendations Bar's";
+				$value = fb_options_validate_plugin($value, $label_prefix);
+				break;
+			case 'like':
+				$label_prefix = "The Like Button's";
+				$value = fb_options_validate_plugin($value, $label_prefix);
+				break;
+			case 'subscribe':
+				$label_prefix = "The Subscribe Button's";
+				$value = fb_options_validate_plugin($value, $label_prefix);
+				break;
+			case 'send':
+				$label_prefix = "The Send Button's";
+				$value = fb_options_validate_plugin($value, $label_prefix);
+				break;
+			case 'comments':
+				$label_prefix = "The Comments Box's";
+				$value = fb_options_validate_plugin($value, $label_prefix);
+				break;
 		}
+		$input[$key] = $value;
 	}
-
-	if (!defined('FB_APP_ID')) {
-		// app ids are big integers
-		$input['app_id'] = trim($input['app_id']);
-		if(! preg_match('/^[0-9]+$/i', $input['app_id'])) {
-		  $input['app_id'] = '';
-		}
-	}
-
-	if (!defined('FB_FANPAGE')) {
-		// fanpage ids are big integers
-		$input['fanpage'] = trim($input['fanpage']);
-		if(! preg_match('/^[0-9]+$/i', $input['fanpage'])) {
-		  $input['fanpage'] = '';
-		}
-	}
-
-	$input = apply_filters('fb_validate_options',$input); // filter to let sub-plugins validate their options too
-	*/
 	return $input;
+}
+
+function fb_options_validate_present($value, $label) {
+	if ($value == '') {
+		add_settings_error(fb_options, '', "$label must be present");
+		return false;
+	}
+	return true;
+}
+
+function fb_options_validate_integer($value, $label, $sanitize=true) {
+	if ($sanitize) {
+		$value = fb_options_sanitize($value);
+	}
+	if (!preg_match('/^[0-9]+$/', $value)) {
+		add_settings_error(fb_options, '', "$label must be an integer");
+	}
+	return $value;
+}
+
+function fb_options_validate_hex($value, $label, $sanitize=true) {
+	if ($sanitize) {
+		$value = fb_options_sanitize($value);
+	}
+	if (!preg_match('/^[0-9a-f]+$/i', $value)) {
+		add_settings_error(fb_options, '', "$label must be a hex string");
+	}
+	return $value;
+}
+
+function fb_options_validate_namespace($value, $label, $sanitize=true) {
+	if ($sanitize) {
+		$value = fb_options_sanitize($value);
+	}
+	if ($value != '' && !preg_match('/^[-_a-z]+$/', $value)) {
+		add_settings_error(fb_options, '', "$label can contain only lowercase letters, dashes and underscores");
+	}
+	return $value;
+}
+
+function fb_options_validate_plugin($array, $label_prefix, $sanitize=true) {
+	// TODO desperately needs to be driven from plugin definitions
+	if ($sanitize) {
+		foreach($array as $key=>$value) {
+			$array[$key] = fb_options_sanitize($value);
+		}
+	}
+	if (!isset($array['enabled']) || !$array['enabled']) {
+		return $array;
+	}
+	foreach($array as $key=>$value) {
+		$label = '';
+		switch ($key) {
+			case 'trigger':
+				$label = "$label_prefix trigger";
+				break;
+			case 'read_time':
+				$label = "$label_prefix read time";
+				break;
+			case 'width':
+				$label = "$label_prefix width";
+				break;
+			case 'num_posts':
+				$label = "$label_prefix number of posts";
+				break;
+		}
+		if ($label != '' && fb_options_validate_present($value, $label)) {
+			$value = fb_options_validate_integer($value, $label);
+		}
+		$array[$key] = $value;
+	}
+	return $array;
+}
+
+function fb_options_sanitize($value) {
+	return trim($value);
 }
 
 ?>

@@ -75,7 +75,6 @@ function fb_get_fb_comments_seo() {
 			$comments = $facebook->api('/comments', array('ids' => $url));
 		}
 		catch (FacebookApiException $e) {
-			//error_log(var_export($e,1));
 		}
 		
 		if (!update_post_meta($post->ID, 'fb_comments', $comments)) {
@@ -84,13 +83,9 @@ function fb_get_fb_comments_seo() {
 		if (!update_post_meta($post->ID, 'fb_comments_cache_timestamp', time())) {
 			add_post_meta($post->ID, 'fb_comments_cache_timestamp', time(), false);
 		}
-		
-		error_log('got comments from API');
 	}
 	else {
 		$comments = get_post_meta($post->ID, 'fb_comments', true);
-		
-		error_log('got cached comments');
 	}
 	
 	if ( ! isset( $comments[$url] ) )

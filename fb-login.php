@@ -75,7 +75,6 @@ function fb_get_current_user() {
 		return $user;
 	}
 	catch (FacebookApiException $e) {
-		//error_log('The Facebook user must be logged in.');
 	}
 }
 ?>

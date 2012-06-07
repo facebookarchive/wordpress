@@ -19,7 +19,6 @@ function fb_friend_page_autocomplete() {
 			}
 		}
 		catch (FacebookApiException $e) {
-			//error_log(var_export($e, 1));
 		}
 
 		if (isset($_GET['q']) && isset($friends_clean)) {
@@ -72,7 +71,6 @@ function fb_friend_page_autocomplete() {
 			}
 		}
 		catch (FacebookApiException $e) {
-			//error_log(var_export($e, 1));
 		}
 
 		if (isset($_GET['q'])) {

@@ -14,7 +14,6 @@ License: GPL2
 License URI: license.txt
 */
 
-global $facebook;
 global $fb_ver;
 
 $fb_ver = '1.0';
@@ -24,16 +23,6 @@ $facebook_plugin_directory = dirname(__FILE__);
 // incldue the Facebook PHP SDK
 if ( ! class_exists( 'Facebook_WP' ) )
 	require_once( $facebook_plugin_directory . '/includes/facebook-php-sdk/class-facebook-wp.php' );
-
-$options = get_option( 'fb_options' );
-
-// appId and secret are required by BaseFacebook
-if ( ( ! empty( $options['app_id'] ) && ! empty( $options['app_secret'] ) ) ) {
-	$facebook = new Facebook_WP(array(
-		'appId'  => $options['app_id'],
-		'secret' => $options['app_secret'],
-	));
-}
 
 require_once( $facebook_plugin_directory . '/fb-admin-menu.php');
 require_once( $facebook_plugin_directory . '/fb-open-graph.php');
@@ -188,13 +177,25 @@ function fb_insights() {
  * @since 1.0
  */
 function fb_init() {
+	
+	global $facebook;
 	$options = get_option( 'fb_options' );
 
 	if ( empty( $options['app_id'] ) )
 		return;
+	
+	
+	// appId and secret are required by BaseFacebook
+	if ( ( ! empty( $options['app_id'] ) && ! empty( $options['app_secret'] ) ) ) {
+	 $facebook = new Facebook_WP(array(
+		'appId'  => $options['app_id'],
+		'secret' => $options['app_secret'],
+	 ));
+	}
 
 	add_action( 'wp_head', 'fb_js_sdk_setup' );
 	add_action( 'admin_head', 'fb_js_sdk_setup' );
+
 }
 
 /**
@@ -257,5 +258,4 @@ function fb_get_locale() {
 function fb_style() {
 	wp_enqueue_style( 'fb', plugins_url( 'style/style.css', __FILE__), array(), '1.0' );
 }
-
 ?>

@@ -44,5 +44,47 @@ class Facebook_WP extends Facebook {
 
 		return wp_remote_retrieve_body( $response );
 	}
+
+  /**
+   * Provides the implementations of the inherited abstract
+   * methods.  The implementation uses user meta to maintain
+   * a store for authorization codes, user ids, CSRF states, and
+   * access tokens.
+   */
+  protected function setPersistentData($key, $value){
+    
+	    if (!in_array($key, self::$kSupportedKeys)) {
+	      self::errorLog('Unsupported key passed to setPersistentData.');
+	      return;   
+	    }
+		
+		//WP 3.0+
+		update_user_meta( get_current_user_id(), $key, $value);
+	}
+
+  protected function getPersistentData($key, $default = false){
+    
+    if (!in_array($key, self::$kSupportedKeys)) {
+      self::errorLog('Unsupported key passed to getPersistentData.');
+      return $default;
+    }
+	
+	  return $usermeta = get_user_meta(get_current_user_id(), $key);
+	}
+
+  protected function clearPersistentData($key) {
+    if (!in_array($key, self::$kSupportedKeys)) {
+      self::errorLog('Unsupported key passed to clearPersistentData.');
+      return;
+    }
+
+    delete_user_meta( get_current_user_id(), $key);
+  }
+
+  protected function clearAllPersistentData() {
+    foreach (self::$kSupportedKeys as $key) {
+      $this->clearPersistentData($key);
+    }
+  }
 }
 ?>

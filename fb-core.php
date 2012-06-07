@@ -106,6 +106,14 @@ function fb_insights_admin() {
 
  	$options = get_option('fb_options');
 
+  preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
+  
+  unset($options['social_publisher']['publish_to_fan_page']);
+  
+  $options['social_publisher']['publish_to_fan_page'] = array();
+  $options['social_publisher']['publish_to_fan_page']['page_name'] = $fan_page_info[0][1];
+  $options['social_publisher']['publish_to_fan_page']['page_id'] = $fan_page_info[0][2];
+  
   $enabled_options = array();
 
   if (isset($options) && isset($options['social_publisher'])){
@@ -142,7 +150,7 @@ function fb_insights_admin() {
     }
   }
   
-  $params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST']);
+  $params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST'], 'context' => 'admin' );
 
   $params = array_merge($fb_sidebar_widgets, $params, $enabled_options);
 
@@ -162,7 +170,7 @@ function fb_insights() {
 
  	$options = get_option('fb_options');
   
-  $params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST']);
+  $params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST'], 'context' => 'user' );
 
 	if (isset($options['app_id'])) {
     echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&payload=" . json_encode($params) . "'>";

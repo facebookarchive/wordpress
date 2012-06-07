@@ -64,17 +64,35 @@ function fb_comments_automatic($content) {
 
 function fb_get_fb_comments_seo() {
 	global $facebook;
+	global $post;
 
 	$url = get_permalink();
-
-	try {
-		$comments = $facebook->api('/comments', array('ids' => $url));
+	
+	$comments_cache_timestamp = get_post_meta($post->ID, 'fb_comments_cache_timestamp', true);
+	
+	if (!isset($comments_cache_timestamp) || ($comments_cache_timestamp + 900) <= time()) {
+		try {
+			$comments = $facebook->api('/comments', array('ids' => $url));
+		}
+		catch (FacebookApiException $e) {
+			//error_log(var_export($e,1));
+		}
+		
+		if (!update_post_meta($post->ID, 'fb_comments', $comments)) {
+			add_post_meta($post->ID, 'fb_comments', $comments, true);
+		}
+		if (!update_post_meta($post->ID, 'fb_comments_cache_timestamp', time())) {
+			add_post_meta($post->ID, 'fb_comments_cache_timestamp', time(), false);
+		}
+		
+		error_log('got comments from API');
 	}
-	catch (FacebookApiException $e) {
-		//error_log(var_export($e,1));
-		$user = null;
+	else {
+		$comments = get_post_meta($post->ID, 'fb_comments', true);
+		
+		error_log('got cached comments');
 	}
-
+	
 	if ( ! isset( $comments[$url] ) )
 		return '';
 

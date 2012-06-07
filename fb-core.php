@@ -139,19 +139,22 @@ function fb_insights_admin() {
   }
 
   $sidebar_widgets = wp_get_sidebars_widgets();
-  
+
   $fb_sidebar_widgets = array();
-  
+
   $sidebars = array( 'sidebar-1', 'sidebar-2', 'sidebar-3', 'sidebar-4', 'sidebar-5' );
-  
+
   foreach ($sidebars as $sidebar) {
+    if (empty($sidebar_widgets[$sidebar])) {
+      continue;
+    }
     foreach($sidebar_widgets[$sidebar] as $key => $val) {
       if (strpos($val, 'fb_') !== false){
         $fb_sidebar_widgets[$sidebar][] = $val;
       }
     }
   }
-  
+
   $params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST']);
 
   $params = array_merge($fb_sidebar_widgets, $params, $enabled_options);
@@ -165,7 +168,7 @@ function fb_insights() {
   global $fb_ver;
 
  	$options = get_option('fb_options');
-  
+
   $params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST']);
 
 	if (isset($options['app_id'])) {
@@ -246,6 +249,11 @@ function fb_get_locale() {
  */
 function fb_style() {
 	wp_enqueue_style( 'fb', plugins_url( 'style/style.css', __FILE__), array(), '1.0' );
+}
+
+function fb_hide_wp_comments() {
+  print plugins_url( 'style/hide-wp-comments.css', __FILE__);
+  wp_enqueue_style( 'fb_hide_wp_comments', plugins_url( 'style/hide-wp-comments.css', __FILE__), array(), '1.0' );
 }
 
 ?>

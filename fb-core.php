@@ -262,7 +262,6 @@ function fb_style() {
 }
 
 function fb_hide_wp_comments() {
-  print plugins_url( 'style/hide-wp-comments.css', __FILE__);
   wp_enqueue_style( 'fb_hide_wp_comments', plugins_url( 'style/hide-wp-comments.css', __FILE__), array(), '1.0' );
 }
 

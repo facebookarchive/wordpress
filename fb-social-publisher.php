@@ -17,11 +17,11 @@ if ( isset($options['social_publisher']) && isset($options['social_publisher']['
  * @since 1.0
  */
 function fb_add_author_message_box() {
-  global $post;
-  
-  if ($post->post_status == 'publish')  
-    return;
-  
+	global $post;
+	
+	if ($post->post_status == 'publish')	
+		return;
+	
 		add_meta_box(
 				'fb_author_message_box_id',
 				__( 'Facebook Status on Your Timeline', 'facebook' ),
@@ -93,15 +93,15 @@ function fb_add_author_message_box_save( $post_id ) {
  * @since 1.0
  */
 function fb_add_fan_page_message_box() {
-  global $post;
-  
-  $options = get_option('fb_options');
-  
-  preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
-  
-  if ($post->post_status == 'publish')  
-    return;
-  
+	global $post;
+	
+	$options = get_option('fb_options');
+	
+	preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
+	
+	if ($post->post_status == 'publish')	
+		return;
+	
 		add_meta_box(
 				'fb_fan_page_message_box_id',
 				__( 'Facebook Status on ' . $fan_page_info[0][1] . '\'s Timeline', 'fb_add_fan_page_message_box_textdomain' ),
@@ -122,10 +122,10 @@ function fb_add_fan_page_message_box() {
  * @since 1.0
  */
 function fb_add_fan_page_message_box_content( $post ) {
-  $options = get_option('fb_options');
-  
-  preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
-  
+	$options = get_option('fb_options');
+	
+	preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
+	
 		// Use nonce for verification
 	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_fan_page_message_box_noncename' );
 
@@ -187,7 +187,7 @@ function fb_post_to_fb_page($post_id) {
 		return;
 
 	preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
-  
+	
 	list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
 
 	$fan_page_message = get_post_meta($post_id, 'fb_fan_page_message', true);
@@ -274,7 +274,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 			$args['ref'] = 'fbwpp';
 
 			$publish_result = $facebook->api('/' . $friend['id'] . '/feed', 'POST', $args);
-      
+			
 			$publish_ids_friends[] = $publish_result['id'];
 
 		}
@@ -316,7 +316,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 			$args['ref'] = 'fbwpp';
 
 			$publish_result = $facebook->api('/' . $page['id'] . '/feed', 'POST', $args);
-      
+			
 			$publish_ids_pages[] = $publish_result['id'];
 		}
 		catch (FacebookApiException $e) {
@@ -333,16 +333,16 @@ function fb_post_to_author_fb_timeline($post_id) {
 		$publish_result = $facebook->api('/me/' . $options["app_namespace"] . ':publish', 'POST', array('message' => $author_message, 'article' => get_permalink($post_id)));
 		
 		add_post_meta($post_id, 'fb_author_post_id', $publish_result['id'], true);
-    
+		
 	}
 	catch (FacebookApiException $e) {
-    //Unset the option to publish to an author's Timeline, since the likely failure is because the admin didn't set up the proper OG action and object in their App Settings
-    //if it's a token issue, it's because the Author hasn't auth'd the WP site yet, so don't unset the option (since that will turn it off for all authors)
-    if ($e->getType() != 'OAuthException') {
-      $options['social_publisher']['publish_to_authors_facebook_timeline'] = false;
-    
-      update_option( 'fb_options', $options );
-    }
+		//Unset the option to publish to an author's Timeline, since the likely failure is because the admin didn't set up the proper OG action and object in their App Settings
+		//if it's a token issue, it's because the Author hasn't auth'd the WP site yet, so don't unset the option (since that will turn it off for all authors)
+		if ($e->getType() != 'OAuthException') {
+			$options['social_publisher']['publish_to_authors_facebook_timeline'] = false;
+		
+			update_option( 'fb_options', $options );
+		}
 	}
 }
 
@@ -350,40 +350,40 @@ function fb_post_to_author_fb_timeline($post_id) {
 function fb_get_social_publisher_fields() {
 	global $facebook;
 
-  if ( ! isset( $facebook ) )
-    return;
+	if ( ! isset( $facebook ) )
+		return;
 
 	$accounts = fb_get_user_pages();
 
 	$accounts_options = array('disabled' => '[Disabled]');
-  
-  $options = get_option('fb_options');
+	
+	$options = get_option('fb_options');
 
 	if (isset($options['social_publisher']) && isset($options['social_publisher']['publish_to_fan_page']) && $options['social_publisher']['publish_to_fan_page'] != 'disabled') {
-    preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER); 
-  }
+		preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER); 
+	}
 
 	foreach($accounts as $account) {
 		if (isset($account['name']) && isset($account['category']) && $account['category'] != 'Application') {
 			$account_options_key = $account['name'] . "@@!!" . $account['id'] . "@@!!" . $account['access_token'];
 			$accounts_options[$account_options_key] = $account['name'];
-      
-      if (isset($fan_page_info)) {
-        if ($account['id'] == $fan_page_info[0][2]) {
-          $options['social_publisher']['publish_to_fan_page'] = $account_options_key;
-        
-          update_option( 'fb_options', $options );
-        }
-      }
-      
-      
+			
+			if (isset($fan_page_info)) {
+				if ($account['id'] == $fan_page_info[0][2]) {
+					$options['social_publisher']['publish_to_fan_page'] = $account_options_key;
+				
+					update_option( 'fb_options', $options );
+				}
+			}
+			
+			
 		}
 	}
-  
+	
 	$parent = array('name' => 'social_publisher',
 									'type' => 'checkbox',
 									'label' => 'Social Publisher',
-									'description' => 'Social Publisher allows you to publish to an Author\'s Facebook Timeline and Fan Page.  Authors can also mention Facebook friends and pages. ',
+									'description' => 'Social Publisher allows you to publish to an Author\'s Facebook Timeline and Fan Page.	Authors can also mention Facebook friends and pages. ',
 									'help_link' => 'http://developers.facebook.com/wordpress',
 									'image' => plugins_url( 'images/settings_social_publisher.png', __FILE__)
 									);
@@ -407,21 +407,21 @@ function fb_get_social_publisher_fields() {
 													'label' => "Publish to author's Timeline",
 													'type' => 'checkbox',
 													'default' => true,
-                          'onclick' => "window.open('http://developers.facebook.com/wordpress#author-og-setup', 'Open Graph Setup', 'fullscreen=no');",
+													'onclick' => "window.open('http://developers.facebook.com/wordpress#author-og-setup', 'Open Graph Setup', 'fullscreen=no');",
 													'help_text' => __( 'Publish new posts to the author\'s Facebook Timeline and allow mentioning friends. You must setup Open Graph in your App Settings. Enable the feature to learn how.', 'facebook' ),
-                          'help_link' => 'http://developers.facebook.com/wordpress#author-og-setup',
+													'help_link' => 'http://developers.facebook.com/wordpress#author-og-setup',
 													),
 										$fan_page_option,
 										array('name' => 'mentions_show_on_homepage',
 													'type' => 'checkbox',
 													'default' => true,
-													'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.  Enable this to show mentions on the homepage, as part of the post and page previews.', 'facebook' ),
+													'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.	Enable this to show mentions on the homepage, as part of the post and page previews.', 'facebook' ),
 													),
 										array('name' => 'mentions_position',
 													'type' => 'dropdown',
 													'default' => 'both',
 													'options' => array('top' => 'top', 'bottom' => 'bottom', 'both' => 'both'),
-													'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.  This controls where mentions will be displayed in the posts.', 'facebook' ),
+													'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.	This controls where mentions will be displayed in the posts.', 'facebook' ),
 													),
 										);
 

@@ -3,8 +3,8 @@ add_action( 'admin_init','fb_friend_page_autocomplete' );
 add_filter( 'the_content', 'fb_social_publisher_mentioning_output', 30 );
 
 function fb_friend_page_autocomplete() {
-  $output = array();
-  
+	$output = array();
+	
 	if (!empty($_GET['fb-friends'])) {
 		global $facebook;
 
@@ -32,19 +32,19 @@ function fb_friend_page_autocomplete() {
 				}
 			}
 		}
-    
-    if (!empty($results)) {
-      $count = 0;
-      
+		
+		if (!empty($results)) {
+			$count = 0;
+			
 			foreach ($results as $result) {
-        $output[$count]['id'] = '[' . $result[1] . '|' . $result[0] . ']';
-        $output[$count]['name'] = '<img src="http://graph.facebook.com/' . $result[1] . '/picture/" width="25" height="25"> &nbsp;' . $result[0];
-        
-        $count++;
+				$output[$count]['id'] = '[' . $result[1] . '|' . $result[0] . ']';
+				$output[$count]['name'] = '<img src="http://graph.facebook.com/' . $result[1] . '/picture/" width="25" height="25"> &nbsp;' . $result[0];
+				
+				$count++;
 			}
 		}
-    
-    print json_encode($output);
+		
+		print json_encode($output);
 		exit;
 	}
 
@@ -86,17 +86,17 @@ function fb_friend_page_autocomplete() {
 		}
 
 		if (!empty($results)) {
-      $count = 0;
-      
+			$count = 0;
+			
 			foreach ($results as $result) {
-        $output[$count]['id'] = '[' . $result[1][2] . '|' . $result[1][1] . ']';
-        $output[$count]['name'] = '<img src="' . $result[1][0] . '" width="25" height="25"> &nbsp;' . $result[1][1] . ' (' . fb_short_number($result[1][3]) . ' likes)';
-        
-        $count++;
+				$output[$count]['id'] = '[' . $result[1][2] . '|' . $result[1][1] . ']';
+				$output[$count]['name'] = '<img src="' . $result[1][0] . '" width="25" height="25"> &nbsp;' . $result[1][1] . ' (' . fb_short_number($result[1][3]) . ' likes)';
+				
+				$count++;
 			}
 		}
-    
-    print json_encode($output);
+		
+		print json_encode($output);
 		exit;
 	}
 }
@@ -112,63 +112,63 @@ add_action( 'add_meta_boxes', 'fb_add_page_mention_box' );
 add_action( 'save_post', 'fb_add_page_mention_box_save' );
 
 function fb_add_page_mention_box() {
-  global $post;
-  
-  if ($post->post_status == 'publish')  
-    return;
-  
-  add_meta_box(
-      'fb_page_mention_box_id',
-      __( 'Mention Facebook Pages', 'fb_page_mention_box_id_textdomain', 'facebook' ),
-      'fb_add_page_mention_box_content',
-      'post',
-      'side'
-  );
-  add_meta_box(
-      'fb_page_mention_box_id',
-      __( 'Mention Facebook Pages', 'fb_page_mention_box_id_textdomain', 'facebook' ),
-      'fb_add_page_mention_box_content',
-      'page',
-      'side'
-  );
+	global $post;
+	
+	if ($post->post_status == 'publish')	
+		return;
+	
+	add_meta_box(
+			'fb_page_mention_box_id',
+			__( 'Mention Facebook Pages', 'fb_page_mention_box_id_textdomain', 'facebook' ),
+			'fb_add_page_mention_box_content',
+			'post',
+			'side'
+	);
+	add_meta_box(
+			'fb_page_mention_box_id',
+			__( 'Mention Facebook Pages', 'fb_page_mention_box_id_textdomain', 'facebook' ),
+			'fb_add_page_mention_box_content',
+			'page',
+			'side'
+	);
 }
 
 function fb_add_page_mention_box_content( $post ) {
 	//wp_enqueue_script('suggest');
 
-  global $facebook;
+	global $facebook;
 
 	// Use nonce for verification
 	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_page_mention_box_noncename' );
 
-  if ( is_page() ) {
-    $noun = 'page';
-  }
-  else {
-    $noun = 'post';
-  }
+	if ( is_page() ) {
+		$noun = 'page';
+	}
+	else {
+		$noun = 'post';
+	}
 
-  $fb_user = fb_get_current_user();
-  
-  if ($fb_user) {
-    $perms = $facebook->api('/me/permissions', 'GET', array('ref' => 'fbwpp'));
-  }
-  
-  if ($fb_user && isset($perms['data'][0]['manage_pages']) && isset($perms['data'][0]['publish_actions']) && isset($perms['data'][0]['publish_stream'])) {
-    // The actual fields for data entry
-    echo '<label for="fb_page_mention_box_autocomplete">';
-         _e("Page's Name", 'fb_page_mention_box_textdomain' );
-    echo '</label> ';
-    echo '<input type="text" class="widefat" id="suggest-pages" autocomplete="off" name="fb_page_mention_box_autocomplete" value="" size="44" placeholder="Type to find a page." />';
-    echo '<label for="fb_page_mention_box_message">';
-         _e("Message", 'fb_page_mention_box_message_textdomain' );
-    echo '</label> ';
-    echo '<input type="text" class="widefat" id="pages-mention-message" name="fb_page_mention_box_message" value="" size="44" placeholder="Write something..." />';
-    echo '<p class="howto">This will add the ' . $noun . ' to the Timeline of each Facebook Page mentioned.  They will also appear in the contents of the ' . $noun . '.</p>';
-  }
-  else {
-    echo '<p>Facebook social publishing is enabled.</p><br><p><strong><a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a></strong> to get full functionality, including adding new Posts to your Timeline and mentioning friends Facebook Pages.</p>';
-  }
+	$fb_user = fb_get_current_user();
+	
+	if ($fb_user) {
+		$perms = $facebook->api('/me/permissions', 'GET', array('ref' => 'fbwpp'));
+	}
+	
+	if ($fb_user && isset($perms['data'][0]['manage_pages']) && isset($perms['data'][0]['publish_actions']) && isset($perms['data'][0]['publish_stream'])) {
+		// The actual fields for data entry
+		echo '<label for="fb_page_mention_box_autocomplete">';
+				 _e("Page's Name", 'fb_page_mention_box_textdomain' );
+		echo '</label> ';
+		echo '<input type="text" class="widefat" id="suggest-pages" autocomplete="off" name="fb_page_mention_box_autocomplete" value="" size="44" placeholder="Type to find a page." />';
+		echo '<label for="fb_page_mention_box_message">';
+				 _e("Message", 'fb_page_mention_box_message_textdomain' );
+		echo '</label> ';
+		echo '<input type="text" class="widefat" id="pages-mention-message" name="fb_page_mention_box_message" value="" size="44" placeholder="Write something..." />';
+		echo '<p class="howto">This will add the ' . $noun . ' to the Timeline of each Facebook Page mentioned.	They will also appear in the contents of the ' . $noun . '.</p>';
+	}
+	else {
+		echo '<p>Facebook social publishing is enabled.</p><br><p><strong><a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a></strong> to get full functionality, including adding new Posts to your Timeline and mentioning friends Facebook Pages.</p>';
+	}
 }
 
 function fb_add_page_mention_box_save( $post_id ) {
@@ -177,10 +177,10 @@ function fb_add_page_mention_box_save( $post_id ) {
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
 			return;
 
-  $fb_user = fb_get_current_user();
-  
-  if (!$fb_user)
-    return;
+	$fb_user = fb_get_current_user();
+	
+	if (!$fb_user)
+		return;
 
 	// verify this came from the our screen and with proper authorization,
 	// because save_post can be triggered at other times
@@ -228,64 +228,64 @@ add_action( 'add_meta_boxes', 'fb_add_friend_mention_box' );
 add_action( 'save_post', 'fb_add_friend_mention_box_save' );
 
 function fb_add_friend_mention_box() {
-  global $post;
-  global $facebook;
-  
-  if ($post->post_status == 'publish')  
-    return;
-  
-  add_meta_box(
-      'fb_friend_mention_box_id',
-      __( 'Mention Facebook Friends', 'facebook' ),
-      'fb_add_friend_mention_box_content',
-      'post',
-      'side'
-  );
-  add_meta_box(
-      'fb_friend_mention_box_id',
-      __( 'Mention Facebook Friends', 'facebook' ),
-      'fb_add_friend_mention_box_content',
-      'page',
-      'side'
-  );
+	global $post;
+	global $facebook;
+	
+	if ($post->post_status == 'publish')	
+		return;
+	
+	add_meta_box(
+			'fb_friend_mention_box_id',
+			__( 'Mention Facebook Friends', 'facebook' ),
+			'fb_add_friend_mention_box_content',
+			'post',
+			'side'
+	);
+	add_meta_box(
+			'fb_friend_mention_box_id',
+			__( 'Mention Facebook Friends', 'facebook' ),
+			'fb_add_friend_mention_box_content',
+			'page',
+			'side'
+	);
 }
 
 function fb_add_friend_mention_box_content( $post ) {
-  global $facebook;
-  
+	global $facebook;
+	
 	wp_enqueue_script('suggest');
 
 	// Use nonce for verification
 	wp_nonce_field( plugin_basename( __FILE__ ), 'fb_friend_mention_box_noncename' );
-  
-  $fb_user = fb_get_current_user();
-  
-  if ($fb_user) {
+	
+	$fb_user = fb_get_current_user();
+	
+	if ($fb_user) {
 			$perms = $facebook->api('/me/permissions', 'GET', array('ref' => 'fbwpp'));
 		}
-  
-  if ($fb_user && isset($perms['data'][0]['manage_pages']) && isset($perms['data'][0]['publish_actions']) && isset($perms['data'][0]['publish_stream'])) {
-    if ( is_page() ) {
-      $noun = 'page';
-    }
-    else {
-      $noun = 'post';
-    }
-    
-    // The actual fields for data entry
-    echo '<label for="fb_friend_mention_box_autocomplete">';
-         _e("Friend's Name", 'fb_friend_mention_box_textdomain' );
-    echo '</label> ';
-    echo '<input type="text" class="widefat" id="suggest-friends" autocomplete="off" name="fb_friend_mention_box_autocomplete" value="" size="44" placeholder="Type to find a friend." />';
-    echo '<label for="fb_friend_mention_box_message">';
-         _e("Message", 'fb_friend_mention_box_message_textdomain' );
-    echo '</label> ';
-    echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_friend_mention_box_message" value="" size="44" placeholder="Write something..." />';
-    echo '<p class="howto">This will add the ' . $noun . ' to the Timeline of each friend mentioned.  They will also appear on the ' . $noun . '.</p>';
-  }
-  else {
-    echo '<p>Facebook social publishing is enabled.</p><br><p><strong><a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a></strong> to get full functionality, including adding new Posts to your Timeline and mentioning friends Facebook Pages.</p>';
-  }
+	
+	if ($fb_user && isset($perms['data'][0]['manage_pages']) && isset($perms['data'][0]['publish_actions']) && isset($perms['data'][0]['publish_stream'])) {
+		if ( is_page() ) {
+			$noun = 'page';
+		}
+		else {
+			$noun = 'post';
+		}
+		
+		// The actual fields for data entry
+		echo '<label for="fb_friend_mention_box_autocomplete">';
+				 _e("Friend's Name", 'fb_friend_mention_box_textdomain' );
+		echo '</label> ';
+		echo '<input type="text" class="widefat" id="suggest-friends" autocomplete="off" name="fb_friend_mention_box_autocomplete" value="" size="44" placeholder="Type to find a friend." />';
+		echo '<label for="fb_friend_mention_box_message">';
+				 _e("Message", 'fb_friend_mention_box_message_textdomain' );
+		echo '</label> ';
+		echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_friend_mention_box_message" value="" size="44" placeholder="Write something..." />';
+		echo '<p class="howto">This will add the ' . $noun . ' to the Timeline of each friend mentioned.	They will also appear on the ' . $noun . '.</p>';
+	}
+	else {
+		echo '<p>Facebook social publishing is enabled.</p><br><p><strong><a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a></strong> to get full functionality, including adding new Posts to your Timeline and mentioning friends Facebook Pages.</p>';
+	}
 }
 
 function fb_add_friend_mention_box_save( $post_id ) {
@@ -293,11 +293,11 @@ function fb_add_friend_mention_box_save( $post_id ) {
 	// If it is our form has not been submitted, so we dont want to do anything
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
 			return;
-  
-  $fb_user = fb_get_current_user();
-  
-  if (!$fb_user)
-    return;
+	
+	$fb_user = fb_get_current_user();
+	
+	if (!$fb_user)
+		return;
 
 	// verify this came from the our screen and with proper authorization,
 	// because save_post can be triggered at other times
@@ -348,7 +348,7 @@ function fb_social_publisher_mentioning_output($content) {
 
 	$options = get_option('fb_options');
 
-	$fb_mentioned_pages   = get_post_meta($post->ID, 'fb_mentioned_pages', true);
+	$fb_mentioned_pages	 = get_post_meta($post->ID, 'fb_mentioned_pages', true);
 	$fb_mentioned_friends = get_post_meta($post->ID, 'fb_mentioned_friends', true);
 
 	$mentions_entities = '';
@@ -366,7 +366,7 @@ function fb_social_publisher_mentioning_output($content) {
 	}
 
 	if ($mentions_entities) {
-    $mentions = '<div class="fb-mentions entry-meta">' . $mentions_entities . 'mentioned.</div>';
+		$mentions = '<div class="fb-mentions entry-meta">' . $mentions_entities . 'mentioned.</div>';
 
 		$new_content = '';
 

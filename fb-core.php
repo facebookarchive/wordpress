@@ -102,64 +102,64 @@ function fb_root() {
  * @since 1.0
  */
 function fb_insights_admin() {
-  global $fb_ver;
+	global $fb_ver;
 
  	$options = get_option('fb_options');
 
-  preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
-  
-  unset($options['social_publisher']['publish_to_fan_page']);
-  
-  $options['social_publisher']['publish_to_fan_page'] = array();
-  $options['social_publisher']['publish_to_fan_page']['page_name'] = $fan_page_info[0][1];
-  $options['social_publisher']['publish_to_fan_page']['page_id'] = $fan_page_info[0][2];
-  
-  $enabled_options = array();
+	preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
+	
+	unset($options['social_publisher']['publish_to_fan_page']);
+	
+	$options['social_publisher']['publish_to_fan_page'] = array();
+	$options['social_publisher']['publish_to_fan_page']['page_name'] = $fan_page_info[0][1];
+	$options['social_publisher']['publish_to_fan_page']['page_id'] = $fan_page_info[0][2];
+	
+	$enabled_options = array();
 
-  if (isset($options) && isset($options['social_publisher'])){
-    $enabled_options['social_publisher'] = $options['social_publisher'];
-  }
+	if (isset($options) && isset($options['social_publisher'])){
+		$enabled_options['social_publisher'] = $options['social_publisher'];
+	}
 
-  if (isset($options) && isset($options['recommendations_bar'])){
-    $enabled_options['recommendations_bar'] = $options['recommendations_bar'];
-  }
+	if (isset($options) && isset($options['recommendations_bar'])){
+		$enabled_options['recommendations_bar'] = $options['recommendations_bar'];
+	}
 
-  if (isset($options) && isset($options['subscribe'])){
-    $enabled_options['subscribe'] = $options['subscribe'];
-  }
+	if (isset($options) && isset($options['subscribe'])){
+		$enabled_options['subscribe'] = $options['subscribe'];
+	}
 
-  if (isset($options) && isset($options['comments'])){
-    $enabled_options['comments'] = $options['comments'];
-  }
+	if (isset($options) && isset($options['comments'])){
+		$enabled_options['comments'] = $options['comments'];
+	}
 
-  if (isset($options) && isset($options['send'])){
-    $enabled_options['send'] = $options['send'];
-  }
+	if (isset($options) && isset($options['send'])){
+		$enabled_options['send'] = $options['send'];
+	}
 
-  $sidebar_widgets = wp_get_sidebars_widgets();
-  
-  $fb_sidebar_widgets = array();
-  
-  $sidebars = array( 'sidebar-1', 'sidebar-2', 'sidebar-3', 'sidebar-4', 'sidebar-5' );
-  
-  foreach ($sidebars as $sidebar) {
-    if (empty($sidebar_widgets[$sidebar])) {
-      continue;
-    }
-    foreach($sidebar_widgets[$sidebar] as $key => $val) {
-      if (strpos($val, 'fb_') !== false){
-        $fb_sidebar_widgets[$sidebar][] = $val;
-      }
-    }
-  }
+	$sidebar_widgets = wp_get_sidebars_widgets();
+	
+	$fb_sidebar_widgets = array();
+	
+	$sidebars = array( 'sidebar-1', 'sidebar-2', 'sidebar-3', 'sidebar-4', 'sidebar-5' );
+	
+	foreach ($sidebars as $sidebar) {
+		if (empty($sidebar_widgets[$sidebar])) {
+			continue;
+		}
+		foreach($sidebar_widgets[$sidebar] as $key => $val) {
+			if (strpos($val, 'fb_') !== false){
+				$fb_sidebar_widgets[$sidebar][] = $val;
+			}
+		}
+	}
 
-  $params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST'], 'context' => 'admin' );
+	$params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST'], 'context' => 'admin' );
 
-  $params = array_merge($fb_sidebar_widgets, $params, $enabled_options);
+	$params = array_merge($fb_sidebar_widgets, $params, $enabled_options);
 
 	if (isset($options['app_id'])) {
-    echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&payload=" . json_encode($params) . "'>";
-  }
+		echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&payload=" . json_encode($params) . "'>";
+	}
 }
 
 /**
@@ -169,15 +169,15 @@ function fb_insights_admin() {
  */
 add_action( 'wp_footer', 'fb_insights' );
 function fb_insights() {
-  global $fb_ver;
+	global $fb_ver;
 
  	$options = get_option('fb_options');
-  
-  $params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST'], 'context' => 'user' );
+	
+	$params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST'], 'context' => 'user' );
 
 	if (isset($options['app_id'])) {
-    echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&payload=" . json_encode($params) . "'>";
-  }
+		echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&payload=" . json_encode($params) . "'>";
+	}
 }
 
 /**
@@ -187,7 +187,7 @@ function fb_insights() {
  */
 function fb_init() {
 	global $facebook;
-  
+	
 	$options = get_option( 'fb_options' );
 
 	if ( empty( $options['app_id'] ) )

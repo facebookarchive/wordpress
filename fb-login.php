@@ -13,7 +13,7 @@ function fb_check_connected_accounts() {
 	global $facebook;
 	
 	if ( ! isset( $facebook ) )
-    return;
+		return;
 	
 	$options = get_option('fb_options');
 

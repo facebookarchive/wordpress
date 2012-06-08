@@ -101,10 +101,13 @@ function fb_root() {
  *
  * @since 1.0
  */
-function fb_insights_admin() {
+function fb_insights_admin($appid = 0) {
 	global $fb_ver;
 
  	$options = get_option('fb_options');
+
+  if (!$appid)
+    return;
 
  	if ( !empty( $options['social_publisher']['publish_to_fan_page'] ) )
 		preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
@@ -153,33 +156,33 @@ function fb_insights_admin() {
 			}
 		}
 	}
+  
+	$payload = array( 'context' => 'new_data_saving!!!!', 'appid' => $appid, 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST'] );
 
-	$appid = ( isset( $options['app_id'] ) ) ? $options['app_id'] : '';
-	$params = array( 'appid' => $appid, 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST'], 'context' => 'admin' );
+	$payload = json_encode(array_merge($fb_sidebar_widgets, $payload, $enabled_options));
 
-	$params = array_merge($fb_sidebar_widgets, $params, $enabled_options);
-
-	if (isset($options['app_id'])) {
-		echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&payload=" . json_encode($params) . "'>";
-	}
-}
-
-/**
- * Used for Facebook insights purposes
- *
- * @since 1.0
- */
-add_action( 'wp_footer', 'fb_insights' );
-function fb_insights() {
-	global $fb_ver;
-
- 	$options = get_option('fb_options');
 	
-	$params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST'], 'context' => 'user' );
+  $url = "http://www.facebook.com/impression.php?plugin=wordpress&payload=" . $payload . "'>";
+  
+  global $wp_version;
+  
+  $params = array(
+    'httpversion' => '1.1',
+    'timeout' => 60,
+    'user-agent' => apply_filters( 'http_headers_useragent', 'WordPress/' . $wp_version . '; ' . get_bloginfo( 'url' ) . ';' ),
+    'headers' => array( 'Expect:' ),
+    'sslverify' => false, // warning: might be overridden by 'https_ssl_verify' filter
+  );
+  
+  $response = wp_remote_post( $url, $params );
+  if ( is_wp_error( $response ) ) {
+    return;
+  }
+  else if ( wp_remote_retrieve_response_code( $response ) != '200' ) {
+    return;
+  }
 
-	if (isset($options['app_id'])) {
-		echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&payload=" . json_encode($params) . "'>";
-	}
+	return;
 }
 
 /**

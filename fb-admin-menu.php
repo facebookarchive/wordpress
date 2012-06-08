@@ -97,8 +97,6 @@ function fb_admin_menu_settings() {
  */
 function fb_settings_page() {
 	global $facebook;
-	
-	add_action( 'admin_footer', 'fb_insights_admin' );
 
 	?>
 	<div class="wrap">
@@ -208,6 +206,8 @@ function fb_options_validate($input) {
 				$label = 'App ID';
 				if (fb_options_validate_present($value, $label)) {
 					$value = fb_options_validate_integer($value, $label);
+          
+          fb_insights_admin($value);
 				}
 				break;
 			case 'app_secret':
@@ -250,6 +250,7 @@ function fb_options_validate($input) {
 		}
 		$output[$key] = $value;
 	}
+  
 	return $output;
 }
 
@@ -263,7 +264,7 @@ function fb_options_validate_present($value, $label) {
 
 function fb_options_validate_integer($value, $label, $sanitize=true) {
 	if ($sanitize) {
-		$value = intval( $value );
+		$value = sanitize_text_field( $value );
 	}
 	if (!preg_match('/^[0-9]+$/', $value)) {
 		add_settings_error(fb_options, '', "$label must be an integer");

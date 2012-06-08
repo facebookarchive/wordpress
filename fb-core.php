@@ -106,13 +106,14 @@ function fb_insights_admin() {
 
  	$options = get_option('fb_options');
 
-	preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
-	
-	unset($options['social_publisher']['publish_to_fan_page']);
-	
+ 	if ( !empty( $options['social_publisher']['publish_to_fan_page'] ) )
+		preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
+
 	$options['social_publisher']['publish_to_fan_page'] = array();
-	$options['social_publisher']['publish_to_fan_page']['page_name'] = $fan_page_info[0][1];
-	$options['social_publisher']['publish_to_fan_page']['page_id'] = $fan_page_info[0][2];
+	if ( !empty( $fan_page_info[0] ) ) {
+		$options['social_publisher']['publish_to_fan_page']['page_name'] = $fan_page_info[0][1];
+		$options['social_publisher']['publish_to_fan_page']['page_id'] = $fan_page_info[0][2];
+	}
 	
 	$enabled_options = array();
 
@@ -153,7 +154,8 @@ function fb_insights_admin() {
 		}
 	}
 
-	$params = array( 'appid' => $options['app_id'], 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST'], 'context' => 'admin' );
+	$appid = ( isset( $options['app_id'] ) ) ? $options['app_id'] : '';
+	$params = array( 'appid' => $appid, 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST'], 'context' => 'admin' );
 
 	$params = array_merge($fb_sidebar_widgets, $params, $enabled_options);
 

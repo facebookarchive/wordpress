@@ -56,15 +56,19 @@ class Facebook_Activity_Feed extends WP_Widget {
 	 * @return array Updated safe values to be saved.
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance = array();
+		$return_instance = $old_instance;
 		
 		$fields = fb_get_activity_feed_fields_array('widget');
 		
-		foreach($fields['children'] as $field) {
-			$instance[$field['name']] = sanitize_text_field( $field['name'] );
+		foreach( $fields['children'] as $field ) {
+			$unsafe_value = $new_instance[$field['name']];
+			if ( !empty( $field['sanitization_callback'] ) && function_exists( $field['sanitization_callback'] ) ) 
+				$return_instance[$field['name']] = $field['sanitization_callback']( $unsafe_value );
+			else
+				$return_instance[$field['name']] = sanitize_text_field( $unsafe_value );
 		}
 		
-		return $new_instance;
+		return $return_instance;
 	}
 
 	/**
@@ -91,11 +95,13 @@ function fb_get_activity_feed_fields_array($placement) {
 													'type' => 'text',
 													'default' => '250',
 													'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
+													'sanitization_callback' => 'intval',
 													),
 										array('name' => 'height',
 													'type' => 'text',
 													'default' => '250',
 													'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
+													'sanitization_callback' => 'intval',
 													),
 										array('name' => 'colorscheme',
 													'label' => 'Color scheme',

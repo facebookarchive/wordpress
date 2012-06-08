@@ -6,9 +6,8 @@
  * @since 1.0
  */
 function fb_check_connected_accounts() {
-	//get current wordpress user
-	global $current_user;
-	wp_get_current_user();
+
+	$current_user = wp_get_current_user();
 
 	global $facebook;
 	
@@ -22,7 +21,7 @@ function fb_check_connected_accounts() {
 		return;
 
 	//see if they have connected their account to facebook
-	$fb_data = get_user_meta($current_user->ID, 'fb_data', true);
+	$fb_data = fb_get_user_meta($current_user->ID, 'fb_data', true);
 	
 	//if no, show message prompting to connect
 	if (empty($fb_data['fb_uid']) && isset($options['social_publisher']) && $options['social_publisher']['enabled']) {
@@ -35,7 +34,7 @@ function fb_check_connected_accounts() {
 		if ($fb_user && isset($perms['data'][0]['manage_pages']) && isset($perms['data'][0]['publish_actions']) && isset($perms['data'][0]['publish_stream'])) {
 			$fb_user_data = array('fb_uid' => $fb_user['id'], 'username' => $fb_user['username'], 'activation_time' => time());
 
-			update_user_meta($current_user->ID, 'fb_data', $fb_user_data);
+			fb_update_user_meta($current_user->ID, 'fb_data', $fb_user_data);
 		}
 		else {
 			fb_admin_dialog( __('Facebook social publishing is enabled. <a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a> to get full functionality, including adding new Posts to your Timeline.', 'facebook' ), true);

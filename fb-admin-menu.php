@@ -201,6 +201,7 @@ function fb_add_settings_pages() {
 
 function fb_options_validate($input) {
 	// TODO wire this up to field definitions!
+	$output = array();
 	foreach ($input as $key=>$value) {
 		switch ($key) {
 			case 'app_id':
@@ -243,10 +244,13 @@ function fb_options_validate($input) {
 				$label_prefix = "The Comments Box's";
 				$value = fb_options_validate_plugin($value, $label_prefix);
 				break;
+			default:
+				$value = '';
+				break;
 		}
-		$input[$key] = $value;
+		$output[$key] = $value;
 	}
-	return $input;
+	return $output;
 }
 
 function fb_options_validate_present($value, $label) {
@@ -259,7 +263,7 @@ function fb_options_validate_present($value, $label) {
 
 function fb_options_validate_integer($value, $label, $sanitize=true) {
 	if ($sanitize) {
-		$value = fb_options_sanitize($value);
+		$value = intval( $value );
 	}
 	if (!preg_match('/^[0-9]+$/', $value)) {
 		add_settings_error(fb_options, '', "$label must be an integer");
@@ -269,7 +273,7 @@ function fb_options_validate_integer($value, $label, $sanitize=true) {
 
 function fb_options_validate_hex($value, $label, $sanitize=true) {
 	if ($sanitize) {
-		$value = fb_options_sanitize($value);
+		$value = sanitize_text_field( $value );
 	}
 	if (!preg_match('/^[0-9a-f]+$/i', $value)) {
 		add_settings_error(fb_options, '', "$label must be a hex string");
@@ -279,7 +283,7 @@ function fb_options_validate_hex($value, $label, $sanitize=true) {
 
 function fb_options_validate_namespace($value, $label, $sanitize=true) {
 	if ($sanitize) {
-		$value = fb_options_sanitize($value);
+		$value = sanitize_text_field( $value );
 	}
 	if ($value != '' && !preg_match('/^[-_a-z]+$/', $value)) {
 		add_settings_error(fb_options, '', "$label can contain only lowercase letters, dashes and underscores");
@@ -291,7 +295,7 @@ function fb_options_validate_plugin($array, $label_prefix, $sanitize=true) {
 	// TODO desperately needs to be driven from plugin definitions
 	if ($sanitize) {
 		foreach($array as $key=>$value) {
-			$array[$key] = fb_options_sanitize($value);
+			$array[$key] = sanitize_text_field( $value );
 		}
 	}
 	if (!isset($array['enabled']) || !$array['enabled']) {
@@ -319,10 +323,6 @@ function fb_options_validate_plugin($array, $label_prefix, $sanitize=true) {
 		$array[$key] = $value;
 	}
 	return $array;
-}
-
-function fb_options_sanitize($value) {
-	return trim($value);
 }
 
 ?>

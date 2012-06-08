@@ -84,7 +84,7 @@ function fb_add_author_message_box_save( $post_id ) {
 	}
 
 	// OK, we're authenticated: we need to find and save the data
-	add_post_meta($post_id, 'fb_author_message', sanitize_text_field($_POST['fb_author_message_box_message']), true);
+	update_post_meta($post_id, 'fb_author_message', sanitize_text_field($_POST['fb_author_message_box_message']) );
 }
 
 /**
@@ -169,7 +169,7 @@ function fb_add_fan_page_message_box_save( $post_id ) {
 
 	// OK, we're authenticated: we need to find and save the data
 
-	add_post_meta($post_id, 'fb_fan_page_message', sanitize_text_field($_POST['fb_fan_page_message_box_message']), true);
+	update_post_meta( $post_id, 'fb_fan_page_message', sanitize_text_field($_POST['fb_fan_page_message_box_message']) );
 }
 
 /**
@@ -222,7 +222,7 @@ function fb_post_to_fb_page($post_id) {
 	try {
 		$publish_result = $facebook->api('/' . $fan_page_info[0][2] . '/feed', 'POST', $args);
 
-		add_post_meta($post_id, 'fb_fan_page_post_id', sanitize_text_field($publish_result['id']), true);
+		update_post_meta($post_id, 'fb_fan_page_post_id', sanitize_text_field($publish_result['id']));
 	}
 	catch (FacebookApiException $e) {
 	}
@@ -282,7 +282,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 		}
 	}
 
-	add_post_meta($post_id, 'fb_mentioned_friends_post_ids', $publish_ids_friends, true);
+	update_post_meta($post_id, 'fb_mentioned_friends_post_ids', $publish_ids_friends);
 
 	$fb_mentioned_pages = get_post_meta($post_id, 'fb_mentioned_pages', true);
 
@@ -325,14 +325,14 @@ function fb_post_to_author_fb_timeline($post_id) {
 		//$mentions .= $page['id'] . ",";
 	}
 
-	add_post_meta($post_id, 'fb_mentioned_pages_post_ids', $publish_ids_pages, true);
+	update_post_meta($post_id, 'fb_mentioned_pages_post_ids', $publish_ids_pages);
 
 	$author_message = get_post_meta($post_id, 'fb_author_message', true);
 
 	try {
 		$publish_result = $facebook->api('/me/' . $options["app_namespace"] . ':publish', 'POST', array('message' => $author_message, 'article' => get_permalink($post_id)));
 		
-		add_post_meta($post_id, 'fb_author_post_id', sanitize_text_field($publish_result['id']), true);
+		update_post_meta($post_id, 'fb_author_post_id', sanitize_text_field($publish_result['id']));
 		
 	}
 	catch (FacebookApiException $e) {

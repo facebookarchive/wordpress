@@ -220,9 +220,9 @@ function fb_add_page_mention_box_save( $post_id ) {
 		$pages_details_meta[] = array('id' => sanitize_text_field($page_detail[1]), 'name' => sanitize_text_field($page_detail[2]));
 	}
 
-	add_post_meta($post_id, 'fb_mentioned_pages', $pages_details_meta, true);
+	update_post_meta($post_id, 'fb_mentioned_pages', $pages_details_meta );
 
-	add_post_meta($post_id, 'fb_mentioned_pages_message', sanitize_text_field($_POST['fb_page_mention_box_message']), true);
+	update_post_meta($post_id, 'fb_mentioned_pages_message', sanitize_text_field($_POST['fb_page_mention_box_message']) );
 }
 
 add_action( 'add_meta_boxes', 'fb_add_friend_mention_box' );
@@ -337,9 +337,9 @@ function fb_add_friend_mention_box_save( $post_id ) {
 		$friends_details_meta[] = array('id' => sanitize_text_field($friend_detail[1]), 'name' => sanitize_text_field($friend_detail[2]));
 	}
 
-	add_post_meta($post_id, 'fb_mentioned_friends', $friends_details_meta, true);
+	update_post_meta($post_id, 'fb_mentioned_friends', $friends_details_meta);
 
-	add_post_meta($post_id, 'fb_mentioned_friends_message', sanitize_text_field($_POST['fb_friend_mention_box_message']), true);
+	update_post_meta($post_id, 'fb_mentioned_friends_message', sanitize_text_field($_POST['fb_friend_mention_box_message']));
 }
 
 

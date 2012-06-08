@@ -81,15 +81,19 @@ class Facebook_Send_Button extends WP_Widget {
 	 * @return array Updated safe values to be saved.
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance = array();
+		$return_instance = $old_instance;
 		
 		$fields = fb_get_send_fields_array('widget');
 		
-		foreach($fields['children'] as $field) {
-			$instance[$field['name']] = sanitize_text_field( $field['name'] );
+		foreach( $fields['children'] as $field ) {
+			$unsafe_value = $new_instance[$field['name']];
+			if ( !empty( $field['sanitization_callback'] ) && function_exists( $field['sanitization_callback'] ) ) 
+				$return_instance[$field['name']] = $field['sanitization_callback']( $unsafe_value );
+			else
+				$return_instance[$field['name']] = sanitize_text_field( $unsafe_value );
 		}
 		
-		return $new_instance;
+		return $return_instance;
 	}
 
 	/**
@@ -159,6 +163,7 @@ function fb_get_send_fields_array($placement) {
 													'type' => 'text',
 													'default' => get_site_url(),
 													'help_text' => __( 'The URL the Send button will point to.', 'facebook' ),
+													'sanitization_callback' => 'esc_url_raw',
 													);
 
 		array_unshift($array['children'], $title_array, $text_array);

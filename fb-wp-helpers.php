@@ -15,20 +15,20 @@ function fb_construct_fields($placement, $children, $parent = null, $object = nu
 			$enabled = isset($options[$parent['name']]['enabled']);
 			if (isset($parent['image'])) {
 				echo '<div class="fb_admin_image">';
-				echo '<img src="' . sanitize_text_field($parent['image']) . '"/>';
+				echo '<img src="' . esc_url( $parent['image'] ) . '"/>';
 			} else {
 				echo '<div>';
 			}
 			echo '<h3>';
-			echo '<input type="checkbox" name="fb_options[' . sanitize_text_field($parent['name']). '][enabled]" value="true" id="' . sanitize_text_field($parent['name']) . '" ' . checked(sanitize_text_field($enabled), 1, false) . ' onclick="toggleOptions(\'' . sanitize_text_field($parent['name']) . '\', [\'' . $parent['name'] . '_table\'])">';
-			echo ' <label for="' . sanitize_text_field($parent['name']) . '">' . sanitize_text_field($parent['label']) . '</label></h3>';
-			echo '<p class="description">' . sanitize_text_field($parent['description']) . ' <a href="' . sanitize_text_field($parent['help_link']) . '" target="_new" title="' . sanitize_text_field($parent['description']) . '">Read more</a></p>';
+			echo '<input type="checkbox" name="fb_options[' . esc_attr( $parent['name'] ). '][enabled]" value="true" id="' . esc_attr( $parent['name'] ) . '" ' . checked( $enabled, 1, false ) . ' onclick="toggleOptions(\'' . esc_js( $parent['name'] ) . '\', [\'' . esc_js( $parent['name'] ) . '_table\'])">';
+			echo ' <label for="' . esc_attr($parent['name']) . '">' . esc_html( $parent['label'] ) . '</label></h3>';
+			echo '<p class="description">' . esc_html( $parent['description'] ) . ' <a href="' . esc_url( $parent['help_link'] ) . '" target="_new" title="' . esc_attr( $parent['description'] ) . '">' . __( 'Read more', 'facebook') . '</a></p>';
 		} else {
 			$enabled = true;
 			echo '<div>';
 		}
 
-		echo '<table class="form-table" id="' . sanitize_text_field($parent['name']) . '_table" style="display:' . (sanitize_text_field($enabled)?'block':'none') . '">
+		echo '<table class="form-table" id="' . esc_attr( $parent['name'] ) . '_table" style="display:' . ( $enabled ?'block':'none') . '">
 						<tbody>';
 
 		echo fb_construct_fields_children('settings', $children, $parent);
@@ -196,7 +196,7 @@ function fb_field_checkbox($field, $place='settings') {
 	return sprintf(
 		'<input type="checkbox" id="%1$s" name="%1$s" onclick="%2$s" value="true" %3$s />',
 		esc_attr($field['name']),
-		$onclick,
+		esc_js( $onclick ),
 		checked($field['value'], 'true', false)
 	);
 }
@@ -223,6 +223,30 @@ function fb_field_dropdown($field, $place='settings') {
 
 function fb_field_disabled_text($field, $place='settings') {
 	return $field['disabled_text'];
+}
+
+function fb_get_user_meta( $user_id, $meta_key, $single = false ) {
+	$override = apply_filters( 'fb_get_user_meta', false, $user_id, $meta_key, $single );
+	if ( false !== $override )
+		return $override;
+
+	return get_user_meta( $user_id, $meta_key, $single );
+}
+
+function fb_update_user_meta( $user_id, $meta_key, $meta_value, $prev_value = '' ) {
+	$override = apply_filters( 'fb_update_user_meta', false, $user_id, $meta_key, $meta_value, $prev_value );
+	if ( false !== $override )
+		return $override;
+
+	return update_user_meta( $user_id, $meta_key, $meta_value, $prev_value );
+}
+
+function fb_delete_user_meta( $user_id, $meta_key, $meta_value = '' ) {
+	$override = apply_filters( 'fb_delete_user_meta', false, $user_id, $meta_key, $meta_value );
+	if ( false !== $override )
+		return $override;
+
+	return delete_user_meta( $user_id, $meta_key, $meta_value );
 }
 
 

@@ -59,7 +59,7 @@ class Facebook_WP extends Facebook {
 	    }
 		
 		//WP 3.0+
-		update_user_meta( get_current_user_id(), $key, $value);
+		fb_update_user_meta( get_current_user_id(), $key, $value);
 	}
 
   protected function getPersistentData($key, $default = false){
@@ -69,7 +69,7 @@ class Facebook_WP extends Facebook {
       return $default;
     }
 	
-	  return $usermeta = get_user_meta(get_current_user_id(), $key);
+	  return $usermeta = fb_get_user_meta(get_current_user_id(), $key);
 	}
 
   protected function clearPersistentData($key) {
@@ -78,7 +78,7 @@ class Facebook_WP extends Facebook {
       return;
     }
 
-    delete_user_meta( get_current_user_id(), $key);
+    fb_delete_user_meta( get_current_user_id(), $key);
   }
 
   protected function clearAllPersistentData() {

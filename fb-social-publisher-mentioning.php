@@ -1,6 +1,7 @@
 <?php
 add_action( 'admin_init','fb_friend_page_autocomplete' );
 add_filter( 'the_content', 'fb_social_publisher_mentioning_output', 30 );
+add_action( 'wp_ajax_my_action', 'fb_friend_page_autocomplete' );
 
 function fb_friend_page_autocomplete() {
 	$output = array();

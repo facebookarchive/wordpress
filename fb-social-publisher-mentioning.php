@@ -37,8 +37,8 @@ function fb_friend_page_autocomplete() {
 			$count = 0;
 			
 			foreach ($results as $result) {
-				$output[$count]['id'] = '[' . $result[1] . '|' . $result[0] . ']';
-				$output[$count]['name'] = '<img src="http://graph.facebook.com/' . $result[1] . '/picture/" width="25" height="25"> &nbsp;' . $result[0];
+				$output[$count]['id'] = '[' . esc_attr($result[1]) . '|' . esc_attr($result[0]) . ']';
+				$output[$count]['name'] = '<img src="http://graph.facebook.com/' . esc_attr($result[1]) . '/picture/" width="25" height="25"> &nbsp;' . esc_attr($result[0]);
 				
 				$count++;
 			}
@@ -89,8 +89,8 @@ function fb_friend_page_autocomplete() {
 			$count = 0;
 			
 			foreach ($results as $result) {
-				$output[$count]['id'] = '[' . $result[1][2] . '|' . $result[1][1] . ']';
-				$output[$count]['name'] = '<img src="' . $result[1][0] . '" width="25" height="25"> &nbsp;' . $result[1][1] . ' (' . fb_short_number($result[1][3]) . ' likes)';
+				$output[$count]['id'] = '[' . esc_attr($result[1][2]) . '|' . esc_attr($result[1][1]) . ']';
+				$output[$count]['name'] = '<img src="' . esc_attr($result[1][0]) . '" width="25" height="25"> &nbsp;' . esc_attr($result[1][1]) . ' (' . fb_short_number(esc_attr($result[1][3])) . ' likes)';
 				
 				$count++;
 			}
@@ -216,12 +216,12 @@ function fb_add_page_mention_box_save( $post_id ) {
 	$pages_details_meta = array();
 
 	foreach($page_details as $page_detail) {
-		$pages_details_meta[] = array('id' => $page_detail[1], 'name' => $page_detail[2]);
+		$pages_details_meta[] = array('id' => sanitize_text_field($page_detail[1]), 'name' => sanitize_text_field($page_detail[2]));
 	}
 
 	add_post_meta($post_id, 'fb_mentioned_pages', $pages_details_meta, true);
 
-	add_post_meta($post_id, 'fb_mentioned_pages_message', $_POST['fb_page_mention_box_message'], true);
+	add_post_meta($post_id, 'fb_mentioned_pages_message', sanitize_text_field($_POST['fb_page_mention_box_message']), true);
 }
 
 add_action( 'add_meta_boxes', 'fb_add_friend_mention_box' );
@@ -333,12 +333,12 @@ function fb_add_friend_mention_box_save( $post_id ) {
 	$friends_details_meta = array();
 
 	foreach($friend_details as $friend_detail) {
-		$friends_details_meta[] = array('id' => $friend_detail[1], 'name' => $friend_detail[2]);
+		$friends_details_meta[] = array('id' => sanitize_text_field($friend_detail[1]), 'name' => sanitize_text_field($friend_detail[2]));
 	}
 
 	add_post_meta($post_id, 'fb_mentioned_friends', $friends_details_meta, true);
 
-	add_post_meta($post_id, 'fb_mentioned_friends_message', $_POST['fb_friend_mention_box_message'], true);
+	add_post_meta($post_id, 'fb_mentioned_friends_message', sanitize_text_field($_POST['fb_friend_mention_box_message']), true);
 }
 
 
@@ -355,13 +355,13 @@ function fb_social_publisher_mentioning_output($content) {
 
 	if (!empty($fb_mentioned_friends)){
 		foreach( $fb_mentioned_friends as $fb_mentioned_friend ) {
-			$mentions_entities .= '<a href="http://www.facebook.com/' . sanitize_text_field($fb_mentioned_friend['id']) . '" title="Click to visit ' . sanitize_text_field($fb_mentioned_friend['name']) . '\'s profile on Facebook."><img src="http://graph.facebook.com/' . sanitize_text_field($fb_mentioned_friend['id']) . '/picture" width="16" height="16"> ' . sanitize_text_field($fb_mentioned_friend['name']) . '</a> ';
+			$mentions_entities .= '<a href="http://www.facebook.com/' . esc_attr($fb_mentioned_friend['id']) . '" title="Click to visit ' . esc_attr($fb_mentioned_friend['name']) . '\'s profile on Facebook."><img src="http://graph.facebook.com/' . esc_attr($fb_mentioned_friend['id']) . '/picture" width="16" height="16"> ' . esc_html($fb_mentioned_friend['name']) . '</a> ';
 		}
 	}
 
 	if (!empty($fb_mentioned_pages)){
 		foreach( $fb_mentioned_pages as $fb_mentioned_page ) {
-			$mentions_entities .= '<a href="http://www.facebook.com/' . sanitize_text_field($fb_mentioned_page['id']) . '" title="Click to visit ' . sanitize_text_field($fb_mentioned_page['name']) . '\'s profile on Facebook."><img src="http://graph.facebook.com/' . sanitize_text_field($fb_mentioned_page['id']) . '/picture" width="16" height="16"> ' . sanitize_text_field($fb_mentioned_page['name']) . '</a> ';
+			$mentions_entities .= '<a href="http://www.facebook.com/' . esc_attr($fb_mentioned_page['id']) . '" title="Click to visit ' . esc_attr($fb_mentioned_page['name']) . '\'s profile on Facebook."><img src="http://graph.facebook.com/' . esc_attr($fb_mentioned_page['id']) . '/picture" width="16" height="16"> ' . esc_html($fb_mentioned_page['name']) . '</a> ';
 		}
 	}
 

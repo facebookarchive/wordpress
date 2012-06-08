@@ -6,100 +6,109 @@ add_action( 'wp_ajax_my_action', 'fb_friend_page_autocomplete' );
 function fb_friend_page_autocomplete() {
 	$output = array();
 	
-	if (!empty($_GET['fb-friends'])) {
-		global $facebook;
-
-		if ( ! isset( $facebook ) )
-			return;
-
-		try {
-			$friends = $facebook->api('/me/friends', 'GET', array('ref' => 'fbwpp'));
-
-			foreach($friends['data'] as $friend) {
-				$friends_clean[$friend['name']] = $friend['id'];
-			}
-		}
-		catch (FacebookApiException $e) {
-		}
-
-		if (isset($_GET['q']) && isset($friends_clean)) {
-			$q = strtolower($_GET['q']);
-
-			if ($q) {
-				foreach ($friends_clean as $key => $value) {
-					if (strpos(strtolower($key), $q) !== false) {
-						$results[] = array($key, $value);
-					}
-				}
-			}
-		}
-		
-		if (!empty($results)) {
-			$count = 0;
-			
-			foreach ($results as $result) {
-				$output[$count]['id'] = '[' . esc_attr($result[1]) . '|' . esc_attr($result[0]) . ']';
-				$output[$count]['name'] = '<img src="http://graph.facebook.com/' . esc_attr($result[1]) . '/picture/" width="25" height="25"> &nbsp;' . esc_attr($result[0]);
-				
-				$count++;
-			}
-		}
-		
-		print json_encode($output);
-		exit;
-	}
-
-
-	if (!empty($_GET['fb-pages'])) {
-		global $facebook;
-
-		if ( ! isset( $facebook ) )
-			return;
-
-		try {
-			$pages = $facebook->api( '/search', 'GET', array( 'access_token' => '', 'q' => $_GET['q'], 'type' => 'page', 'fields' => 'picture,name,id,likes', 'ref' => 'fbwpp' ) );
-
-			if ( isset($pages['data']) ) {
-				foreach($pages['data'] as $page) {
-					if (isset($page['name']) && isset($page['picture']) && isset($page['id']) && isset($page['likes'])) {
-						$pages_clean[$page['name']] = array($page['picture'], $page['name'], $page['id'], $page['likes']);
-					}
-				}
-			}
-			else {
-				echo 'Error returning results.';
-				exit;
-			}
-		}
-		catch (FacebookApiException $e) {
-		}
-
-		if (isset($_GET['q'])) {
-			$q = strtolower($_GET['q']);
-
-			if ($q && isset($pages_clean)) {
-				foreach ($pages_clean as $key => $value) {
-					if (strpos(strtolower($key), $q) !== false) {
-						$results[] = array($key, $value);
-					}
-				}
-			}
-		}
-
-		if (!empty($results)) {
-			$count = 0;
-			
-			foreach ($results as $result) {
-				$output[$count]['id'] = '[' . esc_attr($result[1][2]) . '|' . esc_attr($result[1][1]) . ']';
-				$output[$count]['name'] = '<img src="' . esc_attr($result[1][0]) . '" width="25" height="25"> &nbsp;' . esc_attr($result[1][1]) . ' (' . fb_short_number(esc_attr($result[1][3])) . ' likes)';
-				
-				$count++;
-			}
-		}
-		
-		print json_encode($output);
-		exit;
-	}
+  $nonce = '';
+  
+  if (isset($_GET) && isset($_GET['autocompleteNonce']))
+    $nonce = $_GET['autocompleteNonce'];
+  
+  // check to see if the submitted nonce matches with the
+  // generated nonce we created earlier
+  if ( wp_verify_nonce( $nonce, 'fb_autocomplete_nonce' ) ) {
+    if (!empty($_GET['fb-friends'])) {
+      global $facebook;
+  
+      if ( ! isset( $facebook ) )
+        return;
+  
+      try {
+        $friends = $facebook->api('/me/friends', 'GET', array('ref' => 'fbwpp'));
+  
+        foreach($friends['data'] as $friend) {
+          $friends_clean[$friend['name']] = $friend['id'];
+        }
+      }
+      catch (FacebookApiException $e) {
+      }
+  
+      if (isset($_GET['q']) && isset($friends_clean)) {
+        $q = strtolower($_GET['q']);
+  
+        if ($q) {
+          foreach ($friends_clean as $key => $value) {
+            if (strpos(strtolower($key), $q) !== false) {
+              $results[] = array($key, $value);
+            }
+          }
+        }
+      }
+      
+      if (!empty($results)) {
+        $count = 0;
+        
+        foreach ($results as $result) {
+          $output[$count]['id'] = '[' . esc_attr($result[1]) . '|' . esc_attr($result[0]) . ']';
+          $output[$count]['name'] = '<img src="http://graph.facebook.com/' . esc_attr($result[1]) . '/picture/" width="25" height="25"> &nbsp;' . esc_attr($result[0]);
+          
+          $count++;
+        }
+      }
+      
+      print json_encode($output);
+      exit;
+    }
+  
+  
+    if (!empty($_GET['fb-pages'])) {
+      global $facebook;
+  
+      if ( ! isset( $facebook ) )
+        return;
+  
+      try {
+        $pages = $facebook->api( '/search', 'GET', array( 'access_token' => '', 'q' => $_GET['q'], 'type' => 'page', 'fields' => 'picture,name,id,likes', 'ref' => 'fbwpp' ) );
+  
+        if ( isset($pages['data']) ) {
+          foreach($pages['data'] as $page) {
+            if (isset($page['name']) && isset($page['picture']) && isset($page['id']) && isset($page['likes'])) {
+              $pages_clean[$page['name']] = array($page['picture'], $page['name'], $page['id'], $page['likes']);
+            }
+          }
+        }
+        else {
+          echo 'Error returning results.';
+          exit;
+        }
+      }
+      catch (FacebookApiException $e) {
+      }
+  
+      if (isset($_GET['q'])) {
+        $q = strtolower($_GET['q']);
+  
+        if ($q && isset($pages_clean)) {
+          foreach ($pages_clean as $key => $value) {
+            if (strpos(strtolower($key), $q) !== false) {
+              $results[] = array($key, $value);
+            }
+          }
+        }
+      }
+  
+      if (!empty($results)) {
+        $count = 0;
+        
+        foreach ($results as $result) {
+          $output[$count]['id'] = '[' . esc_attr($result[1][2]) . '|' . esc_attr($result[1][1]) . ']';
+          $output[$count]['name'] = '<img src="' . esc_attr($result[1][0]) . '" width="25" height="25"> &nbsp;' . esc_attr($result[1][1]) . ' (' . fb_short_number(esc_attr($result[1][3])) . ' likes)';
+          
+          $count++;
+        }
+      }
+      
+      print json_encode($output);
+      exit;
+    }
+  }
 }
 
 function fb_short_number($num) {

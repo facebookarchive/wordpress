@@ -74,7 +74,16 @@ function fb_admin_menu_style() { ?>
 function fb_admin_scripts( $hook_suffix ) {
 	wp_enqueue_script( 'fb_admin', plugins_url( 'scripts/fb-admin.js', __FILE__ ), array(), '1.0', true );
 	wp_enqueue_script( 'fb_loopj', plugins_url( 'scripts/loopj-jquery-tokeninput/jquery.tokeninput.js', __FILE__ ), array(), '1.0', true );
-
+  
+  wp_localize_script( 'fb_admin', 'FBNonce', array(
+    // URL to wp-admin/admin-ajax.php to process the request
+    'ajaxurl' => admin_url( 'admin-ajax.php' ),
+ 
+    // generate a nonce with a unique ID "myajax-post-comment-nonce"
+    // so that you can check it later when an AJAX request is sent
+    'autocompleteNonce' => wp_create_nonce( 'fb_autocomplete_nonce' ),
+    )
+  );
 }
 
 /**

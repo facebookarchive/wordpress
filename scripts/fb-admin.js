@@ -48,7 +48,7 @@ function redirectWithParam(key, value) {
 }
 
 jQuery(function() {
-	jQuery("#suggest-friends").tokenInput(ajaxurl + "?fb-friends=1&action=fb_friend_page_autocomplete", {
+	jQuery("#suggest-friends").tokenInput(ajaxurl + "?fb-friends=1&action=fb_friend_page_autocomplete&autocompleteNonce=" +FBNonce.autocompleteNonce, {
 		theme: "facebook",
 		preventDuplicates: true,
 		hintText: "Type to find a friend.",
@@ -58,7 +58,7 @@ jQuery(function() {
 });
 
 jQuery(function() {
-	jQuery("#suggest-pages").tokenInput(ajaxurl + "?fb-pages=1&action=fb_friend_page_autocomplete", {
+	jQuery("#suggest-pages").tokenInput(ajaxurl + "?fb-pages=1&action=fb_friend_page_autocomplete&autocompleteNonce=" +FBNonce.autocompleteNonce, {
 		theme: "facebook",
 		preventDuplicates: true,
 		hintText: "Type to find a page.",

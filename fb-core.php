@@ -241,6 +241,14 @@ function fb_handle_channel_file() {
 	}
 }
 
+add_action( 'admin_init', 'fb_flush_rewrite_rules' );
+function fb_flush_rewrite_rules() {
+	if ( !get_option( 'fb_flush_rewrite_rules' ) ) {
+		flush_rewrite_rules( false );
+		update_option( 'fb_flush_rewrite_rules', 1 );
+	}
+}
+
 function fb_channel_file_link() {
 	global $wp_rewrite;
 	if ( $wp_rewrite->using_permalinks() )

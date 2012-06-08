@@ -68,24 +68,19 @@ function fb_get_fb_comments_seo() {
 
 	$url = get_permalink();
 	
-	$comments_cache_timestamp = get_post_meta($post->ID, 'fb_comments_cache_timestamp', true);
-	
-	if (!isset($comments_cache_timestamp) || ($comments_cache_timestamp + 900) <= time()) {
+	if ( false === ( $comments = get_transient( 'fb_comments_' . $post->ID ) ) ) {
 		try {
 			$comments = $facebook->api('/comments', array('ids' => $url));
 		}
-		catch (FacebookApiException $e) {
+			catch (FacebookApiException $e) {
 		}
 		
-		if (!update_post_meta($post->ID, 'fb_comments', $comments)) {
-			add_post_meta($post->ID, 'fb_comments', $comments, true);
-		}
-		if (!update_post_meta($post->ID, 'fb_comments_cache_timestamp', time())) {
-			add_post_meta($post->ID, 'fb_comments_cache_timestamp', time(), false);
-		}
+		set_transient( 'fb_comments_' . $post->ID, $comments, 60*15 );
+		
+		error_log('api comments');
 	}
 	else {
-		$comments = get_post_meta($post->ID, 'fb_comments', true);
+		error_log('cached comments');
 	}
 	
 	if ( ! isset( $comments[$url] ) )

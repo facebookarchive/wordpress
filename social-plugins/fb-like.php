@@ -94,6 +94,14 @@ class Facebook_Like_Button extends WP_Widget {
 	 * @return array Updated safe values to be saved.
 	 */
 	public function update( $new_instance, $old_instance ) {
+		$instance = array();
+		
+		$fields = fb_get_like_fields_array('widget');
+		
+		foreach($fields['children'] as $field) {
+			$instance[$field['name']] = sanitize_text_field( $field['name'] );
+		}
+		
 		return $new_instance;
 	}
 

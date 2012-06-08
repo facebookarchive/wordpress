@@ -8,13 +8,11 @@ require_once( dirname(__FILE__) . '/fb-subscribe.php' );
 require_once( dirname(__FILE__) . '/fb-comments.php' );
 require_once( dirname(__FILE__) . '/fb-recommendations-bar.php' );
 
-if ( isset( $facebook ) ) {
-	add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Subscribe_Button" );') );
-	add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Send_Button" );') );
-	add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Like_Button" );') );
-	add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Recommendations" );'));
-	add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Activity_Feed" );'));
- }
+add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Subscribe_Button" );'), 100 );
+add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Send_Button" );'), 100 );
+add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Like_Button" );') );
+add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Recommendations" );'));
+add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Activity_Feed" );'));
 
 /**
  * Add social plugins through filters

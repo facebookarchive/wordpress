@@ -61,10 +61,8 @@ class Facebook_Activity_Feed extends WP_Widget {
 		$fields = fb_get_activity_feed_fields_array('widget');
 		
 		foreach($fields['children'] as $field) {
-			sanitize_text_field( $field['name'] );
+			$instance[$field['name']] = sanitize_text_field( $field['name'] );
 		}
-		
-		$instance['title'] = strip_tags( $new_instance['title'] );
 		
 		return $new_instance;
 	}

@@ -20,14 +20,18 @@ function fb_friend_page_autocomplete() {
       if ( ! isset( $facebook ) )
         return;
   
-      try {
-        $friends = $facebook->api('/me/friends', 'GET', array('ref' => 'fbwpp'));
-  
-        foreach($friends['data'] as $friend) {
-          $friends_clean[$friend['name']] = $friend['id'];
+      if ( false === ( $friends = get_transient( 'fb_friends_' . $facebook->getUser() ) ) ) {
+        try {
+          $friends = $facebook->api('/me/friends', 'GET', array('ref' => 'fbwpp'));
         }
+        catch (FacebookApiException $e) {
+        }
+        
+        set_transient( 'fb_friends_' . $facebook->getUser(), $friends, 60*15 );
       }
-      catch (FacebookApiException $e) {
+  
+      foreach($friends['data'] as $friend) {
+        $friends_clean[$friend['name']] = $friend['id'];
       }
   
       if (isset($_GET['q']) && isset($friends_clean)) {
@@ -63,23 +67,27 @@ function fb_friend_page_autocomplete() {
   
       if ( ! isset( $facebook ) )
         return;
+
+      if ( false === ( $pages = get_transient( 'fb_pages_' . $_GET['q']) ) ) {
+        try {
+          $pages = $facebook->api( '/search', 'GET', array( 'access_token' => '', 'q' => $_GET['q'], 'type' => 'page', 'fields' => 'picture,name,id,likes', 'ref' => 'fbwpp' ) );
+        }
+        catch (FacebookApiException $e) {
+        }
+        set_transient( 'fb_pages_' . $_GET['q'], $pages, 60*60 );
+      }
   
-      try {
-        $pages = $facebook->api( '/search', 'GET', array( 'access_token' => '', 'q' => $_GET['q'], 'type' => 'page', 'fields' => 'picture,name,id,likes', 'ref' => 'fbwpp' ) );
   
-        if ( isset($pages['data']) ) {
-          foreach($pages['data'] as $page) {
-            if (isset($page['name']) && isset($page['picture']) && isset($page['id']) && isset($page['likes'])) {
-              $pages_clean[$page['name']] = array($page['picture'], $page['name'], $page['id'], $page['likes']);
-            }
+      if ( isset($pages['data']) ) {
+        foreach($pages['data'] as $page) {
+          if (isset($page['name']) && isset($page['picture']) && isset($page['id']) && isset($page['likes'])) {
+            $pages_clean[$page['name']] = array($page['picture'], $page['name'], $page['id'], $page['likes']);
           }
         }
-        else {
-          echo 'Error returning results.';
-          exit;
-        }
       }
-      catch (FacebookApiException $e) {
+      else {
+        echo 'Error returning results.';
+        exit;
       }
   
       if (isset($_GET['q'])) {

@@ -76,11 +76,6 @@ function fb_get_fb_comments_seo() {
 		}
 		
 		set_transient( 'fb_comments_' . $post->ID, $comments, 60*15 );
-		
-		error_log('api comments');
-	}
-	else {
-		error_log('cached comments');
 	}
 	
 	if ( ! isset( $comments[$url] ) )

@@ -216,7 +216,16 @@ function fb_options_validate($input) {
 				if (fb_options_validate_present($value, $label)) {
 					$value = fb_options_validate_integer($value, $label);
           
-          fb_insights_admin($value);
+          $options = get_option('fb_options');
+          
+          if ( isset( $options['app_id'] ) ) {
+            if ( $options['app_id'] != $value ) {
+              fb_insights_admin($value);
+            }
+          }
+          else {
+            fb_insights_admin($value);
+          }
 				}
 				break;
 			case 'app_secret':
@@ -265,7 +274,7 @@ function fb_options_validate($input) {
 
 function fb_options_validate_present($value, $label) {
 	if ($value == '') {
-		add_settings_error(fb_options, '', "$label must be present");
+		add_settings_error('fb_options', '', "$label must be present");
 		return false;
 	}
 	return true;
@@ -276,7 +285,7 @@ function fb_options_validate_integer($value, $label, $sanitize=true) {
 		$value = sanitize_text_field( $value );
 	}
 	if (!preg_match('/^[0-9]+$/', $value)) {
-		add_settings_error(fb_options, '', "$label must be an integer");
+		add_settings_error('fb_options', '', "$label must be an integer");
 	}
 	return $value;
 }
@@ -286,7 +295,7 @@ function fb_options_validate_hex($value, $label, $sanitize=true) {
 		$value = sanitize_text_field( $value );
 	}
 	if (!preg_match('/^[0-9a-f]+$/i', $value)) {
-		add_settings_error(fb_options, '', "$label must be a hex string");
+		add_settings_error('fb_options', '', "$label must be a hex string");
 	}
 	return $value;
 }
@@ -296,7 +305,7 @@ function fb_options_validate_namespace($value, $label, $sanitize=true) {
 		$value = sanitize_text_field( $value );
 	}
 	if ($value != '' && !preg_match('/^[-_a-z]+$/', $value)) {
-		add_settings_error(fb_options, '', "$label can contain only lowercase letters, dashes and underscores");
+		add_settings_error('fb_options', '', "$label can contain only lowercase letters, dashes and underscores");
 	}
 	return $value;
 }

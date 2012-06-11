@@ -1,8 +1,8 @@
 === Facebook ===
-Contributors: facebook, mattwkelly, niallkennedy, jamesgpearce, Otto42
+Contributors: facebook, automattic, mattwkelly, niallkennedy, jamesgpearce, ravi.grover, eosgood, danielbachhuber, Otto42
 Tags: facebook, comments, social, friends, like, like button, social plugins, facebook platform
 Requires at least: 3.1.1
-Tested up to: 2.1
+Tested up to: 3.1
 Stable tag: 1.0
 
 Make your WordPress site social in a couple of clicks.  This plugin includes many features from Facebook Platform.
@@ -19,6 +19,7 @@ All of these features are easy to enable via checkboxes on the Settings page.
 * Like, send, and subscribe buttons fully customizable.
 * Facebook Comments, including automatic SEO support so that search engines can index them.
 * Automatic Open Graph Protocol integration.
+* Recommendations bar, which offers recommendations and social reader functionality.
 
 **Widgets**
 
@@ -35,7 +36,7 @@ All of these features are easy to enable via checkboxes on the Settings page.
 
 == Frequently Asked Questions ==
 
-
+None yet!
 
 == Screenshots ==
 

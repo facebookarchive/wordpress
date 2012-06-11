@@ -104,8 +104,6 @@ function fb_root() {
 function fb_insights_admin($appid = 0) {
 	global $fb_ver;
 
-error_log('fb_insights_admin');
-
  	$options = get_option('fb_options');
 
   if (!$appid)

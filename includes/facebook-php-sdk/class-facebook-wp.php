@@ -69,7 +69,7 @@ class Facebook_WP extends Facebook {
       return $default;
     }
 	
-	  return $usermeta = fb_get_user_meta(get_current_user_id(), $key);
+	  return $usermeta = fb_get_user_meta( get_current_user_id(), $key, true );
 	}
 
   protected function clearPersistentData($key) {

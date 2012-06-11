@@ -99,7 +99,7 @@ class Facebook_Like_Button extends WP_Widget {
 		$fields = fb_get_like_fields_array('widget');
 		
 		foreach( $fields['children'] as $field ) {
-			$unsafe_value = $new_instance[$field['name']];
+			$unsafe_value = ( isset( $new_instance[$field['name']] ) ) ? $new_instance[$field['name']] : '';
 			if ( !empty( $field['sanitization_callback'] ) && function_exists( $field['sanitization_callback'] ) ) 
 				$return_instance[$field['name']] = $field['sanitization_callback']( $unsafe_value );
 			else

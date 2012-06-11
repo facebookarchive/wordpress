@@ -51,7 +51,7 @@ function fb_friend_page_autocomplete() {
         
         foreach ($results as $result) {
           $output[$count]['id'] = '[' . esc_attr($result[1]) . '|' . esc_attr($result[0]) . ']';
-          $output[$count]['name'] = '<img src="http://graph.facebook.com/' . esc_attr($result[1]) . '/picture/" width="25" height="25"> &nbsp;' . esc_attr($result[0]);
+          $output[$count]['name'] = '<img src="' . esc_url( 'http://graph.facebook.com/' . $result[1] . '/picture/' ) . '" width="25" height="25"> &nbsp;' . esc_attr($result[0]);
           
           $count++;
         }
@@ -107,7 +107,7 @@ function fb_friend_page_autocomplete() {
         
         foreach ($results as $result) {
           $output[$count]['id'] = '[' . esc_attr($result[1][2]) . '|' . esc_attr($result[1][1]) . ']';
-          $output[$count]['name'] = '<img src="' . esc_attr($result[1][0]) . '" width="25" height="25"> &nbsp;' . esc_attr($result[1][1]) . ' (' . fb_short_number(esc_attr($result[1][3])) . ' likes)';
+          $output[$count]['name'] = '<img src="' . esc_url($result[1][0]) . '" width="25" height="25"> &nbsp;' . esc_attr($result[1][1]) . ' (' . fb_short_number(esc_attr($result[1][3])) . ' likes)';
           
           $count++;
         }

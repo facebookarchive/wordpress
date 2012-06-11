@@ -11,7 +11,7 @@ add_action( 'admin_menu', 'fb_add_settings_pages', 10 );
  */
 function fb_create_menu() {
 	//create new top-level menu
-	$page = add_menu_page( sprintf( __( '%s Plugin Settings', 'facebook' ), 'Facebook'), 'Facebook', 'manage_options', __FILE__, 'fb_settings_page', plugins_url( 'images/icon-bw.png', __FILE__) );
+	$page = add_menu_page( sprintf( __( '%s Plugin Settings', 'facebook' ), 'Facebook'), 'Facebook', 'manage_options', 'facebook-settings', 'fb_settings_page', plugins_url( 'images/icon-bw.png', __FILE__) );
 
 	//call register settings function
 	add_action( 'admin_print_styles-' . $page, 'fb_admin_style');
@@ -29,7 +29,7 @@ function fb_create_menu() {
 function fb_plugin_action_links( $links, $file ) {
 	$plugin_basename = plugin_basename( dirname(__FILE__) . '/fb-core.php' );
 	if ( $file === plugin_basename( dirname(__FILE__) . '/fb-core.php' ) )
-		$links[] = '<a href="' . esc_url( admin_url( 'admin.php' ) . '?' . http_build_query( array( 'page' => plugin_basename( __FILE__ ) ) ) ) . '">' . __( 'Settings' ) . '</a>';
+		$links[] = '<a href="' . esc_url( admin_url( 'admin.php' ) . '?' . http_build_query( array( 'page' => 'facebook-settings' ) ) ) . '">' . __( 'Settings' ) . '</a>';
 	return $links;
 }
 // Customize plugins listing
@@ -151,10 +151,76 @@ function fb_settings_page() {
 			}
 
 			submit_button();
+      
+      fb_insights_admin();
 			?>
 		</form>
 	</div>
 	<?php
+}
+
+function fb_insights_admin($appid = 0) {
+	global $fb_ver;
+
+ 	$options = get_option('fb_options');
+
+  if (!$appid) {
+    $appid = $options['app_id'];
+  }
+
+ 	if ( !empty( $options['social_publisher']['publish_to_fan_page'] ) )
+		preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
+
+	$options['social_publisher']['publish_to_fan_page'] = array();
+	if ( !empty( $fan_page_info[0] ) ) {
+		$options['social_publisher']['publish_to_fan_page']['page_name'] = $fan_page_info[0][1];
+		$options['social_publisher']['publish_to_fan_page']['page_id'] = $fan_page_info[0][2];
+	}
+	
+	$enabled_options = array();
+
+	if (isset($options) && isset($options['social_publisher'])){
+		$enabled_options['social_publisher'] = $options['social_publisher'];
+	}
+
+	if (isset($options) && isset($options['recommendations_bar'])){
+		$enabled_options['recommendations_bar'] = $options['recommendations_bar'];
+	}
+
+	if (isset($options) && isset($options['subscribe'])){
+		$enabled_options['subscribe'] = $options['subscribe'];
+	}
+
+	if (isset($options) && isset($options['comments'])){
+		$enabled_options['comments'] = $options['comments'];
+	}
+
+	if (isset($options) && isset($options['send'])){
+		$enabled_options['send'] = $options['send'];
+	}
+
+	$sidebar_widgets = wp_get_sidebars_widgets();
+	
+	$fb_sidebar_widgets = array();
+	
+	$sidebars = array( 'sidebar-1', 'sidebar-2', 'sidebar-3', 'sidebar-4', 'sidebar-5' );
+	
+	foreach ($sidebars as $sidebar) {
+		if (empty($sidebar_widgets[$sidebar])) {
+			continue;
+		}
+		foreach($sidebar_widgets[$sidebar] as $key => $val) {
+			if (strpos($val, 'fb_') !== false){
+				$fb_sidebar_widgets[$sidebar][] = $val;
+			}
+		}
+	}
+  
+	$payload = array( 'appid' => $appid, 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST'] );
+
+	$payload = json_encode(array_merge($fb_sidebar_widgets, $payload, $enabled_options));
+	
+  echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&payload=$payload'>";
 }
 
 /**
@@ -215,17 +281,6 @@ function fb_options_validate($input) {
 				$label = 'App ID';
 				if (fb_options_validate_present($value, $label)) {
 					$value = fb_options_validate_integer($value, $label);
-          
-          $options = get_option('fb_options');
-          
-          if ( isset( $options['app_id'] ) ) {
-            if ( $options['app_id'] != $value ) {
-              fb_insights_admin($value);
-            }
-          }
-          else {
-            fb_insights_admin($value);
-          }
 				}
 				break;
 			case 'app_secret':

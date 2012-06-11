@@ -26,7 +26,7 @@ function fb_get_recommendations_bar_fields_array() {
 	$array['parent'] = array('name' => 'recommendations_bar',
 													 'label' => 'Recommendations Bar',
 														'help_link' => 'https://developers.facebook.com/docs/reference/plugins/recommendationsbar/',
-														'description' => 'The Recommendations Bar allows users to like content, get recommendations, and share what they\'re reading with their friends. This is an experimental, beta feature and support may be removed in the future. ',
+														'description' => 'The Recommendations Bar allows users to click to start getting recommendations, Like content, and add what they\'re reading to Timeline as they go.',
 														'image' => plugins_url( '/images/settings_recommendations_bar.png', dirname(__FILE__))
 									);
 

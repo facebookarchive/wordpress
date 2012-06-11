@@ -143,11 +143,11 @@ function fb_settings_page() {
 				echo '<p>' . sprintf( esc_html( __( 'These settings affect Pages and Posts only.	Additional Social Plugins are also available in the %sWidgets settings%s.', 'facebook' ) ), '<a href="widgets.php">', '</a>' );
 
 				fb_get_social_publisher_fields();
-				fb_get_recommendations_bar_fields();
 				fb_get_like_fields();
 				fb_get_subscribe_fields();
 				fb_get_send_fields();
 				fb_get_comments_fields();
+        fb_get_recommendations_bar_fields();
 			}
 
 			submit_button();

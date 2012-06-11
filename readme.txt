@@ -2,7 +2,7 @@
 Contributors: facebook, automattic, mattwkelly, niallkennedy, jamesgpearce, ravi.grover, danielbachhuber, awats008, eosgood, Otto42
 Tags: facebook, comments, social, friends, like, like button, social plugins, facebook platform
 Requires at least: 3.1.1
-Tested up to: 3.1
+Tested up to: 3.4
 Stable tag: 1.0
 
 Make your WordPress site social in a couple of clicks.  This plugin includes many features from Facebook Platform.
@@ -33,10 +33,6 @@ All of these features are easy to enable via checkboxes on the Settings page.
 1. Upload the plugin to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Click on the Facebook button in the left navigation and follow the instructions.
-
-== Frequently Asked Questions ==
-
-None yet!
 
 == Screenshots ==
 

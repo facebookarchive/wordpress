@@ -1,6 +1,8 @@
 <?php
 require_once( $facebook_plugin_directory . '/fb-social-publisher-mentioning.php');
 
+$options = get_option('fb_options');
+
 if ( isset($options['social_publisher']) && isset($options['social_publisher']['publish_to_authors_facebook_timeline']) ) {
 		add_action( 'add_meta_boxes', 'fb_add_author_message_box' );
 		add_action( 'save_post', 'fb_add_author_message_box_save' );

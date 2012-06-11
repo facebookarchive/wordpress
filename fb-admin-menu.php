@@ -27,8 +27,7 @@ function fb_create_menu() {
  * @return array links array passed in, possibly with our settings link added
  */
 function fb_plugin_action_links( $links, $file ) {
-	$plugin_basename = plugin_basename( dirname(__FILE__) . '/fb-core.php' );
-	if ( $file === plugin_basename( dirname(__FILE__) . '/fb-core.php' ) )
+	if ( $file === plugin_basename( dirname(__FILE__) . '/facebook.php' ) )
 		$links[] = '<a href="' . esc_url( admin_url( 'admin.php' ) . '?' . http_build_query( array( 'page' => 'facebook-settings' ) ) ) . '">' . __( 'Settings' ) . '</a>';
 	return $links;
 }

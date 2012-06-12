@@ -1,5 +1,5 @@
 === Facebook ===
-Contributors: facebook, automattic, mattwkelly, niallkennedy, jamesgpearce, ravi.grover, danielbachhuber, awats008, eosgood, Otto42
+Contributors: Facebook, automattic, mattkelly, niallkennedy, jamesgpearce, ravi.grover, danielbachhuber, awats008, eosgood, Otto42
 Tags: Facebook, comments, social, friends, like, like button, social plugins, facebook platform
 Requires at least: 3.1.1
 Tested up to: 3.4
@@ -33,7 +33,7 @@ All of these features are easy to enable via the Widgets settings page.
 * Recommendations Box.  This shows the Facebook user recommendations of pages they should visit based on the actions their friends are taking on your website.
 * Like, send, and subscribe buttons.
 
-Facebook Insights (www.facebook.com/insights) integration included. This plugin also supports internationalization and mobile.
+Facebook Insights (http://www.facebook.com/insights) integration included. This plugin also supports internationalization and mobile.
 
 == Installation ==
 
@@ -50,8 +50,7 @@ Facebook Insights (www.facebook.com/insights) integration included. This plugin 
 5. The Post is published to the author's (Andy Scott) Timeline.
 6. The Post is published on Duets Facebook Timeline, since it was mentioned in the Post.
 7. The Post is published to the Celebuzz Facebook Page.
-8. Widgets that are available.
-
+8. Widgets are also available.
 
 == Changelog ==
 

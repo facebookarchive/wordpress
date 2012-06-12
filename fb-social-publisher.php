@@ -409,7 +409,7 @@ function fb_get_social_publisher_fields() {
 													'label' => "Publish to author's Timeline",
 													'type' => 'checkbox',
 													'default' => true,
-													'onclick' => "window.open('http://developers.facebook.com/wordpress#author-og-setup', 'Open Graph Setup', 'fullscreen=no');",
+													'onclick' => "window.open(\"http://developers.facebook.com/wordpress#author-og-setup\", \"Open Graph Setup\", \"fullscreen=no\");",
 													'help_text' => __( 'Publish new posts to the author\'s Facebook Timeline and allow mentioning friends. You must setup Open Graph in your App Settings. Enable the feature to learn how.', 'facebook' ),
 													'help_link' => 'http://developers.facebook.com/wordpress#author-og-setup',
 													),

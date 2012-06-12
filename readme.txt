@@ -1,5 +1,5 @@
 === Facebook ===
-Contributors: Facebook, automattic, mattkelly, niallkennedy, jamesgpearce, ravi.grover, danielbachhuber, awats008, eosgood, Otto42
+Contributors: Facebook, automattic, mattkelly, niallkennedy, jamesgpearce, ravi.grover, danielbachhuber, gigawats, eosgood, Otto42
 Tags: Facebook, comments, social, friends, like, like button, social plugins, facebook platform
 Requires at least: 3.1.1
 Tested up to: 3.4

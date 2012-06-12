@@ -9,7 +9,7 @@ function fb_install_warning() {
 
 	$page = (isset($_GET['page']) ? $_GET['page'] : null);
 
-	if ((empty($options['app_id']) || empty($options['app_secret'])) && $page != 'facebook/fb-admin-menu.php' && current_user_can( 'manage_options' ) ) {
+	if ((empty($options['app_id']) || empty($options['app_secret'])) && $page != 'facebook-settings' && current_user_can( 'manage_options' ) ) {
 		fb_admin_dialog( sprintf( __('You must %sconfigure the plugin</a> to enable Facebook for WordPress.', 'facebook' ), '<a href="admin.php?page=facebook-settings">' ), true);
 	}
 }

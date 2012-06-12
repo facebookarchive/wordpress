@@ -262,7 +262,7 @@ function fb_add_settings_pages() {
 				 'fb_settings_page'
 		 );
 		 add_submenu_page(
-				 'facebook/fb-admin-menu.php',
+				 'facebook-settings',
 				 'Insights',
 				 'Insights',
 				 'publish_posts',

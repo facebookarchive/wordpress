@@ -1,4 +1,4 @@
-.facebook-logo {
+body.toplevel_page_facebook-settings .facebook-logo {
 	float: left;
 	background: url(../images/logo.png) no-repeat;
 	width: 34px;
@@ -6,33 +6,33 @@
 	margin: 7px 8px 0 0;
 }
 
-h3 {
+body.toplevel_page_facebook-settings h3 {
 	margin: 1.5em 0 0.5em;
 }
 
-h3 input {
+body.toplevel_page_facebook-settings h3 input {
 	vertical-align: bottom !important;
 }
-p {
+body.toplevel_page_facebook-settings p {
 	margin: 0;
 }
 
-.fb_admin_image {
+body.toplevel_page_facebook-settings .fb_admin_image {
 	margin-left:84px;
 }
 
-.fb_admin_image img {
+body.toplevel_page_facebook-settings .fb_admin_image img {
 	float:left;
 	margin-left:-84px;
 	border:1px solid #CCC;
 	width:64px
 }
 
-.wp_help_link {
+body.toplevel_page_facebook-settings .wp_help_link {
 	text-decoration: none;
 }
 
-.wp_help_hover {
+body.toplevel_page_facebook-settings .wp_help_hover {
 	color: #aaa;
 	cursor: pointer;
 }

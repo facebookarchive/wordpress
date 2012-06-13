@@ -73,11 +73,11 @@ function fb_admin_menu_style() { ?>
 function fb_admin_scripts( $hook_suffix ) {
 	wp_enqueue_script( 'fb_admin', plugins_url( 'scripts/fb-admin.js', __FILE__ ), array(), '1.0', true );
 	wp_enqueue_script( 'fb_loopj', plugins_url( 'scripts/loopj-jquery-tokeninput/jquery.tokeninput.js', __FILE__ ), array(), '1.0', true );
-  
+
   wp_localize_script( 'fb_admin', 'FBNonce', array(
     // URL to wp-admin/admin-ajax.php to process the request
     'ajaxurl' => admin_url( 'admin-ajax.php' ),
- 
+
     // generate a nonce with a unique ID "myajax-post-comment-nonce"
     // so that you can check it later when an AJAX request is sent
     'autocompleteNonce' => wp_create_nonce( 'fb_autocomplete_nonce' ),
@@ -150,7 +150,7 @@ function fb_settings_page() {
 			}
 
 			submit_button();
-      
+
       fb_insights_admin();
 			?>
 		</form>
@@ -175,7 +175,7 @@ function fb_insights_admin($appid = 0) {
 		$options['social_publisher']['publish_to_fan_page']['page_name'] = $fan_page_info[0][1];
 		$options['social_publisher']['publish_to_fan_page']['page_id'] = $fan_page_info[0][2];
 	}
-	
+
 	$enabled_options = array();
 
 	if (isset($options) && isset($options['social_publisher'])){
@@ -199,11 +199,11 @@ function fb_insights_admin($appid = 0) {
 	}
 
 	$sidebar_widgets = wp_get_sidebars_widgets();
-	
+
 	$fb_sidebar_widgets = array();
-	
+
 	$sidebars = array( 'sidebar-1', 'sidebar-2', 'sidebar-3', 'sidebar-4', 'sidebar-5' );
-	
+
 	foreach ($sidebars as $sidebar) {
 		if (empty($sidebar_widgets[$sidebar])) {
 			continue;
@@ -214,11 +214,11 @@ function fb_insights_admin($appid = 0) {
 			}
 		}
 	}
-  
+
 	$payload = array( 'appid' => $appid, 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST'] );
 
 	$payload = json_encode(array_merge($fb_sidebar_widgets, $payload, $enabled_options));
-	
+
   echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&payload=$payload'>";
 }
 
@@ -322,7 +322,7 @@ function fb_options_validate($input) {
 		}
 		$output[$key] = $value;
 	}
-  
+
 	return $output;
 }
 
@@ -339,7 +339,8 @@ function fb_options_validate_integer($value, $label, $sanitize=true) {
 		$value = sanitize_text_field( $value );
 	}
 	if (!preg_match('/^[0-9]+$/', $value)) {
-		add_settings_error('fb_options', '', "$label must be an integer");
+		$value = preg_replace('/[^0-9]/', '', $value);
+		add_settings_error('fb_options', '', "$label has been converted to an integer");
 	}
 	return $value;
 }
@@ -349,7 +350,8 @@ function fb_options_validate_hex($value, $label, $sanitize=true) {
 		$value = sanitize_text_field( $value );
 	}
 	if (!preg_match('/^[0-9a-f]+$/i', $value)) {
-		add_settings_error('fb_options', '', "$label must be a hex string");
+		$value = preg_replace('/[^0-9a-f]/', '', strtolower($value));
+		add_settings_error('fb_options', '', "$label has been converted to a hex string");
 	}
 	return $value;
 }
@@ -359,7 +361,8 @@ function fb_options_validate_namespace($value, $label, $sanitize=true) {
 		$value = sanitize_text_field( $value );
 	}
 	if ($value != '' && !preg_match('/^[-_a-z]+$/', $value)) {
-		add_settings_error('fb_options', '', "$label can contain only lowercase letters, dashes and underscores");
+		$value = preg_replace('/[^-_a-z]/', '', strtolower($value));
+		add_settings_error('fb_options', '', "$label has been converted to contain only lowercase letters, dashes and underscores");
 	}
 	return $value;
 }

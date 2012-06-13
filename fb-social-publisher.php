@@ -32,7 +32,7 @@ function fb_add_author_message_box() {
 		);
 		add_meta_box(
 				'fb_author_message_box_id',
-				__( 'Facebook Status on Your Timeline', 'fb_add_author_message_box_textdomain' ),
+				__( 'Facebook Status on Your Timeline', 'facebook' ),
 				'fb_add_author_message_box_content',
 				'page'
 		);
@@ -50,7 +50,7 @@ function fb_add_author_message_box_content( $post ) {
 	// The actual fields for data entry
 	/*
 	echo '<label for="fb_author_message_box_message">';
-			 _e("Message", 'fb_author_message_box_message_textdomain' );
+			 _e("Message", 'facebook' );
 	echo '</label> ';
 	*/
 	echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_author_message_box_message" value="" size="44" placeholder="What\'s on your mind?" />';
@@ -106,13 +106,13 @@ function fb_add_fan_page_message_box() {
 	
 		add_meta_box(
 				'fb_fan_page_message_box_id',
-				__( 'Facebook Status on ' . $fan_page_info[0][1] . '\'s Timeline', 'fb_add_fan_page_message_box_textdomain' ),
+				__( 'Facebook Status on ' . $fan_page_info[0][1] . '\'s Timeline', 'facebook' ),
 				'fb_add_fan_page_message_box_content',
 				'post'
 		);
 		add_meta_box(
 				'fb_fan_page_message_box_id',
-				__( 'Facebook Status on ' . $fan_page_info[0][1] . '\'s Timeline', 'fb_add_fan_page_message_box_textdomain' ),
+				__( 'Facebook Status on ' . $fan_page_info[0][1] . '\'s Timeline', 'facebook' ),
 				'fb_add_fan_page_message_box_content',
 				'page'
 		);
@@ -134,7 +134,7 @@ function fb_add_fan_page_message_box_content( $post ) {
 	// The actual fields for data entry
 	/*
 	echo '<label for="fb_fan_page_message_box_message">';
-			 _e("Message", 'fb_fan_page_message_box_message_textdomain' );
+			 _e("Message", 'facebook' );
 	echo '</label> ';
 	*/
 	echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_fan_page_message_box_message" value="" size="44" placeholder="Write something..." />';
@@ -534,4 +534,3 @@ function fb_get_user_pages() {
 	return $accounts['data'];
 }
 
-?>

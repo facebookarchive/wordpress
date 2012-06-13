@@ -12,6 +12,7 @@ Author URI: https://developers.facebook.com/wordpress/
 Version: 1.0
 License: GPL2
 License URI: license.txt
+Domain Path: /lang/
 */
 
 global $fb_ver;
@@ -19,7 +20,13 @@ $fb_ver = '1.0';
 
 $facebook_plugin_directory = dirname(__FILE__);
 
-// incldue the Facebook PHP SDK
+// Load the textdomain for translations
+add_action('init', 'fb_load_textdomain');
+function fb_load_textdomain() {
+	load_plugin_textdomain( 'facebook', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+}
+
+// include the Facebook PHP SDK
 if ( ! class_exists( 'Facebook_WP' ) )
 	require_once( $facebook_plugin_directory . '/includes/facebook-php-sdk/class-facebook-wp.php' );
 
@@ -35,4 +42,3 @@ unset( $facebook_plugin_directory );
 add_action( 'init', 'fb_init' );
 add_action( 'admin_notices', 'fb_install_warning' );
 add_action( 'wp_enqueue_scripts', 'fb_style' );
-?>

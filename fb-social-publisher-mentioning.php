@@ -137,14 +137,14 @@ function fb_add_page_mention_box() {
 	
 	add_meta_box(
 			'fb_page_mention_box_id',
-			__( 'Mention Facebook Pages', 'fb_page_mention_box_id_textdomain', 'facebook' ),
+			__( 'Mention Facebook Pages', 'facebook' ),
 			'fb_add_page_mention_box_content',
 			'post',
 			'side'
 	);
 	add_meta_box(
 			'fb_page_mention_box_id',
-			__( 'Mention Facebook Pages', 'fb_page_mention_box_id_textdomain', 'facebook' ),
+			__( 'Mention Facebook Pages', 'facebook' ),
 			'fb_add_page_mention_box_content',
 			'page',
 			'side'
@@ -175,11 +175,11 @@ function fb_add_page_mention_box_content( $post ) {
 	if ($fb_user && isset($perms['data'][0]['manage_pages']) && isset($perms['data'][0]['publish_actions']) && isset($perms['data'][0]['publish_stream'])) {
 		// The actual fields for data entry
 		echo '<label for="fb_page_mention_box_autocomplete">';
-				 _e("Page's Name", 'fb_page_mention_box_textdomain' );
+				 _e("Page's Name", 'facebook' );
 		echo '</label> ';
 		echo '<input type="text" class="widefat" id="suggest-pages" autocomplete="off" name="fb_page_mention_box_autocomplete" value="" size="44" placeholder="Type to find a page." />';
 		echo '<label for="fb_page_mention_box_message">';
-				 _e("Message", 'fb_page_mention_box_message_textdomain' );
+				 _e("Message", 'facebook' );
 		echo '</label> ';
 		echo '<input type="text" class="widefat" id="pages-mention-message" name="fb_page_mention_box_message" value="" size="44" placeholder="Write something..." />';
 		echo '<p class="howto">This will add the ' . $noun . ' to the Timeline of each Facebook Page mentioned.	They will also appear in the contents of the ' . $noun . '.</p>';
@@ -292,11 +292,11 @@ function fb_add_friend_mention_box_content( $post ) {
 		
 		// The actual fields for data entry
 		echo '<label for="fb_friend_mention_box_autocomplete">';
-				 _e("Friend's Name", 'fb_friend_mention_box_textdomain' );
+				 _e("Friend's Name", 'facebook' );
 		echo '</label> ';
 		echo '<input type="text" class="widefat" id="suggest-friends" autocomplete="off" name="fb_friend_mention_box_autocomplete" value="" size="44" placeholder="Type to find a friend." />';
 		echo '<label for="fb_friend_mention_box_message">';
-				 _e("Message", 'fb_friend_mention_box_message_textdomain' );
+				 _e("Message", 'facebook' );
 		echo '</label> ';
 		echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_friend_mention_box_message" value="" size="44" placeholder="Write something..." />';
 		echo '<p class="howto">This will add the ' . $noun . ' to the Timeline of each friend mentioned.	They will also appear on the ' . $noun . '.</p>';

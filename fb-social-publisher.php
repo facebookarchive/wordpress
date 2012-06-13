@@ -245,89 +245,95 @@ function fb_post_to_author_fb_timeline($post_id) {
 
 	$options = get_option('fb_options');
 	$fb_mentioned_friends = get_post_meta($post_id, 'fb_mentioned_friends', true);
+	
+	if ( !empty( $fb_mentioned_friends ) ) {
 
-	list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
+		list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
 
-	$mentioned_friends_message = get_post_meta($post_id, 'fb_mentioned_friends_message', true);
+		$mentioned_friends_message = get_post_meta($post_id, 'fb_mentioned_friends_message', true);
 
-	$publish_ids_friends = array();
+		$publish_ids_friends = array();
 
-	foreach($fb_mentioned_friends as $friend) {
+		foreach($fb_mentioned_friends as $friend) {
 
-		try {
-			if ($post_thumbnail_url == null) {
-				$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
-											'name' => get_the_title(),
-											'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-											'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-											'message' => $mentioned_friends_message,
-											);
+			try {
+				if ($post_thumbnail_url == null) {
+					$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
+										'name' => get_the_title(),
+										'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+										'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+										'message' => $mentioned_friends_message,
+										);
+				}
+				else {
+					$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
+										'picture' => $post_thumbnail_url,
+										'name' => get_the_title(),
+										'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+										'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+										'message' => $mentioned_friends_message,
+										);
+				}
+
+				$args['ref'] = 'fbwpp';
+
+				$publish_result = $facebook->api('/' . $friend['id'] . '/feed', 'POST', $args);
+
+				$publish_ids_friends[] = sanitize_text_field($publish_result['id']);
+
 			}
-			else {
-				$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
-											'picture' => $post_thumbnail_url,
-											'name' => get_the_title(),
-											'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-											'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-											'message' => $mentioned_friends_message,
-											);
+			catch (FacebookApiException $e) {
 			}
-
-			$args['ref'] = 'fbwpp';
-
-			$publish_result = $facebook->api('/' . $friend['id'] . '/feed', 'POST', $args);
-			
-			$publish_ids_friends[] = sanitize_text_field($publish_result['id']);
-
 		}
-		catch (FacebookApiException $e) {
-		}
+
+		update_post_meta($post_id, 'fb_mentioned_friends_post_ids', $publish_ids_friends);
 	}
-
-	update_post_meta($post_id, 'fb_mentioned_friends_post_ids', $publish_ids_friends);
 
 	$fb_mentioned_pages = get_post_meta($post_id, 'fb_mentioned_pages', true);
 
-	$mentioned_pages_message = get_post_meta($post_id, 'fb_mentioned_pages_message', true);
+	if ( !empty( $fb_mentioned_pages ) ) {
+	
+		$mentioned_pages_message = get_post_meta($post_id, 'fb_mentioned_pages_message', true);
 
-	//$mentions = '';
+		//$mentions = '';
 
-	$publish_ids_pages = array();
+		$publish_ids_pages = array();
 
-	foreach($fb_mentioned_pages as $page) {
-		try {
-			if ($post_thumbnail_url == null) {
-				$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
-											'name' => get_the_title(),
-											'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-											'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-											'message' => $mentioned_pages_message,
+		foreach($fb_mentioned_pages as $page) {
+			try {
+				if ($post_thumbnail_url == null) {
+					$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
+												'name' => get_the_title(),
+												'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+												'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+												'message' => $mentioned_pages_message,
 
-											);
+												);
+				}
+				else {
+					$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
+												'picture' => $post_thumbnail_url,
+												'name' => get_the_title(),
+												'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+												'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+												'message' => $mentioned_pages_message,
+												);
+				}
+
+				$args['ref'] = 'fbwpp';
+
+				$publish_result = $facebook->api('/' . $page['id'] . '/feed', 'POST', $args);
+
+				$publish_ids_pages[] = sanitize_text_field($publish_result['id']);
 			}
-			else {
-				$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
-											'picture' => $post_thumbnail_url,
-											'name' => get_the_title(),
-											'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-											'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-											'message' => $mentioned_pages_message,
-											);
+			catch (FacebookApiException $e) {
 			}
 
-			$args['ref'] = 'fbwpp';
-
-			$publish_result = $facebook->api('/' . $page['id'] . '/feed', 'POST', $args);
-			
-			$publish_ids_pages[] = sanitize_text_field($publish_result['id']);
-		}
-		catch (FacebookApiException $e) {
+			//$mentions .= $page['id'] . ",";
 		}
 
-		//$mentions .= $page['id'] . ",";
+		update_post_meta($post_id, 'fb_mentioned_pages_post_ids', $publish_ids_pages);
 	}
-
-	update_post_meta($post_id, 'fb_mentioned_pages_post_ids', $publish_ids_pages);
 
 	$author_message = get_post_meta($post_id, 'fb_author_message', true);
 

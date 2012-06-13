@@ -4,13 +4,13 @@ require_once( $facebook_plugin_directory . '/fb-social-publisher-mentioning.php'
 $options = get_option('fb_options');
 
 if ( isset($options['social_publisher']) && isset($options['social_publisher']['publish_to_authors_facebook_timeline']) ) {
-		add_action( 'add_meta_boxes', 'fb_add_author_message_box' );
-		add_action( 'save_post', 'fb_add_author_message_box_save' );
+	add_action( 'add_meta_boxes', 'fb_add_author_message_box' );
+	add_action( 'save_post', 'fb_add_author_message_box_save' );
 }
 
 if ( isset($options['social_publisher']) && isset($options['social_publisher']['publish_to_fan_page']) && $options['social_publisher']['publish_to_fan_page'] !== 'disabled' ) {
-		add_action( 'add_meta_boxes', 'fb_add_fan_page_message_box' );
-		add_action( 'save_post', 'fb_add_fan_page_message_box_save' );
+	add_action( 'add_meta_boxes', 'fb_add_fan_page_message_box' );
+	add_action( 'save_post', 'fb_add_fan_page_message_box_save' );
 }
 
 /**
@@ -23,19 +23,19 @@ function fb_add_author_message_box() {
 	
 	if ($post->post_status == 'publish')	
 		return;
-	
-		add_meta_box(
-				'fb_author_message_box_id',
-				__( 'Facebook Status on Your Timeline', 'facebook' ),
-				'fb_add_author_message_box_content',
-				'post'
-		);
-		add_meta_box(
-				'fb_author_message_box_id',
-				__( 'Facebook Status on Your Timeline', 'facebook' ),
-				'fb_add_author_message_box_content',
-				'page'
-		);
+
+	add_meta_box(
+		'fb_author_message_box_id',
+		__( 'Facebook Status on Your Timeline', 'facebook' ),
+		'fb_add_author_message_box_content',
+		'post'
+	);
+	add_meta_box(
+		'fb_author_message_box_id',
+		__( 'Facebook Status on Your Timeline', 'facebook' ),
+		'fb_add_author_message_box_content',
+		'page'
+	);
 }
 
 /**
@@ -50,11 +50,11 @@ function fb_add_author_message_box_content( $post ) {
 	// The actual fields for data entry
 	/*
 	echo '<label for="fb_author_message_box_message">';
-			 _e("Message", 'facebook' );
+			 _ e("Message", 'facebook' );
 	echo '</label> ';
 	*/
 	echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_author_message_box_message" value="" size="44" placeholder="What\'s on your mind?" />';
-	echo '<p class="howto">This message will show as part of the story on your Facebook Timeline.</p>';
+	echo '<p class="howto">' __('This message will show as part of the story on your Facebook Timeline.', 'facebook' ) .'</p>';
 }
 
 /**
@@ -104,18 +104,18 @@ function fb_add_fan_page_message_box() {
 	if ($post->post_status == 'publish')	
 		return;
 	
-		add_meta_box(
-				'fb_fan_page_message_box_id',
-				__( 'Facebook Status on ' . $fan_page_info[0][1] . '\'s Timeline', 'facebook' ),
-				'fb_add_fan_page_message_box_content',
-				'post'
-		);
-		add_meta_box(
-				'fb_fan_page_message_box_id',
-				__( 'Facebook Status on ' . $fan_page_info[0][1] . '\'s Timeline', 'facebook' ),
-				'fb_add_fan_page_message_box_content',
-				'page'
-		);
+	add_meta_box(
+		'fb_fan_page_message_box_id',
+		sprintf( __( 'Facebook Status on %s\'s Timeline', 'facebook' ), $fan_page_info[0][1] ),
+		'fb_add_fan_page_message_box_content',
+		'post'
+	);
+	add_meta_box(
+		'fb_fan_page_message_box_id',
+		sprintf( __( 'Facebook Status on %s\'s Timeline', 'facebook' ), $fan_page_info[0][1] ),
+		'fb_add_fan_page_message_box_content',
+		'page'
+	);
 }
 
 /**
@@ -134,11 +134,11 @@ function fb_add_fan_page_message_box_content( $post ) {
 	// The actual fields for data entry
 	/*
 	echo '<label for="fb_fan_page_message_box_message">';
-			 _e("Message", 'facebook' );
+			 _ e("Message", 'facebook' );
 	echo '</label> ';
 	*/
 	echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_fan_page_message_box_message" value="" size="44" placeholder="Write something..." />';
-	echo '<p class="howto">This message will show as part of the story on ' . $fan_page_info[0][1] . '\'s Timeline.</p>';
+	echo '<p class="howto">' . sprintf( __( 'This message will show as part of the story on %s\'s Timeline.', 'facebook'), $fan_page_info[0][1] ) . '</p>';
 }
 
 /**
@@ -196,24 +196,24 @@ function fb_post_to_fb_page($post_id) {
 
 	if ($post_thumbnail_url == null) {
 		$args = array('access_token' => $fan_page_info[0][3],
-									'from' => $fan_page_info[0][2],
-									'link' => apply_filters( 'rel_canonical', get_permalink()),
-									'name' => get_the_title(),
-									'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-									'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-									'message' => $fan_page_message,
-									);
+			'from' => $fan_page_info[0][2],
+			'link' => apply_filters( 'rel_canonical', get_permalink()),
+			'name' => get_the_title(),
+			'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+			'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+			'message' => $fan_page_message,
+		);
 	}
 	else {
 		$args = array('access_token' => $fan_page_info[0][3],
-									'from' => $fan_page_info[0][2],
-									'link' => apply_filters( 'rel_canonical', get_permalink()),
-									'picture' => $post_thumbnail_url,
-									'name' => get_the_title(),
-									'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-									'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-									'message' => $fan_page_message,
-									);
+			'from' => $fan_page_info[0][2],
+			'link' => apply_filters( 'rel_canonical', get_permalink()),
+			'picture' => $post_thumbnail_url,
+			'name' => get_the_title(),
+			'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+			'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+			'message' => $fan_page_message,
+		);
 	}
 
 	$args['ref'] = 'fbwpp';
@@ -258,21 +258,23 @@ function fb_post_to_author_fb_timeline($post_id) {
 
 			try {
 				if ($post_thumbnail_url == null) {
-					$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
-										'name' => get_the_title(),
-										'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-										'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-										'message' => $mentioned_friends_message,
-										);
+					$args = array(
+						'link' => apply_filters( 'rel_canonical', get_permalink()),
+						'name' => get_the_title(),
+						'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+						'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+						'message' => $mentioned_friends_message,
+					);
 				}
 				else {
-					$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
-										'picture' => $post_thumbnail_url,
-										'name' => get_the_title(),
-										'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-										'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-										'message' => $mentioned_friends_message,
-										);
+					$args = array(
+						'link' => apply_filters( 'rel_canonical', get_permalink()),
+						'picture' => $post_thumbnail_url,
+						'name' => get_the_title(),
+						'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+						'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+						'message' => $mentioned_friends_message,
+					);
 				}
 
 				$args['ref'] = 'fbwpp';
@@ -302,22 +304,23 @@ function fb_post_to_author_fb_timeline($post_id) {
 		foreach($fb_mentioned_pages as $page) {
 			try {
 				if ($post_thumbnail_url == null) {
-					$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
-												'name' => get_the_title(),
-												'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-												'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-												'message' => $mentioned_pages_message,
-
-												);
+					$args = array(
+						'link' => apply_filters( 'rel_canonical', get_permalink()),
+						'name' => get_the_title(),
+						'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+						'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+						'message' => $mentioned_pages_message,
+					);
 				}
 				else {
-					$args = array('link' => apply_filters( 'rel_canonical', get_permalink()),
-												'picture' => $post_thumbnail_url,
-												'name' => get_the_title(),
-												'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-												'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-												'message' => $mentioned_pages_message,
-												);
+					$args = array(
+						'link' => apply_filters( 'rel_canonical', get_permalink()),
+						'picture' => $post_thumbnail_url,
+						'name' => get_the_title(),
+						'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+						'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+						'message' => $mentioned_pages_message,
+					);
 				}
 
 				$args['ref'] = 'fbwpp';
@@ -388,52 +391,57 @@ function fb_get_social_publisher_fields() {
 		}
 	}
 	
-	$parent = array('name' => 'social_publisher',
-									'type' => 'checkbox',
-									'label' => 'Social Publisher',
-									'description' => 'Social Publisher allows you to publish to an Author\'s Facebook Timeline and Fan Page.	Authors can also mention Facebook friends and pages. ',
-									'help_link' => 'http://developers.facebook.com/wordpress',
-									'image' => plugins_url( 'images/settings_social_publisher.png', __FILE__)
-									);
+	$parent = array(
+		'name' => 'social_publisher',
+		'type' => 'checkbox',
+		'label' => __('Social Publisher', 'facebook'),
+		'description' => __('Social Publisher allows you to publish to an Author\'s Facebook Timeline and Fan Page.	Authors can also mention Facebook friends and pages. ', 'facebook'),
+		'help_link' => 'http://developers.facebook.com/wordpress',
+		'image' => plugins_url( 'images/settings_social_publisher.png', __FILE__)
+	);
 
 	if (count($accounts_options) < 2) {
-		$fan_page_option = array('name' => 'publish_to_fan_page',
-													'type' => 'disabled_text',
-													'disabled_text' => '<a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account to enable.</a>',
-													'help_text' => __( 'All new posts will be automatically published to this Facebook Page.', 'facebook' ),
-													);
+		$fan_page_option = array(
+			'name' => 'publish_to_fan_page',
+			'type' => 'disabled_text',
+			'disabled_text' => '<a href="#" onclick="authFacebook(); return false;">'.__('Link your Facebook account to your WordPress account to enable.','facebook').'</a>',
+			'help_text' => __( 'All new posts will be automatically published to this Facebook Page.', 'facebook' ),
+			);
 	}
 	else {
-		$fan_page_option = array('name' => 'publish_to_fan_page',
-													'type' => 'dropdown',
-													'options' => $accounts_options,
-													'help_text' => __( 'New posts will be publish to this Facebook Page.', 'facebook' ),
-													);
+		$fan_page_option = array(
+			'name' => 'publish_to_fan_page',
+			'type' => 'dropdown',
+			'options' => $accounts_options,
+			'help_text' => __( 'New posts will be publish to this Facebook Page.', 'facebook' ),
+			);
 	}
 
-	$children = array(array('name' => 'publish_to_authors_facebook_timeline',
-													'label' => "Publish to author's Timeline",
-													'type' => 'checkbox',
-													'default' => true,
-													'onclick' => "window.open(\"http://developers.facebook.com/wordpress#author-og-setup\", \"Open Graph Setup\", \"fullscreen=no\");",
-													'help_text' => __( 'Publish new posts to the author\'s Facebook Timeline and allow mentioning friends. You must setup Open Graph in your App Settings. Enable the feature to learn how.', 'facebook' ),
-													'help_link' => 'http://developers.facebook.com/wordpress#author-og-setup',
-													),
-										$fan_page_option,
-										array('name' => 'mentions_show_on_homepage',
-													'type' => 'checkbox',
-													'default' => true,
-													'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.	Enable this to show mentions on the homepage, as part of the post and page previews.', 'facebook' ),
-													),
-										array('name' => 'mentions_position',
-													'type' => 'dropdown',
-													'default' => 'both',
-													'options' => array('top' => 'top', 'bottom' => 'bottom', 'both' => 'both'),
-													'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.	This controls where mentions will be displayed in the posts.', 'facebook' ),
-													),
-										);
-
-
+	$children = array(
+		array(
+			'name' => 'publish_to_authors_facebook_timeline',
+			'label' => "Publish to author's Timeline",
+			'type' => 'checkbox',
+			'default' => true,
+			'onclick' => "window.open(\"http://developers.facebook.com/wordpress#author-og-setup\", \"Open Graph Setup\", \"fullscreen=no\");",
+			'help_text' => __( 'Publish new posts to the author\'s Facebook Timeline and allow mentioning friends. You must setup Open Graph in your App Settings. Enable the feature to learn how.', 'facebook' ),
+			'help_link' => 'http://developers.facebook.com/wordpress#author-og-setup',
+		),
+		$fan_page_option,
+		array(
+			'name' => 'mentions_show_on_homepage',
+			'type' => 'checkbox',
+			'default' => true,
+			'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.	Enable this to show mentions on the homepage, as part of the post and page previews.', 'facebook' ),
+		),
+		array(
+			'name' => 'mentions_position',
+			'type' => 'dropdown',
+			'default' => 'both',
+			'options' => array('top' => 'top', 'bottom' => 'bottom', 'both' => 'both'),
+			'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.	This controls where mentions will be displayed in the posts.', 'facebook' ),
+		),
+	);
 
 	fb_construct_fields('settings', $children, $parent);
 }
@@ -528,7 +536,7 @@ function fb_get_user_pages() {
 	$accounts = array();
 
 	if ( ! isset( $facebook ) )
-			return $accounts;
+		return $accounts;
 
 	try {
 		$accounts = $facebook->api('/me/accounts', 'GET', array('ref' => 'fbwpp'));

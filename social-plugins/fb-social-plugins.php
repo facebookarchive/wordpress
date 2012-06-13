@@ -57,7 +57,7 @@ function fb_build_social_plugin_params($options) {
 	foreach ($options as $option => $value) {
 		$option = str_replace('_', '-', $option);
 
-		$params .= 'data-' . $option . '="' . $value . '" ';
+		$params .= 'data-' . $option . '="' . esc_attr($value) . '" ';
 	}
 
 	$params .= 'data-ref="wp" ';

@@ -54,7 +54,7 @@ function fb_add_author_message_box_content( $post ) {
 	echo '</label> ';
 	*/
 	echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_author_message_box_message" value="" size="44" placeholder="What\'s on your mind?" />';
-	echo '<p class="howto">' __('This message will show as part of the story on your Facebook Timeline.', 'facebook' ) .'</p>';
+	echo '<p class="howto">'. __('This message will show as part of the story on your Facebook Timeline.', 'facebook' ) .'</p>';
 }
 
 /**

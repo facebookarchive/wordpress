@@ -73,13 +73,12 @@ function fb_init() {
 	if ( empty( $options['app_id'] ) )
 		return;
 	
-	
 	// appId and secret are required by BaseFacebook
 	if ( ( ! empty( $options['app_id'] ) && ! empty( $options['app_secret'] ) ) ) {
-	 $facebook = new Facebook_WP(array(
-		'appId'  => $options['app_id'],
-		'secret' => $options['app_secret'],
-	 ));
+		$facebook = new Facebook_WP(array(
+			'appId'  => $options['app_id'],
+			'secret' => $options['app_secret'],
+		));
 	}
 
 	add_action( 'wp_head', 'fb_js_sdk_setup' );
@@ -164,7 +163,7 @@ function fb_get_locale() {
 		$locale = 'en_US';
 	}
 
-	return $locale;
+	return apply_filters('fb_locale', $locale); // filter the locale in case somebody has a weird case and needs to change it
 }
 
 /**

@@ -116,8 +116,6 @@ function fb_settings_page() {
 			settings_fields( 'fb_options' );
 
 			if ( !isset( $facebook ) ) {
-				//sprintf( esc_html( __( 'Hello %s', 'facebook' ) ), 'world' )
-
 				echo '<h2>' . esc_html__( 'Step 1: Create an App', 'facebook' ) . '</h2>';
 				echo '<p><strong>' . sprintf( esc_html( __( 'If you already have a Facebook app for this website, skip to %sStep 2%s.', 'facebook' ) ), '<a href="#step-2">', '</a>' ) . '</strong></p><br>';
 				echo '<p>' . sprintf( esc_html( __( 'If you don\'t already have an app for this website, go to %s and click the "Create New App" button.	You\'ll see a dialog like the one below.	Fill this in and click "Continue".', 'facebook' ) ), '<a href="https://developers.facebook.com/apps" target="_blank">https://developers.facebook.com/apps</a>' );
@@ -146,12 +144,12 @@ function fb_settings_page() {
 				fb_get_subscribe_fields();
 				fb_get_send_fields();
 				fb_get_comments_fields();
-        fb_get_recommendations_bar_fields();
+				fb_get_recommendations_bar_fields();
 			}
 
 			submit_button();
 
-      fb_insights_admin();
+			fb_insights_admin();
 			?>
 		</form>
 	</div>
@@ -163,9 +161,9 @@ function fb_insights_admin($appid = 0) {
 
  	$options = get_option('fb_options');
 
-  if (!$appid) {
-    $appid = $options['app_id'];
-  }
+	if (!$appid) {
+		$appid = $options['app_id'];
+	}
 
  	if ( !empty( $options['social_publisher']['publish_to_fan_page'] ) )
 		preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
@@ -219,7 +217,7 @@ function fb_insights_admin($appid = 0) {
 
 	$payload = json_encode(array_merge($fb_sidebar_widgets, $payload, $enabled_options));
 
-  echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&payload=$payload'>";
+	echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&payload=$payload'>";
 }
 
 /**
@@ -228,20 +226,21 @@ function fb_insights_admin($appid = 0) {
  * @since 1.0
  */
 function fb_get_main_settings_fields() {
-	$children = array(array('name' => 'app_id',
-													'label' => 'App ID',
-													'type' => 'text',
-													'help_text' => __( 'Your App ID.', 'facebook' ),
-													),
-										array('name' => 'app_secret',
-													'type' => 'text',
-													'help_text' => __( 'Your App Secret.', 'facebook' ),
-													),
-										array('name' => 'app_namespace',
-													'type' => 'text',
-													'help_text' => __( 'Your App Namespace.', 'facebook' ),
-													),
-										);
+	$children = array(
+		array('name' => 'app_id',
+			'label' => 'App ID',
+			'type' => 'text',
+			'help_text' => __( 'Your App ID.', 'facebook' ),
+			),
+		array('name' => 'app_secret',
+			'type' => 'text',
+			'help_text' => __( 'Your App Secret.', 'facebook' ),
+			),
+		array('name' => 'app_namespace',
+			'type' => 'text',
+			'help_text' => __( 'Your App Namespace.', 'facebook' ),
+			),
+		);
 
 	fb_construct_fields('settings', $children);
 }
@@ -252,22 +251,22 @@ function fb_get_main_settings_fields() {
  * @since 1.0
  */
 function fb_add_settings_pages() {
-		 add_submenu_page(
-				 'edit-comments.php',
-				 'Facebook',
-				 'Facebook',
-				 'moderate_comments',
-				 'fb_comments',
-				 'fb_settings_page'
-		 );
-		 add_submenu_page(
-				 'facebook-settings',
-				 'Insights',
-				 'Insights',
-				 'publish_posts',
-				 'fb_insights',
-				 'fb_insights_page'
-		 );
+	add_submenu_page(
+		 'edit-comments.php',
+		 _x('Facebook', 'admin page title', 'facebook'),
+		 _x('Facebook', 'admin menu title', 'facebook'),
+		 'moderate_comments',
+		 'fb_comments',
+		 'fb_settings_page'
+	);
+	add_submenu_page(
+		 'facebook-settings',
+		 _x('Insights', 'admin page title', 'facebook'),
+		 _x('Insights', 'admin menu title', 'facebook'),
+		 'publish_posts',
+		 'fb_insights',
+		 'fb_insights_page'
+	);
 }
 
 
@@ -276,49 +275,49 @@ function fb_options_validate($input) {
 	$output = array();
 	foreach ($input as $key=>$value) {
 		switch ($key) {
-			case 'app_id':
-				$label = 'App ID';
-				if (fb_options_validate_present($value, $label)) {
-					$value = fb_options_validate_integer($value, $label);
-				}
-				break;
-			case 'app_secret':
-				$label = 'App secret';
-				if (fb_options_validate_present($value, $label)) {
-					$value = fb_options_validate_hex($value, $label);
-				}
-				break;
-			case 'app_namespace':
-				$label = 'App namespace';
-				$value = fb_options_validate_namespace($value, $label);
-				break;
-			case 'social_publisher':
-				$label_prefix = "The Social Publisher's";
-				$value = fb_options_validate_plugin($value, $label_prefix);
-				break;
-			case 'recommendations_bar':
-				$label_prefix = "The Recommendations Bar's";
-				$value = fb_options_validate_plugin($value, $label_prefix);
-				break;
-			case 'like':
-				$label_prefix = "The Like Button's";
-				$value = fb_options_validate_plugin($value, $label_prefix);
-				break;
-			case 'subscribe':
-				$label_prefix = "The Subscribe Button's";
-				$value = fb_options_validate_plugin($value, $label_prefix);
-				break;
-			case 'send':
-				$label_prefix = "The Send Button's";
-				$value = fb_options_validate_plugin($value, $label_prefix);
-				break;
-			case 'comments':
-				$label_prefix = "The Comments Box's";
-				$value = fb_options_validate_plugin($value, $label_prefix);
-				break;
-			default:
-				$value = '';
-				break;
+		case 'app_id':
+			$label = 'App ID';
+			if (fb_options_validate_present($value, $label)) {
+				$value = fb_options_validate_integer($value, $label);
+			}
+			break;
+		case 'app_secret':
+			$label = 'App secret';
+			if (fb_options_validate_present($value, $label)) {
+				$value = fb_options_validate_hex($value, $label);
+			}
+			break;
+		case 'app_namespace':
+			$label = 'App namespace';
+			$value = fb_options_validate_namespace($value, $label);
+			break;
+		case 'social_publisher':
+			$label_prefix = "The Social Publisher's";
+			$value = fb_options_validate_plugin($value, $label_prefix);
+			break;
+		case 'recommendations_bar':
+			$label_prefix = "The Recommendations Bar's";
+			$value = fb_options_validate_plugin($value, $label_prefix);
+			break;
+		case 'like':
+			$label_prefix = "The Like Button's";
+			$value = fb_options_validate_plugin($value, $label_prefix);
+			break;
+		case 'subscribe':
+			$label_prefix = "The Subscribe Button's";
+			$value = fb_options_validate_plugin($value, $label_prefix);
+			break;
+		case 'send':
+			$label_prefix = "The Send Button's";
+			$value = fb_options_validate_plugin($value, $label_prefix);
+			break;
+		case 'comments':
+			$label_prefix = "The Comments Box's";
+			$value = fb_options_validate_plugin($value, $label_prefix);
+			break;
+		default:
+			$value = '';
+			break;
 		}
 		$output[$key] = $value;
 	}

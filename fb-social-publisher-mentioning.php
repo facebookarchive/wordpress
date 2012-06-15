@@ -184,7 +184,7 @@ function fb_add_page_mention_box_content( $post ) {
 		echo '</p>';
 	}
 	else {
-		echo '<p>Facebook social publishing is enabled.</p><br><p><strong><a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a></strong> to get full functionality, including adding new Posts to your Timeline and mentioning friends Facebook Pages.</p>';
+		echo '<p>Facebook social publishing is enabled.</p><p><strong><a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a></strong> to get full functionality, including adding new Posts to your Timeline and mentioning friends Facebook Pages.</p>';
 	}
 }
 
@@ -217,28 +217,29 @@ function fb_add_page_mention_box_save( $post_id ) {
 	}
 
 	// OK, we're authenticated: we need to find and save the data
-
-	$autocomplete_data = $_POST['fb_page_mention_box_autocomplete'];
-
-	preg_match_all(
-		"/\[(.*?)\|(.*?)\]/su",
-		$autocomplete_data,
-		$page_details,
-		PREG_SET_ORDER // formats data into an array of posts
-	);
-
-	// probably using add_post_meta(), update_post_meta(), or
-	// a custom table (see Further Reading section below)
-
-	$pages_details_meta = array();
-
-	foreach($page_details as $page_detail) {
-		$pages_details_meta[] = array('id' => sanitize_text_field($page_detail[1]), 'name' => sanitize_text_field($page_detail[2]));
-	}
-
-	update_post_meta($post_id, 'fb_mentioned_pages', $pages_details_meta );
-
-	update_post_meta($post_id, 'fb_mentioned_pages_message', sanitize_text_field($_POST['fb_page_mention_box_message']) );
+  if ( isset ( $_POST ) && isset( $_POST['fb_page_mention_box_autocomplete'] ) ) {
+    $autocomplete_data = $_POST['fb_page_mention_box_autocomplete'];
+    
+    preg_match_all(
+      "/\[(.*?)\|(.*?)\]/su",
+      $autocomplete_data,
+      $page_details,
+      PREG_SET_ORDER // formats data into an array of posts
+    );
+  
+    // probably using add_post_meta(), update_post_meta(), or
+    // a custom table (see Further Reading section below)
+  
+    $pages_details_meta = array();
+  
+    foreach($page_details as $page_detail) {
+      $pages_details_meta[] = array('id' => sanitize_text_field($page_detail[1]), 'name' => sanitize_text_field($page_detail[2]));
+    }
+  
+    update_post_meta($post_id, 'fb_mentioned_pages', $pages_details_meta );
+  
+    update_post_meta($post_id, 'fb_mentioned_pages_message', sanitize_text_field($_POST['fb_page_mention_box_message']) );
+  }
 }
 
 add_action( 'add_meta_boxes', 'fb_add_friend_mention_box' );
@@ -302,7 +303,7 @@ function fb_add_friend_mention_box_content( $post ) {
 		echo '</p>';
 	}
 	else {
-		echo '<p>'.__('Facebook social publishing is enabled.', 'facebook') .'</p><br>';
+		echo '<p>'.__('Facebook social publishing is enabled.', 'facebook') .'</p>';
 		echo '<p>'.sprintf(__('<strong>%sLink your Facebook account to your WordPress account</a></strong> to get full functionality, including adding new Posts to your Timeline and mentioning friends Facebook Pages.', 'facebook'), '<a href="#" onclick="authFacebook(); return false;">' ) .'</p>';
 	}
 }
@@ -336,28 +337,29 @@ function fb_add_friend_mention_box_save( $post_id ) {
 	}
 
 	// OK, we're authenticated: we need to find and save the data
-
-	$autocomplete_data = $_POST['fb_friend_mention_box_autocomplete'];
-
-	preg_match_all(
-		"/\[(.*?)\|(.*?)\]/su",
-		$autocomplete_data,
-		$friend_details,
-		PREG_SET_ORDER // formats data into an array of posts
-	);
-
-	// probably using add_post_meta(), update_post_meta(), or
-	// a custom table (see Further Reading section below)
-
-	$friends_details_meta = array();
-
-	foreach($friend_details as $friend_detail) {
-		$friends_details_meta[] = array('id' => sanitize_text_field($friend_detail[1]), 'name' => sanitize_text_field($friend_detail[2]));
-	}
-
-	update_post_meta($post_id, 'fb_mentioned_friends', $friends_details_meta);
-
-	update_post_meta($post_id, 'fb_mentioned_friends_message', sanitize_text_field($_POST['fb_friend_mention_box_message']));
+  if ( isset ($_POST) && isset( $_POST['fb_page_mention_box_autocomplete'] ) ) {
+    $autocomplete_data = $_POST['fb_friend_mention_box_autocomplete'];
+  
+    preg_match_all(
+      "/\[(.*?)\|(.*?)\]/su",
+      $autocomplete_data,
+      $friend_details,
+      PREG_SET_ORDER // formats data into an array of posts
+    );
+  
+    // probably using add_post_meta(), update_post_meta(), or
+    // a custom table (see Further Reading section below)
+  
+    $friends_details_meta = array();
+  
+    foreach($friend_details as $friend_detail) {
+      $friends_details_meta[] = array('id' => sanitize_text_field($friend_detail[1]), 'name' => sanitize_text_field($friend_detail[2]));
+    }
+  
+    update_post_meta($post_id, 'fb_mentioned_friends', $friends_details_meta);
+  
+    update_post_meta($post_id, 'fb_mentioned_friends_message', sanitize_text_field($_POST['fb_friend_mention_box_message']));
+  }
 }
 
 

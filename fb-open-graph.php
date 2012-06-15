@@ -38,7 +38,9 @@ function fb_add_og_protocol() {
 		'http://ogp.me/ns#site_name' => get_bloginfo( 'name' ),
 		'http://ogp.me/ns#type' => 'website'
 	);
-
+	
+$except = get_the_excerpt();
+print $except;
 	if ( is_home() || is_front_page() ) {
 		$meta_tags['http://ogp.me/ns#title'] = get_bloginfo( 'name' );
 		$meta_tags['http://ogp.me/ns#description'] = get_bloginfo( 'description' );
@@ -48,8 +50,9 @@ function fb_add_og_protocol() {
 		$meta_tags['http://ogp.me/ns#url'] = apply_filters( 'rel_canonical', get_permalink() );
 		if ( post_type_supports( $post_type, 'title' ) )
 			$meta_tags['http://ogp.me/ns#title'] = get_the_title();
-		if ( post_type_supports( $post_type, 'excerpt' ) )
-			$meta_tags['http://ogp.me/ns#description'] = str_replace( array( "\r\n", "\r", "\n" ), ' ', wp_strip_all_tags( strip_shortcodes( apply_filters( 'the_excerpt', get_the_excerpt() ) ) ) );
+		if ( post_type_supports( $post_type, 'excerpt' ) ) {
+				$meta_tags['http://ogp.me/ns#description'] = str_replace( array( "\r\n", "\r", "\n" ), ' ', wp_strip_all_tags( strip_shortcodes( apply_filters( 'the_excerpt', get_the_excerpt() ) ) ) );
+		}
 		$meta_tags['http://ogp.me/ns/article#published_time'] = get_the_date('c');
 		$meta_tags['http://ogp.me/ns/article#modified_time'] = get_the_modified_date('c');
 		if ( post_type_supports( $post_type, 'author' ) && isset( $post->post_author ) )

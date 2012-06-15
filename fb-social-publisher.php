@@ -189,12 +189,15 @@ function fb_post_to_fb_page($post_id) {
 		return;
 
 	preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/su", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
-	
-	list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
+  
+  // does current post type and the current theme support post thumbnails?
+  if ( post_type_supports( $post_type, 'thumbnail' ) && function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {
+    list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
+  }
 
 	$fan_page_message = get_post_meta($post_id, 'fb_fan_page_message', true);
 
-	if ($post_thumbnail_url == null) {
+	if (isset ( $post_thumbnail_url ) ) {
 		$args = array('access_token' => $fan_page_info[0][3],
 			'from' => $fan_page_info[0][2],
 			'link' => apply_filters( 'rel_canonical', get_permalink()),
@@ -247,9 +250,12 @@ function fb_post_to_author_fb_timeline($post_id) {
 	$fb_mentioned_friends = get_post_meta($post_id, 'fb_mentioned_friends', true);
 	
 	if ( !empty( $fb_mentioned_friends ) ) {
-
-		list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
-
+    
+    // does current post type and the current theme support post thumbnails?
+    if ( post_type_supports( $post_type, 'thumbnail' ) && function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {
+      list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
+    }
+    
 		$mentioned_friends_message = get_post_meta($post_id, 'fb_mentioned_friends_message', true);
 
 		$publish_ids_friends = array();
@@ -257,7 +263,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 		foreach($fb_mentioned_friends as $friend) {
 
 			try {
-				if ($post_thumbnail_url == null) {
+				if (isset ( $post_thumbnail_url ) ) {
 					$args = array(
 						'link' => apply_filters( 'rel_canonical', get_permalink()),
 						'name' => get_the_title(),
@@ -303,7 +309,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 
 		foreach($fb_mentioned_pages as $page) {
 			try {
-				if ($post_thumbnail_url == null) {
+				if (isset ( $post_thumbnail_url ) ) {
 					$args = array(
 						'link' => apply_filters( 'rel_canonical', get_permalink()),
 						'name' => get_the_title(),
@@ -349,11 +355,11 @@ function fb_post_to_author_fb_timeline($post_id) {
 	catch (FacebookApiException $e) {
 		//Unset the option to publish to an author's Timeline, since the likely failure is because the admin didn't set up the proper OG action and object in their App Settings
 		//if it's a token issue, it's because the Author hasn't auth'd the WP site yet, so don't unset the option (since that will turn it off for all authors)
-		if ($e->getType() != 'OAuthException') {
+		/*if ($e->getType() != 'OAuthException') {
 			$options['social_publisher']['publish_to_authors_facebook_timeline'] = false;
 		
 			update_option( 'fb_options', $options );
-		}
+		}*/
 	}
 }
 

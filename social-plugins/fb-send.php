@@ -133,7 +133,7 @@ function fb_get_send_fields_array($placement) {
 													),
 										array('name' => 'font',
 													'type' => 'dropdown',
-													'default' => 'arial',
+													'default' => 'lucida grande',
 													'options' => array('arial' => 'arial', 'lucida grande' => 'lucida grande', 'segoe ui' => 'segoe ui', 'tahoma' => 'tahoma', 'trebuchet ms' => 'trebuchet ms', 'verdana' => 'verdana'),
 													'help_text' => __( 'The font of the plugin.', 'facebook' ),
 													),

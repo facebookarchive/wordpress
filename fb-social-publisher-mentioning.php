@@ -388,28 +388,30 @@ function fb_social_publisher_mentioning_output($content) {
 		$mentions = '<div class="fb-mentions entry-meta">' . $mentions_entities . 'mentioned.</div>';
 
 		$new_content = '';
-
-		switch ($options['social_publisher']['mentions_position']) {
-			case 'top':
-				$new_content = $mentions . $content;
-				break;
-			case 'bottom':
-				$new_content = $content . $mentions;
-				break;
-			case 'both':
-				$new_content = $mentions . $content;
-				$new_content .= $mentions;
-				break;
-			default:
-				$new_content = $content;
-		}
-
-		if ( empty( $options['social_publisher']['mentions_show_on_homepage'] ) && is_singular() ) {
-			$content = $new_content;
-		}
-		elseif ( isset($options['social_publisher']['mentions_show_on_homepage']) ) {
-			$content = $new_content;
-		}
+    
+    if ( isset($options['social_publisher']) ) {
+      switch ($options['social_publisher']['mentions_position']) {
+        case 'top':
+          $new_content = $mentions . $content;
+          break;
+        case 'bottom':
+          $new_content = $content . $mentions;
+          break;
+        case 'both':
+          $new_content = $mentions . $content;
+          $new_content .= $mentions;
+          break;
+        default:
+          $new_content = $content;
+      }
+  
+      if ( empty( $options['social_publisher']['mentions_show_on_homepage'] ) && is_singular() ) {
+        $content = $new_content;
+      }
+      elseif ( isset($options['social_publisher']['mentions_show_on_homepage']) ) {
+        $content = $new_content;
+      }
+    }
 	}
 
 	return $content;

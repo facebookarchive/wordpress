@@ -221,7 +221,7 @@ function fb_add_page_mention_box_save( $post_id ) {
 	$autocomplete_data = $_POST['fb_page_mention_box_autocomplete'];
 
 	preg_match_all(
-		"/\[(.*?)\|(.*?)\]/s",
+		"/\[(.*?)\|(.*?)\]/su",
 		$autocomplete_data,
 		$page_details,
 		PREG_SET_ORDER // formats data into an array of posts
@@ -340,7 +340,7 @@ function fb_add_friend_mention_box_save( $post_id ) {
 	$autocomplete_data = $_POST['fb_friend_mention_box_autocomplete'];
 
 	preg_match_all(
-		"/\[(.*?)\|(.*?)\]/s",
+		"/\[(.*?)\|(.*?)\]/su",
 		$autocomplete_data,
 		$friend_details,
 		PREG_SET_ORDER // formats data into an array of posts

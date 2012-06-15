@@ -166,7 +166,7 @@ function fb_insights_admin($appid = 0) {
 	}
 
  	if ( !empty( $options['social_publisher']['publish_to_fan_page'] ) )
-		preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/s", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
+		preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/su", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
 
 	$options['social_publisher']['publish_to_fan_page'] = array();
 	if ( !empty( $fan_page_info[0] ) ) {

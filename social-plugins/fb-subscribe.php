@@ -144,7 +144,7 @@ function fb_get_subscribe_fields_array($placement) {
 													),
 										array('name' => 'width',
 													'type' => 'text',
-													'default' => '250',
+													'default' => '450',
 													'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
 													'sanitization_callback' => 'intval',
 													),

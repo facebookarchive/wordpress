@@ -1,4 +1,9 @@
 <?php
+add_action( 'init', 'fb_init' );
+add_action( 'admin_notices', 'fb_install_warning' );
+add_action( 'admin_notices', 'fb_rate_message' );
+add_action( 'wp_enqueue_scripts', 'fb_style' );
+
 /**
  * Display an admin-facing warning if the current user hasn't authenticated with Facebook yet
  *
@@ -10,9 +15,40 @@ function fb_install_warning() {
 	$page = (isset($_GET['page']) ? $_GET['page'] : null);
 
 	if ((empty($options['app_id']) || empty($options['app_secret'])) && $page != 'facebook-settings' && current_user_can( 'manage_options' ) ) {
-		fb_admin_dialog( sprintf( __('You must %sconfigure the plugin</a> to enable Facebook for WordPress.', 'facebook' ), '<a href="admin.php?page=facebook-settings">' ), true);
+		fb_admin_dialog( sprintf( __('You must %sconfigure the plugin%s to enable Facebook for WordPress.', 'facebook' ), '<a href="admin.php?page=facebook-settings">', '</a>' ), true);
 	}
 }
+
+/**
+ * Display an admin-facing message to rate the plugin
+ *
+ * @since 1.0
+ */
+function fb_rate_message() {
+	$options = get_option('fb_options');
+	
+  global $current_user;
+  
+	$user_id = $current_user->ID;
+	
+	$page = (isset($_GET['page']) ? $_GET['page'] : null);
+
+	if ( !empty($options['app_id']) && !empty( $options['app_secret'] ) && current_user_can( 'publish_posts' ) && !get_user_meta( $user_id, 'fb_rate_message_ignore_notice', true )
+      && ( !empty( $options['social_publisher'] ) || !empty( $options['like_button'] ) || !empty( $options['subscribe_button'] ) || !empty( $options['send_button'] ) || !empty( $options['comments'] ) || !empty( $options['recommendations_bar'] ) ) ) {
+		fb_admin_dialog( sprintf( __( 'Enjoying the Facebook plugin? Please %1$srate it and mark it as working%2$s! Having a problem? %3$sReport it%4$s. &nbsp;|&nbsp; %5$sDismiss%6$s' ), '<a href="http://wordpress.org/extend/plugins/facebook/" target="_blank">', '</a>', '<a href="http://wordpress.org/support/plugin/facebook" target="_blank">', '</a>', '<a href="' . get_admin_url() . '?fb_rate_message_ignore=1' . '">', '</a>' ), false);
+	}
+}
+
+add_action('admin_init', 'fb_rate_message_ignore');
+function fb_rate_message_ignore() {
+	global $current_user;
+	$user_id = $current_user->ID;
+	
+	if ( isset($_GET['fb_rate_message_ignore']) && '1' == $_GET['fb_rate_message_ignore'] ) {
+		add_user_meta($user_id, 'fb_rate_message_ignore_notice', 'true', true);
+	}
+}
+
 
 /**
  * Inits the Facebook JavaScript SDK.

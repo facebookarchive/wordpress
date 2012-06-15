@@ -38,7 +38,3 @@ require_once( $facebook_plugin_directory . '/fb-login.php' );
 require_once( $facebook_plugin_directory . '/fb-social-publisher.php' );
 require_once( $facebook_plugin_directory . '/fb-wp-helpers.php' );
 unset( $facebook_plugin_directory );
-
-add_action( 'init', 'fb_init' );
-add_action( 'admin_notices', 'fb_install_warning' );
-add_action( 'wp_enqueue_scripts', 'fb_style' );

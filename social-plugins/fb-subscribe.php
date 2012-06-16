@@ -7,8 +7,15 @@ function fb_get_subscribe_button($options = array()) {
 
 function fb_subscribe_button_automatic($content) {
 	$options = get_option('fb_options');
-
+	
+	if ( isset($options['subscribe']['show_on_homepage']) ) {
+		global $post;
+		
+		$options['subscribe']['href'] = get_permalink($post->ID);
+	}
+	
 	$fb_data = fb_get_user_meta(get_the_author_meta('ID'), 'fb_data', true);
+
 	if (!$fb_data) {
 		return $content;
 	}
@@ -32,10 +39,10 @@ function fb_subscribe_button_automatic($content) {
 		}
 	}
 
-	if ( empty( $params['show_on_homepage'] ) && is_singular() ) {
+	if ( empty( $options['subscribe']['show_on_homepage'] ) && is_singular() ) {
 		$content = $new_content;
 	}
-	elseif ( isset($params['show_on_homepage']) ) {
+	elseif ( isset($options['subscribe']['show_on_homepage']) ) {
 		$content = $new_content;
 	}
 

@@ -8,6 +8,12 @@ function fb_get_send_button($options = array()) {
 function fb_send_button_automatic($content) {
 	$options = get_option('fb_options');
 
+	if ( isset($options['send']['show_on_homepage']) ) {
+		global $post;
+		
+		$options['send']['href'] = get_permalink($post->ID);
+	}
+
 	$new_content = '';
 
 	switch ($options['send']['position']) {

@@ -15,13 +15,19 @@
 
 function fb_get_like_button($options = array()) {
 	$params = fb_build_social_plugin_params($options);
-
+	
 	return '<div class="fb-like fb-social-plugin" ' . $params . ' ></div>';
 }
 
 function fb_like_button_automatic($content) {
 	$options = get_option('fb_options');
-
+	
+	if ( isset($options['like']['show_on_homepage']) ) {
+		global $post;
+		
+		$options['like']['href'] = get_permalink($post->ID);
+	}
+	
 	$new_content = '';
 
 	switch ($options['like']['position']) {

@@ -49,7 +49,7 @@ function fb_comments_automatic($content) {
 			foreach($options['comments'] as $param => $val) {
 				$param = str_replace('_', '-', $param);
 
-				$params['data-' . $param] = $val;
+				$params[$param] = $val;
 			}
 
 			$content .= fb_get_comments($params);

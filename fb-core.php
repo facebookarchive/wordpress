@@ -1,7 +1,7 @@
 <?php
 add_action( 'init', 'fb_init' );
 add_action( 'admin_notices', 'fb_install_warning' );
-add_action( 'admin_notices', 'fb_rate_message' );
+//add_action( 'admin_notices', 'fb_rate_message' );
 add_action( 'wp_enqueue_scripts', 'fb_style' );
 
 /**
@@ -24,6 +24,7 @@ function fb_install_warning() {
  *
  * @since 1.0
  */
+/*
 function fb_rate_message() {
 	$options = get_option('fb_options');
 	
@@ -60,7 +61,7 @@ function fb_rate_message_ignore() {
 		add_user_meta($user_id, 'fb_rate_message_ignore_notice', 'true', true);
 	}
 }
-
+*/
 
 /**
  * Inits the Facebook JavaScript SDK.

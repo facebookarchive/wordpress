@@ -55,10 +55,8 @@ jQuery(function() {
 	});
 });;
 
-jQuery(function() {
-	jQuery("#suggest-pages").tokenInput("?fb-pages=1", {
-		theme: "facebook",
-		preventDuplicates: true,
-		hintText: "Type to find a page.",
-	});
-});
+function fbShowDebugInfo() {
+  $('#debug-output').show();
+  
+  return false;
+}

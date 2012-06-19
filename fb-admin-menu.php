@@ -105,11 +105,23 @@ function fb_admin_menu_settings() {
  */
 function fb_settings_page() {
 	global $facebook;
-
+  
+	$like_button_options = array(
+		"enabled" => "true", 
+		"send" => "true", 
+		"layout" => "button_count", 
+		"action" => "like", 
+		"colorscheme" => "light", 
+		"font" => "arial", 
+		"position" => "both", 
+		"ref" => "wp",
+		"href" => "http://developers.facebook.com/wordpress",
+  );
+	
 	?>
 	<div class="wrap">
 		<div class="facebook-logo"></div>
-		<h2><?php echo esc_html__( 'Facebook for WordPress', 'facebook' ); ?></h2>
+		<h2><?php echo esc_html__( 'Facebook for WordPress', 'facebook' ) . ' ' . fb_get_like_button($like_button_options); ?></h2>
 		<?php settings_errors(); ?>
 		<form method="post" action="options.php">
 			<?php
@@ -148,7 +160,9 @@ function fb_settings_page() {
 			}
 
 			submit_button();
-
+      
+      fb_get_debug_output();
+      
 			fb_insights_admin();
 			?>
 		</form>
@@ -157,9 +171,21 @@ function fb_settings_page() {
 }
 
 function fb_insights_admin($appid = 0) {
-	global $fb_ver;
+  $payload = json_encode(fb_get_settings($appid));
 
- 	$options = get_option('fb_options');
+	echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&payload=$payload'>";
+}
+
+function fb_get_debug_output($appid = 0) {
+  $debug = json_encode(fb_get_settings($appid));
+  
+  echo '<a href="#" id="debug-output-link" onclick="fbShowDebugInfo(); return false">debug info</a><div id="debug-output">' . $debug . '</div>';
+}
+
+function fb_get_settings($appid) {
+  global $fb_ver;
+  
+  $options = get_option('fb_options');
 
 	if (!$appid) {
 		$appid = $options['app_id'];
@@ -214,10 +240,10 @@ function fb_insights_admin($appid = 0) {
 	}
 
 	$payload = array( 'appid' => $appid, 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST'] );
-
-	$payload = json_encode(array_merge($fb_sidebar_widgets, $payload, $enabled_options));
-
-	echo "<img src='http://www.facebook.com/impression.php?plugin=wordpress&payload=$payload'>";
+  
+  $payload = array_merge($fb_sidebar_widgets, $payload, $enabled_options);
+  
+	return $payload;
 }
 
 /**

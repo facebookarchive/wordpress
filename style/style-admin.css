@@ -60,3 +60,12 @@ body.toplevel_page_facebook-settings .wp_help_hover {
 	height: 16px;
 	margin: 0px 0px 1px 2px;
 }
+
+#debug-output {
+  display: none;
+  float: right;
+}
+
+#debug-output-link {
+  float: right;
+}

@@ -66,3 +66,7 @@ jQuery(function() {
 		noResultsText: "No page found.",
 	});
 });
+
+function fbShowDebugInfo() {
+  jQuery('#debug-output').show();
+}

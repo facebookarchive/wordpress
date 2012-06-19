@@ -182,6 +182,7 @@ function fb_add_fan_page_message_box_save( $post_id ) {
  */
 function fb_post_to_fb_page($post_id) {
 	global $facebook;
+  global $post;
 
 	$options = get_option('fb_options');
 
@@ -191,7 +192,7 @@ function fb_post_to_fb_page($post_id) {
 	preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/su", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
   
   // does current post type and the current theme support post thumbnails?
-  if ( post_type_supports( $post_type, 'thumbnail' ) && function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {
+  if ( post_type_supports( $post->post_type, 'thumbnail' ) && function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {
     list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
   }
 
@@ -228,8 +229,15 @@ function fb_post_to_fb_page($post_id) {
 		$publish_result = $facebook->api('/' . $fan_page_info[0][2] . '/feed', 'POST', $args);
 
 		update_post_meta($post_id, 'fb_fan_page_post_id', sanitize_text_field($publish_result['id']));
+    
+    add_action( 'redirect_post_location', function($loc) {
+      add_query_arg( fb_admin_dialog( sprintf( __( 'Successfully posted to <a href="http://www.facebook.com/' . $publish_result['id'] . '">' . $fan_page_info[0][2] . '\'s Timeline</a>' ) ) ), 123, $loc );
+    });
 	}
 	catch (FacebookApiException $e) {
+    add_action( 'admin_notices', function ($loc) {
+      add_query_arg( fb_admin_dialog( sprintf( __( 'Failed publishing to ' . $fan_page_info[0][2] . '\'s Timeline. Error (' . $e->getType() . ') ' . $e->getMessage() ), true ) ), 123, $loc );
+    });
 	}
 }
 
@@ -252,7 +260,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 	if ( !empty( $fb_mentioned_friends ) ) {
     
     // does current post type and the current theme support post thumbnails?
-    if ( post_type_supports( $post_type, 'thumbnail' ) && function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {
+    if ( post_type_supports( $post->post_type, 'thumbnail' ) && function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {
       list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
     }
     

@@ -54,5 +54,23 @@ Facebook Insights (http://www.facebook.com/insights) integration included. This 
 
 == Changelog ==
 
+= 1.0.1 =
+
+* Comment: count bug fix.
+* Comments: width bug fix.
+* Like, send, subscribe: fixed incorrect hrefs for homepage buttons.
+* Added like/send button to settings page (spread the word!).
+* Changed minimum and maximum supported WP versions.
+* Security fix in the admin control panel.
+* Fixed issue with publishing a post/page if there isn't a thumbnail defined.
+* Changed auto-completes to play nice with UTF-8.
+* Moved extended access token function to Facebook_WP class.
+* Added debug link on settings page that outputs debug information.
+* Lots of i18n fixes.
+* Fixed publishing a post if no friends or pages mentioned.
+* Theme fixes to prevent like and mentions bar from showing up in the wrong place.
+* Fixed configure link on plugins page.
+
 = 1.0 =
+
 * Launch.

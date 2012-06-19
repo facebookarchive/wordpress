@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Facebook
- * @version 1.0
+ * @version 1.0.1
  */
 /*
 Plugin Name: Facebook
@@ -9,7 +9,7 @@ Plugin URI: http://wordpress.org/extend/plugins/facebook/
 Description: Facebook for WordPress. Make your site deeply social in just a couple of clicks.
 Author: Facebook
 Author URI: https://developers.facebook.com/wordpress/
-Version: 1.0
+Version: 1.0.1
 License: GPL2
 License URI: license.txt
 Domain Path: /lang/

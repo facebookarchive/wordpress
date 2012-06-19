@@ -55,7 +55,6 @@ function fb_comments_automatic($content) {
 			$content .= fb_get_comments($params);
 		}
 		else {
-			$content .= fb_get_comments_count();
 		}
 	}
 

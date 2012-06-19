@@ -261,7 +261,6 @@ function fb_post_to_author_fb_timeline($post_id) {
 		$publish_ids_friends = array();
 
 		foreach($fb_mentioned_friends as $friend) {
-
 			try {
 				if (isset ( $post_thumbnail_url ) ) {
 					$args = array(

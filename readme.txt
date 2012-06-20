@@ -77,7 +77,7 @@ Facebook Insights (http://www.facebook.com/insights) integration included. This 
 * Added status messages for what was/wasn't posted to Facebook as part of a Post/Page being taken live.
 * Added functionality to disable publishing to a page if access token fails.
 * Clearer error messages for certain scenarios (like inability to post to a friend of page's Timeline because of privacy settings."
-
+* Fixed conflicts with Power Editor and extraneous text being added to og:description.  Thanks to Angelo Mandato (http://wordpress.org/support/topic/plugin-facebook-plugin-conflicts-with-powerpress?replies=16)
 
 = 1.0 =
 

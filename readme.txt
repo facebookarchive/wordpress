@@ -1,6 +1,6 @@
 === Facebook ===
 Contributors: Facebook, automattic, mattwkelly, niallkennedy, jamesgpearce, ravi.grover, danielbachhuber, gigawats, eosgood, Otto42
-Tags: Facebook, comments, social, friends, like, like button, social plugins, facebook platform
+Tags: Facebook, comments, social, friends, like, like button, social plugins, facebook platform, page, posts, sidebar, plugin, open graph
 Requires at least: 3.2.1
 Tested up to: 3.4
 Stable tag: trunk
@@ -38,7 +38,7 @@ Facebook Insights (http://www.facebook.com/insights) integration included. This 
 == Installation ==
 
 1. Install Facebook for WordPress either via the WordPress.org plugin directory, or by uploading the files to your server (in the `/wp-content/plugins/` directory).
-1. After activating the plugin, you will be asked to set up your Facebook app (via http://developers.facebook.com/apps), with step-by-step instructions.
+1. After activating the plugin, you will be asked to set up your Facebook app (via http://developers.facebook.com/apps ), with step-by-step instructions.
 1. That's it. You're ready to go!
 
 == Screenshots ==
@@ -56,8 +56,8 @@ Facebook Insights (http://www.facebook.com/insights) integration included. This 
 
 = 1.0.1 =
 
-* Comment: count bug fix.
-* Comments: width bug fix.
+* Comment count bug fix.
+* Comments width bug fix.
 * Like, send, subscribe: fixed incorrect hrefs for homepage buttons.
 * Added like/send button to settings page (spread the word!).
 * Changed minimum and maximum supported WP versions.
@@ -73,8 +73,8 @@ Facebook Insights (http://www.facebook.com/insights) integration included. This 
 * Fixes for bugs happening on 404 page.
 * Bug fix for if a WP admin removes the app via facebook.com.
 * Added status messages for what was/wasn't posted to Facebook as part of a Post/Page being taken live.
-* Added better debugging of FB errors.
-* Added better state detection in admin UI, depending on if the user has auth'd and given certain permissions.
+* Added easier debugging of Facebook API errors.
+* Added better logged in state detection in admin UI, depending on if the user has authenticated and given certain permissions.
 
 = 1.0 =
 

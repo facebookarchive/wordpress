@@ -177,9 +177,13 @@ function fb_insights_admin($appid = 0) {
 }
 
 function fb_get_debug_output($appid = 0) {
-  $debug = json_encode(fb_get_settings($appid));
+  $bloginfo = get_bloginfo('version');
   
-  echo '<a href="#" id="debug-output-link" onclick="fbShowDebugInfo(); return false">debug info</a><div id="debug-output">' . $debug . '</div>';
+  $debug = fb_get_settings($appid);
+
+  $debug['wp_ver'] = $bloginfo;
+  
+  echo '<a href="#" id="debug-output-link" onclick="fbShowDebugInfo(); return false">debug info</a><div id="debug-output">' . json_encode($debug) . '</div>';
 }
 
 function fb_get_settings($appid) {

@@ -67,14 +67,17 @@ Facebook Insights (http://www.facebook.com/insights) integration included. This 
 * Moved extended access token function to Facebook_WP class.
 * Added debug link on settings page that outputs debug information.
 * Lots of i18n fixes.
+* Added easier debugging of Facebook API errors.
+* Added better logged in state detection in admin UI, depending on if the user has authenticated and given certain permissions.
 * Fixed publishing a post if no friends or pages mentioned.
 * Theme fixes to prevent like and mentions bar from showing up in the wrong place.
 * Fixed configure link on plugins page.
 * Fixes for bugs happening on 404 page.
 * Bug fix for if a WP admin removes the app via facebook.com.
 * Added status messages for what was/wasn't posted to Facebook as part of a Post/Page being taken live.
-* Added easier debugging of Facebook API errors.
-* Added better logged in state detection in admin UI, depending on if the user has authenticated and given certain permissions.
+* Added functionality to disable publishing to a page if access token fails.
+* Clearer error messages for certain scenarios (like inability to post to a friend of page's Timeline because of privacy settings."
+
 
 = 1.0 =
 

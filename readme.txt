@@ -70,6 +70,11 @@ Facebook Insights (http://www.facebook.com/insights) integration included. This 
 * Fixed publishing a post if no friends or pages mentioned.
 * Theme fixes to prevent like and mentions bar from showing up in the wrong place.
 * Fixed configure link on plugins page.
+* Fixes for bugs happening on 404 page.
+* Bug fix for if a WP admin removes the app via facebook.com.
+* Added status messages for what was/wasn't posted to Facebook as part of a Post/Page being taken live.
+* Added better debugging of FB errors.
+* Added better state detection in admin UI, depending on if the user has auth'd and given certain permissions.
 
 = 1.0 =
 

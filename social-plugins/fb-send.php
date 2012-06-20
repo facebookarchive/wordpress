@@ -7,34 +7,37 @@ function fb_get_send_button($options = array()) {
 
 function fb_send_button_automatic($content) {
 	$options = get_option('fb_options');
-
-	if ( isset($options['send']['show_on_homepage']) ) {
-		global $post;
-		
-		$options['send']['href'] = get_permalink($post->ID);
+	
+	global $post;
+	
+	if ( isset( $post ) ) {
+		if ( isset($options['send']['show_on_homepage']) ) {
+			$options['send']['href'] = get_permalink($post->ID);
+		}
+	
+		$new_content = '';
+	
+		switch ($options['send']['position']) {
+			case 'top':
+				$new_content = fb_get_send_button($options['send']) . $content;
+				break;
+			case 'bottom':
+				$new_content = $content . fb_get_send_button($options['send']);
+				break;
+			case 'both':
+				$new_content = fb_get_send_button($options['send']) . $content;
+				$new_content .= fb_get_send_button($options['send']);
+				break;
+		}
+	
+		if ( empty( $options['send']['show_on_homepage'] ) && is_singular() ) {
+			$content = $new_content;
+		}
+		elseif ( isset($options['send']['show_on_homepage']) ) {
+			$content = $new_content;
+		}
 	}
-
-	$new_content = '';
-
-	switch ($options['send']['position']) {
-		case 'top':
-			$new_content = fb_get_send_button($options['send']) . $content;
-			break;
-		case 'bottom':
-			$new_content = $content . fb_get_send_button($options['send']);
-			break;
-		case 'both':
-			$new_content = fb_get_send_button($options['send']) . $content;
-			$new_content .= fb_get_send_button($options['send']);
-			break;
-	}
-
-	if ( empty( $options['send']['show_on_homepage'] ) && is_singular() ) {
-		$content = $new_content;
-	}
-	elseif ( isset($options['send']['show_on_homepage']) ) {
-		$content = $new_content;
-	}
+	
 
 	return $content;
 }

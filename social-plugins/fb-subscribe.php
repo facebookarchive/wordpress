@@ -8,43 +8,48 @@ function fb_get_subscribe_button($options = array()) {
 function fb_subscribe_button_automatic($content) {
 	$options = get_option('fb_options');
 	
-	if ( isset($options['subscribe']['show_on_homepage']) ) {
-		global $post;
-		
-		$options['subscribe']['href'] = get_permalink($post->ID);
-	}
+	global $post;
 	
-	$fb_data = fb_get_user_meta(get_the_author_meta('ID'), 'fb_data', true);
-
-	if (!$fb_data) {
-		return $content;
-	}
-
-	$options['subscribe']['href'] = 'http://www.facebook.com/' . $fb_data['username'];
-
-	$new_content = '';
-
-	if (isset($fb_data['username'])) {
-		switch ($options['subscribe']['position']) {
-			case 'top':
-				$new_content = fb_get_subscribe_button($options['subscribe']) . $content;
-				break;
-			case 'bottom':
-				$new_content = $content . fb_get_subscribe_button($options['subscribe']);
-				break;
-			case 'both':
-				$new_content = fb_get_subscribe_button($options['subscribe']) . $content;
-				$new_content .= fb_get_subscribe_button($options['subscribe']);
-				break;
+	if ( isset ($post ) ) {
+		if ( isset($options['subscribe']['show_on_homepage']) ) {
+		
+			$options['subscribe']['href'] = get_permalink($post->ID);
+		}
+		
+		$fb_data = fb_get_user_meta(get_the_author_meta('ID'), 'fb_data', true);
+	
+		if (!$fb_data) {
+			return $content;
+		}
+	
+		$options['subscribe']['href'] = 'http://www.facebook.com/' . $fb_data['username'];
+	
+		$new_content = '';
+	
+		if (isset($fb_data['username'])) {
+			switch ($options['subscribe']['position']) {
+				case 'top':
+					$new_content = fb_get_subscribe_button($options['subscribe']) . $content;
+					break;
+				case 'bottom':
+					$new_content = $content . fb_get_subscribe_button($options['subscribe']);
+					break;
+				case 'both':
+					$new_content = fb_get_subscribe_button($options['subscribe']) . $content;
+					$new_content .= fb_get_subscribe_button($options['subscribe']);
+					break;
+			}
+		}
+	
+		if ( empty( $options['subscribe']['show_on_homepage'] ) && is_singular() ) {
+			$content = $new_content;
+		}
+		elseif ( isset($options['subscribe']['show_on_homepage']) ) {
+			$content = $new_content;
 		}
 	}
-
-	if ( empty( $options['subscribe']['show_on_homepage'] ) && is_singular() ) {
-		$content = $new_content;
-	}
-	elseif ( isset($options['subscribe']['show_on_homepage']) ) {
-		$content = $new_content;
-	}
+	
+	
 
 	return $content;
 }

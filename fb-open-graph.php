@@ -39,8 +39,6 @@ function fb_add_og_protocol() {
 		'http://ogp.me/ns#type' => 'website'
 	);
 	
-$except = get_the_excerpt();
-print $except;
 	if ( is_home() || is_front_page() ) {
 		$meta_tags['http://ogp.me/ns#title'] = get_bloginfo( 'name' );
 		$meta_tags['http://ogp.me/ns#description'] = get_bloginfo( 'description' );

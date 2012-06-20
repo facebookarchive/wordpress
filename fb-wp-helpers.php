@@ -1,6 +1,13 @@
 <?php
 function fb_admin_dialog($message, $error = false) {
-		echo '<div ' . ( $error ? 'id="facebook_warning" ' : '') . 'class="updated fade' . '"><p><strong>'. $message . '</strong></p></div>';
+	if ($error) {
+		$class = 'error';
+	}
+	else {
+		$class = 'updated';
+	}
+	
+	echo '<div ' . ( $error ? 'id="facebook_warning" ' : '') . 'class="' . $class . ' fade' . '"><p>'. $message . '</p></div>';
 }
 
 function fb_construct_fields($placement, $children, $parent = null, $object = null) {

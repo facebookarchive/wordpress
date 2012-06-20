@@ -69,3 +69,7 @@ body.toplevel_page_facebook-settings .wp_help_hover {
 #debug-output-link {
   float: right;
 }
+
+.updated img {
+  border: 2px solid;
+}

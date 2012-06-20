@@ -22,32 +22,34 @@ function fb_get_like_button($options = array()) {
 function fb_like_button_automatic($content) {
 	$options = get_option('fb_options');
 	
-	if ( isset($options['like']['show_on_homepage']) ) {
-		global $post;
-		
-		$options['like']['href'] = get_permalink($post->ID);
-	}
+	global $post;
 	
-	$new_content = '';
-
-	switch ($options['like']['position']) {
-		case 'top':
-			$new_content = fb_get_like_button($options['like']) . $content;
-			break;
-		case 'bottom':
-			$new_content = $content . fb_get_like_button($options['like']);
-			break;
-		case 'both':
-			$new_content = fb_get_like_button($options['like']) . $content;
-			$new_content .= fb_get_like_button($options['like']);
-			break;
-	}
-
-	if ( empty( $options['like']['show_on_homepage'] ) && is_singular() ) {
-		$content = $new_content;
-	}
-	elseif ( isset($options['like']['show_on_homepage']) ) {
-		$content = $new_content;
+	if ( isset ( $post ) ) {
+		if ( isset($options['like']['show_on_homepage']) ) {
+			$options['like']['href'] = get_permalink($post->ID);
+		}
+		
+		$new_content = '';
+	
+		switch ($options['like']['position']) {
+			case 'top':
+				$new_content = fb_get_like_button($options['like']) . $content;
+				break;
+			case 'bottom':
+				$new_content = $content . fb_get_like_button($options['like']);
+				break;
+			case 'both':
+				$new_content = fb_get_like_button($options['like']) . $content;
+				$new_content .= fb_get_like_button($options['like']);
+				break;
+		}
+	
+		if ( empty( $options['like']['show_on_homepage'] ) && is_singular() ) {
+			$content = $new_content;
+		}
+		elseif ( isset($options['like']['show_on_homepage']) ) {
+			$content = $new_content;
+		}
 	}
 
 	return $content;

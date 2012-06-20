@@ -41,7 +41,21 @@ class Facebook_WP extends Facebook {
 			throw new FacebookApiException( array( 'error_code' => $response->get_error_code(), 'error_msg' => $response->get_error_message() ) );
 		}
 		else if ( wp_remote_retrieve_response_code( $response ) != '200' ) {
-			throw new FacebookApiException( array( 'error_code' => wp_remote_retrieve_response_code( $response ), 'error' => array( 'type' => 'WP_HTTP', 'message' => 'HTTP Status not OK' ) ) );
+			$fb_response = json_decode( $response['body'] );
+			
+			$error_subcode = '';
+			
+			if ( isset( $fb_response->error->error_subcode ) ) {
+				$error_subcode = $fb_response->error->error_subcode;
+			}
+			
+			throw new FacebookApiException(array(
+        'error_code' => $fb_response->error->code,
+        'error' => array(
+        'message' => $fb_response->error->message,
+        'type' => $fb_response->error->type,
+        ),
+      ));
 		}
 		
 		return wp_remote_retrieve_body( $response );

@@ -20,22 +20,25 @@ if ( isset($options['social_publisher']) && isset($options['social_publisher']['
  */
 function fb_add_author_message_box() {
 	global $post;
-	
+	$options = get_option('fb_options');
+  
 	if ($post->post_status == 'publish')	
 		return;
-
-	add_meta_box(
-		'fb_author_message_box_id',
-		__( 'Facebook Status on Your Timeline', 'facebook' ),
-		'fb_add_author_message_box_content',
-		'post'
-	);
-	add_meta_box(
-		'fb_author_message_box_id',
-		__( 'Facebook Status on Your Timeline', 'facebook' ),
-		'fb_add_author_message_box_content',
-		'page'
-	);
+  
+  if ( isset( $options['social_publisher']['enabled'] ) ) {
+    add_meta_box(
+      'fb_author_message_box_id',
+      __( 'Facebook Status on Your Timeline', 'facebook' ),
+      'fb_add_author_message_box_content',
+      'post'
+    );
+    add_meta_box(
+      'fb_author_message_box_id',
+      __( 'Facebook Status on Your Timeline', 'facebook' ),
+      'fb_add_author_message_box_content',
+      'page'
+    );
+  }
 }
 
 /**
@@ -122,7 +125,7 @@ function fb_add_fan_page_message_box() {
 	if ($post->post_status == 'publish')	
 		return;
 	
-  if ( isset( $fan_page_info ) && isset( $fan_page_info[0] ) && isset( $fan_page_info[0][2] ) ) {
+  if ( isset( $options['social_publisher']['enabled'] ) && isset( $fan_page_info ) && isset( $fan_page_info[0] ) && isset( $fan_page_info[0][2] ) ) {
     add_meta_box(
       'fb_fan_page_message_box_id',
       sprintf( __( 'Facebook Status on %s\'s Timeline', 'facebook' ), $fan_page_info[0][1] ),
@@ -216,75 +219,77 @@ function fb_post_to_fb_page($post_id) {
 		return;
 
 	preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/su", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
-	
-	// does current post type and the current theme support post thumbnails?
-	if ( post_type_supports( $post->post_type, 'thumbnail' ) && function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {
-		list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
-	}
-
-	$fan_page_message = get_post_meta($post_id, 'fb_fan_page_message', true);
-
-	if ( !isset ( $post_thumbnail_url ) ) {
-		$args = array('access_token' => $fan_page_info[0][3],
-			'from' => $fan_page_info[0][2],
-			'link' => apply_filters( 'rel_canonical', get_permalink()),
-			'name' => get_the_title(),
-			'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-			'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-			'message' => $fan_page_message,
-		);
-	}
-	else {
-		$args = array('access_token' => $fan_page_info[0][3],
-			'from' => $fan_page_info[0][2],
-			'link' => apply_filters( 'rel_canonical', get_permalink()),
-			'picture' => $post_thumbnail_url,
-			'name' => get_the_title(),
-			'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-			'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
-			'message' => $fan_page_message,
-		);
-	}
-
-	$args['ref'] = 'fbwpp';
-
-	if ( ! isset( $facebook ) )
-		return;
-
-	$status_messages = array();
-
-	try {
-		$publish_result = $facebook->api('/' . $fan_page_info[0][2] . '/feed', 'POST', $args);
-
-		update_post_meta($post_id, 'fb_fan_page_post_id', sanitize_text_field($publish_result['id']));
-	}
-	catch (FacebookApiException $e) {
-		$error_result = $e->getResult();
-		
-    if ($e->getCode() == 190) {
-      $options['social_publisher']['publish_to_fan_page'] = false;
+  
+  if ( isset( $fan_page_info ) && isset( $fan_page_info[0] ) && isset( $fan_page_info[0][2] ) ) {
+    // does current post type and the current theme support post thumbnails?
+    if ( post_type_supports( $post->post_type, 'thumbnail' ) && function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {
+      list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
+    }
+  
+    $fan_page_message = get_post_meta($post_id, 'fb_fan_page_message', true);
     
-      update_option( 'fb_options', $options );
-      
-      $status_messages[] = array( 'message' => sprintf( __( 'Failed posting to ' . $fan_page_info[0][1] . '\'s Timeline because the access token expired.  To reactivate publishing, visit the Facebook settings page and re-enable the "Publish to fan page" setting. Full error: ' . json_encode ( $error_result['error'] ), true ) ), 'error' => true);
+    if ( !isset ( $post_thumbnail_url ) ) {
+      $args = array('access_token' => $fan_page_info[0][3],
+        'from' => $fan_page_info[0][2],
+        'link' => apply_filters( 'rel_canonical', get_permalink()),
+        'name' => get_the_title(),
+        'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+        'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+        'message' => $fan_page_message,
+      );
     }
     else {
-      $status_messages[] = array( 'message' => sprintf( __( 'Failed posting to ' . $fan_page_info[0][1] . '\'s Timeline. Error: ' . json_encode ( $error_result['error'] ), true ) ), 'error' => true);
+      $args = array('access_token' => $fan_page_info[0][3],
+        'from' => $fan_page_info[0][2],
+        'link' => apply_filters( 'rel_canonical', get_permalink()),
+        'picture' => $post_thumbnail_url,
+        'name' => get_the_title(),
+        'caption' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+        'description' => apply_filters( 'the_excerpt', get_the_excerpt() ),
+        'message' => $fan_page_message,
+      );
     }
-	}
-	
-	if ( isset( $publish_result ) && isset( $publish_result['id'] ) ) {
-    $status_messages[] = array( 'message' => sprintf( __( 'Posted to <a href="' . fb_get_permalink_from_feed_publish_id( sanitize_text_field( $publish_result['id'] ) ) . '" target="_blank">' . $fan_page_info[0][1] . '\'s Facebook Timeline</a>', true ) ), 'error' => false);
-	}
-	
-  $existing_status_messages = get_post_meta($post_id, 'fb_status_messages', true);
   
-  if ( !empty( $existing_status_messages ) ) {
-    $status_messages = array_merge($existing_status_messages, $status_messages);
+    $args['ref'] = 'fbwpp';
+  
+    if ( ! isset( $facebook ) )
+      return;
+  
+    $status_messages = array();
+  
+    try {
+      $publish_result = $facebook->api('/' . $fan_page_info[0][2] . '/feed', 'POST', $args);
+  
+      update_post_meta($post_id, 'fb_fan_page_post_id', sanitize_text_field($publish_result['id']));
+    }
+    catch (FacebookApiException $e) {
+      $error_result = $e->getResult();
+      
+      if ($e->getCode() == 190) {
+        $options['social_publisher']['publish_to_fan_page'] = false;
+      
+        update_option( 'fb_options', $options );
+        
+        $status_messages[] = array( 'message' => sprintf( __( 'Failed posting to ' . $fan_page_info[0][1] . '\'s Timeline because the access token expired.  To reactivate publishing, visit the Facebook settings page and re-enable the "Publish to fan page" setting. Full error: ' . json_encode ( $error_result['error'] ), true ) ), 'error' => true);
+      }
+      else {
+        $status_messages[] = array( 'message' => sprintf( __( 'Failed posting to ' . $fan_page_info[0][1] . '\'s Timeline. Error: ' . json_encode ( $error_result['error'] ), true ) ), 'error' => true);
+      }
+    }
+    
+    if ( isset( $publish_result ) && isset( $publish_result['id'] ) ) {
+      $status_messages[] = array( 'message' => sprintf( __( 'Posted to <a href="' . fb_get_permalink_from_feed_publish_id( sanitize_text_field( $publish_result['id'] ) ) . '" target="_blank">' . $fan_page_info[0][1] . '\'s Facebook Timeline</a>', true ) ), 'error' => false);
+    }
+    
+    $existing_status_messages = get_post_meta($post_id, 'fb_status_messages', true);
+    
+    if ( !empty( $existing_status_messages ) ) {
+      $status_messages = array_merge($existing_status_messages, $status_messages);
+    }
+    
+    update_post_meta( $post->ID, 'fb_status_messages', $status_messages );
+    add_filter( 'redirect_post_location', 'fb_add_new_post_location' );
   }
-  
-	update_post_meta( $post->ID, 'fb_status_messages', $status_messages );
-	add_filter( 'redirect_post_location', 'fb_add_new_post_location' );
 }
 
 
@@ -460,7 +465,8 @@ function fb_post_to_author_fb_timeline($post_id) {
     $author_message = get_post_meta($post_id, 'fb_author_message', true);
   
     try {
-      $publish_result = $facebook->api('/me/' . $options["app_namespace"] . ':publish', 'POST', array('message' => $author_message, 'article' => get_permalink($post_id)));
+      //POST https://graph.facebook.com/me/news.reads?article=[article object URL]
+      $publish_result = $facebook->api('/me/news.publishes', 'POST', array('message' => $author_message, 'article' => get_permalink($post_id)));
       
       update_post_meta($post_id, 'fb_author_post_id', sanitize_text_field($publish_result['id']));
       
@@ -594,7 +600,7 @@ function fb_publish_later($new_status, $old_status, $post) {
 		// only publish "public" post types
 		$post_types = get_post_types( array('public' => true), 'objects' );
 		foreach ( $post_types as $post_type ) {
-			if ( $post->post_type == $post_type->name ) {
+			if ( $post->post_type == $post_type->name && isset( $options['social_publisher']['enabled'] ) ) {
 				fb_post_to_fb_page($post->ID);
 
 				fb_post_to_author_fb_timeline($post->ID);

@@ -135,20 +135,22 @@ function fb_add_page_mention_box() {
 	if ($post->post_status == 'publish')	
 		return;
 	
-	add_meta_box(
-			'fb_page_mention_box_id',
-			__( 'Mention Facebook Pages', 'facebook' ),
-			'fb_add_page_mention_box_content',
-			'post',
-			'side'
-	);
-	add_meta_box(
-			'fb_page_mention_box_id',
-			__( 'Mention Facebook Pages', 'facebook' ),
-			'fb_add_page_mention_box_content',
-			'page',
-			'side'
-	);
+  if ( isset( $options['social_publisher']['enabled'] ) ) {
+    add_meta_box(
+        'fb_page_mention_box_id',
+        __( 'Mention Facebook Pages', 'facebook' ),
+        'fb_add_page_mention_box_content',
+        'post',
+        'side'
+    );
+    add_meta_box(
+        'fb_page_mention_box_id',
+        __( 'Mention Facebook Pages', 'facebook' ),
+        'fb_add_page_mention_box_content',
+        'page',
+        'side'
+    );
+  }
 }
 
 function fb_add_page_mention_box_content( $post ) {
@@ -248,24 +250,27 @@ add_action( 'save_post', 'fb_add_friend_mention_box_save' );
 function fb_add_friend_mention_box() {
 	global $post;
 	global $facebook;
-	
+	$options = get_option('fb_options');
+  
 	if ($post->post_status == 'publish')	
 		return;
 	
-	add_meta_box(
-			'fb_friend_mention_box_id',
-			__( 'Mention Facebook Friends', 'facebook' ),
-			'fb_add_friend_mention_box_content',
-			'post',
-			'side'
-	);
-	add_meta_box(
-			'fb_friend_mention_box_id',
-			__( 'Mention Facebook Friends', 'facebook' ),
-			'fb_add_friend_mention_box_content',
-			'page',
-			'side'
-	);
+  if ( isset( $options['social_publisher']['enabled'] ) ) {
+    add_meta_box(
+        'fb_friend_mention_box_id',
+        __( 'Mention Facebook Friends', 'facebook' ),
+        'fb_add_friend_mention_box_content',
+        'post',
+        'side'
+    );
+    add_meta_box(
+        'fb_friend_mention_box_id',
+        __( 'Mention Facebook Friends', 'facebook' ),
+        'fb_add_friend_mention_box_content',
+        'page',
+        'side'
+    );
+  }
 }
 
 function fb_add_friend_mention_box_content( $post ) {

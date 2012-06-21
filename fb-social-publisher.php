@@ -203,7 +203,13 @@ function fb_add_fan_page_message_box_save( $post_id ) {
 function fb_post_to_fb_page($post_id) {
 	global $facebook;
 	global $post;
-
+  
+  // thanks to Tareq Hasan on http://wordpress.org/support/topic/plugin-facebook-bug-problems-when-publishing-to-a-page
+  if ( isset ( $post_id ) ) {
+    $post = get_post( $post_id );
+    setup_postdata( $post );
+  }
+  
 	$options = get_option('fb_options');
 
 	if (!isset($options['social_publisher']) || !isset($options['social_publisher']['publish_to_fan_page']) || $options['social_publisher']['publish_to_fan_page'] == 'disabled')
@@ -481,7 +487,7 @@ function fb_post_to_author_fb_timeline($post_id) {
   
   $existing_status_messages = get_post_meta($post_id, 'fb_status_messages', true);
   
-  if ( isset( $existing_status_messages ) ) {  
+  if ( !empty( $existing_status_messages ) ) {
     $status_messages = array_merge($existing_status_messages, $status_messages);
   }
   

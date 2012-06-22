@@ -27,6 +27,7 @@ class Facebook_WP extends Facebook {
 			throw new FacebookApiException( array( 'error_code' => 400, 'error' => array( 'type' => 'makeRequest', 'message' => 'Invalid parameters and/or URI passed to makeRequest' ) ) );
 		error_log(var_export($url,1));
 		error_log(var_export($params,1));
+		error_log(var_export(debug_backtrace(),1));
 		$params = array(
 			'redirection' => 0,
 			'httpversion' => '1.1',

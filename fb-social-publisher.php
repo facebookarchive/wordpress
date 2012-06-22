@@ -515,7 +515,7 @@ function fb_get_social_publisher_fields() {
   
   $fan_page_option = array();
   
-  if (!$facebook-getUser() ) {
+  if (!$facebook->getUser() ) {
     $fan_page_option = array(
 			'name' => 'publish_to_fan_page',
 			'type' => 'disabled_text',

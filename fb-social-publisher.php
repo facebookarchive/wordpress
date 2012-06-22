@@ -512,31 +512,55 @@ function fb_get_social_publisher_fields() {
 
 	if ( ! isset( $facebook ) )
 		return;
+  
+  $fan_page_option = array();
+  
+  if (!$facebook-getUser() ) {
+    $fan_page_option = array(
+			'name' => 'publish_to_fan_page',
+			'type' => 'disabled_text',
+			'disabled_text' => '<a href="#" onclick="authFacebook(); return false;">'.__('Link your Facebook account to your WordPress account to enable.','facebook').'</a>',
+			'help_text' => __( 'All new posts will be automatically published to this Facebook Page.', 'facebook' ),
+			);
+  }
+	else {
+    $accounts = fb_get_user_pages();
 
-	$accounts = fb_get_user_pages();
-
-	$accounts_options = array('disabled' => '[Disabled]');
-	
-	$options = get_option('fb_options');
-
-	if (isset($options['social_publisher']) && isset($options['social_publisher']['publish_to_fan_page']) && $options['social_publisher']['publish_to_fan_page'] != 'disabled') {
-		preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/su", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER); 
-	}
-
-	foreach($accounts as $account) {
-		if (isset($account['name']) && isset($account['category']) && $account['category'] != 'Application') {
-			$account_options_key = $account['name'] . "@@!!" . $account['id'] . "@@!!" . $account['access_token'];
-			$accounts_options[$account_options_key] = $account['name'];
-			
-			if ( isset( $fan_page_info ) && isset( $fan_page_info[0] ) && isset( $fan_page_info[0][2] ) ) {
-				if ($account['id'] == $fan_page_info[0][2]) {
-					$options['social_publisher']['publish_to_fan_page'] = $account_options_key;
-				
-					update_option( 'fb_options', $options );
-				}
-			}
-		}
-	}
+    $accounts_options = array('disabled' => '[Disabled]');
+    
+    $options = get_option('fb_options');
+  
+    if (isset($options['social_publisher']) && isset($options['social_publisher']['publish_to_fan_page']) && $options['social_publisher']['publish_to_fan_page'] != 'disabled') {
+      preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/su", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER); 
+    }
+  
+    foreach($accounts as $account) {
+      if (isset($account['name']) && isset($account['category']) && $account['category'] != 'Application') {
+        $account_options_key = $account['name'] . "@@!!" . $account['id'] . "@@!!" . $account['access_token'];
+        $accounts_options[$account_options_key] = $account['name'];
+        
+        if ( isset( $fan_page_info ) && isset( $fan_page_info[0] ) && isset( $fan_page_info[0][2] ) ) {
+          if ($account['id'] == $fan_page_info[0][2]) {
+            $options['social_publisher']['publish_to_fan_page'] = $account_options_key;
+          
+            update_option( 'fb_options', $options );
+          }
+        }
+      }
+    }
+    
+    if (count($accounts_options) < 2) {
+      
+    }
+    else {
+      $fan_page_option = array(
+        'name' => 'publish_to_fan_page',
+        'type' => 'dropdown',
+        'options' => $accounts_options,
+        'help_text' => __( 'New posts will be publish to this Facebook Page.', 'facebook' ),
+        );
+    }
+  }
 	
 	$parent = array(
 		'name' => 'social_publisher',
@@ -546,24 +570,7 @@ function fb_get_social_publisher_fields() {
 		'help_link' => 'http://developers.facebook.com/wordpress',
 		'image' => plugins_url( 'images/settings_social_publisher.png', __FILE__)
 	);
-
-	if (count($accounts_options) < 2) {
-		$fan_page_option = array(
-			'name' => 'publish_to_fan_page',
-			'type' => 'disabled_text',
-			'disabled_text' => '<a href="#" onclick="authFacebook(); return false;">'.__('Link your Facebook account to your WordPress account to enable.','facebook').'</a>',
-			'help_text' => __( 'All new posts will be automatically published to this Facebook Page.', 'facebook' ),
-			);
-	}
-	else {
-		$fan_page_option = array(
-			'name' => 'publish_to_fan_page',
-			'type' => 'dropdown',
-			'options' => $accounts_options,
-			'help_text' => __( 'New posts will be publish to this Facebook Page.', 'facebook' ),
-			);
-	}
-
+  
 	$children = array(
 		array(
 			'name' => 'publish_to_authors_facebook_timeline',

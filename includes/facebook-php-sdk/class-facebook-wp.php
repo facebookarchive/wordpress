@@ -37,7 +37,9 @@ class Facebook_WP extends Facebook {
 		);
 
 		$response = wp_remote_post( $url, $params );
-		
+		error_log(var_export($url,1));
+		error_log(var_export($params,1));
+		error_log(var_export($response,1));
 		if ( is_wp_error( $response ) ) {
 			throw new FacebookApiException( array( 'error_code' => $response->get_error_code(), 'error_msg' => $response->get_error_message() ) );
 		}

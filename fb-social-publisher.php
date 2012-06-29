@@ -374,16 +374,16 @@ function fb_post_to_author_fb_timeline($post_id) {
 				
 				$publish_ids_friends[] = sanitize_text_field( $publish_result['id'] );
 				
-				$friends_posts .= '<a href="' . sanitize_text_field( fb_get_permalink_from_feed_publish_id( $publish_result['id'] ) ) . '" target="_blank"><img src="http://graph.facebook.com/' . $friend['id'] . '/picture" width="15"></a> ';
+				$friends_posts .= '<a href="' . esc_url( fb_get_permalink_from_feed_publish_id( $publish_result['id'] ) ) . '" target="_blank"><img src="' . esc_url( 'http://graph.facebook.com/' . $friend['id'] . '/picture' ) . '" width="15"></a> ';
 			}
 			catch (FacebookApiException $e) {
         $error_result = $e->getResult();
         
         if ($e->getCode() == 210) {
-          $status_messages[] = array( 'message' => sprintf( __( 'Failed posting to mentioned friend\'s Facebook Timeline. <img src="http://graph.facebook.com/' . $friend['id'] . '/picture" width="15"> Error: Page doesn\'t allow posts from other Facebook users. Full error: ' . json_encode ( $error_result['error'] ), true ) ), 'error' => true );
+          $status_messages[] = array( 'message' => sprintf( __( 'Failed posting to mentioned friend\'s Facebook Timeline. <img src="' . esc_url( 'http://graph.facebook.com/' . $friend['id'] . '/picture' ) . '" width="15"> Error: Page doesn\'t allow posts from other Facebook users. Full error: ' . json_encode ( $error_result['error'] ), true ) ), 'error' => true );
         }
         else {
-          $status_messages[] = array( 'message' => sprintf( __( 'Failed posting to mentioned friend\'s Facebook Timeline. <img src="http://graph.facebook.com/' . $friend['id'] . '/picture" width="15"> Error: ' . json_encode ( $error_result['error'] ), true ) ), 'error' => true );
+          $status_messages[] = array( 'message' => sprintf( __( 'Failed posting to mentioned friend\'s Facebook Timeline. <img src="' . esc_url( 'http://graph.facebook.com/' . $friend['id'] . '/picture' ) . '" width="15"> Error: ' . json_encode ( $error_result['error'] ), true ) ), 'error' => true );
         }
 			}
 		}

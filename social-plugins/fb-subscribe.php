@@ -41,10 +41,13 @@ function fb_subscribe_button_automatic($content) {
 			}
 		}
 	
-		if ( empty( $options['subscribe']['show_on_homepage'] ) && is_singular() ) {
+		if ( is_home() && $options['subscribe']['show_on_homepage'] ) {
 			$content = $new_content;
 		}
-		elseif ( isset($options['subscribe']['show_on_homepage']) ) {
+		elseif ( $options['subscribe']['show_on'] ) {
+			if ( is_page() && ( $options['subscribe']['show_on']=='all pages' || $options['subscribe']['show_on'] == 'all posts and pages' ) )
+				$content = $new_content;
+			elseif ( is_single() && ( $options['subscribe']['show_on']=='all posts' || $options['subscribe']['show_on'] == 'all posts and pages' ) )
 			$content = $new_content;
 		}
 	}
@@ -187,11 +190,18 @@ function fb_get_subscribe_fields_array($placement) {
 													'options' => array('top' => 'top', 'bottom' => 'bottom', 'both' => 'both'),
 													'help_text' => __( 'Where the button will display on the page or post.', 'facebook' ),
 													);
+		$array['children'][] = array('name' => 'show_on',
+													'type' => 'dropdown',
+													'default' => 'all posts',
+													'options' => array('all posts' => 'all posts', 'all pages' => 'all pages', 'all posts and pages' => 'all posts and pages', 'none' => 'none'),
+													'help_text' => __( 'Changes whether the plugin appears on all posts or pages. When changed, individual settings are removed.', 'facebook' ),
+													);
 		$array['children'][] = array('name' => 'show_on_homepage',
 													'type' => 'checkbox',
 													'default' => true,
 													'help_text' => __( 'If the plugin should appear on the homepage as part of the Post previews.  If unchecked, the plugin will only display on the Post itself.', 'facebook' ),
 													);
+
 	}
 
 	if ($placement == 'widget') {

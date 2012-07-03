@@ -25,7 +25,9 @@ class Facebook_WP extends Facebook {
 
 		if ( empty( $url ) || empty( $params ) )
 			throw new FacebookApiException( array( 'error_code' => 400, 'error' => array( 'type' => 'makeRequest', 'message' => 'Invalid parameters and/or URI passed to makeRequest' ) ) );
-
+		error_log(var_export($url,1));
+		error_log(var_export($params,1));
+		error_log(var_export(debug_backtrace(),1));
 		$params = array(
 			'redirection' => 0,
 			'httpversion' => '1.1',
@@ -37,7 +39,8 @@ class Facebook_WP extends Facebook {
 		);
 
 		$response = wp_remote_post( $url, $params );
-		
+
+		error_log(var_export($response,1));
 		if ( is_wp_error( $response ) ) {
 			throw new FacebookApiException( array( 'error_code' => $response->get_error_code(), 'error_msg' => $response->get_error_message() ) );
 		}
@@ -66,7 +69,7 @@ class Facebook_WP extends Facebook {
    * Extend an access token, while removing the short-lived token that might have been generated via client-side flow.
    * Thanks to http://stackoverflow.com/questions/486896/adding-a-parameter-to-the-url-with-javascript for the workaround
    */
-  public function getExtendedAccessToken() {
+  public function setExtendedAccessToken() {
     try {
       // need to circumvent json_decode by calling _oauthRequest
       // directly, since response isn't JSON format.

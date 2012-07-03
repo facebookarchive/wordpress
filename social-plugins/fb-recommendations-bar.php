@@ -6,12 +6,15 @@ function fb_get_recommendations_bar($options = array()) {
 }
 
 function fb_recommendations_bar_automatic($content) {
-	if (!is_home()) {
-		$options = get_option('fb_options');
-
-		$content .= fb_get_recommendations_bar($options['recommendations_bar']);
+	$options = get_option('fb_options');
+	if ( ! is_home() && $options['recommendations_bar']['show_on'] ) {
+		if ( ( is_page() && ( $options['recommendations_bar']['show_on'] == 'all pages' || $options['recommendations_bar']['show_on'] == 'all posts and pages' ) )
+				or ( is_single() &&  ( $options['recommendations_bar']['show_on'] == 'all posts' || $options['recommendations_bar']['show_on'] == 'all posts and pages' ) ) )
+		{
+			$content .= fb_get_recommendations_bar( $options['recommendations_bar'] );
+		}
 	}
-
+	
 	return $content;
 }
 
@@ -52,6 +55,12 @@ function fb_get_recommendations_bar_fields_array() {
 													'options' => array('left' => 'left', 'right' => 'right'),
 													'help_text' => __( 'The side of the window that the plugin will display.', 'facebook' ),
 													),
+										array('name' => 'show_on',
+													'type' => 'dropdown',
+													'default' => 'all posts and pages',
+													'options' => array('all posts' => 'all posts', 'all pages' => 'all pages', 'all posts and pages' => 'all posts and pages'),
+													'help_text' => __( 'Whether the plugin will appear on all posts or pages.', 'facebook' ),
+													)
 										);
 
 	return $array;

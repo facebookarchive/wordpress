@@ -58,7 +58,7 @@ function fb_rate_message_ignore() {
 	$user_id = $current_user->ID;
 	
 	if ( isset($_GET['fb_rate_message_ignore']) && '1' == $_GET['fb_rate_message_ignore'] ) {
-		add_user_meta($user_id, 'fb_rate_message_ignore_notice', 'true', true);
+		fb_update_user_meta($user_id, 'fb_rate_message_ignore_notice', 'true');
 	}
 }
 */

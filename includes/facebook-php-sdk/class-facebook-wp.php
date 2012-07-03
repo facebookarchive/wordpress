@@ -69,7 +69,7 @@ class Facebook_WP extends Facebook {
    * Extend an access token, while removing the short-lived token that might have been generated via client-side flow.
    * Thanks to http://stackoverflow.com/questions/486896/adding-a-parameter-to-the-url-with-javascript for the workaround
    */
-  public function getExtendedAccessToken() {
+  public function setExtendedAccessToken() {
     try {
       // need to circumvent json_decode by calling _oauthRequest
       // directly, since response isn't JSON format.

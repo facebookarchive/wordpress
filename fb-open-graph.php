@@ -26,6 +26,31 @@ function fb_output_og_protocol( $property, $content ) {
 	}
 }
 
+function fb_strip_and_format_desc($post) {
+
+	if ( !empty($excerpt_no_html) ) {
+		$desc_no_html = strip_shortcodes($desc_no_html); // Strip shortcodes first in case there is HTML inside the shortcode
+		$desc_no_html = wp_strip_all_tags($desc_no_html); // Strip all html
+		$desc_no_html = trim($desc_no_html); // Trim the final string, we may have stripped everything out of the post so this will make the value empty if that's the case
+	}
+
+	// Recheck if empty, may be that the strip functions above made excerpt empty, doubhtful but we want to be 100% sure.
+	if( empty($desc_no_html) ) {
+		$desc_no_html = $post->post_content; // Start over, this time with the post_content
+		$desc_no_html = strip_shortcodes( $desc_no_html ); // Strip shortcodes first in case there is HTML inside the shortcode
+		$desc_no_html = str_replace(']]>', ']]&gt;', $desc_no_html); // Angelo Recommendation, if for some reason ]]> happens to be in the_content, rare but We've seen it happen
+		$desc_no_html = wp_strip_all_tags($desc_no_html);
+		$excerpt_length = apply_filters('excerpt_length', 55);
+		$excerpt_more = apply_filters('excerpt_more', ' ' . '[...]');
+		$desc_no_html = wp_trim_words( $desc_no_html, $excerpt_length, $excerpt_more );
+		$desc_no_html = trim($desc_no_html); // Trim the final string, we may have stripped everything out of the post so this will make the value empty if that's the case
+	}
+	
+	$desc_no_html = str_replace( array( "\r\n", "\r", "\n" ), ' ',$desc_no_html); // I take it Facebook doesn't like new lines?
+	return $desc_no_html;
+}
+
+
 /**
  * Add Open Graph protocol markup to <head>
  *
@@ -54,27 +79,7 @@ function fb_add_og_protocol() {
 			// Strip and format the wordpress way, but don't apply any other filters which adds junk that ends up getitng stripped back out
 			if ( !post_password_required($post) ) {
 				// First lets get the post excerpt (shouldn't have any html, but anyone can enter anything...)
-				$desc_no_html = $post->post_excerpt;
-				if ( !empty($excerpt_no_html) ) {
-					$desc_no_html = strip_shortcodes($desc_no_html); // Strip shortcodes first in case there is HTML inside the shortcode
-					$desc_no_html = wp_strip_all_tags($desc_no_html); // Strip all html
-					$desc_no_html = trim($desc_no_html); // Trim the final string, we may have stripped everything out of the post so this will make the value empty if that's the case
-				}
-				
-				// Recheck if empty, may be that the strip functions above made excerpt empty, doubhtful but we want to be 100% sure.
-				if( empty($desc_no_html) ) {
-					$desc_no_html = $post->post_content; // Start over, this time with the post_content
-					$desc_no_html = strip_shortcodes( $desc_no_html ); // Strip shortcodes first in case there is HTML inside the shortcode
-					$desc_no_html = str_replace(']]>', ']]&gt;', $desc_no_html); // Angelo Recommendation, if for some reason ]]> happens to be in the_content, rare but We've seen it happen
-					$desc_no_html = wp_strip_all_tags($desc_no_html);
-					$excerpt_length = apply_filters('excerpt_length', 55);
-					$excerpt_more = apply_filters('excerpt_more', ' ' . '[...]');
-					$desc_no_html = wp_trim_words( $desc_no_html, $excerpt_length, $excerpt_more );
-					$desc_no_html = trim($desc_no_html); // Trim the final string, we may have stripped everything out of the post so this will make the value empty if that's the case
-				}
-				
-				$desc_no_html = str_replace( array( "\r\n", "\r", "\n" ), ' ',$desc_no_html); // I take it Facebook doesn't like new lines?
-				$meta_tags['http://ogp.me/ns#description'] = $desc_no_html;
+				$meta_tags['http://ogp.me/ns#description'] = fb_strip_and_format_desc($post);
 			}
 		}
 		

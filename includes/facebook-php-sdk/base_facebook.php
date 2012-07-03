@@ -717,7 +717,7 @@ abstract class BaseFacebook
    * @return mixed An access token exchanged for the authorization code, or
    *               false if an access token could not be generated.
    */
-  protected function setAccessTokenFromCode($code, $redirect_uri = null) {
+  protected function getAccessTokenFromCode($code, $redirect_uri = null) {
     if (empty($code)) {
       return false;
     }

@@ -11,22 +11,22 @@ function fb_send_button_automatic($content) {
 	global $post;
 	
 	if ( isset( $post ) ) {
-		if ( isset($options['send']['show_on_homepage']) ) {
+		if ( isset( $options['send']['show_on_homepage'] ) ) {
 			$options['send']['href'] = get_permalink($post->ID);
 		}
 	
 		$new_content = '';
 	
-		switch ($options['send']['position']) {
+		switch ( $options['send']['position'] ) {
 			case 'top':
-				$new_content = fb_get_send_button($options['send']) . $content;
+				$new_content = fb_get_send_button( $options['send'] ) . $content;
 				break;
 			case 'bottom':
-				$new_content = $content . fb_get_send_button($options['send']);
+				$new_content = $content . fb_get_send_button( $options['send'] );
 				break;
 			case 'both':
-				$new_content = fb_get_send_button($options['send']) . $content;
-				$new_content .= fb_get_send_button($options['send']);
+				$new_content = fb_get_send_button( $options['send'] ) . $content;
+				$new_content .= fb_get_send_button( $options['send'] );
 				break;
 		}
 	
@@ -34,9 +34,9 @@ function fb_send_button_automatic($content) {
 			$content = $new_content;
 		}
 		elseif ( $options['send']['show_on'] ) {
-			if ( is_page() && ( $options['send']['show_on']=='all pages' || $options['send']['show_on'] == 'all posts and pages' ) )
+			if ( is_page() && ( $options['send']['show_on'] == 'all pages' || $options['send']['show_on'] == 'all posts and pages' ) )
 				$content = $new_content;
-			elseif ( is_single() && ( $options['send']['show_on']=='all posts' || $options['send']['show_on'] == 'all posts and pages' ) )
+			elseif ( is_single() && ( $options['send']['show_on'] == 'all posts' || $options['send']['show_on'] == 'all posts and pages' ) )
 				$content = $new_content;
 		}
 		
@@ -161,9 +161,9 @@ function fb_get_send_fields_array($placement) {
 													);
 		$array['children'][] = array('name' => 'show_on',
 													'type' => 'dropdown',
-													'default' => 'all posts',
-													'options' => array('all posts' => 'all posts', 'all pages' => 'all pages', 'all posts and pages' => 'all posts and pages', 'none' => 'none'),
-													'help_text' => __( 'Changes whether the plugin appears on all posts or pages. When changed, individual settings are removed.', 'facebook' ),
+													'default' => 'all posts and pages',
+													'options' => array('all posts' => 'all posts', 'all pages' => 'all pages', 'all posts and pages' => 'all posts and pages'),
+													'help_text' => __( 'Whether the plugin will appear on all posts or pages.', 'facebook' ),
 													);
 		$array['children'][] = array('name' => 'show_on_homepage',
 													'type' => 'checkbox',

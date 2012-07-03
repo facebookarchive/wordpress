@@ -11,14 +11,14 @@ function fb_subscribe_button_automatic($content) {
 	global $post;
 	
 	if ( isset ($post ) ) {
-		if ( isset($options['subscribe']['show_on_homepage']) ) {
+		if ( isset( $options['subscribe']['show_on_homepage'] ) ) {
 		
-			$options['subscribe']['href'] = get_permalink($post->ID);
+			$options['subscribe']['href'] = get_permalink( $post->ID );
 		}
 		
-		$fb_data = fb_get_user_meta(get_the_author_meta('ID'), 'fb_data', true);
+		$fb_data = fb_get_user_meta( get_the_author_meta( 'ID' ), 'fb_data', true );
 	
-		if (!$fb_data) {
+		if ( ! $fb_data ) {
 			return $content;
 		}
 	
@@ -26,17 +26,17 @@ function fb_subscribe_button_automatic($content) {
 	
 		$new_content = '';
 	
-		if (isset($fb_data['username'])) {
-			switch ($options['subscribe']['position']) {
+		if ( isset( $fb_data['username'] ) ) {
+			switch ( $options['subscribe']['position'] ) {
 				case 'top':
-					$new_content = fb_get_subscribe_button($options['subscribe']) . $content;
+					$new_content = fb_get_subscribe_button( $options['subscribe'] ) . $content;
 					break;
 				case 'bottom':
-					$new_content = $content . fb_get_subscribe_button($options['subscribe']);
+					$new_content = $content . fb_get_subscribe_button( $options['subscribe'] );
 					break;
 				case 'both':
-					$new_content = fb_get_subscribe_button($options['subscribe']) . $content;
-					$new_content .= fb_get_subscribe_button($options['subscribe']);
+					$new_content = fb_get_subscribe_button( $options['subscribe'] ) . $content;
+					$new_content .= fb_get_subscribe_button( $options['subscribe'] );
 					break;
 			}
 		}
@@ -45,15 +45,13 @@ function fb_subscribe_button_automatic($content) {
 			$content = $new_content;
 		}
 		elseif ( $options['subscribe']['show_on'] ) {
-			if ( is_page() && ( $options['subscribe']['show_on']=='all pages' || $options['subscribe']['show_on'] == 'all posts and pages' ) )
+			if ( is_page() && ( $options['subscribe']['show_on'] == 'all pages' || $options['subscribe']['show_on'] == 'all posts and pages' ) )
 				$content = $new_content;
-			elseif ( is_single() && ( $options['subscribe']['show_on']=='all posts' || $options['subscribe']['show_on'] == 'all posts and pages' ) )
+			elseif ( is_single() && ( $options['subscribe']['show_on'] == 'all posts' || $options['subscribe']['show_on'] == 'all posts and pages' ) )
 			$content = $new_content;
 		}
 	}
 	
-	
-
 	return $content;
 }
 
@@ -192,9 +190,9 @@ function fb_get_subscribe_fields_array($placement) {
 													);
 		$array['children'][] = array('name' => 'show_on',
 													'type' => 'dropdown',
-													'default' => 'all posts',
-													'options' => array('all posts' => 'all posts', 'all pages' => 'all pages', 'all posts and pages' => 'all posts and pages', 'none' => 'none'),
-													'help_text' => __( 'Changes whether the plugin appears on all posts or pages. When changed, individual settings are removed.', 'facebook' ),
+													'default' => 'all posts and pages',
+													'options' => array('all posts' => 'all posts', 'all pages' => 'all pages', 'all posts and pages' => 'all posts and pages'),
+													'help_text' => __( 'Whether the plugin will appear on all posts or pages.', 'facebook' ),
 													);
 		$array['children'][] = array('name' => 'show_on_homepage',
 													'type' => 'checkbox',

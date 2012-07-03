@@ -47,17 +47,17 @@ function fb_comments_automatic($content) {
 	if ( isset ( $post ) ) {
 		if ( comments_open( get_the_ID() ) && post_type_supports( get_post_type(), 'comments' ) ) {
 			$options = get_option('fb_options');
-			if (!is_home() && $options['comments']['show_on']) {
-				if ( ( is_page() && ( $options['comments']['show_on']=='all pages' || $options['comments']['show_on'] == 'all posts and pages' ) )
+			if ( ! is_home() && $options['comments']['show_on'] ) {
+				if ( ( is_page() && ( $options['comments']['show_on'] == 'all pages' || $options['comments']['show_on'] == 'all posts and pages' ) )
 						or ( is_single() &&  ( $options['comments']['show_on'] == 'all posts' || $options['comments']['show_on'] == 'all posts and pages' ) ) )
 				{
-					foreach($options['comments'] as $param => $val) {
-						$param = str_replace('_', '-', $param);
+					foreach( $options['comments'] as $param => $val ) {
+						$param = str_replace( '_', '-', $param );
 		
 						$params[$param] = $val;
 					}
 		
-					$content .= fb_get_comments($params);
+					$content .= fb_get_comments( $params );
 				}
 			}
 			else {
@@ -141,9 +141,9 @@ function fb_get_comments_fields_array() {
 													),
 										array('name' => 'show_on',
 													'type' => 'dropdown',
-													'default' => 'all posts',
-													'options' => array('all posts' => 'all posts', 'all pages' => 'all pages', 'all posts and pages' => 'all posts and pages', 'none' => 'none'),
-													'help_text' => __( 'Changes whether the plugin appears on all posts or pages. When changed, individual settings are removed.', 'facebook' ),
+													'default' => 'all posts and pages',
+													'options' => array('all posts' => 'all posts', 'all pages' => 'all pages', 'all posts and pages' => 'all posts and pages'),
+													'help_text' => __( 'Whether the plugin will appear on all posts or pages.', 'facebook' ),
 													)
 										);
 

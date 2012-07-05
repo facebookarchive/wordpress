@@ -6,6 +6,7 @@
  * @param string $property whitespace separated list of CURIEs placed in a property attribute
  * @param mixed content attribute value for the given property. use an array for array property values or structured properties
  */
+
 function fb_output_og_protocol( $property, $content ) {
 	if ( empty( $property ) || empty( $content ) )
 		return;

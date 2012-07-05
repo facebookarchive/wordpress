@@ -27,19 +27,25 @@ function fb_notify_user_of_plugin_conflicts()
 	$plugins_list = apply_filters( 'all_plugins', get_plugins() );
 
 	//static array of potentially conflicting plugins
-	$og_conflicting_plugins_static = array( "Facebook", "Hello Dolly", "Open Graph", "WordPress SEO by Yoast", "Pure Web Brilliant's Social Graph Control" );
+	$og_conflicting_plugins_static = array( "http://wordpress.org/extend/plugins/facebook/", 
+											"http://wordpress.org/extend/plugins/opengraph/",
+											"http://wordpress.org/extend/plugins/wordpress-seo/",
+											"http://wordpress.org/extend/plugins/kevinjohn-gallagher-pure-web-brilliants-social-graph-control/",
+											"http://akismet.com/?return=true"
+										   );
 
 	$num_conflicting = 0;
 	$conflicting_plugins = array();
 	foreach ( $plugins_list as $val ) {
+		$plugin_uri = $val['PluginURI'];
 		$plugin_name = $val['Name'];
-		if($plugin_name == "Facebook") {
+		if($plugin_uri == "http://wordpress.org/extend/plugins/facebook/") {
 			continue;
 		}
 		
-		if( in_array($plugin_name, $og_conflicting_plugins_static) ) {
+		if( in_array($plugin_uri, $og_conflicting_plugins_static) ) {
 			$num_conflicting += 1;
-			array_push( $conflicting_plugins, $plugin_name );
+			array_push( $conflicting_plugins, $plugin_name . " : " . $plugin_uri);
 		}
 	}
 

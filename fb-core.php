@@ -83,10 +83,6 @@ function fb_js_sdk_setup() {
 		'oauth' => true
 	) );
 
-	// enforce minimum requirements
-	if ( empty( $args['appId'] ) )
-		return;
-
 	echo '<script type="text/javascript">window.fbAsyncInit=function(){FB.init(' . json_encode( $args ) . ');';
 	do_action( 'fb_async_init', $args );
 	echo '}</script>';

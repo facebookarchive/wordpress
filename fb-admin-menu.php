@@ -18,6 +18,7 @@ function fb_create_menu() {
 	add_action( 'admin_print_scripts-' . $page, 'fb_admin_scripts' );
 }
 
+
 /**
  * Link to settings from the plugin listing page
  *

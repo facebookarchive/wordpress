@@ -19,41 +19,6 @@ function fb_create_menu() {
 }
 
 
-function fb_notify_user_of_plugin_conflicts()
-{
-	$plugins_list = apply_filters( 'all_plugins', get_plugins() );
-
-	//static array of potentially conflicting plugins
-	$og_conflicting_plugins_static = array( "Facebook", "Hello Dolly", "Open Graph", "WordPress SEO by Yoast", "Pure Web Brilliant's Social Graph Control" );
-
-	$num_conflicting = 0;
-	$conflicting_plugins = array();
-	foreach ( $plugins_list as $val ) {
-		$plugin_name = $val['Name'];
-		if($plugin_name == "Facebook") {
-			continue;
-		}
-		
-		if( in_array($plugin_name, $og_conflicting_plugins_static) ) {
-			$num_conflicting += 1;
-			array_push( $conflicting_plugins, $plugin_name );
-		}
-	}
-
-	//if there are more than 1 plugins relying on Open Graph, warn the user on this plugins page
-	if ( $num_conflicting >= 1 ) {
-		echo "<h2>" . "The following plugins may conflict with Facebook: \n" . "</h2>";
-		foreach( $conflicting_plugins as $val ) {
-			echo $val;
-		}
-		echo "<br></br>Consider deactivating a few, so only one is activated at once\n";
-		echo "<a href='plugins.php' aria-label='Plugins 0'>Disable Plugins Here</a>";
-	}
-	else {
-		echo "No issues here!";
-	}
-}
-
 /**
  * Link to settings from the plugin listing page
  *
@@ -187,8 +152,6 @@ function fb_settings_page() {
 
 				echo '<p>' . sprintf( esc_html( __( 'These settings affect Pages and Posts only.	Additional Social Plugins are also available in the %sWidgets settings%s.', 'facebook' ) ), '<a href="widgets.php">', '</a>' );
 
-				
-				fb_notify_user_of_plugin_conflicts();
 				fb_get_social_publisher_fields();
 				fb_get_like_fields();
 				fb_get_subscribe_fields();

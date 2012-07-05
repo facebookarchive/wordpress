@@ -46,7 +46,7 @@ function fb_like_button_automatic($content) {
 	
 		if ( is_home() && isset( $options['like']['show_on_homepage'] ) ) {
 			$content = $new_content;
-		}
+		} 
 		elseif ( isset( $options['like']['show_on'] ) ) {
 			if ( is_page() && ( $options['like']['show_on'] == 'all pages' || $options['like']['show_on'] == 'all posts and pages' ) )
 				$content = $new_content;

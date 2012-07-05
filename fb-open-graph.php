@@ -29,6 +29,7 @@ function fb_output_og_protocol( $property, $content ) {
 
 function fb_strip_and_format_desc( $post ) {
 	
+	$desc_no_html = "";
 	$desc_no_html = strip_shortcodes( $desc_no_html ); // Strip shortcodes first in case there is HTML inside the shortcode
         $desc_no_html = wp_strip_all_tags( $desc_no_html ); // Strip all html
         $desc_no_html = trim( $desc_no_html ); // Trim the final string, we may have stripped everything out of the post so this will make the value empty if that's the case

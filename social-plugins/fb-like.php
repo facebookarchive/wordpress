@@ -44,19 +44,12 @@ function fb_like_button_automatic($content) {
 				break;
 		}
 	
-<<<<<<< HEAD
-		if ( is_home() && isset( $options['like']['show_on_homepage'] ) ) {
-			$content = $new_content;
-		} 
-		elseif ( isset( $options['like']['show_on'] ) ) {
-=======
 		$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_like', true );
 		
 		if ( is_home() && $options['like']['show_on_homepage'] ) {
 			$content = $new_content;
 		}
 		elseif ( ( 'default' == $show_indiv || empty( $show_indiv ) ) && $options['like']['show_on'] ) {
->>>>>>> 2d3755d050b6a5599dc38f6af62c79f977c37f10
 			if ( is_page() && ( $options['like']['show_on'] == 'all pages' || $options['like']['show_on'] == 'all posts and pages' ) )
 				$content = $new_content;
 			elseif ( is_single() && ( $options['like']['show_on'] == 'all posts' || $options['like']['show_on'] == 'all posts and pages' ) )

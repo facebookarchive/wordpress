@@ -44,10 +44,10 @@ function fb_like_button_automatic($content) {
 				break;
 		}
 	
-		if ( is_home() && $options['like']['show_on_homepage'] ) {
+		if ( is_home() && isset( $options['like']['show_on_homepage'] ) ) {
 			$content = $new_content;
-		}
-		elseif ( $options['like']['show_on'] ) {
+		} 
+		elseif ( isset( $options['like']['show_on'] ) ) {
 			if ( is_page() && ( $options['like']['show_on'] == 'all pages' || $options['like']['show_on'] == 'all posts and pages' ) )
 				$content = $new_content;
 			elseif ( is_single() && ( $options['like']['show_on'] == 'all posts' || $options['like']['show_on'] == 'all posts and pages' ) )

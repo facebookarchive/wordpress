@@ -65,8 +65,8 @@ function fb_get_recommendations_bar_fields_array() {
 										array('name' => 'show_on',
 													'type' => 'dropdown',
 													'default' => 'all posts and pages',
-													'options' => array('all posts' => 'all posts', 'all pages' => 'all pages', 'all posts and pages' => 'all posts and pages', 'none' => 'none' ),
-													'help_text' => __( 'Whether the plugin will appear on all posts or pages by default.', 'facebook' ),
+													'options' => array('all posts' => 'all posts', 'all pages' => 'all pages', 'all posts and pages' => 'all posts and pages', 'individual posts and pages' => 'individual posts and pages' ),
+													'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' ),
 													)
 										);
 

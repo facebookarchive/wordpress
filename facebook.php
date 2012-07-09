@@ -36,5 +36,6 @@ require_once( $facebook_plugin_directory . '/fb-open-graph.php');
 require_once( $facebook_plugin_directory . '/social-plugins/fb-social-plugins.php');
 require_once( $facebook_plugin_directory . '/fb-login.php' );
 require_once( $facebook_plugin_directory . '/fb-social-publisher.php' );
+require_once( $facebook_plugin_directory . '/fb-social-plugin-settings.php' );
 require_once( $facebook_plugin_directory . '/fb-wp-helpers.php' );
 unset( $facebook_plugin_directory );

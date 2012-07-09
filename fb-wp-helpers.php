@@ -257,4 +257,39 @@ function fb_delete_user_meta( $user_id, $meta_key, $meta_value = '' ) {
 }
 
 
+function fb_option_name($field){
+	switch ($field) {
+		case 'app_id':
+			return 'App ID';
+			break;
+		case 'app_secret':
+			return 'App secret';
+			break;
+		case 'app_namespace':
+			return 'App namespace';
+			break;
+		case 'social_publisher':
+			return "Social Publisher";
+			break;
+		case 'recommendations_bar':
+			return "Recommendations Bar";
+			break;
+		case 'like':
+			return "Like Button";
+			break;
+		case 'subscribe':
+			return "Subscribe Button";
+			break;
+		case 'send':
+			return "Send Button";
+			break;
+		case 'comments':
+			return "Comments Box";
+			break;
+		default:
+			return '';
+			break;
+	}
+}
+
 ?>

@@ -190,7 +190,6 @@ function fb_notify_user_of_plugin_conflicts()
 	//if there are more than 1 plugins relying on Open Graph, warn the user on this plugins page
 	if ( $num_conflicting >= 1 ) {
 		fb_admin_dialog( sprintf( __('Please disable conflicting plugins, on the %splugins page%s.', 'facebook') . "</br>	Consider the following: " . implode($conflicting_plugins), '<a href="plugins.php" aria-label="Plugins 0">', '</a>' ), true);
-		fb_admin_dialog(var_dump($conflicting_plugins, 1));
 	}
 	else {
 		echo "No issues here!";

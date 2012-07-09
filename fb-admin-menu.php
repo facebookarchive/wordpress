@@ -18,6 +18,7 @@ function fb_create_menu() {
 	add_action( 'admin_print_scripts-' . $page, 'fb_admin_scripts' );
 }
 
+
 /**
  * Function to check if the wordpress user has plugins that may conflict
  * with the Facebook plugin (due to Open Graph). 

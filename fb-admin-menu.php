@@ -114,8 +114,9 @@ function fb_suggest_app_creation_info() {
  */
 function fb_suggest_app_setup() {
 	echo "<h3> Suggested Configuration Options: </h3>";
-	echo "<h4> App Domain(s): </h4>" . $_SERVER["HTTP_HOST"] . "</br>";
-	echo "<h4> Site URL: </h4> http:" . "/" . "/" . $_SERVER["HTTP_HOST"] . "</br>";
+	$domain = parse_url(home_url('/'), PHP_URL_HOST);
+	echo "<h4> App Domain(s): </h4>" . $domain . "</br>";
+	echo "<h4> Site URL: </h4> http:" . "/" . "/" . $domain . "</br>";
 }
 
 /**

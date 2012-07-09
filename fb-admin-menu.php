@@ -25,12 +25,6 @@ function fb_create_menu() {
  */
 function fb_notify_user_of_plugin_conflicts()
 {
-	//$plugins_list = get_plugins();
-	//var_dump($plugins_list,1);
-	
-	//$plugins_list = array_filter( $plugins_list, 'is_plugin_active' );
-    //$activated_plugin_paths = get_option('active_plugins');
-	//var_dump($activated_plugin_paths, 1);
 	//static array of potentially conflicting plugins
 	$og_conflicting_plugins_static = array( "http://wordpress.org/extend/plugins/facebook/", 
 		"http://wordpress.org/extend/plugins/opengraph/",
@@ -175,15 +169,15 @@ function fb_notify_user_of_plugin_conflicts()
 
 	//fetch activated plugins
 	$plugins_list = get_option( 'active_plugins', array() ); 
+
 	$num_conflicting = 0;
 	$conflicting_plugins = array();
+
 	//iterate through activated plugins, checking if they are in the list of conflict plugins
 	foreach ( $plugins_list as $val ) {
-		//echo $val . "<-- path";
 		$plugin_data = get_plugin_data(WP_PLUGIN_DIR . '/' . $val);		
 		$plugin_uri = $plugin_data['PluginURI'];
 		$plugin_name = $plugin_data['Name'];
-		//echo $plugin_uri . "<-- plugin uri. name--> " . $plugin_name;
 		if($plugin_uri == "http://wordpress.org/extend/plugins/facebook/") {
 			continue;
 		}

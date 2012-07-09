@@ -100,6 +100,25 @@ function fb_admin_menu_settings() {
 }
 
 /**
+ * Echo suggested app information
+ *
+ */
+function fb_suggest_app_creation_info() {
+   	//echo "<h3>Upon Creation: Call your app TESTING!</h3>";
+	//var_dump($_SERVER, 1);
+}
+
+/**
+ * Echo suggested app info like URL via _SERVER fields
+ *
+ */
+function fb_suggest_app_setup() {
+	echo "<h3> Suggested Configuration Options: </h3>";
+	echo "<h4> App Domain(s): </h4>" . $_SERVER["HTTP_HOST"] . "</br>";
+	echo "<h4> Site URL: </h4> http:" . "/" . "/" . $_SERVER["HTTP_HOST"] . "</br>";
+}
+
+/**
  * The settings page
  *
  * @since 1.0
@@ -133,10 +152,12 @@ function fb_settings_page() {
 				echo '<p><strong>' . sprintf( esc_html( __( 'If you already have a Facebook app for this website, skip to %sStep 2%s.', 'facebook' ) ), '<a href="#step-2">', '</a>' ) . '</strong></p><br>';
 				echo '<p>' . sprintf( esc_html( __( 'If you don\'t already have an app for this website, go to %s and click the "Create New App" button.	You\'ll see a dialog like the one below.	Fill this in and click "Continue".', 'facebook' ) ), '<a href="https://developers.facebook.com/apps" target="_blank">https://developers.facebook.com/apps</a>' );
 				echo '<p><img src="' . plugins_url( 'images/nux_create_app.png', __FILE__ ) . '"></p>';
+				fb_suggest_app_creation_info();				
 
 				echo '<a name="step-2"></a><h2>' . esc_html__( 'Step 2: Set up the App', 'facebook' ) . '</h2>';
 				echo sprintf( esc_html( __( 'Next, set up your app so that it looks like the settings below.	Make sure you set your app\'s icon and image, too.	If you already have an app and skipped Step 1, you can view your app settings by going to %s', 'facebook' ) ), '<a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>.</p>' );
 				echo '<p><img src="' . plugins_url( 'images/nux_app_settings.png', __FILE__ ) . '"></p>';
+				fb_suggest_app_setup();
 
 				echo '<h2>' . esc_html__( 'Step 3: WordPress settings', 'facebook' ) . '</h2>';
 				echo '<p>' . esc_html__( 'Now, based on what you entered in Step 2, fill in the settings below and Save.	Once saved, additional options will appear on this page.', 'facebook' ) . '</p>';

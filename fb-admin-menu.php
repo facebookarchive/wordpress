@@ -25,7 +25,7 @@ function fb_create_menu() {
  */
 function fb_notify_user_of_plugin_conflicts()
 {
-	$plugins_list = get_plugins();
+	//$plugins_list = get_plugins();
 	//var_dump($plugins_list,1);
 	
 	//$plugins_list = array_filter( $plugins_list, 'is_plugin_active' );
@@ -173,11 +173,17 @@ function fb_notify_user_of_plugin_conflicts()
                 "http://wordpress.org/extend/plugins/zoltonorg-social-plugin"
 	);
 
+	//fetch activated plugins
+	$plugins_list = get_option( 'active_plugins', array() ); 
 	$num_conflicting = 0;
 	$conflicting_plugins = array();
+	//iterate through activated plugins, checking if they are in the list of conflict plugins
 	foreach ( $plugins_list as $val ) {
-		$plugin_uri = $val['PluginURI'];
-		$plugin_name = $val['Name'];
+		//echo $val . "<-- path";
+		$plugin_data = get_plugin_data(WP_PLUGIN_DIR . '/' . $val);		
+		$plugin_uri = $plugin_data['PluginURI'];
+		$plugin_name = $plugin_data['Name'];
+		//echo $plugin_uri . "<-- plugin uri. name--> " . $plugin_name;
 		if($plugin_uri == "http://wordpress.org/extend/plugins/facebook/") {
 			continue;
 		}

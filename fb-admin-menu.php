@@ -184,7 +184,12 @@ function fb_notify_user_of_plugin_conflicts()
 		
 		if( in_array($plugin_uri, $og_conflicting_plugins_static) ) {
 			$num_conflicting += 1;
-			array_push( $conflicting_plugins, $num_conflicting . ". " .  $plugin_name);
+			if($num_conflicting ==1) {
+	                        array_push( $conflicting_plugins, $plugin_name);
+			}
+			else {
+	                        array_push( $conflicting_plugins, ", " .  $plugin_name);
+			}
 		}
 	}
 

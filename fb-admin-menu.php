@@ -113,10 +113,10 @@ function fb_suggest_app_creation_info() {
  *
  */
 function fb_suggest_app_setup() {
-	echo "<h3> Suggested Configuration Options: </h3>";
+	echo "</br><b> Here are for some recommendations for filling this form out, based on where this plugin is installed.: </b></br>";
 	$domain = parse_url(home_url('/'), PHP_URL_HOST);
-	echo "<h4> App Domain(s): </h4>" . $domain . "</br>";
-	echo "<h4> Site URL: </h4> http:" . "/" . "/" . $domain . "</br>";
+	echo "<b> App Domains: </b>" . $domain . "</br>";
+	echo "<b> Site URL and Mobile Web URL: </b> http:" . "/" . "/" . $domain . "</br>";
 }
 
 /**
@@ -157,8 +157,8 @@ function fb_settings_page() {
 
 				echo '<a name="step-2"></a><h2>' . esc_html__( 'Step 2: Set up the App', 'facebook' ) . '</h2>';
 				echo sprintf( esc_html( __( 'Next, set up your app so that it looks like the settings below.	Make sure you set your app\'s icon and image, too.	If you already have an app and skipped Step 1, you can view your app settings by going to %s', 'facebook' ) ), '<a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>.</p>' );
-				echo '<p><img src="' . plugins_url( 'images/nux_app_settings.png', __FILE__ ) . '"></p>';
 				fb_suggest_app_setup();
+				echo '<p><img src="' . plugins_url( 'images/nux_app_settings.png', __FILE__ ) . '" style="border: 1px solid #ccc; margin: 5px; padding: 5px;"></p>';
 
 				echo '<h2>' . esc_html__( 'Step 3: WordPress settings', 'facebook' ) . '</h2>';
 				echo '<p>' . esc_html__( 'Now, based on what you entered in Step 2, fill in the settings below and Save.	Once saved, additional options will appear on this page.', 'facebook' ) . '</p>';

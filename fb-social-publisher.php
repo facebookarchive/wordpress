@@ -16,7 +16,7 @@ if ( isset($options['social_publisher']) && isset($options['social_publisher']['
 
 /**
  * Add meta boxes for a custom Status that is used when posting to an Author's Timeline
- *
+ *5
  * @since 1.0
  */
 function fb_add_author_message_box() {
@@ -550,17 +550,13 @@ function fb_get_social_publisher_fields() {
       }
     }
     
-    if (count($accounts_options) < 2) {
-      
-    }
-    else {
-      $fan_page_option = array(
-        'name' => 'publish_to_fan_page',
-        'type' => 'dropdown',
-        'options' => $accounts_options,
-        'help_text' => __( 'New posts will be publish to this Facebook Page.', 'facebook' ),
-        );
-    }
+    $fan_page_option = array(
+      'name' => 'publish_to_fan_page',
+      'type' => 'dropdown',
+      'options' => $accounts_options,
+      'help_text' => __( 'New posts will be publish to this Facebook Page.', 'facebook' ),
+      );
+    
   }
 	
 	$parent = array(

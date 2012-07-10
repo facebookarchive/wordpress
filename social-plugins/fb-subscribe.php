@@ -43,7 +43,7 @@ function fb_subscribe_button_automatic($content) {
 	
 		$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_subscribe', true );
 		
-		if ( is_home() && $options['subscribe']['show_on_homepage'] ) {
+		if ( is_home() && isset( $options['subscribe']['show_on_homepage'] ) ) {
 			$content = $new_content;
 		}
 		elseif ( ( 'default' == $show_indiv || empty( $show_indiv ) ) && $options['subscribe']['show_on'] ) {

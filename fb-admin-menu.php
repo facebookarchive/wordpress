@@ -104,8 +104,10 @@ function fb_admin_menu_settings() {
  *
  */
 function fb_suggest_app_creation_info() {
-   	//echo "<h3>Upon Creation: Call your app TESTING!</h3>";
-	//var_dump($_SERVER, 1);
+	echo "</br>Here are for some recommendations for filling this form out. </br>";
+	$app_namespace = strtolower(str_replace( " ", "-", get_bloginfo('name')));
+	echo "<b> App Name: </b>" . get_bloginfo('name') . "</br>";
+        echo "<b> App Namespace: </b>". $app_namespace . "</br>";
 }
 
 /**
@@ -113,7 +115,7 @@ function fb_suggest_app_creation_info() {
  *
  */
 function fb_suggest_app_setup() {
-	echo "</br><b> Here are for some recommendations for filling this form out, based on where this plugin is installed.: </b></br>";
+	echo "</br>Here are for some recommendations for filling this form out, based on where this plugin is installed.</br>";
 	$domain = parse_url(home_url('/'), PHP_URL_HOST);
 	echo "<b> App Domains: </b>" . $domain . "</br>";
 	echo "<b> Site URL and Mobile Web URL: </b> http:" . "/" . "/" . $domain . "</br>";

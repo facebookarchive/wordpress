@@ -18,13 +18,14 @@
 		width: 100%;	
 	}
 
+        div#page {
+                width: 480px;
+        }
+
 	.fb-comments {
 		float:left;
-		width:100%;
+ 		width:100%;
 	}
 
-	div#page {
-		width: 480px;
-	}
 }
 

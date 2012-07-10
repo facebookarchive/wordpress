@@ -28,9 +28,8 @@ function fb_notify_user_of_plugin_conflicts()
 	//static array of potentially conflicting plugins
 	$og_conflicting_plugins_static = array( "http://wordpress.org/extend/plugins/facebook/", 
 		"http://wordpress.org/extend/plugins/opengraph/",
-		"http://wordpress.org/extend/plugins/wordpress-seo/",
+		"http://yoast.com/wordpress/seo/#utm_source=wpadmin&utm_medium=plugin&utm_campaign=wpseoplugin", 
 		"http://wordpress.org/extend/plugins/kevinjohn-gallagher-pure-web-brilliants-social-graph-control/",
-		"http://akismet.com/?return=true",
 		"http://wordpress.org/extend/plugins/1-click-retweetsharelike",
 		"http://wordpress.org/extend/plugins/2-click-socialmedia-buttons",
 		"http://wordpress.org/extend/plugins/add-facebook-og-meta-tags-paulund",

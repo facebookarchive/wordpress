@@ -28,6 +28,7 @@ function fb_notify_user_of_plugin_conflicts()
 	//static array of potentially conflicting plugins
 	$og_conflicting_plugins_static = array( "http://wordpress.org/extend/plugins/facebook/", 
 		"http://wordpress.org/extend/plugins/opengraph/",
+		"http://akismet.com/?return=true",
 		"http://yoast.com/wordpress/seo/#utm_source=wpadmin&utm_medium=plugin&utm_campaign=wpseoplugin", 
 		"http://wordpress.org/extend/plugins/kevinjohn-gallagher-pure-web-brilliants-social-graph-control/",
 		"http://wordpress.org/extend/plugins/1-click-retweetsharelike",
@@ -183,13 +184,13 @@ function fb_notify_user_of_plugin_conflicts()
 		
 		if( in_array($plugin_uri, $og_conflicting_plugins_static) ) {
 			$num_conflicting += 1;
-			array_push( $conflicting_plugins, $plugin_name . " : " . $plugin_uri);
+			array_push( $conflicting_plugins, $num_conflicting . ". " .  $plugin_name);
 		}
 	}
 
 	//if there are more than 1 plugins relying on Open Graph, warn the user on this plugins page
 	if ( $num_conflicting >= 1 ) {
-		fb_admin_dialog( sprintf( __('Please disable conflicting plugins, on the %splugins page%s.', 'facebook') . "</br>	Consider the following: " . implode($conflicting_plugins), '<a href="plugins.php" aria-label="Plugins 0">', '</a>' ), true);
+		fb_admin_dialog( sprintf( __('Potential conflicts with the Facebook plugin have been detected. Please consider disabling the following plugins %shere%s.', 'facebook') . "</br>" . implode($conflicting_plugins), '<a href="plugins.php" aria-label="Plugins 0">', '</a>' ), true);
 	}
 	else {
 		echo "No issues here!";

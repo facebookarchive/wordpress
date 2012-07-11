@@ -64,4 +64,92 @@ function fb_build_social_plugin_params($options) {
 
 	return $params;
 }
+
+if ( true ) {
+	add_action( 'add_meta_boxes', 'fb_add_social_plugin_settings_box' );
+	add_action( 'save_post', 'fb_add_social_plugin_settings_box_save' );
+}
+
+/**
+ * Add meta box for social plugin settings for individual posts and pages
+ * 
+ * @since 1.0.2
+ */
+function fb_add_social_plugin_settings_box() {
+	global $post;
+	$options = get_option('fb_options');
+
+	if ( true ) {
+		add_meta_box(
+				'fb_social_plugin_settings_box_id',
+				__( 'Facebook Social Plugins', 'facebook' ),
+				'fb_add_social_plugin_settings_box_content',
+				'post'
+		);
+		add_meta_box(
+				'fb_social_plugin_settings_box_id',
+				__( 'Facebook Social Plugins', 'facebook' ),
+				'fb_add_social_plugin_settings_box_content',
+				'page'
+		);
+	}
+}
+
+/**
+ * Add meta boxes for a custom Status that is used when posting to an Author's Timeline
+ *
+ * @since 1.0.2
+ */
+function fb_add_social_plugin_settings_box_content( $post ) {
+	$options = get_option('fb_options');
+
+	$features = array( 'like', 'subscribe', 'send', 'comments', 'recommendations_bar' );
+	echo '<table><p>Change the settings below to show or hide particular Social Plugins.</p>';
+	foreach ( $features as $feature ) {
+		if ( $options[$feature]['enabled'] ) {
+			$value = get_post_meta( $post->ID, "fb_social_plugin_settings_box_$feature", true );
+			
+			if ( empty( $value ) ) {
+				if ( $post->post_type == 'page' ) {
+					if ( $options[$feature]['show_on'] == 'all posts and pages' || $options[$feature]['show_on'] == 'all pages' ) {
+						$value = 'show';
+					}
+					else {
+						$value = 'hide';
+					}
+				}
+				else {
+					if ( $options[$feature]['show_on'] == 'all posts and pages' || $options[$feature]['show_on'] == 'all posts' ) {
+						$value = 'show';
+					}
+					else {
+						$value = 'hide';
+					}
+				}
+			}
+			
+			echo '<tr><td>' . fb_option_name( $feature ) . "</td> <td><label><input type=\"radio\" name=\"fb_social_plugin_settings_box_$feature\" value =\"show\" "
+				. ( $value == 'show' ? 'checked="checked" ' : '' ) . "/>Show</label></td> <td><label><input type=\"radio\" name=\"fb_social_plugin_settings_box_$feature\" value =\"hide\" "
+				. ( $value == 'hide'  ? 'checked="checked" ' : '' ) . "/>Hide</label></td> </tr>" ;
+		}
+	}
+	echo '</table>';
+}
+
+function fb_add_social_plugin_settings_box_save( $post_id ) {
+	$features = array( 'like', 'subscribe', 'send', 'comments', 'recommendations_bar' );
+	foreach ( $features as $feature ) {
+		$index = "fb_social_plugin_settings_box_$feature";
+		if ( isset( $_POST) && isset( $_POST[$index] )) {
+			switch ( $_POST[$index]) {
+				case 'show':
+					update_post_meta( $post_id, $index, 'show' );
+					break;
+				case 'hide':
+					update_post_meta( $post_id, $index, 'hide' );
+					break;
+			}
+		}
+	}
+}
 ?>

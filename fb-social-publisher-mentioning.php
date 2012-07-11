@@ -178,7 +178,7 @@ function fb_add_page_mention_box_content( $post ) {
 		echo '</label> ';
 		echo '<input type="text" class="widefat" id="pages-mention-message" name="fb_page_mention_box_message" value="" size="44" placeholder="'.esc_attr__('Write something...').'" />';
 		echo '<p class="howto">';
-		if ( is_page() ) {
+		if ( $post->post_type == 'page' ) {
 			_e('This will add the page and message to the Timeline of each Facebook Page mentioned. They will also appear in the contents of the page.', 'facebook');
 		} else {
 			_e('This will add the post and message to the Timeline of each Facebook Page mentioned. They will also appear in the contents of the post.', 'facebook');
@@ -299,7 +299,7 @@ function fb_add_friend_mention_box_content( $post ) {
 		echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_friend_mention_box_message" value="" size="44" placeholder="Write something..." />';
 
 		echo '<p class="howto">';
-		if ( is_page() ) {
+		if ( $post->post_type == 'page' ) {
 			_e('This will add the page and message to the Timeline of each friend mentioned. They will also appear in the contents of the page.', 'facebook');
 		} else {
 			_e('This will add the post and message to the Timeline of each friend mentioned. They will also appear in the contents of the post.', 'facebook');

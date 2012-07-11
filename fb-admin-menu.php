@@ -26,11 +26,17 @@ function fb_create_menu() {
 function fb_notify_user_of_plugin_conflicts()
 {
 	//static array of potentially conflicting plugins
+  	//add to this list of conflicting plugins from the big list below 
 	$og_conflicting_plugins_static = array( "http://wordpress.org/extend/plugins/facebook/", 
 		"http://wordpress.org/extend/plugins/opengraph/",
-		"http://akismet.com/?return=true",
 		"http://yoast.com/wordpress/seo/#utm_source=wpadmin&utm_medium=plugin&utm_campaign=wpseoplugin", 
-		"http://wordpress.org/extend/plugins/kevinjohn-gallagher-pure-web-brilliants-social-graph-control/",
+  		"http://wordbooker.tty.org.uk",
+		"http://ottopress.com/wordpress-plugins/simple-facebook-connect/",
+		"http://www.whiletrue.it",
+		"http://aaroncollegeman.com/sharepress"
+	);
+
+	$og_conflicting_plugins = array ( "http://wordpress.org/extend/plugins/kevinjohn-gallagher-pure-web-brilliants-social-graph-control/",
 		"http://wordpress.org/extend/plugins/1-click-retweetsharelike",
 		"http://wordpress.org/extend/plugins/2-click-socialmedia-buttons",
 		"http://wordpress.org/extend/plugins/add-facebook-og-meta-tags-paulund",
@@ -126,7 +132,6 @@ function fb_notify_user_of_plugin_conflicts()
                 "http://wordpress.org/extend/plugins/seopress",
                 "http://wordpress.org/extend/plugins/share-buttons",
                 "http://wordpress.org/extend/plugins/share-center-pro",
-                "http://wordpress.org/extend/plugins/sharepress",
                 "http://wordpress.org/extend/plugins/shareyourcart",
                 "http://wordpress.org/extend/plugins/sharing-is-caring",
                 "http://wordpress.org/extend/plugins/shopp-facebook-like-button-sflb",
@@ -145,7 +150,6 @@ function fb_notify_user_of_plugin_conflicts()
                 "http://wordpress.org/extend/plugins/socialize",
                 "http://wordpress.org/extend/plugins/wonderm00ns-simple-facebook-open-graph-tags",
                 "http://wordpress.org/extend/plugins/woocommerce",
-                "http://wordpress.org/extend/plugins/wordbooker",
                 "http://wordpress.org/extend/plugins/wordpress-connect",
                 "http://wordpress.org/extend/plugins/wordpress-facebook-integrate",
                 "http://wordpress.org/extend/plugins/wordpress-plugin-seo-and-facebook-opengraph-and-google-schema",

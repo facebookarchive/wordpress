@@ -11,3 +11,21 @@
 	vertical-align: middle;
 	margin-bottom: 2px;
 }
+
+@media only screen and (max-device-width: 480px) {
+	.fb-like {
+		float: left;
+		width: 100%;	
+	}
+
+        div#page {
+                width: 480px;
+        }
+
+	div.fb-comments span{
+		float:left;
+ 		width:100%;
+	}
+
+}
+

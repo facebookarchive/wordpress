@@ -22,7 +22,7 @@
                 width: 480px;
         }
 
-	.fb-comments {
+	div.fb-comments span{
 		float:left;
  		width:100%;
 	}

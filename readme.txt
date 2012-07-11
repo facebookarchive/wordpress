@@ -68,6 +68,7 @@ Facebook Insights (http://www.facebook.com/insights) integration included. This 
 * Added suggestions for what to enter in fields in the new user experience.
 * Bug fixes to ensure everything works on mobile.
 * Bug fixes to Pages drop down on the Facebook settings page.
+* Removed the need to create PHP sessions, relying on user meta/transients now.
 
 = 1.0.1 =
 

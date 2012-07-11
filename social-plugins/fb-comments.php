@@ -89,7 +89,7 @@ function fb_get_fb_comments_seo() {
 			try {
 				$comments = $facebook->api('/comments', array('ids' => $url));
 			}
-				catch (FacebookApiException $e) {
+				catch (WP_FacebookApiException $e) {
 			}
 			
 			set_transient( 'fb_comments_' . $post->ID, $comments, 60*15 );

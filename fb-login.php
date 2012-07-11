@@ -77,6 +77,6 @@ function fb_get_current_user() {
 
 		return $user;
 	}
-	catch (FacebookApiException $e) {
+	catch (WP_FacebookApiException $e) {
 	}
 }

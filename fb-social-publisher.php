@@ -263,7 +263,7 @@ function fb_post_to_fb_page($post_id) {
   
       update_post_meta($post_id, 'fb_fan_page_post_id', sanitize_text_field($publish_result['id']));
     }
-    catch (FacebookApiException $e) {
+    catch (WP_FacebookApiException $e) {
       $error_result = $e->getResult();
       
       if ($e->getCode() == 190) {
@@ -377,7 +377,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 				
 				$friends_posts .= '<a href="' . esc_url( fb_get_permalink_from_feed_publish_id( $publish_result['id'] ) ) . '" target="_blank"><img src="' . esc_url( 'http://graph.facebook.com/' . $friend['id'] . '/picture' ) . '" width="15"></a> ';
 			}
-			catch (FacebookApiException $e) {
+			catch (WP_FacebookApiException $e) {
         $error_result = $e->getResult();
         
         if ($e->getCode() == 210) {
@@ -437,7 +437,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 				$pages_posts .= '<a href="' . sanitize_text_field( fb_get_permalink_from_feed_publish_id ( $publish_result['id'] ) ) . '" target="_blank"><img src="http://graph.facebook.com/' . $page['id'] . '/picture" width="15" target="_blank"></a> ';
 
 			}
-			catch (FacebookApiException $e) {
+			catch (WP_FacebookApiException $e) {
         $error_result = $e->getResult();
         
         if ($e->getCode() == 210) {
@@ -472,7 +472,7 @@ function fb_post_to_author_fb_timeline($post_id) {
       update_post_meta($post_id, 'fb_author_post_id', sanitize_text_field($publish_result['id']));
       
     }
-    catch (FacebookApiException $e) {
+    catch (WP_FacebookApiException $e) {
       $error_result = $e->getResult();
       
       //Unset the option to publish to an author's Timeline, since the likely failure is because the admin didn't set up the proper OG action and object in their App Settings
@@ -631,7 +631,7 @@ function fb_delete_social_posts( $post_id ) {
 		try {
 			$delete_result = $facebook->api('/' . $fb_page_post_id, 'DELETE', array('ref' => 'fbwpp'));
 		}
-		catch (FacebookApiException $e) {
+		catch (WP_FacebookApiException $e) {
 		}
 	}
 	
@@ -641,7 +641,7 @@ function fb_delete_social_posts( $post_id ) {
 		try {
 			$delete_result = $facebook->api('/' . $fb_author_post_id, 'DELETE', array('ref' => 'fbwpp'));
 		}
-		catch (FacebookApiException $e) {
+		catch (WP_FacebookApiException $e) {
 		}
 
 	}
@@ -653,7 +653,7 @@ function fb_delete_social_posts( $post_id ) {
 			try {
 					$delete_result = $facebook->api('/' . $page_post_ids, 'DELETE', array('ref' => 'fbwpp'));
 			}
-			catch (FacebookApiException $e) {
+			catch (WP_FacebookApiException $e) {
 			}
 		}
 	}
@@ -665,7 +665,7 @@ function fb_delete_social_posts( $post_id ) {
 			try {
 					$delete_result = $facebook->api('/' . $page_post_ids, 'DELETE', array('ref' => 'fbwpp'));
 			}
-			catch (FacebookApiException $e) {
+			catch (WP_FacebookApiException $e) {
 			}
 		}
 	}
@@ -694,7 +694,7 @@ function fb_get_user_pages() {
 	try {
 		$accounts = $facebook->api('/me/accounts', 'GET', array('ref' => 'fbwpp'));
 	}
-	catch (FacebookApiException $e) {
+	catch (WP_FacebookApiException $e) {
 		return $accounts;
 	}
 

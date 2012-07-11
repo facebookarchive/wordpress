@@ -24,7 +24,7 @@ function fb_friend_page_autocomplete() {
         try {
           $friends = $facebook->api('/me/friends', 'GET', array('ref' => 'fbwpp'));
         }
-        catch (FacebookApiException $e) {
+        catch (WP_FacebookApiException $e) {
         }
         
         set_transient( 'fb_friends_' . $facebook->getUser(), $friends, 60*15 );
@@ -72,7 +72,7 @@ function fb_friend_page_autocomplete() {
         try {
           $pages = $facebook->api( '/search', 'GET', array( 'access_token' => '', 'q' => $_GET['q'], 'type' => 'page', 'fields' => 'picture,name,id,likes', 'ref' => 'fbwpp' ) );
         }
-        catch (FacebookApiException $e) {
+        catch (WP_FacebookApiException $e) {
         }
         set_transient( 'fb_pages_' . $_GET['q'], $pages, 60*60 );
       }

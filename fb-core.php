@@ -120,7 +120,7 @@ function fb_init() {
 	
 	// appId and secret are required by BaseFacebook
 	if ( ( ! empty( $options['app_id'] ) && ! empty( $options['app_secret'] ) ) ) {
-		$facebook = new Facebook_WP(array(
+		$facebook = new Facebook_WP_Extend(array(
 			'appId'  => $options['app_id'],
 			'secret' => $options['app_secret'],
 		));

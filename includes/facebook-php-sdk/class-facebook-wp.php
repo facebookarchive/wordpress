@@ -1,6 +1,6 @@
 <?php
 
-if ( ! class_exists( 'Facebook' ) )
+if ( ! class_exists( 'WP_Facebook' ) )
 	require_once( dirname( __FILE__ ) . '/facebook.php' );
 
 /**
@@ -8,7 +8,7 @@ if ( ! class_exists( 'Facebook' ) )
  *
  * @since 1.0
  */
-class Facebook_WP extends Facebook {
+class Facebook_WP_Extend extends WP_Facebook {
 	/**
 	 * Override Facebook PHP SDK cURL function with WP_HTTP
 	 * Facebook PHP SDK is POST-only
@@ -24,7 +24,7 @@ class Facebook_WP extends Facebook {
 		global $wp_version;
 
 		if ( empty( $url ) || empty( $params ) )
-			throw new FacebookApiException( array( 'error_code' => 400, 'error' => array( 'type' => 'makeRequest', 'message' => 'Invalid parameters and/or URI passed to makeRequest' ) ) );
+			throw new WP_FacebookApiException( array( 'error_code' => 400, 'error' => array( 'type' => 'makeRequest', 'message' => 'Invalid parameters and/or URI passed to makeRequest' ) ) );
 		error_log(var_export($url,1));
 		error_log(var_export($params,1));
 		error_log(var_export(debug_backtrace(),1));
@@ -42,7 +42,7 @@ class Facebook_WP extends Facebook {
 
 		error_log(var_export($response,1));
 		if ( is_wp_error( $response ) ) {
-			throw new FacebookApiException( array( 'error_code' => $response->get_error_code(), 'error_msg' => $response->get_error_message() ) );
+			throw new WP_FacebookApiException( array( 'error_code' => $response->get_error_code(), 'error_msg' => $response->get_error_message() ) );
 		}
 		else if ( wp_remote_retrieve_response_code( $response ) != '200' ) {
 			$fb_response = json_decode( $response['body'] );
@@ -53,7 +53,7 @@ class Facebook_WP extends Facebook {
 				$error_subcode = $fb_response->error->error_subcode;
 			}
 			
-			throw new FacebookApiException(array(
+			throw new WP_FacebookApiException(array(
         'error_code' => $fb_response->error->code,
         'error' => array(
         'message' => $fb_response->error->message,
@@ -81,7 +81,7 @@ class Facebook_WP extends Facebook {
           'grant_type'=>'fb_exchange_token',
           'fb_exchange_token'=>$this->getAccessToken(),
         ));
-      } catch (FacebookApiException $e) {
+      } catch (WP_FacebookApiException $e) {
         // most likely that user very recently revoked authorization.
         // In any event, we don't have an access token, so say so.
         return false;

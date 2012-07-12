@@ -1,6 +1,7 @@
 <?php
 add_action( 'init', 'fb_init' );
 add_action( 'admin_notices', 'fb_install_warning' );
+add_action( 'admin_notices', 'fb_ssl_warning' );
 //add_action( 'admin_notices', 'fb_rate_message' );
 add_action( 'wp_enqueue_scripts', 'fb_style' );
 
@@ -16,6 +17,27 @@ function fb_install_warning() {
 
 	if ((empty($options['app_id']) || empty($options['app_secret'])) && $page != 'facebook-settings' && current_user_can( 'manage_options' ) ) {
 		fb_admin_dialog( sprintf( __('You must %sconfigure the plugin%s to enable Facebook for WordPress.', 'facebook' ), '<a href="admin.php?page=facebook-settings">', '</a>' ), true);
+	}
+}
+
+/**
+ * Display an admin-facing warning if openSSL is not installed properly
+ *
+ * @since 1.0.2
+ */
+function fb_ssl_warning() {
+	$options = get_option( 'fb_options' );
+
+	$page = (isset($_GET['page']) ? $_GET['page'] : null);
+
+	if ( ! wp_http_supports( array( 'ssl' => true ) )  && current_user_can( 'manage_options' ) ) {
+		$msg = 'SSL must be enabled for certain Facebook social plugins to work.';
+		if ( $options['social_publisher']['enabled'] ) {
+			unset($options['social_publisher']['enabled']);
+			update_option( 'fb_options', $options );
+			$msg .= ' Social Publisher will be disabled.';
+		}
+		fb_admin_dialog( __( $msg, 'facebook' ), true );
 	}
 }
 

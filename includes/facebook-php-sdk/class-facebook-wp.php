@@ -33,7 +33,7 @@ class Facebook_WP extends Facebook {
 			'httpversion' => '1.1',
 			'timeout' => 60,
 			'user-agent' => apply_filters( 'http_headers_useragent', 'WordPress/' . $wp_version . '; ' . get_bloginfo( 'url' ) . '; facebook-php-' . self::VERSION . '-wp' ),
-			'headers' => array( 'Expect:' ),
+			'headers' => array( 'Connection' => 'close'),
 			'sslverify' => false, // warning: might be overridden by 'https_ssl_verify' filter
 			'body' => http_build_query( $params, '', '&' )
 		);

@@ -36,7 +36,9 @@ class FacebookApiException extends Exception
   public function __construct($result) {
     $this->result = $result;
 
-    $code = isset($result['error_code']) ? $result['error_code'] : 0;
+    //when api call fails (no available transport, i.e. cURL etc. not working), error code comes
+    // out as string 'http_failure', but $code needs to be int. is_int returns false if !isset()
+    $code = is_int($result['error_code']) ? $result['error_code'] : 0;
 
     if (isset($result['error_description'])) {
       // OAuth 2.0 Draft 10 style

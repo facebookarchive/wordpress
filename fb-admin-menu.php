@@ -195,7 +195,7 @@ function fb_notify_user_of_plugin_conflicts()
         array_push( $conflicting_plugins, $plugin_name);
 			}
 			else {
-        array_push( $conflicting_plugins, ", " .  $plugin_name );
+        array_push( $conflicting_plugins, ", " . $plugin_name );
 			}
 		}
 	}
@@ -203,9 +203,6 @@ function fb_notify_user_of_plugin_conflicts()
 	//if there are more than 1 plugins relying on Open Graph, warn the user on this plugins page
 	if ( $num_conflicting >= 1 ) {
 		fb_admin_dialog( sprintf( __( 'You have plugins installed that could potentially conflict with the Facebook plugin. Please consider disabling the following plugins on the %sPlugins Settings page%s:', 'facebook' ) . "</br>" . implode($conflicting_plugins), '<a href="plugins.php" aria-label="Plugins 0">', '</a>' ), true);
-	}
-	else {
-		echo "No issues here!";
 	}
 }
 

@@ -46,10 +46,10 @@ function fb_like_button_automatic($content) {
 	
 		$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_like', true );
 		
-		if ( is_home() && isset( $options['like']['show_on_homepage'] ) ) {
+		if ( is_home() && isset ( $options['like']['show_on_homepage'] ) ) {
 			$content = $new_content;
 		}
-		elseif ( ( empty( $show_indiv ) ) && $options['like']['show_on'] ) {
+		elseif ( ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset ( $options['like']['show_on'] ) ) {		
 			if ( is_page() && ( $options['like']['show_on'] == 'all pages' || $options['like']['show_on'] == 'all posts and pages' ) )
 				$content = $new_content;
 			elseif ( is_single() && ( $options['like']['show_on'] == 'all posts' || $options['like']['show_on'] == 'all posts and pages' ) )
@@ -58,8 +58,6 @@ function fb_like_button_automatic($content) {
 		elseif ( 'show' == $show_indiv ) {
 			$content = $new_content;
 		}
-		//elseif ( 'no' == $show_indiv ) {
-		//}
 	}
 
 	return $content;

@@ -48,15 +48,25 @@ function redirectWithParam(key, value) {
 }
 
 jQuery(function() {
-	jQuery("#suggest-friends").tokenInput("?fb-friends=1", {
+	jQuery("#suggest-friends").tokenInput(ajaxurl + "?fb-friends=1&action=fb_friend_page_autocomplete&autocompleteNonce=" +FBNonce.autocompleteNonce, {
 		theme: "facebook",
 		preventDuplicates: true,
-		hintText: "Type to find a friend."
+		hintText: "Type to find a friend.",
+		animateDropdown: false,
+		noResultsText: "No friend found.",
 	});
-});;
+});
+
+jQuery(function() {
+	jQuery("#suggest-pages").tokenInput(ajaxurl + "?fb-pages=1&action=fb_friend_page_autocomplete&autocompleteNonce=" +FBNonce.autocompleteNonce, {
+		theme: "facebook",
+		preventDuplicates: true,
+		hintText: "Type to find a page.",
+		animateDropdown: false,
+		noResultsText: "No page found.",
+	});
+});
 
 function fbShowDebugInfo() {
-  $('#debug-output').show();
-  
-  return false;
+  jQuery('#debug-output').show();
 }

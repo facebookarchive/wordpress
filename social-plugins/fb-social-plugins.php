@@ -104,6 +104,45 @@ function fb_add_social_plugin_settings_box_content( $post ) {
 	$options = get_option('fb_options');
 
 	$features = array( 'like', 'subscribe', 'send', 'comments', 'recommendations_bar' );
+	echo '<table><p>Change the settings below to show or hide particular Social Plugins.  If \'Default\' is selected, the Social Plugin will appear based on the global setting, set on the Facebook Settings page.  If you choose "Show" or "Hide", the Social Plugin will ignore the global setting for this ' . ( $post->post_type == 'page' ? 'page' : 'post' ) . '.</p>';
+	foreach ( $features as $feature ) {
+		if ( $options[ $feature ]['enabled'] ) {
+			$value = get_post_meta($post->ID,"fb_social_plugin_settings_box_$feature",true);
+			echo '<tr><td>' . fb_option_name( $feature ) . "</td> <td><label><input type = \"radio\" name=\"fb_social_plugin_settings_box_$feature\" value=\"default\" "
+				. ( $value == 'default' || empty($value) ? 'checked="checked" ' : '' ) . "/>Default (" . $options[$feature]['show_on'] . ")</label></td> <td><label><input type=\"radio\" name=\"fb_social_plugin_settings_box_$feature\" value =\"show\" "
+				. ( $value == 'show' ? 'checked="checked" ' : '' ) . "/>Show</label></td> <td><label><input type=\"radio\" name=\"fb_social_plugin_settings_box_$feature\" value =\"hide\" "
+				. ( $value == 'hide'  ? 'checked="checked" ' : '' ) . "/>Hide</label></td> </tr>" ;
+		}
+	}
+	echo '</table>';
+}
+
+function fb_add_social_plugin_settings_box_save( $post_id ) {
+	$features = array( 'like', 'subscribe', 'send', 'comments', 'recommendations_bar' );
+	foreach ( $features as $feature ) {
+		$index = "fb_social_plugin_settings_box_$feature";
+		if ( isset( $_POST) && isset( $_POST[$index] )) {
+			switch ( $_POST[ $index ]) {
+				case 'default':
+					update_post_meta( $post_id, $index, 'default' );
+					break;
+				case 'show':
+					update_post_meta( $post_id, $index, 'show' );
+					break;
+				case 'hide':
+					update_post_meta( $post_id, $index, 'hide' );
+					break;
+			}
+		}
+	}
+}
+
+
+/*
+ function fb_add_social_plugin_settings_box_content( $post ) {
+	$options = get_option('fb_options');
+
+	$features = array( 'like', 'subscribe', 'send', 'comments', 'recommendations_bar' );
 	echo '<table><p>Change the settings below to show or hide particular Social Plugins.</p>';
 	foreach ( $features as $feature ) {
 		if ( $options[$feature]['enabled'] ) {
@@ -152,4 +191,5 @@ function fb_add_social_plugin_settings_box_save( $post_id ) {
 		}
 	}
 }
+*/
 ?>

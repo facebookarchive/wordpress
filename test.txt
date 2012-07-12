@@ -1,0 +1,9 @@
+/home/matt/.node-gyp/0.6.13/deps/openssl
+/home/matt/.node-gyp/0.6.13/deps/openssl/openssl
+/home/matt/.node-gyp/0.6.13/deps/openssl/openssl/include/openssl
+/home/matt/.node-gyp/0.6.13/deps/openssl/config/k8/openssl
+/home/matt/.node-gyp/0.6.13/deps/openssl/config/piii/openssl
+/usr/bin/openssl
+/usr/include/openssl
+/usr/share/doc/openssl
+/etc/bash_completion.d/openssl

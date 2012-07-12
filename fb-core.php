@@ -31,11 +31,11 @@ function fb_ssl_warning() {
 	$page = (isset($_GET['page']) ? $_GET['page'] : null);
 
 	if ( ! wp_http_supports( array( 'ssl' => true ) )  && current_user_can( 'manage_options' ) ) {
-		$msg = 'SSL must be enabled for certain Facebook social plugins to work.';
+		$msg = 'SSL must be enabled on your server for Facebook Social Publisher to work.';
 		if ( $options['social_publisher']['enabled'] ) {
 			unset($options['social_publisher']['enabled']);
 			update_option( 'fb_options', $options );
-			$msg .= ' Social Publisher will be disabled.';
+			$msg .= ' As a result, Social Publisher has been disabled.';
 		}
 		fb_admin_dialog( __( $msg, 'facebook' ), true );
 	}

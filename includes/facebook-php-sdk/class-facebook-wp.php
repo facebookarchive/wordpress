@@ -25,22 +25,19 @@ class Facebook_WP_Extend extends WP_Facebook {
 
 		if ( empty( $url ) || empty( $params ) )
 			throw new WP_FacebookApiException( array( 'error_code' => 400, 'error' => array( 'type' => 'makeRequest', 'message' => 'Invalid parameters and/or URI passed to makeRequest' ) ) );
-		error_log(var_export($url,1));
-		error_log(var_export($params,1));
-		error_log(var_export(debug_backtrace(),1));
+			
 		$params = array(
 			'redirection' => 0,
 			'httpversion' => '1.1',
 			'timeout' => 60,
 			'user-agent' => apply_filters( 'http_headers_useragent', 'WordPress/' . $wp_version . '; ' . get_bloginfo( 'url' ) . '; facebook-php-' . self::VERSION . '-wp' ),
-			'headers' => array( 'Connection' => 'close'),
+			'headers' => array( 'Connection' => 'close' , 'Content-type' => 'application/x-www-form-urlencoded'),
 			'sslverify' => false, // warning: might be overridden by 'https_ssl_verify' filter
 			'body' => http_build_query( $params, '', '&' )
 		);
 
 		$response = wp_remote_post( $url, $params );
-
-		error_log(var_export($response,1));
+		
 		if ( is_wp_error( $response ) ) {
 			throw new WP_FacebookApiException( array( 'error_code' => $response->get_error_code(), 'error_msg' => $response->get_error_message() ) );
 		}

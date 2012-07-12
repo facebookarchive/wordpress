@@ -104,7 +104,7 @@ function fb_add_social_plugin_settings_box_content( $post ) {
 	$options = get_option('fb_options');
 
 	$features = array( 'like', 'subscribe', 'send', 'comments', 'recommendations_bar' );
-	echo '<table><p>Change the settings below to show or hide particular Social Plugins.  If \'Default\' is selected, the Social Plugin will appear based on the global setting, set on the Facebook Settings page.  If you choose "Show" or "Hide", the Social Plugin will ignore the global setting for this ' . ( $post->post_type == 'page' ? 'page' : 'post' ) . '.</p>';
+	echo '<table><p>Change the settings below to show or hide particular Social Plugins. </p>';
 	foreach ( $features as $feature ) {
 		if ( $options[ $feature ]['enabled'] ) {
 			$value = get_post_meta($post->ID,"fb_social_plugin_settings_box_$feature",true);
@@ -114,7 +114,7 @@ function fb_add_social_plugin_settings_box_content( $post ) {
 				. ( $value == 'hide'  ? 'checked="checked" ' : '' ) . "/>Hide</label></td> </tr>" ;
 		}
 	}
-	echo '</table>';
+	echo '</table><p class="howto"> If \'Default\' is selected, the Social Plugin will appear based on the global setting, set on the Facebook Settings page.  If you choose "Show" or "Hide", the Social Plugin will ignore the global setting for this ' . ( $post->post_type == 'page' ? 'page' : 'post' ) . '.</p>';
 }
 
 function fb_add_social_plugin_settings_box_save( $post_id ) {

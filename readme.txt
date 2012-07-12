@@ -66,7 +66,7 @@ Facebook Insights (http://www.facebook.com/insights) integration included. This 
 * Fixed poorly formatted description that was being set when publishing to friends' and Pages' feeds.
 * Added notification if plugins that are potentially conflicting are installed.
 * Added suggestions for what to enter in fields in the new user experience.
-* Bug fixes to ensure everything works on mobile.
+* Bug fixes to ensure everything works on mobile (including support for WPTouch).
 * Bug fixes to Pages drop down on the Facebook settings page.
 * Removed the need to create PHP sessions, relying on user meta/transients now.
 

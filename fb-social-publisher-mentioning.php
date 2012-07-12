@@ -131,7 +131,9 @@ add_action( 'save_post', 'fb_add_page_mention_box_save' );
 
 function fb_add_page_mention_box() {
 	global $post;
-	
+	global $facebook;
+	$options = get_option('fb_options');
+  
 	if ($post->post_status == 'publish')	
 		return;
 	
@@ -154,7 +156,7 @@ function fb_add_page_mention_box() {
 }
 
 function fb_add_page_mention_box_content( $post ) {
-	//wp_enqueue_script('suggest');
+	wp_enqueue_script('suggest');
 
 	global $facebook;
 

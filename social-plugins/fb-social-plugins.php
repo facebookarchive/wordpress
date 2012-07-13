@@ -72,7 +72,7 @@ if ( true ) {
 
 /**
  * Add meta box for social plugin settings for individual posts and pages
- * 
+ *
  * @since 1.0.2
  */
 function fb_add_social_plugin_settings_box() {
@@ -106,7 +106,7 @@ function fb_add_social_plugin_settings_box_content( $post ) {
 	$features = array( 'like', 'subscribe', 'send', 'comments', 'recommendations_bar' );
 	echo '<table><p>Change the settings below to show or hide particular Social Plugins. </p>';
 	foreach ( $features as $feature ) {
-		if ( $options[ $feature ]['enabled'] ) {
+		if ( isset ( $options[ $feature ]['enabled'] ) ) {
 			$value = get_post_meta($post->ID,"fb_social_plugin_settings_box_$feature",true);
 			echo '<tr><td>' . fb_option_name( $feature ) . "</td> <td><label><input type = \"radio\" name=\"fb_social_plugin_settings_box_$feature\" value=\"default\" "
 				. ( $value == 'default' || empty($value) ? 'checked="checked" ' : '' ) . "/>Default (" . $options[$feature]['show_on'] . ")</label></td> <td><label><input type=\"radio\" name=\"fb_social_plugin_settings_box_$feature\" value =\"show\" "
@@ -147,7 +147,7 @@ function fb_add_social_plugin_settings_box_save( $post_id ) {
 	foreach ( $features as $feature ) {
 		if ( $options[$feature]['enabled'] ) {
 			$value = get_post_meta( $post->ID, "fb_social_plugin_settings_box_$feature", true );
-			
+
 			if ( empty( $value ) ) {
 				if ( $post->post_type == 'page' ) {
 					if ( $options[$feature]['show_on'] == 'all posts and pages' || $options[$feature]['show_on'] == 'all pages' ) {
@@ -166,7 +166,7 @@ function fb_add_social_plugin_settings_box_save( $post_id ) {
 					}
 				}
 			}
-			
+
 			echo '<tr><td>' . fb_option_name( $feature ) . "</td> <td><label><input type=\"radio\" name=\"fb_social_plugin_settings_box_$feature\" value =\"show\" "
 				. ( $value == 'show' ? 'checked="checked" ' : '' ) . "/>Show</label></td> <td><label><input type=\"radio\" name=\"fb_social_plugin_settings_box_$feature\" value =\"hide\" "
 				. ( $value == 'hide'  ? 'checked="checked" ' : '' ) . "/>Hide</label></td> </tr>" ;

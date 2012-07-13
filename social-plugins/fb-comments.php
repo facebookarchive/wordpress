@@ -48,7 +48,7 @@ function fb_comments_automatic($content) {
 		if ( comments_open( get_the_ID() ) && post_type_supports( get_post_type(), 'comments' ) ) {
 			$options = get_option('fb_options');
 			$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_comments', true );
-			if ( ! is_home() && ( empty( $show_indiv ) ) && $options['comments']['show_on'] ) {
+			if ( ! is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && $options['comments']['show_on'] ) {
 				if ( ( is_page() && ( $options['comments']['show_on'] == 'all pages' || $options['comments']['show_on'] == 'all posts and pages' ) )
 						or ( is_single() &&  ( $options['comments']['show_on'] == 'all posts' || $options['comments']['show_on'] == 'all posts and pages' ) ) )
 				{

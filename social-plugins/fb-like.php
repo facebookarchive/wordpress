@@ -55,7 +55,7 @@ function fb_like_button_automatic($content) {
 			elseif ( is_single() && ( $options['like']['show_on'] == 'all posts' || $options['like']['show_on'] == 'all posts and pages' ) )
 				$content = $new_content;
 		}
-		elseif ( 'show' == $show_indiv ) {
+		elseif ( 'show' == $show_indiv || ( ( ! isset( $options['like']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) {
 			$content = $new_content;
 		}
 	}

@@ -9,14 +9,14 @@ function fb_recommendations_bar_automatic( $content ) {
 	global $post;
 	$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_recommendations_bar', true );
 	$options = get_option('fb_options');
-	if ( ! is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && $options['recommendations_bar']['show_on'] ) {
+	if ( ! is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset( $options['recommendations_bar']['show_on'] ) ) {
 		if ( ( is_page() && ( $options['recommendations_bar']['show_on'] == 'all pages' || $options['recommendations_bar']['show_on'] == 'all posts and pages' ) )
 				or ( is_single() &&  ( $options['recommendations_bar']['show_on'] == 'all posts' || $options['recommendations_bar']['show_on'] == 'all posts and pages' ) ) )
 		{
 			$content .= fb_get_recommendations_bar( $options['recommendations_bar'] );
 		}
 	}
-	elseif ( 'show' == $show_indiv ) {
+	elseif ( 'show' == $show_indiv || ( ( ! isset( $options['recommendations_bar']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) {
 		$content .= fb_get_recommendations_bar( $options['recommendations_bar'] );
 	}
 	//elseif ( 'no' == $show_indiv ) {

@@ -28,9 +28,6 @@ function fb_output_og_protocol( $property, $content ) {
 }
 
 function fb_strip_and_format_desc( $post ) {
-
-  global $wp_version;
-
 	$desc_no_html = "";
 	$desc_no_html = strip_shortcodes( $desc_no_html ); // Strip shortcodes first in case there is HTML inside the shortcode
         $desc_no_html = wp_strip_all_tags( $desc_no_html ); // Strip all html
@@ -44,7 +41,8 @@ function fb_strip_and_format_desc( $post ) {
 		$desc_no_html = wp_strip_all_tags($desc_no_html);
 		$excerpt_length = apply_filters('excerpt_length', 55);
 		$excerpt_more = apply_filters('excerpt_more', ' ' . '[...]');
-    if ( $wp_version >= 3.3 ) {
+    if ( function_exists( wp_trim_words ) ) {
+      // This helps us with legacy support for versions < 3.3; Once we stop supporting them, we can just use wp_trim_words and kill the else.
       $desc_no_html = wp_trim_words( $desc_no_html, $excerpt_length, $excerpt_more );
     } else {
       $length_of_original_str = strlen ( $desc_no_html );

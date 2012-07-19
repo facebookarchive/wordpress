@@ -207,7 +207,6 @@ function fb_add_fan_page_message_box_save( $post_id ) {
 function fb_post_to_fb_page($post_id) {
 	global $facebook;
 	global $post;
-  
   // thanks to Tareq Hasan on http://wordpress.org/support/topic/plugin-facebook-bug-problems-when-publishing-to-a-page
   if ( isset ( $post_id ) ) {
     $post = get_post( $post_id );
@@ -610,7 +609,6 @@ function fb_publish_later($new_status, $old_status, $post) {
 				fb_post_to_fb_page($post->ID);
 
 				fb_post_to_author_fb_timeline($post->ID);
-
 				break;
 			}
 		}

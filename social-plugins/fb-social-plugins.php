@@ -42,9 +42,23 @@ function fb_apply_filters() {
 	}
 
 	if ( array_key_exists( 'comments', $options ) && array_key_exists( 'enabled', $options['comments'] ) && $options['comments']['enabled'] ) {
-		add_filter( 'the_content', 'fb_comments_automatic', 30 );
-		add_filter( 'comments_array', 'fb_close_wp_comments' );
-		add_filter( 'the_posts', 'fb_set_wp_comment_status' );
+	
+	        $options = get_option('fb_options');
+ 	        $options['fb_plugin_activation_time'] = 1;
+       	 	update_option( 'fb_options', $options );
+        	$options = get_option('fb_options');
+		//show the fb comments in this case (when override is enabled), or if the post was after the activation time
+		global $post;
+		if($options['comments']['retroactive_override']['enabled'] && 100 > $options['fb_plugin_activation_time']) {
+			add_filter( 'the_content', 'fb_comments_automatic', 30 );
+			add_filter( 'comments_array', 'fb_close_wp_comments' );
+			echo '<style type="text/css"> #respond, #commentform, #addcomment, #comment-form-wrap .entry-comments { display: none; } </style>';
+		}	
+		//show the wp comments in this case (when they're old posts, and the retroactive option is disabled (default))
+		else {
+	                add_filter( 'the_posts', 'fb_set_wp_comment_status' );
+					add_action( 'comment_form', 'fb_wp_comment_form_unfiltered_html_nonce');
+		}
 		add_action( 'wp_enqueue_scripts', 'fb_hide_wp_comments' );
 		add_filter( 'comments_number', 'fb_get_comments_count' );
 	}
@@ -193,3 +207,4 @@ function fb_add_social_plugin_settings_box_save( $post_id ) {
 }
 */
 ?>
+

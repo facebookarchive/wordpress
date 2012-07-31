@@ -3,7 +3,7 @@ add_action( 'init', 'fb_init' );
 add_action( 'admin_notices', 'fb_install_warning' );
 add_action( 'admin_notices', 'fb_ssl_warning' );
 //add_action( 'admin_notices', 'fb_rate_message' );
-add_action( 'wp_enqueue_scripts', 'fb_style' );
+add_action( 'wp_head', 'fb_style' );
 
 /**
  * Display an admin-facing warning if the current user hasn't authenticated with Facebook yet
@@ -239,5 +239,5 @@ function fb_get_locale() {
  * @since 1.0
  */
 function fb_style() {
-	wp_enqueue_style( 'fb', plugins_url( 'style/style.css', __FILE__), array(), '1.0' );
+	echo '<link rel="stylesheet" id="fb-css"  href="' . plugins_url( 'style/style.css', __FILE__, array(), '1.0' ) . '" type="text/css" media="all" />' . "\n";
 }

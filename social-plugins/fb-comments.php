@@ -9,7 +9,7 @@ function fb_insights_page() {
 
 
 function fb_hide_wp_comments() {
-	wp_enqueue_style( 'fb_hide_wp_comments', plugins_url( 'style/hide-wp-comments.css', dirname(__FILE__)), array(), '1.0' );
+	echo "\n" . '<link rel="stylesheet" id="fb_hide_wp_comments-css"  href="' . plugins_url( 'style/hide-wp-comments.css', dirname(__FILE__), array(), '1.0' ) . '" type="text/css" media="all" />';
 }
 
 function fb_set_wp_comment_status ( $posts ) {

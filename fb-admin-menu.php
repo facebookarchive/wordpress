@@ -286,6 +286,33 @@ function fb_admin_menu_settings() {
 	add_action( 'admin_print_scripts', 'fb_admin_scripts' );
 }
 
+
+/**
+ * Adds options area for managing old posts
+ */
+function fb_retroactive_post_options() { 
+       $parent = array(
+                'name' => 'retroactive_posts',
+                'type' => 'checkbox',
+                'label' => __('Manage Old Posts', 'facebook'),
+                'description' => __('These options decide what to do with posts published before the Facebook plugin was activated.', 'facebook'),
+                'image' => plugins_url( 'images/settings_social_publisher.png', __FILE__)
+	);
+  
+        $children = array(
+                array(
+                        'name' => 'override_old_posts',
+                        'label' => "Preserve WP comments on pages published before the Facebook plugin was added.",
+                        'type' => 'checkbox',
+                        'default' => true,
+                        'help_text' => __( 'Publish new posts to the author\'s Facebook Timeline and allow mentioning friends. You must setup Open Graph in your App Settings. Enable the feature to learn how.', 'facebook' ),
+                        'help_link' => 'http://developers.facebook.com/wordpress#author-og-setup',
+                )
+        );
+
+        fb_construct_fields('settings', $children, $parent);
+}
+
 /**
  * The settings page
  *
@@ -349,6 +376,7 @@ function fb_settings_page() {
 				echo '<p>' . sprintf( esc_html( __( 'These settings affect Pages and Posts only.	Additional Social Plugins are also available in the %sWidgets settings%s.', 'facebook' ) ), '<a href="widgets.php">', '</a>' );
 
 				fb_notify_user_of_plugin_conflicts();
+				fb_retroactive_post_options();
 				fb_get_social_publisher_fields();
 				fb_get_like_fields();
 				fb_get_subscribe_fields();
@@ -629,3 +657,4 @@ function fb_options_validate_plugin($array, $label_prefix, $sanitize=true) {
 }
 
 ?>
+

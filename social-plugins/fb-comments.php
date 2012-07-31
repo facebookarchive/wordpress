@@ -12,6 +12,10 @@ function fb_hide_wp_comments() {
 	wp_enqueue_style( 'fb_hide_wp_comments', plugins_url( 'style/hide-wp-comments.css', dirname(__FILE__)), array(), '1.0' );
 }
 
+function fb_hide_wp_comments_homepage() {
+  return '';
+}
+
 function fb_set_wp_comment_status ( $posts ) {
 	if ( ! empty( $posts ) && is_singular() ) {
 		$posts[0]->comment_status = 'open';
@@ -43,7 +47,7 @@ function fb_get_comments_count() {
 
 function fb_comments_automatic($content) {
 	global $post;
-	
+
 	if ( isset ( $post ) ) {
 		if ( comments_open( get_the_ID() ) && post_type_supports( get_post_type(), 'comments' ) ) {
 			$options = get_option('fb_options');
@@ -54,20 +58,20 @@ function fb_comments_automatic($content) {
 				{
 					foreach( $options['comments'] as $param => $val ) {
 						$param = str_replace( '_', '-', $param );
-		
+
 						$params[$param] = $val;
 					}
-		
+
 					$content .= fb_get_comments( $params );
 				}
 			}
 			elseif ( 'show' == $show_indiv || ( ( ! isset( $options['comments']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) {
 				foreach( $options['comments'] as $param => $val ) {
 					$param = str_replace( '_', '-', $param );
-				
+
 					$params[$param] = $val;
 				}
-				
+
 				$content .= fb_get_comments( $params );
 			}
 			//elseif ( 'no' == $show_indiv ) {
@@ -81,25 +85,25 @@ function fb_comments_automatic($content) {
 function fb_get_fb_comments_seo() {
 	global $facebook;
 	global $post;
-	
+
 	if ( isset( $post ) ) {
 		$url = get_permalink();
-	
+
 		if ( false === ( $comments = get_transient( 'fb_comments_' . $post->ID ) ) ) {
 			try {
 				$comments = $facebook->api('/comments', array('ids' => $url));
 			}
 				catch (WP_FacebookApiException $e) {
 			}
-			
+
 			set_transient( 'fb_comments_' . $post->ID, $comments, 60*15 );
 		}
-		
+
 		if ( ! isset( $comments[$url] ) )
 			return '';
-	
+
 		$output = '<noscript><ol class="commentlist">';
-	
+
 		foreach ($comments[$url]['comments']['data'] as $key => $comment_info) {
 			$unix_timestamp = strtotime($comment_info['created_time']);
 			$output .= '<li id="' . esc_attr( 'comment-' . $key ) . '">
@@ -108,10 +112,10 @@ function fb_get_fb_comments_seo() {
 				' . $comment_info['message'] . '
 				</li>';
 		}
-	
+
 		$output .= '</ol></noscript>';
 	}
-	
+
 	return $output;
 }
 
@@ -154,7 +158,13 @@ function fb_get_comments_fields_array() {
 													'default' => 'all posts and pages',
 													'options' => array('all posts' => 'all posts', 'all pages' => 'all pages', 'all posts and pages' => 'all posts and pages', 'individual posts and pages' => 'individual posts and pages' ),
 													'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' ),
-													)
+                         ),
+                    array('name' => 'homepage_comments',
+                          'label' => 'Show comment counts on the homepage',
+                          'type' => 'checkbox',
+                          'default' => 'true',
+                          'help_text' => __('Whether the plugin will display a comment count for each post on the homepage.'),
+                         )
 										);
 
 	return $array;

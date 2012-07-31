@@ -30,22 +30,34 @@ function fb_close_wp_comments($comments) {
 	return null;
 }
 
+function fb_publish_to_feed()
+{
+	$post = array(
+		"ID" => 238,
+		"post_author" => 1,
+		"post_date" => "2012-07-31 00:54:27",
+		"post_date_gmt" => "0000-00-00 00:00:00"
+	);
+}
+
+
 function fb_wp_comment_form_unfiltered_html_nonce() {
 	?>
 	<script src="//connect.facebook.net/en_US/all.js"></script>
 
 	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
+	<script>
+		(function(d, s, id) {
 		var js, fjs = d.getElementsByTagName(s)[0];
 		if (d.getElementById(id)) return;
 		js = d.createElement(s); js.id = id;
 		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=311654765594138";
 		fjs.parentNode.insertBefore(js, fjs);
-
 		}(document, 'script', 'facebook-jssdk'));
 		</script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
 		<script type="text/javascript">
+		
 		$(window).load(function() {
 			// Handler for .ready() called.
 			FB.getLoginStatus(function(response) {
@@ -64,12 +76,10 @@ function fb_wp_comment_form_unfiltered_html_nonce() {
 						$('input[name=email]').val(response.email);
 					});
 
+					//hide these because they will be populated via fb sdk provided information
 					$(".comment-form-author").hide();
 					$(".comment-form-email").hide();
-
-
 					$(".comment-form-url").hide();
-					$(".comment-form-comment").prepend("</br>");
 				} /*else if (response.status === 'not_authorized') {
 					// the user is logged in to Facebook, 
 					// but has not authenticated your app
@@ -86,11 +96,12 @@ function fb_wp_comment_form_unfiltered_html_nonce() {
 		function afterLogin() {
 			window.location.reload();
 		}
-		</script>
+		
+		$('.logged-in-as').append('<div class="fb-login-button" data-scope="email" data-show-faces="true" data-width="800" data-max-rows="1" style="top:0px;margin-top:10px;" onlogin:"afterLogin();"></div>');
+		
+		</script>	
 
 		<?php
-		echo '<div class="fb-login-button" data-scope="email" data-show-faces="true" data-width="800" data-max-rows="1" style="position:absolute;float:right;top:95px;" onlogin:"afterLogin();"></div>';
-
 		global $post;
 
 		$post_id = 0;
@@ -247,4 +258,3 @@ return $array;
 }
 
 ?>
-

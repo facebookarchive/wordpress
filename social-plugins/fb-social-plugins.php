@@ -46,7 +46,11 @@ function fb_apply_filters() {
 		add_filter( 'comments_array', 'fb_close_wp_comments' );
 		add_filter( 'the_posts', 'fb_set_wp_comment_status' );
 		add_action( 'wp_enqueue_scripts', 'fb_hide_wp_comments' );
-		add_filter( 'comments_number', 'fb_get_comments_count' );
+    if ( isset($options['comments']['homepage_comments']['enabled']) ) {
+      add_filter( 'comments_number', 'fb_get_comments_count' );
+    } else {
+      add_filter( 'comments_number', 'fb_hide_wp_comments_homepage' );
+    }
 	}
 }
 add_action( 'init', 'fb_apply_filters' );

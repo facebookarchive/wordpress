@@ -607,8 +607,10 @@ function fb_publish_later($new_status, $old_status, $post) {
 		foreach ( $post_types as $post_type ) {
 			if ( $post->post_type == $post_type->name && isset( $options['social_publisher']['enabled'] ) ) {
 				fb_post_to_fb_page($post->ID);
-
-				fb_post_to_author_fb_timeline($post->ID);
+                
+                if (isset($options['social_publisher']['publish_to_authors_facebook_timeline'])) {
+				    fb_post_to_author_fb_timeline($post->ID);
+                }
 				break;
 			}
 		}

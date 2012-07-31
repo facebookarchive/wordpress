@@ -323,7 +323,7 @@ function fb_settings_page() {
 				echo "</br>Here are for some recommendations for filling this form out. </br>";
         
         echo "<b> App Name: </b>" . get_bloginfo('name') . "</br>";
-        echo "<b> App Namespace: </b>". strtolower(str_replace( " ", "-", get_bloginfo('name') ) ) . '-' . rand( 0, 999 ) . "</br>";
+        echo "<b> App Namespace: </b>". strtolower(str_replace( " ", "-", get_bloginfo('name') ) ) . "</br>";
 
 				echo '<a name="step-2"></a><h2>' . esc_html__( 'Step 2: Set up the App', 'facebook' ) . '</h2>';
 				echo sprintf( esc_html( __( 'Next, set up your app so that it looks like the settings below.	Make sure you set your app\'s icon and image, too.	If you already have an app and skipped Step 1, you can view your app settings by going to %s', 'facebook' ) ), '<a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>.</p>' );

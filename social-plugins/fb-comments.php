@@ -97,7 +97,7 @@ function fb_wp_comment_form_unfiltered_html_nonce() {
 			window.location.reload();
 		}
 		
-		$('.logged-in-as').append('<div class="fb-login-button" data-scope="email" data-show-faces="true" data-width="800" data-max-rows="1" style="top:0px;margin-top:10px;" onlogin:"afterLogin();"></div>');
+		$('.comment-form-comment').prepend('<div class="fb-login-button" data-scope="email" data-show-faces="true" data-width="800" data-max-rows="1" style="top:0px;margin-top:10px;" onlogin:"afterLogin();"></div>');
 		
 		</script>	
 

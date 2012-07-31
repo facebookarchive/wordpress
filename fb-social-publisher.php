@@ -598,7 +598,6 @@ function fb_get_social_publisher_fields() {
 
 add_action( 'transition_post_status', 'fb_publish_later', 10, 3);
 function fb_publish_later($new_status, $old_status, $post) {
-  var_dump($post, 1);
 	$options = get_option('fb_options');
   
 	// check that the new status is "publish" and that the old status was not "publish"

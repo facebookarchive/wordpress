@@ -609,7 +609,7 @@ function fb_publish_later($new_status, $old_status, $post) {
 				fb_post_to_fb_page($post->ID);
                 
                 if (isset($options['social_publisher']['publish_to_authors_facebook_timeline'])) {
-				    fb_post_to_author_fb_timeline($post->ID);
+			        fb_post_to_author_fb_timeline($post->ID);
                 }
 				break;
 			}

@@ -45,7 +45,7 @@ function fb_apply_filters() {
 		add_filter( 'the_content', 'fb_comments_automatic', 30 );
 		add_filter( 'comments_array', 'fb_close_wp_comments' );
 		add_filter( 'the_posts', 'fb_set_wp_comment_status' );
-		add_action( 'wp_enqueue_scripts', 'fb_hide_wp_comments' );
+		add_action( 'wp_enqueue_scripts', 'fb_hide_wp_comments', 0);
     if ( isset($options['comments']['homepage_comments']['enabled']) ) {
       add_filter( 'comments_number', 'fb_get_comments_count' );
     } else {

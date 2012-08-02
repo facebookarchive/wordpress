@@ -54,8 +54,6 @@ function fb_extend_access_token() {
 		return;
 
 	$facebook->setExtendedAccessToken();
-	//the extended token should be good for a couple of months, but lets refresh it every couple of weeks just in case
-	set_transient( 'fb_extended_access_token_' . $facebook->getUser(), 'extended', 60*60*24*7 );
 }
 
 /**

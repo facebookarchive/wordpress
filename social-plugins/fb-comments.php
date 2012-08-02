@@ -101,6 +101,8 @@ function fb_wp_comment_form_unfiltered_html_nonce() {
 
 		</script>	
 
+		<div class="commentlist"><?php wp_list_comments(array('style' => 'div')); ?></div>
+		
 		<?php
 		global $post;
 

@@ -42,7 +42,8 @@ function fb_get_comments($options = array()) {
 }
 
 function fb_get_comments_count() {
-		return 'Comments : <fb:comments-count href="'. get_permalink() . '"></fb:comments-count>';
+    $comments_string = esc_html(__('Comments: ', 'number-of-comments-prefix', 'facebook'));
+		return $comments_string . '<fb:comments-count href="'. esc_url( get_permalink() ) . '"></fb:comments-count>';
 }
 
 function fb_comments_automatic($content) {

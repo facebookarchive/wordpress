@@ -42,7 +42,7 @@ function fb_get_comments($options = array()) {
 }
 
 function fb_get_comments_count() {
-		return '<iframe src="' . ( is_ssl() ? 'https' : 'http' ) . '://www.facebook.com/plugins/comments.php?' . http_build_query( array( 'href' => get_permalink(), 'permalink' => 1 ) ) . '" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:130px; height:16px;" allowTransparency="true"></iframe>';
+		return 'Comments : <fb:comments-count href="'. get_permalink() . '"></fb:comments-count>';
 }
 
 function fb_comments_automatic($content) {

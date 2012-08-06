@@ -28,10 +28,46 @@ function fb_close_wp_comments($comments) {
 	return null;
 }
 
+function fb_get_comment_author ($comment_ID)
+{
+	$comment = get_comment( $comment_ID );
+	$commenter_fbuid = get_comment_meta ( comment_ID, 'fb_uid', true );
+	//if we have facebook content do facebook stuff
+	if(is_null($commenter_fbuid))
+	{
+		//do what WP does before
+		if ( empty($comment->comment_author) ) {
+			if (!empty($comment->user_id)){
+				$user=get_userdata($comment->user_id);
+				$author=$user->user_login;
+			} else {
+				$author = __('Anonymous');
+			}
+		} else {
+			$author = $comment->comment_author;
+		}
+		return apply_filters('get_comment_author', $author);
+	}
+	else {
+		//we have Facebook content. So return the author we get based on the fb_uid
+		$facebookUrl = "https://graph.facebook.com/" . $commenter_fbuid; 
+		$str = file_get_contents($facebookUrl); 
+		$author_name = json_decode($str); 
+		return apply_filters('get_comment_author', $author_name);
+	}
+}
+
+
 function fb_get_comments($options = array()) {
 	if (isset($options['href']) == '') {
 		$options['href'] = get_permalink();
 	}
+
+	//add filter that will return the author 
+	add_filter('get_comment_author', 'fb_get_comment_author');
+	
+	//add action that will add facebook specific meta data to the comment 
+	add_action('comment_post', 'fb_add_meta_to_comment');
 
 	$params = fb_build_social_plugin_params($options);
 
@@ -39,6 +75,26 @@ function fb_get_comments($options = array()) {
 	$output .= '<div class="fb-comments fb-social-plugin" ' . $params . '></div>';
 
 	return $output;
+}
+
+/*This function adds meta data specific to the signed in Facebook user*/
+function fb_add_meta_to_comment($comment_id)
+{
+	//nothing to do in this case
+	if( is_null($comment_id) ) {
+		return;
+	}
+	
+	$fb_uid = $facebook->getUser();
+	if($fb_uid == 0) {
+		//no logged in user, so no meta-data to add
+		return;
+	} 
+	else {
+		//we got back a valid uid for the logged-in user
+		add_comment_meta($comment_id, 'fb_uid', $fb_uid);
+	}
+	return;
 }
 
 function fb_wp_comment_form_unfiltered_html_nonce() {
@@ -73,13 +129,13 @@ function fb_wp_comment_form_unfiltered_html_nonce() {
 
 					FB.api('/me', function(response) {
 						$('input[name=author]').val("<a href>" + response.name + "</a>");
-						$('input[name=email]').val(response.email);
+					 	$('input[name=email]').val(response.email);
 					});
 
 					//hide these because they will be populated via fb sdk provided information
 					$(".comment-form-author").hide();
 					$(".comment-form-email").hide();
-					$(".comment-form-url").hide();
+					$(".comment-form-url").hide();									
 				} /*else if (response.status === 'not_authorized') {
 				// the user is logged in to Facebook, 
 				// but has not authenticated your app
@@ -101,7 +157,7 @@ function fb_wp_comment_form_unfiltered_html_nonce() {
 
 		</script>	
 
-		<div class="commentlist"><?php wp_list_comments(array('style' => 'div')); ?></div>
+		<!--<div class="commentlist"><?php wp_list_comments(array('style' => 'div')); ?></div> -->
 		
 		<?php
 		global $post;

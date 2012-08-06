@@ -28,58 +28,36 @@ function fb_close_wp_comments($comments) {
 	return null;
 }
 
-function fb_get_comment_author ($comment_ID)
+function fb_get_comment_author_link ($comment_ID)
 {
+	error_log("Here is a Comment!!!!");
 	$comment = get_comment( $comment_ID );
 	$commenter_fbuid = get_comment_meta ( comment_ID, 'fb_uid', true );
 	//if we have facebook content do facebook stuff
 	if(is_null($commenter_fbuid))
 	{
 		//do what WP does before
-		if ( empty($comment->comment_author) ) {
-			if (!empty($comment->user_id)){
-				$user=get_userdata($comment->user_id);
-				$author=$user->user_login;
-			} else {
-				$author = __('Anonymous');
-			}
-		} else {
-			$author = $comment->comment_author;
-		}
-		return apply_filters('get_comment_author', $author);
+		$url    = get_comment_author_url( $comment_ID );
+		$author = get_comment_author( $comment_ID );
+		if ( empty( $url ) || 'http://' == $url )
+		  	$return = $author;
+		else
+			$return = "<a href='$url' rel='external nofollow' class='url'>$author</a>";
+		return apply_filters('get_comment_author_link', $return);
 	}
 	else {
 		//we have Facebook content. So return the author we get based on the fb_uid
-		$facebookUrl = "https://graph.facebook.com/" . $commenter_fbuid; 
-		$str = file_get_contents($facebookUrl); 
-		$author_name = json_decode($str); 
-		return apply_filters('get_comment_author', $author_name);
+		$facebookUrl = "www.facebook.com/" . $commenter_fbuid; 
+		return apply_filters('get_comment_author_link', $facebookUrl);
 	}
 }
 
-
-function fb_get_comments($options = array()) {
-	if (isset($options['href']) == '') {
-		$options['href'] = get_permalink();
-	}
-
-	//add filter that will return the author 
-	add_filter('get_comment_author', 'fb_get_comment_author');
-	
-	//add action that will add facebook specific meta data to the comment 
-	add_action('comment_post', 'fb_add_meta_to_comment');
-
-	$params = fb_build_social_plugin_params($options);
-
-	$output = fb_get_fb_comments_seo();
-	$output .= '<div class="fb-comments fb-social-plugin" ' . $params . '></div>';
-
-	return $output;
-}
 
 /*This function adds meta data specific to the signed in Facebook user*/
 function fb_add_meta_to_comment($comment_id)
 {
+	
+	global $facebook;
 	//nothing to do in this case
 	if( is_null($comment_id) ) {
 		return;
@@ -92,9 +70,31 @@ function fb_add_meta_to_comment($comment_id)
 	} 
 	else {
 		//we got back a valid uid for the logged-in user
-		add_comment_meta($comment_id, 'fb_uid', $fb_uid);
+		add_comment_meta($comment_id, 'fb_uid', $fb_uid);		
+		//add name and email
+		
 	}
 	return;
+}
+
+
+function fb_get_comments($options = array()) {
+	if (isset($options['href']) == '') {
+		$options['href'] = get_permalink();
+	}
+
+	//add filter that will return the author 
+	add_filter(' comment_author_link', 'fb_get_comment_author_link');
+	
+	//add action that will add facebook specific meta data to the comment 
+	add_action('comment_post', 'fb_add_meta_to_comment');
+
+	$params = fb_build_social_plugin_params($options);
+
+	$output = fb_get_fb_comments_seo();
+	$output .= '<div class="fb-comments fb-social-plugin" ' . $params . '></div>';
+
+	return $output;
 }
 
 function fb_wp_comment_form_unfiltered_html_nonce() {

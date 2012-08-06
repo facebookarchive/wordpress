@@ -14,6 +14,8 @@ add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Like
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Recommendations" );'));
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Activity_Feed" );'));
 
+add_filter('get_comment_author', 'fb_get_comment_author_link');
+  
 /**
  * Add social plugins through filters
  * Individual social plugin files contain both administrative setting fields and display code
@@ -58,6 +60,11 @@ function fb_apply_filters() {
 		else {
 			add_filter( 'the_posts', 'fb_set_wp_comment_status' );
 			add_action( 'comment_form', 'fb_wp_comment_form_unfiltered_html_nonce');
+			//add filter that will return the author 
+			add_filter('comment_author_link', 'fb_get_comment_author_link');
+
+			//add action that will add facebook specific meta data to the comment 
+			add_action('comment_post', 'fb_add_meta_to_comment');
 		}
 		
 		add_action( 'wp_enqueue_scripts', 'fb_hide_wp_comments' );

@@ -28,17 +28,16 @@ function fb_close_wp_comments($comments) {
 	return null;
 }
 
-function fb_get_comment_author_link ($comment_ID)
+function fb_get_comment_author_link ($comment_id)
 {
-	error_log("Here is a Comment!!!!");
-	$comment = get_comment( $comment_ID );
-	$commenter_fbuid = get_comment_meta ( comment_ID, 'fb_uid', true );
+	//$comment = get_comment_id()( $comment_id );
+	$commenter_fbuid = get_comment_meta (get_comment_id(), 'fb_uid', true );
 	//if we have facebook content do facebook stuff
 	if(is_null($commenter_fbuid))
 	{
 		//do what WP does before
-		$url    = get_comment_author_url( $comment_ID );
-		$author = get_comment_author( $comment_ID );
+		$url    = get_comment_author_url( $comment_id );
+		$author = get_comment_author( $comment_id );
 		if ( empty( $url ) || 'http://' == $url )
 		  	$return = $author;
 		else
@@ -48,7 +47,9 @@ function fb_get_comment_author_link ($comment_ID)
 	else {
 		//we have Facebook content. So return the author we get based on the fb_uid
 		$facebookUrl = "www.facebook.com/" . $commenter_fbuid; 
-		return apply_filters('get_comment_author_link', $facebookUrl);
+		$url = "http://www.facebook.com/" . $commenter_fbuid;
+		$return = "<a href='$url' rel='external nofollow' class='url'> Rishi G. </a>";
+		return apply_filters('get_comment_author_link', $return);
 	}
 }
 
@@ -70,6 +71,7 @@ function fb_add_meta_to_comment($comment_id)
 	} 
 	else {
 		//we got back a valid uid for the logged-in user
+		error_log($comment_id . "INS is the comment ID on WP. ");
 		add_comment_meta($comment_id, 'fb_uid', $fb_uid);		
 		//add name and email
 		

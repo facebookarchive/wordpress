@@ -52,18 +52,14 @@ function fb_comments_automatic($content) {
 		if ( comments_open( get_the_ID() ) && post_type_supports( get_post_type(), 'comments' ) ) {
 			$options = get_option('fb_options');
 			$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_comments', true );
-			if ( ! is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset( $options['comments']['show_on'] ) ) {
-				if ( ( is_page() && ( $options['comments']['show_on'] == 'all pages' || $options['comments']['show_on'] == 'all posts and pages' ) )
-						or ( is_single() &&  ( $options['comments']['show_on'] == 'all posts' || $options['comments']['show_on'] == 'all posts and pages' ) ) )
-				{
-					foreach( $options['comments'] as $param => $val ) {
-						$param = str_replace( '_', '-', $param );
+            if ( ! is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset( $options['comments']['show_on'] ) && isset( $options['comments']['show_on'][$post->post_type] ) ) {
+                foreach( $options['comments'] as $param => $val ) {
+                    $param = str_replace( '_', '-', $param );
 
-						$params[$param] = $val;
-					}
+                    $params[$param] = $val;
+                }
 
-					$content .= fb_get_comments( $params );
-				}
+                $content .= fb_get_comments( $params );
 			}
 			elseif ( 'show' == $show_indiv || ( ( ! isset( $options['comments']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) {
 				foreach( $options['comments'] as $param => $val ) {
@@ -142,7 +138,9 @@ function fb_get_comments_fields_array() {
 									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/comments/',
 									'image' => plugins_url( '/images/settings_comments.png', dirname(__FILE__))
 									);
-
+    $post_types = get_post_types(array('public' => true));
+    unset($post_types['attachment']);
+    $post_types = array_values($post_types);
 	$array['children'] = array(array('name' => 'num_posts',
 													'label' => 'Number of posts',
 													'type' => 'text',
@@ -162,10 +160,10 @@ function fb_get_comments_fields_array() {
 													'help_text' => 'The color scheme of the plugin.',
 													),
 										array('name' => 'show_on',
-													'type' => 'dropdown',
-													'default' => 'all posts and pages',
-													'options' => array('all posts' => 'all posts', 'all pages' => 'all pages', 'all posts and pages' => 'all posts and pages', 'individual posts and pages' => 'individual posts and pages' ),
-													'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' ),
+													'type' => 'checkbox',
+                                                    'default' => array_fill_keys(array_keys($post_types) , 'true'),
+                                                    'options' => $post_types,
+                                                    'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' ),
                          ),
                     array('name' => 'homepage_comments',
                           'label' => 'Show comment counts on the homepage',

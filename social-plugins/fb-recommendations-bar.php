@@ -9,12 +9,8 @@ function fb_recommendations_bar_automatic( $content ) {
 	global $post;
 	$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_recommendations_bar', true );
 	$options = get_option('fb_options');
-	if ( ! is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset( $options['recommendations_bar']['show_on'] ) ) {
-		if ( ( is_page() && ( $options['recommendations_bar']['show_on'] == 'all pages' || $options['recommendations_bar']['show_on'] == 'all posts and pages' ) )
-				or ( is_single() &&  ( $options['recommendations_bar']['show_on'] == 'all posts' || $options['recommendations_bar']['show_on'] == 'all posts and pages' ) ) )
-		{
-			$content .= fb_get_recommendations_bar( $options['recommendations_bar'] );
-		}
+	if ( ! is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset( $options['recommendations_bar']['show_on']) && isset( $options['recommendations_bar']['show_on'][$post->post_type] ) )  {
+        $content .= fb_get_recommendations_bar( $options['recommendations_bar'] );
 	}
 	elseif ( 'show' == $show_indiv || ( ( ! isset( $options['recommendations_bar']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) {
 		$content .= fb_get_recommendations_bar( $options['recommendations_bar'] );
@@ -39,7 +35,9 @@ function fb_get_recommendations_bar_fields_array() {
 														'description' => 'The Recommendations Bar allows users to click to start getting recommendations, Like content, and add what they\'re reading to Timeline as they go.',
 														'image' => plugins_url( '/images/settings_recommendations_bar.png', dirname(__FILE__))
 									);
-
+    $post_types = get_post_types(array('public' => true));
+    unset($post_types['attachment']);
+    $post_types = array_values($post_types);
 	$array['children'] = array(array('name' => 'trigger',
 													'type' => 'text',
 													'default' => '50',
@@ -63,10 +61,10 @@ function fb_get_recommendations_bar_fields_array() {
 													'help_text' => __( 'The side of the window that the plugin will display.', 'facebook' ),
 													),
 										array('name' => 'show_on',
-													'type' => 'dropdown',
-													'default' => 'all posts and pages',
-													'options' => array('all posts' => 'all posts', 'all pages' => 'all pages', 'all posts and pages' => 'all posts and pages', 'individual posts and pages' => 'individual posts and pages' ),
-													'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' ),
+                                                    'type' => 'checkbox',
+                                                    'default' => array_fill_keys(array_keys($post_types) , 'true'),
+                                                    'options' => $post_types,
+                                                    'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' ),
 													)
 										);
 

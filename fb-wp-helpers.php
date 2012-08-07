@@ -69,9 +69,9 @@ function fb_construct_fields_children($place, $fields, $parent = null, $object =
 			$fields[$c] = $field;
 		}
 	}
-	elseif ($place == 'settings') {
+    elseif ($place == 'settings') { 
 		foreach ($fields as $c => $field) {
-			if ($parent) {
+            if ($parent) {
 				$value = fb_array_default(
 					$options, $parent['name'], $field['name'], (
 						empty($options[$parent['name']]['enabled']) ?
@@ -91,30 +91,28 @@ function fb_construct_fields_children($place, $fields, $parent = null, $object =
 				$parent_js_array = '[' . $parent['name'] . ']';
 			}
 
-			$field['value'] = $value;
+            $field['value'] = $value;
 			$field['name'] = "fb_options$parent_js_array"."[" . $field['name'] ."]";
 			$fields[$c] = $field;
-
 		}
 	}
-
 	return fb_fields($fields, $place);
 }
 
 function fb_array_default() { // $array, $keys..., $default
 	$keys = func_get_args();
 	$array = array_shift($keys);
-	$default = array_pop($keys);
-	$key = array_shift($keys);
+    $default = array_pop($keys);
+    $key = array_shift($keys);
 	if (!isset($array[$key])) {
 		return $default;
 	}
 	$array = $array[$key];
 	if (sizeof($keys)>0) {
 		array_unshift($keys, $array);
-		array_push($keys, $default);
+        array_push($keys, $default);
 		return call_user_func_array('fb_array_default', $keys);
-	}
+    }
 	return $array;
 }
 
@@ -199,13 +197,26 @@ function fb_field_checkbox($field, $place='settings') {
 	if (isset($field['onclick'])) {
 		$onclick = $field['onclick'];
 	}
-		
-	return sprintf(
-		'<input type="checkbox" id="%1$s" name="%1$s" onclick="%2$s" value="true" %3$s />',
-		esc_attr($field['name']),
-		esc_js( $onclick ),
-		checked($field['value'], 'true', false)
-	);
+
+    if (isset($field['options'])) {
+        foreach ($field['options'] as $option_value => $option_label) {
+            $buffer .= sprintf(
+                '<label for="%2$s">%1$s</label><input type="checkbox" class="multicheckbox" id="%2$s" name="%2$s" onclick="%3$s" value="true" %4$s />',
+                esc_html($option_label),
+                esc_attr($field['name'] . "[$option_label]"),
+                esc_js( $onclick ),
+                checked($field['value'][$option_label], 'true', false)
+            );
+        }
+        return $buffer;
+    } else {
+        return sprintf(
+            '<input type="checkbox" id="%1$s" name="%1$s" onclick="%2$s" value="true" %3$s />',
+            esc_attr($field['name']),
+            esc_js( $onclick ),
+            checked($field['value'], 'true', false)
+        );
+    }
 }
 
 function fb_field_dropdown($field, $place='settings') {
@@ -291,5 +302,17 @@ function fb_option_name($field){
 			break;
 	}
 }
+
+function fb_sanitize_options ($options_array) {
+    foreach ($options_array as $key => $value) {
+        if (is_array($value)) {
+            $options_array[$key] = fb_sanitize_options($value);
+        } else {
+            $options_array[$key] = sanitize_text_field($value);
+        }
+    }
+    return $options_array;
+}
+
 
 ?>

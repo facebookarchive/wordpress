@@ -28,27 +28,42 @@ function fb_close_wp_comments($comments) {
 	return null;
 }
 
+
+function fb_get_avatar($avatar, $id_or_email, $size, $default, $alt)
+{
+	$commenter_fbuid = get_comment_meta (get_comment_id(), 'fb_uid', true );
+	
+	//if the user was not logged into Facebook for this, just use the regular avatar
+	if ( $commenter_fbuid == '') {
+	    echo $avatar;
+	}
+	else
+	{
+		$avatar_url = get_comment_meta (get_comment_id(), 'avatar', true );
+		//we have both a valid fb uid and avatar image link
+		if( $avatar_url != '' )
+		{
+			$my_avatar = "<img src='".$avatar_url."' alt='' class='avatar avatar-$size' height='$size' width='$size' />";	//return apply_filters('get_avatar', $avatar_url);
+		}
+		else //we have a valid fb uid but no link to their profile pic (this metadata was not added in old comments)
+		{
+			$my_avatar = "<img src='http://www.simplyzesty.com/wp-content/uploads/2011/09/facebook-logo.png' alt='' class='avatar avatar-$size' height='$size' width='$size' />";				
+		}
+		echo $my_avatar;
+	}
+}
+
 function fb_get_comment_author_link ($comment_id)
 {
 	//$comment = get_comment_id()( $comment_id );
 	$commenter_fbuid = get_comment_meta (get_comment_id(), 'fb_uid', true );
 	//if we have facebook content do facebook stuff
 	error_log("The commenter fb uid is " . $commenter_fbuid);
-	if($commenter_fbuid == '')
-	{
+	if($commenter_fbuid == '')	{
 	    return apply_filters('get_comment_author_link', $comment_id);
-		//do what WP does before
-	/*	$url    = get_comment_author_url( get_comment_id() );
-		$author = get_comment_author( 1 );
-		if ( empty( $url ) || 'http://' == $url )
-		  	$return = $author;
-		else
-			$return = "<a href='$url' rel='external nofollow' class='url'>$author</a>";
-		return apply_filters('get_comment_author_link', $return);*/
 	}
 	else {
 		//we have Facebook content. So return the author we get based on the fb_uid
-		$facebookUrl = "www.facebook.com/" . $commenter_fbuid; 
 		$url = "http://www.facebook.com/" . $commenter_fbuid;
 		$theName = get_comment_meta (get_comment_id(), 'name', false );
 		if($theName[0] != '')
@@ -58,7 +73,7 @@ function fb_get_comment_author_link ($comment_id)
 		else
 		{
 			//$author = get_comment_author( get_comment_id() );
-			$return = $comment_id;//"<a href='" . the_author_posts_link() . "' rel='external nofollow' class='url'></a>";
+			$return = "<a href='$url' rel='external nofollow' class='url'>" . $comment_id . "</a>";
 		}
 		return apply_filters('get_comment_author_link', $return);
 	}
@@ -82,12 +97,13 @@ function fb_add_meta_to_comment($comment_id)
 	} 
 	else {
 		//we got back a valid uid for the logged-in user
-		error_log($comment_id . "INS is the comment ID on WP. ");
 		add_comment_meta($comment_id, 'fb_uid', $fb_uid);		
+		
 		//add name and email
-		$fields = $facebook->api('/me/?fields=name,email');
+		$fields = $facebook->api('/me/?fields=name,email,picture');
 		add_comment_meta($comment_id, 'name', $fields['name']);		
-		add_comment_meta($comment_id, 'email', $fields['email']);		
+		add_comment_meta($comment_id, 'email', $fields['email']);
+		add_comment_meta($comment_id, 'avatar', $fields['picture']);		
 	}
 	return;
 }

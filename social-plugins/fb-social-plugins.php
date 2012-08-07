@@ -15,7 +15,8 @@ add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Reco
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Activity_Feed" );'));
 
 add_filter('get_comment_author', 'fb_get_comment_author_link');
-  
+add_filter('get_avatar', 'fb_get_avatar', 10, 5);
+
 /**
  * Add social plugins through filters
  * Individual social plugin files contain both administrative setting fields and display code

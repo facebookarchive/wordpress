@@ -33,22 +33,33 @@ function fb_get_comment_author_link ($comment_id)
 	//$comment = get_comment_id()( $comment_id );
 	$commenter_fbuid = get_comment_meta (get_comment_id(), 'fb_uid', true );
 	//if we have facebook content do facebook stuff
-	if(is_null($commenter_fbuid))
+	error_log("The commenter fb uid is " . $commenter_fbuid);
+	if($commenter_fbuid == '')
 	{
+	    return apply_filters('get_comment_author_link', $comment_id);
 		//do what WP does before
-		$url    = get_comment_author_url( $comment_id );
-		$author = get_comment_author( $comment_id );
+	/*	$url    = get_comment_author_url( get_comment_id() );
+		$author = get_comment_author( 1 );
 		if ( empty( $url ) || 'http://' == $url )
 		  	$return = $author;
 		else
 			$return = "<a href='$url' rel='external nofollow' class='url'>$author</a>";
-		return apply_filters('get_comment_author_link', $return);
+		return apply_filters('get_comment_author_link', $return);*/
 	}
 	else {
 		//we have Facebook content. So return the author we get based on the fb_uid
 		$facebookUrl = "www.facebook.com/" . $commenter_fbuid; 
 		$url = "http://www.facebook.com/" . $commenter_fbuid;
-		$return = "<a href='$url' rel='external nofollow' class='url'> Rishi G. </a>";
+		$theName = get_comment_meta (get_comment_id(), 'name', false );
+		if($theName[0] != '')
+		{
+			$return = "<a href='$url' rel='external nofollow' class='url'>" .  $theName[0] . "</a>";
+		}
+		else
+		{
+			//$author = get_comment_author( get_comment_id() );
+			$return = $comment_id;//"<a href='" . the_author_posts_link() . "' rel='external nofollow' class='url'></a>";
+		}
 		return apply_filters('get_comment_author_link', $return);
 	}
 }
@@ -74,7 +85,9 @@ function fb_add_meta_to_comment($comment_id)
 		error_log($comment_id . "INS is the comment ID on WP. ");
 		add_comment_meta($comment_id, 'fb_uid', $fb_uid);		
 		//add name and email
-		
+		$fields = $facebook->api('/me/?fields=name,email');
+		add_comment_meta($comment_id, 'name', $fields['name']);		
+		add_comment_meta($comment_id, 'email', $fields['email']);		
 	}
 	return;
 }
@@ -84,12 +97,6 @@ function fb_get_comments($options = array()) {
 	if (isset($options['href']) == '') {
 		$options['href'] = get_permalink();
 	}
-
-	//add filter that will return the author 
-	add_filter(' comment_author_link', 'fb_get_comment_author_link');
-	
-	//add action that will add facebook specific meta data to the comment 
-	add_action('comment_post', 'fb_add_meta_to_comment');
 
 	$params = fb_build_social_plugin_params($options);
 

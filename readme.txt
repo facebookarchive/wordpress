@@ -1,5 +1,5 @@
 === Facebook ===
-Contributors: Facebook, automattic, mattwkelly, niallkennedy, rgharpuray, ngfeldman, jamesgpearce, ravi.grover, danielbachhuber, gigawats, eosgood, Otto42
+Contributors: Facebook, automattic, mattwkelly, niallkennedy, rgharpuray, ngfeldman, jamesgpearce, ravi.grover, danielbachhuber, gigawats, eosgood, Otto42, colmdoyle, zazinteractive
 Tags: Facebook, comments, social, friends, like, like button, social plugins, facebook platform, page, posts, sidebar, plugin, open graph
 Requires at least: 3.2.1
 Tested up to: 3.4
@@ -53,6 +53,20 @@ Facebook Insights (http://www.facebook.com/insights) integration included. This 
 8. Widgets are also available.
 
 == Changelog ==
+
+= 1.0.3 =
+
+* Tweaks to copy to make things clearer.
+* Fixed issues with social plugins settings on indivial posts/pages.
+* Fixed issues with access tokens expiring, affecting posting to Facebook page and user Timelines.
+* Fixed issues with HTML markup appearing in stories posted to Facebook.
+* Fixed bugs in new user experience.
+* Fixed bug where Open Graph action was being posted to author's Timeline, even though option was disabled.
+* Added option to disable "View Comments" on homepage.
+* Fixed comments SEO so that replies to comments also appear.
+* Moved CSS files to head.
+* Adding functionality to decode HTML entities in titles sent to Facebook.
+* Changed mention links on posts/pages to open in new window/tab.
 
 = 1.0.2 =
 

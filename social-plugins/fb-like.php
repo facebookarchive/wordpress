@@ -46,10 +46,10 @@ function fb_like_button_automatic($content) {
 	
 		$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_like', true );
 		
-		if ( is_home() && isset ( $options['like']['show_on_homepage'] ) && isset($options['like']['show_on'][$post->post_type]) ) {
+		if ( is_home() && isset ( $options['like']['show_on_homepage'] ) && isset ( $options['like']['show_on'] ) && isset( $options['like']['show_on'][ $post->post_type ] ) ) {
 			$content = $new_content;
 		}
-		elseif ( !is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset ( $options['like']['show_on'] ) && isset($options['like']['show_on'][$post->post_type]) ) {		
+		elseif ( !is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset ( $options['like']['show_on'] ) && isset( $options['like']['show_on'][ $post->post_type ]) ) {		
             $content = $new_content;
 		}
 		elseif ( !is_home() && ('show' == $show_indiv || ( ( ! isset( $options['like']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) )) {
@@ -198,8 +198,8 @@ function fb_get_like_fields_array($placement) {
 													'help_text' => __( 'Where the button will display on the page or post.', 'facebook' ),
                                                 );
         $post_types = get_post_types(array('public' => true));
-        unset($post_types['attachment']);
-        $post_types = array_values($post_types);
+        //unset($post_types['attachment']);
+        //$post_types = array_values($post_types);
 		$array['children'][] = array('name' => 'show_on',
 													'type' => 'checkbox',
 													'default' => array_fill_keys(array_keys($post_types) , 'true'),

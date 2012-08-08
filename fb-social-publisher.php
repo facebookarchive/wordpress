@@ -25,23 +25,24 @@ function fb_add_author_message_box() {
   
 	if ($post->post_status == 'publish')	
 		return;
-  
-  if ( isset( $options['social_publisher']['enabled'] ) ) {
-    add_meta_box(
-      'fb_author_message_box_id',
-      __( 'Facebook Status on Your Timeline', 'facebook' ),
-      'fb_add_author_message_box_content',
-      'post'
-    );
-    add_meta_box(
-      'fb_author_message_box_id',
-      __( 'Facebook Status on Your Timeline', 'facebook' ),
-      'fb_add_author_message_box_content',
-      'page'
-    );
-  }
-}
+    
+    if ( isset( $options['social_publisher']['enabled'] ) ) {
+        
+        $post_types = get_post_types( array('public' => true) );
+        
+        foreach( $post_types as $post_type ) {
+            if ( isset( $options['social_publisher']['publish_for'][ $post_type ] ) ) {
 
+                add_meta_box(
+                    'fb_author_message_box_id',
+                    __( 'Facebook Status on Your Timeline', 'facebook' ),
+                    'fb_add_author_message_box_content',
+                    $post_type
+                );
+            }
+        }
+    }
+}
 /**
  * Add meta boxes for a custom Status that is used when posting to an Author's Timeline
  *
@@ -125,21 +126,22 @@ function fb_add_fan_page_message_box() {
 	
 	if ($post->post_status == 'publish')	
 		return;
-	
-  if ( isset( $options['social_publisher']['enabled'] ) && isset( $fan_page_info ) && isset( $fan_page_info[0] ) && isset( $fan_page_info[0][2] ) ) {
-    add_meta_box(
-      'fb_fan_page_message_box_id',
-      sprintf( __( 'Facebook Status on %s\'s Timeline', 'facebook' ), $fan_page_info[0][1] ),
-      'fb_add_fan_page_message_box_content',
-      'post'
-    );
-    add_meta_box(
-      'fb_fan_page_message_box_id',
-      sprintf( __( 'Facebook Status on %s\'s Timeline', 'facebook' ), $fan_page_info[0][1] ),
-      'fb_add_fan_page_message_box_content',
-      'page'
-    );
-  }
+
+    if ( isset( $options['social_publisher']['enabled'] ) && isset( $fan_page_info ) && isset( $fan_page_info[0] ) && isset( $fan_page_info[0][2] ) ) {
+        $post_types = get_post_types( array('public' => true) );
+
+        foreach( $post_types as $post_type ) {
+            if ( isset( $options['social_publisher']['publish_for'][ $post_type ] ) ) {
+
+                add_meta_box(
+                    'fb_fan_page_message_box_id',
+                    sprintf( __( 'Facebook Status on %s\'s Timeline', 'facebook' ), $fan_page_info[0][1] ),
+                    'fb_add_fan_page_message_box_content',
+                    $post_type
+                );
+            }
+        }
+    }
 }
 
 /**
@@ -184,7 +186,8 @@ function fb_add_fan_page_message_box_save( $post_id ) {
 
 
 	// Check permissions
-	if ( 'page' == $_POST['post_type'] ) {
+    
+    if ( 'page' == $_POST['post_type'] ) {
 		if ( !current_user_can( 'edit_page', $post_id ) )
 			return;
 	}
@@ -205,7 +208,7 @@ function fb_add_fan_page_message_box_save( $post_id ) {
  * @param int $post_id The post ID that will be posted
  */
 function fb_post_to_fb_page($post_id) {
-	global $facebook;
+    global $facebook;
 	global $post;
   // thanks to Tareq Hasan on http://wordpress.org/support/topic/plugin-facebook-bug-problems-when-publishing-to-a-page
   if ( isset ( $post_id ) ) {
@@ -225,7 +228,7 @@ function fb_post_to_fb_page($post_id) {
     if ( post_type_supports( $post->post_type, 'thumbnail' ) && function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {
       list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
     }
-  
+    
     $fan_page_message = get_post_meta($post_id, 'fb_fan_page_message', true);
     
     if ( !isset ( $post_thumbnail_url ) ) {
@@ -278,9 +281,9 @@ function fb_post_to_fb_page($post_id) {
     }
     
     if ( isset( $publish_result ) && isset( $publish_result['id'] ) ) {
-      $status_messages[] = array( 'message' => sprintf( __( 'Posted to <a href="' . fb_get_permalink_from_feed_publish_id( sanitize_text_field( $publish_result['id'] ) ) . '" target="_blank">' . $fan_page_info[0][1] . '\'s Facebook Timeline</a>', true ) ), 'error' => false);
+      $status_messages[] = array( 'message' => sprintf( __( 'Posted to <a href="' . fb_get_permalink_from_feed_publish_id( sanitize_text_field( $publish_result['id'] ) ) . '" target="_blank">' . $fan_page_info[0][1] . '\'s Facebook Timeline</a>' . ( ! empty( $fan_page_message ) ? ' with message "' . $fan_page_message . '"' : '' ), true ) ), 'error' => false);
     }
-    
+
     $existing_status_messages = get_post_meta($post_id, 'fb_status_messages', true);
     
     if ( !empty( $existing_status_messages ) ) {
@@ -487,7 +490,7 @@ function fb_post_to_author_fb_timeline($post_id) {
     
   
     if ( isset( $publish_result ) && isset( $publish_result['id'] ) ) {
-      $status_messages[] = array( 'message' => sprintf( __( 'Posted to <a href="http://www.facebook.com/' . sanitize_text_field( $publish_result['id'] ) . '" target="_blank">your Facebook Timeline</a>', false ) ), 'error' => false );
+      $status_messages[] = array( 'message' => sprintf( __( 'Posted to <a href="http://www.facebook.com/' . sanitize_text_field( $publish_result['id'] ) . '" target="_blank">your Facebook Timeline</a>' . ( ! empty( $author_message ) ? ' with message "' . $author_message . '"' : '' ), false ) ), 'error' => false );
     }
   }
   
@@ -566,8 +569,10 @@ function fb_get_social_publisher_fields() {
 		'help_link' => 'http://developers.facebook.com/wordpress',
 		'image' => plugins_url( 'images/settings_social_publisher.png', __FILE__)
 	);
-  
-	$children = array(
+    $post_types = get_post_types(array('public' => true));
+    unset($post_types['attachment']);
+    $post_types = array_values($post_types);
+    $children = array(
 		array(
 			'name' => 'publish_to_authors_facebook_timeline',
 			'label' => "Publish to author's Timeline",
@@ -590,7 +595,14 @@ function fb_get_social_publisher_fields() {
 			'default' => 'both',
 			'options' => array('top' => 'top', 'bottom' => 'bottom', 'both' => 'both'),
 			'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.	This controls where mentions will be displayed in the posts.', 'facebook' ),
-		),
+        ),
+        array('name' => 'publish_for',
+            'type' => 'checkbox',
+            'default' => array_fill_keys(array_keys($post_types) , 'true'),
+            'options' => $post_types,
+            'help_text' => __( 'Control which post types are published to Facebook.', 'facebook' ),
+        ),
+
 	);
 
 	fb_construct_fields('settings', $children, $parent);
@@ -603,18 +615,14 @@ function fb_publish_later($new_status, $old_status, $post) {
 	// check that the new status is "publish" and that the old status was not "publish"
 	if ($new_status == 'publish' && $old_status != 'publish') {
 		// only publish "public" post types
-		$post_types = get_post_types( array('public' => true), 'objects' );
-		foreach ( $post_types as $post_type ) {
-			if ( $post->post_type == $post_type->name && isset( $options['social_publisher']['enabled'] ) ) {
-				fb_post_to_fb_page($post->ID);
-                
-                if (isset($options['social_publisher']['publish_to_authors_facebook_timeline'])) {
-				    fb_post_to_author_fb_timeline($post->ID);
-                }
-				break;
-			}
-		}
-	}
+        if ( isset( $options['social_publisher']['enabled'] ) && isset( $options['social_publisher']['publish_for'] ) && isset( $options['social_publisher']['publish_for'][$post->post_type] ) ) {
+            fb_post_to_fb_page($post->ID);
+
+            if (isset($options['social_publisher']['publish_to_authors_facebook_timeline'])) {
+                fb_post_to_author_fb_timeline($post->ID);
+            }
+        }
+    }
 }
 
 add_action('before_delete_post', 'fb_delete_social_posts', 10);

@@ -139,8 +139,6 @@ function fb_get_comments_fields_array() {
 									'image' => plugins_url( '/images/settings_comments.png', dirname(__FILE__))
 									);
     $post_types = get_post_types(array('public' => true));
-    unset($post_types['attachment']);
-    $post_types = array_values($post_types);
 	$array['children'] = array(array('name' => 'num_posts',
 													'label' => 'Number of posts',
 													'type' => 'text',

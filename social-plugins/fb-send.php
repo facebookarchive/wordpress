@@ -32,10 +32,10 @@ function fb_send_button_automatic($content) {
 		
 		$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_send', true );
 		
-		if ( is_home() && isset ( $options['send']['show_on_homepage'] ) && isset($options['send']['show_on'][$post->post_type]) ) {
+		if ( is_home() && isset ( $options['send']['show_on_homepage'] ) && isset( $options['send']['show_on'] ) && isset( $options['send']['show_on'][$post->post_type] ) ) {
 			$content = $new_content;
 		}
-		elseif ( !is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset ( $options['send']['show_on'] ) && isset($options['send']['show_on'][$post->post_type]) ) {		
+		elseif ( !is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset ( $options['send']['show_on'] ) && isset( $options['send']['show_on'][$post->post_type] ) ) {		
             $content = $new_content;
 		}
 		elseif ( !is_home() && ('show' == $show_indiv || ( ( ! isset( $options['send']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) ) {
@@ -163,8 +163,6 @@ function fb_get_send_fields_array($placement) {
 													);
         
         $post_types = get_post_types(array('public' => true));
-        unset($post_types['attachment']);
-        $post_types = array_values($post_types);
         $array['children'][] = array('name' => 'show_on',
 													'type' => 'checkbox',
                                                     'default' => array_fill_keys(array_keys($post_types) , 'true'),

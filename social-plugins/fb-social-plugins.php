@@ -114,7 +114,7 @@ function fb_add_social_plugin_settings_box_content( $post ) {
 				. ( $value == 'show' ? 'checked="checked" ' : '' ) . "/>Show</label></td> <td><label><input type=\"radio\" name=\"fb_social_plugin_settings_box_$feature\" value =\"hide\" "
 				. ( $value == 'hide'  ? 'checked="checked" ' : '' ) . "/>Hide</label></td> </tr>" ;
 		}
-	}
+    }
 	echo '</table><p class="howto"> If \'Default\' is selected, the Social Plugin will appear based on the global setting, set on the Facebook Settings page.  If you choose "Show" or "Hide", the Social Plugin will ignore the global setting for this ' . $post->post_type . '.</p>';
 }
 

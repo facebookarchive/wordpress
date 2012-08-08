@@ -36,8 +36,6 @@ function fb_get_recommendations_bar_fields_array() {
 														'image' => plugins_url( '/images/settings_recommendations_bar.png', dirname(__FILE__))
 									);
     $post_types = get_post_types(array('public' => true));
-    unset($post_types['attachment']);
-    $post_types = array_values($post_types);
 	$array['children'] = array(array('name' => 'trigger',
 													'type' => 'text',
 													'default' => '50',

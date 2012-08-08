@@ -77,3 +77,7 @@ body.toplevel_page_facebook-settings .wp_help_hover {
     margin: 0 10px 0 5px !important;
     vertical-align: middle !important;
 }
+#fb_social_plugin_settings_box_id input[type="radio"] {
+    margin: 0 5px;
+}
+

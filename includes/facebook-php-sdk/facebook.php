@@ -40,7 +40,7 @@ class WP_Facebook extends WP_BaseFacebook
   }
 
   protected static $kSupportedKeys =
-    array('state', 'code', 'access_token', 'user_id', 'fb_data');
+    array('state', 'code', 'access_token', 'user_id');
 
   /**
    * Provides the implementations of the inherited abstract

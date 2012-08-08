@@ -137,22 +137,21 @@ function fb_add_page_mention_box() {
 	if ($post->post_status == 'publish')
 		return;
 
-  if ( isset( $options['social_publisher']['enabled'] ) ) {
-    add_meta_box(
-        'fb_page_mention_box_id',
-        __( 'Mention Facebook Pages', 'facebook' ),
-        'fb_add_page_mention_box_content',
-        'post',
-        'side'
-    );
-    add_meta_box(
-        'fb_page_mention_box_id',
-        __( 'Mention Facebook Pages', 'facebook' ),
-        'fb_add_page_mention_box_content',
-        'page',
-        'side'
-    );
-  }
+    if ( isset( $options['social_publisher']['enabled'] ) ) {
+        $post_types = get_post_types(array('public' => true));
+        unset($post_types['attachment']);
+        $post_types = array_values($post_types);
+
+        foreach ( $post_types as $post_type ) {
+            add_meta_box(
+                'fb_page_mention_box_id',
+                __( 'Mention Facebook Pages', 'facebook' ),
+                'fb_add_page_mention_box_content',
+                $post_type,
+                'side'
+          );
+        }
+    }
 }
 
 function fb_add_page_mention_box_content( $post ) {
@@ -257,22 +256,22 @@ function fb_add_friend_mention_box() {
 	if ($post->post_status == 'publish')
 		return;
 
-  if ( isset( $options['social_publisher']['enabled'] ) ) {
-    add_meta_box(
-        'fb_friend_mention_box_id',
-        __( 'Mention Facebook Friends', 'facebook' ),
-        'fb_add_friend_mention_box_content',
-        'post',
-        'side'
-    );
-    add_meta_box(
-        'fb_friend_mention_box_id',
-        __( 'Mention Facebook Friends', 'facebook' ),
-        'fb_add_friend_mention_box_content',
-        'page',
-        'side'
-    );
-  }
+    if ( isset( $options['social_publisher']['enabled'] ) ) {
+        $post_types = get_post_types(array('public' => true));
+        unset($post_types['attachment']);
+        $post_types = array_values($post_types);
+
+        foreach ( $post_types as $post_type ) {
+
+            add_meta_box(
+                'fb_friend_mention_box_id',
+                __( 'Mention Facebook Friends', 'facebook' ),
+                'fb_add_friend_mention_box_content',
+                $post_type,
+                'side'
+            );
+        }
+    }
 }
 
 function fb_add_friend_mention_box_content( $post ) {

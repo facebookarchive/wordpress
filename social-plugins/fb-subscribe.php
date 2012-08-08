@@ -43,16 +43,13 @@ function fb_subscribe_button_automatic($content) {
 	
 		$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_subscribe', true );
 		
-		if ( is_home() && isset ( $options['subscribe']['show_on_homepage'] ) ) {
+		if ( is_home() && isset ( $options['subscribe']['show_on_homepage'] ) && isset( $options['subscribe']['show_on'] ) && isset( $options['subscribe']['show_on'][$post->post_type] ) ) {
 			$content = $new_content;
 		}
-		elseif ( ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset ( $options['subscribe']['show_on'] ) ) {		
-			if ( is_page() && ( $options['subscribe']['show_on'] == 'all pages' || $options['subscribe']['show_on'] == 'all posts and pages' ) )
-				$content = $new_content;
-			elseif ( is_single() && ( $options['subscribe']['show_on'] == 'all posts' || $options['subscribe']['show_on'] == 'all posts and pages' ) )
-				$content = $new_content;
+		elseif ( !is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset ( $options['subscribe']['show_on'] ) && isset( $options['subscribe']['show_on'][$post->post_type] ) ) {		
+            $content = $new_content;
 		}
-		elseif ( 'show' == $show_indiv || ( ( ! isset( $options['subscribe']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) {
+		elseif ( !is_home() && ('show' == $show_indiv || ( ( ! isset( $options['subscribe']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) ) {
 			$content = $new_content;
 		}
 	}
@@ -192,12 +189,13 @@ function fb_get_subscribe_fields_array($placement) {
 													'default' => 'both',
 													'options' => array('top' => 'top', 'bottom' => 'bottom', 'both' => 'both'),
 													'help_text' => __( 'Where the button will display on the page or post.', 'facebook' ),
-													);
+                                                );
+        $post_types = get_post_types(array('public' => true));
 		$array['children'][] = array('name' => 'show_on',
-													'type' => 'dropdown',
-													'default' => 'all posts and pages',
-													'options' => array('all posts' => 'all posts', 'all pages' => 'all pages', 'all posts and pages' => 'all posts and pages', 'individual posts and pages' => 'individual posts and pages' ),
-													'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' ),
+                                                    'type' => 'checkbox',
+                                                    'default' => array_fill_keys(array_keys($post_types) , 'true'),
+                                                    'options' => $post_types,
+                                                    'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' ),
 													);
 		$array['children'][] = array('name' => 'show_on_homepage',
 													'type' => 'checkbox',

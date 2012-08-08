@@ -55,15 +55,24 @@ function fb_apply_filters() {
 }
 add_action( 'init', 'fb_apply_filters' );
 
-function fb_build_social_plugin_params($options) {
+function fb_build_social_plugin_params($options, $plugin = '' ) {
 	$params = '';
+    
+    if ( 'like' == $plugin ) {
+        if ( ! isset( $options['send'] ) || empty( $options['send'] ) ) {
+            $params .= 'data-send="false"';
+        }
+        if ( ! isset( $options['show_faces'] ) || empty( $options['show_faces'] ) ) {
+            $params .= 'data-show-faces="false"';
+        }
+    }
 
 	foreach ($options as $option => $value) {
 		$option = str_replace('_', '-', $option);
 
 		$params .= 'data-' . $option . '="' . esc_attr($value) . '" ';
-	}
-
+    }
+    
 	$params .= 'data-ref="wp" ';
 
 	return $params;

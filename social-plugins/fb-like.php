@@ -14,15 +14,15 @@
  */
 
 function fb_get_like_button($options = array()) {
-	$params = fb_build_social_plugin_params($options);
+    $params = fb_build_social_plugin_params($options, 'like');
 	
 	return '<div class="fb-like fb-social-plugin" ' . $params . ' ></div>';
 }
 
 function fb_like_button_automatic($content) {
 	$options = get_option('fb_options');
-	
-	global $post;
+    
+    global $post;
 	
 	if ( isset ( $post ) ) {
 		if ( isset($options['like']['show_on_homepage']) ) {
@@ -150,7 +150,7 @@ function fb_get_like_fields_array($placement) {
 														'help_link' => 'https://developers.facebook.com/docs/reference/plugins/like/',
 														);
 
-	$array['children'] = array(array('name' => 'send',
+	$array['children'] = array(         array('name' => 'send',
 													'type' => 'checkbox',
 													'default' => true,
 													'help_text' => __( 'Include a send button.', 'facebook' ),

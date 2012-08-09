@@ -67,6 +67,10 @@ jQuery(function() {
 	});
 });
 
+jQuery(function() {
+        jQuery('.wp_help_hover').tipsy({gravity: 'sw', opacity: 0.9});
+        });
+
 function fbShowDebugInfo() {
   jQuery('#debug-output').show();
 }

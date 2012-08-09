@@ -230,6 +230,7 @@ add_filter( 'plugin_action_links', 'fb_plugin_action_links', 10, 2 );
 function fb_admin_style() {
 	wp_enqueue_style( 'fb_admin', plugins_url( 'style/style-admin.css', __FILE__), array(), '1.0' );
 	wp_enqueue_style( 'fb_loopj', plugins_url( 'scripts/loopj-jquery-tokeninput/styles/token-input-facebook.css', __FILE__ ), array(), '1.0' );
+	wp_enqueue_style( 'tipsy', plugins_url( 'style/tipsy.css', __FILE__) );
 }
 
 /**
@@ -261,8 +262,9 @@ function fb_admin_menu_style() { ?>
 function fb_admin_scripts( $hook_suffix ) {
 	wp_enqueue_script( 'fb_admin', plugins_url( 'scripts/fb-admin.js', __FILE__ ), array(), '1.0', true );
 	wp_enqueue_script( 'fb_loopj', plugins_url( 'scripts/loopj-jquery-tokeninput/jquery.tokeninput.js', __FILE__ ), array(), '1.0', true );
+	wp_enqueue_script( 'tipsy', plugins_url( 'scripts/jquery.tipsy.js', __FILE__ ), array(), '1.0', true );
 
-  wp_localize_script( 'fb_admin', 'FBNonce', array(
+    wp_localize_script( 'fb_admin', 'FBNonce', array(
     // URL to wp-admin/admin-ajax.php to process the request
     'ajaxurl' => admin_url( 'admin-ajax.php' ),
 

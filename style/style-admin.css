@@ -73,3 +73,7 @@ body.toplevel_page_facebook-settings .wp_help_hover {
 .updated img {
   border: 1px solid;
 }
+
+.tipsy {
+    font-size: 12px !important;
+}

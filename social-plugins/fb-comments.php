@@ -56,10 +56,11 @@ function fb_comments_automatic($content) {
                 foreach( $options['comments'] as $param => $val ) {
                     $param = str_replace( '_', '-', $param );
 
-                    $params[$param] = $val;
-                }
-
-                $content .= fb_get_comments( $params );
+					$params[$param] = $val;  
+					}
+  
+					$content .= fb_get_comments( $params );
+				}
 			}
 			elseif ( 'show' == $show_indiv || ( ( ! isset( $options['comments']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) {
 				foreach( $options['comments'] as $param => $val ) {

@@ -299,7 +299,7 @@ function fb_wp_comment_form_unfiltered_html_nonce() {
 								<p class="metadata">' . date('F jS, Y', $unix_timestamp) . ' at ' . date('g:i a', $unix_timestamp) . '</p>
 								' . $comment_info['message'] . '
 									</li>';
-							}
+							}  
 						}
 					}
 					$output .= '</ol></noscript>';

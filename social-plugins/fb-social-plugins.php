@@ -14,6 +14,9 @@ add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Like
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Recommendations" );'));
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Activity_Feed" );'));
 
+add_filter('get_comment_author', 'fb_get_comment_author_link');
+add_filter('get_avatar', 'fb_get_avatar', 10, 5);
+
 /**
  * Add social plugins through filters
  * Individual social plugin files contain both administrative setting fields and display code
@@ -42,15 +45,72 @@ function fb_apply_filters() {
 	}
 
 	if ( array_key_exists( 'comments', $options ) && array_key_exists( 'enabled', $options['comments'] ) && $options['comments']['enabled'] ) {
-		add_filter( 'the_content', 'fb_comments_automatic', 30 );
-		add_filter( 'comments_array', 'fb_close_wp_comments' );
-		add_filter( 'the_posts', 'fb_set_wp_comment_status' );
-		add_action( 'wp_enqueue_scripts', 'fb_hide_wp_comments', 0);
-	if ( isset($options['comments']['homepage_comments']['enabled']) ) {
-		add_filter( 'comments_number', 'fb_get_comments_count' );
-	} else {
-		add_filter( 'comments_number', 'fb_hide_wp_comments_homepage' );
-	}
+		
+		$options = get_option('fb_options');
+				update_option( 'fb_options', $options );
+				$options = get_option('fb_options');
+				global $post;
+		
+		if( $options['comments']['comment_type'] == "WordPress Comments with Login with Facebook" ) {
+					add_filter( 'the_posts', 'fb_set_wp_comment_status' );
+					add_action( 'comment_form', 'fb_wp_comment_form_unfiltered_html_nonce');
+					//add filter that will return the author 
+					add_filter('comment_author_link', 'fb_get_comment_author_link');
+
+					//add action that will add facebook specific meta data to the comment 
+					add_action('comment_post', 'fb_add_meta_to_comment');
+				}
+				else if( $options['comments']['comment_type'] == "Facebook Comments Social Plugin" ) {
+					
+					?>
+					<script src="//connect.facebook.net/en_US/all.js"></script>
+					<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+					<script>
+					(function(d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if (d.getElementById(id)) return;
+						js = d.createElement(s); js.id = id;
+						js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=311654765594138";
+						fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<script>
+						FB.Event.subscribe('comment.create',
+						function(response) {
+							FB.api({method: 'fql.query', query:'SELECT text, post_fbid FROM comment WHERE object_id IN (SELECT comments_fbid FROM link_stat WHERE url = "' + document.URL + '") order by time'},function(comments){
+								var comment_body = comments[comments.length-1].text;
+								var url = document.URL;
+								var post_id = url.substring(url.lastIndexOf('?p=') + 3);
+								//alert(id);
+								$.ajax({
+									type: "POST",
+									url: '?fb-save-comment=true',
+									data: { fb_comment: comment_body, the_post_id : post_id }
+								}).done(function( data ) { 
+									//Data saved to WP DB for this FB social plugin Comment.
+								});
+							})
+						}
+					);
+					</script>
+					<?php
+
+					echo add_query_arg( 'fb_save_comment', 'true', home_url() );
+					add_filter( 'the_content', 'fb_comments_automatic', 30 );
+					add_filter( 'comments_array', 'fb_close_wp_comments' );
+					echo '<style type="text/css"> #respond, #commentform, #addcomment, #comment-form-wrap .entry-comments { display: none; } </style>';
+				}
+				else { //both
+						add_filter( 'the_content', 'fb_comments_automatic', 30 );
+						echo '<style type="text/css"> #respond, #commentform, #addcomment, #comment-form-wrap .entry-comments { display: none; } </style>';
+				}
+		
+		if ( isset($options['comments']['homepage_comments']['enabled']) ) {
+			add_filter( 'comments_number', 'fb_get_comments_count' );
+		} else {
+			add_filter( 'comments_number', 'fb_hide_wp_comments_homepage' );
+		}
 	}
 }
 add_action( 'init', 'fb_apply_filters' );

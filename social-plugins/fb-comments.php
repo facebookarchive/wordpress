@@ -333,7 +333,7 @@ array('name' => 'homepage_comments',
 array('name' => 'retroactive_override',
 'label' => 'Show retroactively',
 'type' => 'checkbox',
-'help_text' => 'The color scheme of the plugin.',
+'help_text' => 'Show Facebook comments instead of Wordpress comments.',
 )
 );
 

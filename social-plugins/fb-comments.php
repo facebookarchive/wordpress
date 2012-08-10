@@ -309,6 +309,31 @@ function fb_wp_comment_form_unfiltered_html_nonce() {
 			}
 
 
+		if ( ! isset( $comments[$url] ) )
+			return '';
+
+        $output = '<noscript><ol class="commentlist">';
+        foreach ($comments[$url]['comments']['data'] as $key => $comment_info) {
+            $unix_timestamp = strtotime($comment_info['created_time']);
+            $output .= '<li id="' . esc_attr( 'comment-' . $key ) . '">
+                <p><a href="' . esc_url( 'http://www.facebook.com/' . $comment_info['from']['id'], array( 'http', 'https' ) ) . '">' . esc_html( $comment_info['from']['name'] ) . '</a>:</p>
+                <p class="metadata">' . date('F jS, Y', $unix_timestamp) . ' at ' . date('g:i a', $unix_timestamp) . '</p>
+                ' . $comment_info['message'] . '
+                </li>';
+            if (isset($comment_info['comments']) && isset($comment_info['comments']['data'])) {
+                foreach ($comment_info['comments']['data'] as $second_key => $comment_info) {
+                    $unix_timestamp = strtotime($comment_info['created_time']);
+                    $output .= '<li id="' . esc_attr( 'comment-' . $key . '-' . $second_key ) . '">  
+                        <p><a href="' . esc_url( 'http://www.facebook.com/' . $comment_info['from']['id'], array( 'http', 'https' ) ) . '">' . esc_html( $comment_info['from']['name'] ) . '</a>:</p>
+                        <p class="metadata">' . date('F jS, Y', $unix_timestamp) . ' at ' . date('g:i a', $unix_timestamp) . '</p>
+                        ' . $comment_info['message'] . '
+                        </li>';
+                }
+            }
+        }
+        $output .= '</ol></noscript>';
+	}
+
 			function fb_get_comments_fields($placement = 'settings', $object = null) {
 				$fields_array = fb_get_comments_fields_array();
 

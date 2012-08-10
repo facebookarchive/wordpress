@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Facebook
- * @version 1.0.2
+ * @version 1.0.3
  */
 /*
 Plugin Name: Facebook
@@ -9,7 +9,7 @@ Plugin URI: http://wordpress.org/extend/plugins/facebook/
 Description: Facebook for WordPress. Make your site deeply social in just a couple of clicks.
 Author: Facebook
 Author URI: https://developers.facebook.com/wordpress/
-Version: 1.0.2
+Version: 1.0.3
 License: GPL2
 License URI: license.txt
 Domain Path: /lang/
@@ -38,3 +38,18 @@ require_once( $facebook_plugin_directory . '/fb-login.php' );
 require_once( $facebook_plugin_directory . '/fb-social-publisher.php' );
 require_once( $facebook_plugin_directory . '/fb-wp-helpers.php' );
 unset( $facebook_plugin_directory );
+
+register_uninstall_hook( __FILE__, 'fb_uninstall' );
+
+function fb_uninstall() {
+    
+    $meta_keys = array('state', 'code', 'access_token', 'user_id', 'fb_data');
+    
+    foreach ( $meta_keys as $meta_key ) {
+        delete_user_meta( get_current_user_id(), $meta_key );    
+    }
+    
+    delete_option( 'fb_options' );
+    delete_option( 'fb_flush_rewrite_rules' );
+}
+

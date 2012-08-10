@@ -14,6 +14,9 @@ add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Like
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Recommendations" );'));
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Activity_Feed" );'));
 
+add_filter('get_comment_author', 'fb_get_comment_author_link');
+add_filter('get_avatar', 'fb_get_avatar', 10, 5);
+
 /**
  * Add social plugins through filters
  * Individual social plugin files contain both administrative setting fields and display code
@@ -42,15 +45,35 @@ function fb_apply_filters() {
 	}
 
 	if ( array_key_exists( 'comments', $options ) && array_key_exists( 'enabled', $options['comments'] ) && $options['comments']['enabled'] ) {
-		add_filter( 'the_content', 'fb_comments_automatic', 30 );
-		add_filter( 'comments_array', 'fb_close_wp_comments' );
-		add_filter( 'the_posts', 'fb_set_wp_comment_status' );
-		add_action( 'wp_enqueue_scripts', 'fb_hide_wp_comments', 0);
-    if ( isset($options['comments']['homepage_comments']['enabled']) ) {
-      add_filter( 'comments_number', 'fb_get_comments_count' );
-    } else {
-      add_filter( 'comments_number', 'fb_hide_wp_comments_homepage' );
-    }
+
+		$options = get_option('fb_options');
+		update_option( 'fb_options', $options );
+		$options = get_option('fb_options');
+		global $post;
+		
+		//show the fb comments in this case (when override is enabled)
+		if($options['comments']['retroactive_override']['enabled']) {
+			add_filter( 'the_content', 'fb_comments_automatic', 30 );
+			add_filter( 'comments_array', 'fb_close_wp_comments' );
+			echo '<style type="text/css"> #respond, #commentform, #addcomment, #comment-form-wrap .entry-comments { display: none; } </style>';
+		}	
+		//show the wp comments in this case (when they're old posts, and the retroactive option is disabled (default))
+		else {
+			add_filter( 'the_posts', 'fb_set_wp_comment_status' );
+			add_action( 'comment_form', 'fb_wp_comment_form_unfiltered_html_nonce');
+			//add filter that will return the author 
+			add_filter('comment_author_link', 'fb_get_comment_author_link');
+
+			//add action that will add facebook specific meta data to the comment 
+			add_action('comment_post', 'fb_add_meta_to_comment');
+		}
+		
+		add_action( 'wp_enqueue_scripts', 'fb_hide_wp_comments' );
+		if ( isset($options['comments']['homepage_comments']['enabled']) ) {
+			add_filter( 'comments_number', 'fb_get_comments_count' );
+		} else {
+			add_filter( 'comments_number', 'fb_hide_wp_comments_homepage' );
+		}
 	}
 }
 add_action( 'init', 'fb_apply_filters' );

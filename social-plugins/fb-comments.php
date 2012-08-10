@@ -330,10 +330,11 @@ array('name' => 'homepage_comments',
 'default' => 'true',
 'help_text' => __('Whether the plugin will display a comment count for each post on the homepage.'),
 ),
-array('name' => 'retroactive_override',
-'label' => 'Show retroactively',
-'type' => 'checkbox',
-'help_text' => 'Show Facebook comments instead of Wordpress comments.',
+array('name' => 'comment_type',
+'label' => 'Show Facebook comments',
+'type' => 'dropdown',
+'options' => array("Facebook Comments Social Plugin" => "Facebook Comments Social Plugin", "WordPress Comments with Login with Facebook" => "WordPress Comments with Login with Facebook", 'FB comments iframe for new posts and WP comments for old posts' => 'FB comments iframe for new posts and WP comments for old posts'),
+'help_text' => 'Hide all posts and pages prior to when you enabled this option, and only show Facebook comments',
 )
 );
 

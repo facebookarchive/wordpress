@@ -52,13 +52,11 @@ function fb_apply_filters() {
 		global $post;
 		
 		//show the fb comments in this case (when override is enabled)
-		if( isset($options['comments']['retroactive_override']['enabled']) ) {
-			add_filter( 'the_content', 'fb_comments_automatic', 30 );
-			add_filter( 'comments_array', 'fb_close_wp_comments' );
-			echo '<style type="text/css"> #respond, #commentform, #addcomment, #comment-form-wrap .entry-comments { display: none; } </style>';
-		}	
+		
+
 		//show the wp comments in this case (when they're old posts, and the retroactive option is disabled (default))
-		else {
+		
+		if( $options['comments']['comment_type'] == "WordPress Comments with Login with Facebook" ) {
 			add_filter( 'the_posts', 'fb_set_wp_comment_status' );
 			add_action( 'comment_form', 'fb_wp_comment_form_unfiltered_html_nonce');
 			//add filter that will return the author 
@@ -66,6 +64,11 @@ function fb_apply_filters() {
 
 			//add action that will add facebook specific meta data to the comment 
 			add_action('comment_post', 'fb_add_meta_to_comment');
+		}
+		else {
+			add_filter( 'the_content', 'fb_comments_automatic', 30 );
+			add_filter( 'comments_array', 'fb_close_wp_comments' );
+			echo '<style type="text/css"> #respond, #commentform, #addcomment, #comment-form-wrap .entry-comments { display: none; } </style>';
 		}
 		
 		add_action( 'wp_enqueue_scripts', 'fb_hide_wp_comments' );

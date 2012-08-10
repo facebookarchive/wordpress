@@ -65,10 +65,14 @@ function fb_apply_filters() {
 			//add action that will add facebook specific meta data to the comment 
 			add_action('comment_post', 'fb_add_meta_to_comment');
 		}
-		else {
+		else if( $options['comments']['comment_type'] == "Facebook Comments Social Plugin" ) {
 			add_filter( 'the_content', 'fb_comments_automatic', 30 );
 			add_filter( 'comments_array', 'fb_close_wp_comments' );
 			echo '<style type="text/css"> #respond, #commentform, #addcomment, #comment-form-wrap .entry-comments { display: none; } </style>';
+		}
+		else { //both
+				add_filter( 'the_content', 'fb_comments_automatic', 30 );
+				echo '<style type="text/css"> #respond, #commentform, #addcomment, #comment-form-wrap .entry-comments { display: none; } </style>';
 		}
 		
 		add_action( 'wp_enqueue_scripts', 'fb_hide_wp_comments' );

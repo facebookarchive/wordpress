@@ -38,3 +38,18 @@ require_once( $facebook_plugin_directory . '/fb-login.php' );
 require_once( $facebook_plugin_directory . '/fb-social-publisher.php' );
 require_once( $facebook_plugin_directory . '/fb-wp-helpers.php' );
 unset( $facebook_plugin_directory );
+
+register_uninstall_hook( __FILE__, 'fb_uninstall' );
+
+function fb_uninstall() {
+    
+    $meta_keys = array('state', 'code', 'access_token', 'user_id', 'fb_data');
+    
+    foreach ( $meta_keys as $meta_key ) {
+        delete_user_meta( get_current_user_id(), $meta_key );    
+    }
+    
+    delete_option( 'fb_options' );
+    delete_option( 'fb_flush_rewrite_rules' );
+}
+

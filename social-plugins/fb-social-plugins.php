@@ -52,7 +52,7 @@ function fb_apply_filters() {
 		global $post;
 		
 		//show the fb comments in this case (when override is enabled)
-		if($options['comments']['retroactive_override']['enabled']) {
+		if( isset($options['comments']['retroactive_override']['enabled']) ) {
 			add_filter( 'the_content', 'fb_comments_automatic', 30 );
 			add_filter( 'comments_array', 'fb_close_wp_comments' );
 			echo '<style type="text/css"> #respond, #commentform, #addcomment, #comment-form-wrap .entry-comments { display: none; } </style>';

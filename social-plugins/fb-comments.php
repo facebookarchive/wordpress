@@ -31,6 +31,8 @@ function fb_close_wp_comments($comments) {
 
 function fb_get_avatar($avatar, $id_or_email, $size, $default, $alt)
 {
+	//error_log("This is  a comment");
+	error_log("The Post's ID is" . get_the_ID());
 	$commenter_fbuid = get_comment_meta (get_comment_id(), 'fb_uid', true );
 	
 	//if the user was not logged into Facebook for this, just use the regular avatar
@@ -58,7 +60,6 @@ function fb_get_comment_author_link ($comment_id)
 	//$comment = get_comment_id()( $comment_id );
 	$commenter_fbuid = get_comment_meta (get_comment_id(), 'fb_uid', true );
 	//if we have facebook content do facebook stuff
-	error_log("The commenter fb uid is " . $commenter_fbuid);
 	if($commenter_fbuid == '')	{
 	    return apply_filters('get_comment_author_link', $comment_id);
 	}
@@ -242,6 +243,29 @@ function fb_wp_comment_form_unfiltered_html_nonce() {
 			function fb_get_fb_comments_seo() {
 				global $facebook;
 				global $post;
+				
+				?>
+				<script src="//connect.facebook.net/en_US/all.js"></script>
+				<script>
+				(function(d, s, id) {
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id)) return;
+					js = d.createElement(s); js.id = id;
+					js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=311654765594138";
+					fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));
+					</script>
+					<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+				<script>
+				FB.Event.subscribe('comment.create',
+				    function(response) {
+				        alert('You commented ' + response['commentID']);
+				    	//now get this to our php from where we can get info about this comment and store it into the WP database.
+					
+				}
+				);
+				</script>
+				<?php
 
 				if ( isset( $post ) ) {
 					$url = get_permalink();

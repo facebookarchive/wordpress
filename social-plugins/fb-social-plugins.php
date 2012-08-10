@@ -47,12 +47,12 @@ function fb_apply_filters() {
 	if ( array_key_exists( 'comments', $options ) && array_key_exists( 'enabled', $options['comments'] ) && $options['comments']['enabled'] ) {
 
 		$options = get_option('fb_options');
-		$options['fb_plugin_activation_time'] = 1;
 		update_option( 'fb_options', $options );
 		$options = get_option('fb_options');
-		//show the fb comments in this case (when override is enabled), or if the post was after the activation time
 		global $post;
-		if($options['comments']['retroactive_override']['enabled'] && 100 > $options['fb_plugin_activation_time']) {
+		
+		//show the fb comments in this case (when override is enabled)
+		if($options['comments']['retroactive_override']['enabled']) {
 			add_filter( 'the_content', 'fb_comments_automatic', 30 );
 			add_filter( 'comments_array', 'fb_close_wp_comments' );
 			echo '<style type="text/css"> #respond, #commentform, #addcomment, #comment-form-wrap .entry-comments { display: none; } </style>';

@@ -23,7 +23,7 @@ All of these features are easy to enable via checkboxes on the Facebook settings
 * Like, send, and subscribe buttons can be enabled in a click and are fully customizable.
 * Facebook Comments, including full SEO support.
 * Open Graph Protocol integration.
-* Recommendations bar, which allows users to click to start getting recommendations, Like content, and add what they're reading to Timeline as they go.
+* Recommendations bar, which allows users to click to start getting recommendations and Like content.
 
 **Widgets**
 
@@ -67,6 +67,9 @@ Facebook Insights (http://www.facebook.com/insights) integration included. This 
 * Moved CSS files to head.
 * Adding functionality to decode HTML entities in titles sent to Facebook.
 * Changed mention links on posts/pages to open in new window/tab.
+* Added nicer tooltips to the Facebook settings page.
+* Fixed showing faces and the send button so that they don't display if they're disabled.
+* When the plugin is removed, pertinent data is also removed so that there aren't issues when re-installing the plugin.
 
 = 1.0.2 =
 

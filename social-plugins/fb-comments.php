@@ -42,7 +42,7 @@ function fb_get_comments($options = array()) {
 }
 
 function fb_get_comments_count() {
-		return '<iframe src="' . ( is_ssl() ? 'https' : 'http' ) . '://www.facebook.com/plugins/comments.php?' . http_build_query( array( 'href' => get_permalink(), 'permalink' => 1 ) ) . '" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:130px; height:16px;" allowTransparency="true"></iframe>';
+  return esc_html(_x('Comments: ', 'number-of-comments-prefix', 'facebook')). '<fb:comments-count href="'. esc_url( get_permalink() ) . '"></fb:comments-count>';
 }
 
 function fb_comments_automatic($content) {
@@ -113,7 +113,7 @@ function fb_get_fb_comments_seo() {
             if (isset($comment_info['comments']) && isset($comment_info['comments']['data'])) {
                 foreach ($comment_info['comments']['data'] as $second_key => $comment_info) {
                     $unix_timestamp = strtotime($comment_info['created_time']);
-                    $output .= '<li id="' . esc_attr( 'comment-' . $key . '-' . $second_key ) . '">  
+                    $output .= '<li id="' . esc_attr( 'comment-' . $key . '-' . $second_key ) . '">
                         <p><a href="' . esc_url( 'http://www.facebook.com/' . $comment_info['from']['id'], array( 'http', 'https' ) ) . '">' . esc_html( $comment_info['from']['name'] ) . '</a>:</p>
                         <p class="metadata">' . date('F jS, Y', $unix_timestamp) . ' at ' . date('g:i a', $unix_timestamp) . '</p>
                         ' . $comment_info['message'] . '

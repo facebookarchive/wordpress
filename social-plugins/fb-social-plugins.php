@@ -13,8 +13,6 @@ add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Send
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Like_Button" );') );
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Recommendations" );'));
 add_action( 'widgets_init', create_function('', 'register_widget( "Facebook_Activity_Feed" );'));
-
-
 /**
  * Add social plugins through filters
  * Individual social plugin files contain both administrative setting fields and display code
@@ -48,6 +46,8 @@ function fb_apply_filters() {
 		 *This file will then take the posted fields and save the comment into the WP database. */
 		?>
 		<script src="//connect.facebook.net/en_US/all.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		
 		<script>
 		(function(d, s, id) {
 			var js, fjs = d.getElementsByTagName(s)[0];
@@ -57,14 +57,16 @@ function fb_apply_filters() {
 			fjs.parentNode.insertBefore(js, fjs);
 			}(document, 'script', 'facebook-jssdk'));
 			</script>
-			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
 			<script>
 			FB.Event.subscribe('comment.create',
 			function(response) {
-				//alert('You commented ' + response['commentID']);
 				//now get this to our php from where we can get info about this comment and store it into the WP database.
-				$.post("fb_comment_to_wpdb.php", { fb_comment_id: response['commentID']}, function(data) {
-				     alert("Data Loaded: " + data);
+				$.ajax({
+				  type: "POST",
+				  url: '?fb-save-comment=true',
+				  data: { fb_comment_id: response['commentID']}
+				}).done(function( data ) { 
+				  alert("got back the" + data + "!!!!!!!");
 				});
 				
 			}
@@ -72,7 +74,7 @@ function fb_apply_filters() {
 		</script>
 		<?php
 		
-		
+		echo add_query_arg( 'fb_save_comment', 'true', home_url() );
 		add_filter( 'the_content', 'fb_comments_automatic', 30 );
 		add_filter( 'comments_array', 'fb_close_wp_comments' );
 		add_filter( 'the_posts', 'fb_set_wp_comment_status' );

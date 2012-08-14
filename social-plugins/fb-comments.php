@@ -1,4 +1,9 @@
 <?php
+add_action( 'init', 'fb_comment_rule' );
+add_action( 'query_vars', 'fb_filter_comment_query_vars' );
+add_action( 'template_redirect', 'fb_handle_save_comment' );
+
+
 function fb_insights_page() {
 	$options = get_option('fb_options');
 
@@ -14,6 +19,29 @@ function fb_hide_wp_comments() {
 
 function fb_hide_wp_comments_homepage() {
 	return '';
+}
+
+/*Handling of saving comments coming from fb social plugin, into the WP DB*/
+function fb_comment_rule() {
+	add_rewrite_rule( '^fb-save-comment/?', 'index.php?fb-save-comment=true', 'top' );
+}
+
+
+function fb_filter_comment_query_vars( $query_vars ) {
+	$query_vars[] = 'fb-save-comment';
+	return $query_vars;
+}
+
+//Call back function that will get the data from ajax 
+function fb_handle_save_comment() {
+	//check if this query var is true, and if so access fb comment id
+	if ( get_query_var( 'fb-save-comment' ) ) {
+		echo "The FB comment id is : " . $_REQUEST['fb_comment_id'];
+		die();
+	}
+}
+function fb_save_comment_link() {
+	echo "JUNKJUNKJUNK";
 }
 
 function fb_set_wp_comment_status ( $posts ) {

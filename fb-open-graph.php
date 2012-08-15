@@ -73,7 +73,7 @@ function fb_add_og_protocol() {
 	} else if ( is_single() ) {
 		$post_type = get_post_type();
 		$meta_tags['http://ogp.me/ns#type'] = 'article';
-		$meta_tags['http://ogp.me/ns#url'] = apply_filters( 'rel_canonical', get_permalink() );
+		$meta_tags['http://ogp.me/ns#url'] = apply_filters( 'fb_rel_canonical', get_permalink() );
 		if ( post_type_supports( $post_type, 'title' ) )
 			$meta_tags['http://ogp.me/ns#title'] = get_the_title();
 		if ( post_type_supports( $post_type, 'excerpt' ) ) {
@@ -152,7 +152,7 @@ function fb_add_og_protocol() {
 	else if ( is_page() ) {
 		$meta_tags['http://ogp.me/ns#type'] = 'article';
 		$meta_tags['http://ogp.me/ns#title'] = get_the_title();
-		$meta_tags['http://ogp.me/ns#url'] = apply_filters( 'rel_canonical', get_permalink() );
+		$meta_tags['http://ogp.me/ns#url'] = apply_filters( 'fb_rel_canonical', get_permalink() );
 	}
 
 	$options = get_option( 'fb_options' );

@@ -13,7 +13,7 @@ function fb_hide_wp_comments() {
 }
 
 function fb_hide_wp_comments_homepage() {
-  return '';
+	return '';
 }
 
 function fb_set_wp_comment_status ( $posts ) {
@@ -102,26 +102,26 @@ function fb_get_fb_comments_seo() {
 		if ( ! isset( $comments[$url] ) )
 			return '';
 
-        $output = '<noscript><ol class="commentlist">';
-        foreach ($comments[$url]['comments']['data'] as $key => $comment_info) {
-            $unix_timestamp = strtotime($comment_info['created_time']);
-            $output .= '<li id="' . esc_attr( 'comment-' . $key ) . '">
-                <p><a href="' . esc_url( 'http://www.facebook.com/' . $comment_info['from']['id'], array( 'http', 'https' ) ) . '">' . esc_html( $comment_info['from']['name'] ) . '</a>:</p>
-                <p class="metadata">' . date('F jS, Y', $unix_timestamp) . ' at ' . date('g:i a', $unix_timestamp) . '</p>
-                ' . $comment_info['message'] . '
-                </li>';
-            if (isset($comment_info['comments']) && isset($comment_info['comments']['data'])) {
-                foreach ($comment_info['comments']['data'] as $second_key => $comment_info) {
-                    $unix_timestamp = strtotime($comment_info['created_time']);
-                    $output .= '<li id="' . esc_attr( 'comment-' . $key . '-' . $second_key ) . '">  
-                        <p><a href="' . esc_url( 'http://www.facebook.com/' . $comment_info['from']['id'], array( 'http', 'https' ) ) . '">' . esc_html( $comment_info['from']['name'] ) . '</a>:</p>
-                        <p class="metadata">' . date('F jS, Y', $unix_timestamp) . ' at ' . date('g:i a', $unix_timestamp) . '</p>
-                        ' . $comment_info['message'] . '
-                        </li>';
-                }
-            }
-        }
-        $output .= '</ol></noscript>';
+		$output = '<noscript><ol class="commentlist">';
+		foreach ($comments[$url]['comments']['data'] as $key => $comment_info) {
+			$unix_timestamp = strtotime($comment_info['created_time']);
+			$output .= '<li id="' . esc_attr( 'comment-' . $key ) . '">
+				<p><a href="' . esc_url( 'http://www.facebook.com/' . $comment_info['from']['id'], array( 'http', 'https' ) ) . '">' . esc_html( $comment_info['from']['name'] ) . '</a>:</p>
+				<p class="metadata">' . date('F jS, Y', $unix_timestamp) . ' at ' . date('g:i a', $unix_timestamp) . '</p>
+				' . $comment_info['message'] . '
+				</li>';
+			if (isset($comment_info['comments']) && isset($comment_info['comments']['data'])) {
+				foreach ($comment_info['comments']['data'] as $second_key => $comment_info) {
+					$unix_timestamp = strtotime($comment_info['created_time']);
+					$output .= '<li id="' . esc_attr( 'comment-' . $key . '-' . $second_key ) . '">
+						<p><a href="' . esc_url( 'http://www.facebook.com/' . $comment_info['from']['id'], array( 'http', 'https' ) ) . '">' . esc_html( $comment_info['from']['name'] ) . '</a>:</p>
+						<p class="metadata">' . date('F jS, Y', $unix_timestamp) . ' at ' . date('g:i a', $unix_timestamp) . '</p>
+						' . $comment_info['message'] . '
+						</li>';
+				}
+			}
+		}
+		$output .= '</ol></noscript>';
 	}
 
 	return $output;
@@ -166,13 +166,13 @@ function fb_get_comments_fields_array() {
 													'default' => 'all posts and pages',
 													'options' => array('all posts' => 'all posts', 'all pages' => 'all pages', 'all posts and pages' => 'all posts and pages', 'individual posts and pages' => 'individual posts and pages' ),
 													'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' ),
-                         ),
-                    array('name' => 'homepage_comments',
-                          'label' => 'Show comment counts on the homepage',
-                          'type' => 'checkbox',
-                          'default' => 'true',
-                          'help_text' => __('Whether the plugin will display a comment count for each post on the homepage.'),
-                         )
+										),
+										array('name' => 'homepage_comments',
+										'label' => 'Show comment counts on the homepage',
+										'type' => 'checkbox',
+										'default' => 'true',
+										'help_text' => __('Whether the plugin will display a comment count for each post on the homepage.'),
+									)
 										);
 
 	return $array;

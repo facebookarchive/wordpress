@@ -231,7 +231,7 @@ function fb_post_to_fb_page($post_id) {
     if ( !isset ( $post_thumbnail_url ) ) {
       $args = array('access_token' => $fan_page_info[0][3],
         'from' => $fan_page_info[0][2],
-        'link' => apply_filters( 'rel_canonical', get_permalink()),
+        'link' => apply_filters( 'fb_rel_canonical', get_permalink()),
         'name' => html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8'),
         'caption' => strip_tags( apply_filters( 'the_excerpt', get_the_excerpt() ) ),
         'description' => strip_tags( fb_strip_and_format_desc( $post ) ), 
@@ -241,7 +241,7 @@ function fb_post_to_fb_page($post_id) {
     else {
       $args = array('access_token' => $fan_page_info[0][3],
         'from' => $fan_page_info[0][2],
-        'link' => apply_filters( 'rel_canonical', get_permalink()),
+        'link' => apply_filters( 'fb_rel_canonical', get_permalink()),
         'picture' => $post_thumbnail_url,
         'name' => html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8'),
         'caption' => strip_tags( apply_filters( 'the_excerpt', get_the_excerpt() ) ),
@@ -350,7 +350,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 			try {
 				if ( !isset ( $post_thumbnail_url ) ) {
 					$args = array(
-						'link' => apply_filters( 'rel_canonical', get_permalink()),
+						'link' => apply_filters( 'fb_rel_canonical', get_permalink()),
 						'name' => html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8'),
 						'caption' => strip_tags( apply_filters( 'the_excerpt', get_the_excerpt() ) ),
         					'description' => strip_tags( fb_strip_and_format_desc( $post ) ), 
@@ -359,7 +359,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 				}
 				else {
 					$args = array(
-						'link' => apply_filters( 'rel_canonical', get_permalink()),
+						'link' => apply_filters( 'fb_rel_canonical', get_permalink()),
 						'picture' => $post_thumbnail_url,
 						'name' => html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8'),
 						'caption' => strip_tags( apply_filters( 'the_excerpt', get_the_excerpt() ) ),
@@ -409,7 +409,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 			try {
 				if ( !isset ( $post_thumbnail_url ) ) {
 					$args = array(
-						'link' => apply_filters( 'rel_canonical', get_permalink()),
+						'link' => apply_filters( 'fb_rel_canonical', get_permalink()),
 						'name' => html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8'),
 						'caption' => strip_tags( apply_filters( 'the_excerpt', get_the_excerpt() ) ),
         					'description' => strip_tags( fb_strip_and_format_desc( $post ) ),
@@ -418,7 +418,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 				}
 				else {
 					$args = array(
-						'link' => apply_filters( 'rel_canonical', get_permalink()),
+						'link' => apply_filters( 'fb_rel_canonical', get_permalink()),
 						'picture' => $post_thumbnail_url,
 						'name' => html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8'),
 						'caption' => strip_tags( apply_filters( 'the_excerpt', get_the_excerpt() ) ),

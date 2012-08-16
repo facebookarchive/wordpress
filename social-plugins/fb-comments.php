@@ -153,15 +153,17 @@ function fb_wp_comment_form_unfiltered_html_nonce() {
 					var accessToken = response.authResponse.accessToken;
 					var oFormObject = document.forms['commentform'];
 
-					FB.api('/me', function(response) {
+						FB.api('/me/?fields=name,email,picture', function(response) {
 						$('input[name=author]').val("<a href>" + response.name + "</a>");
 					 	$('input[name=email]').val(response.email);
+						$('.comment-form-comment').prepend("<div><img src='" + response.picture + "' height='40' width='40' />" + "<a href='$url' rel='external nofollow' class='url' style='top:-15px;position:relative;font-size:17px;'>" +  "  " + response.name + "</a></div>");
 					});
 
 					//hide these because they will be populated via fb sdk provided information
 					$(".comment-form-author").hide();
 					$(".comment-form-email").hide();
-					$(".comment-form-url").hide();									
+					$(".comment-form-url").hide();		
+					$(".fb-login-button").hide();
 				} /*else if (response.status === 'not_authorized') {
 				// the user is logged in to Facebook, 
 				// but has not authenticated your app

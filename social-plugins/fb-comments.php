@@ -3,7 +3,6 @@ add_action( 'init', 'fb_comment_rule' );
 add_action( 'query_vars', 'fb_filter_comment_query_vars' );
 add_action( 'template_redirect', 'fb_handle_save_comment' );
 
-
 function fb_insights_page() {
 	$options = get_option('fb_options');
 
@@ -34,9 +33,66 @@ function fb_filter_comment_query_vars( $query_vars ) {
 
 //Call back function that will get the data from ajax 
 function fb_handle_save_comment() {
+	global $facebook;
 	//check if this query var is true, and if so access fb comment id
 	if ( get_query_var( 'fb-save-comment' ) ) {
-		echo "The FB comment id is : " . $_REQUEST['fb_comment_id'];
+		$fb_comment_id = $_REQUEST['fb_comment_id'];
+		
+		require_once('facebook-php-sdk/facebook.php');
+		
+		$facebook = new Facebook_WP_Extend(array(
+		  'appId'  => '311654765594138',
+		  'secret' => '776fca0b17fef9df33e026268a847e81',
+		));
+		//logic to store this comment into the 
+		$user = $facebook->getUser();
+		error_log($user . " : " . $fb_comment_id);
+		
+		
+		/*$url = 'http://saturnspacesoft.com/wordpress/?p=293';
+		$request_url ="https://graph.facebook.com/comments/?ids=" . $url;
+		$requests = file_get_contents($request_url);
+		error_log($request['comments']);*/
+		
+		$fields = $facebook->api('/me/?fields=name,email,picture');
+		add_comment_meta($comment_id, 'name', $fields['name']);		
+		add_comment_meta($comment_id, 'email', $fields['email']);
+		add_comment_meta($comment_id, 'avatar', $fields['picture']);
+		
+		error_log("after facebook api data population");
+		
+		
+		$comment_post_ID = get_the_ID();
+		$comment_author = $fields['name'];
+		$comment_author_email = $fields['email'];
+		$comment_author_url = "a";
+		$comment_author_IP = "a";
+		$comment_agent = "a";
+		$comment_content = "Sentinel";
+		$comment_author_IP = "127.0.0.1";
+		$comment_agent = 123;
+		$time = '2012-4-4';
+		error_log( $comment_author . "  " . $comment_author_email . "  " . $comment_content );
+		
+		error_log("before comment data array creation");
+		$commentdata = array(
+			'comment_post_ID' => $comment_post_ID,
+			'comment_author' => $comment_author,
+			'comment_author_email' => $comment_author_email,
+			'comment_author_url' => $comment_author_url,
+			'comment_content' => $comment_content,
+			'comment_type' => '',
+			'comment_parent' => 0,
+			'user_id' => 0,
+			'comment_author_IP' => $comment_author_IP,
+			'comment_agent' => $comment_agent,
+			'comment_date' => $time,
+			'comment_approved' => 1
+		);
+		
+		error_log("after comment data array creation, before creation");
+		$new_comments_id = wp_new_comment( $asdfsadfasdf );
+		error_log($new_comments_id . "the new WP comments is <---");
 		die();
 	}
 }

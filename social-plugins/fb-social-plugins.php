@@ -60,6 +60,7 @@ function fb_apply_filters() {
 			<script>
 			FB.Event.subscribe('comment.create',
 			function(response) {
+				alert(response);
 				//now get this to our php from where we can get info about this comment and store it into the WP database.
 				$.ajax({
 				  type: "POST",

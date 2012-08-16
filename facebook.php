@@ -37,7 +37,7 @@ require_once( $facebook_plugin_directory . '/social-plugins/fb-social-plugins.ph
 require_once( $facebook_plugin_directory . '/fb-login.php' );
 require_once( $facebook_plugin_directory . '/fb-social-publisher.php' );
 require_once( $facebook_plugin_directory . '/fb-wp-helpers.php' );
-require_once( $facebook_plugin_directory . '/social-plugins/fb_comment_to_wpdb.php' );
+require_once( $facebook_plugin_directory . '/social-plugins/fb-comments.php' );
 
 unset( $facebook_plugin_directory );
 

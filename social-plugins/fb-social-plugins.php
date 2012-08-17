@@ -60,16 +60,17 @@ function fb_apply_filters() {
 			<script>
 			FB.Event.subscribe('comment.create',
 			function(response) {
-				alert(response);
-				//now get this to our php from where we can get info about this comment and store it into the WP database.
-				$.ajax({
-				  type: "POST",
-				  url: '?fb-save-comment=true',
-				  data: { fb_comment_id: response['commentID']}
-				}).done(function( data ) { 
-				  alert("got back the" + data + "!!!!!!!");
-				});
-				
+				FB.api({method: 'fql.query', query:'SELECT text, post_fbid FROM comment WHERE object_id IN (SELECT comments_fbid FROM link_stat WHERE url = "' + document.URL + '") order by time'},function(comments){
+					var comment_body = comments[comments.length-1].text;
+					$.ajax({
+						type: "POST",
+						url: '?fb-save-comment=true',
+						data: { fb_comment: comment_body}
+					}).done(function( data ) { 
+						//alert("got back the" + data + "!!!!!!!");
+					});
+				})
+
 			}
 		);
 		</script>

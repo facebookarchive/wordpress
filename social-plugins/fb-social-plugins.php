@@ -92,18 +92,15 @@ function fb_add_social_plugin_settings_box() {
 	global $post;
 	$options = get_option('fb_options');
 
-	if ( true ) {
+    $post_types = get_post_types(array('public' => true));
+    unset($post_types['attachment']);
+    $post_types = array_values($post_types);
+    foreach ( $post_types as $post_type ) {
 		add_meta_box(
 				'fb_social_plugin_settings_box_id',
 				__( 'Facebook Social Plugins', 'facebook' ),
 				'fb_add_social_plugin_settings_box_content',
-				'post'
-		);
-		add_meta_box(
-				'fb_social_plugin_settings_box_id',
-				__( 'Facebook Social Plugins', 'facebook' ),
-				'fb_add_social_plugin_settings_box_content',
-				'page'
+				$post_type
 		);
 	}
 }
@@ -120,14 +117,14 @@ function fb_add_social_plugin_settings_box_content( $post ) {
 	echo '<table><p>Change the settings below to show or hide particular Social Plugins. </p>';
 	foreach ( $features as $feature ) {
 		if ( isset ( $options[ $feature ]['enabled'] ) ) {
-			$value = get_post_meta($post->ID,"fb_social_plugin_settings_box_$feature",true);
+            $value = get_post_meta($post->ID,"fb_social_plugin_settings_box_$feature",true);
 			echo '<tr><td>' . fb_option_name( $feature ) . "</td> <td><label><input type = \"radio\" name=\"fb_social_plugin_settings_box_$feature\" value=\"default\" "
-				. ( $value == 'default' || empty($value) ? 'checked="checked" ' : '' ) . "/>Default (" . $options[$feature]['show_on'] . ")</label></td> <td><label><input type=\"radio\" name=\"fb_social_plugin_settings_box_$feature\" value =\"show\" "
+				. ( $value == 'default' || empty($value) ? 'checked="checked" ' : '' ) . "/>Default (" . (isset($options[$feature]['show_on']) && isset($options[$feature]['show_on'][$post->post_type]) ? 'Show' : 'Hide') . ")</label></td> <td><label><input type=\"radio\" name=\"fb_social_plugin_settings_box_$feature\" value =\"show\" "
 				. ( $value == 'show' ? 'checked="checked" ' : '' ) . "/>Show</label></td> <td><label><input type=\"radio\" name=\"fb_social_plugin_settings_box_$feature\" value =\"hide\" "
 				. ( $value == 'hide'  ? 'checked="checked" ' : '' ) . "/>Hide</label></td> </tr>" ;
 		}
-	}
-	echo '</table><p class="howto"> If \'Default\' is selected, the Social Plugin will appear based on the global setting, set on the Facebook Settings page.  If you choose "Show" or "Hide", the Social Plugin will ignore the global setting for this ' . ( $post->post_type == 'page' ? 'page' : 'post' ) . '.</p>';
+    }
+	echo '</table><p class="howto"> If \'Default\' is selected, the Social Plugin will appear based on the global setting, set on the Facebook Settings page.  If you choose "Show" or "Hide", the Social Plugin will ignore the global setting for this ' . $post->post_type . '.</p>';
 }
 
 function fb_add_social_plugin_settings_box_save( $post_id ) {

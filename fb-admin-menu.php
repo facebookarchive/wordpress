@@ -581,7 +581,7 @@ function fb_options_validate_hex($value, $label, $sanitize=true) {
 	if (!preg_match('/^[0-9a-f]+$/i', $value)) {
 		$value = preg_replace('/[^0-9a-f]/', '', strtolower($value));
 		add_settings_error('fb_options', '', "$label has been converted to a hex string");
-	}
+    }
 	return $value;
 }
 
@@ -599,10 +599,8 @@ function fb_options_validate_namespace($value, $label, $sanitize=true) {
 function fb_options_validate_plugin($array, $label_prefix, $sanitize=true) {
 	// TODO desperately needs to be driven from plugin definitions
 	if ($sanitize) {
-		foreach($array as $key=>$value) {
-			$array[$key] = sanitize_text_field( $value );
-		}
-	}
+        $array = fb_sanitize_options($array);
+    }
 	if (!isset($array['enabled']) || !$array['enabled']) {
 		return $array;
 	}

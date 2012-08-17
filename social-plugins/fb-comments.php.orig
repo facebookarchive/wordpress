@@ -158,10 +158,23 @@ function fb_get_comments_fields_array() {
 													'help_text' => 'The color scheme of the plugin.',
 													),
 										array('name' => 'show_on',
-													'type' => 'checkbox',
-													'default' => array_fill_keys(array_keys($post_types) , 'true'),
-													'options' => $post_types,
+<<<<<<< HEAD
+													'type' => 'dropdown',
+													'default' => 'all posts and pages',
+													'options' => array('all posts' => 'all posts', 'all pages' => 'all pages', 'all posts and pages' => 'all posts and pages', 'individual posts and pages' => 'individual posts and pages' ),
 													'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' ),
+										),
+										array('name' => 'homepage_comments',
+										'label' => 'Show comment counts on the homepage',
+										'type' => 'checkbox',
+										'default' => 'true',
+										'help_text' => __('Whether the plugin will display a comment count for each post on the homepage.'),
+									)
+=======
+													'type' => 'checkbox',
+                                                    'default' => array_fill_keys(array_keys($post_types) , 'true'),
+                                                    'options' => $post_types,
+                                                    'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' ),
                          ),
                     array('name' => 'homepage_comments',
                           'label' => 'Show comment counts on the homepage',
@@ -169,6 +182,7 @@ function fb_get_comments_fields_array() {
                           'default' => 'true',
                           'help_text' => __('Whether the plugin will display a comment count for each post on the homepage.'),
                          )
+>>>>>>> a22483c5a00da8d7162eefa7723504d08dd04ad9
 										);
 
 	return $array;

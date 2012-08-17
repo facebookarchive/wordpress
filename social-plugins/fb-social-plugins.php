@@ -62,10 +62,13 @@ function fb_apply_filters() {
 			function(response) {
 				FB.api({method: 'fql.query', query:'SELECT text, post_fbid FROM comment WHERE object_id IN (SELECT comments_fbid FROM link_stat WHERE url = "' + document.URL + '") order by time'},function(comments){
 					var comment_body = comments[comments.length-1].text;
+					var url = document.URL;
+					var post_id = url.substring(url.lastIndexOf('?p=') + 3);
+					//alert(id);
 					$.ajax({
 						type: "POST",
 						url: '?fb-save-comment=true',
-						data: { fb_comment: comment_body}
+						data: { fb_comment: comment_body, the_post_id : post_id }
 					}).done(function( data ) { 
 						//alert("got back the" + data + "!!!!!!!");
 					});

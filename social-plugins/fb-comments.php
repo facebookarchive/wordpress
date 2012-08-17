@@ -54,7 +54,7 @@ function fb_handle_save_comment() {
 		add_comment_meta($comment_id, 'email', $fields['email']);
 		add_comment_meta($comment_id, 'avatar', $fields['picture']);
 
-		$comment_post_ID = get_the_ID();
+		$comment_post_ID = $_REQUEST['the_post_id'];
 		$comment_author = $fields['name'];
 		$comment_author_email = $fields['email'];
 		$comment_author_url = "http://facebook.com/" . $user;
@@ -64,7 +64,7 @@ function fb_handle_save_comment() {
 		$comment_author_IP = "127.0.0.1";
 		error_log($comment_post_ID);
 		$commentdata = array(
-			'comment_post_ID' => 273,
+			'comment_post_ID' => $comment_post_ID,
 			'comment_author' => $comment_author,
 			'comment_author_email' => $comment_author_email,
 			'comment_author_url' => $comment_author_url,

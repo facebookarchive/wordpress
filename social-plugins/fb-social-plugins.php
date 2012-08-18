@@ -41,9 +41,6 @@ function fb_apply_filters() {
 	}
 
 	if ( array_key_exists( 'comments', $options ) && array_key_exists( 'enabled', $options['comments'] ) && $options['comments']['enabled'] ) {
-		
-		/*To store fb social plugin comments into the WP db. Basically, submit a post request with hidden field to a php file. 
-		 *This file will then take the posted fields and save the comment into the WP database. */
 		?>
 		<script src="//connect.facebook.net/en_US/all.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -70,10 +67,9 @@ function fb_apply_filters() {
 						url: '?fb-save-comment=true',
 						data: { fb_comment: comment_body, the_post_id : post_id }
 					}).done(function( data ) { 
-						//alert("got back the" + data + "!!!!!!!");
+						//Data saved to WP DB for this FB social plugin Comment.
 					});
 				})
-
 			}
 		);
 		</script>

@@ -37,14 +37,6 @@ function fb_handle_save_comment() {
 	//check if this query var is true, and if so access fb comment id
 	if ( get_query_var( 'fb-save-comment' ) ) {
 		$fb_comment = $_REQUEST['fb_comment'];
-		require_once('facebook-php-sdk/facebook.php');
-		
-		$facebook = new Facebook_WP_Extend(array(
-		  'appId'  => '311654765594138',
-		  'secret' => '776fca0b17fef9df33e026268a847e81',
-		));
-		
-		error_log($facebook->getAccessToken() . "access token");
 		
 		//logic to store this comment into the 
 		$user = $facebook->getUser();

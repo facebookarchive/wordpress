@@ -115,32 +115,31 @@ function fb_comments_automatic($content) {
 		if ( comments_open( get_the_ID() ) && post_type_supports( get_post_type(), 'comments' ) ) {
 			$options = get_option('fb_options');
 			$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_comments', true );
-            if ( ! is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset( $options['comments']['show_on'] ) && isset( $options['comments']['show_on'][$post->post_type] ) ) {
-                foreach( $options['comments'] as $param => $val ) {
-                    $param = str_replace( '_', '-', $param );
-
-					$params[$param] = $val;  
-					}
-  
-					$content .= fb_get_comments( $params );
-				}
-			}
-			elseif ( 'show' == $show_indiv || ( ( ! isset( $options['comments']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) {
+			if ( ! is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset( $options['comments']['show_on'] ) && isset( $options['comments']['show_on'][$post->post_type] ) ) {
 				foreach( $options['comments'] as $param => $val ) {
 					$param = str_replace( '_', '-', $param );
 
-					$params[$param] = $val;
+					$params[$param] = $val;  
 				}
 
 				$content .= fb_get_comments( $params );
 			}
-			//elseif ( 'no' == $show_indiv ) {
-			//}
 		}
-	}
+		elseif ( 'show' == $show_indiv || ( ( ! isset( $options['comments']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) {
+			foreach( $options['comments'] as $param => $val ) {
+				$param = str_replace( '_', '-', $param );
 
-	return $content;
-}
+				$params[$param] = $val;
+			}
+
+			$content .= fb_get_comments( $params );
+			//elseif ( 'no' == $show_indiv ) {
+				//}
+			}
+		}
+
+		return $content;
+	}
 
 function fb_get_fb_comments_seo() {
 	global $facebook;

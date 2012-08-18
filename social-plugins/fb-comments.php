@@ -29,12 +29,15 @@ function fb_comment_rule() {
 function fb_get_avatar($avatar, $id_or_email, $size, $default, $alt)
 {
 	//error_log("This is  a comment");
-	error_log("The Post's ID is" . get_the_ID());
 	$commenter_fbuid = get_comment_meta (get_comment_id(), 'fb_uid', true );
 	
 	//if the user was not logged into Facebook for this, just use the regular avatar
 	if ( $commenter_fbuid == '') {
-	    echo $avatar;
+		//hack so junk avatars don't show up at bottom left
+		if($size > 64)
+		{
+			echo $avatar;
+		}
 	}
 	else
 	{
@@ -89,8 +92,9 @@ function fb_add_meta_to_comment($comment_id)
 	}
 	
 	$fb_uid = $facebook->getUser();
-	if($fb_uid == 0) {
-		//no logged in user, so no meta-data to add
+	if($fb_uid == 0 || is_user_logged_in() ) {
+		//no logged in user, so no meta-data to add. OR the user is signed into Wordpress, so 
+		//Wordpress login info will prevail
 		return;
 	} 
 	else {
@@ -108,6 +112,8 @@ function fb_add_meta_to_comment($comment_id)
 
 
 function fb_wp_comment_form_unfiltered_html_nonce() {
+	if( !is_user_logged_in() )
+	{
 	?>
 	<script src="//connect.facebook.net/en_US/all.js"></script>
 
@@ -138,7 +144,7 @@ function fb_wp_comment_form_unfiltered_html_nonce() {
 					var oFormObject = document.forms['commentform'];
 
 					FB.api('/me/?fields=name,email,picture', function(response) {
-						$('input[name=author]').val("<a href>" + response.name + "</a>");
+						$('input[name=author]').val(response.name);
 						$('input[name=email]').val(response.email);
 						$('.comment-form-comment').prepend("<div><img src='" + response.picture + "' height='40' width='40' />" + "<a href='$url' rel='external nofollow' class='url' style='top:-15px;position:relative;font-size:17px;'>" +  "  " + response.name + "</a></div>");
 					});
@@ -155,7 +161,7 @@ function fb_wp_comment_form_unfiltered_html_nonce() {
 				var oFormObject = document.forms['commentform'];
 				alert("You're logged in, but need to authorize your app.");
 				} */else {
-					// the user isn't logged in to Facebook.
+					// the user isn't logged in to Facebook
 				}
 			});
 		});			
@@ -172,17 +178,11 @@ function fb_wp_comment_form_unfiltered_html_nonce() {
 		<!--<div class="commentlist"><?php wp_list_comments(array('style' => 'div')); ?></div> -->
 
 		<?php
-		global $post;
-
-		$post_id = 0;
-		if ( !empty($post) )
-			$post_id = $post->ID;
-
-		if ( current_user_can( 'unfiltered_html' ) ) {
-			wp_nonce_field( 'unfiltered-html-comment_' . $post_id, '_wp_unfiltered_html_comment_disabled', false );
-			echo "<script>(function(){if(window===window.parent){document.getElementById('_wp_unfiltered_html_comment_disabled').name='_wp_unfiltered_html_comment';}})();</script>\n";
 		}
-
+		else
+		{
+			//already logged into Wordpress
+		}
 	}
 
 function fb_filter_comment_query_vars( $query_vars ) {

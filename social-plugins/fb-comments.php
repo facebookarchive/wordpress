@@ -200,11 +200,7 @@ function fb_handle_save_comment() {
 		//logic to store this comment into the 
 		$user = $facebook->getUser();
 		$fields = $facebook->api('/me/?fields=name,email,picture');
-		add_comment_meta($comment_id, 'fb_uid', $user);
-		add_comment_meta($comment_id, 'name', $fields['name']);		
-		add_comment_meta($comment_id, 'email', $fields['email']);
-		add_comment_meta($comment_id, 'avatar', $fields['picture']);
-
+		
 		$comment_post_ID = $_REQUEST['the_post_id'];
 		$comment_author = $fields['name'];
 		$comment_author_email = $fields['email'];
@@ -231,6 +227,11 @@ function fb_handle_save_comment() {
 
 		//use wp new comment, not insert because new comment does sanity checks!
 		$new_comments_id = wp_new_comment( $commentdata );
+		add_comment_meta($new_comments_id, 'fb_uid', $user);
+		add_comment_meta($new_comments_id, 'name', $fields['name']);		
+		add_comment_meta($new_comments_id, 'email', $fields['email']);
+		add_comment_meta($new_comments_id, 'avatar', $fields['picture']);
+		
 		die();
 	}
 }

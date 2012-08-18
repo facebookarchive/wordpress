@@ -26,6 +26,165 @@ function fb_comment_rule() {
 }
 
 
+function fb_get_avatar($avatar, $id_or_email, $size, $default, $alt)
+{
+	//error_log("This is  a comment");
+	error_log("The Post's ID is" . get_the_ID());
+	$commenter_fbuid = get_comment_meta (get_comment_id(), 'fb_uid', true );
+	
+	//if the user was not logged into Facebook for this, just use the regular avatar
+	if ( $commenter_fbuid == '') {
+	    echo $avatar;
+	}
+	else
+	{
+		$avatar_url = get_comment_meta (get_comment_id(), 'avatar', true );
+		//we have both a valid fb uid and avatar image link
+		if( $avatar_url != '' )
+		{
+			$my_avatar = "<img src='".$avatar_url."' alt='' class='avatar avatar-$size' height='$size' width='$size' />";	//return apply_filters('get_avatar', $avatar_url);
+		}
+		else //we have a valid fb uid but no link to their profile pic (this metadata was not added in old comments)
+		{
+			$my_avatar = "<img src='http://www.simplyzesty.com/wp-content/uploads/2011/09/facebook-logo.png' alt='' class='avatar avatar-$size' height='$size' width='$size' />";				
+		}
+		echo $my_avatar;
+	}
+}
+
+function fb_get_comment_author_link ($comment_id)
+{
+	//$comment = get_comment_id()( $comment_id );
+	$commenter_fbuid = get_comment_meta (get_comment_id(), 'fb_uid', true );
+	//if we have facebook content do facebook stuff
+	if($commenter_fbuid == '')	{
+	    return apply_filters('get_comment_author_link', $comment_id);
+	}
+	else {
+		//we have Facebook content. So return the author we get based on the fb_uid
+		$url = "http://www.facebook.com/" . $commenter_fbuid;
+		$theName = get_comment_meta (get_comment_id(), 'name', false );
+		if($theName[0] != '')
+		{
+			$return = "<a href='$url' rel='external nofollow' class='url'>" .  $theName[0] . "</a>";
+		}
+		else
+		{
+			//$author = get_comment_author( get_comment_id() );
+			$return = "<a href='$url' rel='external nofollow' class='url'>" . $comment_id . "</a>";
+		}
+		return apply_filters('get_comment_author_link', $return);
+	}
+}
+
+
+/*This function adds meta data specific to the signed in Facebook user*/
+function fb_add_meta_to_comment($comment_id)
+{
+	
+	global $facebook;
+	//nothing to do in this case
+	if( is_null($comment_id) ) {
+		return;
+	}
+	
+	$fb_uid = $facebook->getUser();
+	if($fb_uid == 0) {
+		//no logged in user, so no meta-data to add
+		return;
+	} 
+	else {
+		//we got back a valid uid for the logged-in user
+		add_comment_meta($comment_id, 'fb_uid', $fb_uid);		
+		
+		//add name and email
+		$fields = $facebook->api('/me/?fields=name,email,picture');
+		add_comment_meta($comment_id, 'name', $fields['name']);		
+		add_comment_meta($comment_id, 'email', $fields['email']);
+		add_comment_meta($comment_id, 'avatar', $fields['picture']);		
+	}
+	return;
+}
+
+
+function fb_wp_comment_form_unfiltered_html_nonce() {
+	?>
+	<script src="//connect.facebook.net/en_US/all.js"></script>
+
+	<div id="fb-root"></div>
+	<script>
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=311654765594138";
+		fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+		</script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+		<script type="text/javascript">
+
+		$(window).load(function() {
+			// Handler for .ready() called.
+			FB.getLoginStatus(function(response) {
+				if (response.status === 'connected' || response.status === 'not_authorized') {
+					// the user is logged in and has authenticated your
+					// app, and response.authResponse supplies
+					// the user's ID, a valid access token, a signed
+					// request, and the time the access token 
+					// and signed request each expire
+					var uid = response.authResponse.userID;
+					var accessToken = response.authResponse.accessToken;
+					var oFormObject = document.forms['commentform'];
+
+					FB.api('/me/?fields=name,email,picture', function(response) {
+						$('input[name=author]').val("<a href>" + response.name + "</a>");
+						$('input[name=email]').val(response.email);
+						$('.comment-form-comment').prepend("<div><img src='" + response.picture + "' height='40' width='40' />" + "<a href='$url' rel='external nofollow' class='url' style='top:-15px;position:relative;font-size:17px;'>" +  "  " + response.name + "</a></div>");
+					});
+
+					//hide these because they will be populated via fb sdk provided information
+					$(".comment-form-author").hide();
+					$(".comment-form-email").hide();
+					$(".comment-form-url").hide();		
+					$(".fb-login-button").hide();
+				} /*else if (response.status === 'not_authorized') {
+				// the user is logged in to Facebook, 
+				// but has not authenticated your app
+				alert("not authorized");
+				var oFormObject = document.forms['commentform'];
+				alert("You're logged in, but need to authorize your app.");
+				} */else {
+					// the user isn't logged in to Facebook.
+				}
+			});
+		});			
+
+
+		function afterLogin() {
+			window.location.reload();
+		}
+
+		$('.comment-form-comment').prepend('<div class="fb-login-button" data-scope="email" data-show-faces="true" data-width="800" data-max-rows="1" style="top:0px;margin-top:10px;" onlogin:"afterLogin();"></div>');
+
+		</script>	
+
+		<!--<div class="commentlist"><?php wp_list_comments(array('style' => 'div')); ?></div> -->
+
+		<?php
+		global $post;
+
+		$post_id = 0;
+		if ( !empty($post) )
+			$post_id = $post->ID;
+
+		if ( current_user_can( 'unfiltered_html' ) ) {
+			wp_nonce_field( 'unfiltered-html-comment_' . $post_id, '_wp_unfiltered_html_comment_disabled', false );
+			echo "<script>(function(){if(window===window.parent){document.getElementById('_wp_unfiltered_html_comment_disabled').name='_wp_unfiltered_html_comment';}})();</script>\n";
+		}
+
+	}
+
 function fb_filter_comment_query_vars( $query_vars ) {
 	$query_vars[] = 'fb-save-comment';
 	return $query_vars;
@@ -231,7 +390,13 @@ function fb_get_comments_fields_array() {
                           'type' => 'checkbox',
                           'default' => 'true',
                           'help_text' => __('Whether the plugin will display a comment count for each post on the homepage.'),
-                         )
+                         ),
+						array('name' => 'comment_type',
+						'label' => 'Show Facebook comments',
+						'type' => 'dropdown',
+						'options' => array("Facebook Comments Social Plugin" => "Facebook Comments Social Plugin", "WordPress Comments with Login with Facebook" => "WordPress Comments with Login with Facebook", 'FB comments iframe for new posts and WP comments for old posts' => 'FB comments iframe for new posts and WP comments for old posts'),
+						'help_text' => 'Hide all posts and pages prior to when you enabled this option, and only show Facebook comments',
+						)
 										);
 
 	return $array;

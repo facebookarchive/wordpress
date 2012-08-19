@@ -307,7 +307,7 @@ abstract class WP_BaseFacebook
       }
       
       $this->destroySession();
-      
+      error_log($response_params['access_token'] . "<-- access token");
       $this->setPersistentData('access_token', $response_params['access_token']);
   }
 

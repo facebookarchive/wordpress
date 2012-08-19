@@ -2,7 +2,7 @@
 add_action( 'init', 'fb_comment_rule' );
 add_action( 'query_vars', 'fb_filter_comment_query_vars' );
 add_action( 'template_redirect', 'fb_handle_save_comment' );
-
+  
 function fb_insights_page() {
 	$options = get_option('fb_options');
 

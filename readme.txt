@@ -35,6 +35,12 @@ All of these features are easy to enable via the Widgets settings page.
 
 Facebook Insights (http://www.facebook.com/insights) integration included. This plugin also supports internationalization and mobile.
 
+**Contributing code**
+
+All of the source code for this plugin is available on Facebook's GitHub account (https://github.com/facebook/wordpress). If you like to contribute code to the plugin,  open up an issue against the repository where we can discuss it. Once you have completed the code, open a Pull Request.
+
+Note that all contributors must agree to and sign the Facebook CLA (https://developers.facebook.com/opensource/cla) prior to submitting Pull Requests. We can't accept Pull Requests until this document is signed and submitted.
+
 == Installation ==
 
 1. Install Facebook for WordPress either via the WordPress.org plugin directory, or by uploading the files to your server (in the `/wp-content/plugins/` directory).

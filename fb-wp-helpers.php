@@ -6,7 +6,7 @@ function fb_admin_dialog($message, $error = false) {
 	else {
 		$class = 'updated';
 	}
-	
+
 	echo '<div ' . ( $error ? 'id="facebook_warning" ' : '') . 'class="' . $class . ' fade' . '"><p>'. $message . '</p></div>';
 }
 
@@ -69,7 +69,7 @@ function fb_construct_fields_children($place, $fields, $parent = null, $object =
 			$fields[$c] = $field;
 		}
 	}
-    elseif ($place == 'settings') { 
+    elseif ($place == 'settings') {
 		foreach ($fields as $c => $field) {
             if ($parent) {
 				$value = fb_array_default(
@@ -192,14 +192,18 @@ function fb_field_text($field, $place='settings') {
 }
 
 function fb_field_checkbox($field, $place='settings') {
-	$onclick = '';	
-		
+	$onclick = '';
+	$buffer = '';
+
 	if (isset($field['onclick'])) {
 		$onclick = $field['onclick'];
 	}
 
     if (isset($field['options'])) {
-        foreach ($field['options'] as $option_value => $option_label) {
+		foreach ($field['options'] as $option_value => $option_label) {
+			if ( !isset( $field['value'][$option_value] ) ) {
+				$field['value'][$option_label] = '';
+			}
             $buffer .= sprintf(
                 '<label for="%2$s">%1$s</label><input type="checkbox" class="multicheckbox" id="%2$s" name="%2$s" onclick="%3$s" value="true" %4$s />',
                 esc_html($option_label),

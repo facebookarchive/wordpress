@@ -571,7 +571,6 @@ function fb_get_social_publisher_fields() {
 	);
     $post_types = get_post_types(array('public' => true));
     unset($post_types['attachment']);
-    $post_types = array_values($post_types);
     $children = array(
 		array(
 			'name' => 'publish_to_authors_facebook_timeline',

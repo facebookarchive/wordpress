@@ -58,6 +58,17 @@ Note that all contributors must agree to and sign the Facebook CLA (https://deve
 7. The Post is published to the Celebuzz Facebook Page.
 8. Widgets are also available.
 
+== Upgrade Notice ==
+
+= 1.0.3 =
+This version fixes many bugs and includes many new features. Please upgrade immediately.
+
+= 1.0.2 =
+This version fixes many bugs and you should upgrade immediately.
+
+= 1.0.1 =
+This version fixes many bugs and you should upgrade immediately.
+
 == Changelog ==
 
 = 1.0.3 =

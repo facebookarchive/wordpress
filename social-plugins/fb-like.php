@@ -15,22 +15,22 @@
 
 function fb_get_like_button($options = array()) {
     $params = fb_build_social_plugin_params($options, 'like');
-	
+
 	return '<div class="fb-like fb-social-plugin" ' . $params . ' ></div>';
 }
 
 function fb_like_button_automatic($content) {
 	$options = get_option('fb_options');
-    
+
     global $post;
-	
+
 	if ( isset ( $post ) ) {
 		if ( isset($options['like']['show_on_homepage']) ) {
 			$options['like']['href'] = get_permalink($post->ID);
 		}
-		
+
 		$new_content = '';
-	
+
 		switch ($options['like']['position']) {
 			case 'top':
 				$new_content = fb_get_like_button($options['like']) . $content;
@@ -43,13 +43,13 @@ function fb_like_button_automatic($content) {
 				$new_content .= fb_get_like_button($options['like']);
 				break;
 		}
-	
+
 		$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_like', true );
 		
 		if ( is_home() && isset ( $options['like']['show_on_homepage'] ) && isset ( $options['like']['show_on'] ) && isset( $options['like']['show_on'][ $post->post_type ] ) ) {
 			$content = $new_content;
 		}
-		elseif ( !is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset ( $options['like']['show_on'] ) && isset( $options['like']['show_on'][ $post->post_type ]) ) {		
+		elseif ( !is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset ( $options['like']['show_on'] ) && isset( $options['like']['show_on'][ $post->post_type ]) ) {
             $content = $new_content;
 		}
 		elseif ( !is_home() && ('show' == $show_indiv || ( ( ! isset( $options['like']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) )) {
@@ -108,12 +108,12 @@ class Facebook_Like_Button extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$return_instance = $old_instance;
-		
+
 		$fields = fb_get_like_fields_array('widget');
-		
+
 		foreach( $fields['children'] as $field ) {
 			$unsafe_value = ( isset( $new_instance[$field['name']] ) ) ? $new_instance[$field['name']] : '';
-			if ( !empty( $field['sanitization_callback'] ) && function_exists( $field['sanitization_callback'] ) ) 
+			if ( !empty( $field['sanitization_callback'] ) && function_exists( $field['sanitization_callback'] ) )
 				$return_instance[$field['name']] = $field['sanitization_callback']( $unsafe_value );
 			else
 				$return_instance[$field['name']] = sanitize_text_field( $unsafe_value );
@@ -203,7 +203,7 @@ function fb_get_like_fields_array($placement) {
 		$array['children'][] = array('name' => 'show_on',
 													'type' => 'checkbox',
 													'default' => array_fill_keys(array_keys($post_types) , 'true'),
-													'options' => $post_types, 
+													'options' => $post_types,
 													'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' ),
 													);
 		$array['children'][] = array('name' => 'show_on_homepage',

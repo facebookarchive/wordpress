@@ -25,7 +25,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 
 		if ( empty( $url ) || empty( $params ) )
 			throw new WP_FacebookApiException( array( 'error_code' => 400, 'error' => array( 'type' => 'makeRequest', 'message' => 'Invalid parameters and/or URI passed to makeRequest' ) ) );
-			
+
 		$params = array(
 			'redirection' => 0,
 			'httpversion' => '1.1',
@@ -37,19 +37,19 @@ class Facebook_WP_Extend extends WP_Facebook {
 		);
 
 		$response = wp_remote_post( $url, $params );
-		
+
 		if ( is_wp_error( $response ) ) {
 			throw new WP_FacebookApiException( array( 'error_code' => $response->get_error_code(), 'error_msg' => $response->get_error_message() ) );
 		}
 		else if ( wp_remote_retrieve_response_code( $response ) != '200' ) {
 			$fb_response = json_decode( $response['body'] );
-			
+
 			$error_subcode = '';
-			
+
 			if ( isset( $fb_response->error->error_subcode ) ) {
 				$error_subcode = $fb_response->error->error_subcode;
 			}
-			
+
 			throw new WP_FacebookApiException(array(
         'error_code' => $fb_response->error->code,
         'error' => array(
@@ -58,10 +58,10 @@ class Facebook_WP_Extend extends WP_Facebook {
         ),
       ));
 		}
-		
+
 		return wp_remote_retrieve_body( $response );
 	}
-  
+
   /**
    * Extend an access token, while removing the short-lived token that might have been generated via client-side flow.
    * Thanks to http://stackoverflow.com/questions/486896/adding-a-parameter-to-the-url-with-javascript for the workaround
@@ -83,20 +83,20 @@ class Facebook_WP_Extend extends WP_Facebook {
         // In any event, we don't have an access token, so say so.
         return false;
       }
-  
+
       if (empty($access_token_response)) {
         return false;
       }
-      
+
       $response_params = array();
       parse_str($access_token_response, $response_params);
-      
+
       if (!isset($response_params['access_token'])) {
         return false;
       }
-      
+
       $this->destroySession();
-      
+
       $this->setPersistentData('access_token', $response_params['access_token']);
   }
 
@@ -107,23 +107,23 @@ class Facebook_WP_Extend extends WP_Facebook {
    * access tokens.
    */
   protected function setPersistentData($key, $value){
-    
+
 	    if (!in_array($key, self::$kSupportedKeys)) {
 	      self::errorLog('Unsupported key passed to setPersistentData.');
-	      return;   
+	      return;
 	    }
-		
+
 		//WP 3.0+
 		fb_update_user_meta( get_current_user_id(), $key, $value);
 	}
 
   protected function getPersistentData($key, $default = false){
-    
+
     if (!in_array($key, self::$kSupportedKeys)) {
       self::errorLog('Unsupported key passed to getPersistentData.');
       return $default;
     }
-	
+
 	  return $usermeta = fb_get_user_meta( get_current_user_id(), $key, true );
 	}
 

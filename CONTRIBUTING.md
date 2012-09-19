@@ -1,10 +1,10 @@
-# Contributing to Facebook for Wordpress
+# Contributing to Facebook for WordPress
 
-If you want to help contribute code to the Facebook for Wordpress plugin, we want to make it as easy as possible. Here's some guidelines to help you get on your way.
+If you want to help contribute code to the Facebook for WordPress plugin, we want to make it as easy as possible. Here are some guidelines to help you get on your way.
 
 ## Getting Started
 At a minimum, you'll need the following -
-* An installation of [Wordpress](http://wordpress.org/)
+* An installation of [WordPress](http://wordpress.org/)
 * A Facebook App ID, available through the [App Dashboard](https://developers.facebook.com/apps/)
 * A [GitHub account](https://github.com/signup/free)
 * Let us know what you want to do using Issues.
@@ -12,7 +12,7 @@ At a minimum, you'll need the following -
 
 ## Making your changes
 * Create a new branch for your feature / bug fix
-* Follow the [Wordpress Coding Standards](http://codex.wordpress.org/WordPress_Coding_Standards)
+* Follow the [WordPress Coding Standards](http://codex.wordpress.org/WordPress_Coding_Standards)
 * When you're done, squash to one commit.
 * Reference your issue number in the commit message
 
@@ -23,6 +23,6 @@ At a minimum, you'll need the following -
 
 # Some relevant docs
 * [Facebook API Docs](https://developers.facebook.com/docs/reference/apis/)
-* The Wordpress guide to [writing plugins](http://codex.wordpress.org/Writing_a_Plugin)
-* [Facebook for Wordpress Homepage](https://developers.facebook.com/wordpress/)
+* The WordPress guide to [writing plugins](http://codex.wordpress.org/Writing_a_Plugin)
+* [Facebook for WordPress Homepage](https://developers.facebook.com/wordpress/)
 

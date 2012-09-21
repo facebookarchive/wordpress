@@ -237,7 +237,6 @@ function fb_post_to_fb_page($post_id) {
         'from' => $fan_page_info[0][2],
         'link' => apply_filters( 'fb_rel_canonical', get_permalink()),
         'name' => html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8'),
-        'caption' => strip_tags( apply_filters( 'the_excerpt', get_the_excerpt() ) ),
         'description' => strip_tags( fb_strip_and_format_desc( $post ) ),
         'message' => $fan_page_message,
       );
@@ -248,7 +247,6 @@ function fb_post_to_fb_page($post_id) {
         'link' => apply_filters( 'fb_rel_canonical', get_permalink()),
         'picture' => $post_thumbnail_url,
         'name' => html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8'),
-        'caption' => strip_tags( apply_filters( 'the_excerpt', get_the_excerpt() ) ),
         'description' => strip_tags( fb_strip_and_format_desc( $post ) ),
         'message' => $fan_page_message,
       );

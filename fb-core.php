@@ -239,5 +239,5 @@ function fb_get_locale() {
  * @since 1.0
  */
 function fb_style() {
-	wp_enqueue_style( 'fb', plugins_url( 'style/style.css', __FILE__), array(), '1.0' );
+	wp_enqueue_style( 'fb', plugins_url( 'style/style.min.css', __FILE__ ), array(), '1.0' );
 }

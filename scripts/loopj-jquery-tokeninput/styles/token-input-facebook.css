@@ -1,10 +1,13 @@
 /* Example tokeninput style #2: Facebook style */
 ul.token-input-list-facebook {
-    overflow: hidden;
-    border: 1px solid #dfdfdf;
+    overflow: hidden; 
+    height: auto !important; 
+    height: 1%;
+    width: 400px;
+    border: 1px solid #8496ba;
     cursor: text;
     font-size: 12px;
-    font-family: Verdana;
+    font-family: Verdana, sans-serif;
     min-height: 1px;
     z-index: 999;
     margin: 0;
@@ -77,7 +80,7 @@ div.token-input-dropdown-facebook {
     border-bottom: 1px solid #ccc;
     cursor: default;
     font-size: 11px;
-    font-family: Verdana;
+    font-family: Verdana, sans-serif;
     z-index: 1;
 }
 

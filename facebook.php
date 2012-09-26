@@ -16,7 +16,7 @@ Domain Path: /lang/
 */
 
 global $fb_ver;
-$fb_ver = '1.0.2';
+$fb_ver = '1.0.3';
 
 $facebook_plugin_directory = dirname(__FILE__);
 

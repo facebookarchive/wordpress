@@ -228,9 +228,9 @@ add_filter( 'plugin_action_links', 'fb_plugin_action_links', 10, 2 );
  * @since 1.0
  */
 function fb_admin_style() {
-	wp_enqueue_style( 'fb_admin', plugins_url( 'style/style-admin.css', __FILE__), array(), '1.0' );
-	wp_enqueue_style( 'fb_loopj', plugins_url( 'scripts/loopj-jquery-tokeninput/styles/token-input-facebook.css', __FILE__ ), array(), '1.0' );
-	wp_enqueue_style( 'tipsy', plugins_url( 'style/tipsy.css', __FILE__) );
+	wp_enqueue_style( 'fb_admin', plugins_url( 'style/style-admin.min.css', __FILE__), array(), '1.0' );
+	wp_enqueue_style( 'fb_loopj', plugins_url( 'scripts/loopj-jquery-tokeninput/styles/token-input-facebook.min.css', __FILE__ ), array(), '1.0' );
+	wp_enqueue_style( 'tipsy', plugins_url( 'style/tipsy.min.css', __FILE__) );
 }
 
 /**

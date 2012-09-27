@@ -49,27 +49,26 @@ function fb_ssl_warning() {
 /*
 function fb_rate_message() {
 	$options = get_option('fb_options');
-	
-  global $current_user;
-  
+
+	global $current_user;
+
 	$user_id = $current_user->ID;
 	
 	$page = (isset($_GET['page']) ? $_GET['page'] : null);
 
-	if ( !empty($options['app_id']) && !empty( $options['app_secret'] ) && current_user_can( 'publish_posts' ) && !get_user_meta( $user_id, 'fb_rate_message_ignore_notice', true )
-      && ( !empty( $options['social_publisher'] ) || !empty( $options['like_button'] ) || !empty( $options['subscribe_button'] ) || !empty( $options['send_button'] ) || !empty( $options['comments'] ) || !empty( $options['recommendations_bar'] ) ) ) {
-    $like_button_options = array(
-       "enabled" => "true", 
-       "send" => "true", 
-       "layout" => "button_count", 
-       "action" => "like", 
-       "colorscheme" => "light", 
-       "font" => "arial", 
-       "position" => "both", 
-       "ref" => "wp",
-       "href" => "http://developers.facebook.com/wordpress",
-    );
-    
+	if ( !empty($options['app_id']) && !empty( $options['app_secret'] ) && current_user_can( 'publish_posts' ) && !get_user_meta( $user_id, 'fb_rate_message_ignore_notice', true ) && ( !empty( $options['social_publisher'] ) || !empty( $options['like_button'] ) || !empty( $options['subscribe_button'] ) || !empty( $options['send_button'] ) || !empty( $options['comments'] ) || !empty( $options['recommendations_bar'] ) ) ) {
+		$like_button_options = array(
+			'enabled' => 'true', 
+			'send' => 'true',
+			'layout' => 'button_count',
+			'action' => 'like',
+			'colorscheme' => 'light',
+			'font' => 'arial',
+			'position' => 'both',
+			'ref' => 'wp',
+			'href' => 'http://developers.facebook.com/wordpress'
+		);
+
 		fb_admin_dialog( sprintf( __( '%1$sEnjoying the Facebook plugin? Please like it, %2$srate it,  and mark it as working%3$s! Having a problem? %4$sReport it%5$s. &nbsp;|&nbsp; %6$sDismiss%7$s' ), fb_get_like_button($like_button_options), '<a href="http://wordpress.org/extend/plugins/facebook/" target="_blank">', '</a>', '<a href="http://wordpress.org/support/plugin/facebook" target="_blank">', '</a>', '<a href="' . get_admin_url() . '?fb_rate_message_ignore=1' . '">', '</a>' ), false);
 	}
 }

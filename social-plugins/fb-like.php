@@ -14,20 +14,17 @@
  */
 
 function fb_get_like_button($options = array()) {
-    $params = fb_build_social_plugin_params($options, 'like');
-
-	return '<div class="fb-like fb-social-plugin" ' . $params . ' ></div>';
+	return '<div class="fb-like fb-social-plugin" ' . fb_build_social_plugin_params( $options, 'like' ) . ' ></div>';
 }
 
 function fb_like_button_automatic($content) {
+	global $post;
+
 	$options = get_option('fb_options');
 
-    global $post;
-
 	if ( isset ( $post ) ) {
-		if ( isset($options['like']['show_on_homepage']) ) {
+		if ( isset($options['like']['show_on_homepage']) )
 			$options['like']['href'] = get_permalink($post->ID);
-		}
 
 		$new_content = '';
 
@@ -48,11 +45,9 @@ function fb_like_button_automatic($content) {
 		
 		if ( is_home() && isset ( $options['like']['show_on_homepage'] ) && isset ( $options['like']['show_on'] ) && isset( $options['like']['show_on'][ $post->post_type ] ) ) {
 			$content = $new_content;
-		}
-		elseif ( !is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset ( $options['like']['show_on'] ) && isset( $options['like']['show_on'][ $post->post_type ]) ) {
-            $content = $new_content;
-		}
-		elseif ( !is_home() && ('show' == $show_indiv || ( ( ! isset( $options['like']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) )) {
+		} else if ( !is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset ( $options['like']['show_on'] ) && isset( $options['like']['show_on'][ $post->post_type ]) ) {
+			$content = $new_content;
+		} else if ( !is_home() && ('show' == $show_indiv || ( ( ! isset( $options['like']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) )) {
 			$content = $new_content;
 		}
 	}
@@ -140,91 +135,126 @@ function fb_get_like_fields($placement = 'settings', $object = null) {
 }
 
 function fb_get_like_fields_array($placement) {
-	$array['parent'] = array('name' => 'like',
-														'label' => 'Like Button',
-														'image' => plugins_url( '/images/settings_like_button.png', dirname(__FILE__)),
-														'description' => 'The Like Button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user\'s friends\' News Feed with a link back to your website.',
-														'help_link' => 'https://developers.facebook.com/docs/reference/plugins/like/',
-														);
+	$array['parent'] = array(
+		'name' => 'like',
+		'label' => 'Like Button',
+		'image' => plugins_url( '/images/settings_like_button.png', dirname(__FILE__)),
+		'description' => 'The Like Button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user\'s friends\' News Feed with a link back to your website.',
+		'help_link' => 'https://developers.facebook.com/docs/reference/plugins/like/',
+	);
 
-	$array['children'] = array(         array('name' => 'send',
-													'type' => 'checkbox',
-													'default' => true,
-													'help_text' => __( 'Include a send button.', 'facebook' ),
-													),
-										array('name' => 'show_faces',
-													'type' => 'checkbox',
-													'default' => true,
-													'help_text' => __( 'Show profile pictures below the button.  Applicable to standard layout only.', 'facebook' ),
-													),
-										array('name' => 'layout',
-													'type' => 'dropdown',
-													'default' => 'standard',
-													'options' => array('standard' => 'standard', 'button_count' => 'button_count', 'box_count' => 'box_count'),
-													'help_text' => __( 'Determines the size and amount of social context at the bottom.', 'facebook' ),
-													),
-										array('name' => 'width',
-													'type' => 'text',
-													'default' => '450',
-													'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
-													'sanitization_callback' => 'intval',
-													),
-										array('name' => 'action',
-													'type' => 'dropdown',
-													'default' => 'like',
-													'options' => array('like' => 'like', 'recommend' => 'recommend'),
-													'help_text' => __( 'The verb to display in the button.', 'facebook' ),
-													),
-										array('name' => 'colorscheme',
-													'label' => 'Color scheme',
-													'type' => 'dropdown',
-													'default' => 'light',
-													'options' => array('light' => 'light', 'dark' => 'dark'),
-													'help_text' => __( 'The color scheme of the button.', 'facebook' ),
-													),
-										array('name' => 'font',
-													'type' => 'dropdown',
-													'default' => 'lucida grande',
-													'options' => array('arial' => 'arial', 'lucida grande' => 'lucida grande', 'segoe ui' => 'segoe ui', 'tahoma' => 'tahoma', 'trebuchet ms' => 'trebuchet ms', 'verdana' => 'verdana'),
-													'help_text' => __( 'The font of the button.', 'facebook' ),
-													),
-										);
+	$array['children'] = array(
+		array(
+			'name' => 'send',
+			'type' => 'checkbox',
+			'default' => true,
+			'help_text' => __( 'Include a send button.', 'facebook' )
+		),
+		array(
+			'name' => 'show_faces',
+			'type' => 'checkbox',
+			'default' => true,
+			'help_text' => __( 'Show profile pictures below the button.  Applicable to standard layout only.', 'facebook' )
+		),
+		array(
+			'name' => 'layout',
+			'type' => 'dropdown',
+			'default' => 'standard',
+			'options' => array(
+				'standard' => 'standard',
+				'button_count' => 'button_count',
+				'box_count' => 'box_count'
+			),
+			'help_text' => __( 'Determines the size and amount of social context at the bottom.', 'facebook' )
+		),
+		array(
+			'name' => 'width',
+			'type' => 'text',
+			'default' => '450',
+			'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
+			'sanitization_callback' => 'intval'
+		),
+		array(
+			'name' => 'action',
+			'type' => 'dropdown',
+			'default' => 'like',
+			'options' => array(
+				'like' => 'like',
+				'recommend' => 'recommend'
+			),
+			'help_text' => __( 'The verb to display in the button.', 'facebook' )
+		),
+		array(
+			'name' => 'colorscheme',
+			'label' => 'Color scheme',
+			'type' => 'dropdown',
+			'default' => 'light',
+			'options' => array(
+				'light' => 'light',
+				'dark' => 'dark'
+			),
+			'help_text' => __( 'The color scheme of the button.', 'facebook' )
+		),
+		array(
+			'name' => 'font',
+			'type' => 'dropdown',
+			'default' => 'lucida grande',
+			'options' => array(
+				'arial' => 'arial',
+				'lucida grande' => 'lucida grande',
+				'segoe ui' => 'segoe ui',
+				'tahoma' => 'tahoma',
+				'trebuchet ms' => 'trebuchet ms',
+				'verdana' => 'verdana'
+			),
+			'help_text' => __( 'The font of the button.', 'facebook' )
+		)
+	);
 
-	if ($placement == 'settings') {
-		$array['children'][] = array('name' => 'position',
-													'type' => 'dropdown',
-													'default' => 'both',
-													'options' => array('top' => 'top', 'bottom' => 'bottom', 'both' => 'both'),
-													'help_text' => __( 'Where the button will display on the page or post.', 'facebook' ),
-                                                );
-        $post_types = get_post_types(array('public' => true));
-        //unset($post_types['attachment']);
-        //$post_types = array_values($post_types);
-		$array['children'][] = array('name' => 'show_on',
-													'type' => 'checkbox',
-													'default' => array_fill_keys(array_keys($post_types) , 'true'),
-													'options' => $post_types,
-													'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' ),
-													);
-		$array['children'][] = array('name' => 'show_on_homepage',
-													'type' => 'checkbox',
-													'default' => true,
-													'help_text' => __( 'If the plugin should appear on the homepage as part of the Post previews.  If unchecked, the plugin will only display on the Post itself.', 'facebook' ),
-													);
+	if ( $placement == 'settings' ) {
+		$array['children'][] = array(
+			'name' => 'position',
+			'type' => 'dropdown',
+			'default' => 'both',
+			'options' => array(
+				'top' => 'top',
+				'bottom' => 'bottom',
+				'both' => 'both'
+			),
+			'help_text' => __( 'Where the button will display on the page or post.', 'facebook' )
+		);
+		$post_types = get_post_types(array('public' => true));
+		//unset($post_types['attachment']);
+		//$post_types = array_values($post_types);
+		$array['children'][] = array(
+			'name' => 'show_on',
+			'type' => 'checkbox',
+			'default' => array_fill_keys(array_keys($post_types) , 'true'),
+			'options' => $post_types,
+			'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' )
+		);
+		$array['children'][] = array(
+			'name' => 'show_on_homepage',
+			'type' => 'checkbox',
+			'default' => true,
+			'help_text' => __( 'If the plugin should appear on the homepage as part of the Post previews.  If unchecked, the plugin will only display on the Post itself.', 'facebook' )
+		);
 	}
 
 	if ($placement == 'widget') {
-		$title_array = array('name' => 'title',
-													'type' => 'text',
-													'help_text' => __( 'The title above the button.', 'facebook' ),
-													);
-		$text_array = array('name' => 'href',
-													'label' => 'URL',
-													'type' => 'text',
-													'default' => get_site_url(),
-													'help_text' => __( 'The URL the Like button will point to.', 'facebook' ),
-													'sanitization_callback' => 'esc_url_raw',
-													);
+		$title_array = array(
+			'name' => 'title',
+			'type' => 'text',
+			'help_text' => __( 'The title above the button.', 'facebook' )
+		);
+		$text_array = array(
+			'name' => 'href',
+			'label' => 'URL',
+			'type' => 'text',
+			'default' => get_site_url(),
+			'help_text' => __( 'The URL the Like button will point to.', 'facebook' ),
+			'sanitization_callback' => 'esc_url_raw'
+		);
 
 		array_unshift($array['children'], $title_array, $text_array);
 	}

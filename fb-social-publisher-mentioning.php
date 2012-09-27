@@ -279,11 +279,11 @@ function fb_add_friend_mention_box_content( $post ) {
 
 	if ( isset ( $fb_user ) && isset($perms['data'][0]['manage_pages']) && isset($perms['data'][0]['publish_actions']) && isset($perms['data'][0]['publish_stream'])) {
 		// The actual fields for data entry
-		echo '<label for="fb_friend_mention_box_autocomplete">';
+		echo '<label for="suggest-friends">';
 		_e("Friend's Name", 'facebook' );
 		echo '</label> ';
 		echo '<input type="text" class="widefat" id="suggest-friends" autocomplete="off" name="fb_friend_mention_box_autocomplete" value="" size="44" placeholder="Type to find a friend." />';
-		echo '<label for="fb_friend_mention_box_message">';
+		echo '<label for="friends-mention-message">';
 		_e('Message', 'facebook' );
 		echo '</label> ';
 		echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_friend_mention_box_message" value="" size="44" placeholder="Write something..." />';

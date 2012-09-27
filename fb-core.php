@@ -217,6 +217,22 @@ function fb_get_locale() {
 
 	$locale = get_locale();
 
+	// catch some weird locales served out by WP.
+	$fix_locales = array(
+		'ca'=> 'ca_ES',
+		'en'=> 'en_US',
+		'el'=> 'el_GR',
+		'et'=> 'et_EE',
+		'ja'=> 'ja_JP',
+		'sq'=> 'sq_AL',
+		'uk'=> 'uk_UA',
+		'vi'=> 'vi_VN',
+		'zh'=> 'zh_CN'
+	);
+
+	if ( isset( $fix_locales[$locale] ) )
+		$locale = $fix_locales[$locale];
+
 	// convert locales like "es" to "es_ES", in case that works for the given locale (sometimes it does)
 	if (strlen($locale) == 2) {
 		$locale = strtolower($locale).'_'.strtoupper($locale);

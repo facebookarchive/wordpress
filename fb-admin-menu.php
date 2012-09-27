@@ -29,8 +29,7 @@ function fb_notify_user_of_plugin_conflicts()
   //add to this list of conflicting plugins from the big list below 
 	$og_conflicting_plugins_static = array( "http://wordpress.org/extend/plugins/facebook/", 
 		"http://wordpress.org/extend/plugins/opengraph/",
-		"http://yoast.com/wordpress/seo/#utm_source=wpadmin&utm_medium=plugin&utm_campaign=wpseoplugin", 
-  	"http://wordbooker.tty.org.uk",
+	  	"http://wordbooker.tty.org.uk",
 		"http://ottopress.com/wordpress-plugins/simple-facebook-connect/",
 		"http://www.whiletrue.it",
 		"http://aaroncollegeman.com/sharepress"
@@ -154,7 +153,6 @@ function fb_notify_user_of_plugin_conflicts()
     "http://wordpress.org/extend/plugins/wordpress-connect",
     "http://wordpress.org/extend/plugins/wordpress-facebook-integrate",
     "http://wordpress.org/extend/plugins/wordpress-plugin-seo-and-facebook-opengraph-and-google-schema",
-    "http://wordpress.org/extend/plugins/wordpress-seo",
     "http://wordpress.org/extend/plugins/wordpress-social-ring",
     "http://wordpress.org/extend/plugins/wp-facebook-like",
     "http://wordpress.org/extend/plugins/wp-facebook-like-send-open-graph-meta",

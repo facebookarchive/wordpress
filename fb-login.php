@@ -31,7 +31,9 @@ function fb_check_connected_accounts() {
 		}
 		
 		if ($fb_user && isset($perms['data'][0]['manage_pages']) && isset($perms['data'][0]['publish_actions']) && isset($perms['data'][0]['publish_stream'])) {
-			$fb_user_data = array('fb_uid' => $fb_user['id'], 'username' => $fb_user['username'], 'activation_time' => time());
+			$fb_user_data = array('fb_uid' => $fb_user['id'], 'activation_time' => time());
+			if ( ! empty( $fb_user['username'] ) )
+				$fb_user_data['username'] = $fb_user['username'];
 
 			fb_update_user_meta($current_user->ID, 'fb_data', $fb_user_data);
 		}

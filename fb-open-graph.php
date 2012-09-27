@@ -6,7 +6,6 @@
  * @param string $property whitespace separated list of CURIEs placed in a property attribute
  * @param mixed content attribute value for the given property. use an array for array property values or structured properties
  */
-
 function fb_output_og_protocol( $property, $content ) {
 	if ( empty( $property ) || empty( $content ) )
 		return;
@@ -28,11 +27,10 @@ function fb_output_og_protocol( $property, $content ) {
 }
 
 function fb_strip_and_format_desc( $post ) {
-
-	$desc_no_html = "";
+	$desc_no_html = '';
 	$desc_no_html = strip_shortcodes( $desc_no_html ); // Strip shortcodes first in case there is HTML inside the shortcode
-        $desc_no_html = wp_strip_all_tags( $desc_no_html ); // Strip all html
-        $desc_no_html = trim( $desc_no_html ); // Trim the final string, we may have stripped everything out of the post so this will make the value empty if that's the case
+	$desc_no_html = wp_strip_all_tags( $desc_no_html ); // Strip all html
+	$desc_no_html = trim( $desc_no_html ); // Trim the final string, we may have stripped everything out of the post so this will make the value empty if that's the case
 
 	// Check if empty, may be that the strip functions above made excerpt empty, doubhtful but we want to be 100% sure.
 	if( empty($desc_no_html) ) {
@@ -77,7 +75,7 @@ function fb_add_og_protocol() {
 		if ( post_type_supports( $post_type, 'title' ) )
 			$meta_tags['http://ogp.me/ns#title'] = get_the_title();
 		if ( post_type_supports( $post_type, 'excerpt' ) ) {
-			// thanks to Angelo Mandato (http://wordpress.org/support/topic/plugin-facebook-plugin-conflicts-with-powerpress?replies=16)
+			// thanks to Angelo Mandato (http://wordpress.org/support/topic/plugin-facebook-plugin-conflicts-with-powerpress)
 			// Strip and format the wordpress way, but don't apply any other filters which adds junk that ends up getitng stripped back out
 			if ( !post_password_required($post) ) {
 				// First lets get the post excerpt (shouldn't have any html, but anyone can enter anything...)

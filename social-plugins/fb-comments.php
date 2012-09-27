@@ -52,16 +52,15 @@ function fb_comments_automatic($content) {
 		if ( comments_open( get_the_ID() ) && post_type_supports( get_post_type(), 'comments' ) ) {
 			$options = get_option('fb_options');
 			$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_comments', true );
-            if ( ! is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset( $options['comments']['show_on'] ) && isset( $options['comments']['show_on'][$post->post_type] ) ) {
-                foreach( $options['comments'] as $param => $val ) {
-                    $param = str_replace( '_', '-', $param );
+			if ( ! is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset( $options['comments']['show_on'] ) && isset( $options['comments']['show_on'][$post->post_type] ) ) {
+				foreach( $options['comments'] as $param => $val ) {
+					$param = str_replace( '_', '-', $param );
 
-                    $params[$param] = $val;
-                }
+					$params[$param] = $val;
+				}
 
-                $content .= fb_get_comments( $params );
-			}
-			elseif ( 'show' == $show_indiv || ( ( ! isset( $options['comments']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) {
+				$content .= fb_get_comments( $params );
+			} else if ( 'show' == $show_indiv || ( ( ! isset( $options['comments']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) {
 				foreach( $options['comments'] as $param => $val ) {
 					$param = str_replace( '_', '-', $param );
 
@@ -131,45 +130,52 @@ function fb_get_comments_fields($placement = 'settings', $object = null) {
 }
 
 function fb_get_comments_fields_array() {
-	$array['parent'] = array('name' => 'comments',
-									'type' => 'checkbox',
-									'label' => 'Comments',
-									'description' => 'The Comments Box is a social plugin that enables user commenting on your site. Features include moderation tools and distribution.',
-									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/comments/',
-									'image' => plugins_url( '/images/settings_comments.png', dirname(__FILE__))
-									);
-    $post_types = get_post_types(array('public' => true));
-	$array['children'] = array(array('name' => 'num_posts',
-													'label' => 'Number of posts',
-													'type' => 'text',
-													'default' => 20,
-													'help_text' => 'The number of posts to display by default.',
-													),
-										array('name' => 'width',
-													'type' => 'text',
-													'default' => '470',
-													'help_text' => 'The width of the plugin, in pixels.',
-													),
-										array('name' => 'colorscheme',
-													'label' => 'Color scheme',
-													'type' => 'dropdown',
-													'default' => 'light',
-													'options' => array('light' => 'light', 'dark' => 'dark'),
-													'help_text' => 'The color scheme of the plugin.',
-													),
-										array('name' => 'show_on',
-													'type' => 'checkbox',
-													'default' => array_fill_keys(array_keys($post_types) , 'true'),
-													'options' => $post_types,
-													'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' ),
-                         ),
-                    array('name' => 'homepage_comments',
-                          'label' => 'Show comment counts on the homepage',
-                          'type' => 'checkbox',
-                          'default' => 'true',
-                          'help_text' => __('Whether the plugin will display a comment count for each post on the homepage.'),
-                         )
-										);
+	$array['parent'] = array(
+		'name' => 'comments',
+		'type' => 'checkbox',
+		'label' => 'Comments',
+		'description' => 'The Comments Box is a social plugin that enables user commenting on your site. Features include moderation tools and distribution.',
+		'help_link' => 'https://developers.facebook.com/docs/reference/plugins/comments/',
+		'image' => plugins_url( '/images/settings_comments.png', dirname(__FILE__))
+	);
+	$post_types = get_post_types(array('public' => true));
+	$array['children'] = array(
+		array(
+			'name' => 'num_posts',
+			'label' => 'Number of posts',
+			'type' => 'text',
+			'default' => 20,
+			'help_text' => 'The number of posts to display by default.',
+		),
+		array(
+			'name' => 'width',
+			'type' => 'text',
+			'default' => '470',
+			'help_text' => 'The width of the plugin, in pixels.',
+		),
+		array(
+			'name' => 'colorscheme',
+			'label' => 'Color scheme',
+			'type' => 'dropdown',
+			'default' => 'light',
+			'options' => array('light' => 'light', 'dark' => 'dark'),
+			'help_text' => 'The color scheme of the plugin.',
+		),
+		array(
+			'name' => 'show_on',
+			'type' => 'checkbox',
+			'default' => array_fill_keys(array_keys($post_types) , 'true'),
+			'options' => $post_types,
+			'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' ),
+		),
+		array(
+			'name' => 'homepage_comments',
+			'label' => 'Show comment counts on the homepage',
+			'type' => 'checkbox',
+			'default' => 'true',
+			'help_text' => __('Whether the plugin will display a comment count for each post on the homepage.', 'facebook'),
+		)
+	);
 
 	return $array;
 }

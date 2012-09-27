@@ -1,11 +1,9 @@
 <?php
 function fb_admin_dialog($message, $error = false) {
-	if ($error) {
+	if ( $error )
 		$class = 'error';
-	}
-	else {
+	else
 		$class = 'updated';
-	}
 
 	echo '<div ' . ( $error ? 'id="facebook_warning" ' : '') . 'class="' . $class . ' fade' . '"><p>'. $message . '</p></div>';
 }
@@ -68,10 +66,9 @@ function fb_construct_fields_children($place, $fields, $parent = null, $object =
 			$field['name'] = $object->get_field_name( $field['name'] );
 			$fields[$c] = $field;
 		}
-	}
-    elseif ($place == 'settings') {
+	} else if ($place == 'settings') {
 		foreach ($fields as $c => $field) {
-            if ($parent) {
+			if ($parent) {
 				$value = fb_array_default(
 					$options, $parent['name'], $field['name'], (
 						empty($options[$parent['name']]['enabled']) ?
@@ -91,7 +88,7 @@ function fb_construct_fields_children($place, $fields, $parent = null, $object =
 				$parent_js_array = '[' . $parent['name'] . ']';
 			}
 
-            $field['value'] = $value;
+			$field['value'] = $value;
 			$field['name'] = "fb_options$parent_js_array"."[" . $field['name'] ."]";
 			$fields[$c] = $field;
 		}
@@ -102,17 +99,17 @@ function fb_construct_fields_children($place, $fields, $parent = null, $object =
 function fb_array_default() { // $array, $keys..., $default
 	$keys = func_get_args();
 	$array = array_shift($keys);
-    $default = array_pop($keys);
-    $key = array_shift($keys);
+	$default = array_pop($keys);
+	$key = array_shift($keys);
 	if (!isset($array[$key])) {
 		return $default;
 	}
 	$array = $array[$key];
 	if (sizeof($keys)>0) {
 		array_unshift($keys, $array);
-        array_push($keys, $default);
+		array_push($keys, $default);
 		return call_user_func_array('fb_array_default', $keys);
-    }
+	}
 	return $array;
 }
 
@@ -199,28 +196,28 @@ function fb_field_checkbox($field, $place='settings') {
 		$onclick = $field['onclick'];
 	}
 
-    if (isset($field['options'])) {
+	if (isset($field['options'])) {
 		foreach ($field['options'] as $option_value => $option_label) {
 			if ( !isset( $field['value'][$option_value] ) ) {
 				$field['value'][$option_label] = '';
 			}
-            $buffer .= sprintf(
-                '<label for="%2$s">%1$s</label><input type="checkbox" class="multicheckbox" id="%2$s" name="%2$s" onclick="%3$s" value="true" %4$s />',
-                esc_html($option_label),
-                esc_attr($field['name'] . "[$option_label]"),
-                esc_js( $onclick ),
-                checked($field['value'][$option_label], 'true', false)
-            );
-        }
-        return $buffer;
-    } else {
-        return sprintf(
-            '<input type="checkbox" id="%1$s" name="%1$s" onclick="%2$s" value="true" %3$s />',
-            esc_attr($field['name']),
-            esc_js( $onclick ),
-            checked($field['value'], 'true', false)
-        );
-    }
+			$buffer .= sprintf(
+				'<label for="%2$s">%1$s</label><input type="checkbox" class="multicheckbox" id="%2$s" name="%2$s" onclick="%3$s" value="true" %4$s />',
+				esc_html($option_label),
+				esc_attr($field['name'] . "[$option_label]"),
+				esc_js( $onclick ),
+				checked($field['value'][$option_label], 'true', false)
+			);
+		}
+		return $buffer;
+	} else {
+		return sprintf(
+			'<input type="checkbox" id="%1$s" name="%1$s" onclick="%2$s" value="true" %3$s />',
+			esc_attr($field['name']),
+			esc_js( $onclick ),
+			checked($field['value'], 'true', false)
+		);
+	}
 }
 
 function fb_field_dropdown($field, $place='settings') {
@@ -308,14 +305,13 @@ function fb_option_name($field){
 }
 
 function fb_sanitize_options ($options_array) {
-    foreach ($options_array as $key => $value) {
-        if (is_array($value)) {
-            $options_array[$key] = fb_sanitize_options($value);
-        } else {
-            $options_array[$key] = sanitize_text_field($value);
-        }
-    }
-    return $options_array;
+	foreach ($options_array as $key => $value) {
+		if (is_array($value))
+			$options_array[$key] = fb_sanitize_options($value);
+		else
+			$options_array[$key] = sanitize_text_field($value);
+	}
+	return $options_array;
 }
 
 

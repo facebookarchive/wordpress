@@ -1,8 +1,6 @@
 <?php
 function fb_get_subscribe_button($options = array()) {
-	$params = fb_build_social_plugin_params($options);
-
-	return '<div class="fb-subscribe fb-social-plugin" ' . $params . '></div>';
+	return '<div class="fb-subscribe fb-social-plugin" ' . fb_build_social_plugin_params($options) . '></div>';
 }
 
 function fb_subscribe_button_automatic($content) {
@@ -143,78 +141,107 @@ function fb_get_subscribe_fields($placement = 'settings', $object = null) {
 }
 
 function fb_get_subscribe_fields_array($placement) {
-	$array['parent'] = array('name' => 'subscribe',
-									'label' => 'Subscribe Button',
-									'description' => 'The Subscribe Button lets a user subscribe to your public updates on Facebook.  Each WordPress author must authenticate with Facebook in order for the Subscribe button to appear on their pages and posts.',
-									'type' => 'checkbox',
-									'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
-									'image' => plugins_url( '/images/settings_subscribe_button.png', dirname(__FILE__))
-									);
+	$array['parent'] = array(
+		'name' => 'subscribe',
+		'label' => 'Subscribe Button',
+		'description' => 'The Subscribe Button lets a user subscribe to your public updates on Facebook.  Each WordPress author must authenticate with Facebook in order for the Subscribe button to appear on their pages and posts.',
+		'type' => 'checkbox',
+		'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
+		'image' => plugins_url( '/images/settings_subscribe_button.png', dirname(__FILE__))
+	);
 
-	$array['children'] = array(array('name' => 'layout',
-													'type' => 'dropdown',
-													'default' => 'standard',
-													'options' => array('standard' => 'standard', 'button_count' => 'button_count', 'box_count' => 'box_count'),
-													'help_text' => __( 'Determines the size and amount of social context at the bottom.', 'facebook' ),
-													),
-										array('name' => 'width',
-													'type' => 'text',
-													'default' => '450',
-													'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
-													'sanitization_callback' => 'intval',
-													),
-										array('name' => 'show_faces',
-													'type' => 'checkbox',
-													'default' => true,
-													'help_text' => __( 'Show profile pictures below the button.  Applicable to standard layout only.', 'facebook' ),
-													),
-										array('name' => 'colorscheme',
-													'label' => 'Color scheme',
-													'type' => 'dropdown',
-													'default' => 'light',
-													'options' => array('light' => 'light', 'dark' => 'dark'),
-													'help_text' => __( 'The color scheme of the plugin.', 'facebook' ),
-													),
-										array('name' => 'font',
-													'type' => 'dropdown',
-													'default' => 'lucida grande',
-													'options' => array('arial' => 'arial', 'lucida grande' => 'lucida grande', 'segoe ui' => 'segoe ui', 'tahoma' => 'tahoma', 'trebuchet ms' => 'trebuchet ms', 'verdana' => 'verdana'),
-													'help_text' => __( 'The font of the plugin.', 'facebook' ),
-													),
-										);
+	$array['children'] = array(
+		array(
+			'name' => 'layout',
+			'type' => 'dropdown',
+			'default' => 'standard',
+			'options' => array(
+				'standard' => 'standard',
+				'button_count' => 'button_count',
+				'box_count' => 'box_count'
+			),
+			'help_text' => __( 'Determines the size and amount of social context at the bottom.', 'facebook' )
+		),
+		array(
+			'name' => 'width',
+			'type' => 'text',
+			'default' => '450',
+			'help_text' => __( 'The width of the plugin, in pixels.', 'facebook' ),
+			'sanitization_callback' => 'intval'
+		),
+		array(
+			'name' => 'show_faces',
+			'type' => 'checkbox',
+			'default' => true,
+			'help_text' => __( 'Show profile pictures below the button.  Applicable to standard layout only.', 'facebook' )
+		),
+		array(
+			'name' => 'colorscheme',
+			'label' => 'Color scheme',
+			'type' => 'dropdown',
+			'default' => 'light',
+			'options' => array(
+				'light' => 'light',
+				'dark' => 'dark'
+			),
+			'help_text' => __( 'The color scheme of the plugin.', 'facebook' )
+		),
+		array(
+			'name' => 'font',
+			'type' => 'dropdown',
+			'default' => 'lucida grande',
+			'options' => array(
+				'arial' => 'arial',
+				'lucida grande' => 'lucida grande',
+				'segoe ui' => 'segoe ui',
+				'tahoma' => 'tahoma',
+				'trebuchet ms' => 'trebuchet ms',
+				'verdana' => 'verdana'
+			),
+			'help_text' => __( 'The font of the plugin.', 'facebook' )
+		)
+	);
 
 	if ($placement == 'settings') {
-		$array['children'][] = array('name' => 'position',
-													'type' => 'dropdown',
-													'default' => 'both',
-													'options' => array('top' => 'top', 'bottom' => 'bottom', 'both' => 'both'),
-													'help_text' => __( 'Where the button will display on the page or post.', 'facebook' ),
-                                                );
+		$array['children'][] = array(
+			'name' => 'position',
+			'type' => 'dropdown',
+			'default' => 'both',
+			'options' => array(
+				'top' => 'top',
+				'bottom' => 'bottom',
+				'both' => 'both'
+			),
+			'help_text' => __( 'Where the button will display on the page or post.', 'facebook' )
+		);
         $post_types = get_post_types(array('public' => true));
-		$array['children'][] = array('name' => 'show_on',
-                                                    'type' => 'checkbox',
-                                                    'default' => array_fill_keys(array_keys($post_types) , 'true'),
-                                                    'options' => $post_types,
-                                                    'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' ),
-													);
-		$array['children'][] = array('name' => 'show_on_homepage',
-													'type' => 'checkbox',
-													'default' => true,
-													'help_text' => __( 'If the plugin should appear on the homepage as part of the Post previews.  If unchecked, the plugin will only display on the Post itself.', 'facebook' ),
-													);
-
+		$array['children'][] = array(
+			'name' => 'show_on',
+			'type' => 'checkbox',
+			'default' => array_fill_keys(array_keys($post_types) , 'true'),
+			'options' => $post_types,
+			'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' )
+		);
+		$array['children'][] = array(
+			'name' => 'show_on_homepage',
+			'type' => 'checkbox',
+			'default' => true,
+			'help_text' => __( 'If the plugin should appear on the homepage as part of the Post previews.  If unchecked, the plugin will only display on the Post itself.', 'facebook' )
+		);
 	}
 
-	if ($placement == 'widget') {
-		$title_array = array('name' => 'title',
-													'type' => 'text',
-													'help_text' => __( 'The title above the button.', 'facebook' ),
-													);
-		$text_array = array('name' => 'href',
-													'type' => 'text',
-													'default' => get_site_url(),
-													'help_text' => __( 'The URL the Subscribe button will point to.', 'facebook' ),
-													);
+	if ( $placement == 'widget' ) {
+		$title_array = array(
+			'name' => 'title',
+			'type' => 'text',
+			'help_text' => __( 'The title above the button.', 'facebook' )
+		);
+		$text_array = array(
+			'name' => 'href',
+			'type' => 'text',
+			'default' => get_site_url(),
+			'help_text' => __( 'The URL the Subscribe button will point to.', 'facebook' )
+		);
 
 		array_unshift($array['children'], $title_array, $text_array);
 	}

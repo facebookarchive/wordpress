@@ -2,8 +2,10 @@
 Contributors: Facebook, automattic, mattwkelly, niallkennedy, rgharpuray, ngfeldman, jamesgpearce, ravi.grover, danielbachhuber, gigawats, eosgood, Otto42, colmdoyle, zazinteractive
 Tags: Facebook, comments, social, friends, like, like button, social plugins, facebook platform, page, posts, sidebar, plugin, open graph
 Requires at least: 3.2.1
-Tested up to: 3.4
-Stable tag: trunk
+Tested up to: 3.5
+License: GPLv2
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Stable tag: 1.0.3
 
 Make your WordPress site social in a couple of clicks, powered by Facebook.
 
@@ -11,35 +13,35 @@ Make your WordPress site social in a couple of clicks, powered by Facebook.
 
 This WordPress plugin makes your site deeply social by integrating functionality from Facebook.
 
-For more information, check out http://developers.facebook.com/wordpress.
+For more information, check out [the WordPress page on the Facebook Developers site](http://developers.facebook.com/wordpress/).
 
-**Page and Post Features**
+= Page and Post Features =
 
 All of these features are easy to enable via checkboxes on the Facebook settings page.
 
 * Post to an Author's Facebook Timeline whenever they publish a new WordPress Post or Page.
 * Mention friends and Facebook Pages.  This posts to their Timelines as well as lists them on the WordPress Post or Page.
 * Post all new WordPress Post or Pages to a specified Facebook Page.
-* Like, send, and subscribe buttons can be enabled in a click and are fully customizable.
+* [Like](https://developers.facebook.com/docs/reference/plugins/like/), [send](https://developers.facebook.com/docs/reference/plugins/send/), and [subscribe](https://developers.facebook.com/docs/reference/plugins/subscribe/) buttons can be enabled in a click and are fully customizable.
 * Facebook Comments, including full SEO support.
-* Open Graph Protocol integration.
-* Recommendations bar, which allows users to click to start getting recommendations and Like content.
+* [Open Graph Protocol](http://ogp.me) integration.
+* [Recommendations bar](https://developers.facebook.com/docs/reference/plugins/recommendationsbar/), which allows users to click to start getting recommendations and Like content.
 
-**Widgets**
+= Widgets =
 
 All of these features are easy to enable via the Widgets settings page.
 
-* Activity Feed Box. This shows the Facebook user the activity that their friends are doing on your website.
-* Recommendations Box.  This shows the Facebook user recommendations of pages they should visit based on the actions their friends are taking on your website.
+* [Activity Feed Box](https://developers.facebook.com/docs/reference/plugins/activity/). This shows the Facebook user the activity that their friends are doing on your website.
+* [Recommendations Box](https://developers.facebook.com/docs/reference/plugins/recommendations/).  This shows the Facebook user recommendations of pages they should visit based on the actions their friends are taking on your website.
 * Like, send, and subscribe buttons.
 
-Facebook Insights (http://www.facebook.com/insights) integration included. This plugin also supports internationalization and mobile.
+[Facebook Insights](http://www.facebook.com/insights) integration included. This plugin also supports internationalization and mobile.
 
-**Contributing code**
+= Contributing code =
 
-All of the source code for this plugin is available on Facebook's GitHub account (https://github.com/facebook/wordpress). If you like to contribute code to the plugin,  open up an issue against the repository where we can discuss it. Once you have completed the code, open a Pull Request.
+All of the [source code for this plugin is available on Facebook's GitHub account](https://github.com/facebook/wordpress). If you like to contribute code to the plugin,  open up an issue against the repository where we can discuss it. Once you have completed the code, open [a Pull Request](https://github.com/facebook/wordpress/pulls).
 
-Note that all contributors must agree to and sign the Facebook CLA (https://developers.facebook.com/opensource/cla) prior to submitting Pull Requests. We can't accept Pull Requests until this document is signed and submitted.
+Note: all contributors must agree to and sign the [Facebook Contributor License Agreement](https://developers.facebook.com/opensource/cla) prior to submitting Pull Requests. We can't accept Pull Requests until this document is signed and submitted, affirming your code is not encumbered by intellectual property claims by yourself or your employer and therefore eligible for redistribution by Facebook under the Freedoms of the GPL.
 
 == Installation ==
 
@@ -61,22 +63,21 @@ Note that all contributors must agree to and sign the Facebook CLA (https://deve
 == Upgrade Notice ==
 
 = 1.0.3 =
-This version fixes many bugs and includes many new features. Please upgrade immediately.
+Update Facebook pages and user timelines with longer-lived access tokens. Fixes issues with HTML markup in Facebook stories, improves social plugin settings, and optimizes comments display.
 
 = 1.0.2 =
-This version fixes many bugs and you should upgrade immediately.
+Improve site performance when cURL not installed or SSL not available. Removed post meta boxes when social publishing features not enabled.
 
 = 1.0.1 =
-This version fixes many bugs and you should upgrade immediately.
+Security fixes. Improved customization and debugging of settings. l10n and i18n fixes.
 
 == Changelog ==
 
 = 1.0.3 =
 
-* Tweaks to copy to make things clearer.
-* Fixed issues with social plugins settings on indivial posts/pages.
 * Fixed issues with access tokens expiring, affecting posting to Facebook page and user Timelines.
 * Fixed issues with HTML markup appearing in stories posted to Facebook.
+* Fixed issues with social plugins settings on indivial posts/pages.
 * Fixed bugs in new user experience.
 * Fixed bug where Open Graph action was being posted to author's Timeline, even though option was disabled.
 * Added option to disable "View Comments" on homepage.
@@ -87,6 +88,7 @@ This version fixes many bugs and you should upgrade immediately.
 * Added nicer tooltips to the Facebook settings page.
 * Fixed showing faces and the send button so that they don't display if they're disabled.
 * When the plugin is removed, pertinent data is also removed so that there aren't issues when re-installing the plugin.
+* Tweaks to copy to make things clearer.
 
 = 1.0.2 =
 
@@ -128,7 +130,7 @@ This version fixes many bugs and you should upgrade immediately.
 * Added status messages for what was/wasn't posted to Facebook as part of a Post/Page being taken live.
 * Added functionality to disable publishing to a page if access token fails.
 * Clearer error messages for certain scenarios (like inability to post to a friend of page's Timeline because of privacy settings.
-* Fixed conflicts with Power Editor and extraneous text being added to og:description.  Thanks to Angelo Mandato (http://wordpress.org/support/topic/plugin-facebook-plugin-conflicts-with-powerpress?replies=16)
+* Fixed conflicts with Power Editor and extraneous text being added to og:description.  Thanks to Angelo Mandato ([support mention](http://wordpress.org/support/topic/plugin-facebook-plugin-conflicts-with-powerpress))
 
 = 1.0 =
 

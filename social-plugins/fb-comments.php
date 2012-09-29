@@ -44,7 +44,17 @@ function fb_get_comments($options = array()) {
 function fb_get_comments_count() {
 		return '<iframe src="' . ( is_ssl() ? 'https' : 'http' ) . '://www.facebook.com/plugins/comments.php?' . http_build_query( array( 'href' => get_permalink(), 'permalink' => 1 ) ) . '" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:130px; height:16px;" allowTransparency="true"></iframe>';
 }
-
+/** 
+ * Auto Add Comments
+ *
+ * Auto add comments to post depending on various global and individual options
+ * 
+ * @package Comments
+ * @since 1.0
+ * @global $post object
+ * @param $content string
+ * @return string
+ */
 function fb_comments_automatic($content) {
 	global $post;
 
@@ -52,34 +62,39 @@ function fb_comments_automatic($content) {
 		if ( comments_open( get_the_ID() ) && post_type_supports( get_post_type(), 'comments' ) ) {
 			$options = get_option('fb_options');
 			$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_comments', true );
-			if ( ! is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset( $options['comments']['show_on'] ) && isset( $options['comments']['show_on'][$post->post_type] ) ) {
-				foreach( $options['comments'] as $param => $val ) {
-					$param = str_replace( '_', '-', $param );
-
-					$params[$param] = $val;
-				}
-
+			
+			// If individual posts are set to show (Override all) 
+			// 	OR 
+			// If not home AND not archives AND (if individual posts are set to default or not set) AND comments are set to show globally on this post type
+			if ( 'show' == $show_indiv || (! is_home() && ! is_archive() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset( $options['comments']['show_on'][$post->post_type] ) ) ) {
+				$params = fb_options_to_params($options['comments']);
 				$content .= fb_get_comments( $params );
-			} else if ( 'show' == $show_indiv || ( ( ! isset( $options['comments']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) {
-				foreach( $options['comments'] as $param => $val ) {
-					$param = str_replace( '_', '-', $param );
-
-					$params[$param] = $val;
-				}
-
-				$content .= fb_get_comments( $params );
-			}
-			//elseif ( 'no' == $show_indiv ) {
-			//}
+			} 
 		}
 	}
 
 	return $content;
 }
 
+/**
+ * Options to Params
+ * 
+ * @package Comments
+ * @since 1.0.3
+ * @param $options array
+ * @return array
+ */
+function fb_options_to_params($options){
+	$params = array();
+	foreach( $options as $param => $val ) {
+		$param = str_replace( '_', '-', $param );
+		$params[$param] = $val;
+	}
+	return $params;
+};
+
 function fb_get_fb_comments_seo() {
-	global $facebook;
-	global $post;
+	global $facebook, $post;
 
 	if ( isset( $post ) ) {
 		$url = get_permalink();
@@ -179,5 +194,3 @@ function fb_get_comments_fields_array() {
 
 	return $array;
 }
-
-?>

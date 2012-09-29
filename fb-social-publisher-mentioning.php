@@ -48,12 +48,14 @@ function fb_friend_page_autocomplete() {
 
 				foreach ($results as $result) {
 					$output[$count]['id'] = '[' . esc_attr($result[1]) . '|' . esc_attr($result[0]) . ']';
-					$output[$count]['name'] = '<img src="' . esc_url( 'http://graph.facebook.com/' . $result[1] . '/picture/' ) . '" width="25" height="25"> &nbsp;' . esc_html($result[0]);
-
+					$output[$count]['uid'] = $result[1];
+					$output[$count]['name'] = $result[0];
 					$count++;
 				}
 			}
 
+			if ( ! headers_sent() )
+				header( 'Content-Type: application/json; charset=utf-8', true );
 			echo json_encode($output);
 			exit;
 		}
@@ -64,13 +66,14 @@ function fb_friend_page_autocomplete() {
 
 			if ( false === ( $pages = get_transient( 'fb_pages_' . $_GET['q']) ) ) {
 				try {
-					$pages = $facebook->api( '/search', 'GET', array( 'access_token' => '', 'q' => $_GET['q'], 'type' => 'page', 'fields' => 'picture,name,id,likes', 'ref' => 'fbwpp' ) );
+					$pages = $facebook->api( '/search', 'GET', array( 'type' => 'page', 'fields' => 'picture,name,id,likes', 'ref' => 'fbwpp', 'q' => $_GET['q'] ) );
 				}
 				catch (WP_FacebookApiException $e) {}
 				set_transient( 'fb_pages_' . $_GET['q'], $pages, 60*60 );
 			}
 
 			if ( isset($pages['data']) ) {
+				$pages_clean = array();
 				foreach($pages['data'] as $page) {
 					if (isset($page['name']) && isset($page['picture']) && isset($page['id']) && isset($page['likes']))
 						$pages_clean[$page['name']] = array($page['picture'], $page['name'], $page['id'], $page['likes']);
@@ -80,6 +83,7 @@ function fb_friend_page_autocomplete() {
 				exit;
 			}
 
+			$results = array();
 			if ( isset($_GET['q']) ) {
 				$q = strtolower($_GET['q']);
 
@@ -95,27 +99,33 @@ function fb_friend_page_autocomplete() {
 				$count = 0;
 
 				foreach ($results as $result) {
-					$output[$count]['id'] = '[' . esc_attr($result[1][2]) . '|' . esc_attr($result[1][1]) . ']';
-					$output[$count]['name'] = '<img src="' . esc_url($result[1][0]) . '" width="25" height="25"> &nbsp;' . esc_attr($result[1][1]) . ' (' . fb_short_number(esc_attr($result[1][3])) . ' likes)';
+					$item = array();
+					$item['id'] = '[' . esc_attr($result[1][2]) . '|' . esc_attr($result[1][1]) . ']';
 
+					$image_uri = esc_url_raw( $result[1][0], array('http','https') );
+					if ( $image_uri )
+						$item['image'] = $image_uri;
+					unset( $image_uri );
+
+					$item['name'] = $result[1][1];
+
+					$likes = absint( $result[1][3] );
+					if ( $likes )
+						$item['likes'] = $likes;
+					unset( $likes );
+
+					$output[$count] = $item;
+					unset($item);
 					$count++;
 				}
 			}
 
+			if ( ! headers_sent() )
+				header( 'Content-Type: application/json; charset=utf-8', true );
 			echo json_encode($output);
 			exit;
 		}
 	}
-}
-
-
-function fb_short_number($num) {
-	if( $num > 1000000 )
-		return round(($num/1000000),0) . 'm';
-	else if( $num > 1000 )
-		return round(($num/1000),0).'k';
-
-	return number_format_i18n($num);
 }
 
 add_action( 'add_meta_boxes', 'fb_add_page_mention_box' );

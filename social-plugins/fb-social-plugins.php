@@ -73,7 +73,7 @@ function fb_build_social_plugin_params($options, $plugin = '' ) {
 		$params .= 'data-' . $option . '="' . esc_attr($value) . '" ';
     }
 
-    if ( ! array_key_exists( 'ref', $options ) )
+	if ( ! array_key_exists( 'ref', $options ) )
 		$params .= 'data-ref="wp" ';
 
 	return rtrim( $params, ' ' );

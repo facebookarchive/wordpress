@@ -58,20 +58,20 @@ add_action( 'init', 'fb_apply_filters' );
 function fb_build_social_plugin_params($options, $plugin = '' ) {
 	$params = '';
 
-    if ( 'like' == $plugin ) {
-        if ( ! isset( $options['send'] ) || empty( $options['send'] ) ) {
-            $params .= 'data-send="false" ';
-        }
-        if ( ! isset( $options['show_faces'] ) || empty( $options['show_faces'] ) ) {
-            $params .= 'data-show-faces="false" ';
-        }
-    }
+	if ( 'like' == $plugin ) {
+		if ( ! isset( $options['send'] ) || empty( $options['send'] ) ) {
+			$params .= 'data-send="false" ';
+		}
+		if ( ! isset( $options['show_faces'] ) || empty( $options['show_faces'] ) ) {
+			$params .= 'data-show-faces="false" ';
+		}
+	}
 
 	foreach ($options as $option => $value) {
 		$option = str_replace('_', '-', $option);
 
 		$params .= 'data-' . $option . '="' . esc_attr($value) . '" ';
-    }
+	}
 
 	if ( ! array_key_exists( 'ref', $options ) )
 		$params .= 'data-ref="wp" ';
@@ -93,10 +93,10 @@ function fb_add_social_plugin_settings_box() {
 	global $post;
 	$options = get_option('fb_options');
 
-    $post_types = get_post_types(array('public' => true));
-    unset($post_types['attachment']);
-    $post_types = array_values($post_types);
-    foreach ( $post_types as $post_type ) {
+	$post_types = get_post_types(array('public' => true));
+	unset($post_types['attachment']);
+	$post_types = array_values($post_types);
+	foreach ( $post_types as $post_type ) {
 		add_meta_box(
 			'fb_social_plugin_settings_box_id',
 			__( 'Facebook Social Plugins', 'facebook' ),
@@ -118,13 +118,13 @@ function fb_add_social_plugin_settings_box_content( $post ) {
 	echo '<table><p>' . esc_html( __( 'Change the settings below to show or hide particular Social Plugins.', 'facebook' ) ) . '</p>';
 	foreach ( $features as $feature ) {
 		if ( isset ( $options[ $feature ]['enabled'] ) ) {
-            $value = get_post_meta($post->ID,"fb_social_plugin_settings_box_$feature",true);
+			$value = get_post_meta($post->ID,"fb_social_plugin_settings_box_$feature",true);
 			echo '<tr><td>' . fb_option_name( $feature ) . '</td><td><label><input type="radio" name="fb_social_plugin_settings_box_' . $feature . '" value="default" '
 				. ( $value == 'default' || empty($value) ? 'checked="checked" ' : '' ) . ' />' . esc_html( __( 'Default', 'facebook' ) ) . ' (' . esc_html( isset($options[$feature]['show_on']) && isset($options[$feature]['show_on'][$post->post_type]) ? _x( 'Show', 'action: show what was hidden', 'facebook' ) : _x( 'Hide', 'verb: hide from view', 'facebook' ) ) . ')</label></td> <td><label><input type="radio" name="fb_social_plugin_settings_box_' . $feature . '" value="show" '
 				. ( $value == 'show' ? 'checked="checked" ' : '' ) . ' />' . esc_html( _x( 'Show', 'action: show what was hidden', 'facebook' ) ) . '</label></td><td><label><input type="radio" name="fb_social_plugin_settings_box_' . $feature . '" value="hide" '
 				. ( $value == 'hide'  ? 'checked="checked" ' : '' ) . ' />' . esc_html( _x( 'Hide', 'verb: hide from view', 'facebook' ) ) . '</label></td></tr>' ;
 		}
-    }
+	}
 	echo '</table><p class="howto">'. esc_html( sprintf( __( 'If \'%s\' is selected, the Social Plugin will appear based on the global setting set on the Facebook Settings page.', 'facebook' ), 'Default' ) ) . ' ' . esc_html( sprintf( __( 'If you choose "%1$s" or "%2$s", the Social Plugin will ignore the global setting for this %3$s.', 'facebook' ), _x( 'Show', 'action: show what was hidden', 'facebook' ), _x( 'Hide', 'verb: hide from view', 'facebook' ), $post->post_type ) ) . '</p>';
 }
 

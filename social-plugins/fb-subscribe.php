@@ -41,7 +41,7 @@ function fb_subscribe_button_automatic($content) {
 		if ( is_home() && isset ( $options['subscribe']['show_on_homepage'] ) && isset( $options['subscribe']['show_on'] ) && isset( $options['subscribe']['show_on'][$post->post_type] ) ) {
 			$content = $new_content;
 		} elseif ( !is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset ( $options['subscribe']['show_on'] ) && isset( $options['subscribe']['show_on'][$post->post_type] ) ) {		
-            $content = $new_content;
+			$content = $new_content;
 		} elseif ( !is_home() && ('show' == $show_indiv || ( ( ! isset( $options['subscribe']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) ) {
 			$content = $new_content;
 		}
@@ -209,7 +209,7 @@ function fb_get_subscribe_fields_array($placement) {
 			),
 			'help_text' => __( 'Where the button will display on the page or post.', 'facebook' )
 		);
-        $post_types = get_post_types(array('public' => true));
+		$post_types = get_post_types(array('public' => true));
 		$array['children'][] = array(
 			'name' => 'show_on',
 			'type' => 'checkbox',

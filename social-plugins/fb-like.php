@@ -14,7 +14,7 @@
  */
 
 function fb_get_like_button($options = array()) {
-	return '<div class="fb-like fb-social-plugin" ' . fb_build_social_plugin_params( $options, 'like' ) . ' ></div>';
+	return '<div class="fb-like fb-social-plugin" ' . fb_build_social_plugin_params( $options, 'like' ) . '></div>';
 }
 
 function fb_like_button_automatic($content) {

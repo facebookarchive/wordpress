@@ -16,7 +16,7 @@ function fb_install_warning() {
 	$page = (isset($_GET['page']) ? $_GET['page'] : null);
 
 	if ((empty($options['app_id']) || empty($options['app_secret'])) && $page != 'facebook-settings' && current_user_can( 'manage_options' ) ) {
-		fb_admin_dialog( sprintf( __('You must %sconfigure the plugin%s to enable Facebook for WordPress.', 'facebook' ), '<a href="admin.php?page=facebook-settings">', '</a>' ), true);
+		fb_admin_dialog( sprintf( __('You must %s to enable Facebook for WordPress.', 'facebook' ), '<a href="admin.php?page=facebook-settings">' . esc_html( __( 'configure the plugin', 'facebook' ) ) . '</a>' ), true);
 	}
 }
 
@@ -31,11 +31,11 @@ function fb_ssl_warning() {
 	$page = (isset($_GET['page']) ? $_GET['page'] : null);
 
 	if ( ! wp_http_supports( array( 'ssl' => true ) )  && current_user_can( 'manage_options' ) ) {
-		$msg = 'SSL must be enabled on your server for Facebook Social Publisher to work.';
+		$msg = __( 'SSL must be enabled on your server for Facebook Social Publisher to work.', 'facebook' );
 		if ( $options['social_publisher']['enabled'] ) {
 			unset($options['social_publisher']['enabled']);
 			update_option( 'fb_options', $options );
-			$msg .= ' As a result, Social Publisher has been disabled.';
+			$msg .= ' ' . __( 'As a result, Social Publisher has been disabled.', 'facebook' );
 		}
 		fb_admin_dialog( __( $msg, 'facebook' ), true );
 	}
@@ -218,14 +218,14 @@ function fb_get_locale() {
 
 	// convert locales like "es" to "es_ES", in case that works for the given locale (sometimes it does)
 	if (strlen($locale) == 2) {
-		$locale = strtolower($locale).'_'.strtoupper($locale);
+		$locale = strtolower($locale) . '_' . strtoupper($locale);
 	}
 
 	// convert things like de-DE to de_DE
-	$locale = str_replace('-', '_', $locale);
+	$locale = str_replace( '-', '_', $locale );
 
 	// check to see if the locale is a valid FB one, if not, use en_US as a fallback
-	if ( !in_array($locale, $fb_valid_fb_locales) ) {
+	if ( ! in_array( $locale, $fb_valid_fb_locales ) ) {
 		$locale = 'en_US';
 	}
 
@@ -238,5 +238,5 @@ function fb_get_locale() {
  * @since 1.0
  */
 function fb_style() {
-	wp_enqueue_style( 'fb', plugins_url( 'style/style.min.css', __FILE__ ), array(), '1.0' );
+	wp_enqueue_style( 'fb', plugins_url( 'style/style' . ( defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min' ) . '.css', __FILE__ ), array(), '1.0' );
 }

@@ -38,7 +38,7 @@ function fb_check_connected_accounts() {
 			fb_update_user_meta($current_user->ID, 'fb_data', $fb_user_data);
 		}
 		else {
-			fb_admin_dialog( sprintf( __('Facebook social publishing is enabled. %sLink your Facebook account to your WordPress account</a> to get full functionality, including adding new Posts to your Timeline.', 'facebook' ), '<a href="#" onclick="authFacebook(); return false;">' ), true);
+			fb_admin_dialog( __( 'Facebook social publishing is enabled.', 'facebook' ) . ' ' . sprintf( __( '%s to get full functionality, including adding new Posts to your Timeline.', 'facebook' ), '<a href="#" onclick="authFacebook(); return false;">' . esc_html( __( 'Link your Facebook account to your WordPress account', 'facebook' ) ) . '</a>' ), true);
 		}
 	}
 	else {

@@ -4,26 +4,23 @@ function fb_get_subscribe_button($options = array()) {
 }
 
 function fb_subscribe_button_automatic($content) {
-	$options = get_option('fb_options');
-	
 	global $post;
-	
+	$options = get_option('fb_options');
+
 	if ( isset ($post ) ) {
 		if ( isset( $options['subscribe']['show_on_homepage'] ) ) {
-		
 			$options['subscribe']['href'] = get_permalink( $post->ID );
 		}
-		
+
 		$fb_data = fb_get_user_meta( get_the_author_meta( 'ID' ), 'fb_data', true );
-	
-		if ( ! $fb_data ) {
+
+		if ( ! $fb_data )
 			return $content;
-		}
-	
+
 		$options['subscribe']['href'] = 'http://www.facebook.com/' . $fb_data['username'];
-	
+
 		$new_content = '';
-	
+
 		if ( isset( $fb_data['username'] ) ) {
 			switch ( $options['subscribe']['position'] ) {
 				case 'top':
@@ -38,20 +35,18 @@ function fb_subscribe_button_automatic($content) {
 					break;
 			}
 		}
-	
+
 		$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_subscribe', true );
-		
+
 		if ( is_home() && isset ( $options['subscribe']['show_on_homepage'] ) && isset( $options['subscribe']['show_on'] ) && isset( $options['subscribe']['show_on'][$post->post_type] ) ) {
 			$content = $new_content;
-		}
-		elseif ( !is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset ( $options['subscribe']['show_on'] ) && isset( $options['subscribe']['show_on'][$post->post_type] ) ) {		
+		} elseif ( !is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset ( $options['subscribe']['show_on'] ) && isset( $options['subscribe']['show_on'][$post->post_type] ) ) {		
             $content = $new_content;
-		}
-		elseif ( !is_home() && ('show' == $show_indiv || ( ( ! isset( $options['subscribe']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) ) {
+		} elseif ( !is_home() && ('show' == $show_indiv || ( ( ! isset( $options['subscribe']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) ) {
 			$content = $new_content;
 		}
 	}
-	
+
 	return $content;
 }
 
@@ -107,9 +102,9 @@ class Facebook_Subscribe_Button extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$return_instance = $old_instance;
-		
+
 		$fields = fb_get_subscribe_fields_array('widget');
-		
+
 		foreach( $fields['children'] as $field ) {
 			$unsafe_value = ( isset( $new_instance[$field['name']] ) ) ? $new_instance[$field['name']] : '';
 			if ( !empty( $field['sanitization_callback'] ) && function_exists( $field['sanitization_callback'] ) ) 
@@ -117,7 +112,7 @@ class Facebook_Subscribe_Button extends WP_Widget {
 			else
 				$return_instance[$field['name']] = sanitize_text_field( $unsafe_value );
 		}
-		
+
 		return $return_instance;
 	}
 
@@ -143,11 +138,11 @@ function fb_get_subscribe_fields($placement = 'settings', $object = null) {
 function fb_get_subscribe_fields_array($placement) {
 	$array['parent'] = array(
 		'name' => 'subscribe',
-		'label' => 'Subscribe Button',
-		'description' => 'The Subscribe Button lets a user subscribe to your public updates on Facebook.  Each WordPress author must authenticate with Facebook in order for the Subscribe button to appear on their pages and posts.',
+		'label' => __( 'Subscribe Button', 'facebook' ),
+		'description' => __( 'The Subscribe Button lets a user subscribe to your public updates on Facebook. Each WordPress author must authenticate with Facebook in order for the Subscribe button to appear on their pages and posts.', 'facebook' ),
 		'type' => 'checkbox',
 		'help_link' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/',
-		'image' => plugins_url( '/images/settings_subscribe_button.png', dirname(__FILE__))
+		'image' => plugins_url( '/images/settings_subscribe_button.png', dirname(__FILE__) )
 	);
 
 	$array['children'] = array(
@@ -177,7 +172,7 @@ function fb_get_subscribe_fields_array($placement) {
 		),
 		array(
 			'name' => 'colorscheme',
-			'label' => 'Color scheme',
+			'label' => __( 'Color scheme', 'facebook' ),
 			'type' => 'dropdown',
 			'default' => 'light',
 			'options' => array(

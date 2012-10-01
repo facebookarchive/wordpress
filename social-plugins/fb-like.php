@@ -137,9 +137,9 @@ function fb_get_like_fields($placement = 'settings', $object = null) {
 function fb_get_like_fields_array($placement) {
 	$array['parent'] = array(
 		'name' => 'like',
-		'label' => 'Like Button',
-		'image' => plugins_url( '/images/settings_like_button.png', dirname(__FILE__)),
-		'description' => 'The Like Button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user\'s friends\' News Feed with a link back to your website.',
+		'label' => __( 'Like Button', 'facebook' ),
+		'image' => plugins_url( '/images/settings_like_button.png', dirname(__FILE__) ),
+		'description' => __( 'The Like Button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user\'s friends\' News Feed with a link back to your website.', 'facebook' ),
 		'help_link' => 'https://developers.facebook.com/docs/reference/plugins/like/',
 	);
 
@@ -154,7 +154,7 @@ function fb_get_like_fields_array($placement) {
 			'name' => 'show_faces',
 			'type' => 'checkbox',
 			'default' => true,
-			'help_text' => __( 'Show profile pictures below the button.  Applicable to standard layout only.', 'facebook' )
+			'help_text' => __( 'Show profile pictures below the button. Applicable to standard layout only.', 'facebook' )
 		),
 		array(
 			'name' => 'layout',
@@ -186,7 +186,7 @@ function fb_get_like_fields_array($placement) {
 		),
 		array(
 			'name' => 'colorscheme',
-			'label' => 'Color scheme',
+			'label' => __( 'Color scheme', 'facebook' ),
 			'type' => 'dropdown',
 			'default' => 'light',
 			'options' => array(
@@ -237,7 +237,7 @@ function fb_get_like_fields_array($placement) {
 			'name' => 'show_on_homepage',
 			'type' => 'checkbox',
 			'default' => true,
-			'help_text' => __( 'If the plugin should appear on the homepage as part of the Post previews.  If unchecked, the plugin will only display on the Post itself.', 'facebook' )
+			'help_text' => __( 'If the plugin should appear on the homepage as part of the Post previews. If unchecked, the plugin will only display on the Post itself.', 'facebook' )
 		);
 	}
 

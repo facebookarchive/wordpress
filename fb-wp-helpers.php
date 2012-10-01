@@ -27,13 +27,13 @@ function fb_construct_fields($placement, $children, $parent = null, $object = nu
 			echo '<h3>';
 			echo '<input type="checkbox" name="fb_options[' . esc_attr( $parent['name'] ). '][enabled]" value="true" id="' . esc_attr( $parent['name'] ) . '" ' . checked( $enabled, 1, false ) . ' onclick="toggleOptions(\'' . esc_js( $parent['name'] ) . '\', [\'' . esc_js( $parent['name'] ) . '_table\'])">';
 			echo ' <label for="' . esc_attr($parent['name']) . '">' . esc_html( $parent['label'] ) . '</label></h3>';
-			echo '<p class="description">' . esc_html( $parent['description'] ) . ' <a href="' . esc_url( $parent['help_link'] ) . '" target="_new" title="' . esc_attr( $parent['description'] ) . '">' . __( 'Read more', 'facebook') . '</a></p>';
+			echo '<p class="description">' . esc_html( $parent['description'] ) . ' <a href="' . esc_url( $parent['help_link'] ) . '" target="_blank" title="' . esc_attr( $parent['description'] ) . '">' . esc_html( __( 'Read more', 'facebook') ) . '</a></p>';
 		} else {
 			$enabled = true;
 			echo '<div>';
 		}
 
-		echo '<table class="form-table" id="' . esc_attr( $parent['name'] ) . '_table" style="display:' . ( $enabled ?'block':'none') . '">
+		echo '<table class="form-table" id="' . esc_attr( $parent['name'] ) . '_table" style="display:' . ( $enabled ? 'block':'none' ) . '">
 						<tbody>';
 
 		echo fb_construct_fields_children('settings', $children, $parent);
@@ -272,31 +272,31 @@ function fb_delete_user_meta( $user_id, $meta_key, $meta_value = '' ) {
 function fb_option_name($field){
 	switch ($field) {
 		case 'app_id':
-			return 'App ID';
+			return __( 'App ID', 'facebook' );
 			break;
 		case 'app_secret':
-			return 'App secret';
+			return __( 'App secret', 'facebook' );
 			break;
 		case 'app_namespace':
-			return 'App namespace';
+			return __( 'App namespace', 'facebook' );
 			break;
 		case 'social_publisher':
-			return "Social Publisher";
+			return __( 'Social Publisher', 'facebook' );
 			break;
 		case 'recommendations_bar':
-			return "Recommendations Bar";
+			return __( 'Recommendations Bar', 'facebook' );
 			break;
 		case 'like':
-			return "Like Button";
+			return __( 'Like Button', 'facebook' );
 			break;
 		case 'subscribe':
-			return "Subscribe Button";
+			return __( 'Subscribe Button', 'facebook' );
 			break;
 		case 'send':
-			return "Send Button";
+			return __( 'Send Button', 'facebook' );
 			break;
 		case 'comments':
-			return "Comments Box";
+			return __( 'Comments Box', 'facebook' );
 			break;
 		default:
 			return '';

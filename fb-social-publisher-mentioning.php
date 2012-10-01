@@ -172,13 +172,14 @@ function fb_add_page_mention_box_content( $post ) {
 		echo '<input type="text" class="widefat" id="pages-mention-message" name="fb_page_mention_box_message" value="" size="44" placeholder="'.esc_attr__('Write something...').'" />';
 		echo '<p class="howto">';
 		if ( $post->post_type == 'page' ) {
-			_e('This will add the page and message to the Timeline of each Facebook Page mentioned. They will also appear in the contents of the page.', 'facebook');
+			echo esc_html( __( 'This will add the page and message to the Timeline of each Facebook Page mentioned. They will also appear in the contents of the page.', 'facebook' ) );
 		} else {
-			_e('This will add the post and message to the Timeline of each Facebook Page mentioned. They will also appear in the contents of the post.', 'facebook');
+			echo esc_html( __( 'This will add the post and message to the Timeline of each Facebook Page mentioned. They will also appear in the contents of the post.', 'facebook') );
 		}
 		echo '</p>';
 	} else {
-		echo '<p>Facebook social publishing is enabled.</p><p><strong><a href="#" onclick="authFacebook(); return false;">Link your Facebook account to your WordPress account</a></strong> to get full functionality, including adding new Posts to your Timeline and mentioning friends Facebook Pages.</p>';
+		echo '<p>' . esc_html( __( 'Facebook social publishing is enabled.', 'facebook' ) ) . '</p>';
+		echo '<p>' . esc_html( sprintf( __( '%s to get full functionality, including adding new Posts to your Timeline and mentioning friends Facebook Pages.', 'facebook' ), '<strong><a href="#" onclick="authFacebook(); return false;">' . esc_html( __( 'Link your Facebook account to your WordPress account', 'facebook' ) ) . '</a></strong>' ) ) . '</p>';
 	}
 }
 
@@ -280,24 +281,24 @@ function fb_add_friend_mention_box_content( $post ) {
 	if ( isset ( $fb_user ) && isset($perms['data'][0]['manage_pages']) && isset($perms['data'][0]['publish_actions']) && isset($perms['data'][0]['publish_stream'])) {
 		// The actual fields for data entry
 		echo '<label for="suggest-friends">';
-		_e("Friend's Name", 'facebook' );
+		echo esc_html__( "Friend's Name", 'facebook' );
 		echo '</label> ';
-		echo '<input type="text" class="widefat" id="suggest-friends" autocomplete="off" name="fb_friend_mention_box_autocomplete" value="" size="44" placeholder="Type to find a friend." />';
+		echo '<input type="text" class="widefat" id="suggest-friends" autocomplete="off" name="fb_friend_mention_box_autocomplete" value="" size="44" placeholder="' . esc_attr__( 'Type to find a friend.', 'facebook' ) . '" />';
 		echo '<label for="friends-mention-message">';
-		_e('Message', 'facebook' );
+		echo esc_html__('Message', 'facebook' );
 		echo '</label> ';
-		echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_friend_mention_box_message" value="" size="44" placeholder="Write something..." />';
+		echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_friend_mention_box_message" value="" size="44" placeholder="' . esc_attr__( 'Write something...', 'facebook' ) . '" />';
 
 		echo '<p class="howto">';
 		if ( $post->post_type == 'page' ) {
-			_e('This will add the page and message to the Timeline of each friend mentioned. They will also appear in the contents of the page.', 'facebook');
+			echo esc_html__( 'This will add the page and message to the Timeline of each friend mentioned. They will also appear in the contents of the page.', 'facebook' );
 		} else {
-			_e('This will add the post and message to the Timeline of each friend mentioned. They will also appear in the contents of the post.', 'facebook');
+			echo esc_html__( 'This will add the post and message to the Timeline of each friend mentioned. They will also appear in the contents of the post.', 'facebook' );
 		}
 		echo '</p>';
 	} else {
-		echo '<p>'.__('Facebook social publishing is enabled.', 'facebook') .'</p>';
-		echo '<p>'.sprintf(__('<strong>%sLink your Facebook account to your WordPress account</a></strong> to get full functionality, including adding new Posts to your Timeline and mentioning friends Facebook Pages.', 'facebook'), '<a href="#" onclick="authFacebook(); return false;">' ) .'</p>';
+		echo '<p>' . esc_html( __('Facebook social publishing is enabled.', 'facebook') ) .'</p>';
+		echo '<p>' . esc_html( sprintf( __( '%s to get full functionality, including adding new Posts to your Timeline and mentioning friends Facebook Pages.', 'facebook'), '<a href="#" onclick="authFacebook(); return false;"><strong>' . esc_html( __( 'Link your Facebook account to your WordPress account', 'facebook' ) ) . ' </strong></a>' ) ) .'</p>';
 	}
 }
 
@@ -369,13 +370,13 @@ function fb_social_publisher_mentioning_output($content) {
 
 		if ( ! empty($fb_mentioned_friends) ){
 			foreach( $fb_mentioned_friends as $fb_mentioned_friend ) {
-				$mentions_entities .= '<a target="_blank" href="http://www.facebook.com/' . esc_attr($fb_mentioned_friend['id']) . '" title="'.sprintf(esc_attr__('Click to visit %s\'s profile on Facebook.','facebook'), esc_attr($fb_mentioned_friend['name'])) .'"><img src="http://graph.facebook.com/' . esc_attr($fb_mentioned_friend['id']) . '/picture" width="16" height="16"> ' . esc_html($fb_mentioned_friend['name']) . '</a> ';
+				$mentions_entities .= '<a target="_blank" href="http://www.facebook.com/' . esc_attr($fb_mentioned_friend['id']) . '" title="'.sprintf(esc_attr__('Click to visit %s\'s profile on Facebook.','facebook'), esc_attr($fb_mentioned_friend['name'])) .'"><img src="http://graph.facebook.com/' . esc_attr($fb_mentioned_friend['id']) . '/picture?width=16&height=16" width="16" height="16"> ' . esc_html($fb_mentioned_friend['name']) . '</a> ';
 			}
 		}
 
 		if ( ! empty($fb_mentioned_pages) ) {
 			foreach( $fb_mentioned_pages as $fb_mentioned_page ) {
-				$mentions_entities .= '<a target="_blank" href="http://www.facebook.com/' . esc_attr($fb_mentioned_page['id']) . '" title="'.sprintf(esc_attr__('Click to visit %s\'s profile on Facebook.','facebook'), esc_attr($fb_mentioned_page['name'])).'"><img src="http://graph.facebook.com/' . esc_attr($fb_mentioned_page['id']) . '/picture" width="16" height="16"> ' . esc_html($fb_mentioned_page['name']) . '</a> ';
+				$mentions_entities .= '<a target="_blank" href="http://www.facebook.com/' . esc_attr($fb_mentioned_page['id']) . '" title="'.sprintf(esc_attr__('Click to visit %s\'s profile on Facebook.','facebook'), esc_attr($fb_mentioned_page['name'])).'"><img src="http://graph.facebook.com/' . esc_attr($fb_mentioned_page['id']) . '/picture?width=16&height=16" width="16" height="16"> ' . esc_html($fb_mentioned_page['name']) . '</a> ';
 			}
 		}
 

@@ -54,7 +54,7 @@ class Facebook_Send_Button extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 	 		'fb_send', // Base ID
-			'Facebook Send Button', // Name
+			__( 'Facebook Send Button', 'facebook' ), // Name
 			array( 'description' => __( 'The Send Button allows users to easily send content to their friends.', 'facebook' ), ) // Args
 		);
 	}
@@ -91,9 +91,9 @@ class Facebook_Send_Button extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$return_instance = $old_instance;
-		
+
 		$fields = fb_get_send_fields_array('widget');
-		
+
 		foreach( $fields['children'] as $field ) {
 			$unsafe_value = ( isset( $new_instance[$field['name']] ) ) ? $new_instance[$field['name']] : '';
 			if ( !empty( $field['sanitization_callback'] ) && function_exists( $field['sanitization_callback'] ) ) 
@@ -101,7 +101,7 @@ class Facebook_Send_Button extends WP_Widget {
 			else
 				$return_instance[$field['name']] = sanitize_text_field( $unsafe_value );
 		}
-		
+
 		return $return_instance;
 	}
 
@@ -128,7 +128,7 @@ function fb_get_send_fields_array($placement) {
 	$array['parent'] = array(
 		'name' => 'send',
 		'type' => 'checkbox',
-		'label' => 'Send Button',
+		'label' => __( 'Send Button', 'facebook' ),
 		'description' => __( 'The Send Button allows users to easily send content to their friends. People will have the option to send your URL in a message to their Facebook friends, to the group wall of one of their Facebook groups, and as an email to any email address.', 'facebook' ),
 		'help_link' => 'https://developers.facebook.com/docs/reference/plugins/send/',
 		'image' => plugins_url( '/images/settings_send_button.png', dirname(__FILE__) )
@@ -137,7 +137,7 @@ function fb_get_send_fields_array($placement) {
 	$array['children'] = array(
 		array(
 			'name' => 'colorscheme',
-			'label' => 'Color scheme',
+			'label' => __( 'Color scheme', 'facebook' ),
 			'type' => 'dropdown',
 			'default' => 'light',
 			'options' => array(
@@ -183,7 +183,7 @@ function fb_get_send_fields_array($placement) {
 			'name' => 'show_on_homepage',
 			'type' => 'checkbox',
 			'default' => true,
-			'help_text' => __( 'If the plugin should appear on the homepage as part of the Post previews.  If unchecked, the plugin will only display on the Post itself.', 'facebook' )
+			'help_text' => __( 'If the plugin should appear on the homepage as part of the Post previews. If unchecked, the plugin will only display on the Post itself.', 'facebook' )
 		);
 	}
 

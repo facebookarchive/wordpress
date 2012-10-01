@@ -30,9 +30,9 @@ function fb_get_recommendations_bar_fields($placement = 'settings', $object = nu
 function fb_get_recommendations_bar_fields_array() {
 	$array['parent'] = array(
 		'name' => 'recommendations_bar',
-		'label' => 'Recommendations Bar',
+		'label' => __( 'Recommendations Bar', 'facebook' ),
 		'help_link' => 'https://developers.facebook.com/docs/reference/plugins/recommendationsbar/',
-		'description' => 'The Recommendations Bar allows users to click to start getting recommendations, Like content, and add what they\'re reading to Timeline as they go.',
+		'description' => __( 'The Recommendations Bar allows users to click to start getting recommendations, Like content, and add what they\'re reading to Timeline as they go.', 'facebook' ),
 		'image' => plugins_url( '/images/settings_recommendations_bar.png', dirname(__FILE__) )
 	);
 

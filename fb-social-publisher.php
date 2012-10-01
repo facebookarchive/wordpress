@@ -70,11 +70,11 @@ function fb_add_author_message_box_content( $post ) {
 			$perms = $facebook->api('/me/permissions', 'GET', array('ref' => 'fbwpp'));
 
 		if ( isset ( $fb_user ) && isset($perms['data'][0]['manage_pages']) && isset($perms['data'][0]['publish_actions']) && isset($perms['data'][0]['publish_stream'])) {
-			echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_author_message_box_message" value="" size="44" placeholder="What\'s on your mind?" />';
-			echo '<p class="howto">'. __('This message will show as part of the story on your Facebook Timeline.', 'facebook' ) .'</p>';
+			echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_author_message_box_message" value="" size="44" placeholder="' . esc_attr( __( 'What\'s on your mind?', 'facebook' ) ) . '" />';
+			echo '<p class="howto">'. esc_html( __('This message will show as part of the story on your Facebook Timeline.', 'facebook' ) ) .'</p>';
 		} else {
-			echo '<p>' . __('Facebook social publishing is enabled.', 'facebook') .'</p>';
-			echo '<p>' . sprintf(__('<strong>%sLink your Facebook account to your WordPress account</a></strong> to get full functionality, including adding new Posts to your Timeline and mentioning friends Facebook Pages.', 'facebook'), '<a href="#" onclick="authFacebook(); return false;">' ) . '</p>';
+			echo '<p>' . esc_html( __('Facebook social publishing is enabled.', 'facebook') ) .'</p>';
+			echo '<p>' . sprintf( __( '%s to get full functionality, including adding new Posts to your Timeline and mentioning friends Facebook Pages.', 'facebook'), '<a href="#" onclick="authFacebook(); return false;"><strong>' . esc_html( __( 'Link your Facebook account to your WordPress account', 'facebook' ) ) . '</a></strong>' ) . '</p>';
 		}
 }
 
@@ -160,8 +160,8 @@ function fb_add_fan_page_message_box_content( $post ) {
 			 _ e("Message", 'facebook' );
 	echo '</label> ';
 	*/
-	echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_fan_page_message_box_message" value="" size="44" placeholder="Write something..." />';
-	echo '<p class="howto">' . sprintf( __( 'This message will show as part of the story on %s\'s Timeline.', 'facebook'), $fan_page_info[0][1] ) . '</p>';
+	echo '<input type="text" class="widefat" id="friends-mention-message" name="fb_fan_page_message_box_message" value="" size="44" placeholder="' . esc_attr( __( 'Write something...', 'facebook' ) ) . '" />';
+	echo '<p class="howto">' . esc_html( sprintf( __( 'This message will show as part of the story on %s\'s Timeline.', 'facebook'), $fan_page_info[0][1] ) ) . '</p>';
 }
 
 /**
@@ -270,14 +270,19 @@ function fb_post_to_fb_page($post_id) {
 
 				update_option( 'fb_options', $options );
 
-				$status_messages[] = array( 'message' => sprintf( __( 'Failed posting to ' . $fan_page_info[0][1] . '\'s Timeline because the access token expired.  To reactivate publishing, visit the Facebook settings page and re-enable the "Publish to fan page" setting. Full error: ' . json_encode ( $error_result['error'] ), true ) ), 'error' => true);
+				$status_messages[] = array( 'message' => sprintf( __( 'Failed posting to %s\'s Timeline because the access token expired.  To reactivate publishing, visit the Facebook settings page and re-enable the "Publish to fan page" setting. Full error: ', 'facebook' ), $fan_page_info[0][1] ) . json_encode ( $error_result['error'] ), 'error' => true );
 			} else {
-				$status_messages[] = array( 'message' => sprintf( __( 'Failed posting to ' . $fan_page_info[0][1] . '\'s Timeline. Error: ' . json_encode ( $error_result['error'] ), true ) ), 'error' => true);
+				$status_messages[] = array( 'message' => sprintf( __( 'Failed posting to %s\'s Timeline. Error: ', 'facebook' ), $fan_page_info[0][1] ) . json_encode( $error_result['error'] ), 'error' => true );
 			}
 		}
 
 		if ( isset( $publish_result ) && isset( $publish_result['id'] ) ) {
-			$status_messages[] = array( 'message' => sprintf( __( 'Posted to <a href="' . fb_get_permalink_from_feed_publish_id( sanitize_text_field( $publish_result['id'] ) ) . '" target="_blank">' . $fan_page_info[0][1] . '\'s Facebook Timeline</a>' . ( ! empty( $fan_page_message ) ? ' with message "' . $fan_page_message . '"' : '' ), true ) ), 'error' => false);
+			$link = '<a href="' . esc_url( fb_get_permalink_from_feed_publish_id( sanitize_text_field( $publish_result['id'] ) ) ) . '" target="_blank">' . esc_html( $fan_page_info[0][1] ) . '</a>';
+			if ( empty( $fan_page_message ) )
+				$message = sprintf( __( 'Posted to %s', 'facebook' ), $link );
+			else
+				$message = sprintf( __( 'Posted to %1$s with message "%2$s"', 'facebook' ), $link, $fan_page_message );
+			$status_messages[] = array( 'message' => $message, 'error' => false );
 		}
 
 		$existing_status_messages = get_post_meta($post_id, 'fb_status_messages', true);
@@ -372,14 +377,14 @@ function fb_post_to_author_fb_timeline($post_id) {
 
 				$publish_ids_friends[] = sanitize_text_field( $publish_result['id'] );
 
-				$friends_posts .= '<a href="' . esc_url( fb_get_permalink_from_feed_publish_id( $publish_result['id'] ) ) . '" target="_blank"><img src="' . esc_url( 'http://graph.facebook.com/' . $friend['id'] . '/picture' ) . '" width="15"></a> ';
+				$friends_posts .= '<a href="' . esc_url( fb_get_permalink_from_feed_publish_id( $publish_result['id'] ) ) . '" target="_blank"><img src="' . esc_url( 'http://graph.facebook.com/' . $friend['id'] . '/picture?width=15' ) . '" width="15"></a> ';
 			} catch (WP_FacebookApiException $e) {
 				$error_result = $e->getResult();
 
 				if ( $e->getCode() == 210) {
-					$status_messages[] = array( 'message' => sprintf( __( 'Failed posting to mentioned friend\'s Facebook Timeline. <img src="' . esc_url( 'http://graph.facebook.com/' . $friend['id'] . '/picture' ) . '" width="15"> Error: Page doesn\'t allow posts from other Facebook users. Full error: ' . json_encode ( $error_result['error'] ), true ) ), 'error' => true );
+					$status_messages[] = array( 'message' => __( 'Failed posting to mentioned friend\'s Facebook Timeline.', 'facebook' ) . '<img src="' . esc_url( 'http://graph.facebook.com/' . $friend['id'] . '/picture?width=15' ) . '" width="15" /> ' . __( 'Error: Page doesn\'t allow posts from other Facebook users. Full error:', 'facebook' ) . ' ' . json_encode ( $error_result['error'] ), 'error' => true );
 				} else {
-					$status_messages[] = array( 'message' => sprintf( __( 'Failed posting to mentioned friend\'s Facebook Timeline. <img src="' . esc_url( 'http://graph.facebook.com/' . $friend['id'] . '/picture' ) . '" width="15"> Error: ' . json_encode ( $error_result['error'] ), true ) ), 'error' => true );
+					$status_messages[] = array( 'message' => __( 'Failed posting to mentioned friend\'s Facebook Timeline.', 'facebook' ) . '<img src="' . esc_url( 'http://graph.facebook.com/' . $friend['id'] . '/picture?width=15' ) . '" width="15" /> ' . __( 'Error:', 'facebook') . ' ' . json_encode( $error_result['error'] ), 'error' => true );
 				}
 			}
 		}
@@ -387,7 +392,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 		update_post_meta($post_id, 'fb_mentioned_friends_post_ids', $publish_ids_friends);
 
 		if ( ! empty( $publish_ids_friends ) ) {
-			$status_messages[] = array( 'message' => sprintf( __( 'Posted to mentioned friends\' Facebook Timelines. ' . $friends_posts ) ), 'error' => false );
+			$status_messages[] = array( 'message' => __( 'Posted to mentioned friends\' Facebook Timelines.', 'facebook' ) . $friends_posts, 'error' => false );
 		}
 	}
 
@@ -428,15 +433,15 @@ function fb_post_to_author_fb_timeline($post_id) {
 
 				$publish_ids_pages[] = sanitize_text_field($publish_result['id']);
 
-				$pages_posts .= '<a href="' . sanitize_text_field( fb_get_permalink_from_feed_publish_id ( $publish_result['id'] ) ) . '" target="_blank"><img src="http://graph.facebook.com/' . $page['id'] . '/picture" width="15" target="_blank"></a> ';
+				$pages_posts .= '<a href="' . esc_url( fb_get_permalink_from_feed_publish_id( sanitize_text_field( $publish_result['id'] ) ) ) . '" target="_blank"><img src="' . esc_url( 'http://graph.facebook.com/' . $page['id'] . '/picture?width=15' ) . '" width="15" target="_blank"></a>';
 
 			} catch (WP_FacebookApiException $e) {
 				$error_result = $e->getResult();
 
 				if ( $e->getCode() == 210 ) {
-					$status_messages[] = array( 'message' => sprintf( __( 'Failed posting to mentioned page\'s Facebook Timeline. <img src="http://graph.facebook.com/' . $page['id'] . '/picture" width="15"> Error: Page doesn\'t allow posts from other Facebook users. Full error: ' . json_encode ( $error_result['error'] ), true ) ), 'error' => true );
+					$status_messages[] = array( 'message' => __( 'Failed posting to mentioned page\'s Facebook Timeline.', 'facebook' ) . ' <img src="' . esc_url( 'http://graph.facebook.com/' . $page['id'] . '/picture?width=15' ) . '" width="15"> ' . __( 'Error: Page doesn\'t allow posts from other Facebook users. Full error:', 'facebook' ) . ' ' . json_encode ( $error_result['error'] ), 'error' => true );
 				} else {
-					$status_messages[] = array( 'message' => sprintf( __( 'Failed posting to mentioned page\'s Facebook Timeline. <img src="http://graph.facebook.com/' . $page['id'] . '/picture" width="15"> Error: ' . json_encode ( $error_result['error'] ), true ) ), 'error' => true );
+					$status_messages[] = array( 'message' => __( 'Failed posting to mentioned page\'s Facebook Timeline.', 'facebook' ) . ' <img src="' . esc_url( 'http://graph.facebook.com/' . $page['id'] . '/picture?width=15' ) . '" width="15"> ' . __( 'Error:', 'facebook' ) . ' ' . json_encode ( $error_result['error'] ), 'error' => true );
 				}
 			}
 		}
@@ -444,7 +449,7 @@ function fb_post_to_author_fb_timeline($post_id) {
 		update_post_meta($post_id, 'fb_mentioned_pages_post_ids', $publish_ids_pages);
 
 		if ( !empty( $publish_ids_pages ) )
-			$status_messages[] = array( 'message' => sprintf( __( 'Posted to mentioned pages\' Facebook Timelines. ' . $pages_posts ) ), 'error' => false );
+			$status_messages[] = array( 'message' => __( 'Posted to mentioned pages\' Facebook Timelines.', 'facebook' ) . ' ' . $pages_posts, 'error' => false );
 	}
 
 	$fb_user = fb_get_current_user();
@@ -471,13 +476,19 @@ function fb_post_to_author_fb_timeline($post_id) {
 				update_option( 'fb_options', $options );
 			}*/
 
-			$status_messages[] = array( 'message' => sprintf( __( 'Failed posting to your Facebook Timeline. Error: ' . json_encode ( $error_result['error'] ), true ) ), 'error' => true );
+			$status_messages[] = array( 'message' => __( 'Failed posting to your Facebook Timeline.', 'facebook' ) . ' ' . __( 'Error:', 'facebook' ) . ' ' . json_encode( $error_result['error'] ), 'error' => true );
 		}
 	}
 
 
-	if ( isset( $publish_result ) && isset( $publish_result['id'] ) )
-		$status_messages[] = array( 'message' => sprintf( __( 'Posted to <a href="http://www.facebook.com/' . sanitize_text_field( $publish_result['id'] ) . '" target="_blank">your Facebook Timeline</a>' . ( ! empty( $author_message ) ? ' with message "' . $author_message . '"' : '' ), false ) ), 'error' => false );
+	if ( isset( $publish_result ) && isset( $publish_result['id'] ) ) {
+		$link = '<a href="' . esc_url( 'http://www.facebook.com/' . sanitize_text_field( $publish_result['id'] ) ) . '" target="_blank">' . esc_html( __( 'your Facebook Timeline' ) ) . '</a>';
+		if ( empty( $author_message ) )
+			$message = sprintf( __( 'Posted to %s' ), $link );
+		else
+			$message = sprintf( __( 'Posted to %1$s with message "%2$s"' ), $link, $author_message );
+		$status_messages[] = array( 'message' => $message, 'error' => false );
+	}
 
 	$existing_status_messages = get_post_meta($post_id, 'fb_status_messages', true);
 
@@ -506,7 +517,7 @@ function fb_get_social_publisher_fields() {
 		$fan_page_option = array(
 			'name' => 'publish_to_fan_page',
 			'type' => 'disabled_text',
-			'disabled_text' => '<a href="#" onclick="authFacebook(); return false;">'.__('Link your Facebook account to your WordPress account to enable.','facebook').'</a>',
+			'disabled_text' => '<a href="#" onclick="authFacebook(); return false;">' . esc_html( __( 'Link your Facebook account to your WordPress account to enable.', 'facebook' ) ) . '</a>',
 			'help_text' => __( 'All new posts will be automatically published to this Facebook Page.', 'facebook' ),
 		);
 	} else {
@@ -547,7 +558,7 @@ function fb_get_social_publisher_fields() {
 		'name' => 'social_publisher',
 		'type' => 'checkbox',
 		'label' => __('Social Publisher', 'facebook'),
-		'description' => __('Social Publisher allows you to publish to an Author\'s Facebook Timeline and Fan Page.	Authors can also mention Facebook friends and pages. ', 'facebook'),
+		'description' => __('Social Publisher allows you to publish to an Author\'s Facebook Timeline and Fan Page.	Authors can also mention Facebook friends and pages.', 'facebook'),
 		'help_link' => 'http://developers.facebook.com/wordpress',
 		'image' => plugins_url( 'images/settings_social_publisher.png', __FILE__)
 	);
@@ -559,7 +570,7 @@ function fb_get_social_publisher_fields() {
 			'label' => "Publish to author's Timeline",
 			'type' => 'checkbox',
 			'default' => true,
-			'onclick' => "window.open(\"http://developers.facebook.com/wordpress#author-og-setup\", \"Open Graph Setup\", \"fullscreen=no\");",
+			'onclick' => 'window.open("http://developers.facebook.com/wordpress#author-og-setup", ' . json_encode( __( 'Open Graph Setup'. 'facebook' ) ) . ', "fullscreen=no");',
 			'help_text' => __( 'Publish new posts to the author\'s Facebook Timeline and allow mentioning friends. You must setup Open Graph in your App Settings. Enable the feature to learn how.', 'facebook' ),
 			'help_link' => 'http://developers.facebook.com/wordpress#author-og-setup'
 		),
@@ -568,19 +579,19 @@ function fb_get_social_publisher_fields() {
 			'name' => 'mentions_show_on_homepage',
 			'type' => 'checkbox',
 			'default' => true,
-			'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.	Enable this to show mentions on the homepage, as part of the post and page previews.', 'facebook' )
+			'help_text' => __( 'Authors can mention Facebook friends and pages in posts.', 'facebook' ) . ' ' . __( 'Enable this to show mentions on the homepage, as part of the post and page previews.', 'facebook' )
 		),
 		array(
 			'name' => 'mentions_position',
 			'type' => 'dropdown',
 			'default' => 'both',
 			'options' => array('top' => 'top', 'bottom' => 'bottom', 'both' => 'both'),
-			'help_text' => __( 'Authors can mentions Facebook friends and pages in posts.	This controls where mentions will be displayed in the posts.', 'facebook' )
+			'help_text' => __( 'Authors can mention Facebook friends and pages in posts.', 'facebook' ) . ' ' . __( 'This controls where mentions will be displayed in the posts.', 'facebook' )
 		),
 		array(
 			'name' => 'publish_for',
 			'type' => 'checkbox',
-			'default' => array_fill_keys(array_keys($post_types) , 'true'),
+			'default' => array_fill_keys( array_keys($post_types) , 'true' ),
 			'options' => $post_types,
 			'help_text' => __( 'Control which post types are published to Facebook.', 'facebook' )
 		)

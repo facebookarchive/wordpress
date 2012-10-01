@@ -60,10 +60,10 @@ function fb_build_social_plugin_params($options, $plugin = '' ) {
 
     if ( 'like' == $plugin ) {
         if ( ! isset( $options['send'] ) || empty( $options['send'] ) ) {
-            $params .= 'data-send="false"';
+            $params .= 'data-send="false" ';
         }
         if ( ! isset( $options['show_faces'] ) || empty( $options['show_faces'] ) ) {
-            $params .= 'data-show-faces="false"';
+            $params .= 'data-show-faces="false" ';
         }
     }
 
@@ -73,9 +73,10 @@ function fb_build_social_plugin_params($options, $plugin = '' ) {
 		$params .= 'data-' . $option . '="' . esc_attr($value) . '" ';
     }
 
-	$params .= 'data-ref="wp" ';
+    if ( ! array_key_exists( 'ref', $options ) )
+		$params .= 'data-ref="wp" ';
 
-	return $params;
+	return rtrim( $params, ' ' );
 }
 
 if ( true ) {

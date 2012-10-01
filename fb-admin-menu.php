@@ -201,7 +201,7 @@ function fb_notify_user_of_plugin_conflicts()
 
 	//if there are more than 1 plugins relying on Open Graph, warn the user on this plugins page
 	if ( $num_conflicting >= 1 ) {
-		fb_admin_dialog( sprintf( __( 'You have plugins installed that could potentially conflict with the Facebook plugin. Please consider disabling the following plugins on the %sPlugins Settings page%s:', 'facebook' ) . '<br />' . implode($conflicting_plugins), '<a href="plugins.php" aria-label="Plugins 0">', '</a>' ), true);
+		fb_admin_dialog( sprintf( __( 'You have plugins installed that could potentially conflict with the Facebook plugin. Please consider disabling the following plugins on the %s:', 'facebook' ) . '<br />' . implode($conflicting_plugins), '<a href="plugins.php" aria-label="Plugins 0">' . esc_html( __( 'Plugins Settings page', 'facebook' ) ) . '</a>' ), true);
 	}
 }
 
@@ -311,44 +311,44 @@ function fb_settings_page() {
 	?>
 	<div class="wrap">
 		<div class="facebook-logo"></div>
-		<h2><?php echo esc_html__( 'Facebook for WordPress', 'facebook' ) . ' ' . fb_get_like_button($like_button_options); ?></h2>
+		<h2><?php echo esc_html( sprintf( __( '%s for WordPress', 'facebook' ), 'Facebook' ) ) . ' ' . fb_get_like_button($like_button_options); ?></h2>
 		<?php settings_errors(); ?>
 		<form method="post" action="options.php">
 			<?php
 			settings_fields( 'fb_options' );
 
 			if ( !isset( $facebook ) ) {
-				echo '<h2>' . esc_html__( 'Step 1: Create an App', 'facebook' ) . '</h2>';
-				echo '<p><strong>' . sprintf( esc_html( __( 'If you already have a Facebook app for this website, skip to %sStep 2%s.', 'facebook' ) ), '<a href="#step-2">', '</a>' ) . '</strong></p><br>';
-				echo '<p>' . sprintf( esc_html( __( 'If you don\'t already have an app for this website, go to %s and click the "Create New App" button.	You\'ll see a dialog like the one below.	Fill this in and click "Continue".', 'facebook' ) ), '<a href="https://developers.facebook.com/apps" target="_blank">https://developers.facebook.com/apps</a>' );
+				echo '<h2>' . esc_html( __( 'Step 1: Create an App', 'facebook' ) ) . '</h2>';
+				echo '<p><strong>' . sprintf( esc_html( __( 'If you already have a Facebook app for this website, skip to %s.', 'facebook' ) ), '<a href="#step-2">' . esc_html( __( 'Step 2', 'facebook' ) ) . '</a>' ) . '</strong></p><br>';
+				echo '<p>' . sprintf( esc_html( __( 'If you don\'t already have an app for this website, go to %s and click the "Create New App" button. You\'ll see a dialog like the one below. Fill this in and click "Continue".', 'facebook' ) ), '<a href="https://developers.facebook.com/apps" target="_blank">https://developers.facebook.com/apps</a>' );
 				echo '<p><img src="' . plugins_url( 'images/nux_create_app.png', __FILE__ ) . '"></p>';
-				echo '<p>Here are for some recommendations for filling this form out.</p>';
+				echo '<p>' . esc_html( __( 'Here are for some recommendations for filling this form out.', 'facebook' ) ) . '</p>';
 
-				echo '<b> App Name: </b>' . esc_html( get_bloginfo('name') ) . '<br />';
-				echo '<b> App Namespace: </b>' . esc_html( strtolower(str_replace( ' ', '-', get_bloginfo('name') ) ) ) . '<br />';
+				echo '<b>' . esc_html( __( 'App Name:', 'facebook' ) ) . '</b>' . esc_html( get_bloginfo('name') ) . '<br />';
+				echo '<b>' . esc_html( __( 'App Namespace:', 'facebook' ) ) . '</b>' . esc_html( strtolower(str_replace( ' ', '-', get_bloginfo('name') ) ) ) . '<br />';
 
-				echo '<h2 id="step-2">' . esc_html__( 'Step 2: Set up the App', 'facebook' ) . '</h2>';
-				echo sprintf( esc_html( __( 'Next, set up your app so that it looks like the settings below.	Make sure you set your app\'s icon and image, too.	If you already have an app and skipped Step 1, you can view your app settings by going to %s', 'facebook' ) ), '<a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>.</p>' );
+				echo '<h2 id="step-2">' . esc_html( __( 'Step 2: Set up the App', 'facebook' ) ) . '</h2>';
+				echo sprintf( esc_html( __( 'Next, set up your app so that it looks like the settings below. Make sure you set your app\'s icon and image, too.	If you already have an app and skipped Step 1, you can view your app settings by going to %s', 'facebook' ) ), '<a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>.</p>' );
 
-				echo '<p>Here are for some recommendations for filling this form out, based on where this plugin is installed.</p>';
+				echo '<p>' . esc_html( __( 'Here are for some recommendations for filling this form out, based on where this plugin is installed.', 'facebook' ) ) . '</p>';
 				echo '<b> App Domains: </b>' . esc_html( parse_url( home_url('/'), PHP_URL_HOST ) ) . '<br />';
 				echo '<b> Site URL and Mobile Web URL: </b>' . esc_html( get_bloginfo( 'wpurl' ) ) . '<br />';
 
 				echo '<p><img src="' . esc_url( plugins_url( 'images/nux_app_settings.png', __FILE__ ) ) . '" style="border: 1px solid #ccc; margin: 5px; padding: 5px;"></p>';
 
-				echo '<h2>' . esc_html__( 'Step 3: WordPress settings', 'facebook' ) . '</h2>';
-				echo '<p>' . esc_html__( 'Now, based on what you entered in Step 2, fill in the settings below and Save.	Once saved, additional options will appear on this page.', 'facebook' ) . '</p>';
+				echo '<h2>' . esc_html( __( 'Step 3: WordPress settings', 'facebook' ) ) . '</h2>';
+				echo '<p>' . esc_html( __( 'Now, based on what you entered in Step 2, fill in the settings below and Save. Once saved, additional options will appear on this page.', 'facebook' ) ) . '</p>';
 				fb_get_main_settings_fields();
 			}
 			else {
-				echo '<h2>' . esc_html__( 'Main Settings', 'facebook' ) . '</h2>';
+				echo '<h2>' . esc_html( __( 'Main Settings', 'facebook' ) ) . '</h2>';
 
-				echo '<p>' . sprintf( esc_html( __( 'Get your App ID, Secret, and Namespace at %s. %sIf you already have a Facebook app for this website, it\'s important that you use the same information below%s.', 'facebook' ) ), '<a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>', '<strong>', '</strong>' ) . '</p>';
+				echo '<p>' . sprintf( esc_html( __( 'Get your App ID, Secret, and Namespace at %s.', 'facebook' ) ) . '<strong>' . esc_html( __( 'If you already have a Facebook app for this website, it\'s important that you use the same information below.', 'facebook' ) ) . '</strong>', '<a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>' ) . '</p>';
 				fb_get_main_settings_fields();
 
-				echo '<h2>' . esc_html__( 'Post and Page Settings', 'facebook' ) . '</h2>';
+				echo '<h2>' . esc_html( __( 'Post and Page Settings', 'facebook' ) ) . '</h2>';
 
-				echo '<p>' . sprintf( esc_html( __( 'These settings affect Pages and Posts only.	Additional Social Plugins are also available in the %sWidgets settings%s.', 'facebook' ) ), '<a href="widgets.php">', '</a>' );
+				echo '<p>' . esc_html( __( 'These settings affect Pages and Posts only.', 'facebook' ) ) . ' ' . sprintf( esc_html( __( 'Additional Social Plugins are also available in the %s.', 'facebook' ) ), '<a href="widgets.php">' . esc_html( __( 'Widgets settings', 'facebook' ) ) . '</a>' );
 
 				fb_notify_user_of_plugin_conflicts();
 				fb_get_social_publisher_fields();
@@ -373,7 +373,7 @@ function fb_settings_page() {
 function fb_insights_admin($appid = 0) {
 	$payload = json_encode( fb_get_settings($appid) );
 
-	echo '<img src="http://www.facebook.com/impression.php?plugin=wordpress&payload=' . $payload . '">';
+	echo '<img src="http://www.facebook.com/impression.php?plugin=wordpress&payload=' . $payload . '" width="1" height="1" alt=" " />';
 }
 
 function fb_get_debug_output($appid = 0) {
@@ -383,7 +383,7 @@ function fb_get_debug_output($appid = 0) {
 
 	$debug['wp_ver'] = $bloginfo;
 
-	echo '<a href="#" id="debug-output-link" onclick="fbShowDebugInfo(); return false">debug info</a><div id="debug-output">' . esc_html( json_encode($debug) ) . '</div>';
+	echo '<a href="#" id="debug-output-link" onclick="fbShowDebugInfo(); return false">' . esc_html( __( 'debug info', 'facebook' ) ) . '</a><div id="debug-output">' . esc_html( json_encode($debug) ) . '</div>';
 }
 
 function fb_get_settings($appid) {
@@ -482,16 +482,16 @@ function fb_get_main_settings_fields() {
 function fb_add_settings_pages() {
 	add_submenu_page(
 		 'edit-comments.php',
-		 _x('Facebook', 'admin page title', 'facebook'),
-		 _x('Facebook', 'admin menu title', 'facebook'),
+		 'Facebook',
+		 'Facebook',
 		 'moderate_comments',
 		 'fb_comments',
 		 'fb_settings_page'
 	);
 	add_submenu_page(
 		 'facebook-settings',
-		 _x('Insights', 'admin page title', 'facebook'),
-		 _x('Insights', 'admin menu title', 'facebook'),
+		 _x( 'Insights', 'Facebook insights stats tool', 'facebook' ),
+		 _x( 'Insights', 'Facebook insights stats tool', 'facebook' ),
 		 'publish_posts',
 		 'fb_insights',
 		 'fb_insights_page'
@@ -505,43 +505,43 @@ function fb_options_validate($input) {
 	foreach ($input as $key=>$value) {
 		switch ($key) {
 		case 'app_id':
-			$label = 'App ID';
+			$label = __( 'App ID', 'facebook' );
 			if (fb_options_validate_present($value, $label)) {
 				$value = fb_options_validate_integer($value, $label);
 			}
 			break;
 		case 'app_secret':
-			$label = 'App secret';
+			$label = __( 'App secret', 'facebook' );
 			if (fb_options_validate_present($value, $label)) {
 				$value = fb_options_validate_hex($value, $label);
 			}
 			break;
 		case 'app_namespace':
-			$label = 'App namespace';
+			$label = __( 'App namespace', 'facebook' );
 			$value = fb_options_validate_namespace($value, $label);
 			break;
 		case 'social_publisher':
-			$label_prefix = "The Social Publisher's";
+			$label_prefix = __( 'The Social Publisher\'s', 'facebook' );
 			$value = fb_options_validate_plugin($value, $label_prefix);
 			break;
 		case 'recommendations_bar':
-			$label_prefix = "The Recommendations Bar's";
+			$label_prefix = __( 'The Recommendations Bar\'s', 'facebook' );
 			$value = fb_options_validate_plugin($value, $label_prefix);
 			break;
 		case 'like':
-			$label_prefix = "The Like Button's";
+			$label_prefix = __( 'The Like Button\'s', 'facebook' );
 			$value = fb_options_validate_plugin($value, $label_prefix);
 			break;
 		case 'subscribe':
-			$label_prefix = "The Subscribe Button's";
+			$label_prefix = __( 'The Subscribe Button\'s', 'facebook' );
 			$value = fb_options_validate_plugin($value, $label_prefix);
 			break;
 		case 'send':
-			$label_prefix = "The Send Button's";
+			$label_prefix = __( 'The Send Button\'s', 'facebook' );
 			$value = fb_options_validate_plugin($value, $label_prefix);
 			break;
 		case 'comments':
-			$label_prefix = "The Comments Box's";
+			$label_prefix = __( 'The Comments Box\'s', 'facebook' );
 			$value = fb_options_validate_plugin($value, $label_prefix);
 			break;
 		default:
@@ -556,7 +556,7 @@ function fb_options_validate($input) {
 
 function fb_options_validate_present($value, $label) {
 	if ($value == '') {
-		add_settings_error('fb_options', '', "$label must be present");
+		add_settings_error('fb_options', '', sprintf( __( '%s must be present', 'facebook' ), $label ) );
 		return false;
 	}
 	return true;
@@ -568,7 +568,7 @@ function fb_options_validate_integer($value, $label, $sanitize=true) {
 	}
 	if (!preg_match('/^[0-9]+$/', $value)) {
 		$value = preg_replace('/[^0-9]/', '', $value);
-		add_settings_error('fb_options', '', "$label has been converted to an integer");
+		add_settings_error('fb_options', '', sprintf( __( '%s has been converted to an integer', 'facebook' ), $label ) );
 	}
 	return $value;
 }
@@ -579,7 +579,7 @@ function fb_options_validate_hex($value, $label, $sanitize=true) {
 	}
 	if (!preg_match('/^[0-9a-f]+$/i', $value)) {
 		$value = preg_replace('/[^0-9a-f]/', '', strtolower($value));
-		add_settings_error('fb_options', '', "$label has been converted to a hex string");
+		add_settings_error('fb_options', '', sprintf( __( '%s has been converted to a hex string', 'facebook' ), $label ) );
 	}
 	return $value;
 }
@@ -590,7 +590,7 @@ function fb_options_validate_namespace($value, $label, $sanitize=true) {
 	}
 	if ($value != '' && !preg_match('/^[-_a-z]+$/', $value)) {
 		$value = preg_replace('/[^-_a-z]/', '', strtolower($value));
-		add_settings_error('fb_options', '', "$label has been converted to contain only lowercase letters, dashes and underscores");
+		add_settings_error('fb_options', '', sprintf( __( '%s has been converted to contain only lowercase letters, dashes and underscores', 'facebook' ), $label ) );
 	}
 	return $value;
 }
@@ -607,16 +607,16 @@ function fb_options_validate_plugin($array, $label_prefix, $sanitize=true) {
 		$label = '';
 		switch ($key) {
 			case 'trigger':
-				$label = "$label_prefix trigger";
+				$label = sprintf( __( '%s trigger', 'facebook' ), $label_prefix );
 				break;
 			case 'read_time':
-				$label = "$label_prefix read time";
+				$label = sprintf( __( '%s read time', 'facebook' ), $label_prefix );
 				break;
 			case 'width':
-				$label = "$label_prefix width";
+				$label = sprintf( __( '%s width', 'facebook' ), $label_prefix );
 				break;
 			case 'num_posts':
-				$label = "$label_prefix number of posts";
+				$label = sprintf( __( '%s number of posts', 'facebook' ), $label_prefix );
 				break;
 		}
 		if ($label != '' && fb_options_validate_present($value, $label)) {

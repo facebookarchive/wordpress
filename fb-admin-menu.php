@@ -23,155 +23,10 @@ function fb_create_menu() {
  * Function to check if the wordpress user has plugins that may conflict
  * with the Facebook plugin (due to Open Graph). 
  */
-function fb_notify_user_of_plugin_conflicts()
-{
-	//static array of potentially conflicting plugins
-	//add to this list of conflicting plugins from the big list below 
-	$og_conflicting_plugins_static = array(
-		'http://wordpress.org/extend/plugins/facebook/',
-		'http://wordpress.org/extend/plugins/opengraph/',
-		'http://yoast.com/wordpress/seo/#utm_source=wpadmin&utm_medium=plugin&utm_campaign=wpseoplugin',
-		'http://wordbooker.tty.org.uk',
-		'http://ottopress.com/wordpress-plugins/simple-facebook-connect/',
-		'http://www.whiletrue.it',
-		'http://aaroncollegeman.com/sharepress'
-	);
+function fb_notify_user_of_plugin_conflicts() {
 
-	$og_conflicting_plugins = array(
-		'http://wordpress.org/extend/plugins/kevinjohn-gallagher-pure-web-brilliants-social-graph-control/',
-		'http://wordpress.org/extend/plugins/1-click-retweetsharelike',
-		'http://wordpress.org/extend/plugins/2-click-socialmedia-buttons',
-		'http://wordpress.org/extend/plugins/add-facebook-og-meta-tags-paulund',
-		'http://wordpress.org/extend/plugins/add-link-to-facebook',
-		'http://wordpress.org/extend/plugins/add-meta-tags',
-		'http://wordpress.org/extend/plugins/aj-wp-facebook-like-and-send',
-		'http://wordpress.org/extend/plugins/amarinfotech-downlaod-with-fb-connect',
-		'http://wordpress.org/extend/plugins/another-wordpress-classifieds-plugin',
-		'http://wordpress.org/extend/plugins/aprils-facebook-like-button',	
-		'http://wordpress.org/extend/plugins/aprils-super-functions-pack',
-		'http://wordpress.org/extend/plugins/author-hreview',
-		'http://wordpress.org/extend/plugins/bye-maridjan-seo',
-		'http://wordpress.org/extend/plugins/cd34-header',
-		'http://wordpress.org/extend/plugins/comment-juice',
-		'http://wordpress.org/extend/plugins/contentshare',
-		'http://wordpress.org/extend/plugins/custom-facebook-and-google-thumbnail',
-		'http://wordpress.org/extend/plugins/dudelols-easy-facebook-share-thumbnails',
-		'http://wordpress.org/extend/plugins/dw-fb-sendlike',
-		'http://wordpress.org/extend/plugins/easy-facebook-share-thumbnails',
-		'http://wordpress.org/extend/plugins/easy-social-media',
-		'http://wordpress.org/extend/plugins/easy-toolbox',
-		'http://wordpress.org/extend/plugins/facebook-awd',
-		'http://wordpress.org/extend/plugins/facebook-comment-for-wordpress',
-		'http://wordpress.org/extend/plugins/facebook-comments-for-wordpress',
-		'http://wordpress.org/extend/plugins/facebook-connect-plugin',
-		'http://wordpress.org/extend/plugins/facebook-ilike',
-		'http://wordpress.org/extend/plugins/facebook-image-fix',
-		'http://wordpress.org/extend/plugins/facebook-like',
-		'http://wordpress.org/extend/plugins/facebook-like-a-lot',
-		'http://wordpress.org/extend/plugins/facebook-like-and-comment',
-		'http://wordpress.org/extend/plugins/facebook-like-and-send-2-in-1',
-		'http://wordpress.org/extend/plugins/facebook-like-button',
-		'http://wordpress.org/extend/plugins/facebook-like-button-for-dummies',
-		'http://wordpress.org/extend/plugins/facebook-like-button-plugin',
-		'http://wordpress.org/extend/plugins/facebook-like-content-locker',
-		'http://wordpress.org/extend/plugins/facebook-like-for-marketers',
-		'http://wordpress.org/extend/plugins/facebook-likes-you',
-		'http://wordpress.org/extend/plugins/facebook-meta-tags',
-		'http://wordpress.org/extend/plugins/facebook-open-graph-meta',
-		'http://wordpress.org/extend/plugins/facebook-open-graph-meta-for-wordpress',
-		'http://wordpress.org/extend/plugins/facebook-open-graph-meta-in-wordpress',
-		'http://wordpress.org/extend/plugins/facebook-open-graph-widget',
-		'http://wordpress.org/extend/plugins/facebook-opengraph',
-		'http://wordpress.org/extend/plugins/facebook-optimize',
-		'http://wordpress.org/extend/plugins/facebook-page-publish',
-		'http://wordpress.org/extend/plugins/facebook-recommend-widget',
-		'http://wordpress.org/extend/plugins/facebook-revised-open-graph-meta-tag',
-		'http://wordpress.org/extend/plugins/facebook-send-button',
-		'http://wordpress.org/extend/plugins/facebook-share-new',
-		'http://wordpress.org/extend/plugins/facebook-social-plugins',
-		'http://wordpress.org/extend/plugins/facebook-tools',
-		'http://wordpress.org/extend/plugins/fanpage-connect',
-		'http://wordpress.org/extend/plugins/fatpanda-facebook-comments',
-		'http://wordpress.org/extend/plugins/fb-open-graph-actions-free',
-		'http://wordpress.org/extend/plugins/fb-thumbnail-config',
-		'http://wordpress.org/extend/plugins/fbpromotions',
-		'http://wordpress.org/extend/plugins/fbvirallike',
-		'http://wordpress.org/extend/plugins/fix-facebook-like',
-		'http://wordpress.org/extend/plugins/flexo-facebook-manager',
-		'http://wordpress.org/extend/plugins/flexo-social-gallery',
-		'http://wordpress.org/extend/plugins/foragr-activity-stream',
-		'http://wordpress.org/extend/plugins/foxyshop',
-		'http://wordpress.org/extend/plugins/fp',
-		'http://wordpress.org/extend/plugins/head-cleaner',
-		'http://wordpress.org/extend/plugins/head-meta-facebook',
-		'http://wordpress.org/extend/plugins/hyves-respect',
-		'http://wordpress.org/extend/plugins/jotlinks-button',
-		'http://wordpress.org/extend/plugins/jw-player-plugin-for-wordpress',
-		'http://wordpress.org/extend/plugins/kblog-metadata',
-		'http://wordpress.org/extend/plugins/kevinjohn-gallagher-pure-web-brilliants-social-graph-control',
-		'http://wordpress.org/extend/plugins/leenkme',
-		'http://wordpress.org/extend/plugins/like',
-		'http://wordpress.org/extend/plugins/like-button-plugin-for-wordpress',
-		'http://wordpress.org/extend/plugins/like-buttons',
-		'http://wordpress.org/extend/plugins/me-likey-a-facebook-open-graph-plugin',
-		'http://wordpress.org/extend/plugins/mediaembedder',
-		'http://wordpress.org/extend/plugins/meta-ographr',
-		'http://wordpress.org/extend/plugins/mouseover-share-buttons-by-newsgrape',
-		'http://wordpress.org/extend/plugins/multilpe-social-media',
-		'http://wordpress.org/extend/plugins/network-publisher',
-		'http://wordpress.org/extend/plugins/og-meta',
-		'http://wordpress.org/extend/plugins/ogp',
-		'http://wordpress.org/extend/plugins/only-tweet-like-share-and-google-1',
-		'http://wordpress.org/extend/plugins/open-graph',
-		'http://wordpress.org/extend/plugins/open-graph-protocol-in-posts-and-pages',
-		'http://wordpress.org/extend/plugins/open-graph-protocol-tools',
-		'http://wordpress.org/extend/plugins/opengraph-and-microdata-generator',
-		'http://wordpress.org/extend/plugins/opengraph-metatags-for-facebook',
-		'http://wordpress.org/extend/plugins/professional-share',
-		'http://wordpress.org/extend/plugins/scrolling-social-sharebar',
-		'http://wordpress.org/extend/plugins/scrolling-twitter-like-google-plusone-linkedin-and-stumbleupon',
-		'http://wordpress.org/extend/plugins/seo-facebook-comments',
-		'http://wordpress.org/extend/plugins/seopress',
-		'http://wordpress.org/extend/plugins/share-buttons',
-		'http://wordpress.org/extend/plugins/share-center-pro',
-		'http://wordpress.org/extend/plugins/shareyourcart',
-		'http://wordpress.org/extend/plugins/sharing-is-caring',
-		'http://wordpress.org/extend/plugins/shopp-facebook-like-button-sflb',
-		'http://wordpress.org/extend/plugins/shopp-open-graph-helper',
-		'http://wordpress.org/extend/plugins/shorten2ping',
-		'http://wordpress.org/extend/plugins/simple-facebook-comments-for-wordpress',
-		'http://wordpress.org/extend/plugins/simple-facebook-connect',
-		'http://wordpress.org/extend/plugins/simple-open-graph',
-		'http://wordpress.org/extend/plugins/slick-social-share-buttons',
-		'http://wordpress.org/extend/plugins/social-discussions',
-		'http://wordpress.org/extend/plugins/social-graph-protocol',
-		'http://wordpress.org/extend/plugins/social-kundi',
-		'http://wordpress.org/extend/plugins/social-maven',
-		'http://wordpress.org/extend/plugins/social-networks-auto-poster-facebook-twitter-g',
-		'http://wordpress.org/extend/plugins/social-sharing-toolkit',
-		'http://wordpress.org/extend/plugins/socialize',
-		'http://wordpress.org/extend/plugins/wonderm00ns-simple-facebook-open-graph-tags',
-		'http://wordpress.org/extend/plugins/woocommerce',
-		'http://wordpress.org/extend/plugins/wordpress-connect',
-		'http://wordpress.org/extend/plugins/wordpress-facebook-integrate',
-		'http://wordpress.org/extend/plugins/wordpress-plugin-seo-and-facebook-opengraph-and-google-schema',
-		'http://wordpress.org/extend/plugins/wordpress-seo',
-		'http://wordpress.org/extend/plugins/wordpress-social-ring',
-		'http://wordpress.org/extend/plugins/wp-facebook-like',
-		'http://wordpress.org/extend/plugins/wp-facebook-like-send-open-graph-meta',
-		'http://wordpress.org/extend/plugins/wp-facebook-like-this',
-		'http://wordpress.org/extend/plugins/wp-facebook-likebutton',
-		'http://wordpress.org/extend/plugins/wp-facebook-open-graph-protocol',
-		'http://wordpress.org/extend/plugins/wp-facebook-plugin',
-		'http://wordpress.org/extend/plugins/wp-facebookconnect',
-		'http://wordpress.org/extend/plugins/wp-fb-commerce',
-		'http://wordpress.org/extend/plugins/wp-grow-button',
-		'http://wordpress.org/extend/plugins/wp-ogp',
-		'http://wordpress.org/extend/plugins/wp-open-graph-meta',
-		'http://wordpress.org/extend/plugins/wpmu-dev-facebook-addon',
-		'http://wordpress.org/extend/plugins/wpstorecart',
-		'http://wordpress.org/extend/plugins/zoltonorg-social-plugin'
-	);
+	// store list of conflicts separately for cleaner data vs. logic
+	include_once( dirname(__FILE__) . '/conflicting-plugins.php' );
 
 	//fetch activated plugins
 	$plugins_list = get_option( 'active_plugins', array() ); 
@@ -317,15 +172,15 @@ function fb_settings_page() {
 			<?php
 			settings_fields( 'fb_options' );
 
-			if ( !isset( $facebook ) ) {
+			if ( ! isset( $facebook ) ) {
 				echo '<h2>' . esc_html( __( 'Step 1: Create an App', 'facebook' ) ) . '</h2>';
 				echo '<p><strong>' . sprintf( esc_html( __( 'If you already have a Facebook app for this website, skip to %s.', 'facebook' ) ), '<a href="#step-2">' . esc_html( __( 'Step 2', 'facebook' ) ) . '</a>' ) . '</strong></p><br>';
 				echo '<p>' . sprintf( esc_html( __( 'If you don\'t already have an app for this website, go to %s and click the "Create New App" button. You\'ll see a dialog like the one below. Fill this in and click "Continue".', 'facebook' ) ), '<a href="https://developers.facebook.com/apps" target="_blank">https://developers.facebook.com/apps</a>' );
 				echo '<p><img src="' . plugins_url( 'images/nux_create_app.png', __FILE__ ) . '"></p>';
 				echo '<p>' . esc_html( __( 'Here are for some recommendations for filling this form out.', 'facebook' ) ) . '</p>';
 
-				echo '<b>' . esc_html( __( 'App Name:', 'facebook' ) ) . '</b>' . esc_html( get_bloginfo('name') ) . '<br />';
-				echo '<b>' . esc_html( __( 'App Namespace:', 'facebook' ) ) . '</b>' . esc_html( strtolower(str_replace( ' ', '-', get_bloginfo('name') ) ) ) . '<br />';
+				echo '<b>' . esc_html( __( 'App Name:', 'facebook' ) ) . '</b> ' . esc_html( get_bloginfo('name') ) . '<br />';
+				echo '<b>' . esc_html( __( 'App Namespace:', 'facebook' ) ) . '</b> ' . esc_html( strtolower(str_replace( ' ', '-', get_bloginfo('name') ) ) ) . '<br />';
 
 				echo '<h2 id="step-2">' . esc_html( __( 'Step 2: Set up the App', 'facebook' ) ) . '</h2>';
 				echo sprintf( esc_html( __( 'Next, set up your app so that it looks like the settings below. Make sure you set your app\'s icon and image, too.	If you already have an app and skipped Step 1, you can view your app settings by going to %s', 'facebook' ) ), '<a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>.</p>' );
@@ -370,10 +225,8 @@ function fb_settings_page() {
 	<?php
 }
 
-function fb_insights_admin($appid = 0) {
-	$payload = json_encode( fb_get_settings($appid) );
-
-	echo '<img src="http://www.facebook.com/impression.php?plugin=wordpress&payload=' . $payload . '" width="1" height="1" alt=" " />';
+function fb_insights_admin( $appid = 0 ) {
+	echo '<img src="http://www.facebook.com/impression.php?' . http_build_query( array( 'plugin' => 'wordpress', 'payload' => json_encode( fb_get_settings($appid) ) ) ) . '" width="1" height="1" alt=" " />';
 }
 
 function fb_get_debug_output($appid = 0) {
@@ -394,35 +247,31 @@ function fb_get_settings($appid) {
 	if ( ! $appid )
 		$appid = $options['app_id'];
 
-	if ( !empty( $options['social_publisher']['publish_to_fan_page'] ) )
+	if ( ! empty( $options['social_publisher']['publish_to_fan_page'] ) )
 		preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/su", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
 
 	$options['social_publisher']['publish_to_fan_page'] = array();
-	if ( !empty( $fan_page_info[0] ) ) {
+	if ( ! empty( $fan_page_info[0] ) ) {
 		$options['social_publisher']['publish_to_fan_page']['page_name'] = $fan_page_info[0][1];
 		$options['social_publisher']['publish_to_fan_page']['page_id'] = $fan_page_info[0][2];
 	}
 
 	$enabled_options = array();
+	if ( isset( $options ) ) {
+		if ( isset( $options['social_publisher'] ) )
+			$enabled_options['social_publisher'] = $options['social_publisher'];
 
-	if (isset($options) && isset($options['social_publisher'])){
-		$enabled_options['social_publisher'] = $options['social_publisher'];
-	}
+		if ( isset( $options['recommendations_bar'] ) )
+			$enabled_options['recommendations_bar'] = $options['recommendations_bar'];
 
-	if (isset($options) && isset($options['recommendations_bar'])){
-		$enabled_options['recommendations_bar'] = $options['recommendations_bar'];
-	}
+		if ( isset( $options['subscribe'] ) )
+			$enabled_options['subscribe'] = $options['subscribe'];
 
-	if (isset($options) && isset($options['subscribe'])){
-		$enabled_options['subscribe'] = $options['subscribe'];
-	}
+		if ( isset( $options['comments'] ) )
+			$enabled_options['comments'] = $options['comments'];
 
-	if (isset($options) && isset($options['comments'])){
-		$enabled_options['comments'] = $options['comments'];
-	}
-
-	if (isset($options) && isset($options['send'])){
-		$enabled_options['send'] = $options['send'];
+		if ( isset( $options['send'] ) )
+			$enabled_options['send'] = $options['send'];
 	}
 
 	$sidebar_widgets = wp_get_sidebars_widgets();
@@ -444,7 +293,7 @@ function fb_get_settings($appid) {
 
 	$payload = array( 'appid' => $appid, 'version' => $fb_ver, 'domain' => $_SERVER['HTTP_HOST'] );
 
-	$payload = array_merge($fb_sidebar_widgets, $payload, $enabled_options);
+	$payload = array_merge( $fb_sidebar_widgets, $payload, $enabled_options );
 
 	return $payload;
 }
@@ -456,20 +305,25 @@ function fb_get_settings($appid) {
  */
 function fb_get_main_settings_fields() {
 	$children = array(
-		array('name' => 'app_id',
-			'label' => 'App ID',
+		array(
+			'name' => 'app_id',
+			'label' => __( 'App ID', 'facebook' ),
 			'type' => 'text',
 			'help_text' => __( 'Your App ID.', 'facebook' ),
-			),
-		array('name' => 'app_secret',
+			'required' => true
+		),
+		array(
+			'name' => 'app_secret',
 			'type' => 'text',
 			'help_text' => __( 'Your App Secret.', 'facebook' ),
-			),
-		array('name' => 'app_namespace',
+			'required' => true
+		),
+		array(
+			'name' => 'app_namespace',
 			'type' => 'text',
-			'help_text' => __( 'Your App Namespace.', 'facebook' ),
-			),
-		);
+			'help_text' => __( 'Your App Namespace.', 'facebook' )
+		)
+	);
 
 	fb_construct_fields('settings', $children);
 }

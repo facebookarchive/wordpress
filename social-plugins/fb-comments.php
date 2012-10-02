@@ -175,7 +175,7 @@ function fb_get_comments_fields_array() {
 			'name' => 'homepage_comments',
 			'label' => __( 'Show comment counts on the homepage', 'facebook' ),
 			'type' => 'checkbox',
-			'default' => 'true',
+			'default' => true,
 			'help_text' => __( 'Whether the plugin will display a comment count for each post on the homepage.', 'facebook' ),
 		)
 	);

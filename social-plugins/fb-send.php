@@ -175,7 +175,7 @@ function fb_get_send_fields_array($placement) {
 		$array['children'][] = array(
 			'name' => 'show_on',
 			'type' => 'checkbox',
-			'default' => array_fill_keys(array_keys($post_types) , 'true'),
+			'default' => array_fill_keys( array_keys($post_types), 'true' ),
 			'options' => $post_types,
 			'help_text' => __( 'Whether the plugin will appear on all posts or pages by default. If "individual posts and pages" is selected, you must explicitly set each post and page to display the plugin.', 'facebook' )
 		);

@@ -124,11 +124,11 @@ function fb_fields($fields, $place='settings') {
 function fb_field($field, $place='settings') {
 	extract($field);
 
-	if (!isset($label)) {
+	if ( ! isset($label) ) {
 		$label = trim(
 			ucfirst(
 				str_replace(
-					array("_", "]"), " ",
+					array('_', ']'), ' ',
 					array_pop(
 						explode('[', $name)
 					)
@@ -136,26 +136,14 @@ function fb_field($field, $place='settings') {
 			)
 		);
 	}
-	$label = sprintf(
-		'<label for="%1$s">%2$s</label>',
-		esc_attr($name),
-		esc_html($label)
-	);
+	$label = '<label for="' . esc_attr( $name ) . '">' . esc_html( $label ) . '</label>';
 
-	if (isset($help_link)) {
-		$help = sprintf(
-			'<a href="%s" target="_new" title="%s" class="wp_help_link">[?]</a>',
-			esc_attr($help_link),
-			esc_attr($help_text)
-		);
-	} else {
-		$help = sprintf(
-			'<span title="%s" class="wp_help_hover">[?]</span>',
-			esc_attr($help_text)
-		);
-	}
+	if ( isset($help_link) )
+		$help = '<a href="' . esc_url( $help_link, array( 'http', 'https' ) ) . '" target="_blank" title="' . esc_html( $help_text ) . '" class="wp_help_link">[?]</a>';
+	else
+		$help = '<span title="' . esc_attr( $help_text ) . '" class="wp_help_hover">[?]</span>';
 
-	$widget = call_user_func("fb_field_$type", $field, $place);
+	$widget = call_user_func( "fb_field_$type", $field, $place );
 
 	switch ($place) {
 		case 'widget':
@@ -179,68 +167,96 @@ function fb_field($field, $place='settings') {
 
 }
 
-function fb_field_text($field, $place='settings') {
-	return sprintf(
-		'<input type="text" id="%1$s" name="%1$s" value="%2$s" %3$s/>',
-		esc_attr($field['name']),
-		esc_attr($field['value']),
-		$place=='widget' ? 'class="widefat"' : ""
-	);
+/**
+ * Build an input HTML element of type=text based on field values and the intended display section
+ *
+ * @since 1.0
+ * @param array $field associative array of field values
+ * @param string $place allow special handling for widget display
+ * @return string HTML input element
+ */
+function fb_field_text( $field, $place='settings' ) {
+	$id_name = esc_attr( $field['name'] );
+	$input = '<input type="text" id="' . $id_name . '" name="' . $id_name . '"';
+	if ( $place === 'widget' )
+		$input .= ' class="widefat"';
+	if ( ! empty( $field['value'] ) )
+		$input .= ' value="' . esc_attr( $field['value'] ) . '"';
+	if ( array_key_exists( 'required', $field ) && $field['required'] )
+		$input .= ' required';
+	$input .= ' />';
+	return $input;
 }
 
-function fb_field_checkbox($field, $place='settings') {
+/**
+ * Build an input HTML element of type=checkbox based on field values and the intended display section
+ *
+ * @since 1.0
+ * @param array $field associative array of field values
+ * @param string $place allow special handling for widget display
+ * @return string HTML input element
+ */
+function fb_field_checkbox( $field, $place='settings' ) {
 	$onclick = '';
-	$buffer = '';
-
-	if (isset($field['onclick'])) {
-		$onclick = $field['onclick'];
-	}
+	if ( isset($field['onclick']) )
+		$onclick = esc_attr( esc_js( $field['onclick'] ) );
 
 	if (isset($field['options'])) {
+		$items = array();
 		foreach ($field['options'] as $option_value => $option_label) {
-			if ( !isset( $field['value'][$option_value] ) ) {
+			if ( ! isset( $field['value'][$option_value] ) )
 				$field['value'][$option_label] = '';
-			}
-			$buffer .= sprintf(
-				'<label for="%2$s">%1$s</label><input type="checkbox" class="multicheckbox" id="%2$s" name="%2$s" onclick="%3$s" value="true" %4$s />',
-				esc_html($option_label),
-				esc_attr($field['name'] . "[$option_label]"),
-				esc_js( $onclick ),
-				checked($field['value'][$option_label], 'true', false)
-			);
+
+			$id_name = esc_attr( $field['name'] . "[$option_label]" );
+			$item = '<label for="' . $id_name . '">' . esc_html( $option_label ) . '</label><input type="checkbox" class="multicheckbox" id="' . $id_name . '" name="' . $id_name . '" value="true"' . checked( $field['value'][$option_label], 'true', false );
+			if ( $onclick )
+				$item .= ' onclick="' . $onclick . '"';
+			$item .= ' />';
+
+			$items[] = $item;
+			unset( $id_name );
+			unset( $item );
 		}
-		return $buffer;
+		return implode( '', $items );
 	} else {
-		return sprintf(
-			'<input type="checkbox" id="%1$s" name="%1$s" onclick="%2$s" value="true" %3$s />',
-			esc_attr($field['name']),
-			esc_js( $onclick ),
-			checked($field['value'], 'true', false)
-		);
+		$id_name = esc_attr( $field['name'] );
+		$item = '<input type="checkbox" id="' . $id_name . '" name="' . $id_name . '" value="true"' . checked( $field['value'], 'true', false );
+		if ( $onclick )
+			$item .= ' onclick="' . $onclick . '"';
+		$item .= ' />';
+		return $item;
 	}
 }
 
-function fb_field_dropdown($field, $place='settings') {
-	$buffer = sprintf(
-		'<select id="%1$s" name="%1$s" %2$s>',
-		esc_attr($field['name']),
-		$place=='widget' ? 'class="widefat"' : ""
-	);
-
+/**
+ * Build a select HTML element based on options provided in the field variable
+ *
+ * @since 1.0
+ * @param array $field associative array of field values
+ * @param string $place allow special handling for widget display
+ * @return string HTML select element
+ */
+function fb_field_dropdown( $field, $place='settings' ) {
+	$options = array();
 	foreach ($field['options'] as $option_value => $option_label) {
-		$buffer .= sprintf(
-			'<option value="%1$s" %2$s>%3$s</option>',
-			esc_attr($option_value),
-			selected($field['value'], $option_value, false),
-			esc_html($option_label)
-		);
+		$options[] = '<option value="' . esc_attr( $option_value ) . '"' . selected($field['value'], $option_value, false) . '>' . esc_html( $option_label ) . '</option>';
 	}
 
-	$buffer .= '</select>';
-	return $buffer;
+	if ( empty($options) )
+		return '';
+
+	$id_name = esc_attr( $field['name'] );
+	$select = '<select id="' . $id_name . '" name="' . $id_name . '"';
+	if ( $place === 'widget' )
+		$select .= ' class="widefat"';
+	$select .= '>';
+	$select .= implode( '', $options );
+	$select .= '</select>';
+
+	return $select;
 }
 
-function fb_field_disabled_text($field, $place='settings') {
+function fb_field_disabled_text( $field, $place='settings' ) {
 	return $field['disabled_text'];
 }
 

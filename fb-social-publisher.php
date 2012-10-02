@@ -1,6 +1,6 @@
 <?php
-require_once( $facebook_plugin_directory . '/fb-social-publisher-mentioning.php');
-require_once('fb-open-graph.php');
+require_once( $facebook_plugin_directory . '/fb-social-publisher-mentioning.php' );
+require_once( $facebook_plugin_directory . '/fb-open-graph.php' );
 
 $options = get_option('fb_options');
 
@@ -630,9 +630,7 @@ function fb_delete_social_posts( $post_id ) {
 	if ($fb_page_post_id) {
 		try {
 			$delete_result = $facebook->api('/' . $fb_page_post_id, 'DELETE', array('ref' => 'fbwpp'));
-		}
-		catch (WP_FacebookApiException $e) {
-		}
+		} catch (WP_FacebookApiException $e) {}
 	}
 
 	$fb_author_post_id = get_post_meta($post_id, 'fb_author_post_id', true);
@@ -640,9 +638,7 @@ function fb_delete_social_posts( $post_id ) {
 	if ($fb_author_post_id) {
 		try {
 			$delete_result = $facebook->api('/' . $fb_author_post_id, 'DELETE', array('ref' => 'fbwpp'));
-		}
-		catch (WP_FacebookApiException $e) {
-		}
+		} catch (WP_FacebookApiException $e) {}
 
 	}
 
@@ -651,10 +647,8 @@ function fb_delete_social_posts( $post_id ) {
 	if ($fb_mentioned_pages_post_ids) {
 		foreach($fb_mentioned_pages_post_ids as $page_post_ids) {
 			try {
-					$delete_result = $facebook->api('/' . $page_post_ids, 'DELETE', array('ref' => 'fbwpp'));
-			}
-			catch (WP_FacebookApiException $e) {
-			}
+				$delete_result = $facebook->api('/' . $page_post_ids, 'DELETE', array('ref' => 'fbwpp'));
+			} catch (WP_FacebookApiException $e) {}
 		}
 	}
 
@@ -663,10 +657,8 @@ function fb_delete_social_posts( $post_id ) {
 	if ($fb_mentioned_friends_post_ids) {
 		foreach($fb_mentioned_friends_post_ids as $page_post_ids) {
 			try {
-					$delete_result = $facebook->api('/' . $page_post_ids, 'DELETE', array('ref' => 'fbwpp'));
-			}
-			catch (WP_FacebookApiException $e) {
-			}
+				$delete_result = $facebook->api('/' . $page_post_ids, 'DELETE', array('ref' => 'fbwpp'));
+			} catch (WP_FacebookApiException $e) {}
 		}
 	}
 }

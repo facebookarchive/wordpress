@@ -320,7 +320,7 @@ function fb_option_name($field){
 	}
 }
 
-function fb_sanitize_options ($options_array) {
+function fb_sanitize_options($options_array) {
 	foreach ($options_array as $key => $value) {
 		if (is_array($value))
 			$options_array[$key] = fb_sanitize_options($value);

@@ -28,37 +28,32 @@ function fb_notify_user_of_plugin_conflicts() {
 	// store list of conflicts separately for cleaner data vs. logic
 	include_once( dirname(__FILE__) . '/conflicting-plugins.php' );
 
+	if ( empty( $og_conflicting_plugins_static ) )
+		return;
+
 	//fetch activated plugins
 	$plugins_list = get_option( 'active_plugins', array() ); 
 
-	$num_conflicting = 0;
 	$conflicting_plugins = array();
 
-	//iterate through activated plugins, checking if they are in the list of conflict plugins
+	// iterate through activated plugins, checking if they are in the list of conflict plugins
 	foreach ( $plugins_list as $val ) {
 		$plugin_data = get_plugin_data(WP_PLUGIN_DIR . '/' . $val);		
 		$plugin_uri = $plugin_data['PluginURI'];
-		$plugin_name = $plugin_data['Name'];
 
-		if( $plugin_uri == 'http://wordpress.org/extend/plugins/facebook/' ) {
+		if( $plugin_uri === 'http://wordpress.org/extend/plugins/facebook/' )
 			continue;
-		}
 		
-		if( in_array($plugin_uri, $og_conflicting_plugins_static) ) {
-			$num_conflicting += 1;
-
-			if( $num_conflicting == 1 )
-				array_push( $conflicting_plugins, $plugin_name);
-			else
-				array_push( $conflicting_plugins, ', ' . $plugin_name );
-		}
+		if( in_array( $plugin_uri, $og_conflicting_plugins_static, true ) )
+			$conflicting_plugins[] = $plugin_data['Name'];
 	}
 
 	//if there are more than 1 plugins relying on Open Graph, warn the user on this plugins page
-	if ( $num_conflicting >= 1 ) {
-		fb_admin_dialog( sprintf( __( 'You have plugins installed that could potentially conflict with the Facebook plugin. Please consider disabling the following plugins on the %s:', 'facebook' ) . '<br />' . implode($conflicting_plugins), '<a href="plugins.php" aria-label="Plugins 0">' . esc_html( __( 'Plugins Settings page', 'facebook' ) ) . '</a>' ), true);
+	if ( ! empty( $conflicting_plugins ) ) {
+		fb_admin_dialog( sprintf( __( 'You have plugins installed that could potentially conflict with the Facebook plugin. Please consider disabling the following plugins on the %s:', 'facebook' ) . '<br />' . implode( ', ', $conflicting_plugins ), '<a href="plugins.php" aria-label="Plugins 0">' . esc_html( __( 'Plugins Settings page', 'facebook' ) ) . '</a>' ), true);
 	}
 }
+add_action( 'fb_notify_plugin_conflicts', 'fb_notify_user_of_plugin_conflicts' );
 
 /**
  * Link to settings from the plugin listing page
@@ -194,18 +189,21 @@ function fb_settings_page() {
 				echo '<h2>' . esc_html( __( 'Step 3: WordPress settings', 'facebook' ) ) . '</h2>';
 				echo '<p>' . esc_html( __( 'Now, based on what you entered in Step 2, fill in the settings below and Save. Once saved, additional options will appear on this page.', 'facebook' ) ) . '</p>';
 				fb_get_main_settings_fields();
-			}
-			else {
+			} else {
 				echo '<h2>' . esc_html( __( 'Main Settings', 'facebook' ) ) . '</h2>';
 
-				echo '<p>' . sprintf( esc_html( __( 'Get your App ID, Secret, and Namespace at %s.', 'facebook' ) ) . '<strong>' . esc_html( __( 'If you already have a Facebook app for this website, it\'s important that you use the same information below.', 'facebook' ) ) . '</strong>', '<a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>' ) . '</p>';
+				$options = get_option('fb_options');
+				if ( empty($options['app_id']) || empty($options['app_secret']) )
+					echo '<p>' . sprintf( esc_html( __( 'Get your App ID, Secret, and Namespace at %s.', 'facebook' ) ) . '<strong>' . esc_html( __( 'If you already have a Facebook app for this website, it\'s important that you use the same information below.', 'facebook' ) ) . '</strong>', '<a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>' ) . '</p>';
+				else
+					echo '<p><a href="' . esc_url( 'https://developers.facebook.com/apps/' . $options['app_id'] ) . '">' . esc_html( __( 'Edit app settings on Facebook', 'facebook' ) ) . '</a></p>';
 				fb_get_main_settings_fields();
 
 				echo '<h2>' . esc_html( __( 'Post and Page Settings', 'facebook' ) ) . '</h2>';
 
 				echo '<p>' . esc_html( __( 'These settings affect Pages and Posts only.', 'facebook' ) ) . ' ' . sprintf( esc_html( __( 'Additional Social Plugins are also available in the %s.', 'facebook' ) ), '<a href="widgets.php">' . esc_html( __( 'Widgets settings', 'facebook' ) ) . '</a>' );
 
-				fb_notify_user_of_plugin_conflicts();
+				do_action( 'fb_notify_plugin_conflicts' );
 				fb_get_social_publisher_fields();
 				fb_get_like_fields();
 				fb_get_subscribe_fields();

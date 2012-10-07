@@ -50,96 +50,93 @@ class Facebook_WP_Extend extends WP_Facebook {
 				$error_subcode = $fb_response->error->error_subcode;
 			}
 
-			throw new WP_FacebookApiException(array(
-        'error_code' => $fb_response->error->code,
-        'error' => array(
-        'message' => $fb_response->error->message,
-        'type' => $fb_response->error->type,
-        ),
-      ));
+			throw new WP_FacebookApiException( array(
+				'error_code' => $fb_response->error->code,
+				'error' => array(
+					'message' => $fb_response->error->message,
+					'type' => $fb_response->error->type
+				)
+			) );
 		}
 
 		return wp_remote_retrieve_body( $response );
 	}
 
-  /**
-   * Extend an access token, while removing the short-lived token that might have been generated via client-side flow.
-   * Thanks to http://stackoverflow.com/questions/486896/adding-a-parameter-to-the-url-with-javascript for the workaround
-   */
-  public function setExtendedAccessToken() {
-    try {
-      // need to circumvent json_decode by calling _oauthRequest
-      // directly, since response isn't JSON format.
-      $access_token_response =
-        $this->_oauthRequest(
-          $this->getUrl('graph', '/oauth/access_token'),
-          $params = array(    'client_id' => $this->getAppId(),
-          'client_secret' => $this->getAppSecret(),
-          'grant_type'=>'fb_exchange_token',
-          'fb_exchange_token'=>$this->getAccessToken(),
-        ));
-      } catch (WP_FacebookApiException $e) {
-        // most likely that user very recently revoked authorization.
-        // In any event, we don't have an access token, so say so.
-        return false;
-      }
+	/**
+	 * Extend an access token, while removing the short-lived token that might have been generated via client-side flow.
+	 * Thanks to http://stackoverflow.com/questions/486896/adding-a-parameter-to-the-url-with-javascript for the workaround
+	 */
+	public function setExtendedAccessToken() {
+		try {
+			// need to circumvent json_decode by calling _oauthRequest
+			// directly, since response isn't JSON format.
+			$access_token_response = $this->_oauthRequest(
+				$this->getUrl('graph', '/oauth/access_token'),
+				$params = array(
+					'client_id' => $this->getAppId(),
+					'client_secret' => $this->getAppSecret(),
+					'grant_type' => 'fb_exchange_token',
+					'fb_exchange_token' => $this->getAccessToken()
+				)
+			);
+		} catch ( WP_FacebookApiException $e ) {
+			// most likely that user very recently revoked authorization.
+			// In any event, we don't have an access token, so say so.
+			return false;
+		}
 
-      if (empty($access_token_response)) {
-        return false;
-      }
+		if ( empty( $access_token_response ) )
+			return false;
 
-      $response_params = array();
-      parse_str($access_token_response, $response_params);
+		$response_params = array();
+		parse_str( $access_token_response, $response_params );
 
-      if (!isset($response_params['access_token'])) {
-        return false;
-      }
+		if ( ! isset( $response_params['access_token'] ) )
+			return false;
 
-      $this->destroySession();
+		$this->destroySession();
 
-      $this->setPersistentData('access_token', $response_params['access_token']);
-  }
+		$this->setPersistentData('access_token', $response_params['access_token']);
+	}
 
-  /**
-   * Provides the implementations of the inherited abstract
-   * methods.  The implementation uses user meta to maintain
-   * a store for authorization codes, user ids, CSRF states, and
-   * access tokens.
-   */
-  protected function setPersistentData($key, $value){
-
-	    if (!in_array($key, self::$kSupportedKeys)) {
-	      self::errorLog('Unsupported key passed to setPersistentData.');
-	      return;
-	    }
+	/**
+	 * Provides the implementations of the inherited abstract
+	 * methods.  The implementation uses user meta to maintain
+	 * a store for authorization codes, user ids, CSRF states, and
+	 * access tokens.
+	 */
+	protected function setPersistentData( $key, $value ) {
+		if ( ! in_array( $key, self::$kSupportedKeys ) ) {
+			self::errorLog('Unsupported key passed to setPersistentData.');
+			return;
+		}
 
 		//WP 3.0+
-		fb_update_user_meta( get_current_user_id(), $key, $value);
+		fb_update_user_meta( get_current_user_id(), $key, $value );
 	}
 
-  protected function getPersistentData($key, $default = false){
+	protected function getPersistentData( $key, $default = false ) {
+		if ( ! in_array( $key, self::$kSupportedKeys ) ) {
+			self::errorLog('Unsupported key passed to getPersistentData.');
+			return $default;
+		}
 
-    if (!in_array($key, self::$kSupportedKeys)) {
-      self::errorLog('Unsupported key passed to getPersistentData.');
-      return $default;
-    }
-
-	  return $usermeta = fb_get_user_meta( get_current_user_id(), $key, true );
+		return $usermeta = fb_get_user_meta( get_current_user_id(), $key, true );
 	}
 
-  protected function clearPersistentData($key) {
-    if (!in_array($key, self::$kSupportedKeys)) {
-      self::errorLog('Unsupported key passed to clearPersistentData.');
-      return;
-    }
+	protected function clearPersistentData($key) {
+		if ( ! in_array( $key, self::$kSupportedKeys ) ) {
+			self::errorLog('Unsupported key passed to clearPersistentData.');
+			return;
+		}
 
-    fb_delete_user_meta( get_current_user_id(), $key);
-  }
+		fb_delete_user_meta( get_current_user_id(), $key);
+	}
 
-  protected function clearAllPersistentData() {
-    foreach (self::$kSupportedKeys as $key) {
-      $this->clearPersistentData($key);
-    }
-  }
+	protected function clearAllPersistentData() {
+		foreach ( self::$kSupportedKeys as $key ) {
+			$this->clearPersistentData($key);
+		}
+	}
 }
 ?>

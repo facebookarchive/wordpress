@@ -136,7 +136,8 @@ function fb_add_og_protocol() {
 				if ( ! empty($post_thumbnail_height) )
 					$image['height'] = absint( $post_thumbnail_height );
 
-				$meta_tags['http://ogp.me/ns#image'] = array( $image );
+				//$meta_tags['http://ogp.me/ns#image'] = array( $image );
+				$meta_tags['og:image'] = array( $image );
 			}
 		}
 	}

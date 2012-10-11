@@ -1,133 +1,60 @@
 <?php
-function fb_get_subscribe_button($options = array()) {
-	return '<div class="fb-subscribe fb-social-plugin" ' . fb_build_social_plugin_params($options) . '></div>';
+
+function fb_get_subscribe_button( $options = array() ) {
+	if ( ! class_exists( 'Facebook_Subscribe_Button' ) )
+		require_once( dirname(__FILE__) . '/class-facebook-subscribe-button.php' );
+
+	$subscribe_button = Facebook_Subscribe_Button::fromArray( $options );
+	if ( ! $subscribe_button )
+		return '';
+
+	$html = $subscribe_button->asHTML( array( 'class' => array( 'fb-social-plugin' ) ) );
+	if ( is_string($html) && $html )
+		return "\n" . $html . "\n";
+
+	return '';
 }
 
-function fb_subscribe_button_automatic($content) {
+function fb_subscribe_button_automatic( $content ) {
 	global $post;
-	$options = get_option('fb_options');
 
-	if ( isset ($post ) ) {
-		if ( isset( $options['subscribe']['show_on_homepage'] ) ) {
-			$options['subscribe']['href'] = get_permalink( $post->ID );
-		}
+	$social_plugin_type = 'subscribe';
 
-		$fb_data = fb_get_user_meta( get_the_author_meta( 'ID' ), 'fb_data', true );
+	if ( ! fb_show_social_plugin( $social_plugin_type ) )
+		return $content;
 
-		if ( ! $fb_data )
-			return $content;
+	$options = fb_load_social_plugin_options( $social_plugin_type );
+	if ( empty( $options ) )
+		return $content;
 
-		$options['subscribe']['href'] = 'http://www.facebook.com/' . $fb_data['username'];
+	$fb_data = fb_get_user_meta( get_the_author_meta( 'ID' ), 'fb_data', true );
+	if ( $fb_data ) {
+		if ( array_key_exists( 'username' , $fb_data ) ) // prefer username URLs
+			$options['href'] = 'https://www.facebook.com/' . $fb_data['username'];
+		else if ( array_key_exists( 'fb_uid', $fb_data ) ) // use profile uid if no username
+			$options['href'] = 'https://www.facebook.com/profile.php?' . http_build_query( array( 'id' => $fb_data['fb_uid'] ) );
+	}
 
-		$new_content = '';
+	if ( ! array_key_exists( 'href', $options ) )
+		return $content;
 
-		if ( isset( $fb_data['username'] ) ) {
-			switch ( $options['subscribe']['position'] ) {
-				case 'top':
-					$new_content = fb_get_subscribe_button( $options['subscribe'] ) . $content;
-					break;
-				case 'bottom':
-					$new_content = $content . fb_get_subscribe_button( $options['subscribe'] );
-					break;
-				case 'both':
-					$new_content = fb_get_subscribe_button( $options['subscribe'] ) . $content;
-					$new_content .= fb_get_subscribe_button( $options['subscribe'] );
-					break;
-			}
-		}
-
-		$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_subscribe', true );
-
-		if ( is_home() && isset ( $options['subscribe']['show_on_homepage'] ) && isset( $options['subscribe']['show_on'] ) && isset( $options['subscribe']['show_on'][$post->post_type] ) ) {
-			$content = $new_content;
-		} elseif ( !is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset ( $options['subscribe']['show_on'] ) && isset( $options['subscribe']['show_on'][$post->post_type] ) ) {		
-			$content = $new_content;
-		} elseif ( !is_home() && ('show' == $show_indiv || ( ( ! isset( $options['subscribe']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) ) {
-			$content = $new_content;
+	if ( array_key_exists( 'position', $options ) ) {
+		switch ($options['position']) {
+			case 'top':
+				return fb_get_subscribe_button( $options ) . $content;
+				break;
+			case 'bottom':
+				return $content . fb_get_subscribe_button( $options );
+				break;
+			case 'both':
+				$subscribe_button = fb_get_subscribe_button( $options );
+				return $subscribe_button . $content . $subscribe_button;
+				break;
 		}
 	}
 
 	return $content;
 }
-
-
-/**
- * Adds the Subscribe Button Social Plugin as a WordPress Widget
- */
-class Facebook_Subscribe_Button extends WP_Widget {
-
-	/**
-	 * Register widget with WordPress
-	 */
-	public function __construct() {
-		parent::__construct(
-	 		'fb_subscribe', // Base ID
-			__( 'Facebook Subscribe Button', 'facebook' ), // Name
-			array( 'description' => __( 'Lets a user subscribe to your public updates on Facebook.', 'facebook' ) ) // Args
-		);
-	}
-
-	/**
-	 * Front-end display of widget.
-	 *
-	 * @see WP_Widget::widget()
-	 *
-	 * @param array $args     Widget arguments.
-	 * @param array $instance Saved values from database.
-	 */
-	public function widget( $args, $instance ) {
-		extract( $args );
-
-		echo $before_widget;
-
-		if ( ! empty( $instance['title'] ) )
-			echo $before_title . esc_attr($instance['title']) . $after_title;
-
-		if ($instance['href']) {
-			echo fb_get_subscribe_button($instance);
-		}
-
-		echo $after_widget;
-	}
-
-	/**
-	 * Sanitize widget form values as they are saved.
-	 *
-	 * @see WP_Widget::update()
-	 *
-	 * @param array $new_instance Values just sent to be saved.
-	 * @param array $old_instance Previously saved values from database.
-	 *
-	 * @return array Updated safe values to be saved.
-	 */
-	public function update( $new_instance, $old_instance ) {
-		$return_instance = $old_instance;
-
-		$fields = fb_get_subscribe_fields_array('widget');
-
-		foreach( $fields['children'] as $field ) {
-			$unsafe_value = ( isset( $new_instance[$field['name']] ) ) ? $new_instance[$field['name']] : '';
-			if ( !empty( $field['sanitization_callback'] ) && function_exists( $field['sanitization_callback'] ) ) 
-				$return_instance[$field['name']] = $field['sanitization_callback']( $unsafe_value );
-			else
-				$return_instance[$field['name']] = sanitize_text_field( $unsafe_value );
-		}
-
-		return $return_instance;
-	}
-
-	/**
-	 * Back-end widget form.
-	 *
-	 * @see WP_Widget::form()
-	 *
-	 * @param array $instance Previously saved values from database.
-	 */
-	public function form( $instance ) {
-		fb_get_subscribe_fields('widget', $this);
-	}
-}
-
 
 function fb_get_subscribe_fields($placement = 'settings', $object = null) {
 	$fields_array = fb_get_subscribe_fields_array($placement);
@@ -243,5 +170,7 @@ function fb_get_subscribe_fields_array($placement) {
 
 	return $array;
 }
+
+include_once( dirname(__FILE__) . '/widgets/subscribe-button.php' );
 
 ?>

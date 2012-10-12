@@ -104,6 +104,10 @@ function fb_js_sdk_setup() {
 		'oauth' => true
 	) );
 
+	// account for the filter killing the variable
+	if ( empty( $args ) )
+		return;
+
 	echo '<script type="text/javascript">window.fbAsyncInit=function(){FB.init(' . json_encode( $args ) . ');';
 	do_action( 'fb_async_init', $args );
 	echo '}</script>';
@@ -111,6 +115,7 @@ function fb_js_sdk_setup() {
 	$locale = fb_get_locale();
 	if ( ! $locale )
 		return;
+
 	wp_enqueue_script( 'fb-connect', ( is_ssl() ? 'https' : 'http' ) . '://connect.facebook.net/' . $locale . '/all.js', array(), null, true );
 
 	add_action( 'wp_footer', 'fb_root' );
@@ -133,12 +138,12 @@ function fb_root() {
  */
 function fb_init() {
 	global $facebook;
-	
+
 	$options = get_option( 'fb_options' );
 
 	if ( empty( $options['app_id'] ) )
 		return;
-	
+
 	// appId and secret are required by BaseFacebook
 	if ( ( ! empty( $options['app_id'] ) && ! empty( $options['app_secret'] ) ) ) {
 		$facebook = new Facebook_WP_Extend(array(
@@ -147,7 +152,7 @@ function fb_init() {
 		));
 	}
 
-	add_action( 'wp_head', 'fb_js_sdk_setup' );
+	add_action( 'wp_head', 'fb_js_sdk_setup', -1 );
 	add_action( 'admin_head', 'fb_js_sdk_setup' );
 
 }

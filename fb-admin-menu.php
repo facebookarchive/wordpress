@@ -18,6 +18,12 @@ function fb_create_menu() {
 	add_action( 'admin_print_scripts-' . $page, 'fb_admin_scripts' );
 }
 
+function fb_insights_page() {
+	$options = get_option('fb_options');
+
+	if ( ! empty( $options['app_id'] ))
+		echo '<script type="text/javascript">window.location=' . json_encode( 'https://www.facebook.com/insights/?' . http_build_query( array( 'sk' => 'ao_' . $options['app_id'] ) ) ) . ';</script>';
+}
 
 /**
  * Function to check if the wordpress user has plugins that may conflict

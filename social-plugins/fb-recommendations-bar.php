@@ -1,23 +1,42 @@
 <?php
+
+/**
+ * Recommendations Bar markup for use with Facebook JavaScript SDK
+ *
+ * @param array $options stored options
+ * @return string HTML div markup or empty string
+ */
 function fb_get_recommendations_bar($options = array()) {
-	return '<div class="fb-recommendations-bar fb-social-plugin" ' . fb_build_social_plugin_params($options) . '></div>';
+	if ( ! class_exists( 'Facebook_Recommendations_Bar' ) )
+		require_once( dirname(__FILE__) . '/class-facebook-recommendations-bar.php' );
+
+	$bar = Facebook_Recommendations_Bar::fromArray( $options );
+	if ( ! $bar )
+		return '';
+
+	$html = $bar->asHTML( array( 'class' => array( 'fb-social-plugin' ) ) );
+	if ( $html )
+		return "\n" . $html . "\n";
+
+	return '';
 }
 
 function fb_recommendations_bar_automatic( $content ) {
 	global $post;
 
-	$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_recommendations_bar', true );
-	$options = get_option('fb_options');
+	$social_plugin_type = 'recommendations_bar';
 
-	if ( !is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset( $options['recommendations_bar']['show_on']) && isset( $options['recommendations_bar']['show_on'][$post->post_type] ) )  {
-		$content .= fb_get_recommendations_bar( $options['recommendations_bar'] );
-	} else if ( !is_home() && ( 'show' == $show_indiv || ( ( ! isset( $options['recommendations_bar']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) ) {
-		$content .= fb_get_recommendations_bar( $options['recommendations_bar'] );
-	}
-	//elseif ( 'no' == $show_indiv ) {
-	//}
+	if ( ! fb_show_social_plugin( $social_plugin_type ) )
+		return $content;
 
-	return $content;
+	$options = fb_load_social_plugin_options( $social_plugin_type );
+	if ( empty( $options ) )
+		return $content;
+
+	if ( ! is_singular( get_post_type( $post ) ) )
+		$options['href'] = apply_filters( 'fb_rel_canonical', get_permalink( $post->ID ) );
+
+	return $content .= fb_get_recommendations_bar( $options );
 }
 
 

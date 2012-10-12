@@ -1,122 +1,55 @@
 <?php
+
+/**
+ * Generate HTML for a send button based on passed options
+ *
+ * @param array $options customizations
+ * @return string send button HTML for use with the JavaScript SDK
+ */
 function fb_get_send_button($options = array()) {
-	return '<div class="fb-send fb-social-plugin" ' . fb_build_social_plugin_params($options) . '></div>';
+	if ( ! class_exists( 'Facebook_Send_Button' ) )
+		require_once( dirname(__FILE__) . '/class-facebook-send-button.php' );
+
+	$send_button = Facebook_Send_Button::fromArray( $options );
+	if ( ! $send_button )
+		return '';
+
+	$html = $send_button->asHTML( array( 'class' => array( 'fb-social-plugin' ) ) );
+	if ( $html )
+		return "\n" . $html . "\n";
+
+	return '';
 }
 
-function fb_send_button_automatic($content) {
+function fb_send_button_automatic( $content ) {
 	global $post;
 
-	$options = get_option('fb_options');
+	$social_plugin_type = 'send';
+
+	if ( ! fb_show_social_plugin( $social_plugin_type ) )
+		return $content;
+
+	$options = fb_load_social_plugin_options( $social_plugin_type );
+	if ( empty( $options ) )
+		return $content;
 	
-	if ( isset( $post ) ) {
-		if ( isset( $options['send']['show_on_homepage'] ) ) {
-			$options['send']['href'] = get_permalink($post->ID);
-		}
-	
-		$new_content = '';
-	
-		switch ( $options['send']['position'] ) {
-			case 'top':
-				$new_content = fb_get_send_button( $options['send'] ) . $content;
-				break;
-			case 'bottom':
-				$new_content = $content . fb_get_send_button( $options['send'] );
-				break;
-			case 'both':
-				$new_content = fb_get_send_button( $options['send'] ) . $content;
-				$new_content .= fb_get_send_button( $options['send'] );
-				break;
-		}
-		
-		$show_indiv = get_post_meta( $post->ID, 'fb_social_plugin_settings_box_send', true );
-		
-		if ( is_home() && isset ( $options['send']['show_on_homepage'] ) && isset( $options['send']['show_on'] ) && isset( $options['send']['show_on'][$post->post_type] ) ) {
-			$content = $new_content;
-		} else if ( !is_home() && ( 'default' == $show_indiv || empty( $show_indiv ) ) && isset ( $options['send']['show_on'] ) && isset( $options['send']['show_on'][$post->post_type] ) ) {
-			$content = $new_content;
-		} else if ( !is_home() && ('show' == $show_indiv || ( ( ! isset( $options['send']['show_on'] ) ) && ( 'default' == $show_indiv || empty( $show_indiv ) ) ) ) ) {
-			$content = $new_content;
-		}
+	if ( isset( $options['show_on_homepage'] ) )
+		$options['href'] = get_permalink($post->ID);
+
+	switch ( $options['position'] ) {
+		case 'top':
+			return fb_get_send_button( $options ) . $content;
+			break;
+		case 'bottom':
+			return $content . fb_get_send_button( $options );
+			break;
+		case 'both':
+			$send_button = fb_get_send_button( $options );
+			return $send_button . $content . $send_button;
 	}
 
 	return $content;
 }
-
-
-/**
- * Adds the Send Button Social Plugin as a WordPress Widget
- */
-class Facebook_Send_Button extends WP_Widget {
-
-	/**
-	 * Register widget with WordPress
-	 */
-	public function __construct() {
-		parent::__construct(
-	 		'fb_send', // Base ID
-			__( 'Facebook Send Button', 'facebook' ), // Name
-			array( 'description' => __( 'The Send Button allows users to easily send content to their friends.', 'facebook' ), ) // Args
-		);
-	}
-
-	/**
-	 * Front-end display of widget.
-	 *
-	 * @see WP_Widget::widget()
-	 *
-	 * @param array $args     Widget arguments.
-	 * @param array $instance Saved values from database.
-	 */
-	public function widget( $args, $instance ) {
-		extract( $args );
-
-		echo $before_widget;
-
-		if ( ! empty( $instance['title'] ) )
-			echo $before_title . esc_attr($instance['title']) . $after_title;
-
-		echo fb_get_send_button($instance);
-		echo $after_widget;
-	}
-
-	/**
-	 * Sanitize widget form values as they are saved.
-	 *
-	 * @see WP_Widget::update()
-	 *
-	 * @param array $new_instance Values just sent to be saved.
-	 * @param array $old_instance Previously saved values from database.
-	 *
-	 * @return array Updated safe values to be saved.
-	 */
-	public function update( $new_instance, $old_instance ) {
-		$return_instance = $old_instance;
-
-		$fields = fb_get_send_fields_array('widget');
-
-		foreach( $fields['children'] as $field ) {
-			$unsafe_value = ( isset( $new_instance[$field['name']] ) ) ? $new_instance[$field['name']] : '';
-			if ( !empty( $field['sanitization_callback'] ) && function_exists( $field['sanitization_callback'] ) ) 
-				$return_instance[$field['name']] = $field['sanitization_callback']( $unsafe_value );
-			else
-				$return_instance[$field['name']] = sanitize_text_field( $unsafe_value );
-		}
-
-		return $return_instance;
-	}
-
-	/**
-	 * Back-end widget form.
-	 *
-	 * @see WP_Widget::form()
-	 *
-	 * @param array $instance Previously saved values from database.
-	 */
-	public function form( $instance ) {
-		fb_get_send_fields('widget', $this);
-	}
-}
-
 
 function fb_get_send_fields($placement = 'settings', $object = null) {
 	$fields_array = fb_get_send_fields_array($placement);
@@ -207,5 +140,7 @@ function fb_get_send_fields_array($placement) {
 
 	return $array;
 }
+
+include_once( dirname(__FILE__) . '/widgets/send-button.php' );
 
 ?>

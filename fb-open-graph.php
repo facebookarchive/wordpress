@@ -155,6 +155,11 @@ function fb_add_og_protocol() {
 
 	$options = get_option( 'fb_options' );
 
+	if ( empty( $meta_tags['http://ogp.me/ns#image'] ) && ! empty( $options['app_default_image'] ) ) {
+		$image = array( 'url' => $options['app_default_image'] );
+		$meta_tags['http://ogp.me/ns#image'] = array( $image );
+	}
+
 	if ( ! empty( $options['app_id'] ) )
 		$meta_tags['http://ogp.me/ns/fb#app_id'] = $options['app_id'];
 

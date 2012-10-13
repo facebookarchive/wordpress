@@ -30,11 +30,18 @@ function fb_insights_page() {
  * with the Facebook plugin (due to Open Graph). 
  */
 function fb_notify_user_of_plugin_conflicts() {
+	$og_conflicting_plugins = apply_filters( 'fb_conflicting_plugins', array(
+		'http://wordpress.org/extend/plugins/facebook/',
+		'http://wordpress.org/extend/plugins/opengraph/',
+		'http://yoast.com/wordpress/seo/#utm_source=wpadmin&utm_medium=plugin&utm_campaign=wpseoplugin',
+		'http://wordbooker.tty.org.uk',
+		'http://ottopress.com/wordpress-plugins/simple-facebook-connect/',
+		'http://www.whiletrue.it',
+		'http://aaroncollegeman.com/sharepress'
+	) );
 
-	// store list of conflicts separately for cleaner data vs. logic
-	include_once( dirname(__FILE__) . '/conflicting-plugins.php' );
-
-	if ( empty( $og_conflicting_plugins_static ) )
+	// allow for short circuit
+	if ( ! is_array( $og_conflicting_plugins ) || empty( $og_conflicting_plugins ) )
 		return;
 
 	//fetch activated plugins
@@ -44,19 +51,22 @@ function fb_notify_user_of_plugin_conflicts() {
 
 	// iterate through activated plugins, checking if they are in the list of conflict plugins
 	foreach ( $plugins_list as $val ) {
-		$plugin_data = get_plugin_data(WP_PLUGIN_DIR . '/' . $val);		
+		$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $val );
+		if ( ! ( array_key_exists( 'PluginURI', $plugin_data ) && array_key_exists( 'Name', $plugin_data ) ) )
+			continue;
+
 		$plugin_uri = $plugin_data['PluginURI'];
 
 		if( $plugin_uri === 'http://wordpress.org/extend/plugins/facebook/' )
 			continue;
-		
-		if( in_array( $plugin_uri, $og_conflicting_plugins_static, true ) )
+
+		if( in_array( $plugin_uri, $og_conflicting_plugins, true ) )
 			$conflicting_plugins[] = $plugin_data['Name'];
 	}
 
 	//if there are more than 1 plugins relying on Open Graph, warn the user on this plugins page
 	if ( ! empty( $conflicting_plugins ) ) {
-		fb_admin_dialog( sprintf( __( 'You have plugins installed that could potentially conflict with the Facebook plugin. Please consider disabling the following plugins on the %s:', 'facebook' ) . '<br />' . implode( ', ', $conflicting_plugins ), '<a href="plugins.php" aria-label="Plugins 0">' . esc_html( __( 'Plugins Settings page', 'facebook' ) ) . '</a>' ), true);
+		fb_admin_dialog( sprintf( __( 'You have plugins installed that could potentially conflict with the Facebook plugin. Please consider disabling the following plugins on the %s:', 'facebook' ) . '<br />' . implode( ', ', $conflicting_plugins ), '<a href="plugins.php">' . esc_html( __( 'Plugins Settings page', 'facebook' ) ) . '</a>' ), true);
 	}
 }
 add_action( 'fb_notify_plugin_conflicts', 'fb_notify_user_of_plugin_conflicts' );

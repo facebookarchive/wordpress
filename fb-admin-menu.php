@@ -336,6 +336,12 @@ function fb_get_main_settings_fields() {
 			'name' => 'app_namespace',
 			'type' => 'text',
 			'help_text' => __( 'Your App Namespace.', 'facebook' )
+		),
+		array(
+			'name' => 'app_default_image',
+			'label' => __( 'Default image for posts', 'facebook' ),
+			'type' => 'text',
+			'help_text' => __( 'Default image to be used by Facebook when there is no post thumbnail available.', 'facebook' )
 		)
 	);
 
@@ -387,6 +393,8 @@ function fb_options_validate($input) {
 		case 'app_namespace':
 			$label = __( 'App namespace', 'facebook' );
 			$value = fb_options_validate_namespace($value, $label);
+			break;
+		case 'app_default_image':
 			break;
 		case 'social_publisher':
 			$label_prefix = __( 'The Social Publisher\'s', 'facebook' );

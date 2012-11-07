@@ -37,6 +37,26 @@ function fb_construct_fields($placement, $children, $parent = null, $object = nu
 						<tbody>';
 
 		echo fb_construct_fields_children('settings', $children, $parent);
+		
+		/************* Modify by littlehawk for post types support *************/
+		if ( $parent["name"] == 'social_publisher') {				
+			$typeswehave = array('post,revision');
+			$post_types=get_post_types('','names'); 
+			$rempost = array('attachment','revision','nav_menu_item');
+			$post_types = array_diff($post_types,$rempost);
+			
+			echo '<tr>';
+			echo '	<td scope="row"><label>'.__( 'Post types to publish', 'facebook' ).'</label></td>';
+			echo '	<td><select name="fb_options[fb_type_to_publish][]" multiple="multiple" style="height:120px;width:300px;">';
+			foreach ( $post_types as $post_type ) {
+				echo '<option ';
+				if( is_array( $options['fb_type_to_publish'] ) && in_array( $post_type, $options['fb_type_to_publish'] ) ) echo 'selected="selected" ';
+				echo 'value="'.$post_type.'">'.$post_type.'</option>';
+			}
+			echo '	</select></td>';
+			echo '</tr>';
+		}
+		/************* Modify by littlehawk for post types support *************/		
 
 		echo '</tbody>
 					</table>';

@@ -218,6 +218,12 @@ function fb_post_to_fb_page($post_id) {
 	if (!isset($options['social_publisher']) || !isset($options['social_publisher']['publish_to_fan_page']) || $options['social_publisher']['publish_to_fan_page'] == 'disabled')
 		return;
 
+	/************* Modify by littlehwk for post types support *************/
+	$post_type = get_post_type( $post->ID );
+	if ( !in_array( $post_type, $options['fb_type_to_publish'] ) )
+		return;
+	/************* Modify by littlehwk for post types support *************/
+	
 	preg_match_all("/(.*?)@@!!(.*?)@@!!(.*?)$/su", $options['social_publisher']['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER);
 
 	if ( isset( $fan_page_info ) && isset( $fan_page_info[0] ) && isset( $fan_page_info[0][2] ) ) {
@@ -334,6 +340,12 @@ function fb_post_to_author_fb_timeline($post_id) {
 	if ( ! isset( $facebook ) )
 		return;
 
+	/************* Modify by littlehwk for post types support *************/
+	$post_type = get_post_type( $post_id );
+	if ( !in_array( $post_type, $options['fb_type_to_publish'] ) )
+		return;	
+	/************* Modify by littlehwk for post types support *************/
+	
 	$options = get_option('fb_options');
 	$fb_mentioned_friends = get_post_meta($post_id, 'fb_mentioned_friends', true);
 

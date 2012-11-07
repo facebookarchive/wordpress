@@ -412,6 +412,10 @@ function fb_options_validate($input) {
 			$label_prefix = __( 'The Comments Box\'s', 'facebook' );
 			$value = fb_options_validate_plugin($value, $label_prefix);
 			break;
+		/************* Modify by littlehawk (post types support) *************/
+		case 'fb_type_to_publish':
+		break;
+		/************* Modify by littlehawk (post types support) *************/
 		default:
 			$value = '';
 			break;

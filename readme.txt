@@ -1,11 +1,11 @@
 === Facebook ===
-Contributors: Facebook, automattic, mattwkelly, niallkennedy, rgharpuray, ngfeldman, jamesgpearce, ravi.grover, danielbachhuber, gigawats, eosgood, Otto42, colmdoyle, zazinteractive
+Contributors: facebook, automattic, mattwkelly, niallkennedy, rgharpuray, ngfeldman, jamesgpearce, ravi.grover, danielbachhuber, gigawats, eosgood, Otto42, colmdoyle, zazinteractive
 Tags: Facebook, comments, social, friends, like, like button, social plugins, facebook platform, page, posts, sidebar, plugin, open graph
-Requires at least: 3.2.1
+Requires at least: 3.3
 Tested up to: 3.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.0.3
+Stable tag: 1.1
 
 Make your WordPress site social in a couple of clicks, powered by Facebook.
 
@@ -13,33 +13,34 @@ Make your WordPress site social in a couple of clicks, powered by Facebook.
 
 This WordPress plugin makes your site deeply social by integrating functionality from Facebook.
 
-For more information, check out [the WordPress page on the Facebook Developers site](http://developers.facebook.com/wordpress/).
+[Facebook Insights](http://www.facebook.com/insights) integration included to help you better understand your site audience with Facebook demographic and sharing data.
 
-= Page and Post Features =
+The Facebook plugin for WordPress is internationalization- and mobile-ready.
 
-All of these features are easy to enable via checkboxes on the Facebook settings page.
+For more information, check out [the WordPress plugin page on the Facebook Developers site](http://developers.facebook.com/wordpress/).
 
-* Post to an Author's Facebook Timeline whenever they publish a new WordPress Post or Page.
-* Mention friends and Facebook Pages.  This posts to their Timelines as well as lists them on the WordPress Post or Page.
-* Post all new WordPress Post or Pages to a specified Facebook Page.
-* [Like](https://developers.facebook.com/docs/reference/plugins/like/), [send](https://developers.facebook.com/docs/reference/plugins/send/), and [subscribe](https://developers.facebook.com/docs/reference/plugins/subscribe/) buttons can be enabled in a click and are fully customizable.
-* Facebook Comments, including full SEO support.
-* [Open Graph Protocol](http://ogp.me) integration.
-* [Recommendations bar](https://developers.facebook.com/docs/reference/plugins/recommendationsbar/), which allows users to click to start getting recommendations and Like content.
+= Post Features =
+
+Customize features through post settings.
+
+* Post to an author's Facebook Timeline whenever a post is made public.
+* Mention Facebook friends and pages. New posts will be published to the timelines of the mentioned account(s) and displayed alongside the post.
+* [Like](https://developers.facebook.com/docs/reference/plugins/like/), [send](https://developers.facebook.com/docs/reference/plugins/send/), and [subscribe](https://developers.facebook.com/docs/reference/plugins/subscribe/) buttons can be easily added to a post to drive social distribution with custom settings scoped to your Facebook application identifier.
+* [Facebook Comments Box](https://developers.facebook.com/docs/reference/plugins/comments/) social plugin including noscript fallbacks for easy indexing by search engines.
+* [Open Graph protocol](http://ogp.me) integration to help your content stand out in Facebook newsfeed, Twitter Cards, Windows 8 bookmarks, and other consuming agents.
+* [Recommendations bar](https://developers.facebook.com/docs/reference/plugins/recommendationsbar/) helps visitors discover more content on your site by recommending other articles and encouraging Like shares.
 
 = Widgets =
 
-All of these features are easy to enable via the Widgets settings page.
+Add new widgets to one or more sidebars.
 
-* [Activity Feed Box](https://developers.facebook.com/docs/reference/plugins/activity/). This shows the Facebook user the activity that their friends are doing on your website.
-* [Recommendations Box](https://developers.facebook.com/docs/reference/plugins/recommendations/).  This shows the Facebook user recommendations of pages they should visit based on the actions their friends are taking on your website.
-* Like, send, and subscribe buttons.
-
-[Facebook Insights](http://www.facebook.com/insights) integration included. This plugin also supports internationalization and mobile.
+* [Activity Feed Box](https://developers.facebook.com/docs/reference/plugins/activity/) displays recent sharing activity on your site customized for each visitor logged-on to Facebook.
+* [Recommendations Box](https://developers.facebook.com/docs/reference/plugins/recommendations/) recommends content based on visitor interests and the sharing activity of his or her Facebook friends.
+* [Like](https://developers.facebook.com/docs/reference/plugins/like/), [send](https://developers.facebook.com/docs/reference/plugins/send/), and [subscribe](https://developers.facebook.com/docs/reference/plugins/subscribe/) buttons encourage social engagement.
 
 = Contributing code =
 
-All of the [source code for this plugin is available on Facebook's GitHub account](https://github.com/facebook/wordpress). If you like to contribute code to the plugin,  open up an issue against the repository where we can discuss it. Once you have completed the code, open [a Pull Request](https://github.com/facebook/wordpress/pulls).
+All of the [source code for this plugin is available on Facebook's GitHub account](https://github.com/facebook/wordpress). If you like to contribute code to the plugin, open up an issue against the repository where we can discuss it. Once you have completed the code, open [a Pull Request](https://github.com/facebook/wordpress/pulls).
 
 Note: all contributors must agree to and sign the [Facebook Contributor License Agreement](https://developers.facebook.com/opensource/cla) prior to submitting Pull Requests. We can't accept Pull Requests until this document is signed and submitted, affirming your code is not encumbered by intellectual property claims by yourself or your employer and therefore eligible for redistribution by Facebook under the Freedoms of the GPL.
 
@@ -60,10 +61,38 @@ Note: all contributors must agree to and sign the [Facebook Contributor License 
 7. The Post is published to the Celebuzz Facebook Page.
 8. Widgets are also available.
 
+== Custom actions & filters ==
+
+= Actions =
+
+* `facebook_notify_plugin_conflicts` - executes code to notify site administrators of possible conflicts with other plugins by iterating through a list of all installed plugins and highlighting known conflicts at the time the Facebook plugin for WordPress was released. Some publishers may wish to remove this check for efficiency.
+* `facebook_settings_before_header_$hook_suffix` - add content to a settings page before the main page header section
+* `facebook_settings_after_header_$hook_suffix` - add content to a settings page after the main page header section
+* `facebook_settings_footer_$hook_suffix` - add content to a settings page below the wrapper div
+
+= Filters =
+
+* `facebook_features` - limit the plugin features available on your site
+* `fb_conflicting_plugins` - add or remove plugin URLs used by the plugin to warn against potential conflicts
+* `facebook_jssdk_init_options` - customize arguments sent to the [FB.init](https://developers.facebook.com/docs/reference/javascript/FB.init/) function of the Facebook JavaScript SDK
+* `facebook_jssdk_init_extras` - add extra JavaScript to the `fbAsyncInit` JavaScript function called after the Facebook JavaScript SDK is loaded
+* `facebook_content_filter_priority` - choose the priority of Facebook social plugin filters attached to `the_content` filter. Affects where Facebook content is output on your page relative to other plugins attached to `the_content`
+* `fb_locale` - directly define your site locale based on the list of [Facebook locale mappings](https://developers.facebook.com/docs/internationalization/)
+* `facebook_excerpt_length` - choose a custom length, in words, of a post excerpt generated for use in the Open Graph protocol description. default: 55
+* `facebook_excerpt_more` - string appearing at the end of a truncated excerpt string. default: "&hellip;"
+* `fb_rel_canonical` - customize the canonical URL used by Facebook for a post. Affects Open Graph protocol URL definitions, URL references sent in Open Graph actions, and more. default: result of `get_permalink()`
+* `facebook_comment_schema_org` - override output of search engine friendly comments content using [Schema.org microdata markup](http://googlewebmastercentral.blogspot.com/2011/06/introducing-schemaorg-search-engines.html)
+* `facebook_anchor_target` - customize the [browsing context name](http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-names) used for links to Facebook output alongside your post such as mentions. default: `_blank`
+* `facebook_mentions_classes` - add or remove HTML classes from the parent HTML div element of mentions links
+* `fb_meta_tags` - Customize Open Graph protocol markup before it is output to the page
+* `fb_get_user_meta` - fetch a user meta value by attaching to this filter, bypassing the WordPress user meta API
+* `fb_update_user_meta` - update a user meta value by attaching to this filter, bypassing the WordPress user meta API
+* `fb_delete_user_meta` - delete a user meta value by attaching to this filter, bypassing the WordPress user meta API
+
 == Upgrade Notice ==
 
-= 1.0.3 =
-Update Facebook pages and user timelines with longer-lived access tokens. Fixes issues with HTML markup in Facebook stories, improves social plugin settings, and optimizes comments display.
+= 1.1 =
+Custom post types and status support. Rewritten settings pages. Longer-lived Facebook access tokens. Async JavaScript loading. Threaded comment support.
 
 = 1.0.2 =
 Improve site performance when cURL not installed or SSL not available. Removed post meta boxes when social publishing features not enabled.
@@ -73,22 +102,23 @@ Security fixes. Improved customization and debugging of settings. l10n and i18n 
 
 == Changelog ==
 
-= 1.0.3 =
+= 1.1 =
 
-* Fixed issues with access tokens expiring, affecting posting to Facebook page and user Timelines.
-* Fixed issues with HTML markup appearing in stories posted to Facebook.
-* Fixed issues with social plugins settings on indivial posts/pages.
-* Fixed bugs in new user experience.
-* Fixed bug where Open Graph action was being posted to author's Timeline, even though option was disabled.
-* Added option to disable "View Comments" on homepage.
-* Fixed comments SEO so that replies to comments also appear.
-* Moved CSS files to head.
-* Adding functionality to decode HTML entities in titles sent to Facebook.
-* Changed mention links on posts/pages to open in new window/tab.
-* Added nicer tooltips to the Facebook settings page.
-* Fixed showing faces and the send button so that they don't display if they're disabled.
-* When the plugin is removed, pertinent data is also removed so that there aren't issues when re-installing the plugin.
-* Tweaks to copy to make things clearer.
+* Supports public [custom post types](http://codex.wordpress.org/Post_Types) and [custom post status](http://codex.wordpress.org/Function_Reference/register_post_status)
+* [Facebook JavaScript SDK](https://developers.facebook.com/docs/reference/javascript/) loads asynchronously after pageload
+* Settings page broken into multiple settings pages with [WordPress Settings API](http://codex.wordpress.org/Settings_API) support
+* Choose to display social plugins and mentions on your homepage, archive pages, or individual post types
+* Comments markup appearing in noscript wrappers now include [Schema.org comment markup](http://schema.org/UserComments) by default
+* Added threaded comment support for noscript fallback markup
+* Updated [Facebook PHP SDK](https://github.com/facebook/facebook-php-sdk/) to version 3.2
+* New social plugins builder helps correct mistakes before they happen and only include markup on your pages capable of interpretation by the Facebook JavaScript SDK
+* Mention links open in a new browsing context by default
+* Post mentions are displayed inside their meta boxes after save
+* Strings pass through translation functions, opening up future translation support
+* Fixed mixed-content warnings thrown when Facebook images displayed on a page
+* Uninstall script removes site and user options when the plugin is uninstalled through the WordPress administrative interface
+* [Contextual help menus](http://codex.wordpress.org/Administration_Panels#Help) display helpful information alongside settings choices
+* High-DPI icon support for administration menu
 
 = 1.0.2 =
 

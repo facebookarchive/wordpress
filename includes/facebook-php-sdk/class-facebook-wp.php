@@ -1,7 +1,12 @@
 <?php
 
+// parent class
 if ( ! class_exists( 'WP_Facebook' ) )
 	require_once( dirname( __FILE__ ) . '/facebook.php' );
+
+// load user functions
+if ( ! class_exists( 'Facebook_User' ) )
+	require_once( dirname( dirname( dirname(__FILE__) ) ) . '/facebook-user.php' );
 
 /**
  * Override default Facebook PHP SDK behaviors with WordPress-friendly features
@@ -9,6 +14,7 @@ if ( ! class_exists( 'WP_Facebook' ) )
  * @since 1.0
  */
 class Facebook_WP_Extend extends WP_Facebook {
+
 	/**
 	 * Override Facebook PHP SDK cURL function with WP_HTTP
 	 * Facebook PHP SDK is POST-only
@@ -40,8 +46,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 
 		if ( is_wp_error( $response ) ) {
 			throw new WP_FacebookApiException( array( 'error_code' => $response->get_error_code(), 'error_msg' => $response->get_error_message() ) );
-		}
-		else if ( wp_remote_retrieve_response_code( $response ) != '200' ) {
+		} else if ( wp_remote_retrieve_response_code( $response ) != '200' ) {
 			$fb_response = json_decode( $response['body'] );
 
 			$error_subcode = '';
@@ -63,40 +68,35 @@ class Facebook_WP_Extend extends WP_Facebook {
 	}
 
 	/**
-	 * Extend an access token, while removing the short-lived token that might have been generated via client-side flow.
-	 * Thanks to http://stackoverflow.com/questions/486896/adding-a-parameter-to-the-url-with-javascript for the workaround
+	 * Request current application permissions for an authenticated Facebook user
+	 *
+	 * @since 1.1
+	 * @return array user permissions as flat array
 	 */
-	public function setExtendedAccessToken() {
-		try {
-			// need to circumvent json_decode by calling _oauthRequest
-			// directly, since response isn't JSON format.
-			$access_token_response = $this->_oauthRequest(
-				$this->getUrl('graph', '/oauth/access_token'),
-				$params = array(
-					'client_id' => $this->getAppId(),
-					'client_secret' => $this->getAppSecret(),
-					'grant_type' => 'fb_exchange_token',
-					'fb_exchange_token' => $this->getAccessToken()
-				)
-			);
-		} catch ( WP_FacebookApiException $e ) {
-			// most likely that user very recently revoked authorization.
-			// In any event, we don't have an access token, so say so.
-			return false;
+	public function get_current_user_permissions( $current_user = '' ) {
+		if ( ! $current_user ) {
+			// simply verify a connection between user and app
+			$current_user = Facebook_User::get_current_user( array( 'id' ) );
+			if ( ! $current_user )
+				return array();
 		}
 
-		if ( empty( $access_token_response ) )
-			return false;
+		try {
+			$response = $this->api( '/me/permissions', 'GET', array( 'ref' => 'fbwpp' ) );
+		} catch ( WP_FacebookApiException $e ) {
+			$error_result = $e->getResult();
+			if ( $error_result && isset( $error_result['error_code'] ) ) {
+				// try to extend access token if request failed
+				if ( $error_result['error_code'] === 2500 )
+					$this->setExtendedAccessToken();
+			}
+			return array();
+		}
 
-		$response_params = array();
-		parse_str( $access_token_response, $response_params );
+		if ( is_array( $response ) && isset( $response['data'][0] ) )
+			return array_keys( $response['data'][0] );
 
-		if ( ! isset( $response_params['access_token'] ) )
-			return false;
-
-		$this->destroySession();
-
-		$this->setPersistentData('access_token', $response_params['access_token']);
+		return array();
 	}
 
 	/**
@@ -112,7 +112,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 		}
 
 		//WP 3.0+
-		fb_update_user_meta( get_current_user_id(), $key, $value );
+		Facebook_User::update_user_meta( get_current_user_id(), $key, $value );
 	}
 
 	protected function getPersistentData( $key, $default = false ) {
@@ -121,7 +121,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 			return $default;
 		}
 
-		return $usermeta = fb_get_user_meta( get_current_user_id(), $key, true );
+		return Facebook_User::get_user_meta( get_current_user_id(), $key, true );
 	}
 
 	protected function clearPersistentData($key) {
@@ -130,7 +130,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 			return;
 		}
 
-		fb_delete_user_meta( get_current_user_id(), $key);
+		Facebook_User::delete_user_meta( get_current_user_id(), $key );
 	}
 
 	protected function clearAllPersistentData() {

@@ -6,7 +6,7 @@ if ( ! class_exists( 'Facebook_Recommendations_Box' ) )
 /**
  * Display activity happening on your site including likes and comments in a social context
  *
- * @since 1.0.3
+ * @since 1.1
  * @link https://developers.facebook.com/docs/reference/plugins/activity/ Activity Feed social plugin documentation
  */
 class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
@@ -14,7 +14,7 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	/**
 	 * Element and class name used in markup builders
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var string
 	 */
 	const id = 'activity';
@@ -22,7 +22,7 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	/**
 	 * Include recommendations?
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var bool
 	 */
 	protected $recommendations;
@@ -31,7 +31,7 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	 * Filter which URLs are shown in the plugin
 	 * Up to two path directories: e.g. /section1/section2
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var string
 	 */
 	protected $filter;
@@ -39,7 +39,7 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	/**
 	 * I am an activity feed
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 */
 	public function __toString() {
 		return 'Facebook Activity Feed';
@@ -48,7 +48,7 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	/**
 	 * Always show recommendations?
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @return Facebook_Activity_Feed support chaining
 	 */
 	public function includeRecommendations() {
@@ -61,7 +61,7 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	 * Facebook will parse up to two directories deep: e.g. /section1/section2
 	 * Does not apply to recommendations
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var string $path URL path in current site
 	 * @return Facebook_Activity_Feed support chaining
 	 */
@@ -96,7 +96,7 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	/**
 	 * convert an options array into an object
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param array $values associative array
 	 * @return Facebook_Activity_Feed activity feed object
 	 */
@@ -106,10 +106,10 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 
 		$feed = new Facebook_Activity_Feed();
 
-		if ( array_key_exists( 'site', $values ) )
+		if ( isset( $values['site'] ) )
 			$feed->setSite( $values['site'] );
 
-		if ( array_key_exists( 'action', $values ) ) {
+		if ( isset( $values['action'] ) ) {
 			if ( is_string( $values['action'] ) ) {
 				$feed->addAction( $values['action'] );
 			} else if ( is_array( $values['action'] ) ) {
@@ -119,42 +119,42 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 			}
 		}
 
-		if ( array_key_exists( 'app_id', $values ) )
+		if ( isset( $values['app_id'] ) )
 			$feed->setAppID( $values['app_id'] );
 
-		if ( array_key_exists( 'width', $values ) )
+		if ( isset( $values['width'] ) )
 			$feed->setWidth( absint( $values['width'] ) );
 
-		if( array_key_exists( 'height', $values ) )
+		if( isset( $values['height'] ) )
 			$feed->setHeight( absint( $values['height'] ) );
 
-		if ( array_key_exists( 'header', $values ) && ( $values['header'] === false || $values['header'] === 0 || $values['header'] === 'false' ) )
-			$feed->hideHeader();
-		else
+		if ( isset( $values['header'] ) && ( $values['header'] === true || $values['header'] == 1 || $values['header'] === 'true' ) )
 			$feed->showHeader();
+		else
+			$feed->hideHeader();
 
-		if ( array_key_exists( 'border_color', $values ) )
+		if ( isset( $values['border_color'] ) )
 			$feed->setBorderColor( $values['border_color'] );
 
-		if ( array_key_exists( 'recommendations', $values ) && ( $values['recommendations'] == true || $values['recommendations'] === 1 || $values['recommendations'] === 'true' ) )
+		if ( isset( $values['recommendations'] ) && ( $values['recommendations'] == true || $values['recommendations'] == 1 || $values['recommendations'] === 'true' ) )
 			$feed->includeRecommendations();
 
-		if ( array_key_exists( 'filter', $values ) )
+		if ( isset( $values['filter'] ) )
 			$feed->setFilter( $values['filter'] );
 
-		if ( array_key_exists( 'linktarget', $values ) )
+		if ( isset( $values['linktarget'] ) )
 			$feed->setLinkTarget( $values['linktarget'] );
 
-		if ( array_key_exists( 'max_age', $values ) )
+		if ( isset( $values['max_age'] ) )
 			$feed->setMaxAge( absint( $values['max_age'] ) );
 
-		if ( array_key_exists( 'font', $values ) )
+		if ( isset( $values['font'] ) )
 			$feed->setFont( $values['font'] );
 
-		if ( array_key_exists( 'colorscheme', $values ) )
+		if ( isset( $values['colorscheme'] ) )
 			$feed->setColorScheme( $values['colorscheme'] );
 
-		if ( array_key_exists( 'ref', $values ) )
+		if ( isset( $values['ref'] ) )
 			$feed->setReference( $values['ref'] );
 
 		return $feed;
@@ -163,7 +163,7 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	/**
 	 * Output Activity Feed div with data-* attributes
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param array $div_attributes associative array. customize the returned div with id, class, or style attributes
 	 * @return HTML div or empty string
 	 */
@@ -177,7 +177,7 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	/**
 	 * Output Activity Feed as XFBML
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @return string XFBML markup
 	 */
 	public function asXFBML() {

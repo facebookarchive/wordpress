@@ -9,7 +9,7 @@ class Facebook_Send_Button_Widget extends WP_Widget {
 	 */
 	public function __construct() {
 		parent::__construct(
-	 		'fb_send', // Base ID
+	 		'facebook-send', // Base ID
 			__( 'Facebook Send Button', 'facebook' ), // Name
 			array( 'description' => __( 'The Send Button allows users to easily send content to their friends.', 'facebook' ), ) // Args
 		);
@@ -26,12 +26,23 @@ class Facebook_Send_Button_Widget extends WP_Widget {
 	public function widget( $args, $instance ) {
 		extract( $args );
 
+		if ( ! isset( $instance['ref'] ) )
+			$instance['ref'] = 'widget';
+
+		$send_button_html = facebook_get_send_button( $instance );
+
+		if ( ! ( is_string( $send_button_html ) && $send_button_html ) )
+			return;
+
 		echo $before_widget;
 
-		if ( ! empty( $instance['title'] ) )
-			echo $before_title . esc_attr($instance['title']) . $after_title;
+		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 
-		echo fb_get_send_button($instance);
+		if ( $title )
+			echo $before_title . esc_html( $title ) . $after_title;
+
+		echo $send_button_html;
+
 		echo $after_widget;
 	}
 
@@ -46,19 +57,23 @@ class Facebook_Send_Button_Widget extends WP_Widget {
 	 * @return array Updated safe values to be saved.
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$return_instance = $old_instance;
+		$instance = array();
 
-		$fields = fb_get_send_fields_array('widget');
+		if ( ! empty( $new_instance['title'] ) )
+			$instance['title'] = strip_tags( $new_instance['title'] );
 
-		foreach( $fields['children'] as $field ) {
-			$unsafe_value = ( isset( $new_instance[$field['name']] ) ) ? $new_instance[$field['name']] : '';
-			if ( !empty( $field['sanitization_callback'] ) && function_exists( $field['sanitization_callback'] ) ) 
-				$return_instance[$field['name']] = $field['sanitization_callback']( $unsafe_value );
-			else
-				$return_instance[$field['name']] = sanitize_text_field( $unsafe_value );
+		if ( ! class_exists( 'Facebook_Send_Button' ) )
+			require_once( dirname( dirname(__FILE__) ) . '/class-facebook-send-button.php' );
+
+		$send_button = Facebook_Send_Button::fromArray( $new_instance );
+		if ( $send_button ) {
+			$send_button_options = $send_button->toHTMLDataArray();
+			foreach( $send_button_options as $key => $value ) {
+				$instance[ str_replace( '-', '_', $key ) ] = $value;
+			}
 		}
 
-		return $return_instance;
+		return $instance;
 	}
 
 	/**
@@ -69,7 +84,57 @@ class Facebook_Send_Button_Widget extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		fb_get_send_fields('widget', $this);
+		$this->display_title( isset( $instance['title'] ) ? $instance['title'] : '' );
+		$this->display_href( isset( $instance['href'] ) ? $instance['href'] : '' );
+
+		if ( ! class_exists( 'Facebook_Send_Button_Settings' ) )
+			require_once( dirname( dirname( dirname(__FILE__) ) ) . '/admin/settings-send-button.php' );
+
+		$send_button_settings = new Facebook_Send_Button_Settings( $instance );
+
+		echo '<div><label for="' . $this->get_field_id( 'font' ) . '">' . esc_html( __( 'Font', 'facebook' ) ) . '</label>: ';
+		$send_button_settings->display_font( array(
+			'id' => $this->get_field_id( 'font' ),
+			'name' => $this->get_field_name( 'font' )
+		) );
+		echo '</div><p></p>';
+
+		echo '<div style="line-height:2em">' . esc_html( __( 'Color scheme', 'facebook' ) ) . ': ';
+		$send_button_settings->display_colorscheme( array(
+			'id' => $this->get_field_id( 'colorscheme' ),
+			'name' => $this->get_field_name( 'colorscheme' )
+		) );
+		echo '</div>';
+	}
+
+	/**
+	 * Allow a publisher to customize the title displayed above the widget area
+	 * e.g. Like us on Facebook!
+	 *
+	 * @since 1.1
+	 * @param string $existing_value saved title
+	 */
+	public function display_title( $existing_value = '' ) {
+		echo '<p><label>' . esc_html( __( 'Title', 'facebook' ) ) . ': ';
+		echo '<input type="text" id="' . $this->get_field_id( 'title' ) . '" name="' . $this->get_field_name( 'title' ) . '" class="widefat"';
+		if ( $existing_value )
+			echo ' value="' . esc_attr( $existing_value ) . '"';
+		echo ' /></label></p>';
+	}
+
+	/**
+	 * Customize the Like target
+	 *
+	 * @since 1.1
+	 * @param string $existing_value stored URL value
+	 */
+	public function display_href( $existing_value = '' ) {
+		echo '<p><label>URL: <input type="url" id="' . $this->get_field_id( 'href' ) . '" name="' . $this->get_field_name( 'href' ) . '" class="widefat"';
+		if ( $existing_value )
+			echo ' value="' . esc_url( $existing_value, array( 'http', 'https' ) ) . '"';
+		echo ' /></label></p>';
+
+		echo '<p class="description">' . esc_html( __( 'Default: URL of the displayed page', 'facebook' ) ) . '</p>';
 	}
 }
 ?>

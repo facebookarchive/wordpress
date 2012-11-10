@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Facebook
- * @version 1.0.3
+ * @version 1.1
  */
 /*
 Plugin Name: Facebook
@@ -9,34 +9,354 @@ Plugin URI: http://wordpress.org/extend/plugins/facebook/
 Description: Facebook for WordPress. Make your site deeply social in just a couple of clicks.
 Author: Facebook
 Author URI: https://developers.facebook.com/wordpress/
-Version: 1.0.3
+Version: 1.1
 License: GPL2
 License URI: license.txt
-Domain Path: /lang/
+Domain Path: /languages/
 */
 
-global $fb_ver;
-$fb_ver = '1.0.3';
+/**
+ * Load the Facebook plugin
+ *
+ * @since 1.1
+ */
+class Facebook_Loader {
+	/**
+	 * Uniquely identify plugin version
+	 * Bust caches based on this value
+	 *
+	 * @since 1.1
+	 * @var string
+	 */
+	const VERSION = '1.1';
 
-$facebook_plugin_directory = dirname(__FILE__);
+	/**
+	 * Locale of the site expressed as a Facebook locale
+	 *
+	 * @since 1.1
+	 * @var string
+	 */
+	public $locale = 'en_US';
 
-// Load the textdomain for translations
-add_action( 'init', 'fb_load_textdomain' );
-function fb_load_textdomain() {
-	load_plugin_textdomain( 'facebook', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+	/**
+	 * Store Facebook application information (id, secret, namespace) if available.
+	 *
+	 * @since 1.1
+	 * @var array
+	 */
+	public $credentials = array();
+
+	/**
+	 * List of locales supported by Facebook.
+	 * Two-letter languages codes stored in WordPress are translated to full locales; if a language has multiple country localizations place the first choice earlier in the array to make it the language default
+	 *
+	 * @since 1.1
+	 */
+	public static $locales = array( 'af_ZA', 'ar_AR', 'ay_BO', 'az_AZ', 'be_BY', 'bg_BG', 'bn_IN', 'bs_BA', 'ca_ES', 'ck_US', 'cs_CZ', 'cy_GB', 'da_DK', 'de_DE', 'el_GR', 'en_US', 'en_GB', 'eo_EO', 'es_CL', 'es_ES', 'es_CO', 'es_LA', 'es_MX', 'es_VE', 'et_EE', 'eu_ES', 'fa_IR', 'fb_FI', 'fb_LT', 'fi_FI', 'fo_FO', 'fr_FR', 'fr_CA', 'ga_IE', 'gl_ES', 'gn_PY', 'gu_IN', 'he_IL', 'hi_IN', 'hr_HR', 'hu_HU', 'hy_AM', 'id_ID', 'is_IS', 'it_IT', 'ja_JP', 'jv_ID', 'ka_GE', 'kk_KZ', 'km_KH', 'kn_IN', 'ko_KR', 'ku_TR', 'la_VA', 'li_NL', 'lt_LT', 'lv_LV', 'mg_MG', 'mk_MK', 'ml_IN', 'mn_MN', 'mr_IN', 'ms_MY', 'mt_MT', 'nb_NO', 'ne_NP', 'nl_NL', 'nl_BE', 'nn_NO', 'pa_IN', 'pl_PL', 'ps_AF', 'pt_PT', 'pt_BR', 'qu_PE', 'rm_CH', 'ro_RO', 'ru_RU', 'sa_IN', 'se_NO', 'sk_SK', 'sl_SI', 'so_SO', 'sq_AL', 'sr_RS', 'sv_SE', 'sw_KE', 'sy_SY', 'ta_IN', 'te_IN', 'tg_TJ', 'th_TH', 'tl_PH', 'tl_ST', 'tr_TR', 'tt_RU', 'uk_UA', 'ur_PK', 'uz_UZ', 'vi_VN', 'xh_ZA', 'yi_DE', 'zh_CN', 'zh_HK', 'zh_TW', 'zu_ZA' );
+
+	/**
+	 * Let's get it started
+	 *
+	 * @since 1.1
+	 */
+	public function __construct() {
+		// load plugin files relative to this directory
+		$this->plugin_directory = dirname(__FILE__) . '/';
+		$this->set_locale();
+
+		// Load the textdomain for translations
+		load_plugin_textdomain( 'facebook', false, $this->plugin_directory . 'languages/' );
+
+		$credentials = get_option( 'facebook_application' );
+		if ( ! is_array( $credentials ) )
+			$credentials = array();
+		$this->credentials = $credentials;
+		unset( $credentials );
+
+		add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
+
+		if ( is_admin() ) {
+			add_action( 'admin_enqueue_scripts', array( &$this, 'register_js_sdk' ), 1 );
+			$this->admin_init();
+		} else {
+			add_action( 'wp_enqueue_scripts', array( &$this, 'register_js_sdk' ), 1 );
+			add_action( 'wp', array( &$this, 'public_init' ) );
+		}
+	}
+
+	/**
+	 * Register the Facebook JavaScript SDK for later enqueueing
+	 *
+	 * @since 1.1
+	 * @uses wp_register_script
+	 */
+	public function register_js_sdk() {
+		global $wp_scripts;
+
+		$handle = 'facebook-jssdk'; // match the Facebook async snippet ID to avoid double load
+		wp_register_script( $handle, ( is_ssl() ? 'https' : 'http' ) . '://connect.facebook.net/' . $this->locale . '/' . ( defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? 'all/debug.js' : 'all.js' ), array(), null, true );
+
+		// register the script but take it back with an async load
+		add_filter( 'script_loader_src', array( &$this, 'async_script_loader_src' ), 1, 2 );
+
+		$args = array(
+			'channelUrl' => plugins_url( 'channel.php', __FILE__ ),
+			'status' => true,
+			'cookie' => true,
+			'xfbml' => true
+		);
+
+		// appId optional
+		if ( ! empty( $this->credentials['app_id'] ) )
+			$args['appId'] = $this->credentials['app_id'];
+
+		$args = apply_filters( 'facebook_jssdk_init_options', $args );
+
+		// allow the publisher to short circuit the init through the filter
+		if ( ! empty( $args ) && isset( $wp_scripts ) ) {
+			$wp_scripts->add_data( $handle, 'data', 'window.fbAsyncInit=function(){FB.init(' . json_encode( $args ) . ');' . apply_filters( 'facebook_jssdk_init_extras', '', isset( $this->credentials['app_id'] ) ? $this->credentials['app_id'] : '' ) . '}' );
+		}
+	}
+
+	/**
+	 * Load Facebook JS SDK async
+	 * Called from script_loader_src filter
+	 *
+	 * @since 1.1
+	 * @param string $src script URL
+	 * @param string $handle WordPress registered script handle
+	 * @return string empty string if Facebook JavaScript SDK, else give back the src variable
+	 */
+	public function async_script_loader_src( $src, $handle ) {
+		if ( $handle !== 'facebook-jssdk' )
+			return $src;
+
+		// @link https://developers.facebook.com/docs/reference/javascript/#loading
+		echo '<div id="fb-root"></div><script type="text/javascript">(function(d){var js,id="facebook-jssdk",ref=d.getElementsByTagName("script")[0];if(d.getElementById(id)){return;}js=d.createElement("script");js.id=id;js.async=true;js.src=' . json_encode( $src ) . ';ref.parentNode.insertBefore(js,ref);}(document));</script>';
+
+		// empty out the src response
+		// results in extra DOM but nothing to load
+		return '';
+	}
+
+	/**
+	 * Styles applied to public-facing pages
+	 *
+	 * @since 1.1
+	 * @uses enqueue_styles()
+	 */
+	public static function enqueue_styles() {
+		wp_enqueue_style( 'facebook', plugins_url( 'static/css/style' . ( defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min' ) . '.css', __FILE__ ), array(), self::VERSION );
+	}
+
+	/**
+	 * Initialize a global $facebook variable if one does not already exist and credentials stored for this site
+	 *
+	 * @since 1.1
+	 * @return true if $facebook global exists, else false
+	 */
+	public function load_php_sdk() {
+		global $facebook;
+
+		if ( isset( $facebook ) )
+			return true;
+
+		if ( ! empty( $this->credentials['app_id'] ) && ! empty( $this->credentials['app_secret'] ) ) {
+			if ( ! class_exists( 'Facebook_WP_Extend' ) )
+				require_once( $this->plugin_directory . 'includes/facebook-php-sdk/class-facebook-wp.php' );
+
+			$facebook = new Facebook_WP_Extend( array(
+				'appId' => $this->credentials['app_id'],
+				'secret' => $this->credentials['app_secret']
+			) );
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Intialize the public, front end views
+	 *
+	 * @since 1.1
+	 */
+	public function public_init() {
+		// no feed filters yet
+		if ( is_feed() || is_404() )
+			return;
+
+		// always include Open Graph protocol markup
+		if ( ! class_exists( 'Facebook_Open_Graph_Protocol' ) )
+			require_once( $this->plugin_directory . 'open-graph-protocol.php' );
+		add_action( 'wp_head', 'Facebook_Open_Graph_Protocol::add_og_protocol' );
+
+		add_action( 'wp_enqueue_scripts', 'Facebook_Loader::enqueue_jssdk' );
+
+		$enabled_features = array();
+		$option_name = 'facebook_%s_features';
+		if ( is_home() || is_front_page() ) {
+			$enabled_features = get_option( sprintf( $option_name, 'home' ) );
+		} else if ( is_archive() ) {
+			// all archives wrapped in one option
+			// is_post_type_archive || is_date || is_author || is_category || is_tag || is_tax
+			$enabled_features = get_option( sprintf( $option_name, 'archive' ) );
+		} else {
+			$post_type = get_post_type();
+			if ( $post_type )
+				$enabled_features = get_option( sprintf( $option_name, $post_type ) );
+		}
+		if ( ! is_array( $enabled_features ) || empty( $enabled_features ) )
+			return;
+
+		require_once( $this->plugin_directory . 'social-plugins/social-plugins.php' );
+
+		$priority = apply_filters( 'facebook_content_filter_priority', 30 );
+
+		// features available for archives and singular
+		if ( in_array( 'like', $enabled_features, true ) )
+			add_filter( 'the_content', 'facebook_the_content_like_button', $priority );
+		if ( in_array( 'send', $enabled_features, true ) )
+			add_filter( 'the_content', 'facebook_the_content_send_button', $priority );
+		if ( in_array( 'subscribe', $enabled_features, true ) )
+			add_filter( 'the_content', 'facebook_the_content_subscribe_button', $priority );
+		if ( in_array( 'mentions', $enabled_features, true ) && ! get_option( 'facebook_mentions_disabled' ) ) {
+			if ( ! function_exists( 'fb_social_publisher_mentioning_output' ) )
+				require_once( dirname(__FILE__) . '/social-publisher/mentions.php' );
+			add_filter( 'the_content', 'fb_social_publisher_mentioning_output', $priority );
+		}
+
+		// individual posts, pages, and custom post types features
+		if ( isset( $post_type ) ) {
+			if ( in_array( 'recommendations_bar', $enabled_features, true ) )
+				add_filter( 'the_content', 'facebook_the_content_recommendations_bar', $priority );
+
+			// only load comments class and features if enabled and post type supports
+			if ( in_array( 'comments', $enabled_features, true ) && post_type_supports( $post_type, 'comments' ) ) {
+				if ( ! class_exists( 'Facebook_Comments' ) )
+					require_once( $this->plugin_directory . 'social-plugins/class-facebook-comments.php' );
+
+				add_filter( 'the_content', 'Facebook_Comments::the_content_comments_box', $priority );
+				add_action( 'wp_enqueue_scripts', 'Facebook_Comments::css_hide_comments', 0 );
+				add_filter( 'comments_array', '__return_null' );
+				add_filter( 'comments_open', '__return_true' ); // comments are always open
+
+				// display comments number if used in template
+				add_filter( 'comments_number', 'Facebook_Comments::comments_count_xfbml' );
+
+				// short-circuit special template behavior for comment count = 0
+				// prevents linking to #respond anchor which leads nowhere
+				add_filter( 'get_comments_number', create_function('', 'return -1;') );
+			}
+		}
+
+		add_action( 'wp_enqueue_scripts', 'Facebook_Loader::enqueue_styles' );
+	}
+
+	/**
+	 * Enqueue the JavaScript SDK
+	 *
+	 * @since 1.1
+	 * @uses wp_enqueue_script()
+	 */
+	public static function enqueue_jssdk() {
+		wp_enqueue_script( 'facebook-jssdk', false, array(), false, true );
+	}
+
+	/**
+	 * Initialize the backend, administrative views
+	 *
+	 * @since 1.1
+	 */
+	public function admin_init() {
+		$admin_dir = $this->plugin_directory . 'admin/';
+
+		$sdk = $this->load_php_sdk();
+
+		if ( $sdk ) {
+			if ( ! class_exists( 'Facebook_User' ) )
+				require_once( dirname(__FILE__) . '/facebook-user.php' );
+			Facebook_User::extend_access_token();
+		}
+
+		if ( ! class_exists( 'Facebook_Settings' ) )
+			require_once( $admin_dir . 'settings.php' );
+		Facebook_Settings::init();
+
+		if ( ! class_exists( 'Facebook_Social_Publisher' ) )
+			require_once( $admin_dir . 'social-publisher/social-publisher.php' );
+		new Facebook_Social_Publisher();
+
+		if ( ! class_exists( 'Facebook_Mentions_Search' ) )
+			require_once( $admin_dir . 'social-publisher/mentions/mentions-search.php' );
+		Facebook_Mentions_Search::wp_ajax_handlers();
+	}
+
+	/**
+	 * Register available widgets
+	 *
+	 * @since 1.1
+	 * @uses register_widget()
+	 */
+	public function widgets_init() {
+		$widget_directory = $this->plugin_directory . 'social-plugins/widgets/';
+
+		foreach ( array(
+			'like-button' => 'Facebook_Like_Button_Widget',
+			'send-button' => 'Facebook_Send_Button_Widget',
+			'subscribe-button' => 'Facebook_Subscribe_Button_Widget',
+			'recommendations-box' => 'Facebook_Recommendations_Widget',
+			'activity-feed' => 'Facebook_Activity_Feed_Widget'
+		) as $filename => $classname ) {
+			include_once( $widget_directory . $filename . '.php' );
+			register_widget( $classname );
+		}
+	}
+
+	/**
+	 * Map the site locale to a supported Facebook locale
+	 * Affects OGP and SDK outputs
+	 *
+	 * @since 1.1
+	 */
+	public function set_locale() {
+		$transient_key = 'facebook_locale';
+		$locale = get_transient( $transient_key );
+		if ( $locale ) {
+			$this->locale = $locale;
+			return;
+		}
+
+		$locale = str_replace( '-', '_', get_locale() );
+
+		// convert locales like "es" to "es_ES"
+		if ( strlen( $locale ) === 2 ) {
+			$locale = strtolower( $locale );
+			foreach( self::$locales as $facebook_locale ) {
+				if ( substr_compare( $facebook_locale, $locale, 0, 2 ) === 0 ) {
+					$locale = $facebook_locale;
+					break;
+				}
+			}
+		}
+
+		// check to see if the locale is a valid FB one, if not, use en_US as a fallback
+		if ( ! in_array( $locale, self::$locales, true ) ) {
+			$locale = 'en_US';
+		}
+
+		$locale = apply_filters( 'fb_locale', $locale ); // filter the locale in case somebody has a weird case and needs to change it
+		if ( $locale ) {
+			set_transient( $transient_key, $locale, 60*60*24 );
+			$this->locale = $locale;
+		}
+	}
 }
 
-// include the Facebook PHP SDK
-if ( ! class_exists( 'Facebook_WP' ) )
-	require_once( $facebook_plugin_directory . '/includes/facebook-php-sdk/class-facebook-wp.php' );
+function facebook_loader_init() {
+	global $facebook_loader;
 
-require_once( $facebook_plugin_directory . '/fb-core.php' );
-require_once( $facebook_plugin_directory . '/fb-admin-menu.php' );
-require_once( $facebook_plugin_directory . '/fb-open-graph.php' );
-require_once( $facebook_plugin_directory . '/social-plugins/fb-social-plugins.php' );
-require_once( $facebook_plugin_directory . '/fb-login.php' );
-require_once( $facebook_plugin_directory . '/fb-social-publisher.php' );
-require_once( $facebook_plugin_directory . '/fb-wp-helpers.php' );
-unset( $facebook_plugin_directory );
+	$facebook_loader = new Facebook_Loader();
+}
+add_action( 'init', 'facebook_loader_init', 0 ); // load before widgets_init at 1
 
 ?>

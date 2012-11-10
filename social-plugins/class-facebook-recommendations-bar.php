@@ -6,7 +6,7 @@ if ( ! class_exists( 'Facebook_Social_Plugin' ) )
 /**
  * Recommend content to site visitors based on site activity, interests, and a friends
  *
- * @since 1.0.3
+ * @since 1.1
  * @link https://developers.facebook.com/docs/reference/plugins/recommendationsbar/ Recommendations Bar social plugin documentation
  */
 class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
@@ -14,7 +14,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * Element and class name used in markup builders
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var string
 	 */
 	const id = 'recommendations-bar';
@@ -23,7 +23,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * Override the URL used for the like action.
 	 * Default is og:url or link[rel=canonical] or document.URL
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var string
 	 */
 	protected $href;
@@ -31,7 +31,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * Choose when the plugin expands
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var string
 	 */
 	protected $trigger;
@@ -39,7 +39,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * Number of seconds to wait before expanding the plugin
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var int
 	 */
 	protected $read_time;
@@ -47,7 +47,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * Like or recommend
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var string
 	 */
 	protected $action;
@@ -55,7 +55,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * The verb to display on the button
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var array
 	 */
 	public static $action_choices = array( 'like', 'recommend' );
@@ -63,7 +63,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * Display the recommendations bar on the left or right side
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var string
 	 */
 	protected $side;
@@ -71,7 +71,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * Choose to display the recommendations bar on the left or right side
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var array
 	 */
 	public static $side_choices = array( 'left', 'right' );
@@ -79,7 +79,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * One or more domains to show recommendations for
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var array
 	 */
 	protected $site = array();
@@ -88,7 +88,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * Add a unique reference to track referrals. Facebook passes this parameter to the Like URL when a Facebook user clicks the link.
 	 * Example: 'footer' for a like button in your footer vs. 'banner' for a button in your site banner
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var string
 	 */
 	protected $ref;
@@ -96,7 +96,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * Number of recommendations to display
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var int
 	 */
 	protected $num_recommendations;
@@ -104,7 +104,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * Only include articles newer than a given number of days
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var int
 	 */
 	protected $max_age;
@@ -112,7 +112,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * I am a recommendations bar
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @return string
 	 */
 	public function __toString() {
@@ -122,7 +122,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * Setter for href attribute
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param string $url absolute URL
 	 * @return Facebook_Recommendations_Bar support chaining
 	 */
@@ -137,7 +137,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * Choose when the plugin expands.
 	 * Evaluated in addition to the read_time parameter
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param string $trigger onvisible|manual|X%
 	 * @return Facebook_Recommendations_Bar support chaining
 	 */
@@ -161,7 +161,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * Set the number of seconds before the plugin will expand
 	 * Minimum: 10 seconds
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param int $seconds whole seconds
 	 * @return Facebook_Recommendations_Bar support chaining
 	 */
@@ -174,7 +174,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * Override the default "like" text with "recommend"
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param string $action like|recommend
 	 * @return Facebook_Recommendations_Bar support chaining
 	 */
@@ -188,7 +188,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * Display plugin on the left or right side.
 	 * By default the recommendations bar will display at the end of a normal page scan based on the locale (e.g. right side in the left-to-right reading style of English)
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param string $side left|right
 	 * @return Facebook_Recommendations_Bar support chaining
 	 */
@@ -201,7 +201,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * Show recommendations for an additional domain
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param string $domain domain name
 	 * @return Facebook_Recommendations_Bar support chaining
 	 */
@@ -214,7 +214,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * Clean up the ref paramter based on Facebook requirements
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param string $ref reference string you would like to track on your site after a Facebook visitor follows a link
 	 * @return string cleaned string
 	 */
@@ -228,7 +228,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * Track referrals from Facebook with a string up to 50 chracters.
 	 * Characters in string must be alphanumeric or punctuation (currently +/=-.:_)
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param string $ref reference string
 	 * @return Facebook_Recommendations_Bar support chaining
 	 */
@@ -243,7 +243,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * Set the number of recommendations to display
 	 * Accepts a number between 1 and 5
 	 *
-	 * @aince 1.0.3
+	 * @aince 1.1
 	 * @param int $num number of recommendations. between 1 and 5
 	 * @return Facebook_Recommendations_Bar support chaining
 	 */
@@ -257,7 +257,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * Limit recommendations to a number of days between 1 and 180
 	 * Plugin defaults to no maximum age (age=0)
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param int $days number of whole days
 	 * @return Facebook_Recommendations_Bar support chaining
 	 */
@@ -310,7 +310,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * convert an options array into an object
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param array $values associative array
 	 * @return Facebook_Recommendations_Bar recommendations bar object
 	 */
@@ -320,22 +320,22 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 
 		$bar = new Facebook_Recommendations_Bar();
 
-		if ( array_key_exists( 'href', $values ) )
+		if ( isset( $values['href'] ) )
 			$bar->setURL( $values['href'] );
 
-		if ( array_key_exists( 'trigger', $values ) )
+		if ( isset( $values['trigger'] ) )
 			$bar->setTrigger( $values['trigger'] );
 
-		if ( array_key_exists( 'read_time', $values ) )
+		if ( isset( $values['read_time'] ) )
 			$bar->setReadTime( absint( $values['read_time'] ) );
 
-		if ( array_key_exists( 'action', $values ) )
+		if ( isset( $values['action'] ) )
 			$bar->setAction( $values['action'] );
 
-		if ( array_key_exists( 'side', $values ) )
+		if ( isset( $values['side'] ) )
 			$bar->setSide( $values['side'] );
 
-		if ( array_key_exists( 'site', $values ) ) {
+		if ( isset( $values['site'] ) ) {
 			if ( is_string( $values['site'] ) ) {
 				$bar->addAction( $values['site'] );
 			} else if ( is_array( $values['site'] ) ) {
@@ -345,13 +345,13 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 			}
 		}
 
-		if ( array_key_exists( 'ref', $values ) )
+		if ( isset( $values['ref'] ) )
 			$bar->setReference( $values['ref'] );
 
-		if ( array_key_exists( 'num_recommendations', $values ) )
+		if ( isset( $values['num_recommendations'] ) )
 			$bar->setNumRecommendations( $values['num_recommendations'] );
 
-		if ( array_key_exists( 'max_age', $values ) )
+		if ( isset( $values['max_age'] ) )
 			$bar->setMaxAge( $values['max_age'] );
 
 		return $bar;
@@ -360,7 +360,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * Output Recommendations Box div with data-* attributes
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param array $div_attributes associative array. customize the returned div with id, class, or style attributes
 	 * @return HTML div or empty string
 	 */
@@ -377,7 +377,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	/**
 	 * Output Activity Feed as XFBML
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @return string XFBML markup
 	 */
 	public function asXFBML() {

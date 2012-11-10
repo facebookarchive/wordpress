@@ -6,7 +6,7 @@ if ( ! class_exists( 'Facebook_Social_Plugin' ) )
 /**
  * Encourage visitors to subscribe to your public updates on Facebook with a Subscribe Button
  *
- * @since 1.0.3
+ * @since 1.1
  * @link https://developers.facebook.com/docs/reference/plugins/subscribe/ Facebook Subscribe Button
  */
 class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
@@ -14,7 +14,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	/**
 	 * Element and class name used in markup builders
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var string
 	 */
 	const id = 'subscribe';
@@ -24,7 +24,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	 * Your account must allow subscribers. Subscribe only available for accounts belonging to a user over 18 years of age
 	 *
 	 * @link https://www.facebook.com/about/subscribe About Facebook Subscribe
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var string
 	 */
 	protected $href;
@@ -32,7 +32,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	/**
 	 * Which style subscribe button you would like displayed
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var string
 	 */
 	protected $layout;
@@ -40,7 +40,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	/**
 	 * Choose your subscribe button
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var array
 	 */
 	public static $layout_choices = array( 'standard', 'button_count', 'box_count' );
@@ -49,7 +49,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	 * Show faces of the viewer's friends already subscribed?
 	 * Only applies to standard layout. Needs the extra width.
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var bool
 	 */
 	protected $show_faces;
@@ -57,7 +57,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	/**
 	 * Define a custom width in whole pixels
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var int
 	 */
 	protected $width;
@@ -66,7 +66,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	 * Option to bypass validation.
 	 * You might validate when changing settings but choose not to validate on future generators
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param bool $validate false if object should not be validated
 	 */
 	public function __construct( $validate = true ) {
@@ -79,7 +79,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	/**
 	 * I am a subscribe button
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @return string
 	 */
 	public function __toString() {
@@ -89,7 +89,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	/**
 	 * Setter for href attribute
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param string $url absolute URL
 	 * @return Facebook_Subscribe_Button support chaining
 	 */
@@ -106,7 +106,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	/**
 	 * Choose a layout option
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @see self::$layout_choices
 	 * @param string $layout a supported layout option
 	 * @return Facebook_Subscribe_Button support chaining
@@ -120,7 +120,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	/**
 	 * Show the faces of a logged-on Facebook user's friends
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @return Facebook_Subscribe_Button support chaining
 	 */
 	public function showFaces() {
@@ -132,7 +132,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	 * Width of the subscribe button
 	 * Should be greater than the minimum width of layout option
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param int $width width in whole pixels
 	 * @return Facebook_Subscribe_Button support chaining
 	 */
@@ -146,7 +146,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	/**
 	 * Compute a minimum width of a subscribe button based on configured options
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @return int minimum width of the current configuration in whole pixels
 	 */
 	private function compute_minimum_width() {
@@ -165,7 +165,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	 * Some options may be in conflict with other options or not available for main choices
 	 * Reset customizations if we can detect non-compliance to avoid later confusion and/or layout issues
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 */
 	public function validate() {
 		// allow overrides
@@ -190,7 +190,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	/**
 	 * convert an options array into an object
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param array $values associative array
 	 * @return Facebook_Subscribe_Button subscribe object
 	 */
@@ -200,22 +200,22 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 
 		$subscribe_button = new Facebook_Subscribe_Button();
 
-		if ( array_key_exists( 'href', $values ) && is_string( $values['href'] ) )
+		if ( isset( $values['href'] ) )
 			$subscribe_button->setURL( $values['href'] );
 
-		if ( array_key_exists( 'layout', $values ) && is_string( $values['layout'] ) )
+		if ( isset( $values['layout'] ) )
 			$subscribe_button->setLayout( $values['layout'] );
 
-		if ( array_key_exists( 'show_faces', $values ) && ( $values['show_faces'] === true || $values['show_faces'] === 'true' || $values['show_faces'] === 1 ) )
+		if ( isset( $values['show_faces'] ) && ( $values['show_faces'] === true || $values['show_faces'] === 'true' || $values['show_faces'] == 1 ) )
 			$subscribe_button->showFaces();
 
-		if ( array_key_exists( 'width', $values ) )
+		if ( isset( $values['width'] ) )
 			$subscribe_button->setWidth( absint( $values['width'] ) );
 
-		if ( array_key_exists( 'font', $values ) )
+		if ( isset( $values['font'] ) )
 			$subscribe_button->setFont( $values['font'] );
 
-		if ( array_key_exists( 'colorscheme', $values ) )
+		if ( isset( $values['colorscheme'] ) )
 			$subscribe_button->setColorScheme( $values['colorscheme'] );
 
 		return $subscribe_button;
@@ -226,7 +226,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	 * will become data-key="value"
 	 * Exclude values if default
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @return array associative array
 	 */
 	public function toHTMLDataArray() {
@@ -252,7 +252,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	/**
 	 * Output Subscribe button with data-* attributes
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param array $div_attributes associative array. customize the returned div with id, class, or style attributes
 	 * @return HTML div or empty string
 	 */
@@ -271,7 +271,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	/**
 	 * Output Subscribe button as XFBML
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @return string XFBML markup
 	 */
 	public function asXFBML() {

@@ -49,7 +49,7 @@ class Facebook_Comments {
 	 * @return string XFBML string or empty string if no post permalink context or publisher short-circuits via filter
 	 */
 	public static function comments_count_xfbml() {
-		$url = esc_url( apply_filters( 'fb_rel_canonical', get_permalink() ), array( 'http', 'https' ) );
+		$url = esc_url( apply_filters( 'facebook_rel_canonical', get_permalink() ), array( 'http', 'https' ) );
 
 		if ( $url ) {
 			// match comments_number() text builder, adding XFBML element instead of a number
@@ -210,7 +210,7 @@ class Facebook_Comments {
 		if ( ! isset( $post ) || ! empty( $post->post_password ) )
 			return '';
 
-		$url = apply_filters( 'fb_rel_canonical', get_permalink() );
+		$url = apply_filters( 'facebook_rel_canonical', get_permalink() );
 		if ( ! $url ) // could happen. kill it early
 			return '';
 
@@ -251,7 +251,7 @@ class Facebook_Comments {
 		if ( ! is_array( $options ) )
 			return '';
 		if ( ! empty( $options['href'] ) )
-			$options['href'] = apply_filters( 'fb_rel_canonical', get_permalink() );
+			$options['href'] = apply_filters( 'facebook_rel_canonical', get_permalink() );
 
 		if ( ! class_exists( 'Facebook_Comments_Box' ) )
 			require_once( dirname(__FILE__) . '/class-facebook-comments-box.php' );
@@ -312,7 +312,7 @@ class Facebook_Comments {
 		// no option via JS SDK to display comments yet not accept new comments
 		// only display JS SDK version of comments box display if we would like more comments
 		if ( comments_open( $post->ID ) ) {
-			$url = apply_filters( 'fb_rel_canonical', get_permalink() );
+			$url = apply_filters( 'facebook_rel_canonical', get_permalink() );
 			if ( $url ) // false could happen. let JS SDK handle compatibility mode
 				$options['href'] = $url;
 			$content .= self::js_sdk_markup( $options );

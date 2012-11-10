@@ -3,7 +3,7 @@
 /**
  * Enable user commenting for a URL
  *
- * @since 1.0.3
+ * @since 1.1
  * @link https://developers.facebook.com/docs/reference/plugins/comments/ Facebook Comments Box
  */
 class Facebook_Comments_Box {
@@ -11,7 +11,7 @@ class Facebook_Comments_Box {
 	/**
 	 * Element and class name used in markup builders
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var string
 	 */
 	const id = 'comments';
@@ -20,7 +20,7 @@ class Facebook_Comments_Box {
 	 * Override the URL related to this comment.
 	 * Default is og:url or link[rel=canonical] or document.URL
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var string
 	 */
 	protected $href;
@@ -28,7 +28,7 @@ class Facebook_Comments_Box {
 	/**
 	 * Define a custom width in whole pixels
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var int
 	 */
 	protected $width;
@@ -36,7 +36,7 @@ class Facebook_Comments_Box {
 	/**
 	 * Choose a light or dark color scheme to match your site style
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param string
 	 */
 	protected $color_scheme;
@@ -44,7 +44,7 @@ class Facebook_Comments_Box {
 	/**
 	 * Use a light or dark color scheme
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var array
 	 */
 	public static $color_scheme_choices = array( 'light', 'dark' );
@@ -52,7 +52,7 @@ class Facebook_Comments_Box {
 	/**
 	 * The number of comments to show by default
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @var int
 	 */
 	protected $num_posts;
@@ -66,7 +66,7 @@ class Facebook_Comments_Box {
 	/**
 	 * I am a comments box
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 */
 	public function __toString() {
 		return 'Facebook Comments Box Social Plugin';
@@ -75,7 +75,7 @@ class Facebook_Comments_Box {
 	/**
 	 * Setter for href attribute
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param string $url absolute URL
 	 * @return Facebook_Comments_Box support chaining
 	 */
@@ -90,7 +90,7 @@ class Facebook_Comments_Box {
 	 * Width of the like button
 	 * Should be greater than the minimum width of layout + send button (if enabled) + recommend text (if chosen)
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param int $width width in whole pixels
 	 * @return Facebook_Comments_Box support chaining
 	 */
@@ -104,7 +104,7 @@ class Facebook_Comments_Box {
 	/**
 	 * Choose a light or dark color scheme
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @see self::color_scheme_choices
 	 * @param string $color_scheme light|dark
 	 * @return Facebook_Comments_Box support chaining
@@ -118,7 +118,7 @@ class Facebook_Comments_Box {
 	/**
 	 * The maximum number of comments to display by default
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param int $num positive number of comments
 	 * @return Facebook_Comments_Box support chaining
 	 */
@@ -141,7 +141,7 @@ class Facebook_Comments_Box {
 	/**
 	 * convert an options array into an object
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @param array $values associative array
 	 * @return Facebook_Comments_Box comments box object
 	 */
@@ -151,19 +151,19 @@ class Facebook_Comments_Box {
 
 		$comments_box = new Facebook_Comments_Box();
 
-		if ( array_key_exists( 'href', $values ) && is_string( $values['href'] ) )
+		if ( isset( $values['href'] ) && is_string( $values['href'] ) )
 			$comments_box->setURL( $values['href'] );
 
-		if ( array_key_exists( 'width', $values ) )
+		if ( isset( $values['width'] ) )
 			$comments_box->setWidth( absint( $values['width'] ) );
 
-		if ( array_key_exists( 'num_posts', $values ) )
+		if ( isset( $values['num_posts'] ) )
 			$comments_box->setNumPosts( absint( $values['num_posts'] ) );
 
-		if ( array_key_exists( 'colorscheme', $values ) )
+		if ( isset( $values['colorscheme'] ) )
 			$comments_box->setColorScheme( $values['colorscheme'] );
 
-		if ( array_key_exists( 'mobile', $values ) && ( $values['mobile'] === true || $values['mobile'] === 'true' || $values['mobile'] === 1 )  )
+		if ( isset( $values['mobile'] ) && ( $values['mobile'] === true || $values['mobile'] === 'true' || $values['mobile'] == 1 )  )
 			$comments_box->forceMobile();
 
 		return $comments_box;
@@ -188,7 +188,7 @@ class Facebook_Comments_Box {
 		if ( isset( $this->colorscheme ) && $this->colorscheme !== 'light' )
 			$data['colorscheme'] = $this->colorscheme;
 
-		if ( isset( $this->num_posts ) && is_int( $this->num_posts ) && $this->num_posts > 0 )
+		if ( isset( $this->num_posts ) && is_int( $this->num_posts ) && $this->num_posts > 0 && $this->num_posts !== 10 )
 			$data['num-posts'] = $this->num_posts;
 
 		if ( isset( $this->mobile ) && $this->mobile === true )
@@ -216,7 +216,7 @@ class Facebook_Comments_Box {
 	/**
 	 * Output XFBML element with attributes
 	 *
-	 * @since 1.0.3
+	 * @since 1.1
 	 * @return string XFBML element or empty string
 	 */
 	public function asXFBML() {

@@ -292,7 +292,7 @@ class Facebook_Social_Publisher {
 
 		// check our assumptions about a valid link in place
 		// fail if a piece of the filter process killed our response
-		$link = apply_filters( 'fb_rel_canonical', get_permalink( $post_id ) );
+		$link = apply_filters( 'facebook_rel_canonical', get_permalink( $post_id ) );
 		if ( ! $link )
 			return;
 
@@ -461,7 +461,7 @@ class Facebook_Social_Publisher {
 
 		// check our assumptions about a valid link in place
 		// fail if a piece of the filter process killed our response
-		$link = apply_filters( 'fb_rel_canonical', get_permalink( $post_id ) );
+		$link = apply_filters( 'facebook_rel_canonical', get_permalink( $post_id ) );
 		if ( ! $link )
 			return;
 
@@ -570,7 +570,7 @@ class Facebook_Social_Publisher {
 
 		// check our assumptions about a valid link in place
 		// fail if a piece of the filter process killed our response
-		$link = apply_filters( 'fb_rel_canonical', get_permalink( $post_id ) );
+		$link = apply_filters( 'facebook_rel_canonical', get_permalink( $post_id ) );
 		if ( ! $link )
 			return;
 
@@ -672,7 +672,7 @@ class Facebook_Social_Publisher {
 
 		// check our assumptions about a valid link in place
 		// fail if a piece of the filter process killed our response
-		$link = apply_filters( 'fb_rel_canonical', get_permalink( $post_id ) );
+		$link = apply_filters( 'facebook_rel_canonical', get_permalink( $post_id ) );
 		if ( ! $link )
 			return;
 		$story = array( 'article' => $link );

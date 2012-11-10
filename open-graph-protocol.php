@@ -134,7 +134,7 @@ class Facebook_Open_Graph_Protocol {
 		} else if ( is_single() && empty( $post->post_password ) ) {
 			$post_type = get_post_type();
 			$meta_tags[ self::OGP_NS . 'type' ] = 'article';
-			$meta_tags[ self::OGP_NS . 'url' ] = apply_filters( 'fb_rel_canonical', get_permalink() );
+			$meta_tags[ self::OGP_NS . 'url' ] = apply_filters( 'facebook_rel_canonical', get_permalink() );
 			if ( post_type_supports( $post_type, 'title' ) )
 				$meta_tags[ self::OGP_NS . 'title' ] = get_the_title();
 			if ( post_type_supports( $post_type, 'excerpt' ) ) {
@@ -233,7 +233,7 @@ class Facebook_Open_Graph_Protocol {
 		} else if ( is_page() ) {
 			$meta_tags[ self::OGP_NS . 'type' ] = 'article';
 			$meta_tags[ self::OGP_NS . 'title' ] = get_the_title();
-			$meta_tags[ self::OGP_NS . 'url' ] = apply_filters( 'fb_rel_canonical', get_permalink() );
+			$meta_tags[ self::OGP_NS . 'url' ] = apply_filters( 'facebook_rel_canonical', get_permalink() );
 		}
 
 		$meta_tags = apply_filters( 'fb_meta_tags', $meta_tags, $post );

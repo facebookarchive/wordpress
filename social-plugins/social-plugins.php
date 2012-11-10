@@ -44,7 +44,7 @@ function facebook_the_content_like_button( $content ) {
 		return $content;
 
 	if ( ! is_singular( get_post_type( $post ) ) )
-		$options['href'] = apply_filters( 'fb_rel_canonical', get_permalink( $post->ID ) );
+		$options['href'] = apply_filters( 'facebook_rel_canonical', get_permalink( $post->ID ) );
 
 	if ( $options['position'] === 'top' ) {
 		$options['ref'] = 'above-post';
@@ -152,7 +152,7 @@ function facebook_the_content_send_button( $content ) {
 		$options = array();
 
 	if ( ! is_singular( get_post_type( $post ) ) )
-		$options['href'] = apply_filters( 'fb_rel_canonical', get_permalink( $post->ID ) );
+		$options['href'] = apply_filters( 'facebook_rel_canonical', get_permalink( $post->ID ) );
 
 	if ( $options['position'] === 'top' ) {
 		$options['ref'] = 'above-post';

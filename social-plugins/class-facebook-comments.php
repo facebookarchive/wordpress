@@ -18,6 +18,57 @@ class Facebook_Comments {
 	}
 
 	/**
+	 * Remove the WordPress comments menu bar item, replacing with a Facebook comments link
+	 * Check if Facebook comments enabled and if the current user might be able to view a comments edit screen on Facebook
+	 *
+	 * @since 1.1
+	 * @see WP_Admin_Bar->add_menus()
+	 */
+	public static function admin_bar_menu() {
+		global $facebook_loader;
+
+		if ( is_network_admin() && is_user_admin() )
+			return;
+
+		// use moderate_comments capability as a local proxy for accounts that might be granted moderate comments permissions for the Facebook application if the application administrator fully setup the app
+		// technically the WordPress menu item is added for users with 'edit_posts' due to the permissions of the destination page but we'll check for the specific comments permission instead
+		// TODO: check if Facebook data stored for current user, check if Facebook user is moderator
+		if ( ! current_user_can( 'moderate_comments' ) )
+			return;
+
+		if ( ! class_exists( 'Facebook_User' ) )
+			require_once( dirname( dirname( __FILE__ ) ) . 'facebook-user.php' );
+
+		$current_user = wp_get_current_user();
+		$facebook_user_data = Facebook_User::get_user_meta( $current_user->ID, 'fb_data', true );
+		if ( ! ( is_array( $facebook_user_data ) && isset( $facebook_user_data['fb_uid'] ) ) )
+			return;
+
+		// swap only. don't add a menu item if none existed
+		if ( remove_action( 'admin_bar_menu', 'wp_admin_bar_comments_menu', 60 ) ) {
+			add_action( 'admin_bar_menu', 'Facebook_Comments::admin_bar_add_comments_menu', 60 );
+		}
+	}
+
+	/**
+	 * Add a Facebook Comments menu item to the WordPress admin bar
+	 *
+	 * @since 1.1
+ 	 * @see wp_admin_bar_comments_menu()
+	 * @param WP_Admin_Bar $wp_admin_bar WordPress admin bar to modify
+	 */
+	public static function admin_bar_add_comments_menu( $wp_admin_bar ) {
+		global $facebook_loader;
+
+		$wp_admin_bar->add_menu( array(
+			'id' => 'comments',
+			'title' => '<span class="ab-icon"></span><span id="ab-awaiting-mod" class="ab-label awaiting-mod"></span>',
+			'href' => 'https://developers.facebook.com/tools/comments?' . http_build_query( array( 'id' => $facebook_loader->credentials['app_id'] ) ),
+			'meta' => array( 'target' => '_blank', 'title' => __( 'Moderate Facebook comments', 'facebook' ) )
+		) );
+	}
+
+	/**
 	 * Retrieve a list of comments for the given URL from the Facebook Graph API
 	 *
 	 * @since 1.1

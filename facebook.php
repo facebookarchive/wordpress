@@ -75,12 +75,34 @@ class Facebook_Loader {
 
 		add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
 
+		if ( is_user_logged_in() ) {
+			// admin bar may show on public-facing site as well as administrative section
+			add_action( 'add_admin_bar_menus', array( &$this, 'admin_bar' ) );
+		}
+		
+
 		if ( is_admin() ) {
 			add_action( 'admin_enqueue_scripts', array( &$this, 'register_js_sdk' ), 1 );
 			$this->admin_init();
 		} else {
 			add_action( 'wp_enqueue_scripts', array( &$this, 'register_js_sdk' ), 1 );
 			add_action( 'wp', array( &$this, 'public_init' ) );
+		}
+	}
+
+	/**
+	 * Add Facebook functionality to the WordPress admin bar
+	 *
+	 * @since 1.1
+	 * @param WP_Admin_Bar $wp_admin_bar existing WordPress admin bar object
+	 */
+	public function admin_bar() {
+		if ( isset( $this->credentials ) && isset( $this->credentials['app_id'] ) ) {
+			if ( get_option( 'facebook_comments_enabled' ) ) {
+				if ( ! class_exists( 'Facebook_Comments' ) )
+					require_once( $this->plugin_directory . 'social-plugins/class-facebook-comments.php' );
+				Facebook_Comments::admin_bar_menu();
+			}
 		}
 	}
 

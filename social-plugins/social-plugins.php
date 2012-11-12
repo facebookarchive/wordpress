@@ -6,7 +6,7 @@
  * @param array $options like button options
  * @return string HTML div for use with the JavaScript SDK
  */
-function facebook_get_like_button($options = array()) {
+function facebook_get_like_button( $options = array() ) {
 	if ( ! class_exists( 'Facebook_Like_Button' ) )
 		require_once( dirname(__FILE__) . '/class-facebook-like-button.php' );
 
@@ -117,7 +117,7 @@ function facebook_the_content_recommendations_bar( $content ) {
  * @param array $options customizations
  * @return string send button HTML for use with the JavaScript SDK
  */
-function facebook_get_send_button($options = array()) {
+function facebook_get_send_button( $options = array() ) {
 	if ( ! class_exists( 'Facebook_Send_Button' ) )
 		require_once( dirname(__FILE__) . '/class-facebook-send-button.php' );
 

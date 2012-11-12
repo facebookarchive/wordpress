@@ -82,7 +82,7 @@ class Facebook_Mentions_Box_Pages {
 
 		$facebook_user_permissions = Facebook_User::get_permissions();
 
-		if ( is_array( $facebook_user_permissions ) && ! empty( $facebook_user_permissions ) && in_array( 'publish_actions', $facebook_user_permissions, true ) && in_array( 'publish_stream', $facebook_user_permissions, true ) ) {
+		if ( is_array( $facebook_user_permissions ) && ! empty( $facebook_user_permissions ) && isset( $facebook_user_permissions['publish_actions'] ) && isset( $facebook_user_permissions['publish_stream'] ) ) {
 			$saved_mentions = get_post_meta( $post->ID, self::POST_META_KEY_MENTIONS, true );
 			echo '<label for="suggest-pages">' . esc_html( __( "Page's Name", 'facebook' ) ) . '</label> ';
 			echo '<input type="text" class="widefat" id="suggest-pages" autocomplete="off" name="' . self::FIELD_AUTOCOMPLETE . '" size="44" placeholder="' . esc_attr( __( 'Type to find a page.', 'facebook') ) . '"';

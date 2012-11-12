@@ -151,7 +151,7 @@ class Facebook_User {
 			return false;
 
 		$permissions = $facebook->get_current_user_permissions( $current_user );
-		if ( ! ( is_array( $permissions ) && ! empty( $permissions ) && in_array( 'publish_stream', $permissions, true ) && in_array( 'publish_actions', $permissions, true ) ) )
+		if ( ! ( is_array( $permissions ) && ! empty( $permissions ) && isset( $permissions['publish_stream'] ) && isset( $permissions['publish_actions'] ) ) )
 			return false;
 
 		return true;

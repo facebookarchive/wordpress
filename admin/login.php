@@ -48,7 +48,7 @@ class Facebook_Admin_Login {
 
 			$all_permissions_exist = true;
 			foreach( $verify_permissions as $permission_to_verify ) {
-				if ( ! in_array( $permission_to_verify, $permissions, true ) ) {
+				if ( ! isset( $permissions[$permission_to_verify] ) ) {
 					$all_permissions_exist = false;
 					break;
 				}

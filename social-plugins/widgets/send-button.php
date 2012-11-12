@@ -1,6 +1,8 @@
 <?php
 /**
  * Adds the Send Button Social Plugin as a WordPress Widget
+ *
+ * @since 1.0
  */
 class Facebook_Send_Button_Widget extends WP_Widget {
 

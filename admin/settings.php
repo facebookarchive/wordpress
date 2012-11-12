@@ -335,14 +335,15 @@ class Facebook_Settings {
 	 * @since 1.1
 	 */
 	public static function migrate_options_10() {
-		$is_migrated = get_option( 'facebook_migration_10' );
-		if ( $is_migrated )
+		if ( get_option( 'facebook_migration_10' ) )
 			return;
 
-		if ( ! class_exists( 'Facebook_Migrate_Options_10' ) )
-			require_once( dirname(__FILE__) . '/migrate-options-10.php' );
-		Facebook_Migrate_Options_10::migrate();
-		update_option( 'facebook_migration_10', '1' );
+		if ( current_user_can( 'manage_options' ) ) {
+			if ( ! class_exists( 'Facebook_Migrate_Options_10' ) )
+				require_once( dirname(__FILE__) . '/migrate-options-10.php' );
+			Facebook_Migrate_Options_10::migrate();
+			update_option( 'facebook_migration_10', '1' );
+		}
 	}
 }
 ?>

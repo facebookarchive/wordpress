@@ -296,6 +296,9 @@ class Facebook_Application_Settings {
 				} else {
 					add_settings_error( 'facebook-app-id', 'facebook-app-id-error', __( 'App ID must contain only digits.', 'facebook' ) );
 				}
+			} else {
+				// removing app id disables other features such as comments
+				delete_option( 'facebook_comments_enabled' );
 			}
 			unset( $app_id );
 		}

@@ -89,6 +89,20 @@ Note: all contributors must agree to and sign the [Facebook Contributor License 
 * `fb_update_user_meta` - update a user meta value by attaching to this filter, bypassing the WordPress user meta API
 * `fb_delete_user_meta` - delete a user meta value by attaching to this filter, bypassing the WordPress user meta API
 
+== Frequently Asked Questions ==
+
+= How do I change the image that appears for my posts shared on Facebook =
+
+The plugin generates [Open Graph protocol](http://ogp.me/) markup for your site's webpages including an explicitly-specified image for posts with an associated [post thumbnail](http://codex.wordpress.org/Post_Thumbnails). Your plugin or theme may define additional images through the `fb_meta_tags` filter. If an post thumbnail image exists your additional image will be an alternate for stories shared through a pasted link. Unattended story summaries use the first defined image.
+
+= How do I moderate comments and add reviewers? =
+
+The [Comment Moderation Tool](https://developers.facebook.com/tools/comments) allows you to customize your Facebook application's moderators, blacklisted words, external logins, and more.
+
+= Does Facebook Comments work with my existing WordPress comments? =
+
+The [Comments Box social plugin](https://developers.facebook.com/docs/reference/plugins/comments/) is meant to replace the WordPress commenting system with a more social, client-side experience. We do not currently support synchronizing comments stored on Facebook with comments stored in your WordPress database.
+
 == Upgrade Notice ==
 
 = 1.1 =

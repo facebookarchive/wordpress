@@ -342,8 +342,7 @@ class Facebook_Loader {
 	 */
 	public function set_locale() {
 		$transient_key = 'facebook_locale';
-		//$locale = get_transient( $transient_key );
-		$locale = false;
+		$locale = get_transient( $transient_key );
 		if ( $locale ) {
 			$this->locale = $locale;
 			return;

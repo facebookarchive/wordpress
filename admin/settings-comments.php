@@ -197,13 +197,17 @@ class Facebook_Comments_Settings extends Facebook_Social_Plugin_Settings {
 	 */
 	public function display_show_on() {
 		$existing_value = self::get_display_conditionals_by_feature( 'comments', 'posts' );
-		if ( ! is_array( $existing_value ) )
-			$existing_value = $post_types_supporting_comments;
+		if ( ! is_array( $existing_value ) ) {
+			$existing_value = array();
+			foreach ( $this->supporting_post_types as $post_type ) {
+				$existing_value[$post_type] = true;
+			}
+		}
 
 		$fields = array();
 		foreach( $this->supporting_post_types as $type ) {
 			$field = '<label><input type="checkbox" name="' . self::OPTION_NAME . '[show_on][]" value="' . esc_attr( $type ) . '"';
-			$field .= checked( in_array( $type, $existing_value, true ), true, false );
+			$field .= checked( isset( $existing_value[$type] ), true, false );
 			$field .= ' /> ' . esc_html( $type ) . '</label>';
 
 			$fields[] = $field;

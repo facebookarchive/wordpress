@@ -58,7 +58,7 @@ class Facebook_Social_Plugin_Settings {
 		$fields = array();
 		foreach( $choices as $type ) {
 			$field = '<label><input type="checkbox" name="' . $name . '[]" value="' . esc_attr( $type ) . '"';
-			$field .= checked( in_array( $type, $existing_value, true ), true, false );
+			$field .= checked( isset( $existing_value[$type] ), true, false );
 			$field .= ' /> ' . esc_html( $type ) . '</label>';
 
 			$fields[] = $field;
@@ -195,8 +195,8 @@ class Facebook_Social_Plugin_Settings {
 			$display_preferences = get_option( $option_name );
 			if ( ! is_array( $display_preferences ) )
 				continue;
-			if ( in_array( $feature_slug, $display_preferences, true ) )
-				$show_on[] = $display_type;
+			if ( isset( $display_preferences[$feature_slug] ) )
+				$show_on[$display_type] = true;
 		}
 
 		return $show_on;
@@ -228,18 +228,14 @@ class Facebook_Social_Plugin_Settings {
 			}
 
 			if ( in_array( $display_type, $show_on, true ) ) {
-				if ( ! in_array( $feature_slug, $display_preferences, true ) ) {
-					$display_preferences[] = $feature_slug;
+				if ( ! isset( $display_preferences[$feature_slug] ) ) {
+					$display_preferences[$feature_slug] = true;
 					$update = true;
 				}
-			} else {
+			} else if ( isset( $display_preferences[$feature_slug] ) ) {
 				// remove if present
-				$key = array_search( $feature_slug, $display_preferences, true );
-				if ( $key !== false ) {
-					unset( $display_preferences[$key] );
-					$update = true;
-				}
-				unset( $key );
+				unset( $display_preferences[$feature_slug] );
+				$update = true;
 			}
 
 			if ( $update )

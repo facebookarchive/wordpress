@@ -4,10 +4,6 @@
 if ( ! class_exists( 'WP_Facebook' ) )
 	require_once( dirname( __FILE__ ) . '/facebook.php' );
 
-// load user functions
-if ( ! class_exists( 'Facebook_User' ) )
-	require_once( dirname( dirname( dirname(__FILE__) ) ) . '/facebook-user.php' );
-
 /**
  * Override default Facebook PHP SDK behaviors with WordPress-friendly features
  *
@@ -75,6 +71,10 @@ class Facebook_WP_Extend extends WP_Facebook {
 	 */
 	public function get_current_user_permissions( $current_user = '' ) {
 		if ( ! $current_user ) {
+			// load user functions
+			if ( ! class_exists( 'Facebook_User' ) )
+				require_once( dirname( dirname( dirname(__FILE__) ) ) . '/facebook-user.php' );
+
 			// simply verify a connection between user and app
 			$current_user = Facebook_User::get_current_user( array( 'id' ) );
 			if ( ! $current_user )
@@ -93,8 +93,13 @@ class Facebook_WP_Extend extends WP_Facebook {
 			return array();
 		}
 
-		if ( is_array( $response ) && isset( $response['data'][0] ) )
-			return array_keys( $response['data'][0] );
+		if ( is_array( $response ) && isset( $response['data'][0] ) ) {
+			$permissions = array();
+			foreach( $response['data'][0] as $permission => $exists ) {
+				$permissions[$permission] = true;
+			}
+			return $permissions;
+		}
 
 		return array();
 	}
@@ -111,7 +116,9 @@ class Facebook_WP_Extend extends WP_Facebook {
 			return;
 		}
 
-		//WP 3.0+
+		// load user functions
+		if ( ! class_exists( 'Facebook_User' ) )
+			require_once( dirname( dirname( dirname(__FILE__) ) ) . '/facebook-user.php' );
 		Facebook_User::update_user_meta( get_current_user_id(), $key, $value );
 	}
 
@@ -121,6 +128,9 @@ class Facebook_WP_Extend extends WP_Facebook {
 			return $default;
 		}
 
+		// load user functions
+		if ( ! class_exists( 'Facebook_User' ) )
+			require_once( dirname( dirname( dirname(__FILE__) ) ) . '/facebook-user.php' );
 		return Facebook_User::get_user_meta( get_current_user_id(), $key, true );
 	}
 
@@ -130,6 +140,9 @@ class Facebook_WP_Extend extends WP_Facebook {
 			return;
 		}
 
+		// load user functions
+		if ( ! class_exists( 'Facebook_User' ) )
+			require_once( dirname( dirname( dirname(__FILE__) ) ) . '/facebook-user.php' );
 		Facebook_User::delete_user_meta( get_current_user_id(), $key );
 	}
 

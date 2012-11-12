@@ -1,6 +1,8 @@
 <?php
 /**
  * Adds the Subscribe Button Social Plugin as a WordPress Widget
+ *
+ * @since 1.0
  */
 class Facebook_Subscribe_Button_Widget extends WP_Widget {
 

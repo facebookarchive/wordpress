@@ -37,7 +37,7 @@ class Facebook_Comments {
 			return;
 
 		if ( ! class_exists( 'Facebook_User' ) )
-			require_once( dirname( dirname( __FILE__ ) ) . 'facebook-user.php' );
+			require_once( dirname( dirname( __FILE__ ) ) . '/facebook-user.php' );
 
 		$current_user = wp_get_current_user();
 		$facebook_user_data = Facebook_User::get_user_meta( $current_user->ID, 'fb_data', true );

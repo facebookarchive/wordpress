@@ -19,6 +19,7 @@ $__options = array(
 	'fb_options', // did not delete the old options on migration in case we needed to rerun
 	'facebook_application',
 	'facebook_comments',
+	'facebook_comments_enabled',
 	'facebook_like_button',
 	'facebook_recommendations_bar',
 	'facebook_send_button',

@@ -19,7 +19,7 @@ class Facebook_Mentions_Box {
 
 		// only show mentions box if mentions displayed alongside posts
 		$enabled_post_types = Facebook_Social_Plugin_Settings::get_display_conditionals_by_feature( 'mentions' );
-		if ( ! is_array( $enabled_post_types ) || empty( $enabled_post_types ) || ! in_array( $post_type, $enabled_post_types, true ) )
+		if ( ! is_array( $enabled_post_types ) || empty( $enabled_post_types ) || ! isset( $enabled_post_types[$post_type] ) )
 			return;
 
 		add_action( 'admin_enqueue_scripts', 'Facebook_Mentions_Box::enqueue_scripts' );

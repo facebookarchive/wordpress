@@ -12,7 +12,7 @@ class Facebook_Settings {
 	 * @since 1.1
 	 * @var array
 	 */
-	public static $features = array( 'like', 'send', 'subscribe', 'recommendations_bar', 'comments', 'social_publisher' );
+	public static $features = array( 'like' => true, 'send' => true, 'subscribe' => true, 'recommendations_bar' => true, 'comments' => true, 'social_publisher' => true );
 
 	/**
 	 * Add hooks
@@ -27,7 +27,7 @@ class Facebook_Settings {
 		if ( self::app_credentials_exist() ) {
 			$available_features = apply_filters( 'facebook_features', self::$features );
 			if ( is_array( $available_features ) && ! empty( $available_features ) ) {
-				if ( in_array( 'social_publisher', $available_features, true ) ) {
+				if ( isset( $available_features['social_publisher'] ) ) {
 					// check user capability to publish to Facebook
 					$current_user = wp_get_current_user();
 					if ( user_can( $current_user, 'edit_posts' ) )
@@ -77,21 +77,21 @@ class Facebook_Settings {
 		if ( ! is_array( $available_features ) || empty( $available_features ) )
 			return;
 
-		if ( in_array( 'like', $available_features, true ) ) {
+		if ( isset( $available_features['like'] ) ) {
 			if ( ! class_exists( 'Facebook_Like_Button_Settings' ) )
 				require_once( dirname(__FILE__) . '/settings-like-button.php' );
 
 			Facebook_Like_Button_Settings::add_submenu_item( $menu_slug );
 		}
 
-		if ( in_array( 'send', $available_features, true ) ) {
+		if ( isset( $available_features['send'] ) ) {
 			if ( ! class_exists( 'Facebook_Send_Button_Settings' ) )
 				require_once( dirname(__FILE__) . '/settings-send-button.php' );
 
 			Facebook_Send_Button_Settings::add_submenu_item( $menu_slug );
 		}
 
-		if ( in_array( 'subscribe', $available_features, true ) ) {
+		if ( isset( $available_features['subscribe'] ) ) {
 			if ( ! class_exists( 'Facebook_Subscribe_Button_Settings' ) )
 				require_once( dirname(__FILE__) . '/settings-subscribe-button.php' );
 
@@ -100,21 +100,21 @@ class Facebook_Settings {
 
 		// some features require stored Facbook application credentials. don't be a tease.
 		if ( $app_credentials_exist ) {
-			if ( in_array( 'recommendations_bar', $available_features, true ) ) {
+			if ( isset( $available_features['recommendations_bar'] ) ) {
 				if ( ! class_exists( 'Facebook_Recommendations_Bar_Settings' ) )
 					require_once( dirname(__FILE__) . '/settings-recommendations-bar.php' );
 
 				Facebook_Recommendations_Bar_Settings::add_submenu_item( $menu_slug );
 			}
 
-			if ( in_array( 'comments', $available_features, true ) ) {
+			if ( isset( $available_features['comments'] ) ) {
 				if ( ! class_exists( 'Facebook_Comments_Settings' ) )
 					require_once( dirname(__FILE__) . '/settings-comments.php' );
 
 				Facebook_Comments_Settings::add_submenu_item( $menu_slug );
 			}
 
-			if ( in_array( 'social_publisher', $available_features, true ) && wp_http_supports( array( 'ssl' => true ) ) ) {
+			if ( isset( $available_features['social_publisher'] ) && wp_http_supports( array( 'ssl' => true ) ) ) {
 				if ( ! class_exists( 'Facebook_Social_Publisher_Settings' ) )
 					require_once( dirname(__FILE__) . '/settings-social-publisher.php' );
 
@@ -273,14 +273,14 @@ class Facebook_Settings {
 			foreach( $sidebar_widgets as $widget_id ) {
 				if ( strlen( $widget_id ) > 9 && substr_compare( $widget_id, 'facebook-', 0, 9 ) === 0 ) {
 					$feature = substr( $key, 9, strrpos( $key, '-' ) - 9 );
-					if ( ! in_array( $feature, $widgets, true ) )
-						$widgets[] = $feature;
+					if ( ! isset( $widgets[$feature] ) )
+						$widgets[$feature] = true;
 					unset( $feature );
 				}
 			}
 
 			if ( ! empty( $widgets ) )
-				$debug['widgets'] = $widgets;
+				$debug['widgets'] = array_keys( $widgets );
 			unset( $widgets );
 		}
 
@@ -293,11 +293,11 @@ class Facebook_Settings {
 	 */
 	public static function plugin_conflicts() {
 		$og_conflicting_plugins = apply_filters( 'fb_conflicting_plugins', array(
-			'http://wordpress.org/extend/plugins/opengraph/',
-			'http://wordbooker.tty.org.uk',
-			'http://ottopress.com/wordpress-plugins/simple-facebook-connect/',
-			'http://www.whiletrue.it',
-			'http://aaroncollegeman.com/sharepress'
+			'http://wordpress.org/extend/plugins/opengraph/' => true,
+			'http://wordbooker.tty.org.uk' => true,
+			'http://ottopress.com/wordpress-plugins/simple-facebook-connect/' => true,
+			'http://www.whiletrue.it' => true,
+			'http://aaroncollegeman.com/sharepress' => true
 		) );
 
 		// allow for short circuit
@@ -317,7 +317,7 @@ class Facebook_Settings {
 			if ( ! ( isset( $plugin_data['PluginURI'] ) && isset( $plugin_data['Name'] ) ) || $plugin_data['PluginURI'] === 'http://wordpress.org/extend/plugins/facebook/' )
 				continue;
 
-			if( in_array( $plugin_data['PluginURI'], $og_conflicting_plugins, true ) )
+			if ( isset( $og_conflicting_plugins[ $plugin_data['PluginURI'] ] ) )
 				$conflicting_plugins[] = $plugin_data['Name'];
 
 			unset( $plugin_data );

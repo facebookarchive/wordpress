@@ -52,7 +52,7 @@ class Facebook_Loader {
 	 *
 	 * @since 1.1
 	 */
-	public static $locales = array( 'af_ZA', 'ar_AR', 'ay_BO', 'az_AZ', 'be_BY', 'bg_BG', 'bn_IN', 'bs_BA', 'ca_ES', 'ck_US', 'cs_CZ', 'cy_GB', 'da_DK', 'de_DE', 'el_GR', 'en_US', 'en_GB', 'eo_EO', 'es_CL', 'es_ES', 'es_CO', 'es_LA', 'es_MX', 'es_VE', 'et_EE', 'eu_ES', 'fa_IR', 'fb_FI', 'fb_LT', 'fi_FI', 'fo_FO', 'fr_FR', 'fr_CA', 'ga_IE', 'gl_ES', 'gn_PY', 'gu_IN', 'he_IL', 'hi_IN', 'hr_HR', 'hu_HU', 'hy_AM', 'id_ID', 'is_IS', 'it_IT', 'ja_JP', 'jv_ID', 'ka_GE', 'kk_KZ', 'km_KH', 'kn_IN', 'ko_KR', 'ku_TR', 'la_VA', 'li_NL', 'lt_LT', 'lv_LV', 'mg_MG', 'mk_MK', 'ml_IN', 'mn_MN', 'mr_IN', 'ms_MY', 'mt_MT', 'nb_NO', 'ne_NP', 'nl_NL', 'nl_BE', 'nn_NO', 'pa_IN', 'pl_PL', 'ps_AF', 'pt_PT', 'pt_BR', 'qu_PE', 'rm_CH', 'ro_RO', 'ru_RU', 'sa_IN', 'se_NO', 'sk_SK', 'sl_SI', 'so_SO', 'sq_AL', 'sr_RS', 'sv_SE', 'sw_KE', 'sy_SY', 'ta_IN', 'te_IN', 'tg_TJ', 'th_TH', 'tl_PH', 'tl_ST', 'tr_TR', 'tt_RU', 'uk_UA', 'ur_PK', 'uz_UZ', 'vi_VN', 'xh_ZA', 'yi_DE', 'zh_CN', 'zh_HK', 'zh_TW', 'zu_ZA' );
+	public static $locales = array( 'af_ZA' => true, 'ar_AR' => true, 'ay_BO' => true, 'az_AZ' => true, 'be_BY' => true, 'bg_BG' => true, 'bn_IN' => true, 'bs_BA' => true, 'ca_ES' => true, 'ck_US' => true, 'cs_CZ' => true, 'cy_GB' => true, 'da_DK' => true, 'de_DE' => true, 'el_GR' => true, 'en_US' => true, 'en_GB' => true, 'eo_EO' => true, 'es_CL' => true, 'es_ES' => true, 'es_CO' => true, 'es_LA' => true, 'es_MX' => true, 'es_VE' => true, 'et_EE' => true, 'eu_ES' => true, 'fa_IR' => true, 'fb_FI' => true, 'fb_LT' => true, 'fi_FI' => true, 'fo_FO' => true, 'fr_FR' => true, 'fr_CA' => true, 'ga_IE' => true, 'gl_ES' => true, 'gn_PY' => true, 'gu_IN' => true, 'he_IL' => true, 'hi_IN' => true, 'hr_HR' => true, 'hu_HU' => true, 'hy_AM' => true, 'id_ID' => true, 'is_IS' => true, 'it_IT' => true, 'ja_JP' => true, 'jv_ID' => true, 'ka_GE' => true, 'kk_KZ' => true, 'km_KH' => true, 'kn_IN' => true, 'ko_KR' => true, 'ku_TR' => true, 'la_VA' => true, 'li_NL' => true, 'lt_LT' => true, 'lv_LV' => true, 'mg_MG' => true, 'mk_MK' => true, 'ml_IN' => true, 'mn_MN' => true, 'mr_IN' => true, 'ms_MY' => true, 'mt_MT' => true, 'nb_NO' => true, 'ne_NP' => true, 'nl_NL' => true, 'nl_BE' => true, 'nn_NO' => true, 'pa_IN' => true, 'pl_PL' => true, 'ps_AF' => true, 'pt_PT' => true, 'pt_BR' => true, 'qu_PE' => true, 'rm_CH' => true, 'ro_RO' => true, 'ru_RU' => true, 'sa_IN' => true, 'se_NO' => true, 'sk_SK' => true, 'sl_SI' => true, 'so_SO' => true, 'sq_AL' => true, 'sr_RS' => true, 'sv_SE' => true, 'sw_KE' => true, 'sy_SY' => true, 'ta_IN' => true, 'te_IN' => true, 'tg_TJ' => true, 'th_TH' => true, 'tl_PH' => true, 'tl_ST' => true, 'tr_TR' => true, 'tt_RU' => true, 'uk_UA' => true, 'ur_PK' => true, 'uz_UZ' => true, 'vi_VN' => true, 'xh_ZA' => true, 'yi_DE' => true, 'zh_CN' => true, 'zh_HK' => true, 'zh_TW' => true, 'zu_ZA' => true );
 
 	/**
 	 * Let's get it started
@@ -235,13 +235,13 @@ class Facebook_Loader {
 		$priority = apply_filters( 'facebook_content_filter_priority', 30 );
 
 		// features available for archives and singular
-		if ( in_array( 'like', $enabled_features, true ) )
+		if ( isset( $enabled_features['like'] ) )
 			add_filter( 'the_content', 'facebook_the_content_like_button', $priority );
-		if ( in_array( 'send', $enabled_features, true ) )
+		if ( isset( $enabled_features['send'] ) )
 			add_filter( 'the_content', 'facebook_the_content_send_button', $priority );
-		if ( in_array( 'subscribe', $enabled_features, true ) )
+		if ( isset( $enabled_features['subscribe'] ) )
 			add_filter( 'the_content', 'facebook_the_content_subscribe_button', $priority );
-		if ( in_array( 'mentions', $enabled_features, true ) && ! get_option( 'facebook_mentions_disabled' ) ) {
+		if ( isset( $enabled_features['mentions'] ) ) {
 			if ( ! function_exists( 'fb_social_publisher_mentioning_output' ) )
 				require_once( dirname(__FILE__) . '/social-publisher/mentions.php' );
 			add_filter( 'the_content', 'fb_social_publisher_mentioning_output', $priority );
@@ -249,11 +249,11 @@ class Facebook_Loader {
 
 		// individual posts, pages, and custom post types features
 		if ( isset( $post_type ) ) {
-			if ( in_array( 'recommendations_bar', $enabled_features, true ) )
+			if ( isset( $enabled_features['recommendations_bar'] ) )
 				add_filter( 'the_content', 'facebook_the_content_recommendations_bar', $priority );
 
 			// only load comments class and features if enabled and post type supports
-			if ( in_array( 'comments', $enabled_features, true ) && post_type_supports( $post_type, 'comments' ) ) {
+			if ( isset( $enabled_features['comments'] ) && post_type_supports( $post_type, 'comments' ) ) {
 				if ( ! class_exists( 'Facebook_Comments' ) )
 					require_once( $this->plugin_directory . 'social-plugins/class-facebook-comments.php' );
 
@@ -353,7 +353,7 @@ class Facebook_Loader {
 		// convert locales like "es" to "es_ES"
 		if ( strlen( $locale ) === 2 ) {
 			$locale = strtolower( $locale );
-			foreach( self::$locales as $facebook_locale ) {
+			foreach( self::$locales as $facebook_locale => $exists ) {
 				if ( substr_compare( $facebook_locale, $locale, 0, 2 ) === 0 ) {
 					$locale = $facebook_locale;
 					break;
@@ -362,7 +362,7 @@ class Facebook_Loader {
 		}
 
 		// check to see if the locale is a valid FB one, if not, use en_US as a fallback
-		if ( ! in_array( $locale, self::$locales, true ) ) {
+		if ( ! isset( self::$locales[$locale] ) ) {
 			$locale = 'en_US';
 		}
 

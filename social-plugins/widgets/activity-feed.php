@@ -2,6 +2,8 @@
 
 /**
  * Adds the Recent Activity Social Plugin as a WordPress Widget
+ *
+ * @since 1.0
  */
 class Facebook_Activity_Feed_Widget extends WP_Widget {
 

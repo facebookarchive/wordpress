@@ -10,8 +10,6 @@ function fb_social_publisher_mentioning_output( $content ) {
 	if ( ! isset( $post ) )
 		return $content;
 
-	$options = get_option('fb_options');
-
 	$anchor_extras = '';
 	$anchor_target = apply_filters( 'facebook_anchor_target', '_blank', 'mentions' );
 	if ( $anchor_target && in_array( $anchor_target, array( '_blank', '_self', '_parent', '_top' ), true ) )

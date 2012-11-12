@@ -2,6 +2,8 @@
 
 /**
  * Adds the Recommendations Social Plugin as a WordPress Widget
+ *
+ * @since 1.0
  */
 class Facebook_Recommendations_Widget extends WP_Widget {
 

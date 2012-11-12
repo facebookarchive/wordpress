@@ -237,7 +237,7 @@ class Facebook_Social_Publisher_Settings {
 		if ( ! $this->user_associated_with_facebook_account ) {
 			// connect your account
 			echo '<p>' . sprintf( esc_html( __( '%s to publish new posts to your personal or page Facebook timeline.', 'facebook' ) ), '<span class="facebook-login" data-scope="page" style="font-weight:bold">' . esc_html( __( 'Associate your WordPress account with a Facebook profile', 'facebook' ) ) . '</span>' ) . '</p>';
-		} else if ( ! ( isset( $this->user_permissions ) && in_array( 'publish_stream', $this->user_permissions, true ) && in_array( 'publish_actions', $this->user_permissions, true ) ) ) {
+		} else if ( ! ( isset( $this->user_permissions ) && isset( $this->user_permissions['publish_stream'] ) && isset( $this->user_permissions['publish_actions'] ) ) ) {
 			// grant additional permissions needed to complete the task
 			echo '<p>' . sprintf( esc_html( __( '%s to publish new posts to your personal or page Facebook timeline.', 'facebook' ) ), '<span class="facebook-login" data-scope="page" style="font-weight:bold">' . esc_html( __( 'Grant application permissions', 'facebook' ) ) . '</span>' ) . '</p>';
 		}
@@ -288,7 +288,7 @@ class Facebook_Social_Publisher_Settings {
 	 * @since 1.1
 	 */
 	public function display_publish_author() {
-		if ( isset( $this->user_permissions ) && in_array( 'publish_stream', $this->user_permissions, true ) && in_array( 'publish_actions', $this->user_permissions, true ) ) {
+		if ( isset( $this->user_permissions ) && isset( $this->user_permissions['publish_stream'] ) && isset( $this->user_permissions['publish_actions'] ) ) {
 			echo '<label><input type="checkbox" name="' . self::PUBLISH_OPTION_NAME . '[author_timeline]" value="1"';
 			echo checked( Facebook_User::get_user_meta( $this->current_user->ID, 'facebook_timeline_disabled', true ), '' );
 			echo ' /> ';
@@ -335,7 +335,7 @@ class Facebook_Social_Publisher_Settings {
 
 		if ( $this->user_associated_with_facebook_account ) {
 			// does the current user have the ability to change the page?
-			if ( in_array( 'manage_pages', $this->user_permissions, true ) ) {
+			if ( isset( $this->user_permissions['manage_pages'] ) ) {
 				$pages = self::get_publishable_pages_for_current_user();
 				if ( ! empty( $pages ) ) {
 					echo '<select name="' . self::PUBLISH_OPTION_NAME . '[new_' . $key . ']' . '" id="publish-to-page"><option value=""' . selected( $page_id, '', false ) . '>';

@@ -82,7 +82,7 @@ class Facebook_Mentions_Box_Friends {
 
 		$facebook_user_permissions = Facebook_User::get_permissions();
 
-		if ( is_array( $facebook_user_permissions ) && ! empty( $facebook_user_permissions ) && in_array( 'publish_actions', $facebook_user_permissions, true ) && in_array( 'publish_stream', $facebook_user_permissions, true ) ) {
+		if ( is_array( $facebook_user_permissions ) && ! empty( $facebook_user_permissions ) && isset( $facebook_user_permissions['publish_actions'] ) && isset( $facebook_user_permissions['publish_stream'] ) ) {
 
 			$saved_mentions = get_post_meta( $post->ID, self::POST_META_KEY_MENTIONS, true );
 			echo '<label for="suggest-friends">' . esc_html( __( "Friend's Name", 'facebook' ) ) . '</label>';

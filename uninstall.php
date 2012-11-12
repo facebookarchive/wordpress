@@ -10,9 +10,11 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) )
 	exit();
 
 // user data
+$__user_id = get_current_user_id();
 foreach ( array('state', 'code', 'access_token', 'user_id', 'fb_data', 'facebook_timeline_disabled') as $meta_key ) {
-	delete_user_meta( get_current_user_id(), $meta_key );
+	delete_user_meta( $__user_id, $meta_key );
 }
+unset( $__user_id );
 
 // site options
 $__options = array(
@@ -39,5 +41,5 @@ unset( $__public_post_types );
 foreach ( $__options as $option_name ) {
 	delete_option( $option_name );
 }
-unset( $options );
+unset( $__options );
 ?>

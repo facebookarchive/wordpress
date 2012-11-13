@@ -233,7 +233,7 @@ class Facebook_Settings {
 			$debug['appid'] = $app_id;
 
 		if ( isset( $facebook_loader ) )
-			$debug['version'] = '1.1';
+			$debug['version'] = Facebook_Loader::VERSION;
 
 		$hostname = parse_url( site_url(), PHP_URL_HOST );
 		if ( $hostname )

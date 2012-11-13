@@ -166,7 +166,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * @return Facebook_Recommendations_Bar support chaining
 	 */
 	public function setReadTime( $seconds ) {
-		if ( is_int( $seconds ) && $seconds > 10 )
+		if ( is_int( $seconds ) && $seconds >= 10 )
 			$this->read_time = $seconds;
 		return $this;
 	}

@@ -53,7 +53,7 @@ class Facebook_Application_Settings {
 		// conditional load CSS, scripts
 		if ( $hook_suffix ) {
 			$app_settings->hook_suffix = $hook_suffix;
-			register_setting( $hook_suffix, self::OPTION_NAME, 'Facebook_Application_Settings::sanitize_options' );
+			register_setting( $hook_suffix, self::OPTION_NAME, array( 'Facebook_Application_Settings', 'sanitize_options' ) );
 			add_action( 'load-' . $hook_suffix, array( &$app_settings, 'onload' ) );
 		}
 
@@ -73,7 +73,7 @@ class Facebook_Application_Settings {
 
 		$this->settings_api_init();
 
-		add_action( 'admin_enqueue_scripts', 'Facebook_Application_Settings::enqueue_scripts' );
+		add_action( 'admin_enqueue_scripts', array( 'Facebook_Application_Settings', 'enqueue_scripts' ) );
 	}
 
 	/**
@@ -87,10 +87,10 @@ class Facebook_Application_Settings {
 
 		// notify of conflicts on the main settings page
 		// tie to an action to allow easy removal on sites/networks that rather not run checks
-		add_action( 'facebook_notify_plugin_conflicts', 'Facebook_Settings::plugin_conflicts' );
+		add_action( 'facebook_notify_plugin_conflicts', array( 'Facebook_Settings', 'plugin_conflicts' ) );
 
-		add_action( 'facebook_settings_before_header_' . $this->hook_suffix, 'Facebook_Application_Settings::before_header' );
-		add_action( 'facebook_settings_after_header_' . $this->hook_suffix, 'Facebook_Application_Settings::after_header' );
+		add_action( 'facebook_settings_before_header_' . $this->hook_suffix, array( 'Facebook_Application_Settings', 'before_header' ) );
+		add_action( 'facebook_settings_after_header_' . $this->hook_suffix, array( 'Facebook_Application_Settings', 'after_header' ) );
 
 		Facebook_Settings::settings_page_template( $this->hook_suffix, __( 'Facebook for WordPress', 'facebook' ) );
 	}

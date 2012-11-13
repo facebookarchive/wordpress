@@ -4,7 +4,7 @@
  *
  * @since 1.0
  */
-function fb_social_publisher_mentioning_output( $content ) {
+function facebook_social_publisher_mentioning_output( $content ) {
 	global $post;
 
 	if ( ! isset( $post ) )

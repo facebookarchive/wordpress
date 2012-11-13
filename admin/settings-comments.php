@@ -72,7 +72,7 @@ class Facebook_Comments_Settings extends Facebook_Social_Plugin_Settings {
 
 		if ( $hook_suffix ) {
 			$comments_settings->hook_suffix = $hook_suffix;
-			register_setting( $hook_suffix, self::OPTION_NAME, 'Facebook_Comments_Settings::sanitize_options' );
+			register_setting( $hook_suffix, self::OPTION_NAME, array( 'Facebook_Comments_Settings', 'sanitize_options' ) );
 			add_action( 'load-' . $hook_suffix, array( &$comments_settings, 'onload' ) );
 		}
 

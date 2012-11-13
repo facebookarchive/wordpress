@@ -2,6 +2,8 @@
 
 /**
  * Adds the Like Button Social Plugin as a WordPress Widget
+ *
+ * @since 1.0
  */
 class Facebook_Like_Button_Widget extends WP_Widget {
 

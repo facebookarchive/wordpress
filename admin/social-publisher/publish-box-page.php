@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Add a custom message to your article posted to a Facebook page
+ *
+ * @since 1.1
+ */
 class Facebook_Social_Publisher_Meta_Box_Page {
 	/**
 	 * Check page origin before saving
@@ -36,7 +41,7 @@ class Facebook_Social_Publisher_Meta_Box_Page {
 		add_meta_box(
 			'facebook-fan-page-message-box-id',
 			sprintf( __( 'Facebook Status on %s Timeline', 'facebook' ), $page['name'] ),
-			'Facebook_Social_Publisher_Meta_Box_Page::content',
+			array( 'Facebook_Social_Publisher_Meta_Box_Page', 'content' ),
 			$post_type
 		);
 	}

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Add a custom message to your article posted to a Facebook profile
+ *
+ * @since 1.1
+ */
 class Facebook_Social_Publisher_Meta_Box_Profile {
 
 	/**
@@ -37,7 +42,7 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 		add_meta_box(
 			'facebook-author-message-box-id',
 			__( 'Facebook Status on Your Timeline', 'facebook' ),
-			'Facebook_Social_Publisher_Meta_Box_Profile::content',
+			array( 'Facebook_Social_Publisher_Meta_Box_Profile', 'content' ),
 			$post_type
 		);
 	}

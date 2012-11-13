@@ -46,7 +46,7 @@ class Facebook_Comments {
 
 		// swap only. don't add a menu item if none existed
 		if ( remove_action( 'admin_bar_menu', 'wp_admin_bar_comments_menu', 60 ) ) {
-			add_action( 'admin_bar_menu', 'Facebook_Comments::admin_bar_add_comments_menu', 60 );
+			add_action( 'admin_bar_menu', array( 'Facebook_Comments', 'admin_bar_add_comments_menu' ), 60 );
 		}
 	}
 

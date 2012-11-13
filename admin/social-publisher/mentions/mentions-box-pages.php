@@ -56,7 +56,7 @@ class Facebook_Mentions_Box_Pages {
 		add_meta_box(
 			'facebook-page-mention-box-id',
 			__( 'Mention Facebook Pages', 'facebook' ),
-			'Facebook_Mentions_Box_Pages::content',
+			array( 'Facebook_Mentions_Box_Pages', 'content' ),
 			$post_type,
 			'side'
 		);

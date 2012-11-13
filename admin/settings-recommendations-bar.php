@@ -76,7 +76,7 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 
 		if ( $hook_suffix ) {
 			$recommendations_bar_settings->hook_suffix = $hook_suffix;
-			register_setting( $hook_suffix, self::OPTION_NAME, 'Facebook_Recommendations_Bar_Settings::sanitize_options' );
+			register_setting( $hook_suffix, self::OPTION_NAME, array( 'Facebook_Recommendations_Bar_Settings', 'sanitize_options' ) );
 			add_action( 'load-' . $hook_suffix, array( &$recommendations_bar_settings, 'onload' ) );
 		}
 

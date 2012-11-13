@@ -35,6 +35,9 @@ class Facebook_Subscribe_Button_Widget extends WP_Widget {
 		if ( ! isset( $instance['ref'] ) )
 			$instance['ref'] = 'widget';
 
+		if ( ! function_exists( 'facebook_get_subscribe_button' ) )
+			require_once( dirname( dirname(__FILE__) ) . '/social-plugins.php' );
+
 		$subscribe_button_html = facebook_get_subscribe_button( $instance );
 		if ( ! ( is_string( $subscribe_button_html ) && $subscribe_button_html ) )
 			return;

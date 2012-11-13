@@ -31,6 +31,8 @@ class Facebook_Send_Button_Widget extends WP_Widget {
 		if ( ! isset( $instance['ref'] ) )
 			$instance['ref'] = 'widget';
 
+		if ( ! function_exists( 'facebook_get_send_button' ) )
+			require_once( dirname( dirname(__FILE__) ) . '/social-plugins.php' );
 		$send_button_html = facebook_get_send_button( $instance );
 
 		if ( ! ( is_string( $send_button_html ) && $send_button_html ) )

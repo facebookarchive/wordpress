@@ -31,7 +31,7 @@ class Facebook_Admin_Login {
 			return;
 
 		if ( ! class_exists( 'Facebook_User' ) )
-			require_once( dirname(__FILE__) . 'facebook-user.php' );
+			require_once( dirname(__FILE__) . '/facebook-user.php' );
 
 		$facebook_user_data_exists = false;
 		$facebook_user_data = Facebook_User::get_user_meta( $current_user->ID, 'fb_data', true );

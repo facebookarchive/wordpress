@@ -272,7 +272,7 @@ class Facebook_Settings {
 			// note any facebook widgets we find along the way
 			foreach( $sidebar_widgets as $widget_id ) {
 				if ( strlen( $widget_id ) > 9 && substr_compare( $widget_id, 'facebook-', 0, 9 ) === 0 ) {
-					$feature = substr( $key, 9, strrpos( $key, '-' ) - 9 );
+					$feature = substr( $widget_id, 9, strrpos( $widget_id, '-' ) - 9 );
 					if ( ! isset( $widgets[$feature] ) )
 						$widgets[$feature] = true;
 					unset( $feature );

@@ -17,7 +17,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	 * @since 1.1
 	 * @var string
 	 */
-	const id = 'subscribe';
+	const ID = 'subscribe';
 
 	/**
 	 * The Facebook URL representing a user profile or page open to new subscribers
@@ -262,7 +262,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 		if ( empty( $data ) )
 			return '';
 
-		$div_attributes = self::add_required_class( 'fb-' . self::id, $div_attributes );
+		$div_attributes = self::add_required_class( 'fb-' . self::ID, $div_attributes );
 		$div_attributes['data'] = $data;
 
 		return self::div_builder( $div_attributes );
@@ -279,7 +279,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 		if ( empty( $data ) )
 			return '';
 
-		return self::xfbml_builder( self::id, $data );
+		return self::xfbml_builder( self::ID, $data );
 	}
 }
 ?>

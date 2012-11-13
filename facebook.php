@@ -210,9 +210,9 @@ class Facebook_Loader {
 		// always include Open Graph protocol markup
 		if ( ! class_exists( 'Facebook_Open_Graph_Protocol' ) )
 			require_once( $this->plugin_directory . 'open-graph-protocol.php' );
-		add_action( 'wp_head', 'Facebook_Open_Graph_Protocol::add_og_protocol' );
+		add_action( 'wp_head', array( 'Facebook_Open_Graph_Protocol', 'add_og_protocol' ) );
 
-		add_action( 'wp_enqueue_scripts', 'Facebook_Loader::enqueue_jssdk' );
+		add_action( 'wp_enqueue_scripts', array( 'Facebook_Loader', 'enqueue_jssdk' ) );
 
 		$enabled_features = array();
 		$option_name = 'facebook_%s_features';
@@ -242,9 +242,9 @@ class Facebook_Loader {
 		if ( isset( $enabled_features['subscribe'] ) )
 			add_filter( 'the_content', 'facebook_the_content_subscribe_button', $priority );
 		if ( isset( $enabled_features['mentions'] ) ) {
-			if ( ! function_exists( 'fb_social_publisher_mentioning_output' ) )
+			if ( ! function_exists( 'facebook_social_publisher_mentioning_output' ) )
 				require_once( dirname(__FILE__) . '/social-publisher/mentions.php' );
-			add_filter( 'the_content', 'fb_social_publisher_mentioning_output', $priority );
+			add_filter( 'the_content', 'facebook_social_publisher_mentioning_output', $priority );
 		}
 
 		// individual posts, pages, and custom post types features
@@ -257,13 +257,13 @@ class Facebook_Loader {
 				if ( ! class_exists( 'Facebook_Comments' ) )
 					require_once( $this->plugin_directory . 'social-plugins/class-facebook-comments.php' );
 
-				add_filter( 'the_content', 'Facebook_Comments::the_content_comments_box', $priority );
-				add_action( 'wp_enqueue_scripts', 'Facebook_Comments::css_hide_comments', 0 );
+				add_filter( 'the_content', array( 'Facebook_Comments', 'the_content_comments_box' ), $priority );
+				add_action( 'wp_enqueue_scripts', array( 'Facebook_Comments', 'css_hide_comments' ), 0 );
 				add_filter( 'comments_array', '__return_null' );
 				add_filter( 'comments_open', '__return_true' ); // comments are always open
 
 				// display comments number if used in template
-				add_filter( 'comments_number', 'Facebook_Comments::comments_count_xfbml' );
+				add_filter( 'comments_number', array( 'Facebook_Comments', 'comments_count_xfbml' ) );
 
 				// short-circuit special template behavior for comment count = 0
 				// prevents linking to #respond anchor which leads nowhere
@@ -271,7 +271,7 @@ class Facebook_Loader {
 			}
 		}
 
-		add_action( 'wp_enqueue_scripts', 'Facebook_Loader::enqueue_styles' );
+		add_action( 'wp_enqueue_scripts', array( 'Facebook_Loader', 'enqueue_styles' ) );
 	}
 
 	/**

@@ -82,7 +82,7 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 
 		if ( $hook_suffix ) {
 			$subscribe_button_settings->hook_suffix = $hook_suffix;
-			register_setting( $hook_suffix, self::OPTION_NAME, 'Facebook_Subscribe_Button_Settings::sanitize_options' );
+			register_setting( $hook_suffix, self::OPTION_NAME, array( 'Facebook_Subscribe_Button_Settings', 'sanitize_options' ) );
 			add_action( 'load-' . $hook_suffix, array( &$subscribe_button_settings, 'onload' ) );
 		}
 

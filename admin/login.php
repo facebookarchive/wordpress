@@ -70,12 +70,12 @@ class Facebook_Admin_Login {
 		}
 
 		// priority before js sdk registration needed to add JS inside FbAsyncInit
-		add_action( 'admin_enqueue_scripts', 'Facebook_Admin_Login::add_async_load_javascript_filter', -1, 0 );
+		add_action( 'admin_enqueue_scripts', array( 'Facebook_Admin_Login', 'add_async_load_javascript_filter' ), -1, 0 );
 		// add all others at P11 after scripts registered
-		add_action( 'admin_enqueue_scripts', 'Facebook_Admin_Login::enqueue_scripts', 11 );
+		add_action( 'admin_enqueue_scripts', array( 'Facebook_Admin_Login', 'enqueue_scripts' ), 11 );
 
 		if ( $profile_prompt )
-			add_action( 'admin_notices', 'Facebook_Admin_Login::admin_notice', 1, 0 ); // up top
+			add_action( 'admin_notices', array( 'Facebook_Admin_Login', 'admin_notice' ), 1, 0 ); // up top
 	}
 
 	/**
@@ -92,7 +92,7 @@ class Facebook_Admin_Login {
 
 	public static function add_async_load_javascript_filter() {
 		// async load our script after we async load Facebook JavaScript SDK
-		add_filter( 'facebook_jssdk_init_extras', 'Facebook_Admin_Login::async_load_javascript', 10, 2 );
+		add_filter( 'facebook_jssdk_init_extras', array( 'Facebook_Admin_Login', 'async_load_javascript' ), 10, 2 );
 	}
 
 	/**

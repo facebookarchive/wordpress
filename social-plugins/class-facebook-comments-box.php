@@ -14,7 +14,7 @@ class Facebook_Comments_Box {
 	 * @since 1.1
 	 * @var string
 	 */
-	const id = 'comments';
+	const ID = 'comments';
 
 	/**
 	 * Override the URL related to this comment.
@@ -207,7 +207,7 @@ class Facebook_Comments_Box {
 		if ( ! class_exists( 'Facebook_Social_Plugin' ) )
 			require_once( dirname(__FILE__) . '/class-facebook-social-plugin.php' );
 
-		$div_attributes = Facebook_Social_Plugin::add_required_class( 'fb-' . self::id, $div_attributes );
+		$div_attributes = Facebook_Social_Plugin::add_required_class( 'fb-' . self::ID, $div_attributes );
 		$div_attributes['data'] = $this->toHTMLDataArray();
 
 		return Facebook_Social_Plugin::div_builder( $div_attributes );
@@ -223,7 +223,7 @@ class Facebook_Comments_Box {
 		if ( ! class_exists( 'Facebook_Social_Plugin' ) )
 			require_once( dirname(__FILE__) . '/class-facebook-social-plugin.php' );
 
-		return Facebook_Social_Plugin::xfbml_builder( self::id, $this->toHTMLDataArray() );
+		return Facebook_Social_Plugin::xfbml_builder( self::ID, $this->toHTMLDataArray() );
 	}
 }
 

@@ -21,8 +21,8 @@ class Facebook_Settings {
 	 */
 	public static function init() {
 		self::migrate_options_10();
-		add_action( 'admin_menu', 'Facebook_Settings::settings_menu_items' );
-		add_filter( 'plugin_action_links', 'Facebook_Settings::plugin_action_links', 10, 2 );
+		add_action( 'admin_menu', array( 'Facebook_Settings', 'settings_menu_items' ) );
+		add_filter( 'plugin_action_links', array( 'Facebook_Settings', 'plugin_action_links' ), 10, 2 );
 
 		if ( self::app_credentials_exist() ) {
 			$available_features = apply_filters( 'facebook_features', self::$features );
@@ -31,7 +31,7 @@ class Facebook_Settings {
 					// check user capability to publish to Facebook
 					$current_user = wp_get_current_user();
 					if ( user_can( $current_user, 'edit_posts' ) )
-						add_action( 'admin_init', 'Facebook_Settings::prompt_user_login' );
+						add_action( 'admin_init', array( 'Facebook_Settings', 'prompt_user_login' ) );
 				}
 			}
 		}
@@ -149,7 +149,7 @@ class Facebook_Settings {
 
 		// show admin dialog on post creation, post edit, or user profile screen
 		foreach( array( 'post-new.php','post.php','profile.php' ) as $pagenow ) {
-			add_action( 'load-' . $pagenow, 'Facebook_Admin_Login::connect_facebook_account' );
+			add_action( 'load-' . $pagenow, array( 'Facebook_Admin_Login', 'connect_facebook_account' ) );
 		} 
 	}
 
@@ -272,7 +272,7 @@ class Facebook_Settings {
 			// note any facebook widgets we find along the way
 			foreach( $sidebar_widgets as $widget_id ) {
 				if ( strlen( $widget_id ) > 9 && substr_compare( $widget_id, 'facebook-', 0, 9 ) === 0 ) {
-					$feature = substr( $key, 9, strrpos( $key, '-' ) - 9 );
+					$feature = substr( $widget_id, 9, strrpos( $widget_id, '-' ) - 9 );
 					if ( ! isset( $widgets[$feature] ) )
 						$widgets[$feature] = true;
 					unset( $feature );

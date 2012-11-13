@@ -56,7 +56,7 @@ class Facebook_Mentions_Box_Friends {
 		add_meta_box(
 			'facebook-friend-mention-box-id',
 			__( 'Mention Facebook Friends', 'facebook' ),
-			'Facebook_Mentions_Box_Friends::content',
+			array( 'Facebook_Mentions_Box_Friends', 'content' ),
 			$post_type,
 			'side'
 		);

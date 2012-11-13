@@ -17,7 +17,7 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	 * @since 1.1
 	 * @var string
 	 */
-	const id = 'like';
+	const ID = 'like';
 
 	/**
 	 * Override the URL used for the like action.
@@ -319,7 +319,7 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	 * @return HTML div or empty string
 	 */
 	public function asHTML( $div_attributes=array() ) {
-		$div_attributes = self::add_required_class( 'fb-' . self::id, $div_attributes );
+		$div_attributes = self::add_required_class( 'fb-' . self::ID, $div_attributes );
 		$div_attributes['data'] = $this->toHTMLDataArray();
 
 		return self::div_builder( $div_attributes );
@@ -332,7 +332,7 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	 * @return string XFBML markup
 	 */
 	public function asXFBML() {
-		return self::xfbml_builder( self::id, $this->toHTMLDataArray() );
+		return self::xfbml_builder( self::ID, $this->toHTMLDataArray() );
 	}
 }
 ?>

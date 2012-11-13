@@ -22,7 +22,7 @@ class Facebook_Mentions_Box {
 		if ( ! is_array( $enabled_post_types ) || empty( $enabled_post_types ) || ! isset( $enabled_post_types[$post_type] ) )
 			return;
 
-		add_action( 'admin_enqueue_scripts', 'Facebook_Mentions_Box::enqueue_scripts' );
+		add_action( 'admin_enqueue_scripts', array( 'Facebook_Mentions_Box', 'enqueue_scripts' ) );
 
 		if ( ! class_exists( 'Facebook_Mentions_Box_Friends' ) )
 			require_once( dirname(__FILE__) . '/mentions-box-friends.php' );
@@ -41,11 +41,11 @@ class Facebook_Mentions_Box {
 	public static function add_save_post_hooks() {
 		if ( ! class_exists( 'Facebook_Mentions_Box_Friends' ) )
 			require_once( dirname(__FILE__) . '/mentions-box-friends.php' );
-		add_action( 'save_post', 'Facebook_Mentions_Box_Friends::save' );
+		add_action( 'save_post', array( 'Facebook_Mentions_Box_Friends', 'save' ) );
 
 		if ( ! class_exists( 'Facebook_Mentions_Box_Pages' ) )
 			require_once( dirname(__FILE__) . '/mentions-box-pages.php' );
-		add_action( 'save_post', 'Facebook_Mentions_Box_Pages::save' );
+		add_action( 'save_post', array( 'Facebook_Mentions_Box_Pages', 'save' ) );
 	}
 
 	/**

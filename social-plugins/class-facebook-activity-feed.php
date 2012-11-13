@@ -17,7 +17,7 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	 * @since 1.1
 	 * @var string
 	 */
-	const id = 'activity';
+	const ID = 'activity';
 
 	/**
 	 * Include recommendations?
@@ -168,7 +168,7 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	 * @return HTML div or empty string
 	 */
 	public function asHTML( $div_attributes=array() ) {
-		$div_attributes = self::add_required_class( 'fb-' . self::id, $div_attributes );
+		$div_attributes = self::add_required_class( 'fb-' . self::ID, $div_attributes );
 		$div_attributes['data'] = $this->toHTMLDataArray();
 
 		return self::div_builder( $div_attributes );
@@ -181,7 +181,7 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	 * @return string XFBML markup
 	 */
 	public function asXFBML() {
-		return self::xfbml_builder( self::id, $this->toHTMLDataArray() );
+		return self::xfbml_builder( self::ID, $this->toHTMLDataArray() );
 	}
 }
 

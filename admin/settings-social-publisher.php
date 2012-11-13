@@ -69,8 +69,8 @@ class Facebook_Social_Publisher_Settings {
 
 		if ( $hook_suffix ) {
 			$social_publisher_settings->hook_suffix = $hook_suffix;
-			register_setting( $hook_suffix, self::PUBLISH_OPTION_NAME, 'Facebook_Social_Publisher_Settings::sanitize_publish_options' );
-			register_setting( $hook_suffix, self::MENTIONS_OPTION_NAME, 'Facebook_Social_Publisher_Settings::sanitize_mentions_options' );
+			register_setting( $hook_suffix, self::PUBLISH_OPTION_NAME, array( 'Facebook_Social_Publisher_Settings', 'sanitize_publish_options' ) );
+			register_setting( $hook_suffix, self::MENTIONS_OPTION_NAME, array( 'Facebook_Social_Publisher_Settings', 'sanitize_mentions_options' ) );
 			add_action( 'load-' . $hook_suffix, array( &$social_publisher_settings, 'onload' ) );
 		}
 

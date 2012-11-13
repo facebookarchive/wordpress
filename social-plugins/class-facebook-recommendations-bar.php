@@ -17,7 +17,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * @since 1.1
 	 * @var string
 	 */
-	const id = 'recommendations-bar';
+	const ID = 'recommendations-bar';
 
 	/**
 	 * Override the URL used for the like action.
@@ -368,7 +368,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 		if ( ! class_exists( 'Facebook_Social_Plugin' ) )
 			require_once( dirname(__FILE__) . '/class-facebook-social-plugin.php' );
 
-		$div_attributes = Facebook_Social_Plugin::add_required_class( 'fb-' . self::id, $div_attributes );
+		$div_attributes = Facebook_Social_Plugin::add_required_class( 'fb-' . self::ID, $div_attributes );
 		$div_attributes['data'] = $this->toHTMLDataArray();
 
 		return Facebook_Social_Plugin::div_builder( $div_attributes );
@@ -384,7 +384,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 		if ( ! class_exists( 'Facebook_Social_Plugin' ) )
 			require_once( dirname(__FILE__) . '/class-facebook-social-plugin.php' );
 
-		return Facebook_Social_Plugin::xfbml_builder( self::id, $this->toHTMLDataArray() );
+		return Facebook_Social_Plugin::xfbml_builder( self::ID, $this->toHTMLDataArray() );
 	}
 }
 

@@ -37,8 +37,8 @@ class Facebook_Social_Publisher {
 
 		// always load publish and delete hooks
 		// post can be published or deleted many different ways
-		add_action( 'transition_post_status', 'Facebook_Social_Publisher::publish', 10, 3 );
-		add_action( 'before_delete_post', 'Facebook_Social_Publisher::delete_facebook_post' );
+		add_action( 'transition_post_status', array( 'Facebook_Social_Publisher', 'publish' ), 10, 3 );
+		add_action( 'before_delete_post', array( 'Facebook_Social_Publisher', 'delete_facebook_post' ) );
 		self::add_save_post_hooks();
 
 		// load meta box hooks on post creation screens
@@ -60,11 +60,11 @@ class Facebook_Social_Publisher {
 
 		if ( ! class_exists( 'Facebook_Social_Publisher_Meta_Box_Profile' ) )
 			require_once( dirname(__FILE__) . '/publish-box-profile.php' );
-		add_action( 'save_post', 'Facebook_Social_Publisher_Meta_Box_Profile::save' );
+		add_action( 'save_post', array( 'Facebook_Social_Publisher_Meta_Box_Profile', 'save' ) );
 
 		if ( ! class_exists( 'Facebook_Social_Publisher_Meta_Box_Page' ) )
 			require_once(  dirname(__FILE__) . '/publish-box-page.php' );
-		add_action( 'save_post', 'Facebook_Social_Publisher_Meta_Box_Page::save' );
+		add_action( 'save_post', array( 'Facebook_Social_Publisher_Meta_Box_Page', 'save' ) );
 
 		if ( ! class_exists( 'Facebook_Mentions_Box' ) )
 			require_once( dirname(__FILE__) . '/mentions/mentions-box.php' );
@@ -85,7 +85,7 @@ class Facebook_Social_Publisher {
 			return;
 
 		// on post pages
-		add_action( 'admin_notices', 'Facebook_Social_Publisher::output_post_admin_notices' );
+		add_action( 'admin_notices', array( 'Facebook_Social_Publisher', 'output_post_admin_notices' ) );
 
 		// wait until after post data loaded, then evaluate post
 		add_action( 'add_meta_boxes', array( &$this, 'load_post_features' ) );
@@ -375,7 +375,7 @@ class Facebook_Social_Publisher {
 				$status_messages = array_merge( $existing_status_messages, $status_messages );
 
 			update_post_meta( $post_id, 'facebook_status_messages', $status_messages );
-			add_filter( 'redirect_post_location', 'Facebook_Social_Publisher::add_new_post_location' );
+			add_filter( 'redirect_post_location', array( 'Facebook_Social_Publisher', 'add_new_post_location' ) );
 		}
 	}
 
@@ -438,7 +438,7 @@ class Facebook_Social_Publisher {
 				$status_messages = array_merge($existing_status_messages, $status_messages);
 
 			update_post_meta( $post_id, 'facebook_status_messages', $status_messages );
-			add_filter( 'redirect_post_location', 'Facebook_Social_Publisher::add_new_post_location' );
+			add_filter( 'redirect_post_location', array( 'Facebook_Social_Publisher', 'add_new_post_location' ) );
 		}
 	}
 

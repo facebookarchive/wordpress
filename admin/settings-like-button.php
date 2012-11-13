@@ -81,7 +81,7 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 
 		if ( $hook_suffix ) {
 			$like_button_settings->hook_suffix = $hook_suffix;
-			register_setting( $hook_suffix, self::OPTION_NAME, 'Facebook_Like_Button_Settings::sanitize_options' );
+			register_setting( $hook_suffix, self::OPTION_NAME, array( 'Facebook_Like_Button_Settings', 'sanitize_options' ) );
 			add_action( 'load-' . $hook_suffix, array( &$like_button_settings, 'onload' ) );
 		}
 

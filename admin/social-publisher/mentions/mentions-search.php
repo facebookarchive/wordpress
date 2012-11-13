@@ -14,8 +14,8 @@ class Facebook_Mentions_Search {
 	 * @since 1.1
 	 */
 	public static function wp_ajax_handlers() {
-		add_action( 'wp_ajax_facebook_mentions_friends_autocomplete', 'Facebook_Mentions_Search::search_endpoint_friends' );
-		add_action( 'wp_ajax_facebook_mentions_pages_autocomplete', 'Facebook_Mentions_Search::search_endpoint_pages' );
+		add_action( 'wp_ajax_facebook_mentions_friends_autocomplete', array( 'Facebook_Mentions_Search', 'search_endpoint_friends' ) );
+		add_action( 'wp_ajax_facebook_mentions_pages_autocomplete', array( 'Facebook_Mentions_Search', 'search_endpoint_pages' ) );
 	}
 
 	/**

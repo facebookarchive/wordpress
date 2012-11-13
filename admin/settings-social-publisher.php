@@ -475,7 +475,7 @@ class Facebook_Social_Publisher_Settings {
 
 		if ( isset( $options['show_on'] ) || isset( $options['position'] ) ) {
 			if ( ! class_exists( 'Facebook_Social_Plugin_Button_Settings' ) )
-				require_once( dirname(__FILE__) . '/settings-social-plugin-button' );
+				require_once( dirname(__FILE__) . '/settings-social-plugin-button.php' );
 
 			$options = Facebook_Social_Plugin_Button_Settings::sanitize_options( $options );
 			if ( isset( $options['show_on'] ) ) {

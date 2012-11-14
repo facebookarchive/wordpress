@@ -5,7 +5,7 @@ Requires at least: 3.3
 Tested up to: 3.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 
 Make your WordPress site social in a couple of clicks, powered by Facebook.
 
@@ -105,6 +105,9 @@ The [Comments Box social plugin](https://developers.facebook.com/docs/reference/
 
 == Upgrade Notice ==
 
+= 1.1.4 =
+Comments number filter available on all contexts when comments box enabled for one or more post types.
+
 = 1.1.3 =
 Fix recommendations bar issue and PHP issue affecting 5.2.4 - 5.2.8 installs.
 
@@ -121,6 +124,12 @@ Improve site performance when cURL not installed or SSL not available. Removed p
 Security fixes. Improved customization and debugging of settings. l10n and i18n fixes.
 
 == Changelog ==
+
+= 1.1.4 =
+
+* Comment counts powered by Facebook available in all page contexts when comments box social plugin enabled for one or more post types.
+* Subscribe button settings fix
+* Recommendations Bar max age setting fix
 
 = 1.1.3 =
 

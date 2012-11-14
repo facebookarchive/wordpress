@@ -214,6 +214,23 @@ class Facebook_Loader {
 
 		add_action( 'wp_enqueue_scripts', array( 'Facebook_Loader', 'enqueue_jssdk' ) );
 
+		// include comment count filters on all pages
+		if ( get_option( 'facebook_comments_enabled' ) ) {
+			add_filter( 'comments_array', '__return_null' );
+			add_filter( 'comments_open', '__return_true' ); // comments are always open
+
+			// short-circuit special template behavior for comment count = 0
+			// prevents linking to #respond anchor which leads nowhere
+			add_filter( 'get_comments_number', create_function('', 'return -1;') );
+
+			if ( ! class_exists( 'Facebook_Comments' ) )
+				require_once( $this->plugin_directory . 'social-plugins/class-facebook-comments.php' );
+
+			// display comments number if used in template
+			add_filter( 'comments_number', array( 'Facebook_Comments', 'comments_count_xfbml' ) );
+		}
+
+		// check for enabled features by page type
 		$enabled_features = array();
 		$option_name = 'facebook_%s_features';
 		if ( is_home() || is_front_page() ) {
@@ -259,15 +276,6 @@ class Facebook_Loader {
 
 				add_filter( 'the_content', array( 'Facebook_Comments', 'the_content_comments_box' ), $priority );
 				add_action( 'wp_enqueue_scripts', array( 'Facebook_Comments', 'css_hide_comments' ), 0 );
-				add_filter( 'comments_array', '__return_null' );
-				add_filter( 'comments_open', '__return_true' ); // comments are always open
-
-				// display comments number if used in template
-				add_filter( 'comments_number', array( 'Facebook_Comments', 'comments_count_xfbml' ) );
-
-				// short-circuit special template behavior for comment count = 0
-				// prevents linking to #respond anchor which leads nowhere
-				add_filter( 'get_comments_number', create_function('', 'return -1;') );
 			}
 		}
 

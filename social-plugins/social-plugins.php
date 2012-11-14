@@ -198,12 +198,12 @@ function facebook_get_subscribe_button( $options = array() ) {
 }
 
 /**
- * Add Send Button(s) to post content
- * Adds a send button above the post, below the post, or both above and below the post depending on stored preferences.
+ * Add Subscribe Button(s) to post content
+ * Adds a subscribe button above the post, below the post, or both above and below the post depending on stored preferences.
  *
  * @since 1.1
  * @param string $content existing content
- * @return string passed content with Send Button markup prepended, appended, or both.
+ * @return string passed content with Subscribe Button markup prepended, appended, or both.
  */
 function facebook_the_content_subscribe_button( $content ) {
 	global $post;

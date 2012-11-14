@@ -295,7 +295,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 		if ( isset( $this->site ) && is_array( $this->site ) && ! empty( $this->site ) )
 			$data['site'] = implode( ',', $this->site );
 
-		if ( isset( $this->num_recommendations ) && $this->num_recommendations !== 2 ) // default: 2
+		if ( isset( $this->num_recommendations ) && $this->num_recommendations != 2 ) // default: 2
 			$data['num-recommendations'] = strval( $this->num_recommendations );
 
 		if ( isset( $this->max_age ) && $this->max_age !== 0 ) // default: 0 (no limit)
@@ -349,7 +349,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 			$bar->setReference( $values['ref'] );
 
 		if ( isset( $values['num_recommendations'] ) )
-			$bar->setNumRecommendations( $values['num_recommendations'] );
+			$bar->setNumRecommendations( absint( $values['num_recommendations'] ) );
 
 		if ( isset( $values['max_age'] ) )
 			$bar->setMaxAge( $values['max_age'] );

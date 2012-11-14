@@ -477,9 +477,21 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 		}
 		unset( $options['show_on'] );
 
+		// href required for subscribe button
+		// set href contextual to the post author, not at settings
+		// fake it here to pass sanitization, then remove before save
+		$options['href'] = 'https://www.facebook.com/zuck';
+
 		$subscribe_button = Facebook_Subscribe_Button::fromArray( $options );
-		if ( $subscribe_button )
-			return array_merge( $clean_options, self::html_data_to_options( $subscribe_button->toHTMLDataArray() ) );
+		if ( $subscribe_button ) {
+			$subscribe_button_options = self::html_data_to_options( $subscribe_button->toHTMLDataArray() );
+
+			// remove the dummy value set above
+			// remove here instead of html_data_to_options to separate widget usage with its real href
+			unset( $subscribe_button_options['href'] );
+
+			return array_merge( $clean_options, $subscribe_button_options );
+		}
 
 		return $clean_options;
 	}

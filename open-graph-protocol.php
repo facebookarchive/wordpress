@@ -136,6 +136,7 @@ class Facebook_Open_Graph_Protocol {
 			else
 				$meta_tags[ self::OGP_NS . 'url' ] = home_url();
 		} else if ( is_single() && empty( $post->post_password ) ) {
+			setup_postdata( $post );
 			$post_type = get_post_type();
 			$meta_tags[ self::OGP_NS . 'type' ] = 'article';
 			$meta_tags[ self::OGP_NS . 'url' ] = apply_filters( 'facebook_rel_canonical', get_permalink() );

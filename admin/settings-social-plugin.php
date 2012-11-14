@@ -168,7 +168,7 @@ class Facebook_Social_Plugin_Settings {
 
 		if ( isset( $options['show_on'] ) ) {
 			if ( is_array( $options['show_on'] ) )
-				$clean_options['show_on'] = array_unique( $options['show_on'], SORT_STRING ); // SORT_STRING default after PHP 5.2.10. WordPress min requirement is 5.2.4
+				$clean_options['show_on'] = array_unique( $options['show_on'] ); // SORT_STRING default after PHP 5.2.10. WordPress min requirement is 5.2.4
 			else if ( is_string( $options['show_on'] ) )
 				$clean_options['show_on'] = array( $options['show_on'] );
 		}

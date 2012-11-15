@@ -317,8 +317,11 @@ class Facebook_Comments_Settings extends Facebook_Social_Plugin_Settings {
 		// Handle display preferences first
 		$clean_options = parent::sanitize_options( $options );
 		if ( isset( $clean_options['show_on'] ) ) {
-			update_option( 'facebook_comments_enabled', '1' );
 			self::update_display_conditionals( 'comments', $clean_options['show_on'], self::post_types_supporting_comments() );
+			if ( empty( $clean_options['show_on'] ) )
+				delete_option( 'facebook_comments_enabled' );
+			else
+				update_option( 'facebook_comments_enabled', '1' );
 			unset( $clean_options['show_on'] );
 		} else {
 			delete_option( 'facebook_comments_enabled' );

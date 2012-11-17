@@ -100,7 +100,7 @@ class Facebook_Mentions_Box_Pages {
 				unset( $mentions );
 			}
 			echo ' />';
-			echo '<script type="text/javascript">jQuery("#suggest-pages").bind("facebook-pages-mentions-onload",function(){';
+			echo '<script type="text/javascript">jQuery("#suggest-pages").on("facebook-pages-mentions-onload",function(){';
 			if ( is_array( $saved_mentions ) )
 				echo 'FB_WP.admin.mentions.page_suggest.stored_values=' . json_encode( $saved_mentions ) . ';';
 			echo 'FB_WP.admin.mentions.page_suggest.hint=' . json_encode( _x( 'Type to find a page.', 'Page as in webpage', 'facebook' ) ) . ';';

@@ -101,7 +101,7 @@ class Facebook_Mentions_Box_Friends {
 				unset( $mentions );
 			}
 			echo ' />';
-			echo '<script type="text/javascript">jQuery("#suggest-friends").bind("facebook-friends-mentions-onload",function(){';
+			echo '<script type="text/javascript">jQuery("#suggest-friends").on("facebook-friends-mentions-onload",function(){';
 			if ( is_array( $saved_mentions ) )
 				echo 'FB_WP.admin.mentions.friend_suggest.stored_values=' . json_encode( $saved_mentions ) . ';';
 			echo 'FB_WP.admin.mentions.friend_suggest.hint=' . json_encode( __( 'Type to find a friend.', 'facebook' ) ) . ';';

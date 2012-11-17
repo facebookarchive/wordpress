@@ -2,7 +2,7 @@
 var FB_WP = FB_WP || {};
 FB_WP.admin = FB_WP.admin || {};
 FB_WP.admin.mentions = {
-	friend_suggest: {hint:"Type to find a friend.",noresults:"No friend found.",stored_values:[]}, // TODO: override me with translations
+	friend_suggest: {hint:"Type to find a friend.",noresults:"No friend found.",stored_values:[]},
 	page_suggest: {hint:"Type to find a page.",noresults:"No page found.",stored_values:[]},
 	short_number: function(num) {
 		if( num > 1000000 ) {

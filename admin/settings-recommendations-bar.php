@@ -201,7 +201,7 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	 * @since 1.1
 	 */
 	public function display_show_on() {
-		echo '<fieldset id="facebook-recommendations-bar-show-on">' . self::show_on_choices( self::OPTION_NAME . '[show_on]', self::get_display_conditionals_by_feature( 'recommendations_bar', 'all' ), 'recommendations_bar' ) . '</fieldset>';
+		echo '<fieldset id="facebook-recommendations-bar-show-on">' . self::show_on_choices( self::OPTION_NAME . '[show_on]', self::get_display_conditionals_by_feature( 'recommendations_bar', 'all' ) ) . '</fieldset>';
 
 		echo '<p class="description">' . esc_html( self::show_on_description( self::social_plugin_name() ) ) . '</p>';
 	}

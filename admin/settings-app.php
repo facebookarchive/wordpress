@@ -103,7 +103,7 @@ class Facebook_Application_Settings {
 	 */
 	public function enqueue_scripts() {
 		wp_enqueue_script( 'facebook-jssdk' );
-		wp_enqueue_script( self::PAGE_SLUG, plugins_url( 'static/js/admin/settings-app' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.dev' : '' ) . '.js', dirname(__FILE__) ), array( 'jquery' ), '1.1', true );
+		wp_enqueue_script( self::PAGE_SLUG, plugins_url( 'static/js/admin/settings-app' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min' ) . '.js', dirname(__FILE__) ), array( 'jquery' ), '1.1', true );
 	}
 
 	/**

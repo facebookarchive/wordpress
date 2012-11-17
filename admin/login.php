@@ -112,7 +112,7 @@ class Facebook_Admin_Login {
 	 * @return string JavaScript code to be appended to the fbAsyncInit function
 	 */
 	public static function async_load_javascript( $js_block = '', $app_id = '' ) {
-		return $js_block . 'jQuery.ajax({url:' . json_encode( plugins_url( 'static/js/admin/login' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.dev' : '' ) .  '.js', dirname(__FILE__) ) ) . ',cache:true,dataType:"script"}).success(function(){FB_WP.admin.login.attach_events();});';
+		return $js_block . 'jQuery.ajax({url:' . json_encode( plugins_url( 'static/js/admin/login' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min' ) .  '.js', dirname(__FILE__) ) ) . ',cache:true,dataType:"script"}).success(function(){FB_WP.admin.login.attach_events();});';
 	}
 }
 ?>

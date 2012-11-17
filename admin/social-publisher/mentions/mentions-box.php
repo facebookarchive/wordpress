@@ -59,22 +59,19 @@ class Facebook_Mentions_Box {
 
 		$plugin_file = $facebook_loader->plugin_directory . 'facebook.php';
 
-		$js_suffix = '';
-		$css_suffix = '.min';
-		if ( defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ) {
-			$js_suffix = '.dev';
-			$css_suffix = '';
-		}
+		$suffix = '.min';
+		if ( defined('SCRIPT_DEBUG') && SCRIPT_DEBUG )
+			$suffix = '';
 
 		wp_enqueue_script( 'suggest' );
-		wp_enqueue_script( 'facebook-mentions', plugins_url( 'static/js/admin/mentions' . $js_suffix . '.js', $plugin_file ), array('jquery'), '1.1', true );
-		wp_enqueue_style( 'facebook-mentions', plugins_url( 'static/css/admin/mentions' . $css_suffix . '.css', $plugin_file ), array(), '1.1' );
+		wp_enqueue_script( 'facebook-mentions', plugins_url( 'static/js/admin/mentions' . $suffix . '.js', $plugin_file ), array('jquery'), '1.1', true );
+		wp_enqueue_style( 'facebook-mentions', plugins_url( 'static/css/admin/mentions' . $suffix . '.css', $plugin_file ), array(), '1.1' );
 
 		$loopj_version = '1.6.0';
-		wp_enqueue_script( 'facebook-loopj', plugins_url( 'static/js/admin/loopj-jquery-tokeninput/jquery.tokeninput' . $js_suffix . '.js', $plugin_file ), array('jquery'), $loopj_version, true );
-		wp_enqueue_style( 'facebook-loopj', plugins_url( 'static/js/admin/loopj-jquery-tokeninput/styles/token-input-facebook' . $css_suffix . '.css', $plugin_file ), array(), $loopj_version );
+		wp_enqueue_script( 'facebook-loopj', plugins_url( 'static/js/admin/loopj-jquery-tokeninput/jquery.tokeninput' . $suffix . '.js', $plugin_file ), array('jquery'), $loopj_version, true );
+		wp_enqueue_style( 'facebook-loopj', plugins_url( 'static/js/admin/loopj-jquery-tokeninput/styles/token-input-facebook' . $suffix . '.css', $plugin_file ), array(), $loopj_version );
 
-		wp_enqueue_script( 'tipsy', plugins_url( 'static/js/admin/jquery.tipsy' . $js_suffix . '.js', $plugin_file ), array('jquery'), '1.0.0a', true );
+		wp_enqueue_script( 'tipsy', plugins_url( 'static/js/admin/jquery.tipsy' . $suffix . '.js', $plugin_file ), array('jquery'), '1.0.0a', true );
 
 		wp_localize_script( 'facebook-mentions', 'FBNonce', array(
 			// URL to wp-admin/admin-ajax.php to process the request

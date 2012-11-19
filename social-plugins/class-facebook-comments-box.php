@@ -185,8 +185,8 @@ class Facebook_Comments_Box {
 		if ( isset( $this->width ) && is_int( $this->width ) && $this->width > 0 )
 			$data['width'] = $this->width;
 
-		if ( isset( $this->colorscheme ) && $this->colorscheme !== 'light' )
-			$data['colorscheme'] = $this->colorscheme;
+		if ( isset( $this->color_scheme ) && $this->color_scheme !== 'light' )
+			$data['colorscheme'] = $this->color_scheme;
 
 		if ( isset( $this->num_posts ) && is_int( $this->num_posts ) && $this->num_posts > 0 && $this->num_posts !== 10 )
 			$data['num-posts'] = $this->num_posts;

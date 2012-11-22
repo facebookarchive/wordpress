@@ -358,7 +358,12 @@ class Facebook_Comments {
 
 		// closed posts can have comments from their previous open state
 		// display noscript version of these comments
-		$content .= "\n" . self::comments_markup( 'noscript' ) . "\n";
+		$comments_markup = self::comments_markup( 'noscript' );
+		if ( $comments_markup )
+			$content .= "\n" . $comments_markup . "\n";
+		else
+			remove_filter( 'comments_open', '__return_true' ); // allow closed comments if no previous comments to display
+		unset( $comments_markup );
 
 		// no option via JS SDK to display comments yet not accept new comments
 		// only display JS SDK version of comments box display if we would like more comments
@@ -366,7 +371,7 @@ class Facebook_Comments {
 			$url = apply_filters( 'facebook_rel_canonical', get_permalink() );
 			if ( $url ) // false could happen. let JS SDK handle compatibility mode
 				$options['href'] = $url;
-			$content .= self::js_sdk_markup( $options );
+			$content .= "\n" . self::js_sdk_markup( $options ) . "\n";
 		}
 
 		return $content;

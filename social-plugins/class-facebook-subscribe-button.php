@@ -1,0 +1,285 @@
+<?php
+
+if ( ! class_exists( 'Facebook_Social_Plugin' ) )
+	require_once( dirname(__FILE__) . '/class-facebook-social-plugin.php' );
+
+/**
+ * Encourage visitors to subscribe to your public updates on Facebook with a Subscribe Button
+ *
+ * @since 1.1
+ * @link https://developers.facebook.com/docs/reference/plugins/subscribe/ Facebook Subscribe Button
+ */
+class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
+
+	/**
+	 * Element and class name used in markup builders
+	 *
+	 * @since 1.1
+	 * @var string
+	 */
+	const ID = 'subscribe';
+
+	/**
+	 * The Facebook URL representing a user profile or page open to new subscribers
+	 * Your account must allow subscribers. Subscribe only available for accounts belonging to a user over 18 years of age
+	 *
+	 * @link https://www.facebook.com/about/subscribe About Facebook Subscribe
+	 * @since 1.1
+	 * @var string
+	 */
+	protected $href;
+
+	/**
+	 * Which style subscribe button you would like displayed
+	 *
+	 * @since 1.1
+	 * @var string
+	 */
+	protected $layout;
+
+	/**
+	 * Choose your subscribe button
+	 *
+	 * @since 1.1
+	 * @var array
+	 */
+	public static $layout_choices = array( 'standard', 'button_count', 'box_count' );
+
+	/**
+	 * Show faces of the viewer's friends already subscribed?
+	 * Only applies to standard layout. Needs the extra width.
+	 *
+	 * @since 1.1
+	 * @var bool
+	 */
+	protected $show_faces;
+
+	/**
+	 * Define a custom width in whole pixels
+	 *
+	 * @since 1.1
+	 * @var int
+	 */
+	protected $width;
+
+	/**
+	 * Option to bypass validation.
+	 * You might validate when changing settings but choose not to validate on future generators
+	 *
+	 * @since 1.1
+	 * @param bool $validate false if object should not be validated
+	 */
+	public function __construct( $validate = true ) {
+		if ( $validate === false )
+			$this->validate = false;
+		else
+			$this->validate = true;
+	}
+
+	/**
+	 * I am a subscribe button
+	 *
+	 * @since 1.1
+	 * @return string
+	 */
+	public function __toString() {
+		return 'Facebook Subscribe Button';
+	}
+
+	/**
+	 * Setter for href attribute
+	 *
+	 * @since 1.1
+	 * @param string $url absolute URL
+	 * @return Facebook_Subscribe_Button support chaining
+	 */
+	public function setURL( $url ) {
+		$url = esc_url_raw( $url, array( 'http', 'https' ) );
+		if ( $url ) {
+			// you can only subscribe to a Facebook URL
+			if ( parse_url( $url, PHP_URL_HOST ) === 'www.facebook.com' )
+				$this->href = $url;
+		}
+		return $this;
+	}
+
+	/**
+	 * Choose a layout option
+	 *
+	 * @since 1.1
+	 * @see self::$layout_choices
+	 * @param string $layout a supported layout option
+	 * @return Facebook_Subscribe_Button support chaining
+	 */
+	public function setLayout( $layout ) {
+		if ( is_string( $layout ) && in_array( $layout, self::$layout_choices, true ) )
+			$this->layout = $layout;
+		return $this;
+	}
+
+	/**
+	 * Show the faces of a logged-on Facebook user's friends
+	 *
+	 * @since 1.1
+	 * @return Facebook_Subscribe_Button support chaining
+	 */
+	public function showFaces() {
+		$this->show_faces = true;
+		return $this;
+	}
+
+	/**
+	 * Width of the subscribe button
+	 * Should be greater than the minimum width of layout option
+	 *
+	 * @since 1.1
+	 * @param int $width width in whole pixels
+	 * @return Facebook_Subscribe_Button support chaining
+	 */
+	public function setWidth( $width ) {
+		// narrowest subscribe button is box_count at 55
+		if ( is_int( $width ) && $width > 55 )
+			$this->width = $width;
+		return $this;
+	}
+
+	/**
+	 * Compute a minimum width of a subscribe button based on configured options
+	 *
+	 * @since 1.1
+	 * @return int minimum width of the current configuration in whole pixels
+	 */
+	private function compute_minimum_width() {
+		$min_width = 225; // standard
+		if ( isset( $this->layout ) ) {
+			if ( $this->layout === 'button_count' )
+				$min_width = 90;
+			else if ( $this->layout === 'box_count' )
+				$min_width = 55;
+		}
+
+		return $min_width;
+	}
+
+	/**
+	 * Some options may be in conflict with other options or not available for main choices
+	 * Reset customizations if we can detect non-compliance to avoid later confusion and/or layout issues
+	 *
+	 * @since 1.1
+	 */
+	public function validate() {
+		// allow overrides
+		if ( isset( $this->validate ) && $this->validate === false )
+			return;
+
+		// show faces supported in standard layout only
+		if ( isset( $this->show_faces ) && $this->show_faces === true && $this->layout !== 'standard' )
+			unset( $this->show_faces );
+
+		// is the specified width less than minimum for config?
+		if ( isset( $this->width ) ) {
+			$min_width = $this->compute_minimum_width();
+			if ( $this->width < $min_width )
+				$this->width = $min_width;
+			unset( $min_width );
+		}
+
+		$this->validate = false;
+	}
+
+	/**
+	 * convert an options array into an object
+	 *
+	 * @since 1.1
+	 * @param array $values associative array
+	 * @return Facebook_Subscribe_Button subscribe object
+	 */
+	public static function fromArray( $values ) {
+		if ( ! is_array( $values ) || empty( $values ) )
+			return;
+
+		$subscribe_button = new Facebook_Subscribe_Button();
+
+		if ( isset( $values['href'] ) )
+			$subscribe_button->setURL( $values['href'] );
+
+		if ( isset( $values['layout'] ) )
+			$subscribe_button->setLayout( $values['layout'] );
+
+		if ( isset( $values['show_faces'] ) && ( $values['show_faces'] === true || $values['show_faces'] === 'true' || $values['show_faces'] == 1 ) )
+			$subscribe_button->showFaces();
+
+		if ( isset( $values['width'] ) )
+			$subscribe_button->setWidth( absint( $values['width'] ) );
+
+		if ( isset( $values['font'] ) )
+			$subscribe_button->setFont( $values['font'] );
+
+		if ( isset( $values['colorscheme'] ) )
+			$subscribe_button->setColorScheme( $values['colorscheme'] );
+
+		return $subscribe_button;
+	}
+
+	/**
+	 * Convert the class to data-* attribute friendly associative array
+	 * will become data-key="value"
+	 * Exclude values if default
+	 *
+	 * @since 1.1
+	 * @return array associative array
+	 */
+	public function toHTMLDataArray() {
+		if ( ! isset( $this->href ) )
+			return array();
+
+		$data = parent::toHTMLDataArray();
+
+		$data['href'] = $this->href;
+
+		if ( isset( $this->layout ) && $this->layout !== 'standard' )
+			$data['layout'] = $this->layout;
+
+		if ( isset( $this->show_faces ) && $this->show_faces === true )
+			$data['show-faces'] = 'true';
+
+		if ( isset( $this->width ) && is_int( $this->width ) )
+			$data['width'] = strval( $this->width );
+
+		return $data;
+	}
+
+	/**
+	 * Output Subscribe button with data-* attributes
+	 *
+	 * @since 1.1
+	 * @param array $div_attributes associative array. customize the returned div with id, class, or style attributes
+	 * @return HTML div or empty string
+	 */
+	public function asHTML( $div_attributes=array() ) {
+		$data = $this->toHTMLDataArray();
+		// if no target href then do nothing
+		if ( empty( $data ) )
+			return '';
+
+		$div_attributes = self::add_required_class( 'fb-' . self::ID, $div_attributes );
+		$div_attributes['data'] = $data;
+
+		return self::div_builder( $div_attributes );
+	}
+
+	/**
+	 * Output Subscribe button as XFBML
+	 *
+	 * @since 1.1
+	 * @return string XFBML markup
+	 */
+	public function asXFBML() {
+		$data = $this->toHTMLDataArray();
+		if ( empty( $data ) )
+			return '';
+
+		return self::xfbml_builder( self::ID, $data );
+	}
+}
+?>

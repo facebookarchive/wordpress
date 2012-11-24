@@ -36,6 +36,14 @@ class Facebook_Social_Publisher_Settings {
 	 * @var string
 	 */
 	const OPTION_PUBLISH_TO_PAGE = 'facebook_publish_page';
+	
+	/**
+	 * Define the option name for mentions
+	 *
+	 * @since 
+	 * @var string
+	 */
+	const PUBLISH_POST_TYPES_OPTION_NAME = 'facebook_publish_page_post_types';
 
 	/**
 	 * Reference the social plugin by name
@@ -71,6 +79,7 @@ class Facebook_Social_Publisher_Settings {
 			$social_publisher_settings->hook_suffix = $hook_suffix;
 			register_setting( $hook_suffix, self::PUBLISH_OPTION_NAME, array( 'Facebook_Social_Publisher_Settings', 'sanitize_publish_options' ) );
 			register_setting( $hook_suffix, self::MENTIONS_OPTION_NAME, array( 'Facebook_Social_Publisher_Settings', 'sanitize_mentions_options' ) );
+			register_setting( $hook_suffix, self::PUBLISH_POST_TYPES_OPTION_NAME, array( 'Facebook_Social_Publisher_Settings', 'sanitize_publish_post_types_options' ) );
 			add_action( 'load-' . $hook_suffix, array( &$social_publisher_settings, 'onload' ) );
 		}
 
@@ -160,6 +169,13 @@ class Facebook_Social_Publisher_Settings {
 			'facebook-publish-page',
 			__( 'Publish to a page', 'facebook' ),
 			array( &$this, 'display_publish_page' ),
+			$this->hook_suffix,
+			$section
+		);
+		add_settings_field(
+			'facebook-publish-page-choose-post-type',
+			__( 'Publish only', 'facebook' ),
+			array( &$this, 'display_publish_page_choose_post_type' ),
 			$this->hook_suffix,
 			$section
 		);
@@ -357,6 +373,16 @@ class Facebook_Social_Publisher_Settings {
 	}
 
 	/**
+	 * Choose what post types can be published
+	 *
+	 * @since 
+	 */
+	public function display_publish_page_choose_post_type() {
+		echo '<fieldset id="facebook-publish-page-choose-post-type">' . Facebook_Social_Plugin_Settings::show_on_choices( self::PUBLISH_POST_TYPES_OPTION_NAME . '[show_on]', Facebook_Social_Plugin_Settings::get_display_conditionals_by_feature( 'publish_post_types', 'all' )) . '</fieldset>';
+		echo '<p>' . esc_html( __( 'Choose which post types can be published on facebook.', 'facebook' ) ) . '</p>';		
+	}
+
+	/**
 	 * Introduce the mentions section
 	 *
 	 * @since 1.1
@@ -486,6 +512,32 @@ class Facebook_Social_Publisher_Settings {
 			// limit what is stored to our whitelist of properties
 			if ( isset( $options['position'] ) )
 				return array( 'position' => $options['position'] );
+		}
+
+		return array();
+
+	}
+	
+	/**
+	 * Process changes to publish_post_types options
+	 *
+	 * @since 
+	 * @param array $options form options
+	 */
+	public static function sanitize_publish_post_types_options( $options ) {
+		if ( ! is_array( $options ) || empty( $options ) )
+			return array();
+
+		if ( isset( $options['show_on'] ) ) {
+			if ( ! class_exists( 'Facebook_Social_Plugin_Button_Settings' ) )
+				require_once( dirname(__FILE__) . '/settings-social-plugin-button.php' );
+
+			$options = Facebook_Social_Plugin_Button_Settings::sanitize_options( $options );
+			if ( isset( $options['show_on'] ) ) {
+				Facebook_Social_Plugin_Button_Settings::update_display_conditionals( 'publish_post_types', $options['show_on'], Facebook_Social_Plugin_Button_Settings::get_show_on_choices( 'all' ) );
+				unset( $options['show_on'] );
+			}
+
 		}
 
 		return array();

@@ -289,6 +289,12 @@ class Facebook_Social_Publisher {
 		$post_type = get_post_type( $post );
 		if ( ! $post_type )
 			return $post_type;
+		
+		// check if post type is allowed to be published
+		$post_type_option_name = 'facebook_%s_features';
+		$post_type_option = get_option( sprintf( $post_type_option_name, $post_type ) );
+		if ( ! $post_type_option['publish_post_types'])
+			return $post_type;
 
 		// check our assumptions about a valid link in place
 		// fail if a piece of the filter process killed our response
@@ -403,6 +409,12 @@ class Facebook_Social_Publisher {
 		$post_type = get_post_type( $post );
 		if ( ! ( $post_type && post_type_supports( $post_type, 'author' ) ) )
 			return;
+		
+		// check if post type is allowed to be published
+		$post_type_option_name = 'facebook_%s_features';
+		$post_type_option = get_option( sprintf( $post_type_option_name, $post_type ) );
+		if ( ! $post_type_option['publish_post_types'])
+			return $post_type;
 
 		// the person publishing the post may not be the same person who authored the post
 		// publish to the timeline of the author, not the post approver / publisher

@@ -1,0 +1,80 @@
+#wpbody-content section {
+	margin-top: 3em;
+}
+
+#wpbody-content table {
+  background-color: transparent;
+  border-collapse: collapse;
+  border-spacing: 0;
+  min-width: 33%;
+  max-width: 100%;
+  margin-top: 2em;
+}
+
+#wpbody-content th, #wpbody-content td {
+  padding: 8px;
+  vertical-align: top;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #ddd;
+}
+
+#wpbody-content th {
+  font-weight: bold;
+}
+
+#wpbody-content td {
+  text-align: center;
+}
+
+#debug-server td {
+  text-align: left;
+}
+
+// Bottom align for column headings
+#wpbody-content thead th {
+  text-align: center;
+  vertical-align: bottom;
+}
+
+#wpbody-content thead th:first-child {
+  text-align: left;
+}
+
+#wpbody-content tbody th {
+  text-align: left;
+}
+
+#wpbody-content caption + thead tr:first-child th, #wpbody-content caption + thead tr:first-child td, #wpbody-content colgroup + thead tr:first-child th, #wpbody-content colgroup + thead tr:first-child td, #wpbody-content thead:first-child tr:first-child th, #wpbody-content thead:first-child tr:first-child td {
+  border-top: 0;
+}
+
+tbody tr:nth-child(odd) td, tbody tr:nth-child(odd) th {
+    background-color: #f9f9f9;
+}
+
+.feature-present {
+  font-style: bold;
+  color: green;
+}
+
+.feature-not-present {
+  font-style: bold;
+  color: red
+}
+
+.facebook-icon {
+  background-image: url( '../../img/icon.png' );
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+}
+
+/* high-dpi */
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) {
+  .facebook-icon {
+    background-image: url( '../../img/icon-2x.png' );
+  }
+}

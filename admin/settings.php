@@ -23,6 +23,7 @@ class Facebook_Settings {
 		self::migrate_options_10();
 		add_action( 'admin_menu', array( 'Facebook_Settings', 'settings_menu_items' ) );
 		add_filter( 'plugin_action_links', array( 'Facebook_Settings', 'plugin_action_links' ), 10, 2 );
+		add_action( 'admin_enqueue_scripts', array( 'Facebook_Settings', 'enqueue_scripts' ) );
 
 		if ( self::app_credentials_exist() ) {
 			$available_features = apply_filters( 'facebook_features', self::$features );
@@ -35,6 +36,15 @@ class Facebook_Settings {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Enqueue scripts and styles
+	 *
+	 * @since 1.1.6
+	 */
+	public static function enqueue_scripts() {
+		wp_enqueue_style( 'facebook-admin-icons', plugins_url( 'static/css/admin/icons' . ( ( defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ) ? '' : '.min' ) . '.css', dirname( __FILE__ ) ), array(), '1.1' );
 	}
 
 	/**
@@ -120,6 +130,10 @@ class Facebook_Settings {
 
 				Facebook_Social_Publisher_Settings::add_submenu_item( $menu_slug );
 			}
+
+			if ( ! class_exists( 'Facebook_Settings_Debugger' ) )
+				require_once( dirname(__FILE__) . '/settings-debug.php' );
+			Facebook_Settings_Debugger::add_submenu_item( $menu_slug );
 		}
 
 		// make an assumption about submenu mappings, but don't fail if our assumption is wrong
@@ -245,46 +259,58 @@ class Facebook_Settings {
 			require_once( dirname(__FILE__) . '/settings-social-plugin.php' );
 
 		$enabled_features = array();
-		$all_targets = Facebook_Social_Plugin_Settings::get_show_on_choices( 'all' );
-		$option_name = 'facebook_%s_features';
-		foreach ( $all_targets as $target ) {
-			$features = get_option( sprintf( $option_name, $target ) );
+		$views = Facebook_Social_Plugin_Settings::get_show_on_choices( 'all' );
+		foreach ( $views as $view ) {
+			$features = get_option( 'facebook_' . $view . '_features' );
 			if ( is_array( $features ) && ! empty( $features ) )
-				$enabled_features[$target] = $features;
+				$enabled_features[$view] = array_keys( $features );
 			else
-				$enabled_features[$target] = false; // show a potential target where nothing appears
+				$enabled_features[$view] = false; // show a potential target where nothing appears
 			unset( $features );
 		}
-		unset( $option_name );
-		unset( $all_targets );
+		unset( $views );
 		if ( ! empty( $enabled_features ) )
 			$debug['features'] = $enabled_features;
 		unset( $enabled_features );
 
+		$widgets = self::get_active_widgets();
+		if ( ! empty( $widgets ) )
+			$debug['widgets'] = $widgets;
+
+		return $debug;
+	}
+
+	/**
+	 * Get a list of Facebook widgets in one or more sidebars
+	 *
+	 * @since 1.1.6
+	 * @return array widget slugs
+	 */
+	public static function get_active_widgets() {
 		$sidebar_widgets = wp_get_sidebars_widgets();
 		unset( $sidebar_widgets['wp_inactive_widgets'] ); // no need to track inactives
 		$sidebar_widgets = array_unique( array_merge( array_values( $sidebar_widgets ) ) ); // track widgets, not sidebar names
-		if ( is_array( $sidebar_widgets ) && isset( $sidebar_widgets[0] ) ) {
-			$sidebar_widgets = $sidebar_widgets[0];
-			$widgets = array();
+		if ( ! ( is_array( $sidebar_widgets ) && isset( $sidebar_widgets[0] ) ) )
+			return array();
 
-			// iterate through each sidebar configuration
-			// note any facebook widgets we find along the way
-			foreach( $sidebar_widgets as $widget_id ) {
-				if ( strlen( $widget_id ) > 9 && substr_compare( $widget_id, 'facebook-', 0, 9 ) === 0 ) {
-					$feature = substr( $widget_id, 9, strrpos( $widget_id, '-' ) - 9 );
-					if ( ! isset( $widgets[$feature] ) )
-						$widgets[$feature] = true;
-					unset( $feature );
-				}
+		$sidebar_widgets = $sidebar_widgets[0];
+		$widgets = array();
+
+		// iterate through each sidebar configuration
+		// note any facebook widgets we find along the way
+		foreach( $sidebar_widgets as $widget_id ) {
+			if ( strlen( $widget_id ) > 9 && substr_compare( $widget_id, 'facebook-', 0, 9 ) === 0 ) {
+				$feature = substr( $widget_id, 9, strrpos( $widget_id, '-' ) - 9 );
+				if ( ! isset( $widgets[$feature] ) )
+					$widgets[$feature] = true;
+				unset( $feature );
 			}
-
-			if ( ! empty( $widgets ) )
-				$debug['widgets'] = array_keys( $widgets );
-			unset( $widgets );
 		}
 
-		return $debug;
+		if ( ! empty( $widgets ) )
+			return array_keys( $widgets );
+
+		return array();
 	}
 
 	/**

@@ -105,6 +105,41 @@ class Facebook_WP_Extend extends WP_Facebook {
 	}
 
 	/**
+	 * Retrieve Facebook permissions assigned to the application by a specific Facebook user id
+	 *
+	 * @since 1.1.6
+	 * @param string $facebook_id Facebook user identifier
+	 * @return array Facebook permissions
+	 */
+	public function get_permissions_by_facebook_user_id( $facebook_id ) {
+		if ( ! ( is_string( $facebook_id ) && $facebook_id ) )
+			return array();
+
+		try {
+			$response = $this->api( '/' . $facebook_id . '/permissions', 'GET', array( 'ref' => 'fbwpp' ) );
+		} catch ( WP_FacebookApiException $e ) {
+			$error_result = $e->getResult();
+			if ( $error_result && isset( $error_result['error_code'] ) ) {
+				// try to extend access token if request failed
+				if ( $error_result['error_code'] === 2500 )
+					$this->setExtendedAccessToken();
+			}
+			return array();
+		}
+
+		if ( is_array( $response ) && isset( $response['data'][0] ) ) {
+			$response = $response['data'][0];
+			$permissions = array();
+			foreach( $response as $permission => $exists ) {
+				$permissions[$permission] = true;
+			}
+			return $permissions;
+		}
+
+		return array();
+	}
+
+	/**
 	 * Provides the implementations of the inherited abstract
 	 * methods.  The implementation uses user meta to maintain
 	 * a store for authorization codes, user ids, CSRF states, and

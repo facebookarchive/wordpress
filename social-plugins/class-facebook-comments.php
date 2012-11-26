@@ -104,7 +104,7 @@ class Facebook_Comments {
 
 		if ( $url ) {
 			// match comments_number() text builder, adding XFBML element instead of a number
-			return str_replace( '%', '<fb:comments-count xmlns="http://ogp.me/ns/fb#" href="' . $url .  '"></fb:comments-count>', __('% Comments') );
+			return str_replace( '%', '<fb:comments-count xmlns="http://ogp.me/ns/fb#" href="' . $url .  '"></fb:comments-count>', apply_filters( 'facebook_comments_number_more', __( '% Comments' ) ) );
 		}
 
 		return '';

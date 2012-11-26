@@ -324,7 +324,7 @@ class Facebook_Social_Publisher_Settings {
 				} else {
 					$setter = get_userdata( $existing_page['set_by_user'] );
 					if ( $setter ) {
-						echo '. ' . esc_html( sprintf( __( 'Saved by %s.', 'facebook' ), $setter->display_name ) );
+						echo '. ' . esc_html( sprintf( _x( 'Saved by %s.', 'saved by person name', 'facebook' ), $setter->display_name ) );
 					}
 				}
 			}

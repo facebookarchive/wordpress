@@ -156,6 +156,47 @@ class Facebook_User {
 
 		return true;
 	}
+
+	/**
+	 * Retrieve a list of all WordPress users for the current site with the given capability
+	 * Check each user for stored data indicating a possible association with a Facebook account
+	 *
+	 * @since 1.1.6
+	 * @param string $capability WordPress capability. default: edit_posts
+	 * @return array associative array with Facebook-enabled users (fb key) and other users (wp key)
+	 */
+	public static function get_wordpress_users_associated_with_facebook_accounts( $capability = 'edit_posts' ) {
+		$authors = array(
+			'fb' => array(),
+			'wp' => array()
+		);
+
+		if ( ! $capability )
+			return $authors;
+
+		$site_users = get_users( array(
+			'fields' => array( 'id', 'display_name', 'user_registered' ),
+			'orderby' => 'display_name',
+			'order' => 'ASC'
+		) );
+
+		foreach( $site_users as $user ) {
+			// post authors only
+			if ( ! ( isset( $user->id ) && user_can( $user->id, $capability ) ) )
+				continue;
+
+			$facebook_user_data = self::get_user_meta( $user->id, 'fb_data', true );
+			if ( is_array( $facebook_user_data ) && isset( $facebook_user_data['fb_uid'] ) ) {
+				$user->fb_data = $facebook_user_data;
+				$authors['fb'][] = $user;
+			} else {
+				$authors['wp'][] = $user;
+			}
+			unset( $facebook_user_data );
+		}
+
+		return $authors;
+	}
 }
 
 ?>

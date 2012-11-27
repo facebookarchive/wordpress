@@ -75,11 +75,15 @@ class Facebook_Loader {
 
 		add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
 
+		// load shortcodes
+		if ( ! class_exists( 'Facebook_Shortcodes' ) )
+			require_once( $this->plugin_directory . 'social-plugins/shortcodes.php' );
+		Facebook_Shortcodes::init();
+
 		if ( is_user_logged_in() ) {
 			// admin bar may show on public-facing site as well as administrative section
 			add_action( 'add_admin_bar_menus', array( &$this, 'admin_bar' ) );
 		}
-		
 
 		if ( is_admin() ) {
 			add_action( 'admin_enqueue_scripts', array( &$this, 'register_js_sdk' ), 1 );

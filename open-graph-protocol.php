@@ -156,8 +156,8 @@ class Facebook_Open_Graph_Protocol {
 					$meta_tags[ self::OGP_NS . 'description' ] = $description;
 			}
 
-			$meta_tags[ self::ARTICLE_NS . 'published_time' ] = get_the_date( 'c' );
-			$meta_tags[ self::ARTICLE_NS . 'modified_time' ] = get_the_modified_date( 'c' );
+			$meta_tags[ self::ARTICLE_NS . 'published_time' ] = date( 'c', strtotime( $post->post_date_gmt ) );
+			$meta_tags[ self::ARTICLE_NS . 'modified_time' ] = date( 'c', strtotime( $post->post_modified_gmt ) );
 
 			if ( post_type_supports( $post_type, 'author' ) && isset( $post->post_author ) )
 				$meta_tags[ self::ARTICLE_NS . 'author' ] = get_author_posts_url( $post->post_author );

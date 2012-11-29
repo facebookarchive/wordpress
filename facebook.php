@@ -195,7 +195,8 @@ class Facebook_Loader {
 				'appId' => $this->credentials['app_id'],
 				'secret' => $this->credentials['app_secret']
 			) );
-			return true;
+			if ( $facebook )
+				return true;
 		}
 
 		return false;

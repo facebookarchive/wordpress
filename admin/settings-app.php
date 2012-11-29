@@ -89,7 +89,6 @@ class Facebook_Application_Settings {
 		// tie to an action to allow easy removal on sites/networks that rather not run checks
 		add_action( 'facebook_notify_plugin_conflicts', array( 'Facebook_Settings', 'plugin_conflicts' ) );
 
-		add_action( 'facebook_settings_before_header_' . $this->hook_suffix, array( 'Facebook_Application_Settings', 'before_header' ) );
 		add_action( 'facebook_settings_after_header_' . $this->hook_suffix, array( 'Facebook_Application_Settings', 'after_header' ) );
 
 		Facebook_Settings::settings_page_template( $this->hook_suffix, __( 'Facebook for WordPress', 'facebook' ) );
@@ -103,16 +102,6 @@ class Facebook_Application_Settings {
 	 */
 	public function enqueue_scripts() {
 		wp_enqueue_script( 'facebook-jssdk' );
-		wp_enqueue_script( self::PAGE_SLUG, plugins_url( 'static/js/admin/settings-app' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min' ) . '.js', dirname(__FILE__) ), array( 'jquery' ), '1.1', true );
-	}
-
-	/**
-	 * Add Facebook logo before the header
-	 *
-	 * @since 1.1
-	 */
-	public static function before_header() {
-		echo '<div class="facebook-logo"></div>'; // display facebook Logo before text
 	}
 
 	/**
@@ -173,14 +162,6 @@ class Facebook_Application_Settings {
 			$this->hook_suffix,
 			$section,
 			array( 'label_for' => 'facebook-app-secret' )
-		);
-		add_settings_field(
-			'facebook-app-namespace',
-			sprintf( __( '%s namespace', 'facebook' ), $app_abbr ),
-			array( &$this, 'display_app_namespace' ),
-			$this->hook_suffix,
-			$section,
-			array( 'label_for' => 'facebook-app-namespace' )
 		);
 
 		$this->inline_help_content();
@@ -250,35 +231,14 @@ class Facebook_Application_Settings {
 	}
 
 	/**
-	 * Display the Facebook application namespace input field
-	 *
-	 * @since 1.1
-	 */
-	public function display_app_namespace() {
-		$key = 'app_namespace';
-
-		if ( isset( $this->existing_options[$key] ) && $this->existing_options[$key] )
-			$existing_value = $this->existing_options[$key];
-		else
-			$existing_value = '';
-
-		$id = 'facebook-app-namespace';
-		settings_errors( $id );
-		echo '<input type="text" name="' . self::OPTION_NAME . '[' . $key . ']" id="' . $id . '"';
-		if ( $existing_value )
-			echo ' value="' . esc_attr( $existing_value ) . '"';
-		echo ' size="40" autocomplete="off" pattern="[a-z\-\_]{3,25}" />';
-
-		echo '<p class="description">' . esc_html( __( 'An application namespace allows your website to define custom Open Graph objects and actions. It is an advanced and optional feature.', 'facebook' ) ) . '</p>';
-	}
-
-	/**
 	 * Clean user inputs before saving to database
 	 *
 	 * @since 1.1
 	 * @param array $options form options values
 	 */
 	public static function sanitize_options( $options ) {
+		global $facebook;
+
 		// start fresh
 		$clean_options = array();
 
@@ -314,15 +274,44 @@ class Facebook_Application_Settings {
 			unset( $app_secret );
 		}
 
-		if ( isset( $options['app_namespace'] ) ) {
-			$app_ns = strtolower( trim( $options['app_namespace'] ) );
-			if ( $app_ns ) {
-				if ( preg_match( '/^[a-z\-\_]{3,25}$/', $app_ns ) )
-					$clean_options['app_namespace'] = $app_ns;
-				else
-					add_settings_error( 'facebook-app-namespace', 'facebook-app-namespace-error', __( 'Invalid namespace.', 'facebook' ) );
+		// store an application access token and verify additional data
+		if ( isset( $clean_options['app_id'] ) && isset( $clean_options['app_secret'] ) ) {
+			if ( ! class_exists( 'Facebook_WP_Extend' ) )
+				require_once( dirname( dirname( __FILE__ ) ) . '/includes/facebook-php-sdk/class-facebook-wp.php' );
+
+			$facebook = new Facebook_WP_Extend( array(
+				'appId' => $clean_options['app_id'],
+				'secret' => $clean_options['app_secret']
+			) );
+			if ( $facebook ) {
+				if ( wp_http_supports( array( 'ssl' => true ) ) ) {
+					$access_token = $facebook->getAppAccessToken();
+					if ( $access_token ) {
+						$app_info = $facebook->get_app_details_by_access_token( $access_token );
+						if ( ! empty( $app_info ) ) {
+							if ( isset( $app_info['namespace'] ) )
+								$clean_options['app_namespace'] = $app_info['namespace'];
+							$clean_options['access_token'] = $access_token;
+						}
+						unset( $app_info );
+					} else {
+						add_settings_error( 'facebook-app-auth', 'facebook-app-auth-error', __( 'Application ID and secret failed on authentication with Facebook.', 'facebook' ) );
+						unset( $clean_options['app_id'] );
+						unset( $clean_options['app_secret'] );
+					}
+					unset( $access_token );
+				} else {
+					$app_info = $facebook->get_app_details();
+					if ( ! empty( $app_info ) ) {
+						if ( isset( $app_info['namespace'] ) )
+							$clean_options['app_namespace'] = $app_info['namespace'];
+					}
+					unset( $app_info );
+				}
+			} else {
+				unset( $clean_options['app_id'] );
+				unset( $clean_options['app_secret'] );
 			}
-			unset( $app_ns );
 		}
 
 		return $clean_options;
@@ -377,7 +366,7 @@ class Facebook_Application_Settings {
 		);
 		$content .= '</li>';
 		$content .= '<li>' . esc_html( __( 'Select your existing application from the list of applications', 'facebook' ) ) . '</li>';
-		$content .= '<li>' . esc_html( __( 'Copy your App ID, App Secret, and App Namespace from the Settings Summary section of your application.', 'facebook' ) ) . '</li>';
+		$content .= '<li>' . esc_html( __( 'Copy your App ID and App Secret from the Settings Summary section of your application.', 'facebook' ) ) . '</li>';
 		$content .= '</ol>';
 
 		return $content;

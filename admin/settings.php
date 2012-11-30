@@ -361,14 +361,23 @@ class Facebook_Settings {
 	 * @since 1.1
 	 */
 	public static function migrate_options_10() {
-		if ( get_option( 'facebook_migration_10' ) )
+		if ( get_option( 'facebook_migration_10' ) ) {
+			// run 1.1.5 migration if 1.0 migration already run
+			if ( ! get_option( 'facebook_migration_115' ) && current_user_can( 'manage_options' ) ) {
+				if ( ! class_exists( 'Facebook_Migrate_Options_115' ) )
+					require_once( dirname(__FILE__) . '/migrate-options-115.php' );
+				Facebook_Migrate_Options_115::migrate();
+				update_option( 'facebook_migration_115', '1' );
+			}
 			return;
+		}
 
 		if ( current_user_can( 'manage_options' ) ) {
 			if ( ! class_exists( 'Facebook_Migrate_Options_10' ) )
 				require_once( dirname(__FILE__) . '/migrate-options-10.php' );
 			Facebook_Migrate_Options_10::migrate();
 			update_option( 'facebook_migration_10', '1' );
+			update_option( 'facebook_migration_115', '1' ); // 1.0 covers the changes from 1.1.5
 		}
 	}
 }

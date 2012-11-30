@@ -107,8 +107,68 @@ class Facebook_Open_Graph_Protocol {
 	}
 
 	/**
+	 * Convert full IRI Open Graph protocol values to CURIE prefixed values
+	 * Mapping CURIEs is presumed to occur in a parent element of the group of <meta>s 
+	 *
+	 * @since 1.1.6
+	 * @link http://www.w3.org/TR/rdfa-syntax/#s_curies RDFa 1.1 Core CURIEs
+	 * @param array $ogp associative array of full IRI key and OGP value
+	 * @return array associative array of full IRI replaced with prefix where mapped and the same OGP value passed in
+	 */
+	public static function prefixed_properties( $ogp ) {
+		global $facebook_loader;
+
+		if ( ! is_array( $ogp ) || empty( $ogp ) )
+			return array();
+
+		// map the referenced used by this plugin as well as OGP globals
+		$curies = apply_filters( 'facebook_rdfa_mappings', array(
+			self::OGP_NS => array( 'prefix' => 'og' ),
+			self::FB_NS => array( 'prefix' => 'fb' ),
+			self::ARTICLE_NS => array( 'prefix' => 'article' ),
+			self::PROFILE_NS => array( 'prefix' => 'profile' ),
+			'http://ogp.me/ns/book#' => array( 'prefix' => 'book' ),
+			'http://ogp.me/ns/music#' => array( 'prefix' => 'music' ),
+			'http://ogp.me/ns/video#' => array( 'prefix' => 'video' )
+		) );
+		if ( isset( $facebook_loader->credentials['app_namespace'] ) ) {
+			$app_ns_url = esc_url_raw( 'http://ogp.me/ns/fb/' . $facebook_loader->credentials['app_namespace'] . '#', array( 'http' ) );
+			if ( $app_ns_url && ! isset( $curies[$app_ns_url] ) )
+				$curies[$app_ns_url] = array( 'prefix' => $facebook_loader->credentials['app_namespace'] );
+		}
+
+		foreach ( $curies as $reference => $properties ) {
+			if ( ! isset( $properties['prefix'] ) ) {
+				unset( $curies[$reference] );
+				continue;
+			}
+			$properties['key_length'] = strlen( $reference );
+			$curies[$reference] = $properties;
+		}
+
+		$ogp_prefixed = array();
+
+		foreach ( $ogp as $property => $value ) {
+			$prefixed_property_set = false;
+			foreach ( $curies as $reference => $properties ) {
+				if ( substr_compare( $property, $reference, 0, $properties['key_length'] ) === 0 ) {
+					$ogp_prefixed[ $properties['prefix'] . ':' . substr( $property , $properties['key_length'] ) ] = $value;
+					$prefixed_property_set = true;
+					break;
+				}
+			}
+
+			// pass through unmapped values
+			if ( ! $prefixed_property_set )
+				$ogp_prefixed[$property] = $value;
+		}
+
+		return $ogp_prefixed;
+	}
+
+	/**
 	 * Add Open Graph protocol markup to <head>
-	 * We use full IRIs instead of a more typical mapped CURIE prefix (http://ogp.me/ns#type vs. og:type) to make sure our data is fully declared regardless of the template config. Technically the "og" RDFa prefix would need to be delcared on a parent of meta -- typically head or html -- which is not consistenly accessible even with hackish solutions such as language_attributes()
+	 * We use full IRIs for consistent mapping between mapped CURIE prefixes defined in a parent element and self-contained properties using a full IRI
 	 *
 	 * @since 1.0
 	 * @link http://www.w3.org/TR/rdfa-syntax/#s_curieprocessing RDFa Core 1.1 CURIE and IRI processing
@@ -242,6 +302,10 @@ class Facebook_Open_Graph_Protocol {
 		}
 
 		$meta_tags = apply_filters( 'fb_meta_tags', $meta_tags, $post );
+
+		// default: true while Facebook crawler corrects its indexing of full IRI values
+		if ( apply_filters( 'facebook_ogp_prefixed', true ) )
+			$meta_tags = self::prefixed_properties( $meta_tags );
 
 		foreach ( $meta_tags as $property => $content ) {
 			self::meta_elements( $property, $content );

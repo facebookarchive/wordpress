@@ -86,6 +86,8 @@ Note: all contributors must agree to and sign the [Facebook Contributor License 
 * `facebook_anchor_target` - customize the [browsing context name](http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-names) used for links to Facebook output alongside your post such as mentions. default: `_blank`
 * `facebook_mentions_classes` - add or remove HTML classes from the parent HTML div element of mentions links
 * `fb_meta_tags` - Customize Open Graph protocol markup before it is output to the page
+* `facebook_ogp_prefixed` - true to always use prefixed properties (og:title) or false to use full IRI properties (http://ogp.me/ns#title)
+* `facebook_rdfa_mappings` - array of RDFa references with desired prefix. Used to remap Open Graph protocol properties from a full IRI to a prefix
 * `fb_get_user_meta` - fetch a user meta value by attaching to this filter, bypassing the WordPress user meta API
 * `fb_update_user_meta` - update a user meta value by attaching to this filter, bypassing the WordPress user meta API
 * `fb_delete_user_meta` - delete a user meta value by attaching to this filter, bypassing the WordPress user meta API

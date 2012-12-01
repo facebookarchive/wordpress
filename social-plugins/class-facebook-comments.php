@@ -18,6 +18,98 @@ class Facebook_Comments {
 	}
 
 	/**
+	 * Is Comments Box enabled for the current post type?
+	 *
+	 * @since 1.1.7
+	 * @param object $post post object
+	 * @return bool true if Comments Box enabled
+	 */
+	public static function comments_enabled_for_post_type( $post = null ) {
+		$post_type = get_post_type( $post );
+		if ( ! $post_type )
+			return false;
+
+		$features = get_option( 'facebook_' . $post_type . '_features' );
+		if ( ! is_array( $features ) )
+			return false;
+
+		if ( isset( $features['comments'] ) )
+			return true;
+
+		return false;
+	}
+
+	/**
+	 * Override returned comments if Comments Box handles comments for the post type
+	 *
+	 * @since 1.1.7
+	 * @see comments_template()
+	 * @param array $comments comments for a post
+	 * @param int $post_id post identifier
+	 * @return array to be stored in WP_Query
+	 */
+	public static function comments_array_filter( $comments, $post_id = null ) {
+		if ( ! empty( $comments ) && $post_id ) {
+			$_post = get_post( $post_id );
+			if ( $_post && self::comments_enabled_for_post_type( $_post ) )
+				return array();
+		}
+		return $comments;
+	}
+
+	/**
+	 * Turn on comments open if Comments Box enabled for the post type
+	 * A Comment Box always solicits new comments
+	 *
+	 * @since 1.1.7
+	 * @see comments_open()
+	 * @param bool $open comment status == 'open'
+	 * @param int $post_id post identifier
+	 * @return bool are comments open?
+	 */
+	public static function comments_open_filter( $open, $post_id = null ) {
+		if ( ! $open && $post_id ) {
+			$_post = get_post( $post_id );
+			if ( $_post && self::comments_enabled_for_post_type( $_post ) )
+				return true;
+		}
+		return $open;
+	}
+
+	/**
+	 * Override post->comment_count returned value
+	 * Short-circuit special template behavior for comment count = 0
+	 * Prevents linking to #respond anchor which leads nowhere
+	 *
+	 * @see get_comments_number()
+	 * @param int $count comment count
+	 * @param int $post_id post identifier
+	 * @return int comment count
+	 */
+	public static function get_comments_number_filter( $count, $post_id = null ) {
+		if ( $post_id ) {
+			$_post = get_post( $post_id );
+			if ( $_post && self::comments_enabled_for_post_type( $_post ) )
+				return -1;
+		}
+		return $count;
+	}
+
+	/**
+	 * Overrides text displayed with comments number, inserting Facebook XFBML to be replaced by a number with the Facebook JavaScript SDK
+	 *
+	 * @param string $output number of comments text
+	 * @param number of comments returned by get_comments_number()
+	 * @return string passed output or XFBML string
+	 */
+	public static function comments_number_filter( $output, $number = null ) {
+		$_post = get_post();
+		if ( $_post && self::comments_enabled_for_post_type( $_post ) )
+			return self::comments_count_xfbml();
+		return $output;
+	}
+
+	/**
 	 * Remove the WordPress comments menu bar item, replacing with a Facebook comments link
 	 * Check if Facebook comments enabled and if the current user might be able to view a comments edit screen on Facebook
 	 *

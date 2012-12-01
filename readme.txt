@@ -5,7 +5,7 @@ Requires at least: 3.3
 Tested up to: 3.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.1.6
+Stable tag: 1.1.7
 
 Make your WordPress site social in a couple of clicks, powered by Facebook.
 
@@ -115,6 +115,9 @@ The [Comments Box social plugin](https://developers.facebook.com/docs/reference/
 
 == Upgrade Notice ==
 
+= 1.1.7 =
+Improved comment filters. Add post author as Comment Box admin/moderator. Hide settings error displayed if no output functions exist.
+
 = 1.1.6 =
 Debug page, og: prefixed Open Graph protocol properties, Shortcode API support for Like and Send buttons, comments improvements.
 
@@ -140,6 +143,11 @@ Improve site performance when cURL not installed or SSL not available. Removed p
 Security fixes. Improved customization and debugging of settings. l10n and i18n fixes.
 
 == Changelog ==
+
+= 1.1.7 =
+* Comments Box - overrides of WordPress comment system applied at the post level, allowing more fine-grained control of comments by post type or mixed in a single loop
+* Comments Box - declare post author with `moderate_comments` capability an admin of the individual page, granting comment moderation capabilities on Facebook for the post
+* Hide settings error display if function is not yet defined
 
 = 1.1.6 =
 * [Open Graph protocol](http://ogp.me/) data output in prefixed form (e.g. og:title) instead of full IRI. You may declare your preference to always use a prefix in the future using the `facebook_ogp_prefixed` filter

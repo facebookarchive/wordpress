@@ -30,10 +30,7 @@ class Facebook_Comments {
 			return false;
 
 		$features = get_option( 'facebook_' . $post_type . '_features' );
-		if ( ! is_array( $features ) )
-			return false;
-
-		if ( isset( $features['comments'] ) )
+		if ( is_array( $features ) && isset( $features['comments'] ) )
 			return true;
 
 		return false;

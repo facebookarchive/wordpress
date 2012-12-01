@@ -20,7 +20,7 @@ class Facebook_Settings {
 	 * @since 1.1
 	 */
 	public static function init() {
-		self::migrate_options_10();
+		self::migrate_options();
 		add_action( 'admin_menu', array( 'Facebook_Settings', 'settings_menu_items' ) );
 		add_filter( 'plugin_action_links', array( 'Facebook_Settings', 'plugin_action_links' ), 10, 2 );
 		add_action( 'admin_enqueue_scripts', array( 'Facebook_Settings', 'enqueue_scripts' ) );
@@ -360,7 +360,7 @@ class Facebook_Settings {
 	 *
 	 * @since 1.1
 	 */
-	public static function migrate_options_10() {
+	public static function migrate_options() {
 		if ( get_option( 'facebook_migration_10' ) ) {
 			// run 1.1.5 migration if 1.0 migration already run
 			if ( ! get_option( 'facebook_migration_115' ) && current_user_can( 'manage_options' ) ) {

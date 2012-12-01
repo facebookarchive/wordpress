@@ -253,7 +253,7 @@ class Facebook_Application_Settings {
 						$clean_options['app_id'] = $app_id;
 				} else if ( preg_match( '/^[0-9]+$/', $app_id ) ) {
 					$clean_options['app_id'] = $app_id;
-				} else {
+				} else if ( function_exists( 'add_settings_error' ) ) {
 					add_settings_error( 'facebook-app-id', 'facebook-app-id-error', __( 'App ID must contain only digits.', 'facebook' ) );
 				}
 			} else {
@@ -268,7 +268,7 @@ class Facebook_Application_Settings {
 			if ( $app_secret ) {
 				if ( preg_match( '/^[0-9a-f]+$/', $app_secret ) ) // hex
 					$clean_options['app_secret'] = $app_secret;
-				else
+				else if ( function_exists( 'add_settings_error' ) )
 					add_settings_error( 'facebook-app-secret', 'facebook-app-secret-error', __( 'Invalid app secret.', 'facebook' ) );
 			}
 			unset( $app_secret );
@@ -295,7 +295,8 @@ class Facebook_Application_Settings {
 						}
 						unset( $app_info );
 					} else {
-						add_settings_error( 'facebook-app-auth', 'facebook-app-auth-error', __( 'Application ID and secret failed on authentication with Facebook.', 'facebook' ) );
+						if ( function_exists( 'add_settings_error' ) )
+							add_settings_error( 'facebook-app-auth', 'facebook-app-auth-error', __( 'Application ID and secret failed on authentication with Facebook.', 'facebook' ) );
 						unset( $clean_options['app_id'] );
 						unset( $clean_options['app_secret'] );
 					}

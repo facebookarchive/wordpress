@@ -5,7 +5,7 @@ Requires at least: 3.3
 Tested up to: 3.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 
 Make your WordPress site social in a couple of clicks, powered by Facebook.
 
@@ -37,6 +37,13 @@ Add new widgets to one or more sidebars.
 * [Activity Feed Box](https://developers.facebook.com/docs/reference/plugins/activity/) displays recent sharing activity on your site customized for each visitor logged-on to Facebook.
 * [Recommendations Box](https://developers.facebook.com/docs/reference/plugins/recommendations/) recommends content based on visitor interests and the sharing activity of his or her Facebook friends.
 * [Like](https://developers.facebook.com/docs/reference/plugins/like/), [send](https://developers.facebook.com/docs/reference/plugins/send/), and [subscribe](https://developers.facebook.com/docs/reference/plugins/subscribe/) buttons encourage social engagement.
+
+= Shortcodes =
+
+Add a [Like Button](https://developers.facebook.com/docs/reference/plugins/like/) or a [Send Button](https://developers.facebook.com/docs/reference/plugins/send/) using a shortcode inside your post or evaluated from within your theme. You may override site-level options with shortcode attributes defined on the social plugin's page.
+
+* `[facebook_like_button]`
+* `[facebook_send_button]`
 
 = Contributing code =
 
@@ -108,6 +115,9 @@ The [Comments Box social plugin](https://developers.facebook.com/docs/reference/
 
 == Upgrade Notice ==
 
+= 1.1.6 =
+Debug page, og: prefixed Open Graph protocol properties, Shortcode API support for Like and Send buttons, comments improvements.
+
 = 1.1.5 =
 Fix comments enabled option improperly set on comments settings save when no post types selected.
 
@@ -131,12 +141,23 @@ Security fixes. Improved customization and debugging of settings. l10n and i18n 
 
 == Changelog ==
 
+= 1.1.6 =
+* [Open Graph protocol](http://ogp.me/) data output in prefixed form (e.g. og:title) instead of full IRI. You may declare your preference to always use a prefix in the future using the `facebook_ogp_prefixed` filter
+* Debug page displays your plugin configuration, author accounts associated with a Facebook account, and server information for troubleshooting
+* [Shortcode](http://codex.wordpress.org/Shortcode_API) support for Like Button and Send Button output
+* Comments Box may be disabled for a specific post when post comments are marked closed in WordPress and no comments are stored on Facebook
+* Application id and secret are verified on Facebook servers, generating an app access token for future use
+* Async JavaScript loader support for concatenated script loader configurations
+* Fixed an issue with Comments Box color scheme preference never saving a "dark" preference value
+* JavaScript files renamed to .js and .min.js to match WP Core 3.5 convention (see [Core #21633](http://core.trac.wordpress.org/ticket/21633) )
+* Includes Facebook PHP SDK 3.2.1 and its new SSL certificate chain fallback
+
 = 1.1.5 =
 * Delete comments enabled option on plugin's settings comments page save when no comments selected.
 
 = 1.1.4 =
 
-* Comment counts powered by Facebook available in all page contexts when comments box social plugin enabled for one or more post types.
+* Comment counts powered by Facebook available in all page contexts when comments box social plugin enabled for one or more post types
 * Subscribe button settings fix
 * Recommendations Bar max age setting fix
 

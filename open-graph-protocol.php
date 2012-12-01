@@ -198,7 +198,6 @@ class Facebook_Open_Graph_Protocol {
 		} else if ( is_single() && empty( $post->post_password ) ) {
 			setup_postdata( $post );
 			$post_type = get_post_type();
-			$meta_tags[ self::OGP_NS . 'type' ] = 'article';
 			$meta_tags[ self::OGP_NS . 'url' ] = apply_filters( 'facebook_rel_canonical', get_permalink() );
 			if ( post_type_supports( $post_type, 'title' ) )
 				$meta_tags[ self::OGP_NS . 'title' ] = get_the_title();
@@ -216,11 +215,26 @@ class Facebook_Open_Graph_Protocol {
 					$meta_tags[ self::OGP_NS . 'description' ] = $description;
 			}
 
+			$meta_tags[ self::OGP_NS . 'type' ] = 'article';
 			$meta_tags[ self::ARTICLE_NS . 'published_time' ] = date( 'c', strtotime( $post->post_date_gmt ) );
 			$meta_tags[ self::ARTICLE_NS . 'modified_time' ] = date( 'c', strtotime( $post->post_modified_gmt ) );
 
-			if ( post_type_supports( $post_type, 'author' ) && isset( $post->post_author ) )
+			if ( post_type_supports( $post_type, 'author' ) && isset( $post->post_author ) ) {
 				$meta_tags[ self::ARTICLE_NS . 'author' ] = get_author_posts_url( $post->post_author );
+				// adding an fb:admin grants comment moderation permissions for Comment Box
+				if ( get_option( 'facebook_comments_enabled' ) && user_can( $post->post_author, 'moderate_comments' ) ) {
+					if ( ! class_exists( 'Facebook_Comments' ) )
+						require_once( dirname(__FILE__) . '/social-plugins/class-facebook-comments.php' );
+					if ( Facebook_Comments::comments_enabled_for_post_type( $post ) ) {
+						if ( ! class_exists( 'Facebook_User' ) )
+							require_once( dirname(__FILE__) . '/facebook-user.php' );
+						$facebook_user_data = Facebook_User::get_user_meta( $post->post_author, 'fb_data', true );
+						if ( is_array( $facebook_user_data ) && isset( $facebook_user_data['fb_uid'] ) )
+							$meta_tags[ self::FB_NS . 'admins' ] = $facebook_user_data['fb_uid'];
+						unset( $facebook_user_data );
+					}
+				}
+			}
 
 			// add the first category as a section. all other categories as tags
 			$cat_ids = get_the_category();

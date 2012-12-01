@@ -227,15 +227,16 @@ class Facebook_Loader {
 
 		// include comment count filters on all pages
 		if ( get_option( 'facebook_comments_enabled' ) ) {
-			// short-circuit special template behavior for comment count = 0
-			// prevents linking to #respond anchor which leads nowhere
-			add_filter( 'get_comments_number', create_function('', 'return -1;') );
-
 			if ( ! class_exists( 'Facebook_Comments' ) )
 				require_once( $this->plugin_directory . 'social-plugins/class-facebook-comments.php' );
 
+			add_filter( 'comments_array', array( 'Facebook_Comments', 'comments_array_filter' ), 10, 2 );
+			add_filter( 'comments_open', array( 'Facebook_Comments', 'comments_open_filter' ), 10, 2 );
+
+			// override comment count to a garbage number
+			add_filter( 'get_comments_number', array( 'Facebook_Comments', 'get_comments_number_filter' ), 10, 2 );
 			// display comments number if used in template
-			add_filter( 'comments_number', array( 'Facebook_Comments', 'comments_count_xfbml' ) );
+			add_filter( 'comments_number', array( 'Facebook_Comments', 'comments_number_filter' ), 10, 2 );
 		}
 
 		// check for enabled features by page type
@@ -281,9 +282,6 @@ class Facebook_Loader {
 			if ( isset( $enabled_features['comments'] ) && post_type_supports( $post_type, 'comments' ) ) {
 				if ( ! class_exists( 'Facebook_Comments' ) )
 					require_once( $this->plugin_directory . 'social-plugins/class-facebook-comments.php' );
-
-				add_filter( 'comments_array', '__return_null' );
-				add_filter( 'comments_open', '__return_true' ); // comments are always open
 
 				add_filter( 'the_content', array( 'Facebook_Comments', 'the_content_comments_box' ), $priority );
 				add_action( 'wp_enqueue_scripts', array( 'Facebook_Comments', 'css_hide_comments' ), 0 );

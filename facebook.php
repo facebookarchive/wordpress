@@ -154,11 +154,17 @@ class Facebook_Loader {
 	 * @return string empty string if Facebook JavaScript SDK, else give back the src variable
 	 */
 	public function async_script_loader_src( $src, $handle ) {
+		global $wp_scripts;
+
 		if ( $handle !== 'facebook-jssdk' )
 			return $src;
 
 		// @link https://developers.facebook.com/docs/reference/javascript/#loading
-		echo '<div id="fb-root"></div><script type="text/javascript">(function(d){var js,id="facebook-jssdk",ref=d.getElementsByTagName("script")[0];if(d.getElementById(id)){return;}js=d.createElement("script");js.id=id;js.async=true;js.src=' . json_encode( $src ) . ';ref.parentNode.insertBefore(js,ref);}(document));</script>';
+		$html = '<div id="fb-root"></div><script type="text/javascript">(function(d){var js,id="facebook-jssdk",ref=d.getElementsByTagName("script")[0];if(d.getElementById(id)){return;}js=d.createElement("script");js.id=id;js.async=true;js.src=' . json_encode( $src ) . ';ref.parentNode.insertBefore(js,ref);}(document));</script>' . "\n";
+		if ( isset( $wp_scripts ) && $wp_scripts->do_concat )
+			$wp_scripts->print_html .= $html;
+		else
+			echo $html;
 
 		// empty out the src response
 		// results in extra DOM but nothing to load

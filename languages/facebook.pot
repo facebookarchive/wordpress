@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Facebook package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Facebook 1.1\n"
+"Project-Id-Version: Facebook 1.1.6\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/facebook\n"
-"POT-Creation-Date: 2012-11-13 00:24:12+00:00\n"
+"POT-Creation-Date: 2012-12-01 05:27:44+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,237 +24,227 @@ msgstr ""
 msgid "%s Plugin Settings"
 msgstr ""
 
-#: admin/settings-app.php:95
+#: admin/settings-app.php:94
 msgid "Facebook for WordPress"
 msgstr ""
 
-#: admin/settings-app.php:154
+#: admin/settings-app.php:143
 msgid "Application information"
 msgstr ""
 
-#: admin/settings-app.php:159
+#: admin/settings-app.php:148
 msgctxt "computer application or program"
 msgid "application"
 msgstr ""
 
-#: admin/settings-app.php:159
+#: admin/settings-app.php:148
 msgctxt "application"
 msgid "App"
 msgstr ""
 
-#: admin/settings-app.php:163
+#: admin/settings-app.php:152
 msgid "%s ID"
 msgstr ""
 
-#: admin/settings-app.php:171
+#: admin/settings-app.php:160
 msgid "%s secret"
 msgstr ""
 
-#: admin/settings-app.php:179
-msgid "%s namespace"
-msgstr ""
-
-#: admin/settings-app.php:199
+#: admin/settings-app.php:180
 msgid "Edit your application settings on Facebook"
 msgstr ""
 
-#: admin/settings-app.php:202
+#: admin/settings-app.php:183
 msgid ""
 "Create a new Facebook application or associate %s with an existing Facebook "
 "application."
 msgstr ""
 
-#: admin/settings-app.php:226
+#: admin/settings-app.php:207
 msgid ""
 "An application identifier associates your site, its pages, and visitor "
 "actions with a registered %s application."
 msgstr ""
 
-#: admin/settings-app.php:249
+#: admin/settings-app.php:230
 msgid ""
 "An application secret is a secret shared between %s and your application, "
 "similar to a password."
 msgstr ""
 
-#: admin/settings-app.php:272
-msgid ""
-"An application namespace allows your website to define custom Open Graph "
-"objects and actions. It is an advanced and optional feature."
-msgstr ""
-
-#: admin/settings-app.php:297
+#: admin/settings-app.php:257
 msgid "App ID must contain only digits."
 msgstr ""
 
-#: admin/settings-app.php:312
+#: admin/settings-app.php:272
 msgid "Invalid app secret."
 msgstr ""
 
-#: admin/settings-app.php:323
-msgid "Invalid namespace."
+#: admin/settings-app.php:298
+msgid "Application ID and secret failed on authentication with Facebook."
 msgstr ""
 
-#: admin/settings-app.php:338
+#: admin/settings-app.php:327
 msgid ""
 "%1$s to take advantage of advantage of advanced %2$s features such as post "
 "to timeline, recommendations bar, and more."
 msgstr ""
 
-#: admin/settings-app.php:338
+#: admin/settings-app.php:327
 msgid "Register for a Facebook application"
 msgstr ""
 
-#: admin/settings-app.php:338
+#: admin/settings-app.php:327
 msgid ""
 "You may need to register your %1$s account as a developer account if this is "
 "your first time managing a %1$s application."
 msgstr ""
 
-#: admin/settings-app.php:340
+#: admin/settings-app.php:329
 msgid ""
 "Click the %s button near the top right corner of the page to trigger an "
 "application creation dialog."
 msgstr ""
 
-#: admin/settings-app.php:342
+#: admin/settings-app.php:331
 msgid "%s new application creation dialog"
 msgstr ""
 
-#: admin/settings-app.php:344
+#: admin/settings-app.php:333
 msgid "Uniquely identify your site on %1$s with an application name."
 msgstr ""
 
-#: admin/settings-app.php:352
+#: admin/settings-app.php:341
 msgid "You must choose an application name longer than \"%s.\""
 msgstr ""
 
-#: admin/settings-app.php:353 admin/settings-app.php:356
+#: admin/settings-app.php:342 admin/settings-app.php:345
 msgid "An application name must be between %1$u and %2$u characters in length."
 msgstr ""
 
-#: admin/settings-app.php:355
+#: admin/settings-app.php:344
 msgid "You must choose an application name shorter than \"%s.\""
 msgstr ""
 
-#: admin/settings-app.php:358
+#: admin/settings-app.php:347
 msgid "You may choose to use \"%1$s\" as your %2$s application name."
 msgstr ""
 
-#: admin/settings-app.php:375
+#: admin/settings-app.php:364
 msgctxt "open the link to Facebook Developers dashboard site."
 msgid "Open the %s."
 msgstr ""
 
-#: admin/settings-app.php:376
+#: admin/settings-app.php:365
 msgid "Facebook Developers Applications dashboard"
 msgstr ""
 
-#: admin/settings-app.php:379
+#: admin/settings-app.php:368
 msgid "Select your existing application from the list of applications"
 msgstr ""
 
-#: admin/settings-app.php:380
+#: admin/settings-app.php:369
 msgid ""
-"Copy your App ID, App Secret, and App Namespace from the Settings Summary "
-"section of your application."
+"Copy your App ID and App Secret from the Settings Summary section of your "
+"application."
 msgstr ""
 
-#: admin/settings-app.php:395
+#: admin/settings-app.php:384
 msgid "Facebook application"
 msgstr ""
 
-#: admin/settings-app.php:398
+#: admin/settings-app.php:387
 msgid "new Facebook application"
 msgstr ""
 
-#: admin/settings-app.php:403
+#: admin/settings-app.php:392
 msgid ""
 "Your %1$s should be associated with %2$s across desktop web, mobile web, "
 "iPhone, Android, or any other presence you have established."
 msgstr ""
 
-#: admin/settings-app.php:404
+#: admin/settings-app.php:393
 msgid ""
 "Facebook can send site visitors to the most appropriate URL based on their "
 "browsing context, market your site, and properly identify quality content "
 "with some extra information for your application."
 msgstr ""
 
-#: admin/settings-app.php:409
+#: admin/settings-app.php:398
 msgid "Basic Settings"
 msgstr ""
 
-#: admin/settings-app.php:410
+#: admin/settings-app.php:399
 msgid ""
 "Associate your Facebook application with a domain, a desktop URL, and a "
 "mobile URL through your application's %s."
 msgstr ""
 
-#: admin/settings-app.php:410
+#: admin/settings-app.php:399
 msgid "basic settings"
 msgstr ""
 
-#: admin/settings-app.php:411
+#: admin/settings-app.php:400
 msgid "For example:"
 msgstr ""
 
-#: admin/settings-app.php:413
+#: admin/settings-app.php:402
 msgctxt "data entry field"
 msgid "Field"
 msgstr ""
 
-#: admin/settings-app.php:413
+#: admin/settings-app.php:402
 msgctxt "data entry value"
 msgid "Value"
 msgstr ""
 
-#: admin/settings-app.php:417
+#: admin/settings-app.php:406
 msgid "Contact Email"
 msgstr ""
 
-#: admin/settings-app.php:419
+#: admin/settings-app.php:408
 msgid "App Domains"
 msgstr ""
 
-#: admin/settings-app.php:420
+#: admin/settings-app.php:409
 msgid "Website with Facebook Login"
 msgstr ""
 
-#: admin/settings-app.php:421
+#: admin/settings-app.php:410
 msgid "Mobile website"
 msgstr ""
 
-#: admin/settings-app.php:426
+#: admin/settings-app.php:415
 msgid "App Details"
 msgstr ""
 
-#: admin/settings-app.php:428
+#: admin/settings-app.php:417
 msgid "Set your primary language, site description, and categorize your site."
 msgstr ""
 
-#: admin/settings-app.php:429
+#: admin/settings-app.php:418
 msgid ""
 "Add icons and images to establish trust when asking your publishers for "
 "publish permissions or marketing your site through Facebook."
 msgstr ""
 
-#: admin/settings-app.php:452
+#: admin/settings-app.php:441
 msgid "Create a %s application"
 msgstr ""
 
-#: admin/settings-app.php:458
+#: admin/settings-app.php:447
 msgid "Existing %s application"
 msgstr ""
 
-#: admin/settings-app.php:465
+#: admin/settings-app.php:454
 msgid "Application details"
 msgstr ""
 
-#: admin/settings-app.php:469
+#: admin/settings-app.php:458
 msgid "%s Apps Tool"
 msgstr ""
 
-#: admin/settings-comments.php:46
+#: admin/settings-comments.php:46 admin/settings-debug.php:308
 msgid "Comments Box"
 msgstr ""
 
@@ -279,19 +269,19 @@ msgstr ""
 #: admin/settings-comments.php:146 admin/settings-like-button.php:180
 #: admin/settings-subscribe-button.php:173
 #: social-plugins/widgets/activity-feed.php:201
-#: social-plugins/widgets/like-button.php:126
+#: social-plugins/widgets/like-button.php:128
 #: social-plugins/widgets/recommendations-box.php:161
-#: social-plugins/widgets/subscribe-button.php:114
+#: social-plugins/widgets/subscribe-button.php:117
 msgid "Width"
 msgstr ""
 
 #: admin/settings-comments.php:154 admin/settings-like-button.php:203
 #: admin/settings-send-button.php:155 admin/settings-subscribe-button.php:189
 #: social-plugins/widgets/activity-feed.php:241
-#: social-plugins/widgets/like-button.php:147
+#: social-plugins/widgets/like-button.php:149
 #: social-plugins/widgets/recommendations-box.php:201
-#: social-plugins/widgets/send-button.php:104
-#: social-plugins/widgets/subscribe-button.php:128
+#: social-plugins/widgets/send-button.php:106
+#: social-plugins/widgets/subscribe-button.php:131
 msgid "Color scheme"
 msgstr ""
 
@@ -360,10 +350,155 @@ msgstr ""
 msgid "The width of the %s display area in whole pixels."
 msgstr ""
 
+#: admin/settings-debug.php:41
+msgid "Debugger"
+msgstr ""
+
+#: admin/settings-debug.php:165
+msgid "Authors"
+msgstr ""
+
+#: admin/settings-debug.php:168
+msgid "Connected to Facebook"
+msgstr ""
+
+#: admin/settings-debug.php:168 admin/settings-debug.php:228
+msgid "Name"
+msgstr ""
+
+#: admin/settings-debug.php:168
+msgid "Facebook account"
+msgstr ""
+
+#: admin/settings-debug.php:168
+msgid "Post to timeline"
+msgstr ""
+
+#: admin/settings-debug.php:168
+msgid "Manage pages"
+msgstr ""
+
+#: admin/settings-debug.php:228
+msgid "Not connected to Facebook"
+msgstr ""
+
+#: admin/settings-debug.php:228
+msgid "Number of published posts in the last %u days"
+msgstr ""
+
+#: admin/settings-debug.php:228
+msgctxt "recent articles. used as a table column header"
+msgid "# of recent posts"
+msgstr ""
+
+#: admin/settings-debug.php:254
+msgid "Facebook Page"
+msgstr ""
+
+#: admin/settings-debug.php:255
+msgctxt "publishing to a page name on Facebook.com"
+msgid "Publishing to %s."
+msgstr ""
+
+#: admin/settings-debug.php:259 admin/settings-social-publisher.php:323
+msgid "Saved by you."
+msgstr ""
+
+#: admin/settings-debug.php:263 admin/settings-social-publisher.php:327
+msgctxt "saved by person name"
+msgid "Saved by %s."
+msgstr ""
+
+#: admin/settings-debug.php:287
+msgid "Social Plugins"
+msgstr ""
+
+#: admin/settings-debug.php:288
+msgctxt ""
+"software features available based on different classifications website view"
+msgid "Features enabled by view type"
+msgstr ""
+
+#: admin/settings-debug.php:292 admin/settings-debug.php:366
 #: admin/settings-like-button.php:59
 #: admin/settings-recommendations-bar.php:195
 #: admin/settings-recommendations-bar.php:255
 msgid "Like Button"
+msgstr ""
+
+#: admin/settings-debug.php:296 admin/settings-debug.php:374
+#: admin/settings-like-button.php:157 admin/settings-like-button.php:293
+#: admin/settings-send-button.php:49 admin/settings-send-button.php:197
+msgid "Send Button"
+msgstr ""
+
+#: admin/settings-debug.php:300 admin/settings-debug.php:378
+#: admin/settings-subscribe-button.php:50
+msgid "Subscribe Button"
+msgstr ""
+
+#: admin/settings-debug.php:304 admin/settings-recommendations-bar.php:44
+msgid "Recommendations Bar"
+msgstr ""
+
+#: admin/settings-debug.php:312 admin/settings-social-publisher.php:171
+msgid "Mentions"
+msgstr ""
+
+#: admin/settings-debug.php:316
+msgid "View"
+msgstr ""
+
+#: admin/settings-debug.php:362
+msgid "Activity Feed"
+msgstr ""
+
+#: admin/settings-debug.php:370
+msgid "Recommendations Box"
+msgstr ""
+
+#: admin/settings-debug.php:383
+msgid "Widgets"
+msgstr ""
+
+#: admin/settings-debug.php:384
+msgctxt "name of a page component"
+msgid "Widget name"
+msgstr ""
+
+#: admin/settings-debug.php:384
+msgid "Active"
+msgstr ""
+
+#: admin/settings-debug.php:402
+msgid "Server configuration"
+msgstr ""
+
+#: admin/settings-debug.php:402
+msgid "Feature"
+msgstr ""
+
+#: admin/settings-debug.php:402
+msgctxt "Information"
+msgid "Info"
+msgstr ""
+
+#: admin/settings-debug.php:405 admin/settings-debug.php:414
+msgctxt "software version"
+msgid "%s version"
+msgstr ""
+
+#: admin/settings-debug.php:417
+msgid "Server software"
+msgstr ""
+
+#: admin/settings-debug.php:421
+msgctxt "server-to-server connection"
+msgid "%s connection method"
+msgstr ""
+
+#: admin/settings-debug.php:449
+msgid "none available"
 msgstr ""
 
 #: admin/settings-like-button.php:147 admin/settings-send-button.php:137
@@ -372,14 +507,9 @@ msgstr ""
 msgid "Position"
 msgstr ""
 
-#: admin/settings-like-button.php:157 admin/settings-like-button.php:293
-#: admin/settings-send-button.php:49 admin/settings-send-button.php:197
-msgid "Send Button"
-msgstr ""
-
 #: admin/settings-like-button.php:165 admin/settings-subscribe-button.php:158
-#: social-plugins/widgets/like-button.php:112
-#: social-plugins/widgets/subscribe-button.php:100
+#: social-plugins/widgets/like-button.php:114
+#: social-plugins/widgets/subscribe-button.php:103
 msgid "Layout"
 msgstr ""
 
@@ -389,17 +519,17 @@ msgstr ""
 
 #: admin/settings-like-button.php:188
 #: admin/settings-recommendations-bar.php:151
-#: social-plugins/widgets/like-button.php:133
+#: social-plugins/widgets/like-button.php:135
 msgid "Action"
 msgstr ""
 
 #: admin/settings-like-button.php:195 admin/settings-send-button.php:147
 #: admin/settings-subscribe-button.php:181
 #: social-plugins/widgets/activity-feed.php:226
-#: social-plugins/widgets/like-button.php:140
+#: social-plugins/widgets/like-button.php:142
 #: social-plugins/widgets/recommendations-box.php:186
-#: social-plugins/widgets/send-button.php:97
-#: social-plugins/widgets/subscribe-button.php:121
+#: social-plugins/widgets/send-button.php:99
+#: social-plugins/widgets/subscribe-button.php:124
 msgid "Font"
 msgstr ""
 
@@ -442,10 +572,6 @@ msgstr ""
 
 #: admin/settings-like-button.php:466
 msgid "Action verb displayed in button."
-msgstr ""
-
-#: admin/settings-recommendations-bar.php:44
-msgid "Recommendations Bar"
 msgstr ""
 
 #: admin/settings-recommendations-bar.php:142
@@ -587,10 +713,6 @@ msgstr ""
 msgid "Publish to a page"
 msgstr ""
 
-#: admin/settings-social-publisher.php:171
-msgid "Mentions"
-msgstr ""
-
 #: admin/settings-social-publisher.php:206
 msgid ""
 "Promote social engagement and readership by publishing new posts to the "
@@ -648,14 +770,6 @@ msgstr ""
 msgid "%s page on Facebook"
 msgstr ""
 
-#: admin/settings-social-publisher.php:323
-msgid "Saved by you."
-msgstr ""
-
-#: admin/settings-social-publisher.php:327
-msgid "Saved by %s."
-msgstr ""
-
 #: admin/settings-social-publisher.php:333
 msgid "%s to get started."
 msgstr ""
@@ -680,10 +794,6 @@ msgstr ""
 msgid "Social Mentions"
 msgstr ""
 
-#: admin/settings-subscribe-button.php:50
-msgid "Subscribe Button"
-msgstr ""
-
 #: admin/settings-subscribe-button.php:202
 msgid ""
 "Encourage visitors to subscribe to public updates from an author's %s "
@@ -699,26 +809,26 @@ msgid ""
 "Show profile photos of the viewer's friends who have already subscribed."
 msgstr ""
 
-#: admin/settings.php:129
+#: admin/settings.php:143
 msgid "General"
 msgstr ""
 
-#: admin/settings.php:132
+#: admin/settings.php:146
 msgctxt "Facebook Insights"
 msgid "Insights"
 msgstr ""
 
-#: admin/settings.php:199
+#: admin/settings.php:213
 msgid "Settings"
 msgstr ""
 
-#: admin/settings.php:328
+#: admin/settings.php:354
 msgid ""
 "You have plugins installed that could potentially conflict with the Facebook "
 "plugin. Please consider disabling the following plugins on the %s:"
 msgstr ""
 
-#: admin/settings.php:328
+#: admin/settings.php:354
 msgid "Plugins Settings page"
 msgstr ""
 
@@ -826,24 +936,24 @@ msgstr ""
 msgid "No pages found matching \"%s.\""
 msgstr ""
 
-#: admin/social-publisher/publish-box-page.php:38
+#: admin/social-publisher/publish-box-page.php:43
 msgid "Facebook Status on %s Timeline"
 msgstr ""
 
-#: admin/social-publisher/publish-box-page.php:59
-#: admin/social-publisher/publish-box-profile.php:57
+#: admin/social-publisher/publish-box-page.php:64
+#: admin/social-publisher/publish-box-profile.php:62
 msgid "Summarize the post for your Facebook audience"
 msgstr ""
 
-#: admin/social-publisher/publish-box-page.php:62
+#: admin/social-publisher/publish-box-page.php:67
 msgid "This message will show as part of the story on the %s Timeline."
 msgstr ""
 
-#: admin/social-publisher/publish-box-profile.php:39
+#: admin/social-publisher/publish-box-profile.php:44
 msgid "Facebook Status on Your Timeline"
 msgstr ""
 
-#: admin/social-publisher/publish-box-profile.php:61
+#: admin/social-publisher/publish-box-profile.php:66
 msgid "This message will show as part of the story on your Facebook Timeline."
 msgstr ""
 
@@ -918,7 +1028,7 @@ msgstr ""
 msgid "&hellip;"
 msgstr ""
 
-#: open-graph-protocol.php:164
+#: open-graph-protocol.php:229
 msgid "Uncategorized"
 msgstr ""
 
@@ -945,10 +1055,10 @@ msgid ""
 msgstr ""
 
 #: social-plugins/widgets/activity-feed.php:141
-#: social-plugins/widgets/like-button.php:163
+#: social-plugins/widgets/like-button.php:165
 #: social-plugins/widgets/recommendations-box.php:132
-#: social-plugins/widgets/send-button.php:120
-#: social-plugins/widgets/subscribe-button.php:144
+#: social-plugins/widgets/send-button.php:122
+#: social-plugins/widgets/subscribe-button.php:147
 msgid "Title"
 msgstr ""
 
@@ -971,16 +1081,16 @@ msgstr ""
 msgid "Border color"
 msgstr ""
 
-#: social-plugins/widgets/like-button.php:14
+#: social-plugins/widgets/like-button.php:16
 msgid "Facebook Like Button"
 msgstr ""
 
-#: social-plugins/widgets/like-button.php:17
+#: social-plugins/widgets/like-button.php:19
 msgid "Lets a viewer share your content to his or her Facebook timeline."
 msgstr ""
 
-#: social-plugins/widgets/like-button.php:182
-#: social-plugins/widgets/send-button.php:139
+#: social-plugins/widgets/like-button.php:184
+#: social-plugins/widgets/send-button.php:141
 msgid "Default: URL of the displayed page"
 msgstr ""
 
@@ -1008,7 +1118,7 @@ msgstr ""
 msgid "Lets a user subscribe to your public updates on Facebook."
 msgstr ""
 
-#: social-plugins/widgets/subscribe-button.php:163
+#: social-plugins/widgets/subscribe-button.php:166
 msgid "Must be a Facebook URL"
 msgstr ""
 
@@ -1026,9 +1136,9 @@ msgid_plural "%u mentions"
 msgstr[0] ""
 msgstr[1] ""
 
-#. #-#-#-#-#  plugin.pot (Facebook 1.1)  #-#-#-#-#
+#. #-#-#-#-#  plugin.pot (Facebook 1.1.6)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
-#. #-#-#-#-#  plugin.pot (Facebook 1.1)  #-#-#-#-#
+#. #-#-#-#-#  plugin.pot (Facebook 1.1.6)  #-#-#-#-#
 #. Author of the plugin/theme
 msgid "Facebook"
 msgstr ""

@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Facebook
- * @version 1.1.7
+ * @version 1.1.8
  */
 /*
 Plugin Name: Facebook
@@ -9,7 +9,7 @@ Plugin URI: http://wordpress.org/extend/plugins/facebook/
 Description: Facebook for WordPress. Make your site deeply social in just a couple of clicks.
 Author: Facebook
 Author URI: https://developers.facebook.com/wordpress/
-Version: 1.1.7
+Version: 1.1.8
 License: GPL2
 License URI: license.txt
 Domain Path: /languages/
@@ -28,7 +28,7 @@ class Facebook_Loader {
 	 * @since 1.1
 	 * @var string
 	 */
-	const VERSION = '1.1.7';
+	const VERSION = '1.1.8';
 
 	/**
 	 * Locale of the site expressed as a Facebook locale

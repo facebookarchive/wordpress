@@ -100,8 +100,9 @@ class Facebook_Comments {
 	 * @return string passed output or XFBML string
 	 */
 	public static function comments_number_filter( $output, $number = null ) {
-		$_post = get_post();
-		if ( $_post && self::comments_enabled_for_post_type( $_post ) )
+		global $post;
+
+		if ( isset( $post ) && self::comments_enabled_for_post_type( $post ) )
 			return self::comments_count_xfbml();
 		return $output;
 	}

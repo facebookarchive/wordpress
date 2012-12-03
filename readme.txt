@@ -115,6 +115,9 @@ The [Comments Box social plugin](https://developers.facebook.com/docs/reference/
 
 == Upgrade Notice ==
 
+= 1.1.8 =
+Bugfix for post context on a comments filter.
+
 = 1.1.7 =
 Improved comment filters. Add post author as Comment Box admin/moderator. Hide settings error displayed if no output functions exist.
 
@@ -143,6 +146,9 @@ Improve site performance when cURL not installed or SSL not available. Removed p
 Security fixes. Improved customization and debugging of settings. l10n and i18n fixes.
 
 == Changelog ==
+
+= 1.1.8 =
+* Bugfix: use the post global object instead of get_post on a comments filter
 
 = 1.1.7 =
 * Comments Box - overrides of WordPress comment system applied at the post level, allowing more fine-grained control of comments by post type or mixed in a single loop

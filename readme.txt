@@ -11,32 +11,17 @@ Make your WordPress site social in a couple of clicks, powered by Facebook.
 
 == Description ==
 
-This WordPress plugin makes your site deeply social by integrating functionality from Facebook.
+The Facebook plugin for WordPress adds Facebook social plugins to your WordPress site. Associate your WordPress site with a free Facebook application identifier to enable advanced features such as automatically sharing new posts to an author's Facebook timeline or your site's Facebook page. This plugin is developed by Facebook with extra support for popular plugins and themes.
 
-[Facebook Insights](http://www.facebook.com/insights) integration included to help you better understand your site audience with Facebook demographic and sharing data.
+= Features =
 
-The Facebook plugin for WordPress is internationalization- and mobile-ready.
-
-For more information, check out [the WordPress plugin page on the Facebook Developers site](http://developers.facebook.com/wordpress/).
-
-= Post Features =
-
-Customize features through post settings.
-
-* Post to an author's Facebook Timeline whenever a post is made public.
-* Mention Facebook friends and pages. New posts will be published to the timelines of the mentioned account(s) and displayed alongside the post.
-* [Like](https://developers.facebook.com/docs/reference/plugins/like/), [send](https://developers.facebook.com/docs/reference/plugins/send/), and [subscribe](https://developers.facebook.com/docs/reference/plugins/subscribe/) buttons can be easily added to a post to drive social distribution with custom settings scoped to your Facebook application identifier.
-* [Facebook Comments Box](https://developers.facebook.com/docs/reference/plugins/comments/) social plugin including noscript fallbacks for easy indexing by search engines.
-* [Open Graph protocol](http://ogp.me) integration to help your content stand out in Facebook newsfeed, Twitter Cards, Windows 8 bookmarks, and other consuming agents.
-* [Recommendations bar](https://developers.facebook.com/docs/reference/plugins/recommendationsbar/) helps visitors discover more content on your site by recommending other articles and encouraging Like shares.
-
-= Widgets =
-
-Add new widgets to one or more sidebars.
-
-* [Activity Feed Box](https://developers.facebook.com/docs/reference/plugins/activity/) displays recent sharing activity on your site customized for each visitor logged-on to Facebook.
-* [Recommendations Box](https://developers.facebook.com/docs/reference/plugins/recommendations/) recommends content based on visitor interests and the sharing activity of his or her Facebook friends.
-* [Like](https://developers.facebook.com/docs/reference/plugins/like/), [send](https://developers.facebook.com/docs/reference/plugins/send/), and [subscribe](https://developers.facebook.com/docs/reference/plugins/subscribe/) buttons encourage social engagement.
+* [Open Graph protocol](http://ogp.me) markup optimizes your content for social sharing and rich story previews on Facebook, Twitter, Google+, Mixi, and more.
+* [Facebook Insights](http://www.facebook.com/insights) support for Facebook accounts associated with a Facebook application.
+* Add [Like](https://developers.facebook.com/docs/reference/plugins/like/), [send](https://developers.facebook.com/docs/reference/plugins/send/), and [subscribe](https://developers.facebook.com/docs/reference/plugins/subscribe/) buttons to every post to help your site's readers share content with friends or stay connected to future content shared by your site on Facebook.
+* Enable the [Facebook Comments Box social plugin](https://developers.facebook.com/docs/reference/plugins/comments/) to encourage new comments from logged-in Facebook users and his or her Facebook friends. Comments associated with a post are sorted according to social signals including friend networks, most liked, or the most active discussion threads.
+* [Recommendations Bar](https://developers.facebook.com/docs/reference/plugins/recommendationsbar/) helps visitors discover additional content on your site by recommending posts and encouraging Like shares.
+* [Recommendations Box](https://developers.facebook.com/docs/reference/plugins/recommendations/) suggests related posts in a configurable widget.
+* Mention Facebook friends and Facebook pages associated with a post.
 
 = Shortcodes =
 
@@ -47,14 +32,12 @@ Add a [Like Button](https://developers.facebook.com/docs/reference/plugins/like/
 
 = Contributing code =
 
-All of the [source code for this plugin is available on Facebook's GitHub account](https://github.com/facebook/wordpress). If you like to contribute code to the plugin, open up an issue against the repository where we can discuss it. Once you have completed the code, open [a Pull Request](https://github.com/facebook/wordpress/pulls).
-
-Note: all contributors must agree to and sign the [Facebook Contributor License Agreement](https://developers.facebook.com/opensource/cla) prior to submitting Pull Requests. We can't accept Pull Requests until this document is signed and submitted, affirming your code is not encumbered by intellectual property claims by yourself or your employer and therefore eligible for redistribution by Facebook under the Freedoms of the GPL.
+The development [source code for this plugin is available on Facebook's GitHub account](https://github.com/facebook/wordpress). [Pull Requests](https://github.com/facebook/wordpress/pulls) and code discussion welcome.
 
 == Installation ==
 
 1. Install Facebook for WordPress either via the WordPress.org plugin directory, or by uploading the files to your server (in the `/wp-content/plugins/` directory).
-1. After activating the plugin, you will be asked to set up your Facebook app (via http://developers.facebook.com/apps ), with step-by-step instructions.
+1. After activating the plugin, you will be asked to set up your Facebook application or enter existing credentials copied from the [Facebook Developers site](http://developers.facebook.com/apps/).
 1. That's it. You're ready to go!
 
 == Screenshots ==
@@ -101,9 +84,9 @@ Note: all contributors must agree to and sign the [Facebook Contributor License 
 
 == Frequently Asked Questions ==
 
-= How do I change the image that appears for my posts shared on Facebook =
+= How do I change the image that appears for my posts shared on Facebook? =
 
-The plugin generates [Open Graph protocol](http://ogp.me/) markup for your site's webpages including an explicitly-specified image for posts with an associated [post thumbnail](http://codex.wordpress.org/Post_Thumbnails). Your plugin or theme may define additional images through the `fb_meta_tags` filter. If an post thumbnail image exists your additional image will be an alternate for stories shared through a pasted link. Unattended story summaries use the first defined image.
+The plugin generates [Open Graph protocol](http://ogp.me/) markup for your site's webpages including an explicitly-specified image for posts with an associated [post thumbnail](http://codex.wordpress.org/Post_Thumbnails). Your plugin or theme may define additional images through the `fb_meta_tags` filter. If a post thumbnail image exists your additional image will be an alternate for stories shared through a pasted link. Unattended story summaries use the first defined image. [support sticky](http://wordpress.org/support/topic/customize-open-graph-protocol-for-your-site-or-network)
 
 = How do I moderate comments and add reviewers? =
 

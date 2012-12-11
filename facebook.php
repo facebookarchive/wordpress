@@ -123,7 +123,7 @@ class Facebook_Loader {
 		wp_register_script( $handle, ( is_ssl() ? 'https' : 'http' ) . '://connect.facebook.net/' . $this->locale . '/' . ( defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? 'all/debug.js' : 'all.js' ), array(), null, true );
 
 		// register the script but take it back with an async load
-		add_filter( 'script_loader_src', array( &$this, 'async_script_loader_src' ), 1, 2 );
+		add_filter( 'script_loader_src', array( 'Facebook_Loader', 'async_script_loader_src' ), 1, 2 );
 
 		$args = array(
 			'channelUrl' => plugins_url( 'channel.php', __FILE__ ),
@@ -140,8 +140,29 @@ class Facebook_Loader {
 
 		// allow the publisher to short circuit the init through the filter
 		if ( ! empty( $args ) && isset( $wp_scripts ) ) {
-			$wp_scripts->add_data( $handle, 'data', 'window.fbAsyncInit=function(){FB.init(' . json_encode( $args ) . ');' . apply_filters( 'facebook_jssdk_init_extras', '', isset( $this->credentials['app_id'] ) ? $this->credentials['app_id'] : '' ) . '}' );
+			$wp_scripts->add_data( $handle, 'data', 'var FB_WP=FB_WP||{};FB_WP.queue={_methods:[],flushed:false,add:function(fn){FB_WP.queue.flushed?fn():FB_WP.queue._methods.push(fn)},flush:function(){for(var fn;fn=FB_WP.queue._methods.shift();){fn()}FB_WP.queue.flushed=true}};window.fbAsyncInit=function(){FB.init(' . json_encode( $args ) . ');if(FB_WP && FB_WP.queue && FB_WP.queue.flush){FB_WP.queue.flush()}' . apply_filters( 'facebook_jssdk_init_extras', '', isset( $this->credentials['app_id'] ) ? $this->credentials['app_id'] : '' ) . '}' );
 		}
+	}
+
+	/**
+	 * Proactively resolve Facebook JavaScript SDK domain name asynchronously before later use
+	 *
+	 * @since 1.1.9
+	 * @link http://dev.chromium.org/developers/design-documents/dns-prefetching Chromium prefetch behavior
+	 * @link https://developer.mozilla.org/en-US/docs/Controlling_DNS_prefetching Firefox prefetch behavior
+	 */
+	public static function dns_prefetch_js_sdk(){
+		echo '<link rel="dns-prefetch" href="//connect.facebook.net" />' . "\n";
+	}
+
+	/**
+	 * Enqueue the JavaScript SDK
+	 *
+	 * @since 1.1
+	 * @uses wp_enqueue_script()
+	 */
+	public static function enqueue_js_sdk() {
+		wp_enqueue_script( 'facebook-jssdk', false, array(), false, true );
 	}
 
 	/**
@@ -153,14 +174,14 @@ class Facebook_Loader {
 	 * @param string $handle WordPress registered script handle
 	 * @return string empty string if Facebook JavaScript SDK, else give back the src variable
 	 */
-	public function async_script_loader_src( $src, $handle ) {
+	public static function async_script_loader_src( $src, $handle ) {
 		global $wp_scripts;
 
 		if ( $handle !== 'facebook-jssdk' )
 			return $src;
 
 		// @link https://developers.facebook.com/docs/reference/javascript/#loading
-		$html = '<div id="fb-root"></div><script type="text/javascript">(function(d){var js,id="facebook-jssdk",ref=d.getElementsByTagName("script")[0];if(d.getElementById(id)){return;}js=d.createElement("script");js.id=id;js.async=true;js.src=' . json_encode( $src ) . ';ref.parentNode.insertBefore(js,ref);}(document));</script>' . "\n";
+		$html = '<div id="fb-root"></div><script type="text/javascript">(function(d){var id="facebook-jssdk";if(!d.getElementById(id)){var js=d.createElement("script"),ref=d.getElementsByTagName("script")[0];js.id=id,js.async=!0,js.src=' . json_encode( $src ) . ',ref.parentNode.insertBefore(js,ref)}})(document)</script>' . "\n";
 		if ( isset( $wp_scripts ) && $wp_scripts->do_concat )
 			$wp_scripts->print_html .= $html;
 		else
@@ -223,7 +244,9 @@ class Facebook_Loader {
 			require_once( $this->plugin_directory . 'open-graph-protocol.php' );
 		add_action( 'wp_head', array( 'Facebook_Open_Graph_Protocol', 'add_og_protocol' ) );
 
-		add_action( 'wp_enqueue_scripts', array( 'Facebook_Loader', 'enqueue_jssdk' ) );
+		add_action( 'wp_head', array( 'Facebook_Loader', 'dns_prefetch_js_sdk' ), 1, 0 );
+		add_action( 'wp_enqueue_scripts', array( 'Facebook_Loader', 'enqueue_js_sdk' ) );
+		self::plugin_extras();
 
 		// include comment count filters on all pages
 		if ( get_option( 'facebook_comments_enabled' ) ) {
@@ -289,16 +312,6 @@ class Facebook_Loader {
 		}
 
 		add_action( 'wp_enqueue_scripts', array( 'Facebook_Loader', 'enqueue_styles' ) );
-	}
-
-	/**
-	 * Enqueue the JavaScript SDK
-	 *
-	 * @since 1.1
-	 * @uses wp_enqueue_script()
-	 */
-	public static function enqueue_jssdk() {
-		wp_enqueue_script( 'facebook-jssdk', false, array(), false, true );
 	}
 
 	/**
@@ -389,8 +402,32 @@ class Facebook_Loader {
 			$this->locale = $locale;
 		}
 	}
+
+	/**
+	 * Tie-in to popular site features handled by popular WordPress plugins
+	 *
+	 * @since 1.1.9
+	 */
+	public static function plugin_extras() {
+		// add Google Analytics social trackers
+		if ( defined( 'GOOGLE_ANALYTICATOR_VERSION' ) && function_exists( 'add_google_analytics' ) && has_action( 'wp_head', 'add_google_analytics' ) !== false ) {
+			if ( ! class_exists( 'Facebook_Google_Analytics' ) )
+				require_once( dirname(__FILE__) . '/extras/google-analytics.php' );
+			add_action( 'google_analyticator_extra_js_after', array( 'Facebook_Google_Analytics', 'enqueue' ) );
+		}
+		if ( ( defined( 'GAWP_VERSION' ) && class_exists( 'GA_Filter' ) && has_action( 'wp_head', array( 'GA_Filter', 'spool_analytics' ) ) !== false ) ) {
+			if ( ! class_exists( 'Facebook_Google_Analytics' ) )
+				require_once( dirname(__FILE__) . '/extras/google-analytics.php' );
+			add_filter( 'yoast-ga-push-after-pageview', array( 'Facebook_Google_Analytics', 'gaq_filter' ) );
+		}
+	}
 }
 
+/**
+ * Load plugin function during the WordPress init action
+ *
+ * @since 1.1
+ */
 function facebook_loader_init() {
 	global $facebook_loader;
 

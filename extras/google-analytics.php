@@ -1,4 +1,12 @@
 <?php
+
+/**
+ * Support for Google Analytics Social Interaction Analytics
+ * Queues Facebook-specific calls to the _trackSocial method via the _gaq queue
+ *
+ * @since 1.1.9
+ * @link https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingSocial Google Analytics Social Interaction Analytics
+ */
 class Facebook_Google_Analytics {
 	/**
 	 * Handle used in WordPress script queue
@@ -18,6 +26,12 @@ class Facebook_Google_Analytics {
 		return 'if(FB_WP.queue && FB_WP.queue.add){FB_WP.queue.add(function(){FB_WP.extras.analytics.google.init()})}';
 	}
 
+	/**
+	 * Relative path to Facebook Google Analytics JavaScript file
+	 *
+	 * @since 1.1.9
+	 * @return string file path relative to the plugin directory
+	 */
 	public static function javascript_file_path() {
 		return 'static/js/extras/analytics/google-analytics' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min' ) . '.js';
 	}

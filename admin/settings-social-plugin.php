@@ -190,13 +190,12 @@ class Facebook_Social_Plugin_Settings {
 
 		// iterate through all display types, looking for our feature in each
 		foreach ( $all_possible_display_types as $display_type ) {
-			$option_name = "facebook_{$display_type}_features";
-
-			$display_preferences = get_option( $option_name );
+			$display_preferences = get_option( "facebook_{$display_type}_features" );
 			if ( ! is_array( $display_preferences ) )
 				continue;
 			if ( isset( $display_preferences[$feature_slug] ) )
 				$show_on[$display_type] = true;
+			unset( $display_preferences );
 		}
 
 		return $show_on;

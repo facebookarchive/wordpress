@@ -31,7 +31,7 @@ class Facebook_Migrate_Options_115 {
 		$comments_options = get_option( Facebook_Comments_Settings::OPTION_NAME );
 		if ( ! is_array( $comments_options ) )
 			$comments_options = array();
-		$comments_options['show_on'] = Facebook_Comments_Settings::get_display_conditionals_by_feature( 'comments', 'posts' );
+		$comments_options['show_on'] = array_keys( Facebook_Comments_Settings::get_display_conditionals_by_feature( 'comments', 'posts' ) );
 		update_option( Facebook_Comments_Settings::OPTION_NAME, Facebook_Comments_Settings::sanitize_options( $comments_options ) );
 	}
 

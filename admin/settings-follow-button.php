@@ -8,7 +8,7 @@ if ( ! class_exists( 'Facebook_Social_Plugin_Button_Settings' ) )
  *
  * @since 1.1
  */
-class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_Settings {
+class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Settings {
 
 	/**
 	 * Setting page identifier
@@ -16,7 +16,7 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 	 * @since 1.1
 	 * @var string
 	 */
-	const PAGE_SLUG = 'facebook-subscribe-button';
+	const PAGE_SLUG = 'facebook-follow-button';
 
 	/**
 	 * Define our option array value
@@ -24,7 +24,7 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 	 * @since 1.1
 	 * @var string
 	 */
-	const OPTION_NAME = 'facebook_subscribe_button';
+	const OPTION_NAME = 'facebook_follow_button';
 
 	/**
 	 * Initialize with an options array
@@ -47,17 +47,17 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 	 * @return string social plugin name
 	 */
 	public static function social_plugin_name() {
-		return __( 'Subscribe Button', 'facebook' );
+		return __( 'Follow Button', 'facebook' );
 	}
 
 	/**
-	 * Evaluate the Facebook_Subscribe_Button class file if it is not already loaded
+	 * Evaluate the Facebook_Follow_Button class file if it is not already loaded
 	 *
 	 * @since 1.1
 	 */
-	public static function require_subscribe_button_builder() {
-		if ( ! class_exists( 'Facebook_Subscribe_Button' ) )
-			require_once( dirname( dirname(__FILE__) ) . '/social-plugins/class-facebook-subscribe-button.php' );
+	public static function require_follow_button_builder() {
+		if ( ! class_exists( 'Facebook_Follow_Button' ) )
+			require_once( dirname( dirname(__FILE__) ) . '/social-plugins/class-facebook-follow-button.php' );
 	}
 
 	/**
@@ -69,7 +69,7 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 	 * @return string submenu hook suffix
 	 */
 	public static function add_submenu_item( $parent_slug ) {
-		$subscribe_button_settings = new Facebook_Subscribe_Button_Settings();
+		$follow_button_settings = new Facebook_Follow_Button_Settings();
 
 		$hook_suffix = add_submenu_page(
 			$parent_slug,
@@ -77,13 +77,13 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 			self::social_plugin_name(),
 			'manage_options',
 			self::PAGE_SLUG,
-			array( &$subscribe_button_settings, 'settings_page' )
+			array( &$follow_button_settings, 'settings_page' )
 		);
 
 		if ( $hook_suffix ) {
-			$subscribe_button_settings->hook_suffix = $hook_suffix;
-			register_setting( $hook_suffix, self::OPTION_NAME, array( 'Facebook_Subscribe_Button_Settings', 'sanitize_options' ) );
-			add_action( 'load-' . $hook_suffix, array( &$subscribe_button_settings, 'onload' ) );
+			$follow_button_settings->hook_suffix = $hook_suffix;
+			register_setting( $hook_suffix, self::OPTION_NAME, array( 'Facebook_Follow_Button_Settings', 'sanitize_options' ) );
+			add_action( 'load-' . $hook_suffix, array( &$follow_button_settings, 'onload' ) );
 		}
 
 		return $hook_suffix;
@@ -127,7 +127,7 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 		if ( ! isset( $this->hook_suffix ) )
 			return;
 
-		$section = 'facebook-subscribe-button';
+		$section = 'facebook-follow-button';
 		add_settings_section(
 			$section,
 			'', // no title for main section
@@ -137,55 +137,55 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 
 		// when, where
 		add_settings_field(
-			'facebook-subscribe-show-on',
+			'facebook-follow-show-on',
 			__( 'Show on', 'facebook' ),
 			array( &$this, 'display_show_on' ),
 			$this->hook_suffix,
 			$section
 		);
 		add_settings_field(
-			'facebook-subscribe-position',
+			'facebook-follow-position',
 			__( 'Position', 'facebook' ),
 			array( &$this, 'display_position' ),
 			$this->hook_suffix,
 			$section,
-			array( 'label_for' => 'facebook-subscribe-position' )
+			array( 'label_for' => 'facebook-follow-position' )
 		);
 
-		// subscribe button options
+		// follow button options
 		add_settings_field(
-			'facebook-subscribe-layout',
+			'facebook-follow-layout',
 			__( 'Layout', 'facebook' ),
 			array( &$this, 'display_layout' ),
 			$this->hook_suffix,
 			$section
 		);
 		add_settings_field(
-			'facebook-subscribe-show-faces',
+			'facebook-follow-show-faces',
 			__( 'Show faces', 'facebook' ),
 			array( &$this, 'display_show_faces' ),
 			$this->hook_suffix,
 			$section,
-			array( 'label_for' => 'facebook-subscribe-show-faces' )
+			array( 'label_for' => 'facebook-follow-show-faces' )
 		);
 		add_settings_field(
-			'facebook-subscribe-width',
+			'facebook-follow-width',
 			__( 'Width', 'facebook' ),
 			array( &$this, 'display_width' ),
 			$this->hook_suffix,
 			$section,
-			array( 'label_for' => 'facebook-subscribe-width' )
+			array( 'label_for' => 'facebook-follow-width' )
 		);
 		add_settings_field(
-			'facebook-subscribe-font',
+			'facebook-follow-font',
 			__( 'Font', 'facebook' ),
 			array( &$this, 'display_font' ),
 			$this->hook_suffix,
 			$section,
-			array( 'label_for' => 'facebook-subscribe-font' )
+			array( 'label_for' => 'facebook-follow-font' )
 		);
 		add_settings_field(
-			'facebook-subscribe-colorscheme',
+			'facebook-follow-colorscheme',
 			__( 'Color scheme', 'facebook' ),
 			array( &$this, 'display_colorscheme' ),
 			$this->hook_suffix,
@@ -194,12 +194,44 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 	}
 
 	/**
-	 * Introduce publishers to the Subscribe Button social plugin
+	 * Introduce publishers to the Follow Button social plugin
 	 *
 	 * @since 1.1
 	 */
 	public function section_header() {
-		echo '<p>' . esc_html( sprintf( __( "Encourage visitors to subscribe to public updates from an author's %s account.", 'facebook' ), 'Facebook' ) ) . ' <a href="https://developers.facebook.com/docs/reference/plugins/subscribe/" title="' . esc_attr( sprintf( __( '%s social plugin documentation', 'facebook' ), 'Facebook ' . self::social_plugin_name() ) ) . '">' . esc_html( __( 'Read more...', 'facebook' ) ) . '</a></p>';
+		echo '<p>' . esc_html( __( "Encourage visitors to follow to public updates from an author's Facebook account.", 'facebook' ) ) . ' <a href="https://developers.facebook.com/docs/reference/plugins/follow/" title="' . esc_attr( sprintf( __( '%s social plugin documentation', 'facebook' ), 'Facebook ' . self::social_plugin_name() ) ) . '">' . esc_html( __( 'Read more...', 'facebook' ) ) . '</a></p>';
+	}
+
+	/**
+	 * Archive choices and post type choices
+	 *
+	 * @since 1.1.9
+	 * @return array list of archive names and public post type names
+	 */
+	public static function get_show_on_choices() {
+		return array_merge( array( 'home', 'archive' ), self::post_types_supporting_authorship() );
+	}
+
+	/**
+	 * Not all post types support the concept of an author
+	 * Limit selectable post types to just public post types supporting authors
+	 *
+	 * @since 1.1.9
+	 * @return array list of public post types supporting author feature
+	 */
+	public static function post_types_supporting_authorship() {
+		// get a list of all public post types
+		$public_post_types = get_post_types( array( 'public' => true ) );
+
+		// reduce the list of public post types to just the post types supporting comments
+		$post_types_supporting_authorship = array();
+		foreach( $public_post_types as $post_type ) {
+			if ( post_type_supports( $post_type, 'author' ) ) {
+				$post_types_supporting_authorship[] = $post_type;
+			}
+		}
+
+		return $post_types_supporting_authorship;
 	}
 
 	/**
@@ -214,16 +246,31 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 		extract( self::parse_form_field_attributes(
 			$extra_attributes,
 			array(
-				'id' => 'facebook-subscribe-show-on',
+				'id' => 'facebook-follow-show-on',
 				'class' => '',
 				'name' => self::OPTION_NAME . '[' . $key . ']'
 			)
 		) );
 
+		$existing_value = self::get_display_conditionals_by_feature( 'follow', 'all' );
+
 		echo '<fieldset id="' . $id . '"';
 		if ( isset( $class ) && $class )
 			echo ' class="' . $class . '"';
-		echo '>' . self::show_on_choices( $name, self::get_display_conditionals_by_feature( 'subscribe', 'all' ), 'all' ) . '</fieldset>';
+		echo '>';
+
+		$choices = self::get_show_on_choices();
+		$fields = array();
+		foreach( $choices as $type ) {
+			$field = '<label><input type="checkbox" name="' . $name . '[]" value="' . esc_attr( $type ) . '"';
+			$field .= checked( isset( $existing_value[$type] ), true, false );
+			$field .= ' /> ' . esc_html( $type ) . '</label>';
+
+			$fields[] = $field;
+			unset( $field );
+		}
+		echo implode( ' ', $fields );
+		echo '</fieldset>';
 		echo '<p class="description">' . esc_html( self::show_on_description( self::social_plugin_name() ) ) . '</p>';
 	}
 
@@ -234,16 +281,16 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 	 * @return array layout descriptions keyed by layout choice
 	 */
 	public static function layout_descriptions() {
-		$subscribe_plural = __( 'subscribers', 'facebook' );
+		$follow_plural = __( 'followers', 'facebook' );
 		return array(
 			'standard' => __( 'Display social text next to the button.', 'facebook' ),
-			'button_count' => sprintf( __( 'Display total number of %s next to the button.', 'facebook' ), $subscribe_plural ),
-			'box_count' => sprintf( __( 'Display total number of %s above the button.', 'facebook' ), $subscribe_plural )
+			'button_count' => sprintf( __( 'Display total number of %s next to the button.', 'facebook' ), $follow_plural ),
+			'box_count' => sprintf( __( 'Display total number of %s above the button.', 'facebook' ), $follow_plural )
 		);
 	}
 
 	/**
-	 * Choose a Subscribe Button layout option
+	 * Choose a Follow Button layout option
 	 *
 	 * @since 1.1
 	 * @param array $extra_attributes custom form attributes
@@ -254,16 +301,16 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 		extract( self::parse_form_field_attributes(
 			$extra_attributes,
 			array(
-				'id' => 'facebook-subscribe-' . $key,
+				'id' => 'facebook-follow-' . $key,
 				'class' => '',
 				'name' => self::OPTION_NAME . '[' . $key . ']'
 			)
 		) );
 		$name = esc_attr( $name );
 
-		self::require_subscribe_button_builder();
+		self::require_follow_button_builder();
 
-		if ( isset( $this->existing_options[$key] ) && in_array( $this->existing_options[$key], Facebook_Subscribe_Button::$layout_choices ) )
+		if ( isset( $this->existing_options[$key] ) && in_array( $this->existing_options[$key], Facebook_Follow_Button::$layout_choices ) )
 			$existing_value = $this->existing_options[$key];
 		else
 			$existing_value = 'standard';
@@ -271,7 +318,7 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 		$descriptions = self::layout_descriptions();
 
 		$choices = array();
-		foreach( Facebook_Subscribe_Button::$layout_choices as $layout ) {
+		foreach( Facebook_Follow_Button::$layout_choices as $layout ) {
 			$choice = '<label><input type="radio" name="' . $name . '" value="' . $layout . '"';
 			$choice .= checked( $layout, $existing_value, false );
 			$choice .= ' /> ';
@@ -296,7 +343,7 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 	}
 
 	/**
-	 * Option to display faces of friends below the Subscribe Button
+	 * Option to display faces of friends below the Follow Button
 	 *
 	 * @since 1.1
 	 * @param array $extra_attributes custom form attributes
@@ -307,7 +354,7 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 		extract( self::parse_form_field_attributes(
 			$extra_attributes,
 			array(
-				'id' => 'facebook-subscribe-show-faces',
+				'id' => 'facebook-follow-show-faces',
 				'class' => '',
 				'name' => self::OPTION_NAME . '[' . $key . ']'
 			)
@@ -317,11 +364,11 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 		if ( isset( $class ) && $class )
 			echo ' class="' . $class . '"';
 		checked( isset( $this->existing_options[$key] ) );
-		echo ' /> ' . esc_html( __( "Show profile photos of the viewer's friends who have already subscribed.", 'facebook' ) ) . '</label>';
+		echo ' /> ' . esc_html( __( "Show profile photos of the viewer's friends who already follow this person.", 'facebook' ) ) . '</label>';
 	}
 
 	/**
-	 * Allow the publisher to customize the width of the Subscribe Button
+	 * Allow the publisher to customize the width of the Follow Button
 	 *
 	 * @since 1.1
 	 * @param array $extra_attributes custom form attributes
@@ -333,7 +380,7 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 		extract( self::parse_form_field_attributes(
 			$extra_attributes,
 			array(
-				'id' => 'facebook-subscribe-' . $key,
+				'id' => 'facebook-follow-' . $key,
 				'class' => '',
 				'name' => self::OPTION_NAME . '[' . $key . ']'
 			)
@@ -369,7 +416,7 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 		extract( self::parse_form_field_attributes(
 			$extra_attributes,
 			array(
-				'id' => 'facebook-subscribe-' . $key,
+				'id' => 'facebook-follow-' . $key,
 				'class' => '',
 				'name' => self::OPTION_NAME . '[' . $key . ']'
 			)
@@ -393,7 +440,7 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 		extract( self::parse_form_field_attributes(
 			$extra_attributes,
 			array(
-				'id' => 'facebook-subscribe-' . $key,
+				'id' => 'facebook-follow-' . $key,
 				'class' => '',
 				'name' => self::OPTION_NAME . '[' . $key . ']'
 			)
@@ -417,7 +464,7 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 		extract( self::parse_form_field_attributes(
 			$extra_attributes,
 			array(
-				'id' => 'facebook-subscribe-' . $key,
+				'id' => 'facebook-follow-' . $key,
 				'class' => '',
 				'name' => self::OPTION_NAME . '[' . $key . ']'
 			)
@@ -455,11 +502,11 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 	}
 
 	/**
-	 * Sanitize Subscribe Button settings before they are saved to the database
+	 * Sanitize Follow Button settings before they are saved to the database
 	 *
 	 * @since 1.1
-	 * @param array $options Subscribe Button options
-	 * @return array clean option sets. note: we remove Subscribe Button social plugin default options, storing only custom settings (e.g. dark color scheme stored, light is default and therefore not stored)
+	 * @param array $options Follow Button options
+	 * @return array clean option sets. note: we remove Follow Button social plugin default options, storing only custom settings (e.g. dark color scheme stored, light is default and therefore not stored)
 	 */
 	public static function sanitize_options( $options ) {
 		if ( ! is_array( $options ) || empty( $options ) )
@@ -467,30 +514,30 @@ class Facebook_Subscribe_Button_Settings extends Facebook_Social_Plugin_Button_S
 
 		$clean_options = array();
 
-		self::require_subscribe_button_builder();
+		self::require_follow_button_builder();
 
 		// Handle display preferences first
 		$clean_options = parent::sanitize_options( $options );
 		if ( isset( $clean_options['show_on'] ) ) {
-			self::update_display_conditionals( 'subscribe', $clean_options['show_on'], self::get_show_on_choices( 'all' ) );
+			self::update_display_conditionals( 'follow', $clean_options['show_on'], self::get_show_on_choices() );
 			unset( $clean_options['show_on'] );
 		}
 		unset( $options['show_on'] );
 
-		// href required for subscribe button
+		// href required for follow button
 		// set href contextual to the post author, not at settings
 		// fake it here to pass sanitization, then remove before save
 		$options['href'] = 'https://www.facebook.com/zuck';
 
-		$subscribe_button = Facebook_Subscribe_Button::fromArray( $options );
-		if ( $subscribe_button ) {
-			$subscribe_button_options = self::html_data_to_options( $subscribe_button->toHTMLDataArray() );
+		$follow_button = Facebook_Follow_Button::fromArray( $options );
+		if ( $follow_button ) {
+			$follow_button_options = self::html_data_to_options( $follow_button->toHTMLDataArray() );
 
 			// remove the dummy value set above
 			// remove here instead of html_data_to_options to separate widget usage with its real href
-			unset( $subscribe_button_options['href'] );
+			unset( $follow_button_options['href'] );
 
-			return array_merge( $clean_options, $subscribe_button_options );
+			return array_merge( $clean_options, $follow_button_options );
 		}
 
 		return $clean_options;

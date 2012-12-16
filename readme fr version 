@@ -1,0 +1,233 @@
+Facebook === ===
+Contributeurs: Facebook, Automattic, mattwkelly, niallkennedy, rgharpuray, ngfeldman, jamesgpearce, ravi.grover, danielbachhuber, gigawats, eosgood, Otto42, colmdoyle, zazinteractive
+Tags: Facebook, commentaires, sociaux, des amis, comme, comme plugin de bouton, les plugins sociaux, la plate-forme Facebook, la page, les messages, encadré,, graphique ouvert
+Nécessite au moins: 3,3
+Testé jusqu'à: 3.5
+Licence: GPLv2
+Licence URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tag stable: 1.1.8
+
+Rendez votre site WordPress sociale dans un couple des clics, alimenté par Facebook.
+
+== Description ==
+
+Le plugin pour WordPress Facebook Facebook ajoute plugins sociaux sur votre site WordPress. Associez votre site WordPress avec un identifiant application Facebook gratuite pour activer des fonctionnalités avancées telles que partager automatiquement de nouveaux messages sur Facebook d'un auteur calendrier ou de votre site Facebook page. Ce plugin est développé par Facebook avec un soutien supplémentaire pour les plugins et des thèmes populaires.
+
+= Caractéristiques =
+
+* [Protocole Open Graph] (http://ogp.me) balisage permet d'optimiser votre contenu pour le partage social et des aperçus histoire riche sur Facebook, Twitter, Google+, Mixi, et plus encore.
+* [Facebook Insights] (http://www.facebook.com/insights) le soutien des comptes Facebook associés à une application Facebook.
+* Ajouter [Comme] (https://developers.facebook.com/docs/reference/plugins/like/), [envoyer] (https://developers.facebook.com/docs/reference/plugins/send/), et [s'inscrire] (https://developers.facebook.com/docs/reference/plugins/subscribe/) boutons à chaque poste pour aider le contenu de votre site la part des lecteurs avec des amis ou rester en contact avec le contenu futur partagé par votre site sur Facebook.
+* Activez le [plugin Facebook Comments Box sociale] (https://developers.facebook.com/docs/reference/plugins/comments/) pour encourager de nouveaux commentaires connecté les utilisateurs de Facebook et de ses amis sur Facebook. Commentaires associés à un poste sont triés en fonction des signaux sociaux, y compris les réseaux d'amis, plus aimé, ou les fils de discussion les plus actifs.
+* [Bar Recommandations] (https://developers.facebook.com/docs/reference/plugins/recommendationsbar/) permet aux visiteurs de découvrir un contenu supplémentaire sur votre site en recommandant les messages et en encourageant l'instar des actions.
+* [Box Recommandations] (https://developers.facebook.com/docs/reference/plugins/recommendations/) suggère messages liés à un widget configurable.
+* Mention amis Facebook et les pages Facebook associés à un poste.
+
+= Shortcodes =
+
+Ajouter une [Like Button] (https://developers.facebook.com/docs/reference/plugins/like/) ou un [Envoyer] Bouton (https://developers.facebook.com/docs/reference/plugins/send /) en utilisant un shortcode dans votre poste ou évaluée à partir de votre thème. Vous pouvez passer outre au niveau du site d'options avec des attributs définis shortcode à la page du plugin social.
+
+* `[Facebook_like_button]`
+* `[Facebook_send_button]`
+
+= Code Contribuer =
+
+Le développement [code source de ce plugin est disponible sur le compte Facebook de GitHub] (https://github.com/facebook/wordpress). [Pull Demandes] (https://github.com/facebook/wordpress/pulls) et la discussion du code bienvenus.
+
+== Installation ==
+
+1. Installez Facebook pour WordPress soit via le répertoire du plugin WordPress.org, ou en téléchargeant les fichiers sur votre serveur (dans le répertoire `/ wp-content/plugins /` annuaire).
+1. Après l'activation du plugin, vous serez invité à configurer votre application Facebook ou entrer des informations d'identification existantes copiés à partir du [site Facebook Developers] (http://developers.facebook.com/apps/).
+1. C'est tout. Vous êtes prêt à partir!
+
+Captures d'écran == ==
+
+1. Facebook réglages de l'écran.
+2. Boîtes de mentionner amis Facebook et les pages dans un post WordPress ou la page.
+3. Réglez la mise à jour de statut qui sera publiée sur Facebook, ainsi que la page WordPress ou de poste.
+4. Le message résultant à Celebuzz.
+5. Le message est publié à (Andy Scott) Chronologie de l'auteur.
+6. Le message est publié sur Duets Facebook Timeline, depuis qu'il a été mentionné dans le message.
+7. Le message est publié à la page Facebook Celebuzz.
+8. Les widgets sont également disponibles.
+
+== Les actions personnalisées et filtres ==
+
+= Actions =
+
+* `Facebook_notify_plugin_conflicts` - exécute le code d'informer les administrateurs du site d'éventuels conflits avec d'autres plugins en parcourant une liste de tous les plugins installés et mettre en évidence les conflits connus au moment le plugin Facebook pour WordPress a été libéré. Certains éditeurs pouvez supprimer cette vérification de l'efficacité.
+* `Facebook_settings_before_header_ $ hook_suffix` - ajouter du contenu à une page des paramètres avant la section de tête de la page principale
+* `Facebook_settings_after_header_ $ hook_suffix` - ajouter du contenu à une page des paramètres après la section de tête de la page principale
+* `Facebook_settings_footer_ $ hook_suffix` - ajouter du contenu à une page des paramètres en dessous de la div wrapper
+
+= Filtres =
+
+* `Facebook_features` - limiter le plugin fonctionnalités disponibles sur votre site
+* `Fb_conflicting_plugins` - ajouter ou supprimer des URL plugin utilisé par le plugin pour mettre en garde contre les conflits potentiels
+* `` - Facebook_jssdk_init_options arguments personnaliser envoyées à l'[FB.init] (https://developers.facebook.com/docs/reference/javascript/FB.init/) fonction du SDK Facebook JavaScript
+* `Facebook_jssdk_init_extras` - ajoutez JavaScript supplémentaire à l'`` fbAsyncInit fonction JavaScript appelée après que le SDK Facebook JavaScript est chargé
+* `Facebook_content_filter_priority` - choisir la priorité des filtres Facebook social plugin attachés à the_content `` filter. Affecte où le contenu Facebook est sortie sur votre page par rapport à d'autres plugins attachés à the_content ``
+* `Fb_locale` - définir directement les paramètres régionaux de site basé sur la liste des [Facebook locale mappages] (https://developers.facebook.com/docs/internationalization/)
+* `Facebook_excerpt_length` - choisir une longueur sur mesure, c'est à dire, d'un extrait message généré pour une utilisation dans la description du protocole Open Graph. par défaut: 55
+* `Facebook_excerpt_more` - chaîne apparaissant à la fin d'une chaîne extrait tronqué. par défaut: "..."
+* `Fb_rel_canonical` - personnaliser l'URL canonique utilisée par Facebook pour un poste. Affecte ouvertes définitions Graph protocole URL, références URL envoyés dans des actions Open Graph, et plus encore. par défaut: résultat de `get_permalink ()`
+* `Facebook_comment_schema_org` - Sortie remplacement de moteur de recherche convivial contenu commentaires en utilisant [Schema.org microdonnées à grande diffusion
+* `Facebook_comments_number_more` - remplacer les "Commentaires"% texte par défaut utilisés pour générer un numéro de client-side commentaires. similaire à [comments_number] WordPress (http://codex.wordpress.org/Function_Reference/comments_number) plusieurs paramètres.
+* `Facebook_anchor_target` - personnaliser le contexte de navigation [ utilisée pour les liens vers la sortie à côté de votre poste Facebook comme mentions. par défaut: `_blank`
+* `` - Facebook_mentions_classes ajouter ou supprimer des classes HTML à partir de l'élément HTML div parent de liens mentions
+* `Fb_meta_tags` - Personnaliser protocole Open Graph balisage avant qu'il ne soit sortie à la page
+* `Facebook_ogp_prefixed` - fidèle à toujours utiliser des propriétés préfixées (og: title) ou fausses à utiliser pleines propriétés IRI (http://ogp.me/ns # title)
+* `Facebook_rdfa_mappings` - tableau de références RDFa avec le préfixe désiré. Utilisé pour remapper Ouvrir les propriétés du protocole graphique à partir d'un IRI complète à un préfixe
+* `Fb_get_user_meta` - chercher une valeur méta utilisateur en attachant à ce filtre, sans passer par l'utilisateur WordPress méta API
+* `Fb_update_user_meta` - mettre à jour une valeur méta utilisateur en attachant à ce filtre, sans passer par l'utilisateur WordPress méta API
+* `Fb_delete_user_meta` - supprimer une valeur méta utilisateur en attachant à ce filtre, sans passer par l'utilisateur WordPress méta API
+
+== Questions fréquentes ==
+
+= Comment puis-je modifier l'image qui apparaît pour mes postes partagés sur Facebook? =
+
+Le plugin génère [protocole Open Graph] (http://ogp.me/) balisage pour les pages Web de votre site, y compris une image explicite-indiqué pour les messages avec un rapport connexe [post] (miniatures http://codex.wordpress.org/Post_Thumbnails ). Votre plugin ou un thème peut définir des images supplémentaires à travers le filtre `` fb_meta_tags. Si une image miniature de votre image poste existe supplémentaire sera prévu un suppléant pour des histoires partagées par le biais d'un lien collé. Résumés histoire sans surveillance utiliser la première image définie. [Collant de soutien] (http://wordpress.org/support/topic/customize-open-graph-protocol-for-your-site-or-network)
+
+= Comment puis-je modérer les commentaires et les critiques ajouter? =
+
+[Outils de modération Commentaire] (https://developers.facebook.com/tools/comments) vous permet de personnaliser les modérateurs de votre application Facebook, mots mis à l'index, les connexions externes, et plus encore.
+
+= Est-ce que Facebook Comments travailler avec mes commentaires WordPress existants? =
+
+L'[plugin Box Commentaires sociale] (https://developers.facebook.com/docs/reference/plugins/comments/) est destiné à remplacer le système WordPress commentant avec un plus sociale, côté client expérience. Nous n'avons actuellement pas en charge la synchronisation des commentaires stockés sur Facebook avec des commentaires enregistrés dans votre base de données WordPress.
+
+Avis de mise à niveau == ==
+
+= 1.1.8 =
+Correction de bug pour le contexte post sur un filtre commentaires.
+
+= 1.1.7 =
+Amélioration des filtres commentaire. Ajouter l'auteur poste Box Commentaire admin / modérateur. Masquer les paramètres d'erreur s'affiche si aucune fonction de sortie existent.
+
+= 1.1.6 =
+Page Déboguer, csc: préfixe Ouvrir les propriétés du protocole Graph API, Shortcode de soutien pour apprécier et Envoyer des boutons, des commentaires améliorations.
+
+= 1.1.5 =
+Fixer l'option activée commentaires sur les commentaires mal réglé les paramètres sauf lorsque aucun type de message sélectionné.
+
+= 1.1.4 =
+Filtre nombre de commentaires disponibles sur tous les contextes lorsque la boîte de commentaires activés pour un ou plusieurs types de poste.
+
+= 1.1.3 =
+Correction d'un problème barre des recommandations et PHP question touchant 5.2.4 - 5.2.8 installe.
+
+= 1.1.2 =
+Amélioration de la compatibilité avec PHP 5.2 installations. Bar Recommandations corriger.
+
+= 1,1 =
+Types de message personnalisé et le soutien d'état. Réécriture pages de paramètres. De plus longue durée accès à Facebook jetons. Async JavaScript chargement. Appui commentaire filetée.
+
+= 1.0.2 =
+Améliorer les performances du site lorsque cURL n'est pas installé ou SSL ne sont pas disponibles. Suppression des boîtes postales lors de la publication de méta sociale dispose pas activé.
+
+= 1.0.1 =
+Correctifs de sécurité. Amélioration de la personnalisation et le débogage des paramètres. l10n i18n et des corrections.
+
+== == Modifications
+
+= 1.1.8 =
+* Correction de bug: utiliser l'objet après globale au lieu de get_post sur une filtrer les commentaires
+
+= 1.1.7 =
+* Boîte Commentaires - substitutions de système de commentaires WordPress appliquée au niveau du poste, qui permet un contrôle plus fin des commentaires par type de poste ou mélangés dans une seule boucle
+* Commentaires Box - déclarer auteur du message avec `capacité` moderate_comments un admin de la page individuelle, l'octroi de capacités de modération des commentaires sur Facebook pour le poste
+Affichage d'erreur * Masquer les paramètres si la fonction n'est pas encore définie
+
+= 1.1.6 =
+* [Protocole Open Graph] (http://ogp.me/) des données de sortie sous forme de préfixe (par exemple og: title) au lieu de la pleine IRI. Vous pouvez déclarer votre préférence de toujours utiliser un préfixe dans le futur en utilisant le filtre `` facebook_ogp_prefixed
+Page de débogage * affiche la configuration de votre plugin, auteur comptes associés à un compte Facebook, et les informations du serveur pour le dépannage
+* [Shortcode] (http://codex.wordpress.org/Shortcode_API) soutien aux boutons Like et de sortie Bouton Envoyer
+* Commentaires Box peut être désactivé pour un poste spécifique lorsque poster des commentaires sont fermés marquée dans WordPress et aucun commentaire n'est stockée sur Facebook
+Identifiant * Application et secret sont vérifiées sur les serveurs de Facebook, la génération d'un jeton d'accès pour une utilisation future application
+* Async JavaScript chargeur de support pour concaténation configurations chargeur de script
+* Correction d'un problème avec la boîte de couleur de préférence Commentaires schéma jamais mémorisation d'une valeur "sombre" préférence
+* Les fichiers JavaScript renommé. Js et. Min.js pour correspondre à base WP 3.5 Convention (voir [Core # 21633] (http://core.trac.wordpress.org/ticket/21633))
+* Comprend Facebook PHP SDK 3.2.1 et son nouveau repli chaîne de certificats SSL
+
+= 1.1.5 =
+* Supprimer les commentaires sur les observations option est activée la page des paramètres du plugin sauf lorsque aucun commentaire sélectionné.
+
+= 1.1.4 =
+
+Compte Commentaire * alimentés par disponible dans tous les contextes page Facebook lorsque le plugin boîte de commentaires sociale activé pour un ou plusieurs types de poste
+* Les réglages bouton S'abonner fixer
+* Recommandations bar max fix paramètre de l'âge
+
+= 1.1.3 =
+
+* PHP problème affectant 5.2.4 - 5.2.8 installe
+* Correctement sauver nombre d'articles pour la mise recommandations bar
+* Ajouter explicite Ouvrir l'URL du protocole graphique pour la première page et la maison
+
+= 1.1.2 =
+
+* Améliorer la compatibilité PHP 5.2
+* Correction du nombre minimum de secondes avant que la barre des recommandations montré
+* Correctement référence du widget identifiants pour les stats
+
+= 1,1 =
+
+* Prend en charge publique [types postales personnalisées] (http://codex.wordpress.org/Post_Types) et [état après personnalisé] (http://codex.wordpress.org/Function_Reference/register_post_status)
+* [Facebook] (SDK JavaScript https://developers.facebook.com/docs/reference/javascript/) des charges de manière asynchrone après pageLoad
+* Page Paramètres divisé en plusieurs pages de paramètres avec [Réglages WordPress API] (http://codex.wordpress.org/Settings_API) le soutien
+* Choisissez d'afficher plugins sociaux et mentionne sur votre page d'accueil, pages d'archives, ou les types de postes individuels
+* Balisage Commentaires apparaissant dans des emballages noscript incluent maintenant [balisage commentaire Schema.org] (http://schema.org/UserComments) par défaut
+* Ajout du support commentaire filetée pour noscript balisage de secours
+* Mise à jour [Facebook PHP SDK] (https://github.com/facebook/facebook-php-sdk/) vers la version 3.2
+* Nouveau sociale plugins constructeur permet de corriger les erreurs avant qu'elles ne surviennent et ne comprennent que le balisage de vos pages capables d'interprétation par le SDK Facebook JavaScript
+* Mention liens s'ouvrent dans un nouveau contexte de navigation par défaut
+* Message Mentions s'affichent dans leurs boîtes méta après enregistrer
+Strings * passer à travers fonctions de traduction, l'ouverture des services de traduction avenir
+* Correction de contenu mixte avertissements lancés lorsque les images Facebook affichés sur une page
+* Désinstaller script supprime les options du site et l'utilisateur lorsque le plugin est désinstallé par l'interface d'administration de WordPress
+* [Menus contextuels d'aide] (http://codex.wordpress.org/Administration_Panels # Aide) affiche des informations utiles aux côtés de réglages choix
+* Prise en charge icône de haut-DPI pour le menu d'administration
+
+= 1.0.2 =
+
+* Correction du problème où certains sites étaient extrêmement lents en raison de l'installation du plugin (en raison de cURL n'est pas installé).
+* Ajout d'un avertissement et activement désactiver certaines parties du plugin si SSL n'est pas installé.
+* Correction d'un bug dans l'édition sociale.
+* Ajout de la logique de désactiver les boîtes méta / édition si la publication sociale est désactivé.
+* Correction de problème de chargement pour toujours sur la page des paramètres FB si aucun utilisateur actif existe.
+* Ajout de bonne s'échapper.
+* Ajout des paramètres globaux pour définir si les plugins sociaux montrer sur tous les postes, toutes les pages, les deux, ou ni. Fait à données comparables bouton, abonnez-bouton, le bouton envoyer, commentaires, recommandations et d'un bar.
+* Ajout de paramètres per-post/page pour afficher / masquer plugins sociaux.
+* Correction de la description qui a été mal formaté en cours de lors de la publication chez des amis et des pages intérieures RSS.
+* Ajout d'une notification si les plugins qui sont potentiellement contradictoires sont installés.
+* Ajout des suggestions de ce qu'il faut entrer dans les champs de la nouvelle expérience utilisateur.
+* Bug fixe pour s'assurer que tout fonctionne sur mobile (y compris le soutien pour WPtouch).
+Correction de bugs * à destination de Pages déroulant sur la page Facebook paramètres.
+* Suppression de la nécessité de créer des sessions de PHP, en s'appuyant sur des méta utilisateur / transitoires maintenant.
+
+= 1.0.1 =
+
+* Commentaire correction d'un bug de comptage.
+* Correction bug Commentaires largeur.
+* Comme, envoyer, abonnez-vous: HREF fixes incorrectes pour les boutons de la page d'accueil.
+* Ajout comme / bouton envoyer à la page des paramètres (passez le mot!).
+* Changement de versions minimums et maximums soutenus WP.
+Correctif de sécurité * dans le panneau de configuration.
+* Correction d'un problème avec la publication d'un message / page s'il n'y a pas une vignette définie.
+* Changement automatique complète pour jouer gentil avec UTF-8.
+* Déplacement fonction d'accès étendu jeton Facebook_WP classe.
+* Ajout d'un lien de débogage sur la page des paramètres qui génère des informations de débogage.
+* Beaucoup de corrections de i18n.
+* Ajout de simplifier le débogage des erreurs de l'API Facebook.
+* Ajout d'un meilleur connecté détection d'état dans l'interface d'admin, en fonction de si l'utilisateur s'est authentifié et compte tenu de certaines autorisations.
+* Correction d'un poste d'édition si aucun des amis ou des pages mentionnées.
+* Thème fixe pour empêcher bar comme et mentions d'apparaître au mauvais endroit.
+* Lien fixe à la page de configuration des plugins.
+* Corrections de bugs qui se passe à la page 404.
+* Correction d'un bug car si un administrateur supprime WP l'application via facebook.com.
+* Ajout de messages d'état pour ce qui est / n 'était pas posté sur Facebook dans le cadre d'un post / page étant prises en direct.
+* Ajout d'une fonctionnalité pour désactiver la publication d'une page si le jeton d'accès échoue.
+* Les messages d'erreur plus clairs pour certains scénarios (comme l'incapacité pour poster un ami de la page Chronologie de raison de paramètres de confidentialité.
+* Conflits fixes avec l'éditeur d'alimentation et texte superflu étant ajouté à og: description. Merci à Angelo Mandato ([mention support] (http://wordpress.org/support/topic/plugin-facebook-plugin-conflicts-with-powerpress))
+
+= 1,0 =

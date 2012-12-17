@@ -4,12 +4,12 @@ if ( ! class_exists( 'Facebook_Social_Plugin' ) )
 	require_once( dirname(__FILE__) . '/class-facebook-social-plugin.php' );
 
 /**
- * Encourage visitors to subscribe to your public updates on Facebook with a Subscribe Button
+ * Encourage visitors to follow your public updates on Facebook with a Follow Button
  *
  * @since 1.1
- * @link https://developers.facebook.com/docs/reference/plugins/subscribe/ Facebook Subscribe Button
+ * @link https://developers.facebook.com/docs/reference/plugins/follow/ Facebook Follow Button
  */
-class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
+class Facebook_Follow_Button extends Facebook_Social_Plugin {
 
 	/**
 	 * Element and class name used in markup builders
@@ -17,20 +17,20 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	 * @since 1.1
 	 * @var string
 	 */
-	const ID = 'subscribe';
+	const ID = 'follow';
 
 	/**
-	 * The Facebook URL representing a user profile or page open to new subscribers
-	 * Your account must allow subscribers. Subscribe only available for accounts belonging to a user over 18 years of age
+	 * The Facebook URL representing a user profile or page open to new followers
+	 * Your account must allow followers. Follow ability only available for accounts belonging to a user over 18 years of age
 	 *
-	 * @link https://www.facebook.com/about/subscribe About Facebook Subscribe
+	 * @link https://www.facebook.com/about/follow About Facebook Follow
 	 * @since 1.1
 	 * @var string
 	 */
 	protected $href;
 
 	/**
-	 * Which style subscribe button you would like displayed
+	 * Which style follow button you would like displayed
 	 *
 	 * @since 1.1
 	 * @var string
@@ -38,7 +38,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	protected $layout;
 
 	/**
-	 * Choose your subscribe button
+	 * Choose your follow button
 	 *
 	 * @since 1.1
 	 * @var array
@@ -46,7 +46,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	public static $layout_choices = array( 'standard', 'button_count', 'box_count' );
 
 	/**
-	 * Show faces of the viewer's friends already subscribed?
+	 * Show faces of the viewer's friends already following?
 	 * Only applies to standard layout. Needs the extra width.
 	 *
 	 * @since 1.1
@@ -77,13 +77,13 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	}
 
 	/**
-	 * I am a subscribe button
+	 * I am a follow button
 	 *
 	 * @since 1.1
 	 * @return string
 	 */
 	public function __toString() {
-		return 'Facebook Subscribe Button';
+		return 'Facebook Follow Button';
 	}
 
 	/**
@@ -91,12 +91,12 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	 *
 	 * @since 1.1
 	 * @param string $url absolute URL
-	 * @return Facebook_Subscribe_Button support chaining
+	 * @return Facebook_Follow_Button support chaining
 	 */
 	public function setURL( $url ) {
 		$url = esc_url_raw( $url, array( 'http', 'https' ) );
 		if ( $url ) {
-			// you can only subscribe to a Facebook URL
+			// you can only follow a Facebook URL
 			if ( parse_url( $url, PHP_URL_HOST ) === 'www.facebook.com' )
 				$this->href = $url;
 		}
@@ -109,7 +109,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	 * @since 1.1
 	 * @see self::$layout_choices
 	 * @param string $layout a supported layout option
-	 * @return Facebook_Subscribe_Button support chaining
+	 * @return Facebook_Follow_Button support chaining
 	 */
 	public function setLayout( $layout ) {
 		if ( is_string( $layout ) && in_array( $layout, self::$layout_choices, true ) )
@@ -121,7 +121,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	 * Show the faces of a logged-on Facebook user's friends
 	 *
 	 * @since 1.1
-	 * @return Facebook_Subscribe_Button support chaining
+	 * @return Facebook_Follow_Button support chaining
 	 */
 	public function showFaces() {
 		$this->show_faces = true;
@@ -129,22 +129,22 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Width of the subscribe button
+	 * Width of the follow button
 	 * Should be greater than the minimum width of layout option
 	 *
 	 * @since 1.1
 	 * @param int $width width in whole pixels
-	 * @return Facebook_Subscribe_Button support chaining
+	 * @return Facebook_Follow_Button support chaining
 	 */
 	public function setWidth( $width ) {
-		// narrowest subscribe button is box_count at 55
+		// narrowest follow button is box_count at 55
 		if ( is_int( $width ) && $width > 55 )
 			$this->width = $width;
 		return $this;
 	}
 
 	/**
-	 * Compute a minimum width of a subscribe button based on configured options
+	 * Compute a minimum width of a follow button based on configured options
 	 *
 	 * @since 1.1
 	 * @return int minimum width of the current configuration in whole pixels
@@ -192,33 +192,33 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	 *
 	 * @since 1.1
 	 * @param array $values associative array
-	 * @return Facebook_Subscribe_Button subscribe object
+	 * @return Facebook_Follow_Button follow object
 	 */
 	public static function fromArray( $values ) {
 		if ( ! is_array( $values ) || empty( $values ) )
 			return;
 
-		$subscribe_button = new Facebook_Subscribe_Button();
+		$follow_button = new Facebook_Follow_Button();
 
 		if ( isset( $values['href'] ) )
-			$subscribe_button->setURL( $values['href'] );
+			$follow_button->setURL( $values['href'] );
 
 		if ( isset( $values['layout'] ) )
-			$subscribe_button->setLayout( $values['layout'] );
+			$follow_button->setLayout( $values['layout'] );
 
 		if ( isset( $values['show_faces'] ) && ( $values['show_faces'] === true || $values['show_faces'] === 'true' || $values['show_faces'] == 1 ) )
-			$subscribe_button->showFaces();
+			$follow_button->showFaces();
 
 		if ( isset( $values['width'] ) )
-			$subscribe_button->setWidth( absint( $values['width'] ) );
+			$follow_button->setWidth( absint( $values['width'] ) );
 
 		if ( isset( $values['font'] ) )
-			$subscribe_button->setFont( $values['font'] );
+			$follow_button->setFont( $values['font'] );
 
 		if ( isset( $values['colorscheme'] ) )
-			$subscribe_button->setColorScheme( $values['colorscheme'] );
+			$follow_button->setColorScheme( $values['colorscheme'] );
 
-		return $subscribe_button;
+		return $follow_button;
 	}
 
 	/**
@@ -250,7 +250,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Output Subscribe button with data-* attributes
+	 * Output Follow button with data-* attributes
 	 *
 	 * @since 1.1
 	 * @param array $div_attributes associative array. customize the returned div with id, class, or style attributes
@@ -269,7 +269,7 @@ class Facebook_Subscribe_Button extends Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Output Subscribe button as XFBML
+	 * Output Follow button as XFBML
 	 *
 	 * @since 1.1
 	 * @return string XFBML markup

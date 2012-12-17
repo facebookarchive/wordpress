@@ -172,25 +172,25 @@ function facebook_the_content_send_button( $content ) {
 }
 
 /**
- * Generate HTML for a subscribe button based on passed options
+ * Generate HTML for a follow button based on passed options
  *
  * @since 1.1
  * @param array $options customizations
- * @return string subscribe button HTML for use with the JavaScript SDK
+ * @return string follow button HTML for use with the JavaScript SDK
  */
-function facebook_get_subscribe_button( $options = array() ) {
+function facebook_get_follow_button( $options = array() ) {
 	// need a subscription target
 	if ( ! is_array( $options ) || empty( $options['href'] ) )
 		return '';
 
-	if ( ! class_exists( 'Facebook_Subscribe_Button' ) )
-		require_once( dirname(__FILE__) . '/class-facebook-subscribe-button.php' );
+	if ( ! class_exists( 'Facebook_Follow_Button' ) )
+		require_once( dirname(__FILE__) . '/class-facebook-follow-button.php' );
 
-	$subscribe_button = Facebook_Subscribe_Button::fromArray( $options );
-	if ( ! $subscribe_button )
+	$follow_button = Facebook_Follow_Button::fromArray( $options );
+	if ( ! $follow_button )
 		return '';
 
-	$html = $subscribe_button->asHTML( array( 'class' => array( 'fb-social-plugin' ) ) );
+	$html = $follow_button->asHTML( array( 'class' => array( 'fb-social-plugin' ) ) );
 	if ( is_string($html) && $html )
 		return "\n" . $html . "\n";
 
@@ -198,21 +198,21 @@ function facebook_get_subscribe_button( $options = array() ) {
 }
 
 /**
- * Add Subscribe Button(s) to post content
- * Adds a subscribe button above the post, below the post, or both above and below the post depending on stored preferences.
+ * Add Follow Button(s) to post content
+ * Adds a follow button above the post, below the post, or both above and below the post depending on stored preferences.
  *
  * @since 1.1
  * @param string $content existing content
- * @return string passed content with Subscribe Button markup prepended, appended, or both.
+ * @return string passed content with Follow Button markup prepended, appended, or both.
  */
-function facebook_the_content_subscribe_button( $content ) {
+function facebook_the_content_follow_button( $content ) {
 	global $post;
 
 	// Send Button should not be the only content
 	if ( ! $content )
 		return $content;
 
-	$options = get_option( 'facebook_subscribe_button' );
+	$options = get_option( 'facebook_follow_button' );
 	if ( ! is_array( $options ) )
 		$options = array();
 
@@ -230,15 +230,15 @@ function facebook_the_content_subscribe_button( $content ) {
 
 	if ( $options['position'] === 'top' ) {
 		$options['ref'] = 'above-post';
-		return facebook_get_subscribe_button( $options ) . $content;
+		return facebook_get_follow_button( $options ) . $content;
 	} else if ( $options['position'] === 'bottom' ) {
 		$options['ref'] = 'below-post';
-		return $content . facebook_get_subscribe_button( $options );
+		return $content . facebook_get_follow_button( $options );
 	} else if ( $options['position'] === 'both' ) {
 		$options['ref'] = 'above-post';
-		$above = facebook_get_subscribe_button( $options );
+		$above = facebook_get_follow_button( $options );
 		$options['ref'] = 'below-post';
-		return $above . $content . facebook_get_subscribe_button( $options );
+		return $above . $content . facebook_get_follow_button( $options );
 	}
 
 	// don't break the filter

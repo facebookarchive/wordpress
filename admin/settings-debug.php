@@ -296,9 +296,9 @@ class Facebook_Settings_Debugger {
 				'name' => __( 'Send Button', 'facebook' ),
 				'url' => 'https://developers.facebook.com/docs/reference/plugins/send/'
 			),
-			'subscribe' => array(
-				'name' => __( 'Subscribe Button', 'facebook' ),
-				'url' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/'
+			'follow' => array(
+				'name' => __( 'Follow Button', 'facebook' ),
+				'url' => 'https://developers.facebook.com/docs/reference/plugins/follow/'
 			),
 			'recommendations_bar' => array(
 				'name' => __( 'Recommendations Bar', 'facebook' ),
@@ -374,9 +374,9 @@ class Facebook_Settings_Debugger {
 				'name' => __( 'Send Button', 'facebook' ),
 				'url' => 'https://developers.facebook.com/docs/reference/plugins/send/'
 			),
-			'subscribe' => array(
-				'name' => __( 'Subscribe Button', 'facebook' ),
-				'url' => 'https://developers.facebook.com/docs/reference/plugins/subscribe/'
+			'follow' => array(
+				'name' => __( 'Follow Button', 'facebook' ),
+				'url' => 'https://developers.facebook.com/docs/reference/plugins/follow/'
 			)
 		);
 

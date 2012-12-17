@@ -288,8 +288,8 @@ class Facebook_Loader {
 			add_filter( 'the_content', 'facebook_the_content_like_button', $priority );
 		if ( isset( $enabled_features['send'] ) )
 			add_filter( 'the_content', 'facebook_the_content_send_button', $priority );
-		if ( isset( $enabled_features['subscribe'] ) )
-			add_filter( 'the_content', 'facebook_the_content_subscribe_button', $priority );
+		if ( isset( $enabled_features['follow'] ) )
+			add_filter( 'the_content', 'facebook_the_content_follow_button', $priority );
 		if ( isset( $enabled_features['mentions'] ) ) {
 			if ( ! function_exists( 'facebook_social_publisher_mentioning_output' ) )
 				require_once( dirname(__FILE__) . '/social-publisher/mentions.php' );
@@ -355,7 +355,7 @@ class Facebook_Loader {
 		foreach ( array(
 			'like-button' => 'Facebook_Like_Button_Widget',
 			'send-button' => 'Facebook_Send_Button_Widget',
-			'subscribe-button' => 'Facebook_Subscribe_Button_Widget',
+			'follow-button' => 'Facebook_Follow_Button_Widget',
 			'recommendations-box' => 'Facebook_Recommendations_Widget',
 			'activity-feed' => 'Facebook_Activity_Feed_Widget'
 		) as $filename => $classname ) {

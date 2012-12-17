@@ -76,8 +76,8 @@ class Facebook_Migrate_Options_10 {
 			self::migrate_send_button( $old_options['send'] );
 		if ( isset( $old_options['social_publisher'] ) )
 			self::migrate_social_publisher( $old_options['social_publisher'] );
-		if ( isset( $old_options['subscribe'] ) )
-			self::migrate_subscribe_button( $old_options['subscribe'] );
+		if ( isset( $old_options['follow'] ) )
+			self::migrate_follow_button( $old_options['follow'] );
 	}
 
 	/**
@@ -211,23 +211,23 @@ class Facebook_Migrate_Options_10 {
 	}
 
 	/**
-	 * Migrate subscribe button settings
+	 * Migrate follow button settings
 	 *
 	 * @since 1.1
 	 * @param array $options existing settings
 	 * @return result of update_option, if run
 	 */
-	public static function migrate_subscribe_button( $options ) {
+	public static function migrate_follow_button( $options ) {
 		if ( ! is_array( $options ) || empty( $options ) )
 			return;
 
 		$options = self::show_on( $options );
 
-		if ( ! class_exists( 'Facebook_Subscribe_Button_Settings' ) )
-			require_once( dirname(__FILE__) . '/settings-subscribe-button.php' );
-		$options = Facebook_Subscribe_Button_Settings::sanitize_options( $options );
+		if ( ! class_exists( 'Facebook_Follow_Button_Settings' ) )
+			require_once( dirname(__FILE__) . '/settings-follow-button.php' );
+		$options = Facebook_Follow_Button_Settings::sanitize_options( $options );
 		if ( ! empty( $options ) )
-			return update_option( Facebook_Subscribe_Button_Settings::OPTION_NAME, $options );
+			return update_option( Facebook_Follow_Button_Settings::OPTION_NAME, $options );
 	}
 }
 ?>

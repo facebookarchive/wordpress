@@ -27,7 +27,7 @@ $__options = array(
 	'facebook_send_button',
 	'facebook_mentions',
 	'facebook_publish_page',
-	'facebook_subscribe_button',
+	'facebook_follow_button',
 	'facebook_home_features',
 	'facebook_archive_features'
 );

@@ -1,19 +1,19 @@
 <?php
 /**
- * Adds the Subscribe Button Social Plugin as a WordPress Widget
+ * Adds the Follow Button Social Plugin as a WordPress Widget
  *
  * @since 1.0
  */
-class Facebook_Subscribe_Button_Widget extends WP_Widget {
+class Facebook_Follow_Button_Widget extends WP_Widget {
 
 	/**
 	 * Register widget with WordPress
 	 */
 	public function __construct() {
 		parent::__construct(
-	 		'facebook-subscribe', // Base ID
-			__( 'Facebook Subscribe Button', 'facebook' ), // Name
-			array( 'description' => __( 'Lets a user subscribe to your public updates on Facebook.', 'facebook' ) ) // Args
+	 		'facebook-follow', // Base ID
+			__( 'Facebook Follow Button', 'facebook' ), // Name
+			array( 'description' => __( 'Lets a user follow your public updates on Facebook.', 'facebook' ) ) // Args
 		);
 	}
 
@@ -26,7 +26,7 @@ class Facebook_Subscribe_Button_Widget extends WP_Widget {
 	 * @param array $instance Saved values from database.
 	 */
 	public function widget( $args, $instance ) {
-		// no subscribe target. fail early
+		// no follow target. fail early
 		if ( empty( $instance['href'] ) )
 			return;
 
@@ -35,11 +35,11 @@ class Facebook_Subscribe_Button_Widget extends WP_Widget {
 		if ( ! isset( $instance['ref'] ) )
 			$instance['ref'] = 'widget';
 
-		if ( ! function_exists( 'facebook_get_subscribe_button' ) )
+		if ( ! function_exists( 'facebook_get_follow_button' ) )
 			require_once( dirname( dirname(__FILE__) ) . '/social-plugins.php' );
 
-		$subscribe_button_html = facebook_get_subscribe_button( $instance );
-		if ( ! ( is_string( $subscribe_button_html ) && $subscribe_button_html ) )
+		$follow_button_html = facebook_get_follow_button( $instance );
+		if ( ! ( is_string( $follow_button_html ) && $follow_button_html ) )
 			return;
 
 		echo $before_widget;
@@ -49,7 +49,7 @@ class Facebook_Subscribe_Button_Widget extends WP_Widget {
 		if ( $title )
 			echo $before_title . esc_html( $title ) . $after_title;
 
-		echo $subscribe_button_html;
+		echo $follow_button_html;
 
 		echo $after_widget;
 	}
@@ -70,15 +70,15 @@ class Facebook_Subscribe_Button_Widget extends WP_Widget {
 		if ( ! empty( $new_instance['title'] ) )
 			$instance['title'] = strip_tags( $new_instance['title'] );
 
-		if ( ! class_exists( 'Facebook_Subscribe_Button' ) )
-			require_once( dirname( dirname(__FILE__) ) . '/class-facebook-subscribe-button.php' );
+		if ( ! class_exists( 'Facebook_Follow_Button' ) )
+			require_once( dirname( dirname(__FILE__) ) . '/class-facebook-follow-button.php' );
 
-		$subscribe_button = Facebook_Subscribe_Button::fromArray( $new_instance );
-		if ( $subscribe_button ) {
-			if ( ! class_exists( 'Facebook_Subscribe_Button_Settings' ) )
-				require_once( dirname( dirname( dirname(__FILE__) ) ) . '/admin/settings-subscribe-button.php' );
+		$follow_button = Facebook_Follow_Button::fromArray( $new_instance );
+		if ( $follow_button ) {
+			if ( ! class_exists( 'Facebook_Follow_Button_Settings' ) )
+				require_once( dirname( dirname( dirname(__FILE__) ) ) . '/admin/settings-follow-button.php' );
 
-			return array_merge( $instance, Facebook_Subscribe_Button_Settings::html_data_to_options( $subscribe_button->toHTMLDataArray() ) );
+			return array_merge( $instance, Facebook_Follow_Button_Settings::html_data_to_options( $follow_button->toHTMLDataArray() ) );
 		}
 
 		return $instance;
@@ -95,41 +95,41 @@ class Facebook_Subscribe_Button_Widget extends WP_Widget {
 		$this->display_title( isset( $instance['title'] ) ? $instance['title'] : '' );
 		$this->display_href( isset( $instance['href'] ) ? $instance['href'] : '' );
 
-		if ( ! class_exists( 'Facebook_Subscribe_Button_Settings' ) )
-			require_once( dirname( dirname( dirname(__FILE__) ) ) . '/admin/settings-subscribe-button.php' );
+		if ( ! class_exists( 'Facebook_Follow_Button_Settings' ) )
+			require_once( dirname( dirname( dirname(__FILE__) ) ) . '/admin/settings-follow-button.php' );
 
-		$subscribe_button_settings = new Facebook_Subscribe_Button_Settings( $instance );
+		$follow_button_settings = new Facebook_Follow_Button_Settings( $instance );
 
 		echo '<div>' . esc_html( __( 'Layout', 'facebook' ) ) . ': ';
-		$subscribe_button_settings->display_layout( array(
+		$follow_button_settings->display_layout( array(
 			'id' => $this->get_field_id( 'layout' ),
 			'name' => $this->get_field_name( 'layout' )
 		) );
 		echo '</div><p></p>';
 
 		echo '<div>';
-		$subscribe_button_settings->display_show_faces( array(
+		$follow_button_settings->display_show_faces( array(
 			'id' => $this->get_field_id( 'show_faces' ),
 			'name' => $this->get_field_name( 'show_faces' )
 		) );
 		echo '</div><p></p>';
 
 		echo '<div><label for="' . $this->get_field_id( 'width' ) . '">' . esc_html( __( 'Width', 'facebook' ) ) . '</label>: ';
-		$subscribe_button_settings->display_width( array(
+		$follow_button_settings->display_width( array(
 			'id' => $this->get_field_id( 'width' ),
 			'name' => $this->get_field_name( 'width' )
 		) );
 		echo '</div><p></p>';
 
 		echo '<div><label for="' . $this->get_field_id( 'font' ) . '">' . esc_html( __( 'Font', 'facebook' ) ) . '</label>: ';
-		$subscribe_button_settings->display_font( array(
+		$follow_button_settings->display_font( array(
 			'id' => $this->get_field_id( 'font' ),
 			'name' => $this->get_field_name( 'font' )
 		) );
 		echo '</div><p></p>';
 
 		echo '<div style="line-height:2em">' . esc_html( __( 'Color scheme', 'facebook' ) ) . ': ';
-		$subscribe_button_settings->display_colorscheme( array(
+		$follow_button_settings->display_colorscheme( array(
 			'id' => $this->get_field_id( 'colorscheme' ),
 			'name' => $this->get_field_name( 'colorscheme' )
 		) );

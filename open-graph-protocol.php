@@ -40,6 +40,14 @@ class Facebook_Open_Graph_Protocol {
 	const PROFILE_NS = 'http://ogp.me/ns/profile#';
 
 	/**
+	 * Minimum edge of an acceptable Open Graph protocol image in whole pixels
+	 *
+	 * @since 1.1.9
+	 * @var int
+	 */
+	const MIN_IMAGE_DIMENSION = 200;
+
+	/**
 	 * Recursively build RDFa <meta> elements used for Open Graph protocol
 	 *
 	 * @since 1.0
@@ -52,10 +60,15 @@ class Facebook_Open_Graph_Protocol {
 
 		// array of property values or structured property
 		if ( is_array( $content ) ) {
+			// account for the special structured property of url which is equivalent to the root tag and sets up the structure
+			// must appear before other attributes
+			if ( isset( $content['url'] ) ) {
+				self::meta_elements( $property, $content['url'] );
+				unset( $content['url'] );
+			}
 			foreach( $content as $structured_property => $content_value ) {
 				// handle numeric keys from regular arrays
-				// account for the special structured property of url which is equivalent to the root tag and sets up the structure
-				if ( ! is_string( $structured_property ) || $structured_property === 'url' )
+				if ( ! is_string( $structured_property ) )
 					self::meta_elements( $property, $content_value );
 				else
 					self::meta_elements( $property . ':' . $structured_property, $content_value );
@@ -289,6 +302,16 @@ class Facebook_Open_Graph_Protocol {
 					$meta_tags[ self::OGP_NS . 'image' ] = array( $image );
 				}
 			}
+			$gallery_images = self::gallery_images( $post );
+			if ( ! empty( $gallery_images ) ) {
+				foreach ( $gallery_images as $gallery_image ) {
+					// do not repeat the thumbnail
+					if ( isset( $post_thumbnail_url ) && $post_thumbnail_url === $gallery_image['url'] )
+						continue;
+					$meta_tags[ self::OGP_NS . 'image' ][] = $gallery_image;
+				}
+			}
+			unset( $gallery_images );
 		} else if ( is_author() ) {
 			$author = get_queried_object();
 			if ( ! ( $author && isset( $author->ID ) ) )
@@ -324,6 +347,99 @@ class Facebook_Open_Graph_Protocol {
 		foreach ( $meta_tags as $property => $content ) {
 			self::meta_elements( $property, $content );
 		}
+	}
+
+	/**
+	 * Find gallery shortcodes in the post. Build Open Graph protocol image results.
+	 *
+	 * @since 1.1.9
+	 * @param stdClass $post current post object
+	 * @return array array of arrays containing Open Graph protocol image markup
+	 */
+	public static function gallery_images( $post ) {
+		global $shortcode_tags;
+
+		$og_images = array();
+
+		if ( ! ( isset( $shortcode_tags['gallery'] ) && isset( $post->post_content ) && $post->post_content ) )
+			return $og_images;
+
+		$first_gallery = strpos( $post->post_content, '[gallery' );
+		if ( $first_gallery === false )
+			return $og_images;
+
+		// use regex finder with only the gallery shortcode
+		$old_shortcodes = $shortcode_tags;
+		$shortcode_tags = array( 'gallery' => $shortcode_tags['gallery'] );
+		// find all the gallery shortcodes in the post content
+		preg_match_all( '/' . get_shortcode_regex() . '/s', $post->post_content, $galleries, PREG_SET_ORDER, $first_gallery );
+		// reset
+		$shortcode_tags = $old_shortcodes;
+
+		foreach( $galleries as $gallery_shortcode ) {
+			// request the full-sized image
+			if ( empty( $gallery_shortcode[3] ) ) {
+				$gallery_shortcode[3] = ' size="full"';
+			} else {
+				// break it down
+				$parsed_attributes = shortcode_parse_atts( $gallery_shortcode[3] );
+				// add new attribute or override existing
+				$parsed_attributes['size'] = 'full';
+				// build it up again
+				$attr_str = '';
+				foreach ( $parsed_attributes as $attribute => $value ) {
+					$attr_str .= ' ' . $attribute . '="' . $value . '"';
+				}
+				unset( $parsed_attributes );
+				if ( $attr_str )
+					$gallery_shortcode[3] = $attr_str;
+				unset( $attr_str );
+			}
+
+			// pass the shortcode through all filters and actors
+			$gallery_html = do_shortcode_tag( $gallery_shortcode );
+			if ( ! $gallery_html )
+				continue;
+
+			$gallery_html = strip_tags( $gallery_html, '<img>' );
+			if ( ! $gallery_html )
+				continue;
+
+			$first_image = strpos( $gallery_html, '<img' );
+			if ( $first_image === false )
+				continue;
+
+			preg_match_all( '/<img[^>]+>/i', $gallery_html, $images, PREG_PATTERN_ORDER, $first_image );
+			unset( $gallery_html );
+
+			if ( ! ( is_array( $images ) && is_array( $images[0] ) ) )
+				continue;
+			$images = $images[0];
+
+			foreach ( $images as $image ) {
+				preg_match_all( '/(src|width|height)="([^"]*)"/i', $image, $image_attributes, PREG_SET_ORDER );
+				$og_image = array();
+				foreach( $image_attributes as $parsed_attributes ) {
+					if ( $parsed_attributes[1] === 'src' ) {
+						$url = esc_url_raw( wp_specialchars_decode( $parsed_attributes[2] ), array( 'http', 'https' ) );
+						if ( $url )
+							$og_image['url'] = $url;
+						unset( $url );
+					} else if ( $parsed_attributes[1] === 'width' || $parsed_attributes[1] === 'height' ) {
+						$pixels = absint( $parsed_attributes[2] );
+						if ( $pixels > 0 )
+							$og_image[ $parsed_attributes[1] ] = $pixels;
+						unset( $pixels );
+					}
+				}
+				if ( ! isset( $og_image['url'] ) || ( isset( $og_image['width'] ) && $og_image['width'] < self::MIN_IMAGE_DIMENSION ) || ( isset( $og_image['height'] ) && $og_image['height'] < self::MIN_IMAGE_DIMENSION ) )
+					continue;
+				$og_images[] = $og_image;
+				unset( $og_image );
+			}
+		}
+
+		return $og_images;
 	}
 }
 ?>

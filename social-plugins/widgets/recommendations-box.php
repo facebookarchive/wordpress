@@ -16,6 +16,22 @@ class Facebook_Recommendations_Widget extends WP_Widget {
 			__( 'Facebook Recommendations', 'facebook' ), // Name
 			array( 'description' => __( 'Shows personalized recommendations to your users.', 'facebook' ), ) // Args
 		);
+		add_action( 'admin_enqueue_scripts', array( 'Facebook_Recommendations_Widget', 'admin_enqueue_scripts' ) );
+	}
+
+	/**
+	 * Enqueue color picker if present
+	 *
+	 * @since 1.1.9
+	 * @uses wp_enqueue_script(), wp_enqueue_style()
+	 * @param string $hook_suffix hook suffix passed with action
+	 */
+	public static function admin_enqueue_scripts( $hook_suffix = null ) {
+		if ( $hook_suffix !== 'widgets.php' )
+			return;
+
+		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_script( 'wp-color-picker' );
 	}
 
 	/**
@@ -210,12 +226,20 @@ class Facebook_Recommendations_Widget extends WP_Widget {
 	 * @param string $existing_value stored value
 	 */
 	public function display_border_color( $existing_value = '' ) {
-		echo '<p><label>' . esc_html( __( 'Border color', 'facebook' ) ) . ': <input type="text" size="8" maxlength="7" id="' . $this->get_field_id( 'border_color' ) . '" name="' . $this->get_field_name( 'border_color' ) . '" placeholder="#000000"';
+		$field_id = $this->get_field_id( 'border_color' );
+		echo '<p><label for="' . $field_id . '">' . esc_html( __( 'Border color', 'facebook' ) ) . ': </label><input class="color-picker-hex" type="text" size="8" maxlength="7" id="' . $field_id . '" name="' . $this->get_field_name( 'border_color' ) . '"';
 		if ( $existing_value )
-			echo ' value="' . esc_attr( $existing_value ) . '" /></label> <span style="background-color:' . esc_attr( $existing_value ) . ';min-width:2em;"></span>';
-		else
-			echo ' /></label>';
-		echo '</p>';
+			echo ' value="' . esc_attr( $existing_value ) . '"';
+		echo ' />';
+
+		// include script element inline to trigger color picker on initial pageload as well as jQuery(.widget-content).html() on ajax save
+		if ( wp_script_is( 'wp-color-picker', 'registered' ) ) {
+			echo '</p><script type="text/javascript">if(jQuery){jQuery(function(){if(jQuery.fn.wpColorPicker){jQuery(' . json_encode( '#' . $field_id ) . ').wpColorPicker({defaultColor:"#000000"})}})}</script>';
+		} else {
+			if ( $existing_value )
+				echo ' <span id="' . $field_id . '-span" style="background-color:' . esc_attr( $existing_value ) . ';min-width:2em">&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+			echo '</p><script type="text/javascript">if(jQuery){jQuery(function(){jQuery(' . json_encode( '#' . $field_id ) . ').on("change",function(){jQuery(' . json_encode( '#' . $field_id . '-span' ) . ').css("background-color",jQuery(this).val())})})}</script>';
+		}
 	}
 
 	/**

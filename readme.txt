@@ -5,7 +5,7 @@ Requires at least: 3.3
 Tested up to: 3.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.1.8
+Stable tag: 1.1.9
 
 Make your WordPress site social in a couple of clicks, powered by Facebook.
 
@@ -98,6 +98,9 @@ The [Comments Box social plugin](https://developers.facebook.com/docs/reference/
 
 == Upgrade Notice ==
 
+= 1.1.9 =
+Subscribe Button is now Follow Button. Google Analytics social action tracking support. Gallery images included in Open Graph protocol markup.
+
 = 1.1.8 =
 Bugfix for post context on a comments filter.
 
@@ -129,6 +132,14 @@ Improve site performance when cURL not installed or SSL not available. Removed p
 Security fixes. Improved customization and debugging of settings. l10n and i18n fixes.
 
 == Changelog ==
+
+= 1.1.9 =
+* Support social action tracking in Google Analytics. Includes [Google Analyticator](http://wordpress.org/extend/plugins/google-analyticator/) and [Google Analytics for WordPress](http://wordpress.org/extend/plugins/google-analytics-for-wordpress/) support
+* Facebook Subscribe Button is now known as Follow Button
+* Add gallery images to Open Graph protocol images array if gallery shortcode present
+* Update to Facebook PHP SDK 3.2.2
+* WordPress 3.5 color picker support in Recommendations Box and Activity Feed plugins
+* Fix incorrectly referenced admin menu icon file locations in minified version of icons.css
 
 = 1.1.8 =
 * Bugfix: use the post global object instead of get_post on a comments filter

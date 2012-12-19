@@ -17,6 +17,7 @@ class Facebook_Migrate_Options_118 {
 			return false;
 
 		update_option( 'facebook_follow_button', $options );
+		delete_option( 'facebook_subscribe_button' );
 	}
 
 	/**

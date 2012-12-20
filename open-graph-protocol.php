@@ -163,17 +163,21 @@ class Facebook_Open_Graph_Protocol {
 
 		foreach ( $ogp as $property => $value ) {
 			$prefixed_property_set = false;
+			$property_length = strlen( $property );
 			foreach ( $curies as $reference => $properties ) {
-				if ( substr_compare( $property, $reference, 0, $properties['key_length'] ) === 0 ) {
+				if ( $property_length > $properties['key_length'] && substr_compare( $property, $reference, 0, $properties['key_length'] ) === 0 ) {
 					$ogp_prefixed[ $properties['prefix'] . ':' . substr( $property , $properties['key_length'] ) ] = $value;
 					$prefixed_property_set = true;
 					break;
 				}
 			}
+			unset( $property_length );
 
 			// pass through unmapped values
 			if ( ! $prefixed_property_set )
 				$ogp_prefixed[$property] = $value;
+
+			unset( $prefixed_property_set );
 		}
 
 		return $ogp_prefixed;

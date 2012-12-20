@@ -431,7 +431,7 @@ class Facebook_Settings_Debugger {
 				if ( isset( $curl_version['ssl_version'] ) ) {
 					echo '; ';
 					$ssl_version = $curl_version['ssl_version'];
-					if ( substr_compare( $ssl_version, 'OpenSSL/', 0, 8 ) === 0 )
+					if ( strlen( $curl_version['ssl_version'] ) > 8 && substr_compare( $ssl_version, 'OpenSSL/', 0, 8 ) === 0 )
 						echo '<a href="http://openssl.org/">OpenSSL</a>/' . esc_html( substr( $ssl_version, 8 ) );
 					else
 						echo esc_html( $ssl_version );

@@ -297,6 +297,8 @@ class Facebook_Settings {
 		$widgets = array();
 		// iterate through each sidebar, then widgets within, looking for Facebook widgets
 		foreach ( $sidebar_widgets as $sidebar => $widget_list ) {
+			if ( ! is_array( $widget_list ) )
+				continue;
 			foreach ( $widget_list as $widget_id ) {
 				if ( strlen( $widget_id ) > 9 && substr_compare( $widget_id, 'facebook-', 0, 9 ) === 0 ) {
 					$feature = substr( $widget_id, 9, strrpos( $widget_id, '-' ) - 9 );

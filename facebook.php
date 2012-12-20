@@ -359,8 +359,17 @@ class Facebook_Loader {
 			'recommendations-box' => 'Facebook_Recommendations_Widget',
 			'activity-feed' => 'Facebook_Activity_Feed_Widget'
 		) as $filename => $classname ) {
-			include_once( $widget_directory . $filename . '.php' );
-			register_widget( $classname );
+			if ( class_exists( $classname ) ) {
+				register_widget( $classname );
+			} else {
+				$file = $widget_directory . $filename . '.php';
+				if ( file_exists( $file ) ) {
+					include_once( $file );
+					if ( class_exists( $classname ) )
+						register_widget( $classname );
+				}
+				unset( $file );
+			}
 		}
 	}
 

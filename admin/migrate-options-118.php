@@ -71,7 +71,7 @@ class Facebook_Migrate_Options_118 {
 
 		foreach ( $sidebars as $sidebar => $widgets ) {
 			foreach ( $widgets as $position => $widget_id ) {
-				if ( substr_compare( $widget_id, 'facebook-subscribe', 0, 18 ) === 0 ) {
+				if ( strlen( $widget_id ) > 18 && substr_compare( $widget_id, 'facebook-subscribe', 0, 18 ) === 0 ) {
 					$sidebars[$sidebar][$position] = 'facebook-follow' . substr( $widget_id, strrpos( $widget_id, '-' ) );
 					$found_widgets = true;
 				}

@@ -5,7 +5,7 @@ Requires at least: 3.3
 Tested up to: 3.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.1.9
+Stable tag: 1.1.10
 
 Make your WordPress site social in a couple of clicks, powered by Facebook.
 
@@ -98,6 +98,9 @@ The [Comments Box social plugin](https://developers.facebook.com/docs/reference/
 
 == Upgrade Notice ==
 
+= 1.1.10 =
+Improved string comparison functions for some installs. Improved support for sites without registered sidebars.
+
 = 1.1.9 =
 Subscribe Button is now Follow Button. Google Analytics social action tracking support. Gallery images included in Open Graph protocol markup.
 
@@ -132,6 +135,10 @@ Improve site performance when cURL not installed or SSL not available. Removed p
 Security fixes. Improved customization and debugging of settings. l10n and i18n fixes.
 
 == Changelog ==
+
+= 1.1.10 =
+* Do not compare strings when needle longer than haystack
+* Test if expected widget files and classes exist before registering a widget. Fixes possible cache conflict
 
 = 1.1.9 =
 * Support social action tracking in Google Analytics. Includes [Google Analyticator](http://wordpress.org/extend/plugins/google-analyticator/) and [Google Analytics for WordPress](http://wordpress.org/extend/plugins/google-analytics-for-wordpress/) support

@@ -31,6 +31,14 @@ class Facebook_Loader {
 	const VERSION = '1.1.10';
 
 	/**
+	 * Default Facebook locale
+	 *
+	 * @since 1.1.11
+	 * @var string
+	 */
+	const DEFAULT_LOCALE = 'en_US';
+
+	/**
 	 * Locale of the site expressed as a Facebook locale
 	 *
 	 * @since 1.1
@@ -49,10 +57,11 @@ class Facebook_Loader {
 	/**
 	 * List of locales supported by Facebook.
 	 * Two-letter languages codes stored in WordPress are translated to full locales; if a language has multiple country localizations place the first choice earlier in the array to make it the language default
+	 * @link https://www.facebook.com/translations/FacebookLocales.xml Facebook locales
 	 *
 	 * @since 1.1
 	 */
-	public static $locales = array( 'af_ZA' => true, 'ar_AR' => true, 'ay_BO' => true, 'az_AZ' => true, 'be_BY' => true, 'bg_BG' => true, 'bn_IN' => true, 'bs_BA' => true, 'ca_ES' => true, 'ck_US' => true, 'cs_CZ' => true, 'cy_GB' => true, 'da_DK' => true, 'de_DE' => true, 'el_GR' => true, 'en_US' => true, 'en_GB' => true, 'eo_EO' => true, 'es_CL' => true, 'es_ES' => true, 'es_CO' => true, 'es_LA' => true, 'es_MX' => true, 'es_VE' => true, 'et_EE' => true, 'eu_ES' => true, 'fa_IR' => true, 'fb_FI' => true, 'fb_LT' => true, 'fi_FI' => true, 'fo_FO' => true, 'fr_FR' => true, 'fr_CA' => true, 'ga_IE' => true, 'gl_ES' => true, 'gn_PY' => true, 'gu_IN' => true, 'he_IL' => true, 'hi_IN' => true, 'hr_HR' => true, 'hu_HU' => true, 'hy_AM' => true, 'id_ID' => true, 'is_IS' => true, 'it_IT' => true, 'ja_JP' => true, 'jv_ID' => true, 'ka_GE' => true, 'kk_KZ' => true, 'km_KH' => true, 'kn_IN' => true, 'ko_KR' => true, 'ku_TR' => true, 'la_VA' => true, 'li_NL' => true, 'lt_LT' => true, 'lv_LV' => true, 'mg_MG' => true, 'mk_MK' => true, 'ml_IN' => true, 'mn_MN' => true, 'mr_IN' => true, 'ms_MY' => true, 'mt_MT' => true, 'nb_NO' => true, 'ne_NP' => true, 'nl_NL' => true, 'nl_BE' => true, 'nn_NO' => true, 'pa_IN' => true, 'pl_PL' => true, 'ps_AF' => true, 'pt_PT' => true, 'pt_BR' => true, 'qu_PE' => true, 'rm_CH' => true, 'ro_RO' => true, 'ru_RU' => true, 'sa_IN' => true, 'se_NO' => true, 'sk_SK' => true, 'sl_SI' => true, 'so_SO' => true, 'sq_AL' => true, 'sr_RS' => true, 'sv_SE' => true, 'sw_KE' => true, 'sy_SY' => true, 'ta_IN' => true, 'te_IN' => true, 'tg_TJ' => true, 'th_TH' => true, 'tl_PH' => true, 'tl_ST' => true, 'tr_TR' => true, 'tt_RU' => true, 'uk_UA' => true, 'ur_PK' => true, 'uz_UZ' => true, 'vi_VN' => true, 'xh_ZA' => true, 'yi_DE' => true, 'zh_CN' => true, 'zh_HK' => true, 'zh_TW' => true, 'zu_ZA' => true );
+	public static $locales = array( 'af_ZA' => true, 'ar_AR' => true, 'az_AZ' => true, 'be_BY' => true, 'bg_BG' => true, 'bn_IN' => true, 'bs_BA' => true, 'ca_ES' => true, 'cs_CZ' => true, 'cy_GB' => true, 'da_DK' => true, 'de_DE' => true, 'el_GR' => true, 'en_US' => true, 'en_GB' => true, 'eo_EO' => true, 'es_ES' => true, 'es_LA' => true, 'et_EE' => true, 'eu_ES' => true, 'fa_IR' => true, 'fb_LT' => true, 'fi_FI' => true, 'fo_FO' => true, 'fr_FR' => true, 'fr_CA' => true, 'fy_NL' => true, 'ga_IE' => true, 'gl_ES' => true, 'he_IL' => true, 'hi_IN' => true, 'hr_HR' => true, 'hu_HU' => true, 'hy_AM' => true, 'id_ID' => true, 'is_IS' => true, 'it_IT' => true, 'ja_JP' => true, 'ka_GE' => true, 'km_KH' => true, 'ko_KR' => true, 'ku_TR' => true, 'la_VA' => true, 'lt_LT' => true, 'lv_LV' => true, 'mk_MK' => true, 'ml_IN' => true, 'ms_MY' => true, 'nb_NO' => true, 'ne_NP' => true, 'nl_NL' => true, 'nn_NO' => true, 'pa_IN' => true, 'pl_PL' => true, 'ps_AF' => true, 'pt_PT' => true, 'pt_BR' => true, 'ro_RO' => true, 'ru_RU' => true, 'sk_SK' => true, 'sl_SI' => true, 'sq_AL' => true, 'sr_RS' => true, 'sv_SE' => true, 'sw_KE' => true, 'ta_IN' => true, 'te_IN' => true, 'th_TH' => true, 'tl_PH' => true, 'tr_TR' => true, 'uk_UA' => true, 'vi_VN' => true, 'zh_CN' => true, 'zh_HK' => true, 'zh_TW' => true );
 
 	/**
 	 * Let's get it started
@@ -374,6 +383,63 @@ class Facebook_Loader {
 	}
 
 	/**
+	 * Test if a given locale is a valid Facebook locale
+	 *
+	 * @since 1.1.11
+	 * @see Facebook_Loader::$locales
+	 * @param @param string $locale language and localization combined in a single string. ISO 639-1 (alpha-2) language + underscore character (_) + ISO 3166-1 (alpha-2) country code. example: en_US, es_ES
+	 * @return bool true if locals in list of valid locales. else false
+	 */
+	public static function is_valid_locale( $locale ) {
+		if ( is_string( $locale ) && isset( self::$locales[$locale] ) )
+			return true;
+		return false;
+	}
+
+	/**
+	 * Sanitize a locale input against a list of Facebook-specific locales
+	 *
+	 * @since 1.1.11
+	 * @param string $locale language and localization combined in a single string. The function will attempt to convert an ISO 639-1 (alpha-2) language or a language combined with a ISO 3166-1 (alpha-2) country code separated by a dash or underscore. examples: en, en-US, en_US
+	 * @return string a Facebook-friendly locale
+	 */
+	public static function sanitize_locale( $locale ) {
+		if ( ! is_string( $locale ) )
+			return self::DEFAULT_LOCALE;
+
+		$locale_length = strlen( $locale );
+		if ( ! ( $locale_length === 2 || $locale_length === 5 ) )
+			return self::DEFAULT_LOCALE;
+
+		// convert locales like "es" to "es_ES"
+		if ( $locale_length === 2 ) {
+			if ( ! ctype_alpha( $locale ) )
+				return self::DEFAULT_LOCALE;
+
+			$locale = strtolower( $locale );
+			foreach( self::$locales as $facebook_locale => $exists ) {
+				if ( substr_compare( $facebook_locale, $locale, 0, 2 ) === 0 )
+					return $facebook_locale;
+			}
+
+			// no ISO 639-1 match found
+			return self::DEFAULT_LOCALE;
+		}
+		unset( $locale_length );
+
+		$lang = substr( $locale, 0, 2 );
+		if ( ! ctype_alpha( $lang ) )
+			return self::DEFAULT_LOCALE;
+
+		$localization = substr( $locale, 3, 2 );
+		if ( ! ctype_alpha( $localization ) )
+			return self::DEFAULT_LOCALE;
+
+		// rebuild based on expectations
+		return strtolower( $lang ) . '_' . strtoupper( $localization );
+	}
+
+	/**
 	 * Map the site locale to a supported Facebook locale
 	 * Affects OGP and SDK outputs
 	 *
@@ -387,29 +453,16 @@ class Facebook_Loader {
 			return;
 		}
 
-		$locale = str_replace( '-', '_', get_locale() );
+		// sanitize the locale. e.g. en-US to en_US
+		// filter the result in case a site would like to override
+		$locale = apply_filters( 'fb_locale', self::sanitize_locale( get_locale() ) );
 
-		// convert locales like "es" to "es_ES"
-		if ( strlen( $locale ) === 2 ) {
-			$locale = strtolower( $locale );
-			foreach( self::$locales as $facebook_locale => $exists ) {
-				if ( substr_compare( $facebook_locale, $locale, 0, 2 ) === 0 ) {
-					$locale = $facebook_locale;
-					break;
-				}
-			}
-		}
+		// validate our sanitized value and a possible filter override
+		if ( ! self::is_valid_locale( $locale ) )
+			$locale = self::DEFAULT_LOCALE;
 
-		// check to see if the locale is a valid FB one, if not, use en_US as a fallback
-		if ( ! isset( self::$locales[$locale] ) ) {
-			$locale = 'en_US';
-		}
-
-		$locale = apply_filters( 'fb_locale', $locale ); // filter the locale in case somebody has a weird case and needs to change it
-		if ( $locale ) {
-			set_transient( $transient_key, $locale, 60*60*24 );
-			$this->locale = $locale;
-		}
+		set_transient( $transient_key, $locale, 60*60*24 );
+		$this->locale = $locale;
 	}
 
 	/**

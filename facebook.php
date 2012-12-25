@@ -433,6 +433,6 @@ function facebook_loader_init() {
 
 	$facebook_loader = new Facebook_Loader();
 }
-add_action( 'init', 'facebook_loader_init', 0 ); // load before widgets_init at 1
+add_action( 'init', 'facebook_loader_init', 0 );  // load before widgets_init at 1
 
 ?>

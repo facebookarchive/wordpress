@@ -159,6 +159,18 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	}
 
 	/**
+	 * Do not display the faces of a logged-on Facebook user's friends
+	 * Reverts to default state
+	 *
+	 * @since 1.1.11
+	 * @return Facebook_Like_Button support chaining
+	 */
+	public function hideFaces() {
+		$this->show_faces = false;
+		return $this;
+	}
+
+	/**
 	 * Width of the like button
 	 * Should be greater than the minimum width of layout + send button (if enabled) + recommend text (if chosen)
 	 *

@@ -36,18 +36,18 @@ class Facebook_Comments_Box {
 	/**
 	 * Choose a light or dark color scheme to match your site style
 	 *
-	 * @since 1.1
+	 * @since 1.1.11
 	 * @param string
 	 */
-	protected $color_scheme;
+	protected $colorscheme;
 
 	/**
 	 * Use a light or dark color scheme
 	 *
-	 * @since 1.1
+	 * @since 1.1.11
 	 * @var array
 	 */
-	public static $color_scheme_choices = array( 'light', 'dark' );
+	public static $colorscheme_choices = array( 'light', 'dark' );
 
 	/**
 	 * The number of comments to show by default
@@ -105,13 +105,13 @@ class Facebook_Comments_Box {
 	 * Choose a light or dark color scheme
 	 *
 	 * @since 1.1
-	 * @see self::color_scheme_choices
+	 * @see self::colorscheme_choices
 	 * @param string $color_scheme light|dark
 	 * @return Facebook_Comments_Box support chaining
 	 */
 	public function setColorScheme( $color_scheme ) {
-		if ( is_string( $color_scheme ) && in_array( $color_scheme, self::$color_scheme_choices, true ) )
-			$this->color_scheme = $color_scheme;
+		if ( is_string( $color_scheme ) && in_array( $color_scheme, self::$colorscheme_choices, true ) )
+			$this->colorscheme = $color_scheme;
 		return $this;
 	}
 
@@ -185,8 +185,8 @@ class Facebook_Comments_Box {
 		if ( isset( $this->width ) && is_int( $this->width ) && $this->width > 0 )
 			$data['width'] = $this->width;
 
-		if ( isset( $this->color_scheme ) && $this->color_scheme !== 'light' )
-			$data['colorscheme'] = $this->color_scheme;
+		if ( isset( $this->colorscheme ) && $this->colorscheme !== 'light' )
+			$data['colorscheme'] = $this->colorscheme;
 
 		if ( isset( $this->num_posts ) && is_int( $this->num_posts ) && $this->num_posts > 0 && $this->num_posts !== 10 )
 			$data['num-posts'] = $this->num_posts;

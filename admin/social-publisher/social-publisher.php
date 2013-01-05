@@ -283,7 +283,7 @@ class Facebook_Social_Publisher {
 
 		if ( ! $facebook_page )
 			$facebook_page = get_option( 'facebook_publish_page' );
-		if ( is_array( $facebook_page ) && isset( $facebook_page['access_token'] ) && isset( $facebook_pagee['id'] ) && isset( $facebook_page['name'] ) )
+		if ( ! ( is_array( $facebook_page ) && isset( $facebook_page['access_token'] ) && isset( $facebook_page['id'] ) && isset( $facebook_page['name'] ) ) )
 			return;
 
 		$post_type = get_post_type( $post );

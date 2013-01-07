@@ -362,6 +362,7 @@ class Facebook_Loader {
 		$widget_directory = $this->plugin_directory . 'social-plugins/widgets/';
 
 		foreach ( array(
+			'like-box' => 'Facebook_Like_Box_Widget',
 			'like-button' => 'Facebook_Like_Button_Widget',
 			'send-button' => 'Facebook_Send_Button_Widget',
 			'follow-button' => 'Facebook_Follow_Button_Widget',

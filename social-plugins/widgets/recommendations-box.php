@@ -162,7 +162,7 @@ class Facebook_Recommendations_Widget extends WP_Widget {
 	public function display_header( $true_false ) {
 		echo '<p><label><input type="checkbox" id="' . $this->get_field_id( 'header' ) . '" name="' . $this->get_field_name( 'header' ) . '"';
 		checked( $true_false );
-		echo ' value="1" /> ' . __( 'Include Facebook header', 'facebook' ) . '</label></p>';
+		echo ' value="1" /> ' . esc_html( __( 'Include Facebook header', 'facebook' ) ) . '</label></p>';
 	}
 
 	/**

@@ -5,7 +5,7 @@ Requires at least: 3.3
 Tested up to: 3.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.1.10
+Stable tag: 1.1.11
 
 Make your WordPress site social in a couple of clicks, powered by Facebook.
 
@@ -98,6 +98,9 @@ The [Comments Box social plugin](https://developers.facebook.com/docs/reference/
 
 == Upgrade Notice ==
 
+= 1.1.11 =
+Like Box widget. Improved locale selector. Bugfix publishing to a Facebook Page.
+
 = 1.1.10 =
 Improved string comparison functions for some installs. Improved support for sites without registered sidebars.
 
@@ -135,6 +138,12 @@ Improve site performance when cURL not installed or SSL not available. Removed p
 Security fixes. Improved customization and debugging of settings. l10n and i18n fixes.
 
 == Changelog ==
+
+= 1.1.11 =
+* Added [Like Box](https://developers.facebook.com/docs/reference/plugins/like-box/) widget for Facebook Page promotion
+* New locale selector provides more extensible code
+* Social publisher settings page inline help
+* Fixed bug publishing to a Facebook Page
 
 = 1.1.10 =
 * Do not compare strings when needle longer than haystack

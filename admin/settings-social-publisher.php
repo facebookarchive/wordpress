@@ -186,6 +186,8 @@ class Facebook_Social_Publisher_Settings {
 			$this->hook_suffix,
 			$section
 		);
+
+		self::inline_help_content();
 	}
 
 	/**
@@ -292,10 +294,10 @@ class Facebook_Social_Publisher_Settings {
 			echo '<label><input type="checkbox" name="' . self::PUBLISH_OPTION_NAME . '[author_timeline]" value="1"';
 			echo checked( Facebook_User::get_user_meta( $this->current_user->ID, 'facebook_timeline_disabled', true ), '' );
 			echo ' /> ';
-			echo esc_html( __( 'Post an article to my Facebook timeline after it is published.', 'facebook' ) );
+			echo esc_html( __( 'Post an article to my Facebook Timeline after it is public.', 'facebook' ) );
 			echo '</label>';
 		} else {
-			echo '<p><span class="facebook-login" data-scope="person" style="font-weight:bold">' . esc_html( __( 'Allow new posts to your Facebook timeline', 'facebook' ) ) . '</span></p>';
+			echo '<p><span class="facebook-login" data-scope="person" style="font-weight:bold">' . esc_html( __( 'Allow new posts to your Facebook Timeline', 'facebook' ) ) . '</span></p>';
 		}
 	}
 
@@ -351,7 +353,7 @@ class Facebook_Social_Publisher_Settings {
 				}
 			} else {
 				// request manage_pages permission
-				echo '<p><span class="facebook-login" data-scope="page" style="font-weight:bold">' . esc_html( __( 'Allow new posts to a Facebook page', 'facebook' ) ) . '</span></p>';
+				echo '<p><span class="facebook-login" data-scope="page" style="font-weight:bold">' . esc_html( __( 'Allow new posts to a Facebook Page', 'facebook' ) ) . '</span></p>';
 			}
 		}
 	}
@@ -392,6 +394,55 @@ class Facebook_Social_Publisher_Settings {
 			require_once( dirname(__FILE__) . '/settings-social-plugin-button.php' );
 
 		echo '<select name="' . self::MENTIONS_OPTION_NAME . '[' . $key . ']">' . Facebook_Social_Plugin_Button_Settings::position_choices( isset( $this->mentions_options[$key] ) ? $this->mentions_options[$key] : '' ) . '</select>';
+	}
+
+	/**
+	 * Display inline help for publisher functionality
+	 *
+	 * @since 1.1.11
+	 * @return string HTML
+	 */
+	public static function help_tab_publisher() {
+		$content = '<p>' . esc_html( __( 'The Facebook plugin for WordPress can publish to Facebook on your behalf through a properly configured Facebook application when a post becomes public.', 'facebook' ) ) . ' ' . esc_html( __( 'An author must grant your application permission to publish to his or her Facebook Timeline before the post will appear.', 'facebook' ) ) . ' ' . esc_html( __( 'A Facebook account with the ability to create content on one or more Facebook Pages may store publishing permissions for your WordPress site.', 'facebook' ) ) . '</p>';
+
+		$content .= '<p>' . esc_html( sprintf( __( 'You must associate an Open Graph action-object pair for your Facebook application and submit the action to Facebook for approval before articles from %s will appear in Facebook News Feed.', 'facebook' ), get_bloginfo('name') ) ) . ' ' . esc_html( __( "The Facebook plugin for WordPress cannot programmatically verify your application's Open Graph approval status: the second item on the displayed prerequisites list will not display a checkmark.", 'facebook' ) ) . '</p>';
+
+		return $content;
+	}
+
+	/**
+	 * Display inline help for mentions functionality
+	 *
+	 * @since 1.1.11
+	 * @return string HTML
+	 */
+	public static function help_tab_mentions() {
+		return '<p>' . esc_html( __( 'Sites may enable Facebook mentions functionality for one or more post types.', 'facebook' ) ) . ' ' . esc_html( __( 'Authors may tag Facebook friends associated with the post.', 'facebook' ) ) . ' ' . esc_html( __( 'Authors or editors may tag a Facebook Page associated with the post.', 'facebook' ) ) . ' ' . esc_html( __( 'A linked profile image and name will appear alongside your post for each mentioned Facebook friend or Facebook Page.', 'facebook' ) ) . '</p>';
+	}
+
+	/**
+	 * Display help content on the settings page
+	 *
+	 * @since 1.1
+	 */
+	public static function inline_help_content() {
+		$screen = get_current_screen();
+		if ( ! $screen ) // null if global not set
+			return;
+
+		$screen->add_help_tab( array(
+			'id' => 'facebook-publish-help',
+			'title' => __( 'Publish to Facebook', 'facebook' ),
+			'content' => self::help_tab_publisher()
+		) );
+
+		$screen->add_help_tab( array(
+			'id' => 'facebook-mentions-help',
+			'title' => _x( 'Mentions', 'mentions tagging', 'facebook' ),
+			'content' => self::help_tab_mentions()
+		) );
+
+		$screen->set_help_sidebar( '<p><a href="https://developers.facebook.com/apps/">' . esc_html( __( 'Facebook Apps Tool', 'facebook' ) ) . '</a></p>' );
 	}
 
 	/**

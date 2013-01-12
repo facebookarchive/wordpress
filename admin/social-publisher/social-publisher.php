@@ -267,10 +267,15 @@ class Facebook_Social_Publisher {
 			return;
 
 		$post_id = $post->ID;
-
+		
 		// check if this post has previously been posted to the Facebook page
 		// no need to publish again
 		if ( get_post_meta( $post_id, 'fb_fan_page_post_id', true ) )
+			return;
+		
+		// check if it has to be published
+		$fan_page_checkbox = get_post_meta( $post_id, 'fb_fan_page_checkbox', true );
+		if ( $fan_page_checkbox != "on" )
 			return;
 
 		// thanks to Tareq Hasan on http://wordpress.org/support/topic/plugin-facebook-bug-problems-when-publishing-to-a-page
@@ -289,7 +294,7 @@ class Facebook_Social_Publisher {
 		$post_type = get_post_type( $post );
 		if ( ! $post_type )
 			return $post_type;
-
+		
 		// check our assumptions about a valid link in place
 		// fail if a piece of the filter process killed our response
 		$link = apply_filters( 'facebook_rel_canonical', get_permalink( $post_id ) );
@@ -396,6 +401,11 @@ class Facebook_Social_Publisher {
 		// does the current post have an existing Facebook post id stored? no need to publish again
 		if ( get_post_meta( $post_id, 'fb_author_post_id', true ) )
 			return;
+		
+		// check if it has to be published
+		$author_checkbox = get_post_meta( $post_id, 'fb_author_checkbox', true );
+		if ( $author_checkbox != "on" )
+			return;
 
 		$post = get_post( $post );
 		setup_postdata( $post );
@@ -403,6 +413,11 @@ class Facebook_Social_Publisher {
 		$post_type = get_post_type( $post );
 		if ( ! ( $post_type && post_type_supports( $post_type, 'author' ) ) )
 			return;
+		
+		// check if it has to be published
+		/*$author_checkbox = get_post_meta( $post_id, 'fb_author_checkbox', true );
+		if ( $author_checkbox != "on" )
+			return;*/
 
 		// the person publishing the post may not be the same person who authored the post
 		// publish to the timeline of the author, not the post approver / publisher

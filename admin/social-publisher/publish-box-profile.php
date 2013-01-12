@@ -73,7 +73,7 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 
 		$stored_message = get_post_meta( $post->ID, self::POST_META_KEY, true );
 
-		echo '<input type="checkbox" id="friends-mention-turn" name="' . self::FIELD_CHECKBOX . '" value="on" checked="checked" /> <label for="friends-mention-turn">' . esc_attr( __( 'Publish on your Facebook Timeline', 'facebook' ) ) . '</label>';
+		echo '<input type="checkbox" id="friends-mention-turn-profile" name="' . self::FIELD_CHECKBOX . '" value="on" checked="checked" /> <label for="friends-mention-turn-profile">' . esc_attr( __( 'Publish on your Facebook Timeline', 'facebook' ) ) . '</label>';
 		echo '<input type="text" class="widefat" id="friends-mention-message" name="' . self::FIELD_MESSAGE . '" size="44" placeholder="' . esc_attr( __( 'Summarize the post for your Facebook audience', 'facebook' ) ) . '"';
 		if ( $stored_message )
 			echo ' value="' . esc_attr( $stored_message ) . '"';

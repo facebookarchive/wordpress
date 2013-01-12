@@ -75,7 +75,7 @@ class Facebook_Social_Publisher_Meta_Box_Page {
 		wp_nonce_field( plugin_basename( __FILE__ ), self::NONCE_NAME );
 
 		$stored_message = get_post_meta( $post->ID, self::POST_META_KEY, true );
-		echo '<input type="checkbox" id="friends-mention-turn" name="' . self::FIELD_CHECKBOX . '" checked="checked" value="on" /> <label for="friends-mention-turn">' . esc_html( sprintf( __( 'Publish on %s Timeline', 'facebook'), $page['name'] ) ).'</label>';
+		echo '<input type="checkbox" id="friends-mention-turn-page" name="' . self::FIELD_CHECKBOX . '" checked="checked" value="on" /> <label for="friends-mention-turn-page">' . esc_html( sprintf( __( 'Publish on %s Timeline', 'facebook'), $page['name'] ) ).'</label>';
 		echo '<input type="text" class="widefat" id="friends-mention-message" name="' . self::FIELD_MESSAGE . '" size="44" placeholder="' . esc_attr( __( 'Summarize the post for your Facebook audience', 'facebook' ) ) . '"';
 		if ( $stored_message )
 			echo ' value="' . esc_attr( $stored_message ) . '"';

@@ -22,6 +22,20 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 	 * @var string
 	 */
 	const POST_META_KEY = 'fb_author_message';
+	
+	/**
+	 * Post meta key for the checkbox
+	 *
+	 * @var string
+	 */
+	const POST_CHECKBOX_META_KEY = 'fb_author_checkbox';
+	
+	/**
+	 * Form field name for author profile checkbox
+	 *
+	 * @var string
+	 */
+	const FIELD_CHECKBOX = 'facebook_author_message_checkbox';
 
 	/**
 	 * Form field name for author profile message
@@ -59,6 +73,7 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 
 		$stored_message = get_post_meta( $post->ID, self::POST_META_KEY, true );
 
+		echo '<input type="checkbox" id="friends-mention-turn-profile" name="' . self::FIELD_CHECKBOX . '" value="on" checked="checked" /> <label for="friends-mention-turn-profile">' . esc_attr( __( 'Publish on your Facebook Timeline', 'facebook' ) ) . '</label>';
 		echo '<input type="text" class="widefat" id="friends-mention-message" name="' . self::FIELD_MESSAGE . '" size="44" placeholder="' . esc_attr( __( 'Summarize the post for your Facebook audience', 'facebook' ) ) . '"';
 		if ( $stored_message )
 			echo ' value="' . esc_attr( $stored_message ) . '"';
@@ -84,6 +99,8 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 		if ( ! isset( $_POST[self::FIELD_MESSAGE] ) || empty( $_POST[self::NONCE_NAME] ) || ! wp_verify_nonce( $_POST[self::NONCE_NAME], plugin_basename( __FILE__ ) ) )
 			return;
 
+		if ( $_POST[self::FIELD_CHECKBOX] != "on" ) return;
+		
 		// Check permissions
 		$post_type = get_post_type( $post_id );
 		if ( ! ( $post_type && post_type_supports( $post_type, 'author' ) ) )
@@ -97,6 +114,8 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 			return;
 
 		$message = trim( sanitize_text_field( $_POST[self::FIELD_MESSAGE] ) );
+		$turn = trim( sanitize_text_field( $_POST[self::FIELD_CHECKBOX] ) );
+		update_post_meta( $post_id, self::POST_CHECKBOX_META_KEY, $turn );
 		if ( $message )
 			update_post_meta( $post_id, self::POST_META_KEY, $message );
 	}

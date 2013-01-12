@@ -99,8 +99,6 @@ class Facebook_Social_Publisher_Meta_Box_Page {
 
 		if ( ! isset( $_POST[self::FIELD_MESSAGE] ) || empty( $_POST[self::NONCE_NAME] ) || ! wp_verify_nonce( $_POST[self::NONCE_NAME], plugin_basename( __FILE__ ) ) )
 			return;
-		
-		if ( $_POST[self::FIELD_CHECKBOX] != "on" ) return;
 
 		// Check permissions
 		$post_type = get_post_type( $post_id );

@@ -184,19 +184,6 @@ class Facebook_Migrate_Options_10 {
 		if ( ! is_array( $options ) || empty( $options ) )
 			return;
 
-		$mentions = array( 'show_on' => array( 'post', 'page' ), 'position' => 'both' );
-		if ( isset( $options['mentions_position'] ) )
-			$mentions['position'] = $options['mentions_position'];
-		if ( isset( $options['show_on_homepage'] ) )
-			$mentions['show_on'][] = 'home';
-
-		if ( ! class_exists( 'Facebook_Social_Publisher_Settings' ) )
-			require_once( dirname(__FILE__) . '/settings-social-publisher.php' );
-
-		$mentions = Facebook_Social_Publisher_Settings::sanitize_mentions_options( $mentions );
-		if ( ! empty( $mentions ) )
-			update_option( Facebook_Social_Publisher_Settings::MENTIONS_OPTION_NAME, $mentions );
-
 		// publish to fan page info
 		if ( isset( $options['publish_to_fan_page'] ) && $options['publish_to_fan_page'] !== 'disabled' ) {
 			preg_match_all( "/(.*?)@@!!(.*?)@@!!(.*?)$/su", $options['publish_to_fan_page'], $fan_page_info, PREG_SET_ORDER );

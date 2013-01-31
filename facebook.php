@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Facebook
- * @version 1.1.11
+ * @version 1.2
  */
 /*
 Plugin Name: Facebook
@@ -9,7 +9,7 @@ Plugin URI: http://wordpress.org/extend/plugins/facebook/
 Description: Facebook for WordPress. Make your site deeply social in just a couple of clicks.
 Author: Facebook
 Author URI: https://developers.facebook.com/wordpress/
-Version: 1.1.11
+Version: 1.2
 License: GPL2
 License URI: license.txt
 Domain Path: /languages/
@@ -28,7 +28,7 @@ class Facebook_Loader {
 	 * @since 1.1
 	 * @var string
 	 */
-	const VERSION = '1.1.11';
+	const VERSION = '1.2';
 
 	/**
 	 * Default Facebook locale
@@ -299,11 +299,6 @@ class Facebook_Loader {
 			add_filter( 'the_content', 'facebook_the_content_send_button', $priority );
 		if ( isset( $enabled_features['follow'] ) )
 			add_filter( 'the_content', 'facebook_the_content_follow_button', $priority );
-		if ( isset( $enabled_features['mentions'] ) ) {
-			if ( ! function_exists( 'facebook_social_publisher_mentioning_output' ) )
-				require_once( dirname(__FILE__) . '/social-publisher/mentions.php' );
-			add_filter( 'the_content', 'facebook_social_publisher_mentioning_output', $priority );
-		}
 
 		// individual posts, pages, and custom post types features
 		if ( isset( $post_type ) ) {

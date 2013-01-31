@@ -22,14 +22,6 @@ class Facebook_Social_Publisher_Settings {
 	const PUBLISH_OPTION_NAME = 'facebook_publish';
 
 	/**
-	 * Define the option name for mentions
-	 *
-	 * @since 1.1
-	 * @var string
-	 */
-	const MENTIONS_OPTION_NAME = 'facebook_mentions';
-
-	/**
 	 * Option name for target Facebook page
 	 *
 	 * @since 1.1
@@ -70,7 +62,6 @@ class Facebook_Social_Publisher_Settings {
 		if ( $hook_suffix ) {
 			$social_publisher_settings->hook_suffix = $hook_suffix;
 			register_setting( $hook_suffix, self::PUBLISH_OPTION_NAME, array( 'Facebook_Social_Publisher_Settings', 'sanitize_publish_options' ) );
-			register_setting( $hook_suffix, self::MENTIONS_OPTION_NAME, array( 'Facebook_Social_Publisher_Settings', 'sanitize_mentions_options' ) );
 			add_action( 'load-' . $hook_suffix, array( &$social_publisher_settings, 'onload' ) );
 		}
 
@@ -84,11 +75,6 @@ class Facebook_Social_Publisher_Settings {
 	 */
 	public function onload() {
 		global $facebook;
-
-		$mentions_options = get_option( self::MENTIONS_OPTION_NAME );
-		if ( ! is_array( $mentions_options ) )
-			$mentions_options = array();
-		$this->mentions_options = $mentions_options;
 
 		// prompt to log in or update account info
 		if ( ! class_exists( 'Facebook_Admin_Login' ) )
@@ -164,29 +150,6 @@ class Facebook_Social_Publisher_Settings {
 			$section
 		);
 
-		// when and where to show mentions
-		$section = 'facebook-mentions';
-		add_settings_section(
-			$section,
-			__( 'Mentions', 'facebook' ),
-			array( &$this, 'section_header_mentions' ),
-			$this->hook_suffix
-		);
-		add_settings_field(
-			'facebook-mentions-show-on',
-			__( 'Show on', 'facebook' ),
-			array( &$this, 'display_mentions_show_on' ),
-			$this->hook_suffix,
-			$section
-		);
-		add_settings_field(
-			'facebook-mentions-position',
-			__( 'Position', 'facebook' ),
-			array( &$this, 'display_mentions_position' ),
-			$this->hook_suffix,
-			$section
-		);
-
 		self::inline_help_content();
 	}
 
@@ -219,7 +182,7 @@ class Facebook_Social_Publisher_Settings {
 		echo '</li>';
 
 		echo '<li>';
-		$og_action = esc_html( __( 'Associate an Open Graph action-object pair for your application:', 'facebook' ) ) . ' ' . sprintf( esc_html( __( 'people can %1$s an %2$s', 'facebook' ) ), '<strong>publish</strong>', '<strong>article</strong>' );
+		$og_action = esc_html( __( 'Associate an Open Graph action-object pair for your application:', 'facebook' ) ) . ' ' . sprintf( esc_html( _x( 'people can %1$s an %2$s', 'Open Graph. people can ACTION an OBJECT', 'facebook' ) ), '<strong>publish</strong>', '<strong>article</strong>' );
 		if ( $app_id )
 			echo '<a href="' . esc_url( 'https://developers.facebook.com/apps/' . $app_id . '/opengraph/getting-started/', array( 'http', 'https' ) ) . '">' . $og_action . '</a>';
 		else
@@ -359,44 +322,6 @@ class Facebook_Social_Publisher_Settings {
 	}
 
 	/**
-	 * Introduce the mentions section
-	 *
-	 * @since 1.1
-	 */
-	public function section_header_mentions() {
-		echo '<p>' . esc_html( __( 'Mention Facebook profiles and pages alongside a post.', 'facebook' ) ) . '</p>';
-	}
-
-	/**
-	 * Where should the button appear?
-	 *
-	 * @since 1.1
-	 * @param array $extra_attributes custom form attributes
-	 */
-	public function display_mentions_show_on() {
-		if ( ! class_exists( 'Facebook_Social_Plugin_Settings' ) )
-			require_once( dirname(__FILE__) . '/settings-social-plugin.php' );
-
-		echo '<fieldset id="facebook-mentions-show-on">' . Facebook_Social_Plugin_Settings::show_on_choices( self::MENTIONS_OPTION_NAME . '[show_on]', Facebook_Social_Plugin_Settings::get_display_conditionals_by_feature( 'mentions', 'all' ), 'all' ) . '</fieldset>';
-		echo '<p>' . esc_html( Facebook_Social_Plugin_Settings::show_on_description( __( 'Social Mentions', 'facebook' ) ) ) . '</p>';
-	}
-
-	/**
-	 * Where would you like it?
-	 *
-	 * @since 1.1
-	 * @param array $extra_attributes custom form attributes
-	 */
-	public function display_mentions_position() {
-		$key = 'position';
-
-		if ( ! class_exists( 'Facebook_Social_Plugin_Button_Settings' ) )
-			require_once( dirname(__FILE__) . '/settings-social-plugin-button.php' );
-
-		echo '<select name="' . self::MENTIONS_OPTION_NAME . '[' . $key . ']">' . Facebook_Social_Plugin_Button_Settings::position_choices( isset( $this->mentions_options[$key] ) ? $this->mentions_options[$key] : '' ) . '</select>';
-	}
-
-	/**
 	 * Display inline help for publisher functionality
 	 *
 	 * @since 1.1.11
@@ -408,16 +333,6 @@ class Facebook_Social_Publisher_Settings {
 		$content .= '<p>' . esc_html( sprintf( __( 'You must associate an Open Graph action-object pair for your Facebook application and submit the action to Facebook for approval before articles from %s will appear in Facebook News Feed.', 'facebook' ), get_bloginfo('name') ) ) . ' ' . esc_html( __( "The Facebook plugin for WordPress cannot programmatically verify your application's Open Graph approval status: the second item on the displayed prerequisites list will not display a checkmark.", 'facebook' ) ) . '</p>';
 
 		return $content;
-	}
-
-	/**
-	 * Display inline help for mentions functionality
-	 *
-	 * @since 1.1.11
-	 * @return string HTML
-	 */
-	public static function help_tab_mentions() {
-		return '<p>' . esc_html( __( 'Sites may enable Facebook mentions functionality for one or more post types.', 'facebook' ) ) . ' ' . esc_html( __( 'Authors may tag Facebook friends associated with the post.', 'facebook' ) ) . ' ' . esc_html( __( 'Authors or editors may tag a Facebook Page associated with the post.', 'facebook' ) ) . ' ' . esc_html( __( 'A linked profile image and name will appear alongside your post for each mentioned Facebook friend or Facebook Page.', 'facebook' ) ) . '</p>';
 	}
 
 	/**
@@ -434,12 +349,6 @@ class Facebook_Social_Publisher_Settings {
 			'id' => 'facebook-publish-help',
 			'title' => __( 'Publish to Facebook', 'facebook' ),
 			'content' => self::help_tab_publisher()
-		) );
-
-		$screen->add_help_tab( array(
-			'id' => 'facebook-mentions-help',
-			'title' => _x( 'Mentions', 'mentions tagging', 'facebook' ),
-			'content' => self::help_tab_mentions()
 		) );
 
 		$screen->set_help_sidebar( '<p><a href="https://developers.facebook.com/apps/">' . esc_html( __( 'Facebook Apps Tool', 'facebook' ) ) . '</a></p>' );
@@ -512,35 +421,6 @@ class Facebook_Social_Publisher_Settings {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Process changes to mentions options
-	 *
-	 * @since 1.1
-	 * @param array $options form options
-	 */
-	public static function sanitize_mentions_options( $options ) {
-		if ( ! is_array( $options ) || empty( $options ) )
-			return array();
-
-		if ( isset( $options['show_on'] ) || isset( $options['position'] ) ) {
-			if ( ! class_exists( 'Facebook_Social_Plugin_Button_Settings' ) )
-				require_once( dirname(__FILE__) . '/settings-social-plugin-button.php' );
-
-			$options = Facebook_Social_Plugin_Button_Settings::sanitize_options( $options );
-			if ( isset( $options['show_on'] ) ) {
-				Facebook_Social_Plugin_Button_Settings::update_display_conditionals( 'mentions', $options['show_on'], Facebook_Social_Plugin_Button_Settings::get_show_on_choices( 'all' ) );
-				unset( $options['show_on'] );
-			}
-
-			// limit what is stored to our whitelist of properties
-			if ( isset( $options['position'] ) )
-				return array( 'position' => $options['position'] );
-		}
-
-		return array();
-
 	}
 }
 ?>

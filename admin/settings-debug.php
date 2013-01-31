@@ -307,9 +307,6 @@ class Facebook_Settings_Debugger {
 			'comments' => array(
 				'name' => __( 'Comments Box', 'facebook' ),
 				'url' => 'https://developers.facebook.com/docs/reference/plugins/comments/'
-			),
-			'mentions' => array(
-				'name' => __( 'Mentions', 'facebook' )
 			)
 		);
 

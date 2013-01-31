@@ -2,10 +2,10 @@
 Contributors: Facebook, automattic, mattwkelly, niallkennedy, rgharpuray, ngfeldman, jamesgpearce, ravi.grover, danielbachhuber, gigawats, eosgood, Otto42, colmdoyle, zazinteractive
 Tags: Facebook, comments, social, friends, like, like button, social plugins, facebook platform, page, posts, sidebar, plugin, open graph
 Requires at least: 3.3
-Tested up to: 3.5
+Tested up to: 3.5.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.1.11
+Stable tag: 1.2
 
 Make your WordPress site social in a couple of clicks, powered by Facebook.
 
@@ -19,9 +19,10 @@ The Facebook plugin for WordPress adds Facebook social plugins to your WordPress
 * [Facebook Insights](http://www.facebook.com/insights) support for Facebook accounts associated with a Facebook application.
 * Add [Like](https://developers.facebook.com/docs/reference/plugins/like/), [send](https://developers.facebook.com/docs/reference/plugins/send/), and [subscribe](https://developers.facebook.com/docs/reference/plugins/subscribe/) buttons to every post to help your site's readers share content with friends or stay connected to future content shared by your site on Facebook.
 * Enable the [Facebook Comments Box social plugin](https://developers.facebook.com/docs/reference/plugins/comments/) to encourage new comments from logged-in Facebook users and his or her Facebook friends. Comments associated with a post are sorted according to social signals including friend networks, most liked, or the most active discussion threads.
+* [Like Box](https://developers.facebook.com/docs/reference/plugins/like-box/) displays recent activity from your Facebook Page and encourages Like actions.
 * [Recommendations Bar](https://developers.facebook.com/docs/reference/plugins/recommendationsbar/) helps visitors discover additional content on your site by recommending posts and encouraging Like shares.
 * [Recommendations Box](https://developers.facebook.com/docs/reference/plugins/recommendations/) suggests related posts in a configurable widget.
-* Mention Facebook friends and Facebook pages associated with a post.
+* Mention Facebook friends and Facebook pages in a custom message posted to your timeline with your post.
 
 = Shortcodes =
 
@@ -98,6 +99,9 @@ The [Comments Box social plugin](https://developers.facebook.com/docs/reference/
 
 == Upgrade Notice ==
 
+= 1.2 =
+Mention tagging support. Explicit sharing to Facebook Timeline and/or Facebook Page.
+
 = 1.1.11 =
 Like Box widget. Improved locale selector. Bugfix publishing to a Facebook Page.
 
@@ -138,6 +142,10 @@ Improve site performance when cURL not installed or SSL not available. Removed p
 Security fixes. Improved customization and debugging of settings. l10n and i18n fixes.
 
 == Changelog ==
+
+= 1.2 =
+* [Mention tagging](https://developers.facebook.com/docs/technical-guides/opengraph/mention-tagging/) Facebook friends and Facebook pages replaces previous mention meta boxes for friends and pages.
+* Removed mention display alongside a post. Mentions are constructed in a custom Facebook message.
 
 = 1.1.11 =
 * Added [Like Box](https://developers.facebook.com/docs/reference/plugins/like-box/) widget for Facebook Page promotion

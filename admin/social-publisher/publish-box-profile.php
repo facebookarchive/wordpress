@@ -21,7 +21,15 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 	 * @since 1.1
 	 * @var string
 	 */
-	const POST_META_KEY = 'fb_author_message';
+	const POST_META_KEY_MESSAGE = 'fb_author_message';
+
+	/**
+	 * Post meta key for post to Facebook feature enabled / disabled
+	 *
+	 * @since 1.2
+	 * @var string
+	 */
+	const POST_META_KEY_FEATURE_ENABLED = 'post_to_facebook_timeline';
 
 	/**
 	 * Form field name for author profile message
@@ -30,6 +38,14 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 	 * @var string
 	 */
 	const FIELD_MESSAGE = 'facebook_author_message_box_message';
+
+	/**
+	 * Form field name for feature enabled or disabled
+	 *
+	 * @since 1.2
+	 * @var string
+	 */
+	const FIELD_FEATURE_ENABLED = 'facebook_author_enabled';
 
 	/**
 	 * Add a meta box to the post editor
@@ -45,6 +61,24 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 			array( 'Facebook_Social_Publisher_Meta_Box_Profile', 'content' ),
 			$post_type
 		);
+		add_action( 'admin_enqueue_scripts', array( 'Facebook_Social_Publisher_Meta_Box_Profile', 'enqueue_scripts' ) );
+	}
+
+	/**
+	 * Load mentions typeahead JavaScript and jQuery UI requirements
+	 *
+	 * @since 1.2
+	 * @uses wp_enqueue_script()
+	 */
+	public static function enqueue_scripts( ) {
+		global $facebook_loader;
+
+		$suffix = '.min';
+		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
+			$suffix = '';
+
+		wp_enqueue_script( 'facebook-mentions', plugins_url( 'static/js/admin/mentions' . $suffix . '.js', $facebook_loader->plugin_directory . 'facebook.php' ), array( 'jquery-ui-autocomplete' ), '1.2', true );
+		wp_enqueue_style( 'facebook-mentions', plugins_url( 'static/css/admin/mentions' . $suffix . '.css', $facebook_loader->plugin_directory . 'facebook.php' ), array(), '1.2' );
 	}
 
 	/**
@@ -54,16 +88,35 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 	 * @param stdClass $post current post
 	 */
 	public static function content( $post ) {
+		global $wp_locale;
+
 		// Use nonce for verification
 		wp_nonce_field( plugin_basename( __FILE__ ), self::NONCE_NAME );
 
-		$stored_message = get_post_meta( $post->ID, self::POST_META_KEY, true );
+		$feature_enabled = true;
+		if ( get_post_meta( $post->ID, self::POST_META_KEY_FEATURE_ENABLED, true ) === '0' )
+			$feature_enabled = false;
+		echo '<div><p><input class="checkbox" type="checkbox" id="facebook-author-enabled" name="' . self::FIELD_FEATURE_ENABLED . '" value="1"';
+		checked( $feature_enabled );
+		echo ' /> <label for="facebook-author-enabled">' . esc_html( __( 'Post to Facebook Timeline', 'facebook' ) ) . '</label></p></div>';
 
-		echo '<input type="text" class="widefat" id="friends-mention-message" name="' . self::FIELD_MESSAGE . '" size="44" placeholder="' . esc_attr( __( 'Summarize the post for your Facebook audience', 'facebook' ) ) . '"';
+		$field_message_id = 'facebook-timeline-mention-message';
+		echo '<div id="facebook-timeline-mention-message-container"><input type="text" class="widefat" id="' . $field_message_id . '" name="' . self::FIELD_MESSAGE . '" size="44" placeholder="' . esc_attr( __( 'Summarize the post for your Facebook audience', 'facebook' ) ) . '"';
+		$stored_message = get_post_meta( $post->ID, self::POST_META_KEY_MESSAGE, true );
 		if ( $stored_message )
 			echo ' value="' . esc_attr( $stored_message ) . '"';
 
-		echo ' /><p class="howto">'. esc_html( __('This message will show as part of the story on your Facebook Timeline.', 'facebook' ) ) .'</p>';
+		echo ' /><p class="howto"><label for="' . $field_message_id . '">'. esc_html( __( 'This message will show as part of the story on your Facebook Timeline.', 'facebook' ) ) .'</label></p>';
+
+		// set JavaScript properties for localized text
+		echo '<script type="text/javascript">jQuery("#' . $field_message_id . '").on("facebook-mentions-onload",function(){';
+		echo 'FB_WP.admin.mentions.autocomplete_nonce=' . json_encode( wp_create_nonce( 'facebook_autocomplete_nonce' ) ) . ';';
+		if ( isset( $wp_locale ) )
+			echo 'FB_WP.admin.mentions.thousands_separator=' . json_encode( $wp_locale->number_format['thousands_sep'] ) . ';';
+		echo 'FB_WP.admin.mentions.messages.likes=' . json_encode( _x( '%s like this', 'number of people who Like a Page', 'facebook' ) ) . ';';
+		echo 'FB_WP.admin.mentions.messages.talking_about=' . json_encode( _x( '%s talking about this', 'number of people talking about a Page', 'facebook' ) ) . ';';
+		echo '});';
+		echo '</script></div>';
 	}
 
 	/**
@@ -96,9 +149,16 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 		if ( ! current_user_can( 'edit_' . $capability_singular_base, $post_id ) )
 			return;
 
+		$feature_enabled = '1';
+		if ( ! isset( $_POST[self::FIELD_FEATURE_ENABLED] ) || $_POST[self::FIELD_FEATURE_ENABLED] === '0' )
+			$feature_enabled = '0';
+
+		update_post_meta( $post_id, self::POST_META_KEY_FEATURE_ENABLED, $feature_enabled );
+		unset( $feature_enabled );
+
 		$message = trim( sanitize_text_field( $_POST[self::FIELD_MESSAGE] ) );
 		if ( $message )
-			update_post_meta( $post_id, self::POST_META_KEY, $message );
+			update_post_meta( $post_id, self::POST_META_KEY_MESSAGE, $message );
 	}
 }
 

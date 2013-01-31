@@ -1,76 +1,90 @@
-/**
- * Tipsy jQuery plugin stylesheet
- * https://github.com/jaz303/tipsy
- */
-.tipsy { font-size: 10px; position: absolute; padding: 5px; z-index: 100000; }
-  .tipsy-inner { background-color: #000; color: #FFF; max-width: 200px; padding: 5px 8px 4px 8px; text-align: center; }
-
-  /* Rounded corners */
-  .tipsy-inner { border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
-  
-  /* Uncomment for shadow */
-  /*.tipsy-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }*/
-  
-  .tipsy-arrow { position: absolute; width: 0; height: 0; line-height: 0; border: 5px dashed #000; }
-  
-  /* Rules to colour arrows */
-  .tipsy-arrow-n { border-bottom-color: #000; }
-  .tipsy-arrow-s { border-top-color: #000; }
-  .tipsy-arrow-e { border-left-color: #000; }
-  .tipsy-arrow-w { border-right-color: #000; }
-  
-	.tipsy-n .tipsy-arrow { top: 0px; left: 50%; margin-left: -5px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent; }
-    .tipsy-nw .tipsy-arrow { top: 0; left: 10px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent;}
-    .tipsy-ne .tipsy-arrow { top: 0; right: 10px; border-bottom-style: solid; border-top: none;  border-left-color: transparent; border-right-color: transparent;}
-  .tipsy-s .tipsy-arrow { bottom: 0; left: 50%; margin-left: -5px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
-    .tipsy-sw .tipsy-arrow { bottom: 0; left: 10px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
-    .tipsy-se .tipsy-arrow { bottom: 0; right: 10px; border-top-style: solid; border-bottom: none; border-left-color: transparent; border-right-color: transparent; }
-  .tipsy-e .tipsy-arrow { right: 0; top: 50%; margin-top: -5px; border-left-style: solid; border-right: none; border-top-color: transparent; border-bottom-color: transparent; }
-  .tipsy-w .tipsy-arrow { left: 0; top: 50%; margin-top: -5px; border-right-style: solid; border-left: none; border-top-color: transparent; border-bottom-color: transparent; }
-/* End Tipsy */
-
-
-/* Begin Facebook plugin customizations */
-#token-input-suggest-friends {
-	width: 100%;
-}
-#token-input-suggest-pages {
-	width: 100%;
-}
-.token-input-list-facebook {
+#facebook-author-message-box-id .ui-autocomplete {
+	background-color: #fff;
 	max-width: 100%;
 }
-.token-input-token-facebook img {
-	vertical-align: middle;
-	border-radius: 3px;
-	width: 16px;
-	height: 16px;
-	margin: 0px 0px 1px -1px;
+
+#facebook-author-message-box-id .ui-autocomplete .subtext {
+	color: #999;
 }
 
-.token-input-dropdown-item2-facebook img {
-	vertical-align: middle;
-	border-radius: 3px;
-	width: 16px;
-	height: 16px;
-	margin: 0px 0px 1px 2px;
+// hide accessibility helper
+#facebook-author-message-box-id .ui-autocomplete .ui-helper-hidden-accessible {
+  position: absolute !important;
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
 }
 
-.token-input-dropdown-item-facebook img {
-	vertical-align: middle;
-	border-radius: 3px;
-	width: 16px;
-	height: 16px;
-	margin: 0px 0px 1px 2px;
+#facebook-author-message-box-id .ui-autocomplete .results {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
 }
 
-.tipsy {
-	font-size: 12px !important;
+#facebook-author-message-box-id ul.ui-autocomplete {
+  list-style-type: none;
+  margin: 0;
+  background-color: #FFF;
+  border-color: #333333 #333333 #293E6A;
+  border-style: solid;
+  border-width: 1px 1px 2px;
+  overflow: hidden;
+  padding: 2px 0;
 }
 
-.multicheckbox {
-	margin: 0 10px 0 5px !important;
-	vertical-align: middle !important;
+#facebook-author-message-box-id .ui-autocomplete li {
+  color: #333;
+  border-color: #FFF;
+  border-style: solid;
+  border-width: 1px 0;
+  cursor: pointer;
+  min-height: 32px;
+  padding: 2px 10px 2px 45px;
+  display: block;
+  position: relative;
 }
 
-/* End Facebook plugin customizations */
+#facebook-author-message-box-id .ui-autocomplete li.ui-state-focus {
+  background-color: #6d84b4;
+  border-color: #3b5998;
+}
+#facebook-author-message-box-id .ui-autocomplete li.ui-state-focus .text, #facebook-author-message-box-id .ui-autocomplete li.ui-state-focus .subtext {
+  color: #fff !important;
+}
+
+#facebook-author-message-box-id .ui-autocomplete li a.ui-state-focus {
+  background-color: transparent !important;
+}
+
+#facebook-author-message-box-id .ui-autocomplete li img {
+  border: 0;
+  display: block;
+  position: absolute;
+  height: 32px;
+  width: 32px;
+  left: 6px;
+}
+
+#facebook-author-message-box-id .ui-autocomplete .text {
+  font-weight: bold;
+  padding-top: 0;
+  padding-bottom: 2px;
+  padding-left: 5px;
+}
+
+#facebook-author-message-box-id .ui-autocomplete .subtext {
+  color: #999;
+  padding-left: 5px;
+}
+
+#facebook-author-message-box-id .ui-autocomplete .text, #facebook-author-message-box-id .ui-autocomplete .subtext {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 2px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

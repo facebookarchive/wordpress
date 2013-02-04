@@ -42,7 +42,7 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 	 * @return string 
 	 */
 	public static function sanitize_facebook_page_url( $url ) {
-		global $wpdb, $facebook;
+		global $wpdb, $facebook_loader;
 
 		if ( ! is_string( $url ) || ! $url )
 			return '';
@@ -69,7 +69,10 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 			return '';
 
 		// attempt to normalize the URL through a Facebook request if an access token is present
-		if ( isset( $facebook ) ) {
+		if ( isset( $facebook_loader ) && $facebook_loader->app_access_token_exists() ) {
+			if ( ! class_exists( 'Facebook_WP_Extend' ) )
+				require_once( $facebook_loader->plugin_directory . 'includes/facebook-php-sdk/class-facebook-wp.php' );
+
 			// page without a username
 			if ( strlen( $url_parts['path'] ) > 7 && substr_compare( $url_parts['path'], 'pages/', 0, 6 ) === 0 ) {
 				$page_id = substr( $url_parts['path'], strrpos( $url_parts['path'], '/' ) );
@@ -84,7 +87,7 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 			$where .= ' AND is_published=1';
 
 			try {
-				$page_info = $facebook->api( '/fql', array( 'q' => 'SELECT page_url FROM page WHERE ' . $where ) );
+				$page_info = Facebook_WP_Extend::graph_api_with_app_access_token( '/fql', 'GET', array( 'q' => 'SELECT page_url FROM page WHERE ' . $where ) );
 			} catch ( WP_FacebookApiException $e ) {
 				break;
 			}

@@ -173,15 +173,10 @@ class Facebook_Application_Settings {
 	 * @since 1.1
 	 */
 	public function section_header() {
-		global $facebook;
-
-		if ( isset( $facebook ) && $facebook ) {
-			if ( isset( $this->existing_options['app_id'] ) && $this->existing_options['app_id'] ) {
-				echo '<p><a href="' . esc_url( 'https://developers.facebook.com/apps/' . $this->existing_options['app_id'] ) . '">' . esc_html( __( 'Edit your application settings on Facebook', 'facebook' ) ) . '</a></p>';
-			}
-		} else {
+		if ( ! empty( $this->existing_options['app_id'] ) )
+			echo '<p><a href="' . esc_url( 'https://developers.facebook.com/apps/' . $this->existing_options['app_id'] ) . '">' . esc_html( __( 'Edit your application settings on Facebook', 'facebook' ) ) . '</a></p>';
+		else
 			echo '<p><a href="https://developers.facebook.com/apps/">' . esc_html( sprintf( __( 'Create a new Facebook application or associate %s with an existing Facebook application.', 'facebook' ), get_bloginfo( 'name' ) ) ) . '</a></p>';
-		}
 	}
 
 	/**
@@ -237,7 +232,7 @@ class Facebook_Application_Settings {
 	 * @param array $options form options values
 	 */
 	public static function sanitize_options( $options ) {
-		global $facebook;
+		global $facebook_loader;
 
 		// start fresh
 		$clean_options = array();
@@ -277,17 +272,17 @@ class Facebook_Application_Settings {
 		// store an application access token and verify additional data
 		if ( isset( $clean_options['app_id'] ) && isset( $clean_options['app_secret'] ) ) {
 			if ( ! class_exists( 'Facebook_WP_Extend' ) )
-				require_once( dirname( dirname( __FILE__ ) ) . '/includes/facebook-php-sdk/class-facebook-wp.php' );
+				require_once( $facebook_loader->plugin_directory . 'includes/facebook-php-sdk/class-facebook-wp.php' );
 
-			$facebook = new Facebook_WP_Extend( array(
+			$facebook_php_sdk = new Facebook_WP_Extend( array(
 				'appId' => $clean_options['app_id'],
 				'secret' => $clean_options['app_secret']
 			) );
-			if ( $facebook ) {
+			if ( $facebook_php_sdk ) {
 				if ( wp_http_supports( array( 'ssl' => true ) ) ) {
-					$access_token = $facebook->getAppAccessToken();
+					$access_token = $facebook_php_sdk->getAppAccessToken();
 					if ( $access_token ) {
-						$app_info = $facebook->get_app_details_by_access_token( $access_token );
+						$app_info = $facebook_php_sdk->get_app_details_by_access_token( $access_token );
 						if ( ! empty( $app_info ) ) {
 							if ( isset( $app_info['namespace'] ) )
 								$clean_options['app_namespace'] = $app_info['namespace'];
@@ -302,7 +297,7 @@ class Facebook_Application_Settings {
 					}
 					unset( $access_token );
 				} else {
-					$app_info = $facebook->get_app_details();
+					$app_info = $facebook_php_sdk->get_app_details();
 					if ( ! empty( $app_info ) ) {
 						if ( isset( $app_info['namespace'] ) )
 							$clean_options['app_namespace'] = $app_info['namespace'];

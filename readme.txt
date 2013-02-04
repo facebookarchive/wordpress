@@ -100,7 +100,7 @@ The [Comments Box social plugin](https://developers.facebook.com/docs/reference/
 == Upgrade Notice ==
 
 = 1.2 =
-Mention tagging support. Explicit sharing to Facebook Timeline and/or Facebook Page.
+App access token support. Mention tagging support. Explicit sharing to Facebook Timeline and/or Facebook Page.
 
 = 1.1.11 =
 Like Box widget. Improved locale selector. Bugfix publishing to a Facebook Page.
@@ -144,6 +144,8 @@ Security fixes. Improved customization and debugging of settings. l10n and i18n 
 == Changelog ==
 
 = 1.2 =
+* Post to Timeline now uses an [app access token](https://developers.facebook.com/docs/concepts/login/access-tokens-and-types/#appaccess) to communicate with Facebook servers without needing an active Facebook user session. Improves XML-RPC compatibility and wp-admin performance.
+* The Facebook PHP SDK is now loaded as needed, not with every admin request.
 * [Mention tagging](https://developers.facebook.com/docs/technical-guides/opengraph/mention-tagging/) Facebook friends and Facebook pages replaces previous mention meta boxes for friends and pages.
 * Removed mention display alongside a post. Mentions are constructed in a custom Facebook message.
 

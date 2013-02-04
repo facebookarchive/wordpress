@@ -13,9 +13,9 @@ class Facebook_User {
 	 * @since 1.0
 	 */
 	public static function extend_access_token() {
-		global $facebook;
+		global $facebook, $facebook_loader;
 
-		if ( isset( $facebook ) )
+		if ( isset( $facebook ) || ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
 			$facebook->setExtendedAccessToken();
 	}
 
@@ -25,9 +25,9 @@ class Facebook_User {
 	 * @since 1.0
 	 */
 	public static function get_current_user( $fields = array() ) {
-		global $facebook;
+		global $facebook, $facebook_loader;
 
-		if ( ! isset( $facebook ) )
+		if ( ! isset( $facebook ) && ! ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
 			return;
 
 		$params = array( 'ref' => 'fbwpp' );
@@ -109,9 +109,9 @@ class Facebook_User {
 	 * @return array permissions array returned by Facebook Graph API
 	 */
 	public static function get_permissions() {
-		global $facebook;
+		global $facebook, $facebook_loader;
 
-		if ( ! isset( $facebook ) )
+		if ( ! isset( $facebook ) && ! ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
 			return array();
 
 		$current_user = wp_get_current_user();
@@ -135,9 +135,9 @@ class Facebook_User {
 	 * @return bool true if Facebook information present for current user and publish permissions exist
 	 */
 	public static function can_publish_to_facebook() {
-		global $facebook;
+		global $facebook, $facebook_loader;
 
-		if ( ! isset( $facebook ) )
+		if ( ! isset( $facebook ) && ! ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
 			return false;
 
 		$current_user = wp_get_current_user();
@@ -196,6 +196,24 @@ class Facebook_User {
 		}
 
 		return $authors;
+	}
+
+	/**
+	 * Get the Facebook user identifier associated with the given WordPress user identifier, if one exists
+	 *
+	 * @since 1.2
+	 * @param int $wordpress_user_id WordPress user identifier
+	 * @return string Facebook user identifier
+	 */
+	public static function get_facebook_profile_id( $wordpress_user_id ) {
+		if ( ! ( is_int( $wordpress_user_id ) && $wordpress_user_id ) )
+			return '';
+
+		$facebook_user_data = self::get_user_meta( $wordpress_user_id, 'fb_data', true );
+		if ( is_array( $facebook_user_data ) && isset( $facebook_user_data['fb_uid'] ) )
+			return $facebook_user_data['fb_uid'];
+
+		return '';
 	}
 }
 

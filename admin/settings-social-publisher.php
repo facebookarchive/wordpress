@@ -74,7 +74,7 @@ class Facebook_Social_Publisher_Settings {
 	 * @since 1.1
 	 */
 	public function onload() {
-		global $facebook;
+		global $facebook, $facebook_loader;
 
 		// prompt to log in or update account info
 		if ( ! class_exists( 'Facebook_Admin_Login' ) )
@@ -90,7 +90,8 @@ class Facebook_Social_Publisher_Settings {
 		$facebook_user_data = Facebook_User::get_user_meta( $this->current_user->ID, 'fb_data', true );
 		if ( is_array( $facebook_user_data ) && isset( $facebook_user_data['fb_uid'] ) ) {
 			$this->user_associated_with_facebook_account = true;
-			$this->user_permissions = $facebook->get_current_user_permissions( $this->current_user );
+			if ( isset( $facebook ) || ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
+				$this->user_permissions = $facebook->get_current_user_permissions( $this->current_user );
 			if ( ! is_array( $this->user_permissions ) )
 				$this->user_permissions = array();
 		} else {
@@ -215,9 +216,9 @@ class Facebook_Social_Publisher_Settings {
 	 * @return array associative array of id, name, and access token for pages with create content permissions
 	 */
 	public static function get_publishable_pages_for_current_user() {
-		global $facebook;
+		global $facebook, $facebook_loader;
 
-		if ( ! isset( $facebook ) )
+		if ( ! isset( $facebook ) && ! ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
 			return array();
 
 		try {
@@ -385,8 +386,6 @@ class Facebook_Social_Publisher_Settings {
 	 * @return array clean option sets.
 	 */
 	public static function sanitize_publish_options( $options ) {
-		global $facebook;
-
 		if ( ! is_array( $options ) || empty( $options ) )
 			return array();
 

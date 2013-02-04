@@ -13,7 +13,7 @@ class Facebook_Admin_Login {
 	 * @since 1.1
 	 */
 	public static function connect_facebook_account( $verify_permissions = null ) {
-		global $facebook;
+		global $facebook, $facebook_loader;
 
 		$profile_prompt = false;
 
@@ -42,8 +42,11 @@ class Facebook_Admin_Login {
 		}
 
 		// Facebook information not found
-		$facebook_user = Facebook_User::get_current_user( array( 'id','username' ) );
+		$facebook_user = Facebook_User::get_current_user( array( 'id','username','third_party_id' ) );
 		if ( $facebook_user ) {
+			if ( ! isset( $facebook ) && ! ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
+				return;
+
 			$permissions = $facebook->get_current_user_permissions( $facebook_user );
 
 			$all_permissions_exist = true;
@@ -62,6 +65,8 @@ class Facebook_Admin_Login {
 					);
 					if ( ! empty( $facebook_user['username'] ) )
 						$facebook_user_data['username'] = $facebook_user['username'];
+					if ( ! empty( $facebook_user['third_party_id'] ) )
+						$facebook_user_data['third_party_id'] = $facebook_user['third_party_id'];
 
 					Facebook_User::update_user_meta( $current_user->ID, 'fb_data', $facebook_user_data );
 				}

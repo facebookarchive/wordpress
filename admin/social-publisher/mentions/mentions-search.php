@@ -31,7 +31,7 @@ class Facebook_Mentions_Search {
 	 * @since 1.2
 	 */
 	public static function search_endpoint() {
-		global $facebook;
+		global $facebook, $facebook_loader;
 
 		header( 'Content-Type: application/json; charset=utf-8', true );
 
@@ -49,7 +49,7 @@ class Facebook_Mentions_Search {
 			exit;
 		}
 
-		if ( ! isset( $facebook ) ) {
+		if ( ! isset( $facebook ) && ! ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) ) {
 			status_header( 403 );
 			echo json_encode( array( 'error' => __( 'Facebook credentials not properly configured on the server', 'facebook' ) ) );
 			exit;

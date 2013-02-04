@@ -333,6 +333,11 @@ class Facebook_Open_Graph_Protocol {
 			if ( $description )
 				$meta_tags[ self::OGP_NS . 'description'] = $description;
 
+			$facebook_user_data = Facebook_User::get_user_meta( $author_id, 'fb_data', true );
+			if ( is_array( $facebook_user_data ) && isset( $facebook_user_data['third_party_id'] ) )
+					$meta_tags[ self::FB_NS . 'profile_id' ] = $facebook_user_data['third_party_id'];
+			unset( $facebook_user_data );
+
 			// no need to show username if there is only one
 			if ( is_multi_author() )
 				$meta_tags[ self::PROFILE_NS . 'username' ] = get_the_author_meta( 'login', $author_id );

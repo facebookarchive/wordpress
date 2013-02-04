@@ -166,13 +166,15 @@ class Facebook_Comments {
 	 * @return array list of comments
 	 */
 	public static function get_comments_by_url( $url ) {
-		global $facebook;
+		global $facebook_loader;
 
-		if ( ! ( isset( $facebook ) && is_string( $url ) && $url ) )
+		if ( ! ( isset( $facebook_loader ) && $facebook_loader->app_access_token_exists() && is_string( $url ) && $url ) )
 			return array();
 
+		if ( ! class_exists( 'Facebook_WP_Extend' ) )
+			require_once( $facebook_loader->plugin_directory . 'includes/facebook-php-sdk/class-facebook-wp.php' );
 		try {
-			$comments = $facebook->api( '/comments', array( 'id' => $url ) );
+			$comments = Facebook_WP_Extend::graph_api_with_app_access_token( 'comments', 'GET', array( 'id' => $url ) );
 		} catch ( WP_FacebookApiException $e ) {
 			return array();
 		}

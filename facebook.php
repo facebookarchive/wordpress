@@ -212,6 +212,18 @@ class Facebook_Loader {
 	}
 
 	/**
+	 * Has the current site stored an application identifier, application secret, had the pair verified by Facebook, and stored the resulting application access token?
+	 * Access token only saved if WP_HTTP supports HTTPS
+	 *
+	 * @return bool true if application access token set, else false
+	 */
+	public function app_access_token_exists() {
+		if ( ! empty( $this->credentials['access_token'] ) )
+			return true;
+		return false;
+	}
+
+	/**
 	 * Initialize a global $facebook variable if one does not already exist and credentials stored for this site
 	 *
 	 * @since 1.1
@@ -223,19 +235,32 @@ class Facebook_Loader {
 		if ( isset( $facebook ) )
 			return true;
 
-		if ( ! empty( $this->credentials['app_id'] ) && ! empty( $this->credentials['app_secret'] ) ) {
-			if ( ! class_exists( 'Facebook_WP_Extend' ) )
-				require_once( $this->plugin_directory . 'includes/facebook-php-sdk/class-facebook-wp.php' );
-
-			$facebook = new Facebook_WP_Extend( array(
-				'appId' => $this->credentials['app_id'],
-				'secret' => $this->credentials['app_secret']
-			) );
-			if ( $facebook )
-				return true;
+		$facebook_php_sdk = $this->get_php_sdk();
+		if ( $facebook_php_sdk ) {
+			$facebook = $facebook_php_sdk;
+			return true;
 		}
 
 		return false;
+	}
+
+	/**
+	 * Initialize the Facebook PHP SDK using an application identifier and secret
+	 *
+	 * @since 1.2
+	 * @return Facebook_WP_Extend Facebook PHP SDK class or null if minimum requirements not met
+	 */
+	public function get_php_sdk() {
+		if ( empty( $this->credentials['app_id'] ) || empty( $this->credentials['app_secret'] ) )
+			return;
+
+		if ( ! class_exists( 'Facebook_WP_Extend' ) )
+			require_once( $this->plugin_directory . 'includes/facebook-php-sdk/class-facebook-wp.php' );
+
+		return new Facebook_WP_Extend( array(
+			'appId' => $this->credentials['app_id'],
+			'secret' => $this->credentials['app_secret']
+		) );
 	}
 
 	/**
@@ -326,25 +351,19 @@ class Facebook_Loader {
 	public function admin_init() {
 		$admin_dir = $this->plugin_directory . 'admin/';
 
-		$sdk = $this->load_php_sdk();
-
-		if ( $sdk ) {
-			if ( ! class_exists( 'Facebook_User' ) )
-				require_once( dirname(__FILE__) . '/facebook-user.php' );
-			Facebook_User::extend_access_token();
-		}
-
 		if ( ! class_exists( 'Facebook_Settings' ) )
 			require_once( $admin_dir . 'settings.php' );
 		Facebook_Settings::init();
 
-		if ( ! class_exists( 'Facebook_Social_Publisher' ) )
-			require_once( $admin_dir . 'social-publisher/social-publisher.php' );
-		new Facebook_Social_Publisher();
+		if ( $this->app_access_token_exists() ) {
+			if ( ! class_exists( 'Facebook_Social_Publisher' ) )
+				require_once( $admin_dir . 'social-publisher/social-publisher.php' );
+			add_action( 'admin_init', array( 'Facebook_Social_Publisher', 'init' ) );
 
-		if ( ! class_exists( 'Facebook_Mentions_Search' ) )
-			require_once( $admin_dir . 'social-publisher/mentions/mentions-search.php' );
-		Facebook_Mentions_Search::wp_ajax_handlers();
+			if ( ! class_exists( 'Facebook_Mentions_Search' ) )
+				require_once( $admin_dir . 'social-publisher/mentions/mentions-search.php' );
+			Facebook_Mentions_Search::wp_ajax_handlers();
+		}
 	}
 
 	/**

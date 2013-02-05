@@ -75,7 +75,7 @@ class Facebook_Admin_Login {
 		}
 
 		// priority before js sdk registration needed to add JS inside FbAsyncInit
-		add_action( 'admin_enqueue_scripts', array( 'Facebook_Admin_Login', 'add_async_load_javascript_filter' ), -1, 0 );
+		add_action( 'admin_enqueue_scripts', array( 'Facebook_Admin_Login', 'add_async_load_javascript_filter' ), -1, 2 );
 		// add all others at P11 after scripts registered
 		add_action( 'admin_enqueue_scripts', array( 'Facebook_Admin_Login', 'enqueue_scripts' ), 11 );
 
@@ -95,6 +95,11 @@ class Facebook_Admin_Login {
 		echo '</p></div>';
 	}
 
+	/**
+	 * Add output to the JavaScript SDK async loader success function filter
+	 *
+	 * @since 1.1
+	 */
 	public static function add_async_load_javascript_filter() {
 		// async load our script after we async load Facebook JavaScript SDK
 		add_filter( 'facebook_jssdk_init_extras', array( 'Facebook_Admin_Login', 'async_load_javascript' ), 10, 2 );
@@ -117,7 +122,7 @@ class Facebook_Admin_Login {
 	 * @return string JavaScript code to be appended to the fbAsyncInit function
 	 */
 	public static function async_load_javascript( $js_block = '', $app_id = '' ) {
-		return $js_block . 'jQuery.ajax({url:' . json_encode( plugins_url( 'static/js/admin/login' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min' ) .  '.js', dirname(__FILE__) ) ) . ',cache:true,dataType:"script"}).success(function(){FB_WP.admin.login.attach_events();});';
+		return $js_block . 'jQuery.ajax({url:' . json_encode( plugins_url( 'static/js/admin/login' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min' ) .  '.js', dirname(__FILE__) ) ) . ',cache:true,dataType:"script"}).success(function(){FB_WP.admin.login.messages.author_permissions_text=' . json_encode( __( 'Allow new posts to your Facebook Timeline', 'facebook' ) ) . ';FB_WP.admin.login.attach_events()});';
 	}
 }
 ?>

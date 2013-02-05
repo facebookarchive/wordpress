@@ -9,10 +9,13 @@
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) )
 	exit();
 
+if ( ! class_exists( 'Facebook_User' ) )
+	require_once( dirname(__FILE__) . '/facebook-user.php' );
+
 // user data
 $__user_id = get_current_user_id();
 foreach ( array('state', 'code', 'access_token', 'user_id', 'fb_data', 'facebook_timeline_disabled') as $meta_key ) {
-	delete_user_meta( $__user_id, $meta_key );
+	Facebook_User::delete_user_meta( $__user_id, $meta_key );
 }
 unset( $__user_id );
 

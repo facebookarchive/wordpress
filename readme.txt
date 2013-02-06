@@ -39,18 +39,18 @@ The development [source code for this plugin is available on Facebook's GitHub a
 
 1. Install Facebook for WordPress either via the WordPress.org plugin directory, or by uploading the files to your server (in the `/wp-content/plugins/` directory).
 1. After activating the plugin, you will be asked to set up your Facebook application or enter existing credentials copied from the [Facebook Developers site](http://developers.facebook.com/apps/).
+1. Publishing to Facebook Timeline requires a Facebook application with an approved publish action with tags, user message, and explicitly shared action permissions. See the [Facebook for WordPress help page](https://developers.facebook.com/wordpress/) for more information.
 1. That's it. You're ready to go!
 
 == Screenshots ==
 
-1. Facebook settings screen.
-2. Boxes to mention Facebook friends and pages in a WordPress Post or Page.
-3. Set the status update that will be published to Facebook, along with the WordPress Page or Post.
-4. The resulting Post on Celebuzz.
-5. The Post is published to the author's (Andy Scott) Timeline.
-6. The Post is published on Duets Facebook Timeline, since it was mentioned in the Post.
-7. The Post is published to the Celebuzz Facebook Page.
-8. Widgets are also available.
+1. Facebook settings screen
+2. Mention Facebook friends and pages in a custom message posted to your Timeline
+3. Create a custom message published to your Facebook Timeline or Page alongside a summary of your new post
+4. The resulting post published on the author's Timeline
+5. Encourage social activity by adding Facebook social plugins before and after your posts
+6. Facebook social plugins are available as WordPress widgets
+7. Customized Like Box and Recommendations Box social plugins displayed as WordPress widgets
 
 == Custom actions & filters ==
 

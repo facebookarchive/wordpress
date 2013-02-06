@@ -148,6 +148,7 @@ Security fixes. Improved customization and debugging of settings. l10n and i18n 
 * The Facebook PHP SDK is now loaded as needed, not with every admin request.
 * [Mention tagging](https://developers.facebook.com/docs/technical-guides/opengraph/mention-tagging/) Facebook friends and Facebook pages replaces previous mention meta boxes for friends and pages.
 * Removed mention display alongside a post. Mentions are constructed in a custom Facebook message.
+* Associate a WordPress account with a Facebook account from the edit profile page.
 
 = 1.1.11 =
 * Added [Like Box](https://developers.facebook.com/docs/reference/plugins/like-box/) widget for Facebook Page promotion

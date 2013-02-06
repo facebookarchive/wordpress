@@ -55,6 +55,8 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 	 * @param array Facebook page info
 	 */
 	public static function add_meta_box( $post_type ) {
+		global $facebook, $facebook_loader;
+
 		add_meta_box(
 			'facebook-author-message-box-id',
 			__( 'Facebook Status on Your Timeline', 'facebook' ),
@@ -62,6 +64,12 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 			$post_type
 		);
 		add_action( 'admin_enqueue_scripts', array( 'Facebook_Social_Publisher_Meta_Box_Profile', 'enqueue_scripts' ) );
+
+		// attempt to extend the access token while suppressing errors and warnings such as headers sent on session start
+		try {
+			if ( isset( $facebook ) || ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
+				$facebook->setExtendedAccessToken();
+		}catch(Exception $e){}
 	}
 
 	/**

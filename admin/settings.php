@@ -23,16 +23,30 @@ class Facebook_Settings {
 		self::migrate_options();
 		add_action( 'admin_menu', array( 'Facebook_Settings', 'settings_menu_items' ) );
 		add_filter( 'plugin_action_links', array( 'Facebook_Settings', 'plugin_action_links' ), 10, 2 );
+		add_action( 'admin_init', array( 'Facebook_Settings', 'load_social_settings' ), 1 );
 		add_action( 'admin_enqueue_scripts', array( 'Facebook_Settings', 'enqueue_scripts' ) );
+	}
 
-		if ( self::app_credentials_exist() ) {
-			$available_features = apply_filters( 'facebook_features', self::$features );
-			if ( is_array( $available_features ) && ! empty( $available_features ) ) {
-				if ( isset( $available_features['social_publisher'] ) ) {
-					// check user capability to publish to Facebook
-					$current_user = wp_get_current_user();
-					if ( user_can( $current_user, 'edit_posts' ) )
-						add_action( 'admin_init', array( 'Facebook_Settings', 'prompt_user_login' ) );
+	/**
+	 * Load extra settings only if Facebook application credentials exist
+	 *
+	 * @since 1.2
+	 */
+	public static function load_social_settings() {
+		global $facebook_loader;
+
+		if ( ! ( isset( $facebook_loader ) && $facebook_loader->app_access_token_exists() ) )
+			return;
+
+		$available_features = apply_filters( 'facebook_features', self::$features );
+		if ( is_array( $available_features ) && ! empty( $available_features ) ) {
+			if ( isset( $available_features['social_publisher'] ) ) {
+				// check user capability to publish to Facebook
+				$current_user = wp_get_current_user();
+				if ( user_can( $current_user, 'edit_posts' ) ) {
+					if ( ! class_exists( 'Facebook_User_Profile' ) )
+						require_once( dirname(__FILE__) . '/profile.php' );
+					add_action( 'load-profile.php', array( 'Facebook_User_Profile', 'init' ) );
 				}
 			}
 		}

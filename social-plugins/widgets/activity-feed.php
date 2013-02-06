@@ -14,7 +14,7 @@ class Facebook_Activity_Feed_Widget extends WP_Widget {
 		parent::__construct(
 	 		'facebook-activity-feed', // Base ID
 			__( 'Facebook Recent Activity', 'facebook' ), // Name
-			array( 'description' => __( 'Displays the most interesting recent activity taking place on your site.', 'facebook' ), ) // Args
+			array( 'description' => __( 'Displays the most interesting recent activity taking place on your site.', 'facebook' ) ) // Args
 		);
 		add_action( 'admin_enqueue_scripts', array( 'Facebook_Activity_Feed_Widget', 'admin_enqueue_scripts' ) );
 	}

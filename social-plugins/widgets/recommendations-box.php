@@ -14,7 +14,7 @@ class Facebook_Recommendations_Widget extends WP_Widget {
 		parent::__construct(
 	 		'facebook-recommendations', // Base ID
 			__( 'Facebook Recommendations', 'facebook' ), // Name
-			array( 'description' => __( 'Shows personalized recommendations to your users.', 'facebook' ), ) // Args
+			array( 'description' => __( 'Shows personalized recommendations to your users.', 'facebook' ) ) // Args
 		);
 		add_action( 'admin_enqueue_scripts', array( 'Facebook_Recommendations_Widget', 'admin_enqueue_scripts' ) );
 	}

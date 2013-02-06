@@ -41,6 +41,12 @@ class Facebook_Admin_Login {
 			$facebook_user_data_exists = true;
 		}
 
+		// attempt to extend the access token while suppressing errors and warnings such as headers sent on session start
+		try {
+			if ( isset( $facebook ) || ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
+				$facebook->setExtendedAccessToken();
+		}catch(Exception $e){}
+
 		// Facebook information not found
 		$facebook_user = Facebook_User::get_current_user( array( 'id','username','third_party_id' ) );
 		if ( $facebook_user ) {

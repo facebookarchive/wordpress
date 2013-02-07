@@ -1,11 +1,11 @@
 === Facebook ===
-Contributors: Facebook, automattic, mattwkelly, niallkennedy, rgharpuray, ngfeldman, jamesgpearce, ravi.grover, danielbachhuber, gigawats, eosgood, Otto42, colmdoyle, zazinteractive
+Contributors: Facebook, automattic, niallkennedy, mattwkelly, rgharpuray, ngfeldman, jamesgpearce, ravi.grover, danielbachhuber, gigawats, eosgood, Otto42, colmdoyle, zazinteractive
 Tags: Facebook, comments, social, friends, like, like button, social plugins, facebook platform, page, posts, sidebar, plugin, open graph
 Requires at least: 3.3
 Tested up to: 3.5.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.2
+Stable tag: 1.2.1
 
 Make your WordPress site social in a couple of clicks, powered by Facebook.
 
@@ -99,6 +99,9 @@ The [Comments Box social plugin](https://developers.facebook.com/docs/reference/
 
 == Upgrade Notice ==
 
+= 1.2.1 =
+Fixes an issue with author pages and Open Graph protocol.
+
 = 1.2 =
 App access token support. Mention tagging support. Explicit sharing to Facebook Timeline and/or Facebook Page.
 
@@ -142,6 +145,9 @@ Improve site performance when cURL not installed or SSL not available. Removed p
 Security fixes. Improved customization and debugging of settings. l10n and i18n fixes.
 
 == Changelog ==
+
+= 1.2.1 =
+* Fix: Properly display Open Graph protocol data on author page.
 
 = 1.2 =
 * Post to Timeline now uses an [app access token](https://developers.facebook.com/docs/concepts/login/access-tokens-and-types/#appaccess) to communicate with Facebook servers without needing an active Facebook user session. Improves XML-RPC compatibility and wp-admin performance.

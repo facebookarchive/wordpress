@@ -20,7 +20,7 @@ class Facebook_Settings {
 	 * @since 1.1
 	 */
 	public static function init() {
-		self::migrate_options();
+		add_action( 'admin_init', array( 'Facebook_Settings', 'migrate_options' ), 0, 0 );
 		add_action( 'admin_menu', array( 'Facebook_Settings', 'settings_menu_items' ) );
 		add_filter( 'plugin_action_links', array( 'Facebook_Settings', 'plugin_action_links' ), 10, 2 );
 		add_action( 'admin_init', array( 'Facebook_Settings', 'load_social_settings' ), 1 );

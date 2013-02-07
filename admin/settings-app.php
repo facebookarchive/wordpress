@@ -232,8 +232,6 @@ class Facebook_Application_Settings {
 	 * @param array $options form options values
 	 */
 	public static function sanitize_options( $options ) {
-		global $facebook_loader;
-
 		// start fresh
 		$clean_options = array();
 
@@ -272,7 +270,7 @@ class Facebook_Application_Settings {
 		// store an application access token and verify additional data
 		if ( isset( $clean_options['app_id'] ) && isset( $clean_options['app_secret'] ) ) {
 			if ( ! class_exists( 'Facebook_WP_Extend' ) )
-				require_once( $facebook_loader->plugin_directory . 'includes/facebook-php-sdk/class-facebook-wp.php' );
+				require_once( dirname( dirname(__FILE__) ) . '/includes/facebook-php-sdk/class-facebook-wp.php' );
 
 			$facebook_php_sdk = new Facebook_WP_Extend( array(
 				'appId' => $clean_options['app_id'],

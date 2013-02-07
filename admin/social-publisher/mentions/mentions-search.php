@@ -12,7 +12,7 @@ class Facebook_Mentions_Search {
 	 * @since 1.2
 	 * @var int
 	 */
-	const MAX_RESULTS = 10;
+	const MAX_RESULTS = 8;
 
 	/**
 	 * Respond to WordPress admin AJAX requests
@@ -61,7 +61,7 @@ class Facebook_Mentions_Search {
 			exit;
 		}
 
-		$results = self::search_friends( $search_term, 5 );
+		$results = self::search_friends( $search_term, self::MAX_RESULTS / 2 );
 		$results = array_merge( $results, self::search_pages( $search_term, self::MAX_RESULTS - count($results) ) );
 		if ( empty( $results ) ) {
 			status_header( 404 );
@@ -80,7 +80,7 @@ class Facebook_Mentions_Search {
 	 * @param int $limit maximum number of results
 	 * @return array friend results
 	 */
-	public static function search_friends( $search_term, $limit = 5 ) {
+	public static function search_friends( $search_term, $limit = 4 ) {
 		global $facebook;
 
 		$facebook_user_id = $facebook->getUser();
@@ -142,7 +142,7 @@ class Facebook_Mentions_Search {
 	 * @param int $limit maximum number of results
 	 * @return array pages results
 	 */
-	public static function search_pages( $search_term, $limit = 5 ) {
+	public static function search_pages( $search_term, $limit = 4 ) {
 		global $facebook, $facebook_loader;
 
 		$cache_key = 'facebook_12_pages_' . $search_term;

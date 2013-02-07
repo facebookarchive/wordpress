@@ -5,7 +5,7 @@ Requires at least: 3.3
 Tested up to: 3.5.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 
 Make your WordPress site social in a couple of clicks, powered by Facebook.
 
@@ -99,6 +99,9 @@ The [Comments Box social plugin](https://developers.facebook.com/docs/reference/
 
 == Upgrade Notice ==
 
+= 1.2.2 =
+Improve performance of settings migration from old versions of the plugin.
+
 = 1.2.1 =
 Fixes an issue with author pages and Open Graph protocol.
 
@@ -146,15 +149,18 @@ Security fixes. Improved customization and debugging of settings. l10n and i18n 
 
 == Changelog ==
 
+= 1.2.2 =
+* Improve performance of settings migration from old versions of the plugin
+
 = 1.2.1 =
-* Fix: Properly display Open Graph protocol data on author page.
+* Fix: Properly display Open Graph protocol data on author page
 
 = 1.2 =
-* Post to Timeline now uses an [app access token](https://developers.facebook.com/docs/concepts/login/access-tokens-and-types/#appaccess) to communicate with Facebook servers without needing an active Facebook user session. Improves XML-RPC compatibility and wp-admin performance.
-* The Facebook PHP SDK is now loaded as needed, not with every admin request.
-* [Mention tagging](https://developers.facebook.com/docs/technical-guides/opengraph/mention-tagging/) Facebook friends and Facebook pages replaces previous mention meta boxes for friends and pages.
-* Removed mention display alongside a post. Mentions are constructed in a custom Facebook message.
-* Associate a WordPress account with a Facebook account from the edit profile page.
+* Post to Timeline now uses an [app access token](https://developers.facebook.com/docs/concepts/login/access-tokens-and-types/#appaccess) to communicate with Facebook servers without needing an active Facebook user session. Improves XML-RPC compatibility and wp-admin performance
+* The Facebook PHP SDK is now loaded as needed, not with every admin request
+* [Mention tagging](https://developers.facebook.com/docs/technical-guides/opengraph/mention-tagging/) Facebook friends and Facebook pages replaces previous mention meta boxes for friends and pages
+* Removed mention display alongside a post. Mentions are constructed in a custom Facebook message
+* Associate a WordPress account with a Facebook account from the edit profile page
 
 = 1.1.11 =
 * Added [Like Box](https://developers.facebook.com/docs/reference/plugins/like-box/) widget for Facebook Page promotion

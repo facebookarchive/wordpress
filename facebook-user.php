@@ -147,7 +147,7 @@ class Facebook_User {
 		if ( ! ( is_array( $facebook_user_data ) && isset( $facebook_user_data['fb_uid'] ) ) )
 			return false;
 
-		if ( Facebook_User::get_user_meta( $current_user->ID, 'facebook_timeline_disabled', true ) )
+		if ( self::get_user_meta( $current_user->ID, 'facebook_timeline_disabled', true ) )
 			return false;
 
 		$permissions = $facebook->get_current_user_permissions( $current_user );

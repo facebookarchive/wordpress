@@ -97,7 +97,7 @@ class Facebook_Settings_Debugger {
 		echo '<header><h2>' . esc_html( self::social_plugin_name() ) . '</h2></header>';
 
 		// only show users if app credentials stored
-		if ( isset( $facebook_loader->credentials['app_id'] ) ) {
+		if ( $facebook_loader->app_access_token_exists() ) {
 			self::users_section();
 			self::post_to_page_section();
 		}
@@ -117,32 +117,35 @@ class Facebook_Settings_Debugger {
 	 * @since 1.1.6
 	 */
 	public static function get_all_wordpress_facebook_users() {
-		global $facebook;
-
-		if ( ! isset( $facebook ) )
-			return array( 'fb' => array(), 'wp' => array() );
-
 		if ( ! class_exists( 'Facebook_User' ) )
 			require_once( dirname( dirname( __FILE__ ) ) . '/facebook-user.php' );
 		// fb => [], wp => []
 		$users = Facebook_User::get_wordpress_users_associated_with_facebook_accounts();
 
 		$users_with_app_permissions = array();
-		foreach ( $users['fb'] as $user ) {
-			if ( ! isset( $user->fb_data['fb_uid'] ) ) {
-				$users['wp'] = $user;
-				continue;
-			}
 
-			$facebook_user_permissions = $facebook->get_permissions_by_facebook_user_id( $user->fb_data['fb_uid'] );
-			if ( ! is_array( $facebook_user_permissions ) || ! isset( $facebook_user_permissions['installed'] ) ) {
-				$users['wp'] = $user;
-				continue;
+		if ( ! empty( $users['fb'] ) ) {
+
+			if ( ! class_exists( 'Facebook_WP_Extend' ) )
+				require_once( dirname( dirname( __FILE__ ) ) . '/includes/facebook-php-sdk/class-facebook-wp.php' );
+
+			foreach ( $users['fb'] as $user ) {
+				if ( ! isset( $user->fb_data['fb_uid'] ) ) {
+					$users['wp'][] = $user;
+					continue;
+				}
+
+				$facebook_user_permissions = Facebook_WP_Extend::get_permissions_by_facebook_user_id( $user->fb_data['fb_uid'] );
+				if ( ! is_array( $facebook_user_permissions ) || ! isset( $facebook_user_permissions['installed'] ) ) {
+					$users['wp'][] = $user;
+					continue;
+				}
+				$user->fb_data['permissions'] = $facebook_user_permissions;
+				unset( $facebook_user_permissions );
+				$users_with_app_permissions[] = $user;
 			}
-			$user->fb_data['permissions'] = $facebook_user_permissions;
-			unset( $facebook_user_permissions );
-			$users_with_app_permissions[] = $user;
 		}
+
 		$users['fb'] = $users_with_app_permissions;
 
 		return $users;

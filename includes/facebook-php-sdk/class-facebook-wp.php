@@ -120,6 +120,8 @@ class Facebook_WP_Extend extends WP_Facebook {
 		if ( ! is_array( $params ) )
 			$params = array();
 		$params['access_token'] = $facebook_loader->credentials['access_token'];
+		if ( ! isset( $params['ref'] ) )
+			$params['ref'] = 'fbwpp';
 		foreach ( $params as $key => $value ) {
 			if ( ! is_string( $value ) )
 				$params[$key] = json_encode( $value );
@@ -197,25 +199,15 @@ class Facebook_WP_Extend extends WP_Facebook {
 	/**
 	 * Retrieve Facebook permissions assigned to the application by a specific Facebook user id
 	 *
-	 * @since 1.1.6
+	 * @since 1.2
 	 * @param string $facebook_id Facebook user identifier
 	 * @return array Facebook permissions
 	 */
-	public function get_permissions_by_facebook_user_id( $facebook_id ) {
+	public static function get_permissions_by_facebook_user_id( $facebook_id ) {
 		if ( ! ( is_string( $facebook_id ) && $facebook_id ) )
 			return array();
 
-		try {
-			$response = $this->api( '/' . $facebook_id . '/permissions', 'GET', array( 'ref' => 'fbwpp' ) );
-		} catch ( WP_FacebookApiException $e ) {
-			$error_result = $e->getResult();
-			if ( $error_result && isset( $error_result['error_code'] ) ) {
-				// try to extend access token if request failed
-				if ( $error_result['error_code'] === 2500 )
-					$this->setExtendedAccessToken();
-			}
-			return array();
-		}
+		$response = self::graph_api_with_app_access_token( $facebook_id . '/permissions', 'GET' );
 
 		if ( is_array( $response ) && isset( $response['data'][0] ) ) {
 			$response = $response['data'][0];

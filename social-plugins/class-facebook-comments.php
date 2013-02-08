@@ -108,6 +108,23 @@ class Facebook_Comments {
 	}
 
 	/**
+	 * Build a XFBML string to place on the page for interpretation by the Facebook JavaScript SDK at runtime
+	 *
+	 * @since 1.1
+	 * @return string XFBML string or empty string if no post permalink context or publisher short-circuits via filter
+	 */
+	public static function comments_count_xfbml() {
+		$url = esc_url( apply_filters( 'facebook_rel_canonical', get_permalink() ), array( 'http', 'https' ) );
+
+		if ( $url ) {
+			// match comments_number() text builder, adding XFBML element instead of a number
+			return str_replace( '%', '<fb:comments-count xmlns="http://ogp.me/ns/fb#" href="' . $url .  '"></fb:comments-count>', apply_filters( 'facebook_comments_number_more', __( '% Comments' ) ) );
+		}
+
+		return '';
+	}
+
+	/**
 	 * Remove the WordPress comments menu bar item, replacing with a Facebook comments link
 	 * Check if Facebook comments enabled and if the current user might be able to view a comments edit screen on Facebook
 	 *
@@ -183,23 +200,6 @@ class Facebook_Comments {
 			return $comments['data'];
 		else
 			return array();
-	}
-
-	/**
-	 * Build a XFBML string to place on the page for interpretation by the Facebook JavaScript SDK at runtime
-	 *
-	 * @since 1.1
-	 * @return string XFBML string or empty string if no post permalink context or publisher short-circuits via filter
-	 */
-	public static function comments_count_xfbml() {
-		$url = esc_url( apply_filters( 'facebook_rel_canonical', get_permalink() ), array( 'http', 'https' ) );
-
-		if ( $url ) {
-			// match comments_number() text builder, adding XFBML element instead of a number
-			return str_replace( '%', '<fb:comments-count xmlns="http://ogp.me/ns/fb#" href="' . $url .  '"></fb:comments-count>', apply_filters( 'facebook_comments_number_more', __( '% Comments' ) ) );
-		}
-
-		return '';
 	}
 
 	/**

@@ -94,32 +94,19 @@ class Facebook_WP_Extend extends WP_Facebook {
 		return array();
 	}
 
-	/**
-	 * Invoke the Graph API for server-to-server communication using an application access token (no user session)
-	 *
-	 * @since 1.2
-	 * @param string $path The Graph API URI endpoint path component
-	 * @param string $method The HTTP method (default 'GET')
-	 * @param array $params The query/post data
-	 *
-	 * @return mixed The decoded response object
-	 * @throws WP_FacebookApiException
-	 */
-	public static function graph_api_with_app_access_token( $path, $method = 'GET', $params = array() ) {
-		global $facebook_loader, $wp_version;
+	public static function graph_api( $path, $method = 'GET', $params = array() ) {
+		global $wp_version;
 
-		if ( ! ( isset( $facebook_loader ) && $facebook_loader->app_access_token_exists() && is_string( $path ) ) )
+		if ( ! is_string( $path ) )
 			return;
 
 		$path = ltrim( $path, '/' ); // normalize the leading slash
 		if ( ! $path )
 			return;
 
-		if ( ! in_array( $method, array( 'GET', 'POST', 'DELETE' ), true ) )
-			$method = 'GET';
+		// pass a reference to WordPress plugin origin with each request
 		if ( ! is_array( $params ) )
 			$params = array();
-		$params['access_token'] = $facebook_loader->credentials['access_token'];
 		if ( ! isset( $params['ref'] ) )
 			$params['ref'] = 'fbwpp';
 		foreach ( $params as $key => $value ) {
@@ -141,6 +128,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 			$http_args['timeout'] = 5;
 			$response = self::handle_response( wp_remote_get( $url, $http_args ) );
 		} else {
+			// POST
 			// WP_HTTP does not support DELETE verb. store as method param for interpretation by Facebook Graph API server
 			if ( $method === 'DELETE' )
 				$params['method'] = 'DELETE';
@@ -153,6 +141,30 @@ class Facebook_WP_Extend extends WP_Facebook {
 
 		if ( isset( $response ) && $response )
 			return json_decode( $response, true );
+	}
+
+	/**
+	 * Invoke the Graph API for server-to-server communication using an application access token (no user session)
+	 *
+	 * @since 1.2
+	 * @param string $path The Graph API URI endpoint path component
+	 * @param string $method The HTTP method (default 'GET')
+	 * @param array $params The query/post data
+	 *
+	 * @return mixed The decoded response object
+	 * @throws WP_FacebookApiException
+	 */
+	public static function graph_api_with_app_access_token( $path, $method = 'GET', $params = array() ) {
+		global $facebook_loader;
+
+		if ( ! ( isset( $facebook_loader ) && $facebook_loader->app_access_token_exists() ) )
+			return;
+
+		if ( ! is_array( $params ) )
+			$params = array();
+		$params['access_token'] = $facebook_loader->credentials['access_token'];
+
+		return self::graph_api( $path, $method, $params );
 	}
 
 	/**

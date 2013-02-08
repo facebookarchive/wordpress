@@ -350,7 +350,7 @@ class Facebook_Social_Publisher {
 			if ( $e->getCode() == 190 ) {
 				delete_option( 'facebook_publish_page' );
 
-				$status_messages[] = array( 'message' => esc_html( sprintf( __( 'Failed posting to %s Timeline because the access token expired.', 'facebook' ), $facebook_page['name'] ) ) . esc_html( __( 'To reactivate publishing, visit the Facebook settings page and re-enable the "Publish to fan page" setting.', 'facebook' ) ) . ' ' . esc_html( __( 'Error', 'facebook' ) ) . ': ' . esc_html( json_encode( $error_result['error'] ) ), 'error' => true );
+				$status_messages[] = array( 'message' => esc_html( sprintf( __( 'Failed posting to %s Timeline because the access token expired.', 'facebook' ), $facebook_page['name'] ) ) . ' ' . esc_html( __( 'To reactivate publishing, visit Facebook Social Publisher settings page and associate a Page through the "Allow new posts to a Facebook Page" link.', 'facebook' ) ) . ' ' . esc_html( __( 'Error', 'facebook' ) ) . ': ' . esc_html( json_encode( $error_result['error'] ) ), 'error' => true );
 			} else {
 				$status_messages[] = array( 'message' => esc_html( sprintf( __( 'Failed posting to %s Timeline.', 'facebook' ), $facebook_page['name'] ) ) . ' ' . esc_html( __( 'Error', 'facebook' ) ) . ': ' . esc_html( json_encode( $error_result['error'] ) ), 'error' => true );
 			}

@@ -318,8 +318,7 @@ class Facebook_Social_Publisher {
 
 		$args = array(
 			'access_token' => $facebook_page['access_token'],
-			'link' => $link,
-			'ref' => 'fbwpp'
+			'link' => $link
 		);
 
 		if ( $meta_box_present )
@@ -332,42 +331,12 @@ class Facebook_Social_Publisher {
 			$args['message'] = $fan_page_message;
 		unset( $fan_page_message );
 
-		// does current post type and the current theme support post thumbnails?
-		if ( post_type_supports( $post_type, 'thumbnail' ) && function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {
-			list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
-			if ( ! empty( $post_thumbnail_url ) )
-				$args['picture'] = $post_thumbnail_url;
-			unset( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height );
-		}
-
-		if ( post_type_supports( $post_type, 'title' ) ) {
-			$title = trim( html_entity_decode( get_the_title( $post_id ), ENT_COMPAT, 'UTF-8' ) );
-			if ( $title )
-				$args['name'] = $title;
-			unset( $title );
-		}
-
-		if ( ! class_exists( 'Facebook_Open_Graph_Protocol' ) )
-			require_once( dirname( dirname( dirname( __FILE__ ) ) ) . '/open-graph-protocol.php' );
-
-		if ( post_type_supports( $post_type, 'excerpt' ) && ! empty( $post->post_excerpt ) ) {
-			$excerpt = trim( apply_filters( 'get_the_excerpt', $post->post_excerpt ) );
-			if ( $excerpt ) {
-				$excerpt = Facebook_Open_Graph_Protocol::clean_description( $excerpt );
-				if ( $excerpt )
-					$args['caption'] = $excerpt;
-			}
-			unset( $excerpt );
-		}
-
-		$post_content = Facebook_Open_Graph_Protocol::clean_description( $post->post_content, false );
-		if ( $post_content )
-			$args['description'] = $post_content;
-		unset( $post_content );
-
 		$status_messages = array();
 		try {
-			$publish_result = $facebook->api( $facebook_page['id'] . '/feed', 'POST', $args );
+			if ( ! class_exists( 'Facebook_WP_Extend' ) )
+				require_once( $facebook_loader->plugin_directory . 'includes/facebook-php-sdk/class-facebook-wp.php' );
+
+			$publish_result = Facebook_WP_Extend::graph_api( $facebook_page['id'] . '/feed', 'POST', $args );
 
 			if ( isset( $publish_result['id'] ) ) {
 				update_post_meta( $post_id, 'fb_fan_page_post_id', sanitize_text_field( $publish_result['id'] ) );

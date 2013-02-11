@@ -206,7 +206,7 @@ class Facebook_User {
 	 * @return string Facebook user identifier
 	 */
 	public static function get_facebook_profile_id( $wordpress_user_id ) {
-		if ( ! ( is_int( $wordpress_user_id ) && $wordpress_user_id ) )
+		if ( ! ( is_numeric( $wordpress_user_id ) && $wordpress_user_id ) )
 			return '';
 
 		$facebook_user_data = self::get_user_meta( $wordpress_user_id, 'fb_data', true );

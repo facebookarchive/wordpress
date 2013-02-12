@@ -7,28 +7,12 @@
  */
 class Facebook_Social_Publisher {
 	/**
-	 * Can the current user publish the current post?
+	 * Initialize social publisher hooks
 	 *
-	 * @since 1.1
-	 * @var bool
+	 * @since 1.2
+	 * @return Facebook_Social_Publisher new Facebook_Social_Publisher object
 	 */
-	protected $user_can_publish_post = false;
-
-	/**
-	 * Is the post already published to the public site?
-	 * Avoid republishing social data for public posts or older posts added before the plugin was enabled
-	 *
-	 * @since 1.1
-	 * @var bool
-	 */
-	protected $post_is_public = false;
-
-	/**
-	 * Add init action
-	 *
-	 * @since 1.1
-	 */
-	public function __construct() {
+	public static function init() {
 		global $facebook_loader;
 
 		if ( ! ( isset( $facebook_loader ) && $facebook_loader->app_access_token_exists() ) )
@@ -42,18 +26,8 @@ class Facebook_Social_Publisher {
 
 		// load meta box hooks on post creation screens
 		foreach( array( 'post', 'post-new' ) as $hook ) {
-			add_action( 'load-' . $hook . '.php', array( &$this, 'load' ) );
+			add_action( 'load-' . $hook . '.php', array( 'Facebook_Social_Publisher', 'load' ), 1, 0 );
 		}
-	}
-
-	/**
-	 * Initialize social publisher hooks
-	 *
-	 * @since 1.2
-	 * @return Facebook_Social_Publisher new Facebook_Social_Publisher object
-	 */
-	public static function init() {
-		return new Facebook_Social_Publisher();
 	}
 
 	/**
@@ -77,23 +51,16 @@ class Facebook_Social_Publisher {
 	}
 
 	/**
-	 * Add actions after init
+	 * Add actions to post edit page
 	 *
-	 * @since 1.1
+	 * @since 1.2.3
 	 */
-	public function load() {
-		$this->user_can_facebook_publish = self::user_can_publish_to_facebook();
-		$this->page_to_publish = self::get_publish_page();
-
-		// need at least publisher permissions or page permissions for social publisher
-		if ( ! $this->user_can_facebook_publish && empty( $this->page_to_publish ) )
-			return;
-
+	public static function load() {
 		// on post pages
 		add_action( 'admin_notices', array( 'Facebook_Social_Publisher', 'output_post_admin_notices' ) );
 
 		// wait until after post data loaded, then evaluate post
-		add_action( 'add_meta_boxes', array( &$this, 'load_post_features' ) );
+		add_action( 'add_meta_boxes', array( 'Facebook_Social_Publisher', 'load_post_features' ), 1, 0 );
 	}
 
 	/**
@@ -160,14 +127,11 @@ class Facebook_Social_Publisher {
 	/**
 	 * Test if a post's post status is public
 	 *
-	 * @since 1.1
+	 * @since 1.2.3
 	 * @param int $post_id post identifier
 	 * @return bool true if public, else false
 	 */
-	public static function post_is_public( $post_id ) {
-		if ( ! self::post_type_is_public( get_post_type( $post_id ) ) )
-			return false;
-
+	public static function post_status_is_public( $post_id ) {
 		$post_status_object = get_post_status_object( get_post_status( $post_id ) );
 		if ( ! $post_status_object )
 			return false;
@@ -204,16 +168,17 @@ class Facebook_Social_Publisher {
 	/**
 	 * Load post meta boxes and actions after post data loaded if post matches publisher preferences and capabilities
 	 *
-	 * @since 1.1
+	 * @since 1.2.3
 	 */
-	public function load_post_features() {
+	public static function load_post_features() {
 		global $post;
 
 		if ( ! isset( $post ) )
 			return;
 
 		$post_type = get_post_type( $post );
-		if ( ! self::post_type_is_public( $post_type ) )
+		// do not load meta boxes if post type not public or post status is public
+		if ( ! self::post_type_is_public( $post_type ) || self::post_status_is_public( $post->ID ) )
 			return;
 
 		$capability_singular_base = self::post_type_capability_base( $post_type );
@@ -223,33 +188,26 @@ class Facebook_Social_Publisher {
 		if ( ! $capability_singular_base )
 			return;
 
-		if ( current_user_can( 'publish_' . $capability_singular_base, $post->ID ) )
-			$this->user_can_publish_post = true;
+		// only display post meta boxes if current user can edit the current post
+		if ( ! current_user_can( 'edit_' . $capability_singular_base, $post->ID ) )
+			return;
 
-		// is the current post already public?
-		if ( self::post_is_public( $post->ID ) )
-			$this->post_is_public = true;
-
-		// post to page data exists. load features
-		if ( ! $this->post_is_public && ! empty( $this->page_to_publish ) ) {
+		// load page meta box if Facebook Page data saved
+		$page_to_publish = self::get_publish_page();
+		if ( ! empty( $page_to_publish ) ) {
 			if ( ! class_exists( 'Facebook_Social_Publisher_Meta_Box_Page' ) )
 				require_once(  dirname(__FILE__) . '/publish-box-page.php' );
 
-			Facebook_Social_Publisher_Meta_Box_Page::add_meta_box( $post_type, $this->page_to_publish );
+			Facebook_Social_Publisher_Meta_Box_Page::add_meta_box( $post_type, $page_to_publish );
 		}
+		unset( $page_to_publish );
 
-		// can the current user post to Facebook? Does the current post support authorship?
-		if ( $this->user_can_publish_post && $this->user_can_facebook_publish && post_type_supports( $post_type, 'author' ) ) {
-			$current_user = wp_get_current_user();
+		// does the current post support authorship? can the post author post to Facebook Timeline?
+		if ( post_type_supports( $post_type, 'author' ) && isset( $post->post_author ) && self::user_can_publish_to_facebook( (int) $post->post_author ) ) {
+			if ( ! class_exists( 'Facebook_Social_Publisher_Meta_Box_Profile' ) )
+				require_once( dirname(__FILE__) . '/publish-box-profile.php' );
 
-			if ( ! isset( $post->post_author ) || $post->post_author == $current_user->ID ) {
-				if ( ! $this->post_is_public ) {
-					if ( ! class_exists( 'Facebook_Social_Publisher_Meta_Box_Profile' ) )
-						require_once( dirname(__FILE__) . '/publish-box-profile.php' );
-
-					Facebook_Social_Publisher_Meta_Box_Profile::add_meta_box( $post_type );
-				}
-			}
+			Facebook_Social_Publisher_Meta_Box_Profile::add_meta_box( $post_type );
 		}
 	}
 
@@ -279,8 +237,9 @@ class Facebook_Social_Publisher {
 		if ( ! $old_status_object || ( isset( $old_status_object->public ) && $old_status_object->public ) )
 			return;
 
-		if ( self::user_can_publish_to_facebook() )
+		if ( isset( $post->post_author ) && self::user_can_publish_to_facebook( (int) $post->post_author ) ) {			
 			self::publish_to_facebook_profile( $post );
+		}
 
 		$page_to_publish = self::get_publish_page();
 		if ( ! empty( $page_to_publish ) )
@@ -603,7 +562,7 @@ class Facebook_Social_Publisher {
 		unset( $fb_page_post_id );
 
 		$post = get_post( $post_id );
-		if ( isset( $post->post_author ) && self::user_can_publish_to_facebook( $post->post_author ) ) {
+		if ( isset( $post->post_author ) && self::user_can_publish_to_facebook( (int) $post->post_author ) ) {
 
 			if ( ! class_exists( 'Facebook_WP_Extend' ) )
 				require_once( $facebook_loader->plugin_directory . 'includes/facebook-php-sdk/class-facebook-wp.php' );

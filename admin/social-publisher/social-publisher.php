@@ -111,11 +111,12 @@ class Facebook_Social_Publisher {
 
 		if ( ! ( is_int( $wordpress_user_id ) && $wordpress_user_id ) ) {
 			$current_user = wp_get_current_user();
-			$wordpress_user_id = $current_user->ID;
+			if ( isset( $current_user->ID ) )
+				$wordpress_user_id = (int) $current_user->ID;
 			unset( $current_user );
 		}
 
-		if ( Facebook_User::get_facebook_profile_id( $wordpress_user_id ) && ! Facebook_User::get_user_meta( $wordpress_user_id, 'facebook_timeline_disabled', true ) )
+		if ( is_int( $wordpress_user_id ) && $wordpress_user_id && Facebook_User::get_facebook_profile_id( $wordpress_user_id ) && ! Facebook_User::get_user_meta( $wordpress_user_id, 'facebook_timeline_disabled', true ) )
 			return true;
 
 		return false;
@@ -412,16 +413,22 @@ class Facebook_Social_Publisher {
 		setup_postdata( $post );
 
 		$post_type = get_post_type( $post );
-		if ( ! ( $post_type && post_type_supports( $post_type, 'author' ) ) )
+		if ( ! ( $post_type && post_type_supports( $post_type, 'author' ) && isset( $post->post_author ) ) )
+			return;
+
+		$post_author = (int) $post->post_author;
+		if ( ! $post_author )
 			return;
 
 		// test the author, not the current actor
-		if ( ! self::user_can_publish_to_facebook( $post->post_author ) )
+		if ( ! self::user_can_publish_to_facebook( $post_author ) )
 			return;
 
 		if ( ! class_exists( 'Facebook_User' ) )
 			require_once( $facebook_loader->plugin_directory . 'facebook-user.php' );
-		$author_facebook_id = Facebook_User::get_facebook_profile_id( $post->post_author );
+		$author_facebook_id = Facebook_User::get_facebook_profile_id( $post_author );
+		if ( ! $author_facebook_id )
+			return;
 
 		// check our assumptions about a valid link in place
 		// fail if a piece of the filter process killed our response

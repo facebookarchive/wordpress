@@ -137,6 +137,27 @@ class Facebook_Social_Publisher {
 	}
 
 	/**
+	 * Test if a post type is intended for use publicly
+	 * If not explicitly declared as public a post type is considered non-public (default false)
+	 *
+	 * @since 1.2.3
+	 * @see register_post_type()
+	 * @param string $post_type post type
+	 * @return bool true if public else false
+	 */
+	public static function post_type_is_public( $post_type ) {
+		// empty string or a false response from get_post_type()
+		if ( ! $post_type )
+			return false;
+
+		$post_type_object = get_post_type_object( $post_type );
+		if ( isset( $post_type_object->public ) && $post_type_object->public )
+			return true;
+
+		return false;
+	}
+
+	/**
 	 * Test if a post's post status is public
 	 *
 	 * @since 1.1
@@ -144,6 +165,9 @@ class Facebook_Social_Publisher {
 	 * @return bool true if public, else false
 	 */
 	public static function post_is_public( $post_id ) {
+		if ( ! self::post_type_is_public( get_post_type( $post_id ) ) )
+			return false;
+
 		$post_status_object = get_post_status_object( get_post_status( $post_id ) );
 		if ( ! $post_status_object )
 			return false;
@@ -189,7 +213,7 @@ class Facebook_Social_Publisher {
 			return;
 
 		$post_type = get_post_type( $post );
-		if ( ! $post_type )
+		if ( ! self::post_type_is_public( $post_type ) )
 			return;
 
 		$capability_singular_base = self::post_type_capability_base( $post_type );
@@ -241,6 +265,9 @@ class Facebook_Social_Publisher {
 	public static function publish( $new_status, $old_status, $post ) {
 		// content not public even if status public
 		if ( ! empty( $post->post_password ) )
+			return;
+
+		if ( ! self::post_type_is_public( get_post_type( $post ) ) )
 			return;
 
 		// transition from non-public to public?
@@ -308,8 +335,8 @@ class Facebook_Social_Publisher {
 			return;
 
 		$post_type = get_post_type( $post );
-		if ( ! $post_type )
-			return $post_type;
+		if ( ! self::post_type_is_public( $post_type ) )
+			return;
 
 		// check our assumptions about a valid link in place
 		// fail if a piece of the filter process killed our response
@@ -413,7 +440,7 @@ class Facebook_Social_Publisher {
 		setup_postdata( $post );
 
 		$post_type = get_post_type( $post );
-		if ( ! ( $post_type && post_type_supports( $post_type, 'author' ) && isset( $post->post_author ) ) )
+		if ( ! ( self::post_type_is_public( $post_type ) && post_type_supports( $post_type, 'author' ) && isset( $post->post_author ) ) )
 			return;
 
 		$post_author = (int) $post->post_author;

@@ -5,7 +5,7 @@ Requires at least: 3.3
 Tested up to: 3.5.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 
 Make your WordPress site social in a couple of clicks, powered by Facebook.
 
@@ -99,6 +99,9 @@ The [Comments Box social plugin](https://developers.facebook.com/docs/reference/
 
 == Upgrade Notice ==
 
+= 1.2.3 =
+Publish to Page with app access token. Improved custom post type support. Improved publish author validation.
+
 = 1.2.2 =
 Improve performance of settings migration from old versions of the plugin.
 
@@ -148,6 +151,11 @@ Improve site performance when cURL not installed or SSL not available. Removed p
 Security fixes. Improved customization and debugging of settings. l10n and i18n fixes.
 
 == Changelog ==
+
+= 1.2.3 =
+* Post to Facebook Page using Facebook application access token
+* Do not display social publisher meta boxes or publish flow if post type not explicitly public
+* Improved local validators for publish flow
 
 = 1.2.2 =
 * Improve performance of settings migration from old versions of the plugin

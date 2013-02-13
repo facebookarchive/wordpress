@@ -169,7 +169,7 @@ class Facebook_Social_Publisher_Settings {
 		$yay = ' <span style="font-style:bold;color:green">&#10003;</span>';
 		$boo = ' <span style="font-style:bold;color:red">X</span>';
 
-		echo '<p>' . esc_html( __( 'Promote social engagement and readership by publishing new posts to the Facebook timeline of an authenticated author or page.', 'facebook' ) ) . '</p>';
+		echo '<p>' . esc_html( __( 'Promote social engagement and readership by publishing new posts to the Facebook Timeline of an authenticated author or page.', 'facebook' ) ) . '</p>';
 
 		echo '<p>' . esc_html( __( 'Prerequisites', 'facebook' ) ) . ': </p>';
 
@@ -185,27 +185,35 @@ class Facebook_Social_Publisher_Settings {
 		echo '<li>';
 		$og_action = esc_html( __( 'Associate an Open Graph action-object pair for your application:', 'facebook' ) ) . ' ' . sprintf( esc_html( _x( 'people can %1$s an %2$s', 'Open Graph. people can ACTION an OBJECT', 'facebook' ) ), '<strong>publish</strong>', '<strong>article</strong>' );
 		if ( $app_id )
-			echo '<a href="' . esc_url( 'https://developers.facebook.com/apps/' . $app_id . '/opengraph/getting-started/', array( 'http', 'https' ) ) . '">' . $og_action . '</a>';
+			echo '<a href="' . esc_url( 'https://developers.facebook.com/apps/' . $app_id . '/opengraph/getting-started/', array( 'http', 'https' ) ) . '" target="_blank">' . $og_action . '</a>';
 		else
 			echo $og_action;
 		echo '</li>';
+		unset( $og_action );
 
 		echo '<li>';
-		echo esc_html( __( 'Authenticate with Facebook to allow your Facebook application to post to your timeline or page on your behalf when a post is published.', 'facebook' ) );
+		echo esc_html( __( 'Authenticate with Facebook to allow your Facebook application to post to your Timeline or Page on your behalf when a post is published', 'facebook' ) );
 		if ( $this->user_associated_with_facebook_account )
 			echo $yay;
 		else
 			echo $boo;
 		echo '</li>';
 
+		echo '<li>' . esc_html( __( 'Publish an article to your Facebook Timeline', 'facebook' ) ) . '</li>';
+
+		$og_action_text = esc_html( __( 'your Publish action', 'facebook' ) );
+		echo '<li>' . sprintf( esc_html( __( 'Submit %s for approval.', 'facebook' ) ), $app_id ? '<a href="' . esc_url( 'https://developers.facebook.com/apps/' . $app_id . '/opengraph/action_type/331247406956072', array( 'http', 'https' ) ) . '" target="_blank">' . $og_action_text . '</a>' : $og_action_text );
+		echo ' ' . esc_html( __( 'Request optional capabilities:', 'facebook' ) ) . ' <a href="' . esc_url( 'https://developers.facebook.com/docs/submission-process/opengraph/guidelines/action-properties/#usermessages', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'User Messages', 'facebook' ) ) . '</a>, <a href="' . esc_url( 'https://developers.facebook.com/docs/submission-process/opengraph/guidelines/action-properties/#mentiontagging', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'Tags', 'facebook' ) ) . '</a>, <a href="' . esc_url( 'https://developers.facebook.com/docs/submission-process/opengraph/guidelines/action-properties/#explicitlyshared', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'Explicitly Shared', 'facebook' ) ) . '</a></li>';
+		unset( $og_action_text );
+
 		echo '</ol>';
 
 		if ( ! $this->user_associated_with_facebook_account ) {
 			// connect your account
-			echo '<p>' . sprintf( esc_html( __( '%s to publish new posts to your personal or page Facebook timeline.', 'facebook' ) ), '<span class="facebook-login" data-scope="page" style="font-weight:bold">' . esc_html( __( 'Associate your WordPress account with a Facebook profile', 'facebook' ) ) . '</span>' ) . '</p>';
+			echo '<p>' . sprintf( esc_html( __( '%s to publish new posts to your Facebook Timeline or Page.', 'facebook' ) ), '<span class="facebook-login" data-scope="page" style="font-weight:bold">' . esc_html( __( 'Associate your WordPress account with a Facebook account', 'facebook' ) ) . '</span>' ) . '</p>';
 		} else if ( ! ( isset( $this->user_permissions ) && isset( $this->user_permissions['publish_stream'] ) && isset( $this->user_permissions['publish_actions'] ) ) ) {
 			// grant additional permissions needed to complete the task
-			echo '<p>' . sprintf( esc_html( __( '%s to publish new posts to your personal or page Facebook timeline.', 'facebook' ) ), '<span class="facebook-login" data-scope="page" style="font-weight:bold">' . esc_html( __( 'Grant application permissions', 'facebook' ) ) . '</span>' ) . '</p>';
+			echo '<p>' . sprintf( esc_html( __( '%s to publish new posts to your Facebook Timeline or Page.', 'facebook' ) ), '<span class="facebook-login" data-scope="page" style="font-weight:bold">' . esc_html( __( 'Grant application permissions', 'facebook' ) ) . '</span>' ) . '</p>';
 		}
 	}
 
@@ -283,7 +291,7 @@ class Facebook_Social_Publisher_Settings {
 			echo '<input type="hidden" name="' . self::PUBLISH_OPTION_NAME . '[' . $key . '][id]" value="' . esc_attr( $existing_page['id'] ) . '" />';
 			echo '<input type="hidden" name="' . self::PUBLISH_OPTION_NAME . '[' . $key . '][name]" value="' . esc_attr( $existing_page['name'] ) . '" />';
 			echo '<input type="hidden" name="' . self::PUBLISH_OPTION_NAME . '[' . $key . '][access_token]" value="' . esc_attr( $existing_page['access_token'] ) . '" />';
-			echo '<p>' . sprintf( esc_html( __( 'Publishing to %s', 'facebook' ) ), '<a href="' . esc_url( 'https://www.facebook.com/' . $existing_page['id'], array( 'http', 'https' ) ) . '" title="' . esc_attr( sprintf( __( '%s page on Facebook', 'facebook' ), $existing_page['name'] ) ) . '">' . esc_html( $existing_page['name'] ) . '</a>' );
+			echo '<p>' . sprintf( esc_html( __( 'Publishing to %s', 'facebook' ) ), '<a href="' . esc_url( 'https://www.facebook.com/' . $existing_page['id'], array( 'http', 'https' ) ) . '" title="' . esc_attr( sprintf( __( '%s page on Facebook', 'facebook' ), $existing_page['name'] ) ) . '" target="_blank">' . esc_html( $existing_page['name'] ) . '</a>' );
 			if ( is_multi_author() && isset( $existing_page['set_by_user'] ) ) {
 				if ( $this->current_user->ID == $existing_page['set_by_user'] ) {
 					echo '. ' . esc_html( __( 'Saved by you.', 'facebook' ) );
@@ -329,9 +337,9 @@ class Facebook_Social_Publisher_Settings {
 	 * @return string HTML
 	 */
 	public static function help_tab_publisher() {
-		$content = '<p>' . esc_html( __( 'The Facebook plugin for WordPress can publish to Facebook on your behalf through a properly configured Facebook application when a post becomes public.', 'facebook' ) ) . ' ' . esc_html( __( 'An author must grant your application permission to publish to his or her Facebook Timeline before the post will appear.', 'facebook' ) ) . ' ' . esc_html( __( 'A Facebook account with the ability to create content on one or more Facebook Pages may store publishing permissions for your WordPress site.', 'facebook' ) ) . '</p>';
+		$content = '<p>' . esc_html( __( 'The Facebook plugin for WordPress can publish to Facebook on your behalf through a properly configured Facebook application when a public post type becomes public.', 'facebook' ) ) . ' ' . esc_html( __( 'An author must grant your application permission to publish to his or her Facebook Timeline before the post will appear.', 'facebook' ) ) . ' ' . esc_html( __( 'A Facebook account with the ability to create content on one or more Facebook Pages may store publishing permissions for use by your WordPress site.', 'facebook' ) ) . '</p>';
 
-		$content .= '<p>' . esc_html( sprintf( __( 'You must associate an Open Graph action-object pair for your Facebook application and submit the action to Facebook for approval before articles from %s will appear in Facebook News Feed.', 'facebook' ), get_bloginfo('name') ) ) . ' ' . esc_html( __( "The Facebook plugin for WordPress cannot programmatically verify your application's Open Graph approval status: the second item on the displayed prerequisites list will not display a checkmark.", 'facebook' ) ) . '</p>';
+		$content .= '<p>' . esc_html( sprintf( __( 'You must associate an Open Graph action-object pair for your Facebook application and submit the action to Facebook for approval before articles from %s and its authors will appear in Facebook News Feed.', 'facebook' ), get_bloginfo('name') ) ) . ' ' . esc_html( __( "The Facebook plugin for WordPress cannot programmatically verify your application's Open Graph approval status..", 'facebook' ) ) . '</p>';
 
 		return $content;
 	}
@@ -352,7 +360,7 @@ class Facebook_Social_Publisher_Settings {
 			'content' => self::help_tab_publisher()
 		) );
 
-		$screen->set_help_sidebar( '<p><a href="https://developers.facebook.com/apps/">' . esc_html( __( 'Facebook Apps Tool', 'facebook' ) ) . '</a></p>' );
+		$screen->set_help_sidebar( '<p><a href="' . esc_url( 'https://developers.facebook.com/apps/', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'Facebook Apps Tool', 'facebook' ) ) . '</a></p><p><a href="' . esc_url( 'https://developers.facebook.com/wordpress', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'Plugin help page', 'facebook' ) ) . '</a></p>' );
 	}
 
 	/**

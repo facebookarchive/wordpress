@@ -25,6 +25,11 @@ class Facebook_Admin_Login {
 		}
 
 		$current_user = wp_get_current_user();
+		if ( ! ( isset( $current_user ) && isset( $current_user->ID ) ) )
+			return;
+		$current_user_id = (int) $current_user->ID;
+		if ( ! $current_user_id )
+			return;
 
 		// no need to alert if he cannot create a post
 		if ( ! user_can( $current_user, 'edit_posts' ) )
@@ -34,7 +39,7 @@ class Facebook_Admin_Login {
 			require_once( dirname( dirname(__FILE__) ) . '/facebook-user.php' );
 
 		$facebook_user_data_exists = false;
-		$facebook_user_data = Facebook_User::get_user_meta( $current_user->ID, 'fb_data', true );
+		$facebook_user_data = Facebook_User::get_user_meta( $current_user_id, 'fb_data', true );
 		if ( is_array( $facebook_user_data ) && isset( $facebook_user_data['fb_uid'] ) ) {
 			if ( empty( $verify_permissions ) )
 				return;
@@ -74,7 +79,7 @@ class Facebook_Admin_Login {
 					if ( ! empty( $facebook_user['third_party_id'] ) )
 						$facebook_user_data['third_party_id'] = $facebook_user['third_party_id'];
 
-					Facebook_User::update_user_meta( $current_user->ID, 'fb_data', $facebook_user_data );
+					Facebook_User::update_user_meta( $current_user_id, 'fb_data', $facebook_user_data );
 				}
 				return;
 			}

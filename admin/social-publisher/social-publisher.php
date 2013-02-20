@@ -237,6 +237,8 @@ class Facebook_Social_Publisher {
 		if ( ! $old_status_object || ( isset( $old_status_object->public ) && $old_status_object->public ) )
 			return;
 
+		// transition post status happens before save post
+		// wait until the end of the insert / update process to send to Facebook
 		if ( isset( $post->post_author ) && self::user_can_publish_to_facebook( (int) $post->post_author ) )		
 			add_action( 'wp_insert_post', array( 'Facebook_Social_Publisher', 'publish_to_facebook_profile' ), 10, 2 );
 
@@ -425,16 +427,16 @@ class Facebook_Social_Publisher {
 		if ( $og_action ) {
 			$story = array( 'article' => $link );
 			$path .= 'news.publishes';
+			if ( $meta_box_present )
+				$story['fb:explicitly_shared'] = 'true';
 		} else {
 			$story = array( 'link' => $link );
 			$path .= 'feed';
 		}
 
-		if ( $og_action && $meta_box_present )
-			$story['fb:explicitly_shared'] = 'true';
 		$message = get_post_meta( $post_id, Facebook_Social_Publisher_Meta_Box_Profile::POST_META_KEY_MESSAGE, true );
 		if ( is_string( $message ) && $message )
-			$story['message'] = $message;
+			$story['message'] = trim( $message );
 
 		if ( ! class_exists( 'Facebook_WP_Extend' ) )
 			require_once( $facebook_loader->plugin_directory . 'includes/facebook-php-sdk/class-facebook-wp.php' );
@@ -511,8 +513,12 @@ class Facebook_Social_Publisher {
 		if ( empty( $_GET['facebook_message'] ) || ! isset( $post ) || ! isset( $post->ID ) )
 			return;
 
+		$post_id = absint( $post->ID );
+		if ( ! $post_id )
+			return;
+
 		$post_meta_key = 'facebook_status_messages';
-		$messages = get_post_meta( $post->ID, $post_meta_key, true );
+		$messages = get_post_meta( $post_id, $post_meta_key, true );
 		if ( ! is_array( $messages ) )
 			return;
 
@@ -520,20 +526,20 @@ class Facebook_Social_Publisher {
 			if ( ! isset( $message['message'] ) )
 				continue;
 
-			$div = '<div ';
+			$div = '<div class="fade ';
 			if ( isset( $message['error'] ) && $message['error'] )
-				$div .= 'id="facebook-warning" class="error fade"';
+				$div .= 'error';
 			else
-				$div .= 'class="updated fade"';
-			$div .= '><p>';
-			$div .= $message['message'];
+				$div .= 'updated';
+			$div .= '"><p>';
+			$div .= $message['message']; // escaped when generated. may contain links
 			$div .= '</p></div>';
 			echo $div;
 			unset( $div );
 		}
 
 		// display once
-		delete_post_meta( $post->ID, $post_meta_key );
+		delete_post_meta( $post_id, $post_meta_key );
 	}
 
 	/**
@@ -545,6 +551,7 @@ class Facebook_Social_Publisher {
 	public static function delete_facebook_post( $post_id ) {
 		global $facebook_loader;
 
+		$post_id = absint( $post_id );
 		if ( ! $post_id )
 			return;
 

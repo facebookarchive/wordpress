@@ -63,13 +63,21 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 			array( 'Facebook_Social_Publisher_Meta_Box_Profile', 'content' ),
 			$post_type
 		);
-		add_action( 'admin_enqueue_scripts', array( 'Facebook_Social_Publisher_Meta_Box_Profile', 'enqueue_scripts' ) );
 
-		// attempt to extend the access token while suppressing errors and warnings such as headers sent on session start
-		try {
-			if ( isset( $facebook ) || ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
-				$facebook->setExtendedAccessToken();
-		}catch(Exception $e){}
+		if ( ! class_exists( 'Facebook_Social_Publisher_Settings' ) )
+			require_once( dirname( dirname( __FILE__ ) ) . '/settings-social-publisher.php' );
+
+		// only load mentions-specific features if Facebook app configuration supports tags
+		if ( get_option( Facebook_Social_Publisher_Settings::OPTION_OG_ACTION ) ) {
+			add_action( 'admin_enqueue_scripts', array( 'Facebook_Social_Publisher_Meta_Box_Profile', 'enqueue_scripts' ) );
+
+			// attempt to extend the access token while suppressing errors and warnings such as headers sent on session start
+			// extended session used to match friends on mentions search
+			try {
+				if ( isset( $facebook ) || ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
+					$facebook->setExtendedAccessToken();
+			}catch(Exception $e){}
+		}
 	}
 
 	/**
@@ -98,6 +106,9 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 	public static function content( $post ) {
 		global $wp_locale;
 
+		if ( ! isset( $post->ID ) )
+			return;
+
 		// Use nonce for verification
 		wp_nonce_field( plugin_basename( __FILE__ ), self::NONCE_NAME );
 
@@ -116,15 +127,20 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 
 		echo ' /><p class="howto"><label for="' . $field_message_id . '">'. esc_html( __( 'This message will show as part of the story on your Facebook Timeline.', 'facebook' ) ) .'</label></p>';
 
-		// set JavaScript properties for localized text
-		echo '<script type="text/javascript">jQuery("#' . $field_message_id . '").on("facebook-mentions-onload",function(){';
-		echo 'FB_WP.admin.mentions.autocomplete_nonce=' . json_encode( wp_create_nonce( 'facebook_autocomplete_nonce' ) ) . ';';
-		if ( isset( $wp_locale ) )
-			echo 'FB_WP.admin.mentions.thousands_separator=' . json_encode( $wp_locale->number_format['thousands_sep'] ) . ';';
-		echo 'FB_WP.admin.mentions.messages.likes=' . json_encode( _x( '%s like this', 'number of people who Like a Page', 'facebook' ) ) . ';';
-		echo 'FB_WP.admin.mentions.messages.talking_about=' . json_encode( _x( '%s talking about this', 'number of people talking about a Page', 'facebook' ) ) . ';';
-		echo '});';
-		echo '</script></div>';
+		if ( ! class_exists( 'Facebook_Social_Publisher_Settings' ) )
+			require_once( dirname( dirname( __FILE__ ) ) . '/settings-social-publisher.php' );
+		if ( get_option( Facebook_Social_Publisher_Settings::OPTION_OG_ACTION ) ) {
+			// set JavaScript properties for localized text
+			echo '<script type="text/javascript">jQuery("#' . $field_message_id . '").on("facebook-mentions-onload",function(){';
+			echo 'FB_WP.admin.mentions.autocomplete_nonce=' . json_encode( wp_create_nonce( 'facebook_autocomplete_nonce' ) ) . ';';
+			if ( isset( $wp_locale ) )
+				echo 'FB_WP.admin.mentions.thousands_separator=' . json_encode( $wp_locale->number_format['thousands_sep'] ) . ';';
+			echo 'FB_WP.admin.mentions.messages.likes=' . json_encode( _x( '%s like this', 'number of people who Like a Page', 'facebook' ) ) . ';';
+			echo 'FB_WP.admin.mentions.messages.talking_about=' . json_encode( _x( '%s talking about this', 'number of people talking about a Page', 'facebook' ) ) . ';';
+			echo '});';
+			echo '</script>';
+		}
+		echo '</div>';
 	}
 
 	/**

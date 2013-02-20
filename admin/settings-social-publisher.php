@@ -30,6 +30,14 @@ class Facebook_Social_Publisher_Settings {
 	const OPTION_PUBLISH_TO_PAGE = 'facebook_publish_page';
 
 	/**
+	 * Option name for advanced Facebook Open Graph action functionality
+	 *
+	 * @since 1.2.4
+	 * @var string
+	 */
+	const OPTION_OG_ACTION = 'facebook_og_action';
+
+	/**
 	 * Reference the social plugin by name
 	 *
 	 * @since 1.1
@@ -126,23 +134,42 @@ class Facebook_Social_Publisher_Settings {
 		if ( ! isset( $this->hook_suffix ) )
 			return;
 
-		$section = 'facebook-publish';
+		// Timeline customizations
+		$section = 'facebook-publish-advanced';
 		add_settings_section(
 			$section,
-			__( 'Publish to Facebook', 'facebook' ), // no title for main section
-			array( &$this, 'section_header_publish' ),
+			__( 'Facebook Timeline', 'facebook' ),
+			array( &$this, 'section_timeline_publish' ),
 			$this->hook_suffix
 		);
+		add_settings_field(
+			'facebook-author-profile',
+			__( 'Facebook permissions', 'facebook' ),
+			array( 'Facebook_Social_Publisher_Settings', 'display_facebook_author' ),
+			$this->hook_suffix
+		);
+		add_settings_field(
+			'facebook-publish-author',
+			__( 'Publish to my Timeline', 'facebook' ),
+			array( &$this, 'display_publish_author' ),
+			$this->hook_suffix,
+			$section
+		);
+		add_settings_field(
+			'facebook-og-action',
+			__( 'Enable Open Graph features', 'facebook' ),
+			array( &$this, 'display_og_action' ),
+			$this->hook_suffix,
+			$section
+		);
 
-		if ( current_user_can( 'edit_posts' ) && $this->user_associated_with_facebook_account ) {
-			add_settings_field(
-				'facebook-publish-author',
-				__( 'Publish to my timeline', 'facebook' ),
-				array( &$this, 'display_publish_author' ),
-				$this->hook_suffix,
-				$section
-			);
-		}
+		$section = 'facebook-publish-page-section';
+		add_settings_section(
+			$section,
+			__( 'Facebook Page', 'facebook' ),
+			array( &$this, 'section_page_publish' ),
+			$this->hook_suffix
+		);
 		add_settings_field(
 			'facebook-publish-page',
 			__( 'Publish to a page', 'facebook' ),
@@ -159,7 +186,7 @@ class Facebook_Social_Publisher_Settings {
 	 *
 	 * @since 1.1
 	 */
-	public function section_header_publish() {
+	public function section_timeline_publish() {
 		global $facebook_loader;
 
 		$app_id = '';
@@ -169,9 +196,9 @@ class Facebook_Social_Publisher_Settings {
 		$yay = ' <span style="font-style:bold;color:green">&#10003;</span>';
 		$boo = ' <span style="font-style:bold;color:red">X</span>';
 
-		echo '<p>' . esc_html( __( 'Promote social engagement and readership by publishing new posts to the Facebook Timeline of an authenticated author or page.', 'facebook' ) ) . '</p>';
+		echo '<p>' . esc_html( __( 'Promote social engagement and readership by publishing new posts to the Facebook Timeline of a connected author.', 'facebook' ) ) . '</p>';
 
-		echo '<p>' . esc_html( __( 'Prerequisites', 'facebook' ) ) . ': </p>';
+		echo '<p>' . sprintf( esc_html( __( 'Open Graph %s', 'facebook' ) ), '<a href="' . esc_url( 'https://developers.facebook.com/wordpress/#author-og-setup', array( 'http', 'https' ) ) . '" target="_blank" title="' . esc_attr( __( 'Facebook Open Graph action submission process', 'facebook' ) ) . '">' . esc_html( __( 'prerequisites', 'facebook' ) ) . '</a>' ) . ': </p>';
 
 		echo '<ol>';
 
@@ -218,6 +245,15 @@ class Facebook_Social_Publisher_Settings {
 	}
 
 	/**
+	 * Describe publish to Facebook Page functionality
+	 *
+	 * @since 1.2.4
+	 */
+	public function section_page_publish() {
+		echo '<p>' . sprintf( esc_html( __( 'Publish to a Facebook Page using the credentials of a Facebook account with %s permissions for the Page.', 'facebook' ) ), '<a href="' . esc_html( 'https://www.facebook.com/help/289207354498410/', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'content creator', 'facebook' ) ) . '</a>' ) . '</p>';
+	}
+
+	/**
 	 * Get a list of publishable Facebook pages for the currently authenticated Facebook account
 	 *
 	 * @since 1.1
@@ -230,7 +266,7 @@ class Facebook_Social_Publisher_Settings {
 			return array();
 
 		try {
-			$accounts = $facebook->api( '/me/accounts', 'GET', array( 'ref' => 'fbwpp' ) );
+			$accounts = $facebook->api( '/me/accounts', 'GET', array( 'fields' => 'id,name,category,access_token,perms', 'ref' => 'fbwpp' ) );
 		} catch (WP_FacebookApiException $e) {}
 		if ( ! ( isset( $accounts ) && is_array( $accounts['data'] ) ) )
 			return array();
@@ -244,13 +280,17 @@ class Facebook_Social_Publisher_Settings {
 				continue;
 
 			// can the authenticated user create new content on the page?
-			if ( is_array( $account['perms'] ) && in_array( 'CREATE_CONTENT', $account['perms'], true ) ) {
-				$pages[] = array(
+			if ( is_array( $account['perms'] ) && in_array( 'CREATE_CONTENT', $account['perms'], true ) && ! empty( $account['id'] ) && ! empty( $account['name'] ) && ! empty( $account['access_token'] ) ) {
+				$pages[ $account['name'] ] = array(
 					'id' => $account['id'],
 					'name' => $account['name'],
 					'access_token' => $account['access_token']
 				);
 			}
+		}
+		if ( ! empty( $pages ) ) {
+			ksort( $pages, SORT_LOCALE_STRING );
+			$pages = array_values( $pages );
 		}
 
 		return $pages;
@@ -261,16 +301,8 @@ class Facebook_Social_Publisher_Settings {
 	 *
 	 * @since 1.1
 	 */
-	public function display_publish_author() {
-		if ( isset( $this->user_permissions ) && isset( $this->user_permissions['publish_stream'] ) && isset( $this->user_permissions['publish_actions'] ) ) {
-			echo '<label><input type="checkbox" name="' . self::PUBLISH_OPTION_NAME . '[author_timeline]" value="1"';
-			echo checked( Facebook_User::get_user_meta( $this->current_user->ID, 'facebook_timeline_disabled', true ), '' );
-			echo ' /> ';
-			echo esc_html( __( 'Post an article to my Facebook Timeline after it is public.', 'facebook' ) );
-			echo '</label>';
-		} else {
-			echo '<p><span class="facebook-login" data-scope="person" style="font-weight:bold">' . esc_html( __( 'Allow new posts to your Facebook Timeline', 'facebook' ) ) . '</span></p>';
-		}
+	public static function display_publish_author() {
+		echo '<p>' . sprintf( esc_html( __( 'An author can associate his or her WordPress account with a Facebook account on his or her %s', 'facebook' ) ), '<a href="' . esc_url( self_admin_url( 'profile.php' ), array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'profile page', 'facebook' ) ) . '</a>' ) . '</p>';
 	}
 
 	/**
@@ -328,6 +360,19 @@ class Facebook_Social_Publisher_Settings {
 				echo '<p><span class="facebook-login" data-scope="page" style="font-weight:bold">' . esc_html( __( 'Allow new posts to a Facebook Page', 'facebook' ) ) . '</span></p>';
 			}
 		}
+	}
+
+	/**
+	 * Display an option for the publisher to enable advanced Open Graph action functionality
+	 *
+	 * @since 1.2.4
+	 */
+	public function display_og_action() {
+		$id = 'og-action';
+		echo '<div><input type="checkbox" class="checkbox" name="' . self::PUBLISH_OPTION_NAME . '[og_action]" id="' . $id . '" value="1"';
+		checked( get_option( self::OPTION_OG_ACTION ) );
+		echo ' /> <label for="' . $id . '">' . esc_html( __( 'Post to Facebook Timeline using Open Graph actions', 'facebook' ) ) . '</label></div>';
+		echo '<p class="description">' . esc_html( __( 'Publish new posts to Facebook using Open Graph actions.', 'facebook' ) ) . ' ' . esc_html( __( 'Increases News Feed engagement through news-specific classification, explicitly shared posts, custom messages, and mention tagging.', 'facebook' ) ) . '</p>';
 	}
 
 	/**
@@ -397,26 +442,24 @@ class Facebook_Social_Publisher_Settings {
 		if ( ! is_array( $options ) || empty( $options ) )
 			return array();
 
-		if ( ! class_exists( 'Facebook_User' ) )
-			require_once( dirname( dirname(__FILE__) ) . '/facebook-user.php' );
-
-		// publish to timeline is really a per-user setting, not a per-site setting
-		// handle the special user case
-		$user_meta_key = 'facebook_timeline_disabled';
-		$current_user = wp_get_current_user();
-		if ( isset( $options['author_timeline'] ) && $options['author_timeline'] == 1 )
-			Facebook_User::delete_user_meta( $current_user->ID, $user_meta_key ); // delete if stored
-		else
-			Facebook_User::update_user_meta( $current_user->ID, $user_meta_key, '1' );
+		$og_action_field = 'og_action';
+		if ( isset( $options[ $og_action_field ] ) && $options[ $og_action_field ] == '1' ) {
+			update_option( self::OPTION_OG_ACTION, '1' );
+		} else {
+			delete_option( self::OPTION_OG_ACTION );
+		}
+		unset( $og_action_field );
 
 		// is a new page chosen?
 		// if the same page selected on new_page_timeline as currently stored don't overwrite the access token
 		// it is possible multiple users can create content from the page but should not overwrite each other when editing the page without changing the target page
-		if ( isset( $options['new_page_timeline'] ) ) {
-			$page_id = trim( $options['new_page_timeline'] );
-			if ( ! $page_id && isset( $options['page_timeline']['id'] ) ) {
+		$page_field = 'page_timeline';
+		$new_page_field = 'new_' . $page_field;
+		if ( isset( $options[ $new_page_field ] ) ) {
+			$page_id = trim( $options[ $new_page_field ] );
+			if ( ! $page_id && isset( $options[ $page_field ]['id'] ) ) {
 				delete_option( self::OPTION_PUBLISH_TO_PAGE );
-			} else if ( $page_id && ! ( isset( $options['page_timeline']['id'] ) && $options['page_timeline']['id'] == $options['new_page_timeline'] ) ) {
+			} else if ( $page_id && ! ( isset( $options[ $page_field ]['id'] ) && $options[ $page_field ]['id'] == $options[ $new_page_field ] ) ) {
 				$pages_for_current_user = self::get_publishable_pages_for_current_user();
 				foreach ( $pages_for_current_user as $page ) {
 					if ( isset( $page['id'] ) && $page['id'] === $page_id ) {
@@ -426,6 +469,8 @@ class Facebook_Social_Publisher_Settings {
 				}
 			}
 		}
+		unset( $page_field );
+		unset( $new_page_field );
 
 		return false;
 	}

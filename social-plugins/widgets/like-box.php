@@ -64,7 +64,7 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 			return '';
 
 		// reject a Like Box URL pointing to the Facebook homepage
-		$url_parts['path'] = ltrim( $url_parts['path'], '/' );
+		$url_parts['path'] = ltrim( $url_parts['path'], '\/' );
 		if ( ! $url_parts['path'] )
 			return '';
 
@@ -75,7 +75,7 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 
 			// page without a username
 			if ( strlen( $url_parts['path'] ) > 7 && substr_compare( $url_parts['path'], 'pages/', 0, 6 ) === 0 ) {
-				$page_id = substr( $url_parts['path'], strrpos( $url_parts['path'], '/' ) );
+				$page_id = ltrim( substr( $url_parts['path'], strrpos( $url_parts['path'], '/' ) ), '\/' );
 				if ( ! ( is_string( $page_id ) && $page_id && ctype_digit( $page_id ) ) )
 					return '';
 				$where = $wpdb->prepare( 'page_id=%s', $page_id );

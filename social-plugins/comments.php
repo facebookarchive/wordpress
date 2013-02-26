@@ -8,7 +8,10 @@ if ( post_password_required() )
 ?>
 
 <div id="comments" class="comments-area">
-<?php if ( have_comments() ) : ?>
+<?php if ( have_comments() ) :
+	add_filter( 'comment_reply_link', array( 'Facebook_Loader', '__return_empty_string' ) );
+	add_filter( 'post_comments_link', array( 'Facebook_Loader', '__return_empty_string' ) );
+?>
 	<h2 class="comments-title"><?php echo esc_html( apply_filters( 'facebook_wp_comments_title', __( 'Comments' ) ) ); ?></h2>
 	<ol class="comment-list"><?php
 		/**

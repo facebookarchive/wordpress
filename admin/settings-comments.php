@@ -142,6 +142,13 @@ class Facebook_Comments_Settings extends Facebook_Social_Plugin_Settings {
 			array( 'label_for' => 'facebook-comments-num-posts' )
 		);
 		add_settings_field(
+			'facebook-comments-order-by',
+			__( 'Order by', 'facebook' ),
+			array( &$this, 'display_order_by' ),
+			$this->hook_suffix,
+			$section
+		);
+		add_settings_field(
 			'facebook-comments-width',
 			__( 'Width', 'facebook' ),
 			array( &$this, 'display_width' ),
@@ -280,6 +287,42 @@ class Facebook_Comments_Settings extends Facebook_Social_Plugin_Settings {
 	}
 
 	/**
+	 * Ordering choices
+	 *
+	 * @since 1.3
+	 * @return array associative array of social plugin field value and translated label
+	 */
+	public static function order_by_choices() {
+		return array(
+			'social' => __( 'social', 'facebook' ),
+			'time' => _x( 'oldest first', 'display comments ordered from oldest to newest', 'facebook' ),
+			'reverse_time' => _x( 'newest first', 'display comments ordered from newest to oldest', 'facebook' )
+		);
+	}
+
+	/**
+	 * Customize comment order
+	 *
+	 * @since 1.3
+	 */
+	public function display_order_by() {
+		$key = 'order_by';
+		$choices = self::order_by_choices();
+		if ( isset( $this->existing_options[$key] ) )
+			$existing_value = $this->existing_options[$key];
+		else
+			$existing_value = 'social';
+
+		echo '<fieldset id="facebook-comments-' . $key . '">';
+		foreach( $choices as $choice => $label ) {
+			echo '<label><input type="radio" name="' . self::OPTION_NAME . '[' . $key  . ']" value="' . $choice . '"';
+			checked( $choice, $existing_value );
+			echo ' /> ' . esc_html( $label ) . '</label> ';
+		}
+		echo '</fieldset>';
+	}
+
+	/**
 	 * Translate HTML data response returned from Facebook social plugin builder into underscored keys and PHP values before saving
 	 *
 	 * @since 1.1
@@ -293,6 +336,10 @@ class Facebook_Comments_Settings extends Facebook_Social_Plugin_Settings {
 		if ( isset( $options['num-posts'] ) ) {
 			$options['num_posts'] = absint( $options['num-posts'] );
 			unset( $options['num-posts'] );
+		}
+		if ( isset( $options['order-by'] ) ) {
+			$options['order_by'] = $options['order-by'];
+			unset( $options['order-by'] );
 		}
 		if ( isset( $options['width'] ) )
 			$options['width'] = absint( $options['width'] );

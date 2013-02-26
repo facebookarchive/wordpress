@@ -27,6 +27,7 @@ class Facebook_Comments_Box {
 
 	/**
 	 * Define a custom width in whole pixels
+	 * Minimum recommended width: 400 pixels
 	 *
 	 * @since 1.1
 	 * @var int
@@ -47,7 +48,7 @@ class Facebook_Comments_Box {
 	 * @since 1.1.11
 	 * @var array
 	 */
-	public static $colorscheme_choices = array( 'light', 'dark' );
+	public static $colorscheme_choices = array( 'light' => true, 'dark' => true );
 
 	/**
 	 * The number of comments to show by default
@@ -56,6 +57,22 @@ class Facebook_Comments_Box {
 	 * @var int
 	 */
 	protected $num_posts;
+
+	/**
+	 * The order to use when displaying comments
+	 *
+	 * @since 1.3
+	 * @var string
+	 */
+	protected $order_by;
+
+	/**
+	 * Choices for the order_by property
+	 *
+	 * @since 1.3
+	 * @var string
+	 */
+	public static $order_by_choices = array( 'social' => true, 'time' => true, 'reverse_time' => true );
 
 	/**
 	 * Should we force the mobile-optimized version?
@@ -110,7 +127,7 @@ class Facebook_Comments_Box {
 	 * @return Facebook_Comments_Box support chaining
 	 */
 	public function setColorScheme( $color_scheme ) {
-		if ( is_string( $color_scheme ) && in_array( $color_scheme, self::$colorscheme_choices, true ) )
+		if ( is_string( $color_scheme ) && $color_scheme && isset( self::$colorscheme_choices[$color_scheme] ) )
 			$this->colorscheme = $color_scheme;
 		return $this;
 	}
@@ -125,6 +142,20 @@ class Facebook_Comments_Box {
 	public function setNumPosts( $num ) {
 		if ( is_int( $num ) && $num > 0 )
 			$this->num_posts = $num;
+		return $this;
+	}
+
+	/**
+	 * Choose a social, chronological, or reverse chronological comment ordering
+	 *
+	 * @since 1.3
+	 * @see self::order_by_choices
+	 * @param string $order_by social|time|
+	 * @return Facebook_Comments_Box support chaining
+	 */
+	public function setOrderBy( $order_by ) {
+		if ( is_string( $order_by ) && $order_by && isset( self::$order_by_choices[$order_by] ) )
+			$this->order_by = $order_by;
 		return $this;
 	}
 
@@ -163,6 +194,9 @@ class Facebook_Comments_Box {
 		if ( isset( $values['colorscheme'] ) )
 			$comments_box->setColorScheme( $values['colorscheme'] );
 
+		if ( isset( $values['order_by'] ) )
+			$comments_box->setOrderBy( $values['order_by'] );
+
 		if ( isset( $values['mobile'] ) && ( $values['mobile'] === true || $values['mobile'] === 'true' || $values['mobile'] == 1 )  )
 			$comments_box->forceMobile();
 
@@ -190,6 +224,9 @@ class Facebook_Comments_Box {
 
 		if ( isset( $this->num_posts ) && is_int( $this->num_posts ) && $this->num_posts > 0 && $this->num_posts !== 10 )
 			$data['num-posts'] = $this->num_posts;
+
+		if ( isset( $this->order_by ) && $this->order_by !== 'social' )
+			$data['order-by'] = $this->order_by;
 
 		if ( isset( $this->mobile ) && $this->mobile === true )
 			$data['mobile'] = 'true';

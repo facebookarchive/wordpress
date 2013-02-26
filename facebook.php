@@ -287,11 +287,8 @@ class Facebook_Loader {
 			if ( ! class_exists( 'Facebook_Comments' ) )
 				require_once( $this->plugin_directory . 'social-plugins/class-facebook-comments.php' );
 
-			add_filter( 'comments_array', array( 'Facebook_Comments', 'comments_array_filter' ), 10, 2 );
 			add_filter( 'comments_open', array( 'Facebook_Comments', 'comments_open_filter' ), 10, 2 );
 
-			// override comment count to a garbage number
-			add_filter( 'get_comments_number', array( 'Facebook_Comments', 'get_comments_number_filter' ), 10, 2 );
 			// display comments number if used in template
 			add_filter( 'comments_number', array( 'Facebook_Comments', 'comments_number_filter' ), 10, 2 );
 		}
@@ -335,8 +332,7 @@ class Facebook_Loader {
 				if ( ! class_exists( 'Facebook_Comments' ) )
 					require_once( $this->plugin_directory . 'social-plugins/class-facebook-comments.php' );
 
-				add_filter( 'the_content', array( 'Facebook_Comments', 'the_content_comments_box' ), $priority );
-				add_action( 'wp_enqueue_scripts', array( 'Facebook_Comments', 'css_hide_comments' ), 0 );
+				add_filter( 'comments_template', array( 'Facebook_Comments', 'comments_template' ) );
 			}
 		}
 
@@ -497,6 +493,16 @@ class Facebook_Loader {
 				require_once( dirname(__FILE__) . '/extras/google-analytics.php' );
 			add_filter( 'yoast-ga-push-after-pageview', array( 'Facebook_Google_Analytics', 'gaq_filter' ) );
 		}
+	}
+
+	/**
+	 * Useful for blanking a string filter
+	 *
+	 * @since 1.3
+	 * @return string empty string
+	 */
+	public static function __return_empty_string() {
+		return '';
 	}
 }
 

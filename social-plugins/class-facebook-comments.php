@@ -18,6 +18,16 @@ class Facebook_Comments {
 	}
 
 	/**
+	 * Override default comments template with a Facebook-specific comments template
+	 *
+	 * @since 1.3
+	 * @return string file path to plugin comments template PHP
+	 */
+	public static function comments_template() {
+		return dirname( __FILE__ ) . '/comments.php';
+	}
+
+	/**
 	 * Is Comments Box enabled for the current post type?
 	 *
 	 * @since 1.1.7
@@ -37,24 +47,6 @@ class Facebook_Comments {
 	}
 
 	/**
-	 * Override returned comments if Comments Box handles comments for the post type
-	 *
-	 * @since 1.1.7
-	 * @see comments_template()
-	 * @param array $comments comments for a post
-	 * @param int $post_id post identifier
-	 * @return array to be stored in WP_Query
-	 */
-	public static function comments_array_filter( $comments, $post_id = null ) {
-		if ( ! empty( $comments ) && $post_id ) {
-			$_post = get_post( $post_id );
-			if ( $_post && self::comments_enabled_for_post_type( $_post ) )
-				return array();
-		}
-		return $comments;
-	}
-
-	/**
 	 * Turn on comments open if Comments Box enabled for the post type
 	 * A Comment Box always solicits new comments
 	 *
@@ -71,25 +63,6 @@ class Facebook_Comments {
 				return true;
 		}
 		return $open;
-	}
-
-	/**
-	 * Override post->comment_count returned value
-	 * Short-circuit special template behavior for comment count = 0
-	 * Prevents linking to #respond anchor which leads nowhere
-	 *
-	 * @see get_comments_number()
-	 * @param int $count comment count
-	 * @param int $post_id post identifier
-	 * @return int comment count
-	 */
-	public static function get_comments_number_filter( $count, $post_id = null ) {
-		if ( $post_id ) {
-			$_post = get_post( $post_id );
-			if ( $_post && self::comments_enabled_for_post_type( $_post ) )
-				return -1;
-		}
-		return $count;
 	}
 
 	/**
@@ -431,17 +404,19 @@ class Facebook_Comments {
 	}
 
 	/**
-	 * Display comments and comments box after main post content
+	 * Display comments and comments box
+	 * Existing Facebook comments are wrapped in a noscript for search engine indexing and styling
 	 *
-	 * @since 1.1
-	 * @param string $content post content
-	 * @return string post content, possibly with noscript comments content appended and/or comments box markup to be interpreted by the Facebook JavaScript SDK
+	 * @since 1.3
+	 * @return string noscript Facebook comments content and/or Comments Box markup to be interpreted by the Facebook JavaScript SDK
 	 */
-	public static function the_content_comments_box( $content ) {
+	public static function comments_box() {
 		global $post;
 
-		if ( ! isset( $post ) )
-			return;
+		$content = '';
+
+		if ( ! ( isset( $post ) && isset( $post->ID ) ) )
+			return $content;
 
 		$options = get_option( 'facebook_comments' );
 
@@ -452,7 +427,7 @@ class Facebook_Comments {
 		// display noscript version of these comments
 		$comments_markup = self::comments_markup( 'noscript' );
 		if ( $comments_markup )
-			$content .= "\n" . $comments_markup . "\n";
+			$content .= $comments_markup;
 		else
 			remove_filter( 'comments_open', '__return_true' ); // allow closed comments if no previous comments to display
 		unset( $comments_markup );
@@ -463,7 +438,7 @@ class Facebook_Comments {
 			$url = apply_filters( 'facebook_rel_canonical', get_permalink() );
 			if ( $url ) // false could happen. let JS SDK handle compatibility mode
 				$options['href'] = $url;
-			$content .= "\n" . self::js_sdk_markup( $options ) . "\n";
+			$content .= self::js_sdk_markup( $options );
 		}
 
 		return $content;

@@ -8,6 +8,14 @@
 class Facebook_Comments {
 
 	/**
+	 * Limit the strings allowed as an element name wrapping comments retrieved from Facebook servers
+	 *
+	 * @since 1.3
+	 * @var array
+	 */
+	public static $allowed_comment_wrapper_elements = array( 'noscript' => true, 'div' => true, 'section' => true );
+
+	/**
 	 * Hide comments-related content via CSS
 	 *
 	 * @since 1.1
@@ -350,7 +358,7 @@ class Facebook_Comments {
 
 		$html = trim( $html );
 
-		if ( $html && is_string( $wrapper_element ) && in_array( $wrapper_element, array( 'noscript', 'div', 'section' ), true ) )
+		if ( $html && is_string( $wrapper_element ) && isset( self::$allowed_comment_wrapper_elements[$wrapper_element] ) )
 			return '<' . $wrapper_element . '>' . $html . '</' . $wrapper_element . '>';
 
 		return $html;
@@ -418,23 +426,32 @@ class Facebook_Comments {
 		if ( ! ( isset( $post ) && isset( $post->ID ) ) )
 			return $content;
 
+		$post_id = absint( $post->ID );
+		if ( ! $post_id )
+			return $content;
+
 		$options = get_option( 'facebook_comments' );
 
 		if ( ! is_array( $options ) || empty( $options ) )
 			return $content;
 
 		// closed posts can have comments from their previous open state
-		// display noscript version of these comments
-		$comments_markup = self::comments_markup( 'noscript' );
-		if ( $comments_markup )
-			$content .= $comments_markup;
-		else
-			remove_filter( 'comments_open', '__return_true' ); // allow closed comments if no previous comments to display
-		unset( $comments_markup );
+		// display noscript version of these comments, or display on page if filter override exists
+		$comments_wrapper = apply_filters( 'facebook_comments_wrapper', 'noscript', $post_id );
+
+		if ( $comments_wrapper && isset( self::$allowed_comment_wrapper_elements[$comments_wrapper] ) ) {
+			$comments_markup = self::comments_markup( 'noscript' );
+			if ( $comments_markup )
+				$content .= $comments_markup;
+			else
+				remove_filter( 'comments_open', '__return_true' ); // allow closed comments if no previous comments to display
+			unset( $comments_markup );
+		}
+		unset( $comments_wrapper );
 
 		// no option via JS SDK to display comments yet not accept new comments
 		// only display JS SDK version of comments box display if we would like more comments
-		if ( comments_open( $post->ID ) ) {
+		if ( comments_open( $post_id ) ) {
 			$url = apply_filters( 'facebook_rel_canonical', get_permalink() );
 			if ( $url ) // false could happen. let JS SDK handle compatibility mode
 				$options['href'] = $url;

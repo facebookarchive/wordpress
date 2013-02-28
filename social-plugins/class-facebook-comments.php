@@ -382,7 +382,12 @@ class Facebook_Comments {
 
 		$comments_box = Facebook_Comments_Box::fromArray( $options );
 		if ( $comments_box ) {
-			$comments_jssdk_div = $comments_box->asHTML( array( 'class' => array( 'fb-social-plugin' ) ) );
+			$comments_box_attributes = array( 'class' => array( 'fb-social-plugin' ) );
+			$wp_comment_form_args = apply_filters( 'comment_form_defaults', array( 'source' => 'facebook', 'id_form' => 'commentform' ) );
+			if ( is_array( $wp_comment_form_args ) && isset( $wp_comment_form_args['id_form'] ) )
+				$comments_box_attributes['id'] = $wp_comment_form_args['id_form'];
+			unset( $wp_comment_form_args );
+			$comments_jssdk_div = $comments_box->asHTML( $comments_box_attributes );
 			if ( $comments_jssdk_div )
 				return "\n" . $comments_jssdk_div . "\n";
 		}

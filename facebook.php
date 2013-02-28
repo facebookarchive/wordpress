@@ -136,10 +136,12 @@ class Facebook_Loader {
 
 		$args = array(
 			'channelUrl' => plugins_url( 'channel.php', __FILE__ ),
-			'status' => true,
-			'cookie' => true,
 			'xfbml' => true
 		);
+		if ( is_admin() ) {
+			$args['status'] = true;
+			$args['cookie'] = true;
+		}
 
 		// appId optional
 		if ( ! empty( $this->credentials['app_id'] ) )
@@ -160,7 +162,7 @@ class Facebook_Loader {
 	 * @link http://dev.chromium.org/developers/design-documents/dns-prefetching Chromium prefetch behavior
 	 * @link https://developer.mozilla.org/en-US/docs/Controlling_DNS_prefetching Firefox prefetch behavior
 	 */
-	public static function dns_prefetch_js_sdk(){
+	public static function dns_prefetch_js_sdk() {
 		echo '<link rel="dns-prefetch" href="//connect.facebook.net" />' . "\n";
 	}
 

@@ -119,6 +119,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 			'redirection' => 0,
 			'httpversion' => '1.1',
 			'sslverify' => false, // warning: might be overridden by 'https_ssl_verify' filter
+			'headers' => array('Connection' => 'close'),
 			'user-agent' => apply_filters( 'http_headers_useragent', 'WordPress/' . $wp_version . '; ' . get_bloginfo( 'url' ) . '; facebook-php-' . self::VERSION . '-wp' )
 		);
 

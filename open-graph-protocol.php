@@ -208,10 +208,7 @@ class Facebook_Open_Graph_Protocol {
 		if ( is_home() || is_front_page() ) {
 			$meta_tags[ self::OGP_NS . 'title' ] = get_bloginfo( 'name' );
 			$meta_tags[ self::OGP_NS . 'description' ] = get_bloginfo( 'description' );
-			if ( is_front_page() )
-				$meta_tags[ self::OGP_NS . 'url' ] = site_url();
-			else
-				$meta_tags[ self::OGP_NS . 'url' ] = home_url();
+			$meta_tags[ self::OGP_NS . 'url' ] = home_url();
 		} else if ( is_single() && empty( $post->post_password ) ) {
 			setup_postdata( $post );
 			$post_type = get_post_type();

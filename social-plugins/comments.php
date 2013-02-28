@@ -9,8 +9,11 @@ if ( post_password_required() )
 
 <div id="comments" class="comments-area">
 <?php if ( have_comments() ) :
+	// remove links to reply to an existing comment in the WordPress comment system
 	add_filter( 'comment_reply_link', array( 'Facebook_Loader', '__return_empty_string' ) );
 	add_filter( 'post_comments_link', array( 'Facebook_Loader', '__return_empty_string' ) );
+	add_filter( 'cancel_comment_reply_link', array( 'Facebook_Loader', '__return_empty_string' ) );
+	add_filter( 'comment_id_fields', array( 'Facebook_Loader', '__return_empty_string' ) );
 ?>
 	<h2 class="comments-title"><?php echo esc_html( apply_filters( 'facebook_wp_comments_title', __( 'Comments' ) ) ); ?></h2><?php
 	$_comment_options = apply_filters( 'facebook_wp_list_comments', array( 'style' => 'ol' ) );

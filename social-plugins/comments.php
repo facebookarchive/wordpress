@@ -34,11 +34,11 @@ endif; // have_comments()
 
 $_facebook_comments = Facebook_Comments::comments_box();
 if ( $_facebook_comments ) {
-	do_action( 'fb_comment_form_before' );
+	do_action( 'facebook_comment_form_before' );
 	echo '<div id="respond">';
 	echo $_facebook_comments;
 	echo '</div>';
-	do_action( 'fb_comment_form_after' );
+	do_action( 'facebook_comment_form_after' );
 }
 unset( $_facebook_comments );
 ?>

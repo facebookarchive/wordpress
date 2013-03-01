@@ -16,16 +16,6 @@ class Facebook_Comments {
 	public static $allowed_comment_wrapper_elements = array( 'noscript' => true, 'div' => true, 'section' => true );
 
 	/**
-	 * Hide comments-related content via CSS
-	 *
-	 * @since 1.1
-	 * @uses wp_enqueue_style
-	 */
-	public static function css_hide_comments() {
-		wp_enqueue_style( 'fb_hide_wp_comments', plugins_url( 'static/css/hide-wp-comments.min.css', dirname(__FILE__) ), array(), '1.1' );
-	}
-
-	/**
 	 * Override default comments template with a Facebook-specific comments template
 	 *
 	 * @since 1.3

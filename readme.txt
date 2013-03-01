@@ -63,8 +63,8 @@ The development [source code for this plugin is available on Facebook's GitHub a
 * `facebook_settings_before_header_$hook_suffix` - add content to a settings page before the main page header section
 * `facebook_settings_after_header_$hook_suffix` - add content to a settings page after the main page header section
 * `facebook_settings_footer_$hook_suffix` - add content to a settings page below the wrapper div
-* `fb_comment_form_before` - comment form [pluggable action](http://codex.wordpress.org/Function_Reference/comment_form#Pluggable_actions "WordPress comment form pluggable action") replacing the WordPress `comment_form()` equivalent action `comment_form_before`
-* `fb_comment_form_after` - comment form [pluggable action](http://codex.wordpress.org/Function_Reference/comment_form#Pluggable_actions "WordPress comment form pluggable action") replacing the WordPress `comment_form()` equivalent action `comment_form_after`
+* `facebook_comment_form_before` - comment form [pluggable action](http://codex.wordpress.org/Function_Reference/comment_form#Pluggable_actions "WordPress comment form pluggable action") replacing the WordPress `comment_form()` equivalent action `comment_form_before`
+* `facebook_comment_form_after` - comment form [pluggable action](http://codex.wordpress.org/Function_Reference/comment_form#Pluggable_actions "WordPress comment form pluggable action") replacing the WordPress `comment_form()` equivalent action `comment_form_after`
 
 = Filters =
 

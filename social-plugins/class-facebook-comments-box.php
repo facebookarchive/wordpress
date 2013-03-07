@@ -225,7 +225,7 @@ class Facebook_Comments_Box {
 		if ( isset( $this->num_posts ) && is_int( $this->num_posts ) && $this->num_posts > 0 && $this->num_posts !== 10 )
 			$data['num-posts'] = $this->num_posts;
 
-		if ( isset( $this->order_by ) && $this->order_by !== 'social' )
+		if ( isset( $this->order_by ) )
 			$data['order-by'] = $this->order_by;
 
 		if ( isset( $this->mobile ) && $this->mobile === true )

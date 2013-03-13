@@ -93,8 +93,8 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
 			$suffix = '';
 
-		wp_enqueue_script( 'facebook-mentions', plugins_url( 'static/js/admin/mentions' . $suffix . '.js', $facebook_loader->plugin_directory . 'facebook.php' ), array( 'jquery-ui-autocomplete' ), '1.2', true );
-		wp_enqueue_style( 'facebook-mentions', plugins_url( 'static/css/admin/mentions' . $suffix . '.css', $facebook_loader->plugin_directory . 'facebook.php' ), array(), '1.2' );
+		wp_enqueue_script( 'facebook-mentions', plugins_url( 'static/js/admin/mentions' . $suffix . '.js', $facebook_loader->plugin_directory . 'facebook.php' ), array( 'jquery-ui-autocomplete' ), '1.3', true );
+		wp_enqueue_style( 'facebook-mentions', plugins_url( 'static/css/admin/mentions' . $suffix . '.css', $facebook_loader->plugin_directory . 'facebook.php' ), array(), '1.3' );
 	}
 
 	/**

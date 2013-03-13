@@ -88,19 +88,34 @@ class Facebook_Mentions_Search {
 			return array();
 
 		// cached list of all friends
-		$cache_key = 'facebook_12_friends_' . $facebook_user_id;
+		$cache_key = 'facebook_13_friends_' . $facebook_user_id;
 		$friends = get_transient( $cache_key );
 		if ( $friends === false ) {
 			try {
-				$friends = $facebook->api( '/' . $facebook_user_id . '/friends', 'GET', array( 'fields' => 'id,name,link', 'ref' => 'fbwpp' ) );
+				$friends = $facebook->api( '/' . $facebook_user_id . '/friends', 'GET', array( 'fields' => 'id,name,picture', 'ref' => 'fbwpp' ) );
 			} catch ( WP_FacebookApiException $e ) {
 				return array();
 			}
 
-			if ( isset( $friends['data'] ) && is_array( $friends['data'] ) )
+			if ( isset( $friends['data'] ) && is_array( $friends['data'] ) ) {
 				$friends = $friends['data'];
-			else
+				$clean_friends = array();
+				foreach ( $friends as $friend ) {
+					// FBID and name required
+					if ( ! ( isset( $friend['name'] ) && $friend['name'] && isset( $friend['id'] ) && $friend['id'] ) )
+						continue;
+
+					$clean_friend = array( 'id' => $friend['id'], 'name' => $friend['name'], 'name_lower' => strtolower( $friend['name'] ) );
+					if ( isset( $friend['picture']['data']['url'] ) )
+						$clean_friend['picture'] = $friend['picture']['data']['url'];
+					$clean_friends[] = $clean_friend;
+					unset( $clean_friend );
+				}
+				$friends = $clean_friends;
+				unset( $clean_friends );
+			} else {
 				$friends = array();
+			}
 			set_transient( $cache_key, $friends, 60*15 ); // cache friends list for 15 minutes
 		}
 
@@ -119,13 +134,10 @@ class Facebook_Mentions_Search {
 			if ( $matched_count === $limit )
 				break;
 
-			// enforce minimum requirements
-			if ( ! isset( $friend['name'] ) || ! isset( $friend['id'] ) )
-				continue;
-
 			// does the search term appear in the name?
-			if ( strpos( strtolower($friend['name']), $search_term ) !== false ) {
+			if ( strpos( $friend['name_lower'], $search_term ) !== false ) {
 				$friend['object_type'] = 'user';
+				unset( $friend['name_lower'] );
 				$matched_friends[] = $friend;
 				$matched_count++;
 			}

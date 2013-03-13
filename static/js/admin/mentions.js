@@ -159,7 +159,7 @@ FB_WP.admin.mentions = {
 	// user result item
 	render_user: function( user ) {
 		return jQuery( "<li />" ).addClass( "user" ).attr( {"role": "option", "aria-label": user.name} ).mouseenter(function(){jQuery(this).addClass("ui-state-focus")}).mouseleave(function(){jQuery(this).removeClass("ui-state-focus")}).append(
-			jQuery( "<img />" ).attr( {src: "https:\/\/graph.facebook.com\/" + user.id + "\/picture", alt: user.name, width:32, height:32} ) ).append(
+			jQuery( "<img />" ).attr( {src: (user.picture === undefined) ? "https:\/\/graph.facebook.com\/" + user.id + "\/picture" : user.picture, alt: user.name, width:32, height:32} ) ).append(
 			jQuery( "<a />" ).addClass( "text" ).text( user.name )
 		);
 	},

@@ -99,6 +99,7 @@ class Facebook_Loader {
 			$this->admin_init();
 		} else {
 			add_action( 'wp_enqueue_scripts', array( &$this, 'register_js_sdk' ), 1 );
+			add_action( 'init', array( &$this, 'public_early_init' ), 1, 0 );
 			add_action( 'wp', array( &$this, 'public_init' ) );
 		}
 	}
@@ -266,6 +267,22 @@ class Facebook_Loader {
 	}
 
 	/**
+	 * Add overrides early in the WordPress loading process for front-end views
+	 *
+	 * @since 1.3.1
+	 */
+	public function public_early_init() {
+		// add possible comments submission override if Comments Box enabled for one or more post types
+		if ( get_option( 'facebook_comments_enabled' ) ) {
+			if ( ! class_exists( 'Facebook_Comments' ) )
+				require_once( $this->plugin_directory . 'social-plugins/class-facebook-comments.php' );
+
+			// cutoff new comment attempts for post types under management by Comments Box
+			add_action( 'pre_comment_on_post', array( 'Facebook_Comments', 'pre_comment_on_post' ), 1, 1 );
+		}
+	}
+
+	/**
 	 * Intialize the public, front end views
 	 *
 	 * @since 1.1
@@ -289,9 +306,10 @@ class Facebook_Loader {
 			if ( ! class_exists( 'Facebook_Comments' ) )
 				require_once( $this->plugin_directory . 'social-plugins/class-facebook-comments.php' );
 
+			// treat as if comments are open for post types with comments under management by Comments Box
 			add_filter( 'comments_open', array( 'Facebook_Comments', 'comments_open_filter' ), 10, 2 );
 
-			// display comments number if used in template
+			// display comments number XFBML for JS SDK interpretation if used in template
 			add_filter( 'comments_number', array( 'Facebook_Comments', 'comments_number_filter' ), 10, 2 );
 		}
 

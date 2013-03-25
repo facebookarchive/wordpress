@@ -37,7 +37,7 @@ class Facebook_Like_Box {
 	 * @since 1.1
 	 * @var array
 	 */
-	public static $colorscheme_choices = array( 'light', 'dark' );
+	public static $colorscheme_choices = array( 'light' => true, 'dark' => true );
 
 	/**
 	 * URL of a Facebook Page. The target of the Like action.
@@ -178,7 +178,7 @@ class Facebook_Like_Box {
 	 * @return Facebook_Like_Box support chaining
 	 */
 	public function setColorscheme( $color_scheme ) {
-		if ( is_string( $color_scheme ) && in_array( $color_scheme, self::$colorscheme_choices, true ) )
+		if ( is_string( $color_scheme ) && isset( self::$colorscheme_choices[$color_scheme] ) )
 			$this->colorscheme = $color_scheme;
 		return $this;
 	}

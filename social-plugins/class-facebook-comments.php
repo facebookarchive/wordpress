@@ -64,6 +64,23 @@ class Facebook_Comments {
 	}
 
 	/**
+	 * Kill attempts to comment on a post managed by Facebook Comments Box
+	 *
+	 * @since 1.3.1
+	 * @param int post_id post identifer
+	 */
+	public static function pre_comment_on_post( $post_id ) {
+		if ( ! $post_id )
+			return;
+		$_post = get_post( $post_id );
+		if ( $_post && self::comments_enabled_for_post_type( $_post ) ) {
+			// match comments closed message and behavior
+			do_action( 'comment_closed', $post_id );
+			wp_die( __('Sorry, comments are closed for this item.') );
+		}
+	}
+
+	/**
 	 * Overrides text displayed with comments number, inserting Facebook XFBML to be replaced by a number with the Facebook JavaScript SDK
 	 *
 	 * @param string $output number of comments text

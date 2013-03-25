@@ -5,7 +5,7 @@ Requires at least: 3.3
 Tested up to: 3.5.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.3
+Stable tag: 1.3.1
 
 Add Facebook social plugins and the ability to publish new posts to a Facebook Timeline or Facebook Page. Official Facebook plugin.
 
@@ -95,7 +95,7 @@ The development [source code for this plugin is available on Facebook's GitHub a
 
 = How do I sign up for a Facebook application ID for my website? =
 
-You may create a new Facebook application or edit your existing Facebook application through the [Facebook Developers application interface](https://developers.facebook.com/apps/).
+You may create a new Facebook application or edit your existing Facebook application through the [Facebook Developers application interface](https://developers.facebook.com/apps/). You may first need to signup for a Facebook Developer account.
 
 = How do I change the image that appears for my posts shared on Facebook? =
 
@@ -130,6 +130,9 @@ It's possible another plugin (or your theme) including an English version of the
 
 
 == Upgrade Notice ==
+
+= 1.3.1 =
+Block new comments to Comments Box posts. Improved session handling for PHP SDK.
 
 = 1.3 =
 Opt-in to the advanced features of Open Graph publishing after successful Facebook application configuration. Comments Box moved to comments template, overriding your theme's comments template for enabled post types. Existing WordPress comments displayed above Comments Box.
@@ -186,6 +189,11 @@ Improve site performance when cURL not installed or SSL not available. Removed p
 Security fixes. Improved customization and debugging of settings. l10n and i18n fixes.
 
 == Changelog ==
+
+= 1.3.1 =
+* Reject new comments submitted for a post with comments managed by Facebook Comments Box
+* Improve Facebook PHP SDK performance through WordPress-managed sessions
+* Faster image display for mention tagging autocomplete
 
 = 1.3 =
 * Open Graph posting is now an advanced feature configured through a site's Social Publisher settings page. Applications without an approved Publish action can post to an author's Timeline feed with more limited functionality and story promotion.

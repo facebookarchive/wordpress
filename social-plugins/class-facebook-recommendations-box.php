@@ -90,7 +90,7 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 	 * @since 1.1
 	 * @var array
 	 */
-	public static $linktarget_choices = array( '_blank', '_parent', '_top' );
+	public static $linktarget_choices = array( '_blank' => true, '_parent' => true, '_top' => true );
 
 	/**
 	 * Limit the number of days since article creation
@@ -223,7 +223,7 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 	 * @return Facebook_Activity_Feed support chaining
 	 */
 	public function setLinkTarget( $target ) {
-		if ( is_string( $target ) && in_array( $target, self::$linktarget_choices, true ) )
+		if ( is_string( $target ) && isset( self::$linktarget_choices[$target] ) )
 			$this->linktarget = $target;
 		return $this;
 	}

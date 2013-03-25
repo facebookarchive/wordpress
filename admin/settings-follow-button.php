@@ -310,15 +310,16 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 
 		self::require_follow_button_builder();
 
-		if ( isset( $this->existing_options[$key] ) && in_array( $this->existing_options[$key], Facebook_Follow_Button::$layout_choices ) )
+		if ( isset( $this->existing_options[$key] ) && isset( Facebook_Follow_Button::$layout_choices[ $this->existing_options[$key] ] ) )
 			$existing_value = $this->existing_options[$key];
 		else
 			$existing_value = 'standard';
 
 		$descriptions = self::layout_descriptions();
 
+		$layout_choices = array_keys( Facebook_Follow_Button::$layout_choices );
 		$choices = array();
-		foreach( Facebook_Follow_Button::$layout_choices as $layout ) {
+		foreach( $layout_choices as $layout ) {
 			$choice = '<label><input type="radio" name="' . $name . '" value="' . $layout . '"';
 			$choice .= checked( $layout, $existing_value, false );
 			$choice .= ' /> ';

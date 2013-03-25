@@ -321,7 +321,7 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 
 		self::require_like_button_builder();
 
-		if ( isset( $this->existing_options[$key] ) && in_array( $this->existing_options[$key], Facebook_Like_Button::$layout_choices ) )
+		if ( isset( $this->existing_options[$key] ) && isset( Facebook_Like_Button::$layout_choices[ $this->existing_options[$key] ] ) )
 			$existing_value = $this->existing_options[$key];
 		else
 			$existing_value = 'standard';
@@ -338,9 +338,9 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 
 		$descriptions = self::layout_descriptions();
 
+		$layout_choices = array_keys( Facebook_Like_Button::$layout_choices );
 		$choices = array();
-
-		foreach( Facebook_Like_Button::$layout_choices as $layout ) {
+		foreach( $layout_choices as $layout ) {
 			$choice = '<label><input type="radio" name="' . $name . '" value="' . $layout . '"';
 			$choice .= checked( $layout, $existing_value, false );
 			$choice .= ' /> ';
@@ -438,7 +438,7 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 
 		self::require_like_button_builder();
 
-		if ( isset( $this->existing_options[$key] ) && in_array( $this->existing_options[$key], Facebook_Like_Button::$action_choices ) )
+		if ( isset( $this->existing_options[$key] ) && isset( Facebook_Like_Button::$action_choices[ $this->existing_options[$key] ] ) )
 			$existing_value = $this->existing_options[$key];
 		else
 			$existing_value = 'like';
@@ -453,8 +453,9 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 		) );
 		$name = esc_attr( $name );
 
+		$action_choices = array_keys( Facebook_Like_Button::$action_choices );
 		$fields = array();
-		foreach( Facebook_Like_Button::$action_choices as $action ) {
+		foreach( $action_choices as $action ) {
 			$fields[] = '<label><input type="radio" name="' . $name . '" value="' . $action . '"' . checked( $action, $existing_value, false ) . ' /> ' . esc_html( __( $action, 'facebook' ) ) . '</label>';
 		}
 

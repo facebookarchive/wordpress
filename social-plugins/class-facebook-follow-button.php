@@ -43,7 +43,7 @@ class Facebook_Follow_Button extends Facebook_Social_Plugin {
 	 * @since 1.1
 	 * @var array
 	 */
-	public static $layout_choices = array( 'standard', 'button_count', 'box_count' );
+	public static $layout_choices = array( 'standard' => true, 'button_count' => true, 'box_count' => true );
 
 	/**
 	 * Show faces of the viewer's friends already following?
@@ -112,7 +112,7 @@ class Facebook_Follow_Button extends Facebook_Social_Plugin {
 	 * @return Facebook_Follow_Button support chaining
 	 */
 	public function setLayout( $layout ) {
-		if ( is_string( $layout ) && in_array( $layout, self::$layout_choices, true ) )
+		if ( is_string( $layout ) && isset( self::$layout_choices[$layout] ) )
 			$this->layout = $layout;
 		return $this;
 	}

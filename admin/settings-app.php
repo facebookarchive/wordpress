@@ -409,7 +409,7 @@ class Facebook_Application_Settings {
 		$content .= '<section id="facebook-application-details-help-details"><header><h3>' . esc_html( __( 'App Details', 'facebook' ) ) . '</h3></header>';
 		$content .= '<p>';
 		$content .= esc_html( __( 'Set your primary language, site description, and categorize your site.', 'facebook' ) ) . ' ';
-		$content .= esc_html( __( 'Add icons and images to establish trust when asking your publishers for publish permissions or marketing your site through Facebook.', 'facebook' ) );
+		$content .= esc_html( __( 'Add icons and images to establish trust when asking your authors for publish permissions or marketing your site through Facebook.', 'facebook' ) );
 		$content .= '</p>';
 		$content .= '</section>';
 

@@ -216,13 +216,14 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 
 		self::require_recommendations_bar_builder();
 
-		if ( isset( $this->existing_options[$key] ) && in_array( $this->existing_options[$key], Facebook_Recommendations_Bar::$side_choices, true ) )
+		if ( isset( $this->existing_options[$key] ) && isset( Facebook_Recommendations_Bar::$side_choices[ $this->existing_options[$key] ] ) )
 			$existing_value = $this->existing_options[$key];
 		else
 			$existing_value = 'right';
 
+		$side_choices = array_keys( Facebook_Recommendations_Bar::$side_choices );
 		$choices = array();
-		foreach ( Facebook_Recommendations_Bar::$side_choices as $side ) {
+		foreach ( $side_choices as $side ) {
 			$choices[] = '<label><input type="radio" name="' . self::OPTION_NAME . '[' . $key . ']" value="' . $side . '"' . checked( $existing_value, $side, false ) . ' /> ' . esc_html( __( $side, 'facebook' ) ) . '</label>';
 		}
 		echo '<fieldset id="facebook-recommendations-bar-' . $key . '">' . implode( ' ', $choices ) . '</fieldset>';
@@ -241,13 +242,14 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 
 		self::require_recommendations_bar_builder();
 
-		if ( isset( $this->existing_options[$key] ) && in_array( $this->existing_options[$key], Facebook_Recommendations_Bar::$action_choices ) )
+		if ( isset( $this->existing_options[$key] ) && isset( Facebook_Recommendations_Bar::$action_choices[ $this->existing_options[$key] ] ) )
 			$existing_value = $this->existing_options[$key];
 		else
 			$existing_value = 'like';
 
+		$action_choices = array_keys( Facebook_Recommendations_Bar::$action_choices );
 		$fields = array();
-		foreach( Facebook_Recommendations_Bar::$action_choices as $action ) {
+		foreach( $action_choices as $action ) {
 			$fields[] = '<label><input type="radio" name="' . $name . '" value="' . $action . '"' . checked( $action, $existing_value, false ) . ' /> ' . esc_html( __( $action, 'facebook' ) ) . '</label>';
 		}
 

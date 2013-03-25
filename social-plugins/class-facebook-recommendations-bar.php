@@ -58,7 +58,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * @since 1.1
 	 * @var array
 	 */
-	public static $action_choices = array( 'like', 'recommend' );
+	public static $action_choices = array( 'like' => true, 'recommend' => true );
 
 	/**
 	 * Display the recommendations bar on the left or right side
@@ -74,7 +74,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * @since 1.1
 	 * @var array
 	 */
-	public static $side_choices = array( 'left', 'right' );
+	public static $side_choices = array( 'left' => true, 'right' => true );
 
 	/**
 	 * One or more domains to show recommendations for
@@ -179,7 +179,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * @return Facebook_Recommendations_Bar support chaining
 	 */
 	public function setAction( $action ) {
-		if ( is_string( $action ) && in_array( $action, self::$action_choices, true ) )
+		if ( is_string( $action ) && isset( self::$action_choices[$action] ) )
 			$this->action = $action;
 		return $this;
 	}
@@ -193,7 +193,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * @return Facebook_Recommendations_Bar support chaining
 	 */
 	public function setSide( $side ) {
-		if ( is_string( $side ) && in_array( $side, self::$side_choices ) )
+		if ( is_string( $side ) && isset( self::$side_choices[$side] ) )
 			$this->side = $side;
 		return $this;
 	}

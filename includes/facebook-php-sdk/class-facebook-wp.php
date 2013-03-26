@@ -268,7 +268,6 @@ class Facebook_WP_Extend extends WP_Facebook {
 				'user-agent' => self::generate_user_agent()
 			) ) );
 		} catch( WP_FacebookApiException $e ) {
-			var_dump( $e );
 			return '';
 		}
 

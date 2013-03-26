@@ -12,6 +12,18 @@ if ( ! class_exists( 'WP_Facebook' ) )
 class Facebook_WP_Extend extends WP_Facebook {
 
 	/**
+	 * Uniquely identify requests sent from the WordPress site by WordPress version and blog url
+	 *
+	 * @since 1.3.2
+	 * @return string User-Agent string for use in requests to Facebook
+	 */
+	public static function generate_user_agent() {
+		global $wp_version;
+
+		return apply_filters( 'http_headers_useragent', 'WordPress/' . $wp_version . '; ' . get_bloginfo( 'url' ) . '; facebook-php-' . self::VERSION . '-wp' );
+	}
+
+	/**
 	 * Handle a response from the WordPress HTTP API
 	 * Checks if the response is a WP_Error object. converts WP_Error to a WP_FacebookApiException for compatibility with the Facebook PHP SDK
 	 * If the HTTP response code is not 200 OK then a WP_FacebookApiException is thrown with error information returned by Facebook
@@ -52,8 +64,6 @@ class Facebook_WP_Extend extends WP_Facebook {
 	 * @return string HTTP response body
 	 */
 	protected function makeRequest( $url, $params, $ch=null ) {
-		global $wp_version;
-
 		if ( empty( $url ) || empty( $params ) )
 			throw new WP_FacebookApiException( array( 'error_code' => 400, 'error' => array( 'type' => 'makeRequest', 'message' => 'Invalid parameters and/or URI passed to makeRequest' ) ) );
 
@@ -61,7 +71,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 			'redirection' => 0,
 			'httpversion' => '1.1',
 			'timeout' => 60,
-			'user-agent' => apply_filters( 'http_headers_useragent', 'WordPress/' . $wp_version . '; ' . get_bloginfo( 'url' ) . '; facebook-php-' . self::VERSION . '-wp' ),
+			'user-agent' => self::generate_user_agent(),
 			'headers' => array( 'Connection' => 'close' , 'Content-Type' => 'application/x-www-form-urlencoded' ),
 			'sslverify' => false, // warning: might be overridden by 'https_ssl_verify' filter
 			'body' => http_build_query( $params, '', '&' )
@@ -76,8 +86,6 @@ class Facebook_WP_Extend extends WP_Facebook {
 	 * @return array decoded JSON response as an associative array
 	 */
 	public static function get_json_url( $url ) {
-		global $wp_version;
-
 		if ( ! is_string( $url ) && $url )
 			return array();
 
@@ -86,7 +94,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 			'httpversion' => '1.1',
 			'timeout' => 5,
 			'headers' => array( 'Connection' => 'close' ),
-			'user-agent' => apply_filters( 'http_headers_useragent', 'WordPress/' . $wp_version . '; ' . get_bloginfo( 'url' ) . '; facebook-php-' . self::VERSION . '-wp' )
+			'user-agent' => self::generate_user_agent()
 		) ) );
 
 		if ( $response )
@@ -95,9 +103,15 @@ class Facebook_WP_Extend extends WP_Facebook {
 		return array();
 	}
 
+	/**
+	 * Submit a request to the Facebook Graph API outside of the Facebook PHP SDK
+	 *
+	 * @param string $path Facebook Graph API endpoint
+	 * @param string $method HTTP method
+	 * @param array $params parameters to pass to the Graph API
+	 * @return array|null data response from Graph API
+	 */
 	public static function graph_api( $path, $method = 'GET', $params = array() ) {
-		global $wp_version;
-
 		if ( ! is_string( $path ) )
 			return;
 
@@ -121,7 +135,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 			'httpversion' => '1.1',
 			'sslverify' => false, // warning: might be overridden by 'https_ssl_verify' filter
 			'headers' => array( 'Connection' => 'close' ),
-			'user-agent' => apply_filters( 'http_headers_useragent', 'WordPress/' . $wp_version . '; ' . get_bloginfo( 'url' ) . '; facebook-php-' . self::VERSION . '-wp' )
+			'user-agent' => self::generate_user_agent()
 		);
 
 		if ( $method === 'GET' ) {
@@ -238,50 +252,49 @@ class Facebook_WP_Extend extends WP_Facebook {
 	/**
 	 * Trade an application id and a application secret for an application token used for future requests
 	 *
-	 * @since 1.1.6
-	 * @return bool|string access token or false if error
+	 * @since 1.3.2
+	 * @return string access token or false if error
 	 */
-	public function getAppAccessToken() {
+	public static function get_app_access_token( $app_id, $app_secret ) {
+		if ( ! ( is_string( $app_id ) && $app_id && is_string( $app_secret ) && $app_secret ) )
+			return '';
+
 		try {
-			// need to circumvent json_decode by calling _oauthRequest
-			// directly, since response isn't JSON format.
-			$access_token_response = $this->makeRequest(
-				$this->getUrl( 'graph', 'oauth/access_token' ),
-				array(
-					'client_id' => $this->getAppId(),
-					'client_secret' => $this->getAppSecret(),
-					'grant_type' => 'client_credentials'
-				)
-			);
-		} catch ( WP_FacebookApiException $e ) {
-			return false;
+			$response = self::handle_response( wp_remote_get( self::$DOMAIN_MAP['graph'] . 'oauth/access_token?' . http_build_query( array( 'client_id' => $app_id, 'client_secret' => $app_secret, 'grant_type' => 'client_credentials' ), '', '&' ), array(
+				'redirection' => 0,
+				'httpversion' => '1.1',
+				'timeout' => 5,
+				'headers' => array( 'Connection' => 'close' ),
+				'user-agent' => self::generate_user_agent()
+			) ) );
+		} catch( WP_FacebookApiException $e ) {
+			return '';
 		}
 
-		if ( empty( $access_token_response ) )
-			return false;
+		if ( ! ( is_string( $response ) && $response ) )
+			return '';
 
 		$response_params = array();
-		parse_str( $access_token_response, $response_params );
+		wp_parse_str( $response, $response_params );
 		if ( isset( $response_params['access_token'] ) && $response_params['access_token'] )
 			return $response_params['access_token'];
 
-		return false;
+		return '';
 	}
 
 	/**
 	 * Get application details including app name, namespace, link, and more.
 	 *
-	 * @param string $app_id application identifier. uses appId property if set
+	 * @since 1.3.2
+	 * @param string $app_id application identifier
+	 * @param array $fields app fields to retrieve. if blank a default set will be returned
 	 * @return array application data response from Facebook API
 	 */
-	public function get_app_details( $app_id = '' ) {
-		if ( ! ( is_string( $app_id ) && $app_id ) ) {
-			$app_id = $this->getAppId();
-			if ( ! $app_id )
-				return array();
-		}
+	public static function get_app_details( $app_id = '', $fields = null ) {
+		if ( ! ( is_string( $app_id ) && $app_id ) )
+			return array();
 
-		$url = $this->getUrl( 'graph', $app_id );
+		$url = self::$DOMAIN_MAP['graph'] . $app_id;
 
 		// switch to HTTP for server configurations not supporting HTTPS
 		if ( substr_compare( $url, 'https://', 0, 8 ) === 0 && ! wp_http_supports( array( 'ssl' => true ) ) )
@@ -289,6 +302,9 @@ class Facebook_WP_Extend extends WP_Facebook {
 
 		if ( ! $url )
 			return array();
+
+		if ( is_array( $fields ) && ! empty( $fields ) )
+			$url .= '?' . http_build_query( array( 'fields' => implode( ',', $fields ) ), '', '&' );
 
 		try {
 			$app_info = self::get_json_url( $url );
@@ -305,21 +321,23 @@ class Facebook_WP_Extend extends WP_Facebook {
 	/**
 	 * Get application details based on an application access token
 	 *
-	 * @since 1.1.6
+	 * @since 1.3.2
 	 * @param string $access_token application access token
 	 * @return array application information returned by Facebook servers
 	 */
-	public function get_app_details_by_access_token( $access_token ) {
+	public static function get_app_details_by_access_token( $access_token, $fields ) {
 		if ( ! ( is_string( $access_token ) && $access_token ) )
 			return array();
 
-		$url = $this->getUrl( 'graph', 'app', array( 'access_token' => $access_token ) );
-
-		if ( ! $url )
-			return array();
+		$params = array( 'access_token' => $access_token );
+		if ( is_array( $fields ) && ! empty( $fields ) ) {
+			if ( ! in_array( 'id', $fields, true ) )
+				$fields[] = 'id';
+			$params['fields'] = implode( ',', $fields );
+		}
 
 		try {
-			$app_info = self::get_json_url( $url );
+			$app_info = self::graph_api( 'app', 'GET', $params );
 		} catch( WP_FacebookApiException $e ) {
 			return array();
 		}

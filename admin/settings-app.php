@@ -272,40 +272,39 @@ class Facebook_Application_Settings {
 			if ( ! class_exists( 'Facebook_WP_Extend' ) )
 				require_once( dirname( dirname(__FILE__) ) . '/includes/facebook-php-sdk/class-facebook-wp.php' );
 
-			$facebook_php_sdk = new Facebook_WP_Extend( array(
-				'appId' => $clean_options['app_id'],
-				'secret' => $clean_options['app_secret']
-			) );
-			if ( $facebook_php_sdk ) {
-				if ( wp_http_supports( array( 'ssl' => true ) ) ) {
-					$access_token = $facebook_php_sdk->getAppAccessToken();
-					if ( $access_token ) {
-						$app_info = $facebook_php_sdk->get_app_details_by_access_token( $access_token );
-						if ( ! empty( $app_info ) ) {
-							if ( isset( $app_info['namespace'] ) )
-								$clean_options['app_namespace'] = $app_info['namespace'];
-							$clean_options['access_token'] = $access_token;
-						}
-						unset( $app_info );
-					} else {
-						if ( function_exists( 'add_settings_error' ) )
-							add_settings_error( 'facebook-app-auth', 'facebook-app-auth-error', __( 'Application ID and secret failed on authentication with Facebook.', 'facebook' ) );
+			if ( wp_http_supports( array( 'ssl' => true ) ) ) {
+				$access_token = Facebook_WP_Extend::get_app_access_token( $clean_options['app_id'], $clean_options['app_secret'] );
+				if ( $access_token ) {
+					$app_info = Facebook_WP_Extend::get_app_details_by_access_token( $access_token, array( 'id', 'namespace' ) );
+					if ( empty( $app_info ) ) {
 						unset( $clean_options['app_id'] );
 						unset( $clean_options['app_secret'] );
-					}
-					unset( $access_token );
-				} else {
-					$app_info = $facebook_php_sdk->get_app_details();
-					if ( ! empty( $app_info ) ) {
+					} else {
 						if ( isset( $app_info['namespace'] ) )
 							$clean_options['app_namespace'] = $app_info['namespace'];
+						$clean_options['access_token'] = $access_token;
 					}
 					unset( $app_info );
+				} else {
+					if ( function_exists( 'add_settings_error' ) )
+						add_settings_error( 'facebook-app-auth', 'facebook-app-auth-error', __( 'Application ID and secret failed on authentication with Facebook.', 'facebook' ) );
+					unset( $clean_options['app_id'] );
+					unset( $clean_options['app_secret'] );
 				}
+				unset( $access_token );
 			} else {
-				unset( $clean_options['app_id'] );
-				unset( $clean_options['app_secret'] );
+				$app_info = Facebook_WP_Extend::get_app_details( $clean_options['app_id'], array( 'id','namespace' ) );
+				if ( empty( $app_info ) ) {
+					unset( $clean_options['app_id'] );
+					unset( $clean_options['app_secret'] );
+				} else if ( isset( $app_info['namespace'] ) ) {
+					$clean_options['app_namespace'] = $app_info['namespace'];
+				}
+				unset( $app_info );
 			}
+		} else {
+			unset( $clean_options['app_id'] );
+			unset( $clean_options['app_secret'] );
 		}
 
 		return $clean_options;

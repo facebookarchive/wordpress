@@ -40,7 +40,7 @@ class Facebook_Shortcodes {
 			'font' => isset( $site_options['font'] ) ? $site_options['font'] : '',
 			'colorscheme' => isset( $site_options['colorscheme'] ) ? $site_options['colorscheme'] : '',
 			'ref' => 'shortcode'
-		), $attributes );
+		), $attributes, 'facebook_like_button' );
 
 		// check for valid href value. unset if not valid, allowing for a possible permalink replacement
 		if ( is_string( $options['href'] ) && $options['href'] )
@@ -89,7 +89,7 @@ class Facebook_Shortcodes {
 			'font' => isset( $site_options['font'] ) ? $site_options['font'] : '',
 			'colorscheme' => isset( $site_options['colorscheme'] ) ? $site_options['colorscheme'] : '',
 			'ref' => 'shortcode'
-		), $attributes );
+		), $attributes, 'facebook_send_button' );
 
 		// check for valid href value. unset if not valid, allowing for a possible permalink replacement
 		if ( is_string( $options['href'] ) && $options['href'] )

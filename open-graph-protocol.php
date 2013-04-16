@@ -316,7 +316,7 @@ class Facebook_Open_Graph_Protocol {
 		} else if ( is_author() ) {
 			$author = get_queried_object();
 			if ( ! ( $author && isset( $author->ID ) ) )
-				break;
+				return;
 
 			$author_id = $author->ID;
 

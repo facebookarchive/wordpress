@@ -148,7 +148,7 @@ class Facebook_Social_Plugin {
 			$attributes = array();
 
 		if ( ! is_string( $class ) )
-			return $attrubites;
+			return $attributes;
 
 		if ( isset( $attributes['class'] ) && is_array( $attributes['class'] ) ) {
 			if ( ! in_array( $class, $attributes['class'] ) )

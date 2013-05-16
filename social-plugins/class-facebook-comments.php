@@ -179,7 +179,7 @@ class Facebook_Comments {
 		if ( ! class_exists( 'Facebook_WP_Extend' ) )
 			require_once( $facebook_loader->plugin_directory . 'includes/facebook-php-sdk/class-facebook-wp.php' );
 		try {
-			$comments = Facebook_WP_Extend::graph_api_with_app_access_token( 'comments', 'GET', array( 'id' => $url ) );
+			$comments = Facebook_WP_Extend::graph_api_with_app_access_token( 'comments', 'GET', array( 'id' => $url, 'filter' => 'toplevel', 'fields' => 'id,from,created_time,message,comments.fields(id,from,created_time,message)' ) );
 		} catch ( WP_FacebookApiException $e ) {
 			return array();
 		}

@@ -150,8 +150,8 @@ function facebook_the_content_send_button( $content ) {
 	if ( ! is_array( $options ) )
 		$options = array();
 
-	if ( ! is_singular( get_post_type( $post ) ) )
-		$options['href'] = apply_filters( 'facebook_rel_canonical', get_permalink( $post->ID ) );
+
+	$options['href'] = apply_filters( 'facebook_rel_canonical', get_permalink( $post->ID ) );
 
 	if ( $options['position'] === 'top' ) {
 		$options['ref'] = 'above-post';

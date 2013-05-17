@@ -2,10 +2,10 @@
 Contributors: Facebook, automattic, niallkennedy, mattwkelly, rgharpuray, ngfeldman, jamesgpearce, ravi.grover, danielbachhuber, gigawats, eosgood, Otto42, colmdoyle, zazinteractive
 Tags: Facebook, comments, social, friends, like, like button, social plugins, facebook platform, page, posts, sidebar, plugin, open graph
 Requires at least: 3.3
-Tested up to: 3.5.1
+Tested up to: 3.6
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.3.1
+Stable tag: 1.4
 
 Add Facebook social plugins and the ability to publish new posts to a Facebook Timeline or Facebook Page. Official Facebook plugin.
 
@@ -131,6 +131,9 @@ It's possible another plugin (or your theme) including an English version of the
 
 == Upgrade Notice ==
 
+= 1.4 =
+Support new Facebook Comment API. Improve reliability of application credential verification. WP 3.6 updates.
+
 = 1.3.1 =
 Block new comments to Comments Box posts. Improved session handling for PHP SDK.
 
@@ -189,6 +192,15 @@ Improve site performance when cURL not installed or SSL not available. Removed p
 Security fixes. Improved customization and debugging of settings. l10n and i18n fixes.
 
 == Changelog ==
+
+= 1.4 =
+* [Facebook Comment API update](https://developers.facebook.com/blog/post/2013/04/03/new-apis-for-comment-replies/) to support July 2013 changes
+* Improved reliability of Facebook application credentials verification for app access token exchange
+* The `get_comments_number` function response now includes the number of comments for a post stored on Facebook servers
+* Update Facebook PHP SDK. Includes support for app secret proofs.
+* Fix typo preventing custom classes on social plugins
+* New Facebook icons matching April 2013 Facebook favicon redesign
+* Added support for shortcode filters (WordPress 3.6+)
 
 = 1.3.1 =
 * Reject new comments submitted for a post with comments managed by Facebook Comments Box

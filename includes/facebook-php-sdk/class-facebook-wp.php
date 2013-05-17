@@ -14,7 +14,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 	/**
 	 * Uniquely identify requests sent from the WordPress site by WordPress version and blog url
 	 *
-	 * @since 1.3.2
+	 * @since 1.4
 	 * @return string User-Agent string for use in requests to Facebook
 	 */
 	public static function generate_user_agent() {
@@ -252,7 +252,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 	/**
 	 * Trade an application id and a application secret for an application token used for future requests
 	 *
-	 * @since 1.3.2
+	 * @since 1.4
 	 * @return string access token or false if error
 	 */
 	public static function get_app_access_token( $app_id, $app_secret ) {
@@ -285,7 +285,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 	/**
 	 * Get application details including app name, namespace, link, and more.
 	 *
-	 * @since 1.3.2
+	 * @since 1.4
 	 * @param string $app_id application identifier
 	 * @param array $fields app fields to retrieve. if blank a default set will be returned
 	 * @return array application data response from Facebook API
@@ -321,7 +321,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 	/**
 	 * Get application details based on an application access token
 	 *
-	 * @since 1.3.2
+	 * @since 1.4
 	 * @param string $access_token application access token
 	 * @return array application information returned by Facebook servers
 	 */

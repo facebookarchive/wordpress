@@ -81,6 +81,45 @@ class Facebook_Comments {
 	}
 
 	/**
+	 * Add Facebook comment count to the built-in WordPress comment count
+	 *
+	 * @since 1.4
+	 * @see get_comments_number()
+	 * @param int $count The number of WordPress comments a post has
+	 * @param int $post_id The Post ID
+	 * @return int The number of WordPress comments + Facebook comments a post has
+	 */
+	public static function get_comments_number_filter( $count, $post_id ) {
+		global $post, $facebook_loader;
+
+		if ( ! ( isset( $facebook_loader ) && $facebook_loader->app_access_token_exists() ) )
+			return $count;
+
+		if ( ! ( isset( $post ) && self::comments_enabled_for_post_type( $post ) ) )
+			return $count;
+
+		$url = apply_filters( 'facebook_rel_canonical', get_permalink() );
+		if ( ! $url )
+			return $count;
+
+		if ( ! class_exists( 'Facebook_WP_Extend' ) )
+			require_once( $facebook_loader->plugin_directory . 'includes/facebook-php-sdk/class-facebook-wp.php' );
+		try {
+			// request a summary of all comments for the object represented by the current post URL
+			// minimize data response by limiting to one comment with a single field: id
+			$comments = Facebook_WP_Extend::graph_api_with_app_access_token( 'comments', 'GET', array( 'id' => $url, 'filter' => 'stream', 'summary' => true, 'limit' => 1, 'fields' => 'id' ) );
+		} catch ( WP_FacebookApiException $e ) {
+			return $count;
+		}
+
+		if ( isset( $comments['summary'] ) && isset( $comments['summary']['total_count'] ) ) {
+			return absint( $count ) + absint( $comments['summary']['total_count'] );
+		}
+
+		return $count;
+	}
+
+	/**
 	 * Overrides text displayed with comments number, inserting Facebook XFBML to be replaced by a number with the Facebook JavaScript SDK
 	 *
 	 * @param string $output number of comments text

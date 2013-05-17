@@ -98,23 +98,33 @@ class Facebook_Comments {
 		if ( ! ( isset( $post ) && self::comments_enabled_for_post_type( $post ) ) )
 			return $count;
 
-		$url = apply_filters( 'facebook_rel_canonical', get_permalink() );
-		if ( ! $url )
-			return $count;
+		$count = absint( $count );
+		$cache_key = 'fb_comments_count_' . $post->ID;
+		$fb_count = get_transient( $cache_key );
+		if ( $fb_count === false ) { // allow cached count of 0
+			$fb_count = 0;
+			$url = apply_filters( 'facebook_rel_canonical', get_permalink() );
+			if ( ! $url )
+				return $count;
 
-		if ( ! class_exists( 'Facebook_WP_Extend' ) )
-			require_once( $facebook_loader->plugin_directory . 'includes/facebook-php-sdk/class-facebook-wp.php' );
-		try {
-			// request a summary of all comments for the object represented by the current post URL
-			// minimize data response by limiting to one comment with a single field: id
-			$comments = Facebook_WP_Extend::graph_api_with_app_access_token( 'comments', 'GET', array( 'id' => $url, 'filter' => 'stream', 'summary' => true, 'limit' => 1, 'fields' => 'id' ) );
-		} catch ( WP_FacebookApiException $e ) {
-			return $count;
+			if ( ! class_exists( 'Facebook_WP_Extend' ) )
+				require_once( $facebook_loader->plugin_directory . 'includes/facebook-php-sdk/class-facebook-wp.php' );
+			try {
+				// request a summary of all comments for the object represented by the current post URL
+				// minimize data response by limiting to one comment with a single field: id
+				$comments = Facebook_WP_Extend::graph_api_with_app_access_token( 'comments', 'GET', array( 'id' => $url, 'filter' => 'stream', 'summary' => true, 'limit' => 1, 'fields' => 'id' ) );
+			} catch ( WP_FacebookApiException $e ) {
+				return $count;
+			}
+
+			if ( isset( $comments['summary'] ) && isset( $comments['summary']['total_count'] ) ) {
+				$fb_count = absint( $comments['summary']['total_count'] );
+				set_transient( $cache_key, $fb_count, 60*15 );
+			}
 		}
 
-		if ( isset( $comments['summary'] ) && isset( $comments['summary']['total_count'] ) ) {
-			return absint( $count ) + absint( $comments['summary']['total_count'] );
-		}
+		if ( $fb_count )
+			$count += $fb_count;
 
 		return $count;
 	}

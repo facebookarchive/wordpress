@@ -193,7 +193,7 @@ class Facebook_Loader {
 			return $src;
 
 		// @link https://developers.facebook.com/docs/reference/javascript/#loading
-		$html = '<div id="fb-root"></div><script type="text/javascript">(function(d){var id="facebook-jssdk";if(!d.getElementById(id)){var js=d.createElement("script"),ref=d.getElementsByTagName("script")[0];js.id=id,js.async=true,js.src=' . json_encode( $src ) . ',ref.parentNode.insertBefore(js,ref)}})(document)</script>' . "\n";
+		$html = '<div id="fb-root"></div><script type="text/javascript">(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src=' . json_encode($src) . ';fjs.parentNode.insertBefore(js,fjs)}(document,"script","facebook-jssdk"));</script>' . "\n";
 		if ( isset( $wp_scripts ) && $wp_scripts->do_concat )
 			$wp_scripts->print_html .= $html;
 		else

@@ -208,7 +208,7 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	 * @since 1.1.9
 	 * @return array list of archive names and public post type names
 	 */
-	public static function get_show_on_choices() {
+	public static function get_show_on_choices( $scope = null ) {
 		return array_merge( array( 'home', 'archive' ), self::post_types_supporting_authorship() );
 	}
 

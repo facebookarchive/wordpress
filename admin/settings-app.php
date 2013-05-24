@@ -100,7 +100,7 @@ class Facebook_Application_Settings {
 	 * @since 1.1
 	 * @uses wp_enqueue_script()
 	 */
-	public function enqueue_scripts() {
+	public static function enqueue_scripts() {
 		wp_enqueue_script( 'facebook-jssdk' );
 	}
 

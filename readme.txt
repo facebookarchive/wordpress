@@ -78,8 +78,7 @@ The development [source code for this plugin is available on Facebook's GitHub a
 * `facebook_excerpt_more` - string appearing at the end of a truncated excerpt string. default: "&hellip;"
 * `fb_rel_canonical` - customize the canonical URL used by Facebook for a post. Affects Open Graph protocol URL definitions, URL references sent in Open Graph actions, and more. default: result of `get_permalink()`
 * `facebook_comment_schema_org` - override output of search engine friendly comments content using [Schema.org microdata markup](http://googlewebmastercentral.blogspot.com/2011/06/introducing-schemaorg-search-engines.html)
-* `facebook_comments_number_more` - override the default "% Comments" text used to generate a client-side comments number. similar to WordPress' [comments_number](http://codex.wordpress.org/Function_Reference/comments_number) more parameter.
-* `facebook_anchor_target` - customize the [browsing context name](http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-names) used for links to Facebook output alongside your post such as mentions. default: `_blank`
+* `facebook_comments_number_more` - override the default "% Comments" text used to generate a client-side comments number. similar to WordPress' [comments_number](http://codex.wordpress.org/Function_Reference/comments_number) more parameter
 * `facebook_mentions_classes` - add or remove HTML classes from the parent HTML div element of mentions links
 * `fb_meta_tags` - Customize Open Graph protocol markup before it is output to the page
 * `facebook_ogp_prefixed` - true to always use prefixed properties (og:title) or false to use full IRI properties (http://ogp.me/ns#title)

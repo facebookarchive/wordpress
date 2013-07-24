@@ -255,14 +255,6 @@ class Facebook_Social_Publisher_Settings {
 		unset( $og_action_text );
 
 		echo '</ol>';
-
-		if ( ! $this->user_associated_with_facebook_account ) {
-			// connect your account
-			echo '<p>' . sprintf( esc_html( __( '%s to publish new posts to your Facebook Timeline or Page.', 'facebook' ) ), '<span class="facebook-login" data-scope="page" style="font-weight:bold">' . esc_html( __( 'Associate your WordPress account with a Facebook account', 'facebook' ) ) . '</span>' ) . '</p>';
-		} else if ( ! ( isset( $this->user_permissions ) && isset( $this->user_permissions['publish_stream'] ) && isset( $this->user_permissions['publish_actions'] ) ) ) {
-			// grant additional permissions needed to complete the task
-			echo '<p>' . sprintf( esc_html( __( '%s to publish new posts to your Facebook Timeline or Page.', 'facebook' ) ), '<span class="facebook-login" data-scope="page" style="font-weight:bold">' . esc_html( __( 'Grant application permissions', 'facebook' ) ) . '</span>' ) . '</p>';
-		}
 	}
 
 	/**

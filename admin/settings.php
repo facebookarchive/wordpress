@@ -62,6 +62,47 @@ class Facebook_Settings {
 	}
 
 	/**
+	 * Register the JavaScript file used for Facebook Login
+	 * Localize strings used in the JavaScript file
+	 *
+	 * @since 1.5
+	 * @uses wp_register_script()
+	 */
+	public static function register_login_script() {
+		global $facebook_loader, $wp_scripts;
+
+		$suffix = '.min';
+		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
+			$suffix = '';
+
+		$handle = 'facebook-login';
+		wp_register_script( $handle, plugins_url( 'static/js/admin/login' . $suffix . '.js', $facebook_loader->plugin_directory . 'facebook.php' ), array( 'jquery', 'facebook-jssdk' ), '1.5', true );
+
+		$script = 'jQuery(document).one("facebook-login-load",function(){';
+		foreach( array(
+			'FB_WP.admin.login.messages.form_submit_prompt' => __( 'Please save your edits by submitting the form', 'facebook' ),
+			'FB_WP.admin.login.page.messages.add_manage_pages' => __( 'Allow new posts to a Facebook Page', 'facebook' ),
+			'FB_WP.admin.login.page.messages.delete_stored_page' => _x( 'None: remove %s', 'Choose none of the options and remove the object', 'facebook' ),
+			'FB_WP.admin.login.page.messages.select_new' => _x( 'Select a new page:', 'Displayed above a list of choices', 'facebook' ),
+			'FB_WP.admin.login.page.messages.no_create_content_pages' => _x( 'No new published pages with create content permission found', 'No Facebook Pages found for the user where the user has been granted permission to create content', 'facebook' ),
+			'FB_WP.admin.login.person.messages.associate_account' => __( 'Associate my WordPress account with my Facebook account', 'facebook' ),
+			'FB_WP.admin.login.person.messages.associate_account_publish' => __( 'Associate my WordPress account with my Facebook account and allow new posts to my Facebook Timeline', 'facebook' ),
+			'FB_WP.admin.login.person.messages.add_publish_actions' => _x( 'Allow new posts to my Facebook Timeline', 'Allow the application to publish to the Facebook Timeline of the viewer', 'facebook' ),
+			'FB_WP.admin.login.person.messages.edit_permissions' => __( 'Manage app permissions and visibility', 'facebook' )
+		) as $variable => $translated_text ) {
+			$script .= $variable . '=' . json_encode( $translated_text ) . ';';
+		}
+		$script .= '});';
+
+		$data = $wp_scripts->get_data( $handle, 'data' );
+		if ( $data )
+			$script = $data . "\n" . $script;
+		$wp_scripts->add_data( $handle, 'data', $script );
+
+		return $handle;
+	}
+
+	/**
 	 * Check if Facebook application credentials are stored for the current site
 	 * Limit displayed features based on the existence of app data
 	 *
@@ -164,21 +205,6 @@ class Facebook_Settings {
 				);
 			}
 		}
-	}
-
-	/**
-	 * Prompt a logged-in user to associate his or her account with a Facebook account
-	 *
-	 * @since 1.1
-	 */
-	public static function prompt_user_login() {
-		if ( ! class_exists( 'Facebook_Admin_Login' ) )
-			require_once( dirname(__FILE__) . '/login.php' );
-
-		// show admin dialog on post creation, post edit, or user profile screen
-		foreach( array( 'post-new.php','post.php','profile.php' ) as $pagenow ) {
-			add_action( 'load-' . $pagenow, array( 'Facebook_Admin_Login', 'connect_facebook_account' ) );
-		} 
 	}
 
 	/**

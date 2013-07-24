@@ -250,17 +250,18 @@ class Facebook_WP_Extend extends WP_Facebook {
 	}
 
 	/**
-	 * Trade an application id and a application secret for an application token used for future requests
+	 * Request an access token from the Facebook OAuth endpoint
 	 *
-	 * @since 1.4
-	 * @return string access token or false if error
+	 * @since 1.5
+	 * @param array $params associative array of query parameters
+	 * @return string access token
 	 */
-	public static function get_app_access_token( $app_id, $app_secret ) {
-		if ( ! ( is_string( $app_id ) && $app_id && is_string( $app_secret ) && $app_secret ) )
+	public static function get_access_token( $params ) {
+		if ( ! is_array( $params ) || empty( $params ) )
 			return '';
 
 		try {
-			$response = self::handle_response( wp_remote_get( self::$DOMAIN_MAP['graph'] . 'oauth/access_token?' . http_build_query( array( 'client_id' => $app_id, 'client_secret' => $app_secret, 'grant_type' => 'client_credentials' ), '', '&' ), array(
+			$response = self::handle_response( wp_remote_get( self::$DOMAIN_MAP['graph'] . 'oauth/access_token?' . http_build_query( $params, '', '&' ), array(
 				'redirection' => 0,
 				'httpversion' => '1.1',
 				'timeout' => 5,
@@ -280,6 +281,35 @@ class Facebook_WP_Extend extends WP_Facebook {
 			return $response_params['access_token'];
 
 		return '';
+	}
+
+	/**
+	 * Trade an application id and a application secret for an application token used for future requests
+	 *
+	 * @since 1.4
+	 * @return string access token or false if error
+	 */
+	public static function get_app_access_token( $app_id, $app_secret ) {
+		if ( ! ( is_string( $app_id ) && $app_id && is_string( $app_secret ) && $app_secret ) )
+			return '';
+
+		return self::get_access_token( array( 'client_id' => $app_id, 'client_secret' => $app_secret, 'grant_type' => 'client_credentials' ) );
+	}
+
+	/**
+	 * Exchange a short-term access token for a long-lived access token
+	 *
+	 * @link https://developers.facebook.com/docs/facebook-login/access-tokens/#extending Access Tokens: Extending Access Tokens
+	 * @param string $token existing access token
+	 * @return string long-lived access token
+	 */
+	public static function exchange_token( $token ) {
+		global $facebook_loader;
+
+		if ( ! ( is_string( $token ) && $token && isset( $facebook_loader ) && isset( $facebook_loader->credentials ) && isset( $facebook_loader->credentials['app_id'] ) && isset( $facebook_loader->credentials['app_secret'] ) ) )
+			return '';
+
+		return self::get_access_token( array( 'client_id' => $facebook_loader->credentials['app_id'], 'client_secret' => $facebook_loader->credentials['app_secret'], 'grant_type' => 'fb_exchange_token', 'fb_exchange_token' => $token ) );
 	}
 
 	/**

@@ -12,31 +12,45 @@ class Facebook_User_Profile {
 	 * @since 1.2
 	 */
 	public static function init() {
-		$current_user = wp_get_current_user();
-
-		if ( ! ( $current_user && user_can( $current_user, 'edit_posts' ) ) )
+		if ( ! current_user_can( 'edit_posts' ) )
 			return;
 
-		// prompt to log in or update account info
-		if ( ! class_exists( 'Facebook_Admin_Login' ) )
-			require_once( dirname(__FILE__) . '/login.php' );
-		Facebook_Admin_Login::connect_facebook_account( array( 'publish_actions', 'publish_stream' ) );
+		add_action( 'show_user_profile', array( 'Facebook_User_Profile', 'facebook_section' ) );
+		add_action( 'admin_enqueue_scripts', array( 'Facebook_User_Profile', 'enqueue_scripts' ) );
 
-		// use the Admin Login async JS an an indicator of further login action needed (not connected or connected without all required Timeline permissions)
-		if ( remove_action( 'admin_enqueue_scripts', array( 'Facebook_Admin_Login', 'add_async_load_javascript_filter' ), -1, 2 ) ) {
-			add_action( 'admin_enqueue_scripts', array( 'Facebook_User_Profile', 'add_async_load_javascript_filter' ), -1, 2 );
-		} else {
-			// connected. permissions exist
-			add_action( 'personal_options', array( 'Facebook_User_Profile', 'personal_options' ) );
-			add_action( 'personal_options_update', array( 'Facebook_User_Profile', 'save_data' ) );
-			add_action( 'show_user_profile', array( 'Facebook_User_Profile', 'enhance_input_field' ) );
-		}
+		// disable posting to Facebook when publish_actions present
+		add_action( 'personal_options', array( 'Facebook_User_Profile', 'personal_options' ) );
 
-		add_filter( 'user_contactmethods', array( 'Facebook_User_Profile', 'user_contactmethods' ), 1, 2 );
+		// listen for Facebook changes
+		add_action( 'personal_options_update', array( 'Facebook_User_Profile', 'save_data' ) );
 	}
 
 	/**
-	 * Allow an author to disable posting to Timeline
+	 * Add the login JavaScript to the WordPress script queue
+	 *
+	 * @since 1.5
+	 * @uses wp_enqueue_script()
+	 */
+	public static function enqueue_scripts() {
+		global $wp_scripts;
+
+		if ( ! class_exists( 'Facebook_Settings' ) )
+			require_once( dirname(__FILE__) . '/settings.php' );
+
+		$handle = Facebook_Settings::register_login_script();
+		wp_enqueue_script( $handle );
+
+		// attach initialization JavaScript to WordPress enqueue. enqueue function for execution with Facebook SDK for JavaScript async loader
+		$script = 'jQuery(document).one("facebook-login-load",function(){if(FB_WP.queue && FB_WP.queue.add){FB_WP.queue.add(function(){FB_WP.admin.login.person.init()})}});';
+
+		$data = $wp_scripts->get_data( $handle, 'data' );
+		if ( $data )
+			$script = $data . "\n" . $script;
+		$wp_scripts->add_data( $handle, 'data', $script );
+	}
+
+	/**
+	 * Allow an author to disable posting to Timeline by default
 	 *
 	 * @since 1.2
 	 * @param $wordpress_user WP_User object for the current profile
@@ -44,7 +58,7 @@ class Facebook_User_Profile {
 	public static function personal_options( $wordpress_user ) {
 		echo '<tr class="facebook-post-to-timeline"><th scope="row">Facebook</th><td><input class="checkbox" type="checkbox" name="facebook_timeline" id="facebook-timeline" value="1"';
 
-		if ( $wordpress_user ) {
+		if ( $wordpress_user && isset( $wordpress_user->ID ) ) {
 			if ( ! class_exists( 'Facebook_User' ) )
 				require_once( dirname( dirname(__FILE__) ) . '/facebook-user.php' );
 			checked( ! Facebook_User::get_user_meta( $wordpress_user->ID, 'facebook_timeline_disabled', true ) );
@@ -54,71 +68,63 @@ class Facebook_User_Profile {
 	}
 
 	/**
-	 * Add a Facebook form field to the contact info section
+	 * Add a Facebook section to the WordPress user profile page
 	 *
-	 * @since 1.2
-	 * @param array $user_contactmethods associative array of id label pairs.
-	 * @param WP_User $user WordPress user
+	 * @since 1.5
+	 * @param WP_User $wp_user WordPress user for the current profile page
 	 */
-	public static function user_contactmethods( $user_contactmethods, $user ) {
-		if ( is_array( $user_contactmethods ) && $user && method_exists( $user, 'exists' ) && user_can( $user, 'edit_posts' ) ) {
-			$user_contactmethods['facebook'] = 'Facebook';
-
-			if ( ! class_exists( 'Facebook_User' ) )
-				require_once( dirname( dirname(__FILE__) ) . '/facebook-user.php' );
-			$facebook_user_data = Facebook_User::get_user_meta( get_current_user_id(), 'fb_data', true );
-
-			if ( isset( $facebook_user_data['username'] ) )
-				$user->facebook = esc_url_raw( 'https://www.facebook.com/' . $facebook_user_data['username'], array( 'http', 'https' ) );
-			else if ( isset( $facebook_user_data['fb_uid'] ) )
-				$user->facebook = esc_url_raw( 'https://www.facebook.com/profile.php?' . http_build_query( array( 'id' => $facebook_user_data['fb_uid'] ), '', '&' ), array( 'http', 'https' ) );
-			unset( $facebook_user_data );
-		}
-
-		return $user_contactmethods;
-	}
-
-	/**
-	 * Add output to the JavaScript SDK async loader success function filter
-	 *
-	 * @since 1.2
-	 */
-	public static function add_async_load_javascript_filter() {
-		// async load our script after we async load Facebook JavaScript SDK
-		add_filter( 'facebook_jssdk_init_extras', array( 'Facebook_User_Profile', 'async_load_javascript' ), 10, 2 );
-	}
-
-	/**
-	 * add JavaScript code to the fbAsyncInit function run after Facebook JavaScript SDK has loaded.
-	 *
-	 * @since 1.2
-	 * @param string $js_block existing JavaScript in filter
-	 * @param string Facebook application id
-	 * @return string JavaScript code to be appended to the fbAsyncInit function
-	 */
-	public static function async_load_javascript( $js_block = '', $app_id = '' ) {
-		return $js_block . 'jQuery.ajax({url:' . json_encode( plugins_url( 'static/js/admin/login' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min' ) .  '.js', dirname(__FILE__) ) ) . ',cache:true,dataType:"script"}).done(function(){FB_WP.admin.login.messages.author_permissions_text=' . json_encode( __( 'Allow new posts to your Facebook Timeline', 'facebook' ) ) . ';FB_WP.admin.login.edit_profile()});';
-	}
-
-	/**
-	 * Add information to contact info field after output
-	 *
-	 * @since 1.2
-	 * @param WP_User WordPress user
-	 */
-	public static function enhance_input_field( $wordpress_user ) {
+	public static function facebook_section( $wp_user ) {
 		global $facebook_loader;
 
-		echo '<script type="text/javascript">jQuery(function(){';
-		echo 'var facebook_input_el=jQuery("#facebook");if(facebook_input_el.length===0){return}';
+		if ( ! ( $wp_user && isset( $wp_user->ID ) && method_exists( $wp_user, 'exists' ) && $wp_user->exists() && user_can( $wp_user, 'edit_posts' ) ) )
+			return;
 
-		// disable the input. encourage permissions management on Facebook.com
-		echo 'facebook_input_el.prop("disabled",true );';
-		if ( isset( $facebook_loader ) && isset( $facebook_loader->credentials['app_id'] ) ) {
-			echo 'facebook_input_el.after( jQuery("<div />").append( jQuery("<a />").attr({"href":' . json_encode( esc_url_raw( 'https://www.facebook.com/settings?tab=applications#application-li-' . $facebook_loader->credentials['app_id'], array( 'http', 'https' ) ) ) . ',"target":"_blank"}).text(' . json_encode( _x( 'Edit Permissions', 'edit permissions granted by a Facebook account to a Facebook application', 'facebook' ) ) . ' ) ) );';
+		$section = '<h3>' . esc_html( __( 'Facebook Account', 'facebook' ) ) . '</h3>';
+
+		if ( ! class_exists( 'Facebook_User' ) )
+			require_once( dirname( dirname(__FILE__) ) . '/facebook-user.php' );
+		$facebook_user_data = Facebook_User::get_user_meta( $wp_user->ID, 'fb_data', true );
+
+		$section .= '<table id="facebook-info" class="form-table"';
+
+		// test if Facebook account associated with current WordPress user context
+		if ( is_array( $facebook_user_data ) && isset( $facebook_user_data['fb_uid'] ) ) {
+
+			$section .= ' data-fbid="' . esc_attr( $facebook_user_data['fb_uid'] ) . '"';
+			if ( isset( $facebook_loader->credentials['app_id'] ) )
+				$section .= ' data-appid="' . esc_attr( $facebook_loader->credentials['app_id'] ) . '">';
+			$section .= '<tr><th scope="row">' . esc_html( _x( 'Connected Profile', 'Connected Facebook Profile', 'facebook' ) ) . '</th>';
+			$section .= '<td><a href="' . esc_url( Facebook_User::facebook_profile_link( $facebook_user_data ), array( 'http', 'https' ) ) . '">' . esc_html( $facebook_user_data['fb_uid'] ) . '</a>';
+			if ( isset( $facebook_user_data['activation_time'] ) )
+				$section .= '<div class="description"><p>' . sprintf( esc_html( __( 'Associated on %s', 'facebook' ) ), '<time datetime="' . gmstrftime( '%FT%T', $facebook_user_data['activation_time'] ) . '+00:00">' . date_i18n( get_option('date_format'), $facebook_user_data['activation_time'] ) . '</time>' ) . '</p></div>';
+			$section .= '</td></tr>';
+
+			if ( ! class_exists( 'Facebook_WP_Extend' ) )
+				require_once( $facebook_loader->plugin_directory . 'includes/facebook-php-sdk/class-facebook-wp.php' );
+			$permissions = Facebook_WP_Extend::get_permissions_by_facebook_user_id( $facebook_user_data['fb_uid'] );
+			if ( ! empty( $permissions ) ) {
+				$permission_labels = array();
+				if ( isset( $permissions['installed'] ) )
+					$permission_labels[] = '<a href="https://www.facebook.com/about/privacy/your-info#public-info">' . esc_html( __( 'Public profile information', 'facebook' ) ) . '</a>';
+				if ( isset( $permissions['publish_actions'] ) )
+					$permission_labels[] = esc_html( __( 'Publish to Timeline', 'facebook' ) );
+				if ( isset( $permissions['manage_pages'] ) )
+					$permission_labels[] = '<a href="https://developers.facebook.com/docs/reference/login/page-permissions/">' . esc_html( __( 'Manage your pages on your behalf (including creating content)', 'facebook' ) ) . '</a>';
+				$section .= '<tr><th scope="row">' . esc_html( __( 'Permissions', 'facebook' ) ) . '</th><td>';
+				if ( empty( $permissions ) ) {
+					$section .= __( 'None', 'facebook' );
+				} else {
+					$section .= '<ul><li>' . implode( '</li><li>', $permission_labels ) .  '</li></ul>';
+				}
+				$section .= '<div id="facebook-login"></div></td></tr>';
+			}
+		} else {
+			$section .= '><tr><th scope="row">' . esc_html( _x( 'Get started', 'Begin the process', 'facebook' ) ) . '</th>';
+			$section .= '<td id="facebook-login"></td></tr>';
 		}
 
-		echo '});</script>';
+		$section .= '</table>';
+		echo $section;
 	}
 
 	/**
@@ -128,10 +134,33 @@ class Facebook_User_Profile {
 	 * @param int $wordpress_user_id WordPress user identifier
 	 */
 	public static function save_data( $wordpress_user_id ) {
-		remove_filter( 'user_contactmethods', array( 'Facebook_User_Profile', 'user_contactmethods' ), 1, 2 );
-
 		if ( ! ( $wordpress_user_id && current_user_can( 'edit_user', $wordpress_user_id ) ) )
 			return;
+
+		if ( isset( $_POST['facebook_fbid'] ) && ctype_digit( $_POST['facebook_fbid'] ) ) {
+			if ( ! class_exists( 'Facebook_User' ) )
+				require_once( dirname( dirname(__FILE__) ) . '/facebook-user.php' );
+
+			try {
+				$facebook_user = Facebook_User::get_facebook_user( $_POST['facebook_fbid'], array( 'fields' => array( 'id', 'username', 'link', 'third_party_id' ) ) );
+				if ( isset( $facebook_user['id'] ) ) {
+					$facebook_user_data = array(
+						'fb_uid' => $facebook_user['id'],
+						'activation_time' => time()
+					);
+					if ( ! empty( $facebook_user['username'] ) )
+						$facebook_user_data['username'] = $facebook_user['username'];
+					if ( ! empty( $facebook_user['link'] ) )
+						$facebook_user_data['link'] = $facebook_user['link'];
+					if ( ! empty( $facebook_user['third_party_id'] ) )
+						$facebook_user_data['third_party_id'] = $facebook_user['third_party_id'];
+
+					Facebook_User::update_user_meta( $wordpress_user_id, 'fb_data', $facebook_user_data );
+					unset( $facebook_user_data );
+				}
+				unset( $facebook_user );
+			} catch(Exception $e) {}
+		}
 
 		if ( isset( $_POST[ 'facebook_timeline' ] ) && $_POST[ 'facebook_timeline' ] == '1' ) {
 			if ( ! class_exists( 'Facebook_User' ) )
@@ -142,6 +171,6 @@ class Facebook_User_Profile {
 				require_once( dirname( dirname(__FILE__) ) . '/facebook-user.php' );
 			Facebook_User::update_user_meta( $wordpress_user_id, 'facebook_timeline_disabled', '1' );
 		}
-	} 
+	}
 }
 ?>

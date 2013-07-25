@@ -90,20 +90,24 @@ class Facebook_Comments {
 	 * @return int The number of WordPress comments + Facebook comments a post has
 	 */
 	public static function get_comments_number_filter( $count, $post_id ) {
-		global $post, $facebook_loader;
+		global $facebook_loader;
 
 		if ( ! ( isset( $facebook_loader ) && $facebook_loader->app_access_token_exists() ) )
 			return $count;
 
-		if ( ! ( isset( $post ) && self::comments_enabled_for_post_type( $post ) ) )
+		if ( ! $post_id )
+			return $count;
+
+		$post = get_post( $post_id );
+		if ( ! ( $post && self::comments_enabled_for_post_type( $post ) ) )
 			return $count;
 
 		$count = absint( $count );
-		$cache_key = 'fb_comments_count_' . $post->ID;
+		$cache_key = 'fb_comments_count_' . $post_id;
 		$fb_count = get_transient( $cache_key );
 		if ( $fb_count === false ) { // allow cached count of 0
 			$fb_count = 0;
-			$url = apply_filters( 'facebook_rel_canonical', get_permalink() );
+			$url = apply_filters( 'facebook_rel_canonical', get_permalink( $post_id ) );
 			if ( ! $url )
 				return $count;
 
@@ -387,10 +391,10 @@ class Facebook_Comments {
 	public static function comments_markup( $wrapper_element = 'noscript' ) {
 		global $post;
 
-		if ( ! isset( $post ) || ! empty( $post->post_password ) )
+		if ( ! ( isset( $post ) && empty( $post->post_password ) ) )
 			return '';
 
-		$url = apply_filters( 'facebook_rel_canonical', get_permalink() );
+		$url = apply_filters( 'facebook_rel_canonical', get_permalink( $post->ID ) );
 		if ( ! $url ) // could happen. kill it early
 			return '';
 
@@ -513,7 +517,7 @@ class Facebook_Comments {
 		// no option via JS SDK to display comments yet not accept new comments
 		// only display JS SDK version of comments box display if we would like more comments
 		if ( comments_open( $post_id ) ) {
-			$url = apply_filters( 'facebook_rel_canonical', get_permalink() );
+			$url = apply_filters( 'facebook_rel_canonical', get_permalink( $post_id ) );
 			if ( $url ) // false could happen. let JS SDK handle compatibility mode
 				$options['href'] = $url;
 			$content .= self::js_sdk_markup( $options );

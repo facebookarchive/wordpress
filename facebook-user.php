@@ -30,6 +30,7 @@ class Facebook_User {
 		if ( ! isset( $facebook ) && ! ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
 			return;
 
+		Facebook_User::extend_access_token();
 		$params = array( 'ref' => 'fbwpp' );
 		if ( is_array( $fields ) )
 			$params['fields'] = implode( ',', $fields );
@@ -37,6 +38,28 @@ class Facebook_User {
 		try {
 			return $facebook->api( '/me', 'GET', $params );
 		} catch ( WP_FacebookApiException $e ) {}
+	}
+
+	/**
+	 * Gets and returns a specific Facebook user
+	 * Requires public info read access for the account
+	 *
+	 * @since 1.5
+	 * @link https://developers.facebook.com/docs/reference/api/user/ Facebook User fields
+	 * @param string $facebook_id Facebook user identifier
+	 * @param array $fields User fields to include in the result
+	 */
+	public static function get_facebook_user( $facebook_id, $fields = array() ) {
+		if ( ! class_exists('Facebook_WP_Extend') )
+			require_once( dirname(__FILE__) . '/includes/facebook-php-sdk/class-facebook-wp.php' );
+
+		$response = Facebook_WP_Extend::graph_api_with_app_access_token( $facebook_id, 'GET', $fields );
+
+		if ( is_array( $response ) ) {
+			return $response;
+		}
+
+		return array();
 	}
 
 	/**
@@ -199,6 +222,68 @@ class Facebook_User {
 	}
 
 	/**
+	 * Get a list of publishable Facebook pages for the currently authenticated Facebook account
+	 *
+	 * @since 1.5
+	 * @link https://www.facebook.com/help/www/289207354498410 Facebook Page admin roles
+	 * @param string $permission page permission
+	 * @return array associative array with key of id, valuee of associative array of name and access token values for pages with create content permissions
+	 */
+	public static function get_permissioned_pages( $permission ) {
+		global $facebook, $facebook_loader;
+
+		$pages = array();
+
+		if ( ! isset( $facebook ) && ! ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
+			return $pages;
+
+		$allowed_permissions = array(
+			'ADMINISTER'       => true,
+			'EDIT_PROFILE'     => true,
+			'CREATE_CONTENT'   => true,
+			'MODERATE_CONTENT' => true,
+			'CREATE_ADS'       => true,
+			'BASIC_ADMIN'      => true
+		);
+
+		$fields = 'id,name,link,is_published,access_token';
+		if ( is_string( $permission ) && $permission && isset( $allowed_permissions[$permission] ) )
+			$fields .= ',perms';
+		else
+			$permission = '';
+
+		try {
+			// refresh token if needed
+			$facebook->setExtendedAccessToken();
+			$accounts = $facebook->api( '/me/accounts', 'GET', array( 'fields' => $fields, 'ref' => 'fbwpp' ) );
+		} catch (WP_FacebookApiException $e) {}
+		if ( ! ( isset( $accounts ) && is_array( $accounts['data'] ) ) )
+			return $pages;
+		$accounts = $accounts['data'];
+
+		foreach ( $accounts as $account ) {
+
+			if ( ! ( isset( $account['is_published'] ) && $account['is_published'] === true ) )
+				continue;
+
+			// check the specified permission exists for the user accessing the page
+			if ( $permission && ! ( is_array( $account['perms'] ) && in_array( $permission, $account['perms'], true ) ) )
+				continue;
+
+			// add page if necessary fields exist
+			if ( empty( $account['id'] ) || empty( $account['name'] ) || empty( $account['access_token'] ) )
+				continue;
+
+			$pages[ $account['id'] ] = array(
+				'name' => $account['name'],
+				'access_token' => $account['access_token']
+			);
+		}
+
+		return $pages;
+	}
+
+	/**
 	 * Get the Facebook user identifier associated with the given WordPress user identifier, if one exists
 	 *
 	 * @since 1.2
@@ -214,6 +299,25 @@ class Facebook_User {
 			return $facebook_user_data['fb_uid'];
 
 		return '';
+	}
+
+	/**
+	 * Build a link to a Facebook profile based on stored Facebook metadata
+	 *
+	 * @since 1.5
+	 * @param array $facebook_user_data fb_data user metadata
+	 * @return string Facebook profile URL or blank of not enough data exists
+	 */
+	public static function facebook_profile_link( $facebook_user_data ) {
+		if ( ! ( is_array( $facebook_user_data ) && isset( $facebook_user_data['fb_uid'] ) ) )
+			return '';
+
+		if ( isset( $facebook_user_data['link'] ) )
+			return $facebook_user_data['link'];
+		else if ( isset( $facebook_user_data['name'] ) )
+			return 'https://www.facebook.com/' . $facebook_user_data['username'];
+		else
+			return 'https://www.facebook.com/profile.php?' . http_build_query( array( 'id' => $facebook_user_data['fb_uid'] ), '', '&' );
 	}
 }
 

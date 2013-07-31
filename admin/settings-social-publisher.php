@@ -38,6 +38,14 @@ class Facebook_Social_Publisher_Settings {
 	const OPTION_OG_ACTION = 'facebook_og_action';
 
 	/**
+	 * Does the current WordPress user have an associated Facebook account stored?
+	 *
+	 * @since 1.1
+	 * @var boolean
+	 */
+	protected $user_associated_with_facebook_account = false;
+
+	/**
 	 * Reference the social plugin by name
 	 *
 	 * @since 1.1
@@ -82,13 +90,6 @@ class Facebook_Social_Publisher_Settings {
 	 * @since 1.1
 	 */
 	public function onload() {
-		global $facebook, $facebook_loader;
-
-		// prompt to log in or update account info
-		if ( ! class_exists( 'Facebook_Admin_Login' ) )
-			require_once( dirname(__FILE__) . '/login.php' );
-		Facebook_Admin_Login::connect_facebook_account( array( 'manage_pages', 'publish_actions', 'publish_stream' ) );
-
 		// prep user-specific functionality and comparisons
 		$this->current_user = wp_get_current_user();
 		if ( ! class_exists( 'Facebook_User' ) )
@@ -98,13 +99,9 @@ class Facebook_Social_Publisher_Settings {
 		$facebook_user_data = Facebook_User::get_user_meta( $this->current_user->ID, 'fb_data', true );
 		if ( is_array( $facebook_user_data ) && isset( $facebook_user_data['fb_uid'] ) ) {
 			$this->user_associated_with_facebook_account = true;
-			if ( isset( $facebook ) || ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
-				$this->user_permissions = $facebook->get_current_user_permissions( $this->current_user );
-			if ( ! is_array( $this->user_permissions ) )
-				$this->user_permissions = array();
+			add_action( 'admin_enqueue_scripts', array( 'Facebook_Social_Publisher_Settings', 'enqueue_scripts' ) );
 		} else {
 			$this->user_associated_with_facebook_account = false;
-			$this->user_permissions = array();
 		}
 
 		$this->settings_api_init();
@@ -182,6 +179,30 @@ class Facebook_Social_Publisher_Settings {
 	}
 
 	/**
+	 * Add the login JavaScript to the WordPress script queue
+	 *
+	 * @since 1.5
+	 * @uses wp_enqueue_script()
+	 */
+	public static function enqueue_scripts() {
+		global $wp_scripts;
+
+		if ( ! class_exists( 'Facebook_Settings' ) )
+			require_once( dirname(__FILE__) . '/settings.php' );
+
+		$handle = Facebook_Settings::register_login_script();
+		wp_enqueue_script( $handle );
+
+		// attach initialization JavaScript to WordPress enqueue. enqueue function for execution with Facebook SDK for JavaScript async loader
+		$script = 'jQuery(document).one("facebook-login-load",function(){if(FB_WP.queue && FB_WP.queue.add){FB_WP.queue.add(function(){FB_WP.admin.login.page.init()})}});';
+
+		$data = $wp_scripts->get_data( $handle, 'data' );
+		if ( $data )
+			$script = $data . "\n" . $script;
+		$wp_scripts->add_data( $handle, 'data', $script );
+	}
+
+	/**
 	 * Introduce the publish to Facebook feature
 	 *
 	 * @since 1.1
@@ -234,14 +255,6 @@ class Facebook_Social_Publisher_Settings {
 		unset( $og_action_text );
 
 		echo '</ol>';
-
-		if ( ! $this->user_associated_with_facebook_account ) {
-			// connect your account
-			echo '<p>' . sprintf( esc_html( __( '%s to publish new posts to your Facebook Timeline or Page.', 'facebook' ) ), '<span class="facebook-login" data-scope="page" style="font-weight:bold">' . esc_html( __( 'Associate your WordPress account with a Facebook account', 'facebook' ) ) . '</span>' ) . '</p>';
-		} else if ( ! ( isset( $this->user_permissions ) && isset( $this->user_permissions['publish_stream'] ) && isset( $this->user_permissions['publish_actions'] ) ) ) {
-			// grant additional permissions needed to complete the task
-			echo '<p>' . sprintf( esc_html( __( '%s to publish new posts to your Facebook Timeline or Page.', 'facebook' ) ), '<span class="facebook-login" data-scope="page" style="font-weight:bold">' . esc_html( __( 'Grant application permissions', 'facebook' ) ) . '</span>' ) . '</p>';
-		}
 	}
 
 	/**
@@ -251,49 +264,6 @@ class Facebook_Social_Publisher_Settings {
 	 */
 	public function section_page_publish() {
 		echo '<p>' . sprintf( esc_html( __( 'Publish to a Facebook Page using the credentials of a Facebook account with %s permissions for the Page.', 'facebook' ) ), '<a href="' . esc_html( 'https://www.facebook.com/help/289207354498410/', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'content creator', 'facebook' ) ) . '</a>' ) . '</p>';
-	}
-
-	/**
-	 * Get a list of publishable Facebook pages for the currently authenticated Facebook account
-	 *
-	 * @since 1.1
-	 * @return array associative array of id, name, and access token for pages with create content permissions
-	 */
-	public static function get_publishable_pages_for_current_user() {
-		global $facebook, $facebook_loader;
-
-		if ( ! isset( $facebook ) && ! ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
-			return array();
-
-		try {
-			$accounts = $facebook->api( '/me/accounts', 'GET', array( 'fields' => 'id,name,category,access_token,perms', 'ref' => 'fbwpp' ) );
-		} catch (WP_FacebookApiException $e) {}
-		if ( ! ( isset( $accounts ) && is_array( $accounts['data'] ) ) )
-			return array();
-
-		$accounts = $accounts['data'];
-
-		$pages = array();
-		foreach ( $accounts as $account ) {
-			// pages only
-			if ( isset( $account['category'] ) && $account['category'] === 'Application' )
-				continue;
-
-			// can the authenticated user create new content on the page?
-			if ( is_array( $account['perms'] ) && in_array( 'CREATE_CONTENT', $account['perms'], true ) && ! empty( $account['id'] ) && ! empty( $account['name'] ) && ! empty( $account['access_token'] ) ) {
-				$pages[ $account['name'] ] = array(
-					'id' => $account['id'],
-					'name' => $account['name'],
-					'access_token' => $account['access_token']
-				);
-			}
-		}
-		if ( ! empty( $pages ) ) {
-			ksort( $pages, SORT_LOCALE_STRING );
-			$pages = array_values( $pages );
-		}
-
-		return $pages;
 	}
 
 	/**
@@ -311,7 +281,6 @@ class Facebook_Social_Publisher_Settings {
 	 * @since 1.1
 	 */
 	public function display_publish_page() {
-		$key = 'page_timeline';
 		$existing_page = get_option( self::OPTION_PUBLISH_TO_PAGE );
 		if ( is_array( $existing_page ) && isset( $existing_page['id'] ) && isset( $existing_page['name'] ) && isset( $existing_page['access_token'] ) ) {
 			$page_id = $existing_page['id'];
@@ -319,47 +288,39 @@ class Facebook_Social_Publisher_Settings {
 			$page_id = '';
 		}
 
+		echo '<div id="facebook-page"';
 		if ( $page_id ) {
-			echo '<input type="hidden" name="' . self::PUBLISH_OPTION_NAME . '[' . $key . '][id]" value="' . esc_attr( $existing_page['id'] ) . '" />';
-			echo '<input type="hidden" name="' . self::PUBLISH_OPTION_NAME . '[' . $key . '][name]" value="' . esc_attr( $existing_page['name'] ) . '" />';
-			echo '<input type="hidden" name="' . self::PUBLISH_OPTION_NAME . '[' . $key . '][access_token]" value="' . esc_attr( $existing_page['access_token'] ) . '" />';
-			echo '<p>' . sprintf( esc_html( __( 'Publishing to %s', 'facebook' ) ), '<a href="' . esc_url( 'https://www.facebook.com/' . $existing_page['id'], array( 'http', 'https' ) ) . '" title="' . esc_attr( sprintf( __( '%s page on Facebook', 'facebook' ), $existing_page['name'] ) ) . '" target="_blank">' . esc_html( $existing_page['name'] ) . '</a>' );
+			echo ' data-fbid="' . esc_attr( $existing_page['id'] ) . '" data-name="' . esc_attr( $existing_page['name'] ) . '">';
+
+			echo '<p>';
+			echo sprintf( esc_html( __( 'Publishing to %s', 'facebook' ) ), '<a href="' . esc_url( ( isset( $existing_page['link'] ) ? $existing_page['link'] : 'https://www.facebook.com/' . $existing_page['id'] ), array( 'http', 'https' ) ) . '" title="' . esc_attr( sprintf( __( '%s page on Facebook', 'facebook' ), $existing_page['name'] ) ) . '" target="_blank">' . esc_html( $existing_page['name'] ) . '</a>' );
+			unset( $link );
+
+			// indicate the account responsible for publishing to the Facebook Page
 			if ( is_multi_author() && isset( $existing_page['set_by_user'] ) ) {
 				if ( $this->current_user->ID == $existing_page['set_by_user'] ) {
 					echo '. ' . esc_html( __( 'Saved by you.', 'facebook' ) );
 				} else {
 					$setter = get_userdata( $existing_page['set_by_user'] );
-					if ( $setter ) {
+					if ( $setter && isset( $setter->display_name ) ) {
 						echo '. ' . esc_html( sprintf( _x( 'Saved by %s.', 'saved by person name', 'facebook' ), $setter->display_name ) );
 					}
 				}
 			}
 			echo '</p>';
-		} else if ( ! $this->user_associated_with_facebook_account ) {
-			echo '<p>' . sprintf( esc_html( __( '%s to get started.', '' ) ), '<a href="#facebook-login">' . esc_html( __( 'Connect your Facebook account', 'facebook' ) ) . '</a>') . '</p>';
+		} else {
+			echo '>';
 		}
 
 		if ( $this->user_associated_with_facebook_account ) {
-			// does the current user have the ability to change the page?
-			if ( isset( $this->user_permissions['manage_pages'] ) ) {
-				$pages = self::get_publishable_pages_for_current_user();
-				if ( ! empty( $pages ) ) {
-					echo '<select name="' . self::PUBLISH_OPTION_NAME . '[new_' . $key . ']' . '" id="publish-to-page"><option value=""' . selected( $page_id, '', false ) . '>';
-					if ( $page_id )
-						echo esc_html( sprintf( __( 'None: remove %s', 'facebook' ), $existing_page['name'] ) );
-					else
-						echo ' ';
-					echo '</option>';
-					foreach ( $pages as $page ) {
-						echo '<option value="' . esc_attr( $page['id'] ) . '"' . selected( $page_id, $page['id'], false ) . '>' . esc_html( $page['name'] ) . '</option>';
-					}
-					echo '</select>';
-				}
-			} else {
-				// request manage_pages permission
-				echo '<p><span class="facebook-login" data-scope="page" style="font-weight:bold">' . esc_html( __( 'Allow new posts to a Facebook Page', 'facebook' ) ) . '</span></p>';
-			}
+			// edits only avaialble to WordPress accounts connected with a Facebook account
+			echo '<div id="facebook-login" data-option="' . self::PUBLISH_OPTION_NAME . '[page_timeline]"></div>';
+		} else {
+			// send to profile page to connect an account if no connected account stored for current WP user
+			echo '<p><a href="' . esc_url( self_admin_url( 'profile.php' ), array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( 'Add a Facebook account to your WordPress account' ) . '</a></p>';
 		}
+
+		echo '</div>';
 	}
 
 	/**
@@ -416,19 +377,39 @@ class Facebook_Social_Publisher_Settings {
 	 * @param array $page_data data returned from Facebook Graph API permissions call
 	 */
 	public static function update_publish_to_page( $page_data ) {
-		if ( ! ( is_array( $page_data ) && ! empty( $page_data ) && isset( $page_data['id'] ) && isset( $page_data['access_token'] ) && isset( $page_data['name'] ) ) )
+		if ( ! ( is_array( $page_data ) && ! empty( $page_data ) && isset( $page_data['id'] ) ) )
 			return;
 
 		$current_user_id = get_current_user_id();
 		if ( ! $current_user_id )
 			return;
 
-		update_option( self::OPTION_PUBLISH_TO_PAGE, array(
+		if ( ! class_exists( 'Facebook_User' ) )
+			require_once( dirname( dirname(__FILE__) ) . '/facebook-user.php' );
+
+		// request access token based on current user session and specified page
+		$write_pages = Facebook_User::get_permissioned_pages( 'CREATE_CONTENT' );
+		if ( ! ( $write_pages && is_array( $write_pages ) && isset( $write_pages[ $page_data['id'] ] ) && isset( $write_pages[ $page_data['id'] ]['name'] ) && isset( $write_pages[ $page_data['id'] ]['access_token'] ) ) )
+			return;
+
+		if ( ! class_exists( 'Facebook_WP_Extend' ) )
+			require_once( dirname( dirname(__FILE__) ) . '/includes/facebook-php-sdk/class-facebook-wp.php' );
+
+		// get long lived access token
+		$access_token = Facebook_WP_Extend::exchange_token( $write_pages[ $page_data['id'] ]['access_token'] );
+		if ( ! $access_token )
+			return;
+
+		$value = array(
 			'id' => $page_data['id'],
-			'name' => $page_data['name'],
-			'access_token' => $page_data['access_token'],
+			'name' => $write_pages[ $page_data['id'] ]['name'],
+			'access_token' => $access_token,
 			'set_by_user' => $current_user_id
-		) );
+		);
+		if ( isset( $write_pages[ $page_data['id'] ]['link'] ) )
+			$value['link'] = $write_pages[ $page_data['id'] ]['link'];
+
+		update_option( self::OPTION_PUBLISH_TO_PAGE, $value );
 	}
 
 	/**
@@ -450,28 +431,23 @@ class Facebook_Social_Publisher_Settings {
 		}
 		unset( $og_action_field );
 
-		// is a new page chosen?
-		// if the same page selected on new_page_timeline as currently stored don't overwrite the access token
-		// it is possible multiple users can create content from the page but should not overwrite each other when editing the page without changing the target page
 		$page_field = 'page_timeline';
-		$new_page_field = 'new_' . $page_field;
-		if ( isset( $options[ $new_page_field ] ) ) {
-			$page_id = trim( $options[ $new_page_field ] );
-			if ( ! $page_id && isset( $options[ $page_field ]['id'] ) ) {
-				delete_option( self::OPTION_PUBLISH_TO_PAGE );
-			} else if ( $page_id && ! ( isset( $options[ $page_field ]['id'] ) && $options[ $page_field ]['id'] == $options[ $new_page_field ] ) ) {
-				$pages_for_current_user = self::get_publishable_pages_for_current_user();
-				foreach ( $pages_for_current_user as $page ) {
-					if ( isset( $page['id'] ) && $page['id'] === $page_id ) {
-						self::update_publish_to_page( $page );
-						break;
-					}
+		if ( isset( $options[ $page_field ] ) ) {
+			$page_id = trim( $options[ $page_field ] );
+			// check if page is stored
+			$existing_page = get_option( self::OPTION_PUBLISH_TO_PAGE );
+			if ( is_array( $existing_page ) && isset( $existing_page['id'] ) ) {
+				// process the option to delete the stored page
+				if ( $options[ $page_field ] === '' ) {
+					delete_option( self::OPTION_PUBLISH_TO_PAGE );
+				} else if ( $page_id != $existing_page['id'] ) {
+					self::update_publish_to_page( array( 'id' => $page_id ) );
 				}
+			} else {
+				self::update_publish_to_page( array( 'id' => $page_id ) );
 			}
 		}
 		unset( $page_field );
-		unset( $new_page_field );
-
 		return false;
 	}
 }

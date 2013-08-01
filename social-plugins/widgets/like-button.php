@@ -70,9 +70,17 @@ class Facebook_Like_Button_Widget extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
+		$new_instance = (array) $new_instance;
 
 		if ( ! empty( $new_instance['title'] ) )
 			$instance['title'] = strip_tags( $new_instance['title'] );
+
+		foreach( array( 'send', 'show_faces' ) as $bool_option ) {
+			if ( isset( $new_instance[ $bool_option ] ) )
+				$new_instance[ $bool_option ] = true;
+			else
+				$new_instance[ $bool_option ] = false;
+		}
 
 		if ( ! class_exists( 'Facebook_Like_Button' ) )
 			require_once( dirname( dirname(__FILE__) ) . '/class-facebook-like-button.php' );
@@ -96,8 +104,20 @@ class Facebook_Like_Button_Widget extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		$this->display_title( empty( $instance['title'] ) ? '' : $instance['title'] );
-		$this->display_href( empty( $instance['href'] ) ? '' : $instance['href'] );
+		$instance = wp_parse_args( (array) $instance, array(
+			'title' => '',
+			'href' => '',
+			'send' => false,
+			'layout' => 'standard',
+			'show_faces' => false,
+			'width' => 0,
+			'action' => 'like',
+			'font' => '',
+			'colorscheme' => 'light'
+		) );
+
+		$this->display_title( $instance['title'] );
+		$this->display_href( $instance['href'] );
 
 		if ( ! class_exists( 'Facebook_Like_Button_Settings' ) )
 			require_once( dirname( dirname( dirname( __FILE__ ) ) ) . '/admin/settings-like-button.php' );

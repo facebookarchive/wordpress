@@ -27,11 +27,18 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	const OPTION_NAME = 'facebook_follow_button';
 
 	/**
+	 * The hook suffix assigned by add_submenu_page()
+	 *
+	 * @since 1.1
+	 * @var string
+	 */
+	protected $hook_suffix = '';
+
+	/**
 	 * Initialize with an options array
 	 *
 	 * @since 1.1
 	 * @param array $options existing options
-	 * @param string $page associate settings with this page slug
 	 */
 	public function __construct( $options = array() ) {
 		if ( is_array( $options ) && ! empty( $options ) )
@@ -121,7 +128,6 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	 * @since 1.1
 	 * @uses add_settings_section()
 	 * @uses add_settings_field()
-	 * @param string $options_group target grouping
 	 */
 	private function settings_api_init() {
 		if ( ! isset( $this->hook_suffix ) )
@@ -206,6 +212,7 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	 * Archive choices and post type choices
 	 *
 	 * @since 1.1.9
+	 * @param string $scope accept the same number of parameters as the parent class function. no effect
 	 * @return array list of archive names and public post type names
 	 */
 	public static function get_show_on_choices( $scope = null ) {
@@ -491,7 +498,7 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 		if ( isset( $options['show-faces'] ) ) {
 			if ( $options['show-faces'] === 'true' )
 				$options['show_faces'] = true;
-			else
+			else if ( $options['show-faces'] === 'false' )
 				$options['show_faces'] = false;
 			unset( $options['show-faces'] );
 		}
@@ -513,8 +520,6 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 		if ( ! is_array( $options ) || empty( $options ) )
 			return array();
 
-		$clean_options = array();
-
 		self::require_follow_button_builder();
 
 		// Handle display preferences first
@@ -524,6 +529,14 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 			unset( $clean_options['show_on'] );
 		}
 		unset( $options['show_on'] );
+
+		if ( isset( $options['show_faces'] ) )
+			$options['show_faces'] = true;
+		else
+			$options['show_faces'] = false;
+
+		if ( isset( $options['width'] ) )
+			$options['width'] = absint( $options['width'] );
 
 		// href required for follow button
 		// set href contextual to the post author, not at settings

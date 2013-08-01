@@ -35,7 +35,7 @@ endif; // have_comments()
 $_facebook_comments = Facebook_Comments::comments_box();
 if ( $_facebook_comments ) {
 	do_action( 'facebook_comment_form_before' );
-	echo '<div id="respond">';
+	echo '<div id="respond" class="comment-respond">';
 	echo $_facebook_comments;
 	echo '</div>';
 	do_action( 'facebook_comment_form_after' );

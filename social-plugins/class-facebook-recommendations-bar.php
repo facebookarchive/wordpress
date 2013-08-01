@@ -85,15 +85,6 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	protected $site = array();
 
 	/**
-	 * Add a unique reference to track referrals. Facebook passes this parameter to the Like URL when a Facebook user clicks the link.
-	 * Example: 'footer' for a like button in your footer vs. 'banner' for a button in your site banner
-	 *
-	 * @since 1.1
-	 * @var string
-	 */
-	protected $ref;
-
-	/**
 	 * Number of recommendations to display
 	 *
 	 * @since 1.1
@@ -212,34 +203,6 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Clean up the ref paramter based on Facebook requirements
-	 *
-	 * @since 1.1
-	 * @param string $ref reference string you would like to track on your site after a Facebook visitor follows a link
-	 * @return string cleaned string
-	 */
-	public static function cleanRef( $ref ) {
-		if ( is_string( $ref ) && $ref && strlen( $ref ) < 50 )
-			return preg_replace( '/[^a-zA-Z0-9\+\/\=\-.\:\_]/', '', $ref );
-		return '';
-	}
-
-	/**
-	 * Track referrals from Facebook with a string up to 50 chracters.
-	 * Characters in string must be alphanumeric or punctuation (currently +/=-.:_)
-	 *
-	 * @since 1.1
-	 * @param string $ref reference string
-	 * @return Facebook_Recommendations_Bar support chaining
-	 */
-	public function setReference( $ref ) {
-		$ref = self::cleanRef( $ref );
-		if ( $ref )
-			$this->ref = $ref;
-		return $this;
-	}
-
-	/**
 	 * Set the number of recommendations to display
 	 * Accepts a number between 1 and 5
 	 *
@@ -262,7 +225,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * @return Facebook_Recommendations_Bar support chaining
 	 */
 	public function setMaxAge( $days ) {
-		if ( is_int( $days ) && $days > -1 && $days < 181 )
+		if ( is_int( $days ) && $days >= 0 && $days < 181 )
 			$this->max_age = $days;
 		return $this;
 	}
@@ -275,7 +238,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * @return array associative array
 	 */
 	public function toHTMLDataArray() {
-		$data = array();
+		$data = parent::toHTMLDataArray();
 
 		if ( isset( $this->href ) )
 			$data['href'] = $this->href;
@@ -301,8 +264,10 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 		if ( isset( $this->max_age ) && $this->max_age != 0 ) // default: 0 (no limit)
 			$data['max-age'] = $this->max_age;
 
-		if ( isset( $this->ref ) )
-			$data['ref'] = $this->ref;
+		// remove generic social plugin properties not applicable to recommendations bar
+		foreach( array( 'font', 'colorscheme' ) as $prop ) {
+			unset( $data[$prop] );
+		}
 
 		return $data;
 	}
@@ -345,14 +310,14 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 			}
 		}
 
-		if ( isset( $values['ref'] ) )
-			$bar->setReference( $values['ref'] );
-
 		if ( isset( $values['num_recommendations'] ) )
 			$bar->setNumRecommendations( absint( $values['num_recommendations'] ) );
 
 		if ( isset( $values['max_age'] ) )
 			$bar->setMaxAge( absint( $values['max_age'] ) );
+
+		if ( isset( $values['ref'] ) )
+			$bar->setReference( $values['ref'] );
 
 		return $bar;
 	}
@@ -365,13 +330,10 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * @return HTML div or empty string
 	 */
 	public function asHTML( $div_attributes=array() ) {
-		if ( ! class_exists( 'Facebook_Social_Plugin' ) )
-			require_once( dirname(__FILE__) . '/class-facebook-social-plugin.php' );
-
-		$div_attributes = Facebook_Social_Plugin::add_required_class( 'fb-' . self::ID, $div_attributes );
+		$div_attributes = self::add_required_class( 'fb-' . self::ID, $div_attributes );
 		$div_attributes['data'] = $this->toHTMLDataArray();
 
-		return Facebook_Social_Plugin::div_builder( $div_attributes );
+		return self::div_builder( $div_attributes );
 	}
 
 	/**
@@ -381,10 +343,7 @@ class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 	 * @return string XFBML markup
 	 */
 	public function asXFBML() {
-		if ( ! class_exists( 'Facebook_Social_Plugin' ) )
-			require_once( dirname(__FILE__) . '/class-facebook-social-plugin.php' );
-
-		return Facebook_Social_Plugin::xfbml_builder( self::ID, $this->toHTMLDataArray() );
+		return self::xfbml_builder( self::ID, $this->toHTMLDataArray() );
 	}
 }
 

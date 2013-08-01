@@ -3,6 +3,11 @@
 if ( ! class_exists( 'Facebook_Social_Plugin_Settings' ) )
 	require_once( dirname(__FILE__) . '/settings-social-plugin.php' );
 
+/**
+ * Customize Comments Box Facebook social plugin parameters
+ *
+ * @since 1.1
+ */
 class Facebook_Comments_Settings extends Facebook_Social_Plugin_Settings {
 
 	/**
@@ -20,6 +25,14 @@ class Facebook_Comments_Settings extends Facebook_Social_Plugin_Settings {
 	 * @var string
 	 */
 	const OPTION_NAME = 'facebook_comments';
+
+	/**
+	 * The hook suffix assigned by add_submenu_page()
+	 *
+	 * @since 1.1
+	 * @var string
+	 */
+	protected $hook_suffix = '';
 
 	/**
 	 * Initialize with an options array
@@ -59,7 +72,7 @@ class Facebook_Comments_Settings extends Facebook_Social_Plugin_Settings {
 
 		// no post types support comments. nothing to do here
 		if ( empty( $comments_settings->supporting_post_types ) )
-			return;
+			return '';
 
 		$hook_suffix = add_submenu_page(
 			$parent_slug,
@@ -374,6 +387,11 @@ class Facebook_Comments_Settings extends Facebook_Social_Plugin_Settings {
 			delete_option( 'facebook_comments_enabled' );
 		}
 		unset( $options['show_on'] );
+
+		foreach( array( 'width', 'num_posts' ) as $option ) {
+			if ( isset( $options[ $option ] ) )
+				$options[ $option ] = absint( $options[ $option ] );
+		}
 
 		$comments_box = Facebook_Comments_Box::fromArray( $options );
 		if ( $comments_box )

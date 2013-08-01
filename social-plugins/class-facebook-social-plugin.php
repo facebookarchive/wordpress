@@ -49,6 +49,15 @@ class Facebook_Social_Plugin {
 	protected $ref;
 
 	/**
+	 * Is your website primarily directed to children in the United States under the age of 13?
+	 * @link https://developers.facebook.com/docs/plugins/restrictions/ Child-directed sites and services
+	 *
+	 * @since 1.5
+	 * @var bool
+	 */
+	protected $kid_directed_site;
+
+	/**
 	 * Choose a font to match your site styling
 	 *
 	 * @since 1.1
@@ -105,6 +114,17 @@ class Facebook_Social_Plugin {
 	}
 
 	/**
+	 * Inform Facebook a social plugin will likely be displayed to a child in the United States under the age of 13
+	 *
+	 * @since 1.5
+	 * @return Facebook_Social_Plugin support chaining
+	 */
+	public function isKidDirectedSite() {
+		$this->kid_directed_site = true;
+		return $this;
+	}
+
+	/**
 	 * Convert the class object into an array, removing default values
 	 *
 	 * @return array associative array
@@ -121,6 +141,9 @@ class Facebook_Social_Plugin {
 		if ( isset( $this->ref ) )
 			$data['ref'] = $this->ref;
 
+		if ( isset( $this->kid_directed_site ) && $this->kid_directed_site === true )
+			$data['kid_directed_site'] = true;
+
 		return $data;
 	}
 
@@ -132,6 +155,14 @@ class Facebook_Social_Plugin {
 	 * @return array associative array
 	 */
 	public function toHTMLDataArray() {
+		$data = $this->toArray();
+
+		// underscores to data-* dashes
+		if ( isset( $data['kid_directed_site'] ) ) {
+			$data['kid-directed-site'] = $data['kid_directed_site'];
+			unset( $data['kid_directed_site'] );
+		}
+
 		return $this->toArray();
 	}
 

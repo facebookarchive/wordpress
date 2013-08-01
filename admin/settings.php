@@ -142,6 +142,12 @@ class Facebook_Settings {
 		if ( ! is_array( $available_features ) || empty( $available_features ) )
 			return;
 
+		// remove features for child directed sites
+		if ( get_option( 'facebook_kid_directed_site' ) ) {
+			unset( $available_features['recommendations_bar'] );
+			unset( $available_features['comments'] );
+		}
+
 		if ( isset( $available_features['like'] ) ) {
 			if ( ! class_exists( 'Facebook_Like_Button_Settings' ) )
 				require_once( dirname(__FILE__) . '/settings-like-button.php' );

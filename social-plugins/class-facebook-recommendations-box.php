@@ -21,7 +21,7 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 
 	/**
 	 * The activity domain. Defaults to the current domain
-	 * 
+	 *
 	 * @since 1.1
 	 * @var string
 	 */
@@ -66,14 +66,6 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 	 * @var bool
 	 */
 	protected $header;
-
-	/**
-	 * Box border color
-	 *
-	 * @since 1.1
-	 * @var string
-	 */
-	protected $border_color;
 
 	/**
 	 * Define the browsing context of followed links
@@ -203,19 +195,6 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Define the border color of the recommendations box
-	 *
-	 * @since 1.1
-	 * @param string $color hex color
-	 * @return Facebook_Recommendations_Box support chaining
-	 */
-	public function setBorderColor( $color ) {
-		if ( is_string( $color ) )
-			$this->border_color = $color;
-		return $this;
-	}
-
-	/**
 	 * Define a link target to control browser context on link actions
 	 *
 	 * @since 1.1
@@ -272,9 +251,6 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 		else
 			$data['header'] = 'true';
 
-		if ( isset( $this->border_color ) )
-			$data['border-color'] = $this->border_color;
-
 		if ( isset( $this->linktarget ) )
 			$data['linktarget'] = $this->linktarget;
 
@@ -323,9 +299,6 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 			$box->showHeader();
 		else
 			$box->hideHeader();
-
-		if ( isset( $values['border_color'] ) )
-			$box->setBorderColor( $values['border_color'] );
 
 		if ( isset( $values['linktarget'] ) )
 			$box->setLinkTarget( $values['linktarget'] );

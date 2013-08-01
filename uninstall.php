@@ -25,6 +25,7 @@ $__options = array(
 	'facebook_application',
 	'facebook_comments',
 	'facebook_comments_enabled',
+	'facebook_kid_directed_site',
 	'facebook_like_button',
 	'facebook_recommendations_bar',
 	'facebook_send_button',

@@ -45,6 +45,7 @@ class Facebook_Social_Plugin_Settings {
 	 * @since 1.1
 	 * @param string $name HTML name attribute
 	 * @param array $existing_value stored preference
+	 * @param string $scope 'all' to include home and archive conditionals
 	 * @return string labeled checkboxes
 	 */
 	public static function show_on_choices( $name, $existing_value = '', $scope = 'posts' ) {
@@ -72,7 +73,7 @@ class Facebook_Social_Plugin_Settings {
 	 * Describe the show_on setting
 	 *
 	 * @since 1.1
-	 * @param string $plugin_name translated name of the social plugin
+	 * @param string $social_plugin_name translated name of the social plugin
 	 * @return string description text
 	 */
 	public static function show_on_description( $social_plugin_name ) {
@@ -85,7 +86,8 @@ class Facebook_Social_Plugin_Settings {
 	/**
 	 * List of font choices as a HTML option list
 	 *
-	 * @param string $exsiting_value existing font preference
+	 * @since 1.1
+	 * @param string $existing_value existing font preference
 	 * @return string HTML <option>s suitable for use as children of a select
 	 */
 	public static function font_choices( $existing_value = '' ) {

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Display a settings page for Facebook application data
+ *
+ * @since 1.1
+ */
 class Facebook_Application_Settings {
 	/**
 	 * Settings page identifier
@@ -18,11 +23,26 @@ class Facebook_Application_Settings {
 	const OPTION_NAME = 'facebook_application';
 
 	/**
+	 * Define the kid-directed option value
+	 *
+	 * @since 1.5
+	 * @var string
+	 */
+	const OPTION_NAME_KID_DIRECTED = 'facebook_kid_directed_site';
+
+	/**
+	 * The hook suffix assigned by add_submenu_page()
+	 *
+	 * @since 1.1
+	 * @var string
+	 */
+	protected $hook_suffix = '';
+
+	/**
 	 * Initialize with an options array
 	 *
 	 * @since 1.1
 	 * @param array $options existing options
-	 * @param string $hook_suffix (optional) page slug. used to build settings fields
 	 */
 	public function __construct( $options = array() ) {
 		if ( is_array( $options ) && ! empty( $options ) )
@@ -157,11 +177,29 @@ class Facebook_Application_Settings {
 		);
 		add_settings_field(
 			'facebook-app-secret',
-			sprintf( __( '%s secret', 'facebook' ), $app_abbr ),
+			sprintf( __( '%s Secret', 'facebook' ), $app_abbr ),
 			array( &$this, 'display_app_secret' ),
 			$this->hook_suffix,
 			$section,
 			array( 'label_for' => 'facebook-app-secret' )
+		);
+
+		$section = 'facebook-restrictions';
+
+		add_settings_section(
+			$section,
+			__( 'Restrictions', 'facebook' ),
+			array( 'Facebook_Application_Settings', 'restriction_section_header' ),
+			$this->hook_suffix
+		);
+
+		add_settings_field(
+			'facebook-kid-directed-site',
+			__( 'Child-Directed Site', 'facebook' ),
+			array( 'Facebook_Application_Settings', 'display_kid_directed_site' ),
+			$this->hook_suffix,
+			$section,
+			array( 'label_for' => 'facebook-kid-directed-site' )
 		);
 
 		$this->inline_help_content();
@@ -177,6 +215,15 @@ class Facebook_Application_Settings {
 			echo '<p><a href="' . esc_url( 'https://developers.facebook.com/apps/' . $this->existing_options['app_id'] ) . '">' . esc_html( __( 'Edit your application settings on Facebook', 'facebook' ) ) . '</a></p>';
 		else
 			echo '<p><a href="https://developers.facebook.com/apps/">' . esc_html( sprintf( __( 'Create a new Facebook application or associate %s with an existing Facebook application.', 'facebook' ), get_bloginfo( 'name' ) ) ) . '</a></p>';
+	}
+
+	/**
+	 * Introduction to Facebook restrictions configurations
+	 *
+	 * @since 1.5
+	 */
+	public static function restriction_section_header() {
+		echo '<p>' . esc_html( __( 'Limit Facebook functionality', 'facebook' ) ) . '</p>';
 	}
 
 	/**
@@ -226,14 +273,35 @@ class Facebook_Application_Settings {
 	}
 
 	/**
+	 * Display a checkbox to designate the site as child-focused
+	 *
+	 * @since 1.3
+	 */
+	public static function display_kid_directed_site() {
+		global $facebook_loader;
+
+		echo '<label><input type="checkbox" name="' . self::OPTION_NAME . '[kid_directed_site]" id="facebook-kid-directed-site" value="1"';
+		checked( $facebook_loader->kid_directed );
+		echo ' /> ';
+		echo esc_html( __( 'Is your site directed at children in the United States under the age of 13?', 'facebook' ) );
+		echo '</label>';
+	}
+
+	/**
 	 * Clean user inputs before saving to database
 	 *
 	 * @since 1.1
 	 * @param array $options form options values
+	 * @return array $options sanitized options
 	 */
 	public static function sanitize_options( $options ) {
 		// start fresh
 		$clean_options = array();
+
+		if ( isset( $options['kid_directed_site'] ) )
+			update_option( self::OPTION_NAME_KID_DIRECTED, '1' );
+		else
+			delete_option( self::OPTION_NAME_KID_DIRECTED );
 
 		if ( isset( $options['app_id'] ) ) {
 			// leading spaces is a common copy-paste mistake
@@ -369,6 +437,7 @@ class Facebook_Application_Settings {
 	 * Help applications associate basic data with their Facebook application
 	 *
 	 * @since 1.1
+	 * @param string $app_id application identifier. used to construct a link to the Facebook Developers site
 	 * @return string HTML content
 	 */
 	public static function help_tab_edit_app( $app_id = '' ) {
@@ -416,6 +485,20 @@ class Facebook_Application_Settings {
 	}
 
 	/**
+	 * Explain the child-directed site option
+	 *
+	 * @since 1.5
+	 * @return string HTML string
+	 */
+	public static function help_tab_kid_directed() {
+		$content = '<p>' . esc_html( __( 'Comply with privacy laws of your audience including information collected about children.', 'facebook' ) ) . '</p>';
+		$content .= '<p>' . esc_html( __( 'Example: a site primary directed at children in the United States under the age of 13 might set this option to comply with privacy policies in the United States.', 'facebook' ) ) . '</p>';
+		$content .= '<p><a href="https://developers.facebook.com/docs/plugins/restrictions/">' . esc_html( __( 'Facebook social plugins: Information for Child-Directed Sites and Services', 'facebook' ) ) . '</a></p>';
+
+		return $content;
+	}
+
+	/**
 	 * Display help content on the settings page
 	 *
 	 * @since 1.1
@@ -446,6 +529,12 @@ class Facebook_Application_Settings {
 			'id' => 'facebook-application-details-help',
 			'title' => __( 'Application details', 'facebook' ),
 			'content' => self::help_tab_edit_app( $app_id )
+		) );
+
+		$screen->add_help_tab( array(
+			'id' => 'facebook-kid-directed-help',
+			'title' => __( 'Child directed', 'facebook' ),
+			'content' => self::help_tab_kid_directed()
 		) );
 
 		$screen->set_help_sidebar( '<p><a href="https://developers.facebook.com/apps/">' . esc_html( sprintf( __( '%s Apps Tool', 'facebook' ), 'Facebook' ) ) . '</a></p>' );

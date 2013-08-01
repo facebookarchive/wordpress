@@ -14,6 +14,7 @@ class Facebook_Shortcodes {
 	public static function init() {
 		add_shortcode( 'facebook_like_button', array( 'Facebook_Shortcodes', 'like_button' ) );
 		add_shortcode( 'facebook_send_button', array( 'Facebook_Shortcodes', 'send_button' ) );
+		add_shortcode( 'facebook_follow_button', array( 'Facebook_Shortcodes', 'follow_button' ) );
 	}
 
 	/**
@@ -22,6 +23,7 @@ class Facebook_Shortcodes {
 	 * @since 1.1.6
 	 * @param array $attributes shortcode attributes. overrides site options for specific button attributes
 	 * @param string $content shortcode content. no effect
+	 * @return string Like Button div HTML or empty string if minimum requirements not met
 	 */
 	public static function like_button( $attributes, $content = null ) {
 		global $post;
@@ -76,6 +78,7 @@ class Facebook_Shortcodes {
 	 * @since 1.1.6
 	 * @param array $attributes shortcode attributes. overrides site options for specific button attributes
 	 * @param string $content shortcode content. no effect
+	 * @return string send button HTML div or empty string if minimum requirements not met
 	 */
 	public static function send_button( $attributes, $content = null ) {
 		global $post;
@@ -110,6 +113,53 @@ class Facebook_Shortcodes {
 			require_once( dirname(__FILE__) . '/social-plugins.php' );
 
 		return facebook_get_send_button( $options );
+	}
+
+	/**
+	 * Generate a HTML div element with data-* attributes to be converted into a Follow Button by the Facebook JavaScript SDK
+	 * The passed href URL value must be a Facebook User profile URL; this URL is not validated before attempting to use in a Follow Button parameter
+	 *
+	 * @since 1.5
+	 * @param array $attributes shortcode attributes. overrides site options for specific button attributes
+	 * @param string $content shortcode content. no effect
+	 * @return string Follow Button div HTML or empty string if minimum requirements not met
+	 */
+	public static function follow_button( $attributes, $content = null ) {
+		$site_options = get_option( 'facebook_follow_button' );
+		if ( ! is_array( $site_options ) )
+			$site_options = array();
+
+		$options = shortcode_atts( array(
+			'href' => '',
+			'layout' => isset( $site_options['layout'] ) ? $site_options['layout'] : '',
+			'show_faces' => isset( $site_options['show_faces'] ) && $site_options['show_faces'],
+			'width' => isset( $site_options['width'] ) ? $site_options['width'] : 0,
+			'font' => isset( $site_options['font'] ) ? $site_options['font'] : '',
+			'colorscheme' => isset( $site_options['colorscheme'] ) ? $site_options['colorscheme'] : '',
+			'ref' => 'shortcode'
+		), $attributes, 'facebook_follow_button' );
+
+		// Facebook User profile URL required as the target of the follow
+		if ( is_string( $options['href'] ) && $options['href'] )
+			$options['href'] = esc_url_raw( trim( $options['href'] ), array( 'http', 'https' ) );
+		else
+			return '';
+
+		$options['show_faces'] = (bool) $options['show_faces'];
+		$options['width'] = absint( $options['width'] );
+		if ( ! $options['width'] )
+			unset( $options['width'] );
+
+		foreach( array( 'layout', 'font', 'colorscheme' ) as $key ) {
+			$options[$key] = trim( $options[$key] );
+			if ( ! $options[$key] )
+				unset( $options[$key] );
+		}
+
+		if ( ! function_exists( 'facebook_get_follow_button' ) )
+			require_once( dirname(__FILE__) . '/social-plugins.php' );
+
+		return facebook_get_follow_button( $options );
 	}
 }
 ?>

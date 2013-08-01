@@ -27,6 +27,14 @@ class Facebook_Send_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 	const OPTION_NAME = 'facebook_send_button';
 
 	/**
+	 * The hook suffix assigned by add_submenu_page()
+	 *
+	 * @since 1.1
+	 * @var string
+	 */
+	protected $hook_suffix = '';
+
+	/**
 	 * Initialize with an options array
 	 *
 	 * @since 1.1
@@ -110,7 +118,6 @@ class Facebook_Send_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 	 * @since 1.1
 	 * @uses add_settings_section()
 	 * @uses add_settings_field()
-	 * @param string $page target grouping
 	 */
 	private function settings_api_init() {
 		if ( ! isset( $this->hook_suffix ) )
@@ -284,8 +291,6 @@ class Facebook_Send_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 	public static function sanitize_options( $options ) {
 		if ( ! is_array( $options ) || empty( $options ) )
 			return array();
-
-		$clean_options = array();
 
 		if ( ! class_exists( 'Facebook_Send_Button' ) )
 			require_once( dirname( dirname(__FILE__) ) . '/social-plugins/class-facebook-send-button.php' );

@@ -66,9 +66,18 @@ class Facebook_Follow_Button_Widget extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
+		$new_instance = (array) $new_instance;
 
 		if ( ! empty( $new_instance['title'] ) )
 			$instance['title'] = strip_tags( $new_instance['title'] );
+
+		if ( isset( $new_instance['show_faces'] ) )
+			$new_instance['show_faces'] = true;
+		else
+			$new_instance['show_faces'] = false;
+
+		if ( isset( $new_instance['width'] ) )
+			$new_instance['width'] = absint( $new_instance['width'] );
 
 		if ( ! class_exists( 'Facebook_Follow_Button' ) )
 			require_once( dirname( dirname(__FILE__) ) . '/class-facebook-follow-button.php' );
@@ -92,6 +101,16 @@ class Facebook_Follow_Button_Widget extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
+		$instance = wp_parse_args( (array) $instance, array(
+			'title' => '',
+			'href' => '',
+			'layout' => 'standard',
+			'show_faces' => false,
+			'colorscheme' => 'light',
+			'font' => '',
+			'width' => 0
+		) );
+
 		$this->display_title( isset( $instance['title'] ) ? $instance['title'] : '' );
 		$this->display_href( isset( $instance['href'] ) ? $instance['href'] : '' );
 

@@ -128,15 +128,12 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 		if( isset( $values['height'] ) )
 			$feed->setHeight( absint( $values['height'] ) );
 
-		if ( isset( $values['header'] ) && ( $values['header'] === true || $values['header'] == 1 || $values['header'] === 'true' ) )
+		if ( isset( $values['header'] ) && ( $values['header'] === true || $values['header'] === 'true' || $values['header'] == 1 ) )
 			$feed->showHeader();
 		else
 			$feed->hideHeader();
 
-		if ( isset( $values['border_color'] ) )
-			$feed->setBorderColor( $values['border_color'] );
-
-		if ( isset( $values['recommendations'] ) && ( $values['recommendations'] == true || $values['recommendations'] == 1 || $values['recommendations'] === 'true' ) )
+		if ( isset( $values['recommendations'] ) && ( $values['recommendations'] === true || $values['recommendations'] === 'true' || $values['recommendations'] == 1 ) )
 			$feed->includeRecommendations();
 
 		if ( isset( $values['filter'] ) )

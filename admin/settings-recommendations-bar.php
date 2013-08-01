@@ -3,6 +3,11 @@
 if ( ! class_exists( 'Facebook_Social_Plugin_Settings' ) )
 	require_once( dirname(__FILE__) . '/settings-social-plugin.php' );
 
+/**
+ * Site settings for the Facebook Recommendations Bar social plugin
+ *
+ * @since 1.1
+ */
 class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Settings {
 
 	/**
@@ -20,6 +25,14 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	 * @var string
 	 */
 	const OPTION_NAME = 'facebook_recommendations_bar';
+
+	/**
+	 * The hook suffix assigned by add_submenu_page()
+	 *
+	 * @since 1.1
+	 * @var string
+	 */
+	protected $hook_suffix = '';
 
 	/**
 	 * Initialize with an options array
@@ -95,7 +108,7 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 		$this->existing_options = $options;
 
 		$this->settings_api_init();
-	}	
+	}
 
 	/**
 	 * Load the page
@@ -266,8 +279,8 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 		$key = 'trigger';
 		$name = self::OPTION_NAME . '[' . $key . ']';
 
-		if ( isset( $this->existing_options[$key] ) )
-			$existing_value = $this->existing_options[$key];
+		if ( isset( $this->existing_options[ $key ] ) )
+			$existing_value = $this->existing_options[ $key ];
 		else
 			$existing_value = 'onvisible';
 
@@ -363,10 +376,10 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 		if ( ! is_array( $options ) )
 			return array();
 
-		foreach( array( 'max-age', 'num-recommendations', 'read-time' ) as $option ) {
-			if ( isset( $options[$option] ) ) {
-				$options[ str_replace( '-', '_', $option ) ] = absint( $options[$option] );
-				unset( $options[$option] );
+		foreach( array( 'max-age' => 'max_age', 'num-recommendations' => 'num_recommendations', 'read-time' => 'read_time' ) as $data => $option ) {
+			if ( isset( $options[ $data ] ) ) {
+				$options[ $option ] = absint( $options[ $data ] );
+				unset( $options[ $data ] );
 			}
 		}
 
@@ -395,6 +408,11 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 				$options['trigger'] = $pct . '%';
 			else
 				$options['trigger'] = 'onvisible';
+		}
+
+		foreach( array( 'read_time', 'num_recommendations', 'max_age' ) as $option ) {
+			if ( isset( $options[ $option ] ) )
+				$options[ $option ] = absint( $options[ $option ] );
 		}
 
 		self::require_recommendations_bar_builder();

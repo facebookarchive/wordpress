@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Associate Facebook friends and pages with a post
  *
@@ -36,6 +37,22 @@ class Facebook_Social_Publisher_Settings {
 	 * @var string
 	 */
 	const OPTION_OG_ACTION = 'facebook_og_action';
+
+
+	/**
+	 * The hook suffix assigned by add_submenu_page()
+	 *
+	 * @since 1.1
+	 * @var string
+	 */
+	protected $hook_suffix = '';
+
+	/**
+	 * The current user object
+	 *
+	 * @var WP_User
+	 */
+	protected $current_user;
 
 	/**
 	 * Reference the social plugin by name
@@ -128,7 +145,6 @@ class Facebook_Social_Publisher_Settings {
 	 * @since 1.1
 	 * @uses add_settings_section()
 	 * @uses add_settings_field()
-	 * @param string $page parent page slug
 	 */
 	private function settings_api_init() {
 		if ( ! isset( $this->hook_suffix ) )
@@ -443,7 +459,7 @@ class Facebook_Social_Publisher_Settings {
 			return array();
 
 		$og_action_field = 'og_action';
-		if ( isset( $options[ $og_action_field ] ) && $options[ $og_action_field ] == '1' ) {
+		if ( isset( $options[ $og_action_field ] ) ) {
 			update_option( self::OPTION_OG_ACTION, '1' );
 		} else {
 			delete_option( self::OPTION_OG_ACTION );

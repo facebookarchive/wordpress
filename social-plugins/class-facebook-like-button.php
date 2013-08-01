@@ -289,6 +289,9 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 		if ( isset( $values['ref'] ) )
 			$like_button->setReference( $values['ref'] );
 
+		if ( isset( $values['kid_directed_site'] ) && ( $values['kid_directed_site'] === true || $values['kid_directed_site'] === 'true' || $values['kid_directed_site'] == 1 ) )
+			$like_button->isKidDirectedSite();
+
 		return $like_button;
 	}
 

@@ -218,6 +218,9 @@ class Facebook_Follow_Button extends Facebook_Social_Plugin {
 		if ( isset( $values['colorscheme'] ) )
 			$follow_button->setColorScheme( $values['colorscheme'] );
 
+		if ( isset( $values['kid_directed_site'] ) && ( $values['kid_directed_site'] === true || $values['kid_directed_site'] === 'true' || $values['kid_directed_site'] == 1 ) )
+			$follow_button->isKidDirectedSite();
+
 		return $follow_button;
 	}
 
@@ -237,10 +240,10 @@ class Facebook_Follow_Button extends Facebook_Social_Plugin {
 
 		$data['href'] = $this->href;
 
+		// show_faces only if standard layout
 		if ( isset( $this->layout ) && $this->layout !== 'standard' )
 			$data['layout'] = $this->layout;
-
-		if ( isset( $this->show_faces ) && $this->show_faces === true )
+		else if ( isset( $this->show_faces ) && $this->show_faces === true )
 			$data['show-faces'] = 'true';
 
 		if ( isset( $this->width ) && is_int( $this->width ) )

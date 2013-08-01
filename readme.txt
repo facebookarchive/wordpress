@@ -28,10 +28,11 @@ The Facebook plugin for WordPress adds Facebook social plugins to your WordPress
 
 = Shortcodes =
 
-Add a [Like Button](https://developers.facebook.com/docs/reference/plugins/like/) or a [Send Button](https://developers.facebook.com/docs/reference/plugins/send/) using a shortcode inside your post or evaluated from within your theme. You may override site-level options with shortcode attributes defined on the social plugin's page.
+Add a [Like Button](https://developers.facebook.com/docs/reference/plugins/like/), [Send Button](https://developers.facebook.com/docs/reference/plugins/send/), or [Follow Button](https://developers.facebook.com/docs/reference/plugins/follow/) using a shortcode inside your post or evaluated from within your theme. You may override site-level options with shortcode attributes defined on the social plugin's page.
 
 * `[facebook_like_button]`
 * `[facebook_send_button]`
+* `[facebook_follow_button href="{$facebook_profile_url}"]`
 
 = Contributing code =
 

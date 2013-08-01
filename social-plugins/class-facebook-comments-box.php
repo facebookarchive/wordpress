@@ -77,6 +77,8 @@ class Facebook_Comments_Box {
 	/**
 	 * Should we force the mobile-optimized version?
 	 * Default is auto-detect
+	 *
+	 * @var bool
 	 */
 	protected $mobile;
 

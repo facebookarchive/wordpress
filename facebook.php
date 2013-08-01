@@ -55,6 +55,16 @@ class Facebook_Loader {
 	public $credentials = array();
 
 	/**
+	 * Is the current site's primary audience children under the age of 13 in the United States?
+	 * Restricts the availability of Facebook social plugins for compliance with United States laws
+	 *
+	 * @since 1.5
+	 * @link https://developers.facebook.com/docs/plugins/restrictions/ Facebook Social Plugin restrictions
+	 * @var bool
+	 */
+	public $kid_directed = false;
+
+	/**
 	 * List of locales supported by Facebook.
 	 * Two-letter languages codes stored in WordPress are translated to full locales; if a language has multiple country localizations place the first choice earlier in the array to make it the language default
 	 * @link https://www.facebook.com/translations/FacebookLocales.xml Facebook locales
@@ -81,6 +91,7 @@ class Facebook_Loader {
 			$credentials = array();
 		$this->credentials = $credentials;
 		unset( $credentials );
+		$this->kid_directed = (bool) get_option( 'facebook_kid_directed_site' );
 
 		add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
 
@@ -142,6 +153,8 @@ class Facebook_Loader {
 		if ( is_admin() ) {
 			$args['status'] = true;
 			$args['cookie'] = true;
+		} else if ( $this->kid_directed ) {
+			$args['kidDirectedSite'] = true;
 		}
 
 		// appId optional
@@ -202,16 +215,6 @@ class Facebook_Loader {
 		// empty out the src response
 		// results in extra DOM but nothing to load
 		return '';
-	}
-
-	/**
-	 * Styles applied to public-facing pages
-	 *
-	 * @since 1.1
-	 * @uses enqueue_styles()
-	 */
-	public static function enqueue_styles() {
-		wp_enqueue_style( 'facebook', plugins_url( 'static/css/style' . ( defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min' ) . '.css', __FILE__ ), array(), self::VERSION );
 	}
 
 	/**
@@ -304,7 +307,7 @@ class Facebook_Loader {
 		self::plugin_extras();
 
 		// include comment count filters on all pages
-		if ( get_option( 'facebook_comments_enabled' ) ) {
+		if ( ! $this->kid_directed && get_option( 'facebook_comments_enabled' ) ) {
 			if ( ! class_exists( 'Facebook_Comments' ) )
 				require_once( $this->plugin_directory . 'social-plugins/class-facebook-comments.php' );
 
@@ -350,7 +353,7 @@ class Facebook_Loader {
 			add_filter( 'the_content', 'facebook_the_content_follow_button', $priority );
 
 		// individual posts, pages, and custom post types features
-		if ( isset( $post_type ) ) {
+		if ( isset( $post_type ) && ! $this->kid_directed ) {
 			if ( isset( $enabled_features['recommendations_bar'] ) )
 				add_filter( 'the_content', 'facebook_the_content_recommendations_bar', $priority );
 
@@ -362,8 +365,6 @@ class Facebook_Loader {
 				add_filter( 'comments_template', array( 'Facebook_Comments', 'comments_template' ) );
 			}
 		}
-
-		add_action( 'wp_enqueue_scripts', array( 'Facebook_Loader', 'enqueue_styles' ) );
 	}
 
 	/**
@@ -398,14 +399,18 @@ class Facebook_Loader {
 	public function widgets_init() {
 		$widget_directory = $this->plugin_directory . 'social-plugins/widgets/';
 
-		foreach ( array(
-			'like-box' => 'Facebook_Like_Box_Widget',
+		$widgets = array(
 			'like-button' => 'Facebook_Like_Button_Widget',
 			'send-button' => 'Facebook_Send_Button_Widget',
-			'follow-button' => 'Facebook_Follow_Button_Widget',
-			'recommendations-box' => 'Facebook_Recommendations_Widget',
-			'activity-feed' => 'Facebook_Activity_Feed_Widget'
-		) as $filename => $classname ) {
+			'follow-button' => 'Facebook_Follow_Button_Widget'
+		);
+		if ( ! $this->kid_directed ) {
+			$widgets['like-box'] = 'Facebook_Like_Box_Widget';
+			$widgets['recommendations-box'] = 'Facebook_Recommendations_Widget';
+			$widgets['activity-feed'] = 'Facebook_Activity_Feed_Widget';
+		}
+
+		foreach ( $widgets as $filename => $classname ) {
 			if ( class_exists( $classname ) ) {
 				register_widget( $classname );
 			} else {

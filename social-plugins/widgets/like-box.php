@@ -15,22 +15,6 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 			__( 'Facebook Like Box', 'facebook' ), // Name
 			array( 'description' => _x( 'Highlight your Facebook Page content.', 'Improve the marketing of Facebook content by including on your site.', 'facebook' ) . ' ' . __( 'Encourage visitors to like your Facebook page.', 'facebook' ) ) // Args
 		);
-		add_action( 'admin_enqueue_scripts', array( 'Facebook_Like_Box_Widget', 'admin_enqueue_scripts' ) );
-	}
-
-	/**
-	 * Enqueue color picker if present
-	 *
-	 * @since 1.1.11
-	 * @uses wp_enqueue_script(), wp_enqueue_style()
-	 * @param string $hook_suffix hook suffix passed with action
-	 */
-	public static function admin_enqueue_scripts( $hook_suffix = null ) {
-		if ( $hook_suffix !== 'widgets.php' )
-			return;
-
-		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_script( 'wp-color-picker' );
 	}
 
 	/**
@@ -39,7 +23,7 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 	 *
 	 * @since 1.1.11
 	 * @param string $url absolute URL
-	 * @return string 
+	 * @return string Facebook Page URL or empty string if the passed URL does not seem to be a Facebook Page URL
 	 */
 	public static function sanitize_facebook_page_url( $url ) {
 		global $wpdb, $facebook_loader;
@@ -155,82 +139,58 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
+		$new_instance = (array) $new_instance;
 
 		if ( ! empty( $new_instance['title'] ) )
 			$instance['title'] = strip_tags( $new_instance['title'] );
+
+		// set the booleans
+		foreach ( array( 'stream', 'header', 'show_border', 'force_wall', 'show_faces' ) as $bool_option ) {
+			if ( isset( $new_instance[ $bool_option ] ) )
+				$new_instance[ $bool_option ] = true;
+			else
+				$new_instance[ $bool_option ] = false;
+		}
+
+		if ( isset( $new_instance['href'] ) ) {
+			// sanitize if href has changed
+			if ( ! isset( $old_instance['href'] ) || $old_instance['href'] !== $new_instance['href'] )
+				$new_instance['href'] = self::sanitize_facebook_page_url( $new_instance['href'] );
+		}
+
+		foreach( array( 'width', 'height' ) as $option ) {
+			if ( isset( $new_instance[ $option ] ) )
+				$new_instance[ $option ] = absint( $new_instance[ $option ] );
+		}
 
 		if ( ! class_exists( 'Facebook_Like_Box' ) )
 			require_once( dirname( dirname(__FILE__) ) . '/class-facebook-like-box.php' );
 
 		// include values when checkboxes not present
-		$box = Facebook_Like_Box::fromArray( array_merge( array(
-			'show_faces' => false,
-			'stream' => false,
-			'header' => false,
-			'force_wall' => false
-		),  $new_instance ) );
+		$box = Facebook_Like_Box::fromArray( $new_instance );
 		if ( $box ) {
 			$box_options = $box->toHTMLDataArray();
 
-			if ( isset( $box_options['href'] ) ) {
-				// sanitize if href has changed
-				if ( ! isset( $old_instance['href'] ) || $old_instance['href'] !== $box_options['href'] )
-					$box_options['href'] = self::sanitize_facebook_page_url( $box_options['href'] );
-			}
+			// convert dashes used to construct data-* attributes into underscore properties
+			foreach( array( 'stream' => 'stream', 'header' => 'header', 'show-border' => 'show_border', 'force-wall' => 'force_wall', 'show-faces' => 'show_faces' ) as $data => $prop ) {
+				if ( ! isset( $box_options[ $data ] ) )
+					continue;
 
-			// convert the booleans
-			foreach ( array( 'stream', 'header' ) as $bool_property ) {
-				if ( isset( $box_options[ $bool_property ] ) ) {
-					if ( $box_options[ $bool_property ] === 'false' )
-						$box_options[ $bool_property ] = false;
-					else
-						$box_options[ $bool_property ] = true;
+				if ( $box_options[ $data ] === 'true' )
+					$box_options[ $data ] = true;
+				else if ( $box_options[ $data ] === 'false' )
+					$box_options[ $data ] = false;
+
+				if ( $data !== $prop ) {
+					$box_options[ $prop ] = $box_options[ $data ];
+					unset( $box_options[ $data ] );
 				}
 			}
 
-			// dashes to underscores
-			if ( isset( $box_options['border-color'] ) ) {
-				$box_options['border_color'] = $box_options['border-color'];
-				unset( $box_options['border-color'] );
-			}
-			if ( isset( $box_options['max-age'] ) ) {
-				$box_options['max_age'] = absint( $box_options['max-age'] );
-				unset( $box_options['max-age'] );
-			}
-
-			// bool with dash
-			if ( isset( $box_options['force-wall'] ) ) {
-				if ( $box_options['force-wall'] === 'true' )
-					$box_options['force_wall'] = true;
-				else
-					$box_options['force_wall'] = false;
-				unset( $box_options['force-wall'] );
-			}
-			// bool with dash
-			if ( isset( $box_options['show-faces'] ) ) {
-				if ( $box_options['show-faces'] === 'false' )
-					$box_options['show_faces'] = false;
-				else
-					$box_options['show_faces'] = true;
-				unset( $box_options['show-faces'] );
-			}
-
-			if ( isset( $box_options['width'] ) ) {
-				$box_options['width'] = absint( $box_options['width'] );
-				if ( $box_options['width'] > 0 ) {
-					// correct an invalid value to the closest allowed value
-					if ( $box_options['width'] < Facebook_Like_Box::MIN_WIDTH )
-						$box_options['width'] = Facebook_Like_Box::MIN_WIDTH;
-				} else {
-					unset( $box_options['width'] );
-				}
-			}
-
-			if ( isset( $box_options['height'] ) ) {
-				$box_options['height'] = absint( $box_options['height'] );
-				// default is the same as minimum. remove invalid value
-				if ( $box_options['height'] < Facebook_Like_Box::MIN_HEIGHT )
-					unset( $box_options['height'] );
+			// unsigned ints
+			foreach( array( 'width', 'height' ) as $option ) {
+				if ( isset( $box_options[ $option ] ) )
+					$box_options[ $option ] = absint( $box_options[ $option ] );
 			}
 
 			return array_merge( $instance, $box_options );
@@ -247,26 +207,26 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		$instance = wp_parse_args( $instance, array(
+		$instance = wp_parse_args( (array) $instance, array(
 			'title' => '',
 			'header' => true,
+			'show_border' => true,
 			'href' => '',
 			'stream' => true,
 			'force_wall' => false,
 			'show_faces' => true,
 			'colorscheme' => 'light',
-			'border_color' => '',
 			'width' => 300,
 			'height' => 0
 		) );
 		$this->display_title( $instance['title'] );
 		$this->display_header( $instance['header'] === true || $instance['header'] === 'true' || $instance['header'] == '1' );
+		$this->display_show_border( $instance['show_border'] === true || $instance['show_border'] === 'true' || $instance['show_border'] == '1' );
 		$this->display_href( $instance['href'] );
 		$this->display_stream( $instance['stream'] === true || $instance['stream'] === 'true' || $instance['stream'] == '1' );
 		$this->display_force_wall( $instance['force_wall'] === true || $instance['force_wall'] === 'true' || $instance['force_wall'] == '1' );
 		$this->display_show_faces( $instance['show_faces'] === true || $instance['show_faces'] === 'true' || $instance['show_faces'] == '1' );
 		$this->display_colorscheme( $instance['colorscheme'] );
-		$this->display_border_color( $instance['border_color'] );
 		$this->display_width( absint( $instance['width'] ) );
 		$this->display_height( absint( $instance['height'] ) );
 	}
@@ -297,6 +257,19 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 		echo '<p><input class="checkbox" type="checkbox" id="' . $this->get_field_id( 'header' ) . '" name="' . $this->get_field_name( 'header' ) . '" value="1"';
 		checked( $true_false );
 		echo ' /> <label for="' . $this->get_field_id( 'header' ) . '">' . esc_html( __( 'Include Facebook header', 'facebook' ) ) . '</label></p>';
+	}
+
+	/**
+	 * Show the Facebook header
+	 * Works best when you do not set your own widget title
+	 *
+	 * @since 1.5
+	 * @param bool $true_false
+	 */
+	public function display_show_border( $true_false ) {
+		echo '<p><input class="checkbox" type="checkbox" id="' . $this->get_field_id( 'show_border' ) . '" name="' . $this->get_field_name( 'show_border' ) . '" value="1"';
+		checked( $true_false );
+		echo ' /> <label for="' . $this->get_field_id( 'show_border' ) . '">' . esc_html( __( 'Show a border', 'facebook' ) ) . '</label></p>';
 	}
 
 	/**
@@ -362,32 +335,7 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 
 		$color_schemes = Facebook_Social_Plugin_Settings::color_scheme_choices( $this->get_field_name( 'colorscheme' ), $existing_value );
 		if ( $color_schemes )
-			echo '<fieldset id="' . $this->get_field_id( 'colorscheme' ) . '">' . esc_html( __( 'Color scheme', 'facebook' ) ) . ': ' . $color_schemes . '</fieldset>';
-	}
-
-	/**
-	 * Choose a custom border color
-	 * Note: we purposely do not set input[type=color] since an empty string is not a valid value for that field
-	 *
-	 * @since 1.1.11
-	 * @link http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#color-state-(type=color) WHATWG input[type=color]
-	 * @param string $existing_value stored value
-	 */
-	public function display_border_color( $existing_value = '' ) {
-		$field_id = $this->get_field_id( 'border_color' );
-		echo '<p><label for="' . $field_id . '">' . esc_html( __( 'Border color', 'facebook' ) ) . '</label>: <input class="color-picker-hex" type="text" size="8" maxlength="7" id="' . $field_id . '" name="' . $this->get_field_name( 'border_color' ) . '"';
-		if ( $existing_value )
-			echo ' value="' . esc_attr( $existing_value ) . '"';
-		echo ' />';
-
-		// include script element inline to trigger color picker on initial pageload as well as jQuery(.widget-content).html() on ajax save
-		if ( wp_script_is( 'wp-color-picker', 'registered' ) ) {
-			echo '</p><script type="text/javascript">if(jQuery){jQuery(function(){if(jQuery.fn.wpColorPicker){jQuery(' . json_encode( '#' . $field_id ) . ').wpColorPicker({defaultColor:"#000000"})}})}</script>';
-		} else {
-			if ( $existing_value )
-				echo ' <span id="' . $field_id . '-span" style="background-color:' . esc_attr( $existing_value ) . ';min-width:2em">&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-			echo '</p><script type="text/javascript">if(jQuery){jQuery(function(){jQuery(' . json_encode( '#' . $field_id ) . ').on("change",function(){jQuery(' . json_encode( '#' . $field_id . '-span' ) . ').css("background-color",jQuery(this).val())})})}</script>';
-		}
+			echo '<div id="' . $this->get_field_id( 'colorscheme' ) . '">' . esc_html( __( 'Color scheme', 'facebook' ) ) . ': ' . $color_schemes . '</div>';
 	}
 
 	/**

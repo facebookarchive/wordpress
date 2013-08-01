@@ -62,6 +62,7 @@ class Facebook_Send_Button_Widget extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
+		$new_instance = (array) $new_instance;
 
 		if ( ! empty( $new_instance['title'] ) )
 			$instance['title'] = strip_tags( $new_instance['title'] );
@@ -71,10 +72,7 @@ class Facebook_Send_Button_Widget extends WP_Widget {
 
 		$send_button = Facebook_Send_Button::fromArray( $new_instance );
 		if ( $send_button ) {
-			$send_button_options = $send_button->toHTMLDataArray();
-			foreach( $send_button_options as $key => $value ) {
-				$instance[ str_replace( '-', '_', $key ) ] = $value;
-			}
+			return array_merge( $instance, $send_button->toHTMLDataArray() );
 		}
 
 		return $instance;
@@ -88,8 +86,15 @@ class Facebook_Send_Button_Widget extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		$this->display_title( isset( $instance['title'] ) ? $instance['title'] : '' );
-		$this->display_href( isset( $instance['href'] ) ? $instance['href'] : '' );
+		$instance = wp_parse_args( (array) $instance, array(
+			'title' => '',
+			'href' => '',
+			'font' => '',
+			'colorscheme' => 'light'
+		) );
+
+		$this->display_title( $instance['title'] );
+		$this->display_href( $instance['href'] );
 
 		if ( ! class_exists( 'Facebook_Send_Button_Settings' ) )
 			require_once( dirname( dirname( dirname(__FILE__) ) ) . '/admin/settings-send-button.php' );

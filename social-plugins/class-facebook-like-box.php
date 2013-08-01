@@ -1,9 +1,10 @@
 <?php
 /**
- * Display recommended pages based on the browsing history, site interactions, and interests of a Facebook user and friends
+ * Encourage visitors to Like a Facebook Page
+ * Optionally display profile photos of friends who already like your page or latest updates from your page
  *
  * @since 1.1
- * @link https://developers.facebook.com/docs/reference/plugins/recommendations/ Recommendations Box social plugin
+ * @link https://developers.facebook.com/docs/reference/plugins/like-box/ Like Box social plugin
  */
 class Facebook_Like_Box {
 	/**
@@ -99,12 +100,14 @@ class Facebook_Like_Box {
 	protected $header;
 
 	/**
-	 * Box border color as a hexadecimal value
+	 * Show a border around the plugin
+	 * Default: true
+	 * Set to false to style the resulting iframe with your custom CSS
 	 *
-	 * @since 1.1.11
-	 * @var string
+	 * @since 1.5
+	 * @var bool
 	 */
-	protected $border_color;
+	protected $show_border;
 
 	/**
 	 * Places-specific features: should the stream contain posts from a Pages' walls instead of checkins by friends?
@@ -251,21 +254,24 @@ class Facebook_Like_Box {
 	}
 
 	/**
-	 * Define the border color of the Like Box
+	 * Add a border to the box
 	 *
-	 * @since 1.1.11
-	 * @param string $color hex color
+	 * @since 1.5
 	 * @return Facebook_Like_Box support chaining
 	 */
-	public function setBorderColor( $color ) {
-		if ( is_string( $color ) ) {
-			// hex only
-			$color = ltrim( $color, '#' );
-			$color_len = strlen( $color );
-			// shorthand or full hex
-			if ( ( $color_len === 3 && preg_match( '/^[0-9a-f]{3}$/Di', $color ) ) || ( $color_len === 6 && preg_match( '/^[0-9a-f]{6}$/Di', $color ) ) )
-				$this->border_color = '#' . strtolower( $color ); // to lower for consistency
-		}
+	public function showBorder() {
+		$this->show_border = true;
+		return $this;
+	}
+
+	/**
+	 * Hide the box border
+	 *
+	 * @since 1.5
+	 * @return Facebook_Like_Box support chaining
+	 */
+	public function hideBorder() {
+		$this->show_border = false;
 		return $this;
 	}
 
@@ -317,9 +323,6 @@ class Facebook_Like_Box {
 		if ( isset( $values['colorscheme'] ) )
 			$like_box->setColorscheme( $values['colorscheme'] );
 
-		if ( isset( $values['border_color'] ) )
-			$like_box->setBorderColor( $values['border_color'] );
-
 		if ( isset( $values['show_faces'] ) && ( $values['show_faces'] === false || $values['show_faces'] === 'false' || $values['show_faces'] == 0 ) )
 			$like_box->hideFaces();
 		else
@@ -339,6 +342,11 @@ class Facebook_Like_Box {
 			$like_box->hideHeader();
 		else
 			$like_box->showHeader();
+
+		if ( isset( $values['show_border'] ) && ( $values['show_border'] === false || $values['show_border'] === 'false' || $values['show_border'] == 0 ) )
+			$like_box->hideBorder();
+		else
+			$like_box->showBorder();
 
 		return $like_box;
 	}
@@ -363,23 +371,28 @@ class Facebook_Like_Box {
 		if ( isset( $this->colorscheme ) && $this->colorscheme !== 'light' )
 			$data['colorscheme'] = $this->colorscheme;
 
-		if ( isset( $this->show_faces ) && $this->show_faces === false )
-			$data['show-faces'] = 'false';
+		if ( isset( $this->show_faces ) ) {
+			if ( $this->show_faces === false )
+				$data['show-faces'] = 'false';
+			else
+				$data['show-faces'] = 'true';
+		}
 
 		if ( isset( $this->stream ) ) {
 			if ( $this->stream === false ) {
 				$data['stream'] = 'false';
-			} else if ( isset( $this->force_wall ) && $this->force_wall === true ) {
+			} else {
 				$data['stream'] = 'true';
-				$data['force-wall'] = 'true';
+				if ( isset( $this->force_wall ) && $this->force_wall === true )
+					$data['force-wall'] = 'true';
 			}
 		}
 
 		if ( isset( $this->header ) && $this->header === false )
 			$data['header'] = 'false';
 
-		if ( isset( $this->border_color ) )
-			$data['border-color'] = $this->border_color;
+		if ( isset( $this->show_border ) && $this->show_border === false )
+			$data['show-border'] = 'false';
 
 		return $data;
 	}

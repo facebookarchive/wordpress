@@ -27,6 +27,14 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 	const OPTION_NAME = 'facebook_like_button';
 
 	/**
+	 * The hook suffix assigned by add_submenu_page()
+	 *
+	 * @since 1.1
+	 * @var string
+	 */
+	protected $hook_suffix = '';
+
+	/**
 	 * Initialize with an options array
 	 *
 	 * @since 1.1
@@ -120,7 +128,6 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 	 * @since 1.1
 	 * @uses add_settings_section()
 	 * @uses add_settings_field()
-	 * @param string $page parent page slug
 	 */
 	private function settings_api_init() {
 		if ( ! isset( $this->hook_suffix ) )
@@ -292,7 +299,7 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 
 		echo esc_html( sprintf( __( 'Include a %1$s alongside the %2$s.', 'facebook' ), __( 'Send Button', 'facebook' ), self::social_plugin_name() ) ) . '</label>';
 
-		echo '<p class="description">' . esc_html( sprintf( __( 'Allows a %1$s user to easily send your URL to a friend via email, %1$s message, or post to a %1$s group.', 'facebook' ), 'Facebook' ) ) . '</p>';
+		echo '<p class="description">' . esc_html( __( 'Allows a Facebook user to easily send your URL to a friend via email, Facebook message, or post to a Facebook group.', 'facebook' ) ) . '</p>';
 	}
 
 	/**
@@ -526,12 +533,21 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 		if ( ! is_array( $options ) )
 			return array();
 
-		if ( isset( $options['send'] ) && $options['send'] === 'true' )
-			$options['send'] = true;
-		if ( isset( $options['show-faces'] ) && $options['show-faces'] === 'true' ) {
-			$options['show_faces'] = true;
+		if ( isset( $options['send'] ) ) {
+			if ( $options['send'] === 'true' )
+				$options['send'] = true;
+			else if ( $options['send'] === 'false' )
+				$options['send'] = false;
+		}
+
+		if ( isset( $options['show-faces'] ) ) {
+			if ( $options['show-faces'] === 'true' )
+				$options['show_faces'] = true;
+			else if ( $options['show-faces'] === 'false' )
+				$options['show_faces'] = false;
 			unset( $options['show-faces'] );
 		}
+
 		if ( isset( $options['width'] ) )
 			$options['width'] = absint( $options['width'] );
 
@@ -558,6 +574,16 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 			unset( $clean_options['show_on'] );
 		}
 		unset( $options['show_on'] );
+
+		foreach( array( 'send', 'show_faces' ) as $bool_option ) {
+			if ( isset( $options[ $bool_option ] ) )
+				$options[ $bool_option ] = true;
+			else
+				$options[ $bool_option ] = false;
+		}
+
+		if ( isset( $options['width'] ) )
+			$options['width'] = absint( $options['width'] );
 
 		$like_button = Facebook_Like_Button::fromArray( $options );
 		if ( $like_button ) {

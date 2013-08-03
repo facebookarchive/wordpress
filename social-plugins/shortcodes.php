@@ -12,9 +12,32 @@ class Facebook_Shortcodes {
 	 * @since 1.1.6
 	 */
 	public static function init() {
+		// expose social plugin markup using WordPress Shortcode API
 		add_shortcode( 'facebook_like_button', array( 'Facebook_Shortcodes', 'like_button' ) );
 		add_shortcode( 'facebook_send_button', array( 'Facebook_Shortcodes', 'send_button' ) );
 		add_shortcode( 'facebook_follow_button', array( 'Facebook_Shortcodes', 'follow_button' ) );
+		add_shortcode( 'facebook_embedded_post', array( 'Facebook_Shortcodes', 'embedded_post' ) );
+
+		// Convert a Facebook URL possibly representing a public post into Facebook embedded post markup
+		wp_embed_register_handler( 'facebook_embedded_post_vanity', '#^https?://www\.facebook\.com/([A-Za-z0-9\.-]{2,50})/posts/([\d]+)#i', array( 'Facebook_Shortcodes', 'wp_embed_handler_embedded_post' ) );
+		wp_embed_register_handler( 'facebook_embedded_post_no_vanity', '#^https?://www\.facebook\.com/permalink\.php\?story_fbid=([\d]+)&id=([\d]+)#i', array( 'Facebook_Shortcodes', 'wp_embed_handler_embedded_post' ) );
+		wp_embed_register_handler( 'facebook_embedded_post_photo', '#^https?://www\.facebook\.com/photo\.php\?fbid=([\d]+)#i', array( 'Facebook_Shortcodes', 'wp_embed_handler_embedded_post' ) );
+		wp_embed_register_handler( 'facebook_embedded_post_video', '#^https?://www\.facebook\.com/photo\.php\?v=([\d]+)#i', array( 'Facebook_Shortcodes', 'wp_embed_handler_embedded_post' ) );
+	}
+
+	/**
+	 * Facebook Embedded Post embed handler callback
+	 * Facebook does not support oEmbed
+	 *
+	 * @since 1.5
+	 * @param array $matches The regex matches from the provided regex when calling {@link wp_embed_register_handler()}.
+	 * @param array $attr Embed attributes. Not used.
+	 * @param string $url The original URL that was matched by the regex. Not used.
+	 * @param array $rawattr The original unmodified attributes. Not used.
+	 * @return string social plugin XFBML or an empty string if minimum requirements unmet
+	 */
+	public static function wp_embed_handler_embedded_post( $matches, $attr, $url, $rawattr ) {
+		return self::embedded_post( array( 'href' => $matches[0] ) );
 	}
 
 	/**
@@ -160,6 +183,31 @@ class Facebook_Shortcodes {
 			require_once( dirname(__FILE__) . '/social-plugins.php' );
 
 		return facebook_get_follow_button( $options );
+	}
+
+	/**
+	 * Generate a HTML div element with data-* attributes to be converted into a Facebook embedded post
+	 *
+	 * @since 1.5
+	 * @param array $attributes shortcode attributes. overrides site options for specific button attributes
+	 * @param string $content shortcode content. no effect
+	 * @return string Follow Button div HTML or empty string if minimum requirements not met
+	 */
+	public static function embedded_post( $attributes, $content = null ) {
+		$options = shortcode_atts( array(
+			'href' => ''
+		), $attributes, 'facebook_embed_post' );
+
+		$options['href'] = trim( $options['href'] );
+		if ( ! $options['href'] )
+			return '';
+
+		if ( ! class_exists( 'Facebook_Embedded_Post' ) )
+		require_once( dirname(__FILE__) . '/class-facebook-embedded-post.php' );
+
+		$embed = new Facebook_Embedded_Post();
+		$embed->setURL( $options['href'] );
+		return $embed->asHTML( array( 'class' => array( 'fb-social-plugin' ) ) );
 	}
 }
 ?>

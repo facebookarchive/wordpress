@@ -21,6 +21,8 @@ class Facebook_Shortcodes {
 		// Convert a Facebook URL possibly representing a public post into Facebook embedded post markup
 		wp_embed_register_handler( 'facebook_embedded_post_vanity', '#^https?://www\.facebook\.com/([A-Za-z0-9\.-]{2,50})/posts/([\d]+)#i', array( 'Facebook_Shortcodes', 'wp_embed_handler_embedded_post' ) );
 		wp_embed_register_handler( 'facebook_embedded_post_no_vanity', '#^https?://www\.facebook\.com/permalink\.php\?story_fbid=([\d]+)&id=([\d]+)#i', array( 'Facebook_Shortcodes', 'wp_embed_handler_embedded_post' ) );
+		wp_embed_register_handler( 'facebook_embedded_post_activity', '#^https?://www\.facebook\.com/([A-Za-z0-9\.-]{2,50})/activity/([\d]+)#i', array( 'Facebook_Shortcodes', 'wp_embed_handler_embedded_post' ) );
+		wp_embed_register_handler( 'facebook_embedded_post_question', '#^https?://www\.facebook\.com/questions/([\d]+)#i', array( 'Facebook_Shortcodes', 'wp_embed_handler_embedded_post' ) );
 		wp_embed_register_handler( 'facebook_embedded_post_photo', '#^https?://www\.facebook\.com/photo\.php\?fbid=([\d]+)#i', array( 'Facebook_Shortcodes', 'wp_embed_handler_embedded_post' ) );
 		wp_embed_register_handler( 'facebook_embedded_post_video', '#^https?://www\.facebook\.com/photo\.php\?v=([\d]+)#i', array( 'Facebook_Shortcodes', 'wp_embed_handler_embedded_post' ) );
 	}
@@ -195,7 +197,8 @@ class Facebook_Shortcodes {
 	 */
 	public static function embedded_post( $attributes, $content = null ) {
 		$options = shortcode_atts( array(
-			'href' => ''
+			'href' => '',
+			'show_border' => true
 		), $attributes, 'facebook_embed_post' );
 
 		$options['href'] = trim( $options['href'] );
@@ -203,10 +206,11 @@ class Facebook_Shortcodes {
 			return '';
 
 		if ( ! class_exists( 'Facebook_Embedded_Post' ) )
-		require_once( dirname(__FILE__) . '/class-facebook-embedded-post.php' );
+			require_once( dirname(__FILE__) . '/class-facebook-embedded-post.php' );
 
-		$embed = new Facebook_Embedded_Post();
-		$embed->setURL( $options['href'] );
+		$embed = Facebook_Embedded_Post::fromArray( $options );
+		if ( ! $embed )
+			return '';
 		return $embed->asHTML( array( 'class' => array( 'fb-social-plugin' ) ) );
 	}
 }

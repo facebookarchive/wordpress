@@ -97,7 +97,7 @@ class Facebook_Follow_Button extends Facebook_Social_Plugin {
 		$url = esc_url_raw( $url, array( 'http', 'https' ) );
 		if ( $url ) {
 			// you can only follow a Facebook URL
-			if ( parse_url( $url, PHP_URL_HOST ) === 'www.facebook.com' )
+			if ( ! $this->validate || parse_url( $url, PHP_URL_HOST ) === 'www.facebook.com' )
 				$this->href = $url;
 		}
 		return $this;

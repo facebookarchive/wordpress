@@ -416,7 +416,7 @@ class Facebook_Open_Graph_Protocol {
 
 		// get image attachments
 		if ( function_exists( 'get_attached_media' ) ) {
-			$images = get_attached_media( 'image' );
+			$images = get_attached_media( 'image', $post->ID );
 			if ( ! empty( $images ) ) {
 				foreach( $images as $i ) {
 					if ( ! isset( $i->ID ) )

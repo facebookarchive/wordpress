@@ -71,7 +71,82 @@ class Facebook_Loader {
 	 *
 	 * @since 1.1
 	 */
-	public static $locales = array( 'af_ZA' => true, 'ar_AR' => true, 'az_AZ' => true, 'be_BY' => true, 'bg_BG' => true, 'bn_IN' => true, 'bs_BA' => true, 'ca_ES' => true, 'cs_CZ' => true, 'cy_GB' => true, 'da_DK' => true, 'de_DE' => true, 'el_GR' => true, 'en_US' => true, 'en_GB' => true, 'eo_EO' => true, 'es_ES' => true, 'es_LA' => true, 'et_EE' => true, 'eu_ES' => true, 'fa_IR' => true, 'fb_LT' => true, 'fi_FI' => true, 'fo_FO' => true, 'fr_FR' => true, 'fr_CA' => true, 'fy_NL' => true, 'ga_IE' => true, 'gl_ES' => true, 'he_IL' => true, 'hi_IN' => true, 'hr_HR' => true, 'hu_HU' => true, 'hy_AM' => true, 'id_ID' => true, 'is_IS' => true, 'it_IT' => true, 'ja_JP' => true, 'ka_GE' => true, 'km_KH' => true, 'ko_KR' => true, 'ku_TR' => true, 'la_VA' => true, 'lt_LT' => true, 'lv_LV' => true, 'mk_MK' => true, 'ml_IN' => true, 'ms_MY' => true, 'nb_NO' => true, 'ne_NP' => true, 'nl_NL' => true, 'nn_NO' => true, 'pa_IN' => true, 'pl_PL' => true, 'ps_AF' => true, 'pt_PT' => true, 'pt_BR' => true, 'ro_RO' => true, 'ru_RU' => true, 'sk_SK' => true, 'sl_SI' => true, 'sq_AL' => true, 'sr_RS' => true, 'sv_SE' => true, 'sw_KE' => true, 'ta_IN' => true, 'te_IN' => true, 'th_TH' => true, 'tl_PH' => true, 'tr_TR' => true, 'uk_UA' => true, 'vi_VN' => true, 'zh_CN' => true, 'zh_HK' => true, 'zh_TW' => true );
+	public static $locales = array(
+		'af_ZA' => true, // Afrikaans
+		'ar_AR' => true, // Arabic
+		'az_AZ' => true, // Azerbaijani
+		'be_BY' => true, // Belarusian
+		'bg_BG' => true, // Bulgarian
+		'bn_IN' => true, // Bengali
+		'bs_BA' => true, // Bosnian
+		'ca_ES' => true, // Catalan
+		'cs_CZ' => true, // Czech
+		'cy_GB' => true, // Welsh
+		'da_DK' => true, // Danish
+		'de_DE' => true, // German
+		'el_GR' => true, // Greek
+		'en_US' => true, // English (US)
+		'en_GB' => true, // English (UK)
+		'eo_EO' => true, // Esperanto
+		'es_LA' => true, // Spanish
+		'es_ES' => true, // Spanish (Spain)
+		'et_EE' => true, // Estonian
+		'eu_ES' => true, // Basque
+		'fa_IR' => true, // Persian
+		'fi_FI' => true, // Finnish
+		'fo_FO' => true, // Faroese
+		'fr_FR' => true, // French (France)
+		'fr_CA' => true, // French (Canada)
+		'fy_NL' => true, // Frisian
+		'ga_IE' => true, // Irish
+		'gl_ES' => true, // Galician
+		'he_IL' => true, // Hebrew
+		'hi_IN' => true, // Hindi
+		'hr_HR' => true, // Croatian
+		'hu_HU' => true, // Hungarian
+		'hy_AM' => true, // Armenian
+		'id_ID' => true, // Indonesian
+		'is_IS' => true, // Icelandic
+		'it_IT' => true, // Italian
+		'ja_JP' => true, // Japanese
+		'ka_GE' => true, // Georgian
+		'km_KH' => true, // Khmer
+		'ko_KR' => true, // Korean
+		'ku_TR' => true, // Kurdish
+		'la_VA' => true, // Latin
+		'lt_LT' => true, // Lithuanian
+		'lv_LV' => true, // Latvian
+		'mk_MK' => true, // Macedonian
+		'ml_IN' => true, // Malayalam
+		'ms_MY' => true, // Malay
+		'nb_NO' => true, // Norwegian (bokmal)
+		'ne_NP' => true, // Nepali
+		'nl_NL' => true, // Dutch
+		'nn_NO' => true, // Norwegian (nynorsk)
+		'pa_IN' => true, // Punjabi
+		'pl_PL' => true, // Polish
+		'ps_AF' => true, // Pashto
+		'pt_BR' => true, // Portuguese (Brazil)
+		'pt_PT' => true, // Portuguese (Portugal)
+		'ro_RO' => true, // Romanian
+		'ru_RU' => true, // Russian
+		'sk_SK' => true, // Slovak
+		'sl_SI' => true, // Slovenian
+		'sq_AL' => true, // Albanian
+		'sr_RS' => true, // Serbian
+		'sv_SE' => true, // Swedish
+		'sw_KE' => true, // Swahili
+		'ta_IN' => true, // Tamil
+		'te_IN' => true, // Telugu
+		'th_TH' => true, // Thai
+		'tl_PH' => true, // Filipino
+		'tr_TR' => true, // Turkish
+		'uk_UA' => true, // Ukrainian
+		'vi_VN' => true, // Vietnamese
+		'zh_CN' => true, // Simplified Chinese (China)
+		'zh_HK' => true, // Traditional Chinese (Hong Kong)
+		'zh_TW' => true // Traditional Chinese (Taiwan)
+	);
 
 	/**
 	 * Let's get it started

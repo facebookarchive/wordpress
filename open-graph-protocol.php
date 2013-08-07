@@ -48,6 +48,16 @@ class Facebook_Open_Graph_Protocol {
 	const MIN_IMAGE_DIMENSION = 200;
 
 	/**
+	 * Only list the first N eligible Open Graph protocol images
+	 * Facebook helps a person choose one of three parsed images when a link is pasted into a message
+	 * Other consumers of Open Graph protocol data (Google, Twitter, etc.) may index additional images; increase this number to trade-off speed for coverage
+	 *
+	 * @since 1.5
+	 @var int
+	 */
+	const MAX_IMAGE_COUNT = 3;
+
+	/**
 	 * Recursively build RDFa <meta> elements used for Open Graph protocol
 	 *
 	 * @since 1.0
@@ -74,7 +84,15 @@ class Facebook_Open_Graph_Protocol {
 					self::meta_elements( $property . ':' . $structured_property, $content_value );
 			}
 		} else {
-			echo "<meta property=\"$property\" content=\"" . esc_attr( $content ) . "\" />\n";
+			echo '<meta property="' . $property . '" content="' . esc_attr( $content ) . '"';
+
+			// do not use trailing slash if HTML5
+			// http://wiki.whatwg.org/wiki/FAQ#Should_I_close_empty_elements_with_.2F.3E_or_.3E.3F
+			if ( current_theme_supports('html5') )
+				echo '>';
+			else
+				echo ' />';
+			echo "\n";
 		}
 	}
 
@@ -121,7 +139,7 @@ class Facebook_Open_Graph_Protocol {
 
 	/**
 	 * Convert full IRI Open Graph protocol values to CURIE prefixed values
-	 * Mapping CURIEs is presumed to occur in a parent element of the group of <meta>s 
+	 * Mapping CURIEs is presumed to occur in a parent element of the group of <meta>s
 	 *
 	 * @since 1.1.6
 	 * @link http://www.w3.org/TR/rdfa-syntax/#s_curies RDFa 1.1 Core CURIEs
@@ -287,32 +305,10 @@ class Facebook_Open_Graph_Protocol {
 				}
 			}
 
-			// does current post type and the current theme support post thumbnails?
-			if ( post_type_supports( $post_type, 'thumbnail' ) && function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {
-				list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
-
-				if ( ! empty( $post_thumbnail_url ) ) {
-					$image = array( 'url' => $post_thumbnail_url );
-
-					if ( ! empty( $post_thumbnail_width ) )
-						$image['width'] = absint( $post_thumbnail_width );
-
-					if ( ! empty($post_thumbnail_height) )
-						$image['height'] = absint( $post_thumbnail_height );
-
-					$meta_tags[ self::OGP_NS . 'image' ] = array( $image );
-				}
-			}
-			$gallery_images = self::gallery_images( $post );
-			if ( ! empty( $gallery_images ) ) {
-				foreach ( $gallery_images as $gallery_image ) {
-					// do not repeat the thumbnail
-					if ( isset( $post_thumbnail_url ) && $post_thumbnail_url === $gallery_image['url'] )
-						continue;
-					$meta_tags[ self::OGP_NS . 'image' ][] = $gallery_image;
-				}
-			}
-			unset( $gallery_images );
+			$images = self::get_og_images( $post );
+			if ( ! empty( $images ) )
+				$meta_tags[ self::OGP_NS . 'image' ] = array_values( $images );
+			unset( $images );
 		} else if ( is_author() ) {
 			$author = get_queried_object();
 			if ( $author && isset( $author->ID ) ) {
@@ -359,14 +355,128 @@ class Facebook_Open_Graph_Protocol {
 	}
 
 	/**
+	 * Extract Open Graph protocol image information from a WordPress image attachment
+	 *
+	 * @since 1.5
+	 * @param int $attachment_id post id of the attachment object
+	 * @param string $size requested size. one of thumbnail, medium, large, or full
+	 * @return array associative array with URL, width, height or empty array if minimum requirements not met
+	 */
+	public static function attachment_to_og_image( $attachment_id, $size = 'full' ) {
+		if ( ! ( is_string( $size ) && $size ) )
+			$size = 'full';
+
+		$image = array();
+		list( $attachment_url, $attachment_width, $attachment_height ) = wp_get_attachment_image_src( $attachment_id, $size );
+		if ( empty( $attachment_url ) )
+			return $image;
+
+		$image['url'] = $attachment_url;
+
+		if ( ! empty( $attachment_width ) ) {
+			$image['width'] = absint( $attachment_width );
+			if ( ! $image['width'] )
+				unset( $image['width'] );
+			else if ( $image['width'] < self::MIN_IMAGE_DIMENSION )
+				return array();
+		}
+		if ( ! empty( $attachment_height ) ) {
+			$image['height'] = absint( $attachment_height );
+			if ( ! $image['height'] )
+				unset( $image['height'] );
+			else if ( $image['height'] < self::MIN_IMAGE_DIMENSION )
+				return array();
+		}
+
+		return $image;
+	}
+
+	/**
+	 * Identify images attachments related to the post
+	 * Request the full size of the attachment, not necessarily the same as the size used in the post
+	 *
+	 * @since 1.5
+	 * @param WP_Post $post WordPress post of interest
+	 */
+	public static function get_og_images( $post ) {
+		$og_images = array();
+
+		if ( ! $post || ! isset( $post->ID ) )
+			return $og_images;
+
+		// does current post type and the current theme support post thumbnails?
+		if ( post_type_supports( get_post_type( $post ), 'thumbnail' ) && function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {
+			list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
+
+			$image = self::attachment_to_og_image( get_post_thumbnail_id( $post->ID ) );
+			if ( isset( $image['url'] ) && ! isset( $og_images[ $image['url'] ] ) )
+				$og_images[ $image['url'] ] = $image;
+			unset( $image );
+		}
+
+		// get image attachments
+		if ( function_exists( 'get_attached_media' ) ) {
+			$images = get_attached_media( 'image' );
+			if ( ! empty( $images ) ) {
+				foreach( $images as $i ) {
+					if ( ! isset( $i->ID ) )
+						continue;
+
+					$image = self::attachment_to_og_image( $i->ID );
+					if ( ! isset( $image['url'] ) || isset( $og_images[ $image['url'] ] ) )
+						continue;
+
+					$og_images[ $image['url'] ] = $image;
+					if ( count( $og_images ) === self::MAX_IMAGE_COUNT )
+						return $og_images;
+				}
+			}
+			unset( $images );
+		}
+
+		// add gallery content
+		if ( function_exists( 'get_post_galleries' ) ) {
+			// use get_post_galleries function from WP 3.6+
+			$galleries = get_post_galleries( $post, false );
+			foreach( $galleries as $gallery ) {
+				// use ids to request full-size image URI
+				if ( ! ( isset( $gallery['ids'] ) && $gallery['ids'] ) )
+					continue;
+
+				$gallery['ids'] = explode( ',', $gallery['ids'] );
+				foreach( $gallery['ids'] as $attachment_id ) {
+					$image = self::attachment_to_og_image( $attachment_id );
+					if ( ! isset( $image['url'] ) || isset( $og_images[ $image['url'] ] ) )
+						continue;
+
+					$og_images[ $image['url'] ] = $image;
+					if ( count( $og_images ) === self::MAX_IMAGE_COUNT )
+						return $og_images;
+
+					unset( $image );
+				}
+			}
+			unset( $galleries );
+		} else {
+			// extract full-size images from gallery shortcode
+			$og_images = self::gallery_images( $post, $og_images );
+		}
+
+		return $og_images;
+	}
+
+	/**
 	 * Find gallery shortcodes in the post. Build Open Graph protocol image results.
 	 *
 	 * @since 1.1.9
 	 * @param stdClass $post current post object
 	 * @return array array of arrays containing Open Graph protocol image markup
 	 */
-	public static function gallery_images( $post ) {
+	public static function gallery_images( $post, $existing_images = array() ) {
 		global $shortcode_tags;
+
+		if ( ! is_array( $existing_images ) )
+			$existing_images = array();
 
 		$og_images = array();
 
@@ -441,14 +551,17 @@ class Facebook_Open_Graph_Protocol {
 						unset( $pixels );
 					}
 				}
-				if ( ! isset( $og_image['url'] ) || ( isset( $og_image['width'] ) && $og_image['width'] < self::MIN_IMAGE_DIMENSION ) || ( isset( $og_image['height'] ) && $og_image['height'] < self::MIN_IMAGE_DIMENSION ) )
+				if ( ! isset( $og_image['url'] ) || isset( $existing_images[ $og_image['url'] ] ) || ( isset( $og_image['width'] ) && $og_image['width'] < self::MIN_IMAGE_DIMENSION ) || ( isset( $og_image['height'] ) && $og_image['height'] < self::MIN_IMAGE_DIMENSION ) )
 					continue;
-				$og_images[] = $og_image;
+
+				$existing_images[ $og_image['url'] ] = $og_image;
 				unset( $og_image );
+				if ( count( $existing_images ) === self::MAX_IMAGE_COUNT )
+					return $existing_images;
 			}
 		}
 
-		return $og_images;
+		return $existing_images;
 	}
 }
 ?>

@@ -88,11 +88,9 @@ class Facebook_Open_Graph_Protocol {
 
 			// do not use trailing slash if HTML5
 			// http://wiki.whatwg.org/wiki/FAQ#Should_I_close_empty_elements_with_.2F.3E_or_.3E.3F
-			if ( current_theme_supports('html5') )
-				echo '>';
-			else
-				echo ' />';
-			echo "\n";
+			if ( ! current_theme_supports('html5') )
+				echo ' /';
+			echo ">\n";
 		}
 	}
 
@@ -159,7 +157,12 @@ class Facebook_Open_Graph_Protocol {
 			self::ARTICLE_NS => array( 'prefix' => 'article' ),
 			self::PROFILE_NS => array( 'prefix' => 'profile' ),
 			'http://ogp.me/ns/book#' => array( 'prefix' => 'book' ),
+			'http://ogp.me/ns/business#' => array( 'prefix' => 'business' ),
+			'http://ogp.me/ns/event#' => array( 'prefix' => 'event' ),
+			'http://ogp.me/ns/fitness#' => array( 'prefix' => 'fitness' ),
 			'http://ogp.me/ns/music#' => array( 'prefix' => 'music' ),
+			'http://ogp.me/ns/product#' => array( 'prefix' => 'product' ),
+			'http://ogp.me/ns/restaurant#' => array( 'prefix' => 'restaurant' ),
 			'http://ogp.me/ns/video#' => array( 'prefix' => 'video' )
 		) );
 		if ( isset( $facebook_loader->credentials['app_namespace'] ) ) {

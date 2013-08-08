@@ -40,6 +40,14 @@ class Facebook_Open_Graph_Protocol {
 	const PROFILE_NS = 'http://ogp.me/ns/profile#';
 
 	/**
+	 * Base IRI of Open Graph protocol video object global properties
+	 *
+	 * @since 1.1
+	 * @var string
+	 */
+	const VIDEO_NS = 'http://ogp.me/ns/video#';
+
+	/**
 	 * Minimum edge of an acceptable Open Graph protocol image in whole pixels
 	 *
 	 * @since 1.1.9
@@ -53,7 +61,7 @@ class Facebook_Open_Graph_Protocol {
 	 * Other consumers of Open Graph protocol data (Google, Twitter, etc.) may index additional images; increase this number to trade-off speed for coverage
 	 *
 	 * @since 1.5
-	 @var int
+	 * @var int
 	 */
 	const MAX_IMAGE_COUNT = 3;
 
@@ -163,7 +171,7 @@ class Facebook_Open_Graph_Protocol {
 			'http://ogp.me/ns/music#' => array( 'prefix' => 'music' ),
 			'http://ogp.me/ns/product#' => array( 'prefix' => 'product' ),
 			'http://ogp.me/ns/restaurant#' => array( 'prefix' => 'restaurant' ),
-			'http://ogp.me/ns/video#' => array( 'prefix' => 'video' )
+			self::VIDEO_NS => array( 'prefix' => 'video' )
 		) );
 		if ( isset( $facebook_loader->credentials['app_namespace'] ) ) {
 			$app_ns_url = esc_url_raw( 'http://ogp.me/ns/fb/' . $facebook_loader->credentials['app_namespace'] . '#', array( 'http' ) );
@@ -250,68 +258,75 @@ class Facebook_Open_Graph_Protocol {
 					$meta_tags[ self::OGP_NS . 'description' ] = $description;
 			}
 
-			$meta_tags[ self::OGP_NS . 'type' ] = 'article';
-			$meta_tags[ self::ARTICLE_NS . 'published_time' ] = date( 'c', strtotime( $post->post_date_gmt ) );
-			$meta_tags[ self::ARTICLE_NS . 'modified_time' ] = date( 'c', strtotime( $post->post_modified_gmt ) );
-
-			if ( post_type_supports( $post_type, 'author' ) && isset( $post->post_author ) ) {
-				$meta_tags[ self::ARTICLE_NS . 'author' ] = get_author_posts_url( $post->post_author );
-				// adding an fb:admin grants comment moderation permissions for Comment Box
-				if ( get_option( 'facebook_comments_enabled' ) && user_can( $post->post_author, 'moderate_comments' ) ) {
-					if ( ! class_exists( 'Facebook_Comments' ) )
-						require_once( dirname(__FILE__) . '/social-plugins/class-facebook-comments.php' );
-					if ( Facebook_Comments::comments_enabled_for_post_type( $post ) ) {
-						if ( ! class_exists( 'Facebook_User' ) )
-							require_once( dirname(__FILE__) . '/facebook-user.php' );
-						$facebook_user_data = Facebook_User::get_user_meta( $post->post_author, 'fb_data', true );
-						if ( is_array( $facebook_user_data ) && isset( $facebook_user_data['fb_uid'] ) )
-							$meta_tags[ self::FB_NS . 'admins' ] = $facebook_user_data['fb_uid'];
-						unset( $facebook_user_data );
-					}
-				}
-			}
-
-			// add the first category as a section. all other categories as tags
-			$cat_ids = get_the_category();
-
-			if ( ! empty( $cat_ids ) ) {
-				$no_category = apply_filters( 'the_category', __( 'Uncategorized' ) );
-
-				$cat = get_category( $cat_ids[0] );
-
-				if ( ! empty( $cat ) && isset( $cat->name ) && $cat->name !== $no_category )
-					$meta_tags[ self::ARTICLE_NS . 'section' ] = $cat->name;
-
-				//output the rest of the categories as tags
-				unset( $cat_ids[0] );
-
-				if ( ! empty( $cat_ids ) ) {
-					$meta_tags[ self::ARTICLE_NS . 'tag' ] = array();
-					foreach( $cat_ids as $cat_id ) {
-						$cat = get_category( $cat_id );
-						if ( isset( $cat->name ) && $cat->name !== $no_category )
-							$meta_tags[ self::ARTICLE_NS . 'tag' ][] = $cat->name;
-						unset( $cat );
-					}
-				}
-			}
-
-			// add tags. treat tags as lower priority than multiple categories
-			$tags = get_the_tags();
-
-			if ( $tags ) {
-				if ( ! array_key_exists( self::ARTICLE_NS . 'tag', $meta_tags ) )
-					$meta_tags[ self::ARTICLE_NS . 'tag' ] = array();
-
-				foreach ( $tags as $tag ) {
-					$meta_tags[ self::ARTICLE_NS . 'tag' ][] = $tag->name;
-				}
-			}
+			$meta_tags[ self::OGP_NS . 'type' ] = self::get_post_og_type( $post );
 
 			$images = self::get_og_images( $post );
 			if ( ! empty( $images ) )
 				$meta_tags[ self::OGP_NS . 'image' ] = array_values( $images );
 			unset( $images );
+
+			if ( $meta_tags[ self::OGP_NS . 'type' ] === 'article' ) {
+				// add article-specific properties
+				$meta_tags = array_merge( $meta_tags, self::get_article_properties( $post ) );
+			} else if ( $meta_tags[ self::OGP_NS . 'type' ] === 'video.other' ) {
+				// attempt to declare a video or videos
+				$videos = self::get_og_videos( $post );
+				if ( ! empty( $videos ) ) {
+					$videos = array_values( $videos );
+					if ( count( $videos ) === 1 ) {
+						$video = array_shift( $videos );
+						if ( $video && isset( $video[ self::VIDEO_NS ] ) ) {
+							foreach( $video[self::VIDEO_NS] as $property => $value ) {
+								$meta_tags[ self::VIDEO_NS . $property ] = $value;
+							}
+							unset( $video[ self::VIDEO_NS ] );
+						}
+						$meta_tags[ self::OGP_NS . 'video' ] = array( $video );
+						unset( $video );
+					} else {
+						$videos_only = array();
+						foreach( $videos as $video ) {
+							unset( $video[self::VIDEO_NS] );
+							$videos_only[] = $video;
+						}
+						$meta_tags[ self::OGP_NS . 'video' ] = $videos_only;
+						unset( $videos_only );
+					}
+				}
+				unset( $videos );
+			}
+
+			// include MP3s for audio post formats
+			if ( has_post_format( 'audio', $post ) ) {
+				$audios = self::get_og_audio( $post );
+				if ( ! empty( $audios ) )
+					$meta_tags[ self::OGP_NS . 'audio' ] = array_values( $audios );
+				unset( $audios );
+			}
+
+			if ( post_type_supports( $post_type, 'author' ) && isset( $post->post_author ) ) {
+				if ( ! class_exists( 'Facebook_User' ) )
+					require_once( $facebook_loader->plugin_directory . 'facebook-user.php' );
+
+				$facebook_user_data = Facebook_User::get_user_meta( $post->post_author, 'fb_data', true );
+				$author_fbid = '';
+				if ( is_array( $facebook_user_data ) && isset( $facebook_user_data['fb_uid'] ) )
+					$author_fbid = $facebook_user_data['fb_uid'];
+				unset( $facebook_user_data );
+				if ( $author_fbid ) {
+					$meta_tags[ self::FB_NS . 'profile_id' ] = $author_fbid;
+
+					// adding an fb:admin grants comment moderation permissions for Comment Box
+					if ( get_option( 'facebook_comments_enabled' ) && user_can( $post->post_author, 'moderate_comments' ) ) {
+						if ( ! class_exists( 'Facebook_Comments' ) )
+							require_once( $facebook_loader->plugin_directory . 'social-plugins/class-facebook-comments.php' );
+
+						if ( Facebook_Comments::comments_enabled_for_post_type( $post ) )
+							$meta_tags[ self::FB_NS . 'admins' ] = $author_fbid;
+					}
+				}
+				unset( $author_fbid );
+			}
 		} else if ( is_author() ) {
 			$author = get_queried_object();
 			if ( $author && isset( $author->ID ) ) {
@@ -328,11 +343,11 @@ class Facebook_Open_Graph_Protocol {
 					$meta_tags[ self::OGP_NS . 'description'] = $description;
 
 				if ( ! class_exists( 'Facebook_User' ) )
-					require_once( dirname(__FILE__) . '/facebook-user.php' );
+					require_once( $facebook_loader->plugin_directory . 'facebook-user.php' );
 
 				$facebook_user_data = Facebook_User::get_user_meta( $author_id, 'fb_data', true );
-				if ( is_array( $facebook_user_data ) && isset( $facebook_user_data['third_party_id'] ) )
-					$meta_tags[ self::FB_NS . 'profile_id' ] = $facebook_user_data['third_party_id'];
+				if ( is_array( $facebook_user_data ) && isset( $facebook_user_data['fb_uid'] ) )
+					$meta_tags[ self::FB_NS . 'profile_id' ] = $facebook_user_data['fb_uid'];
 				unset( $facebook_user_data );
 
 				// no need to show username if there is only one
@@ -355,6 +370,101 @@ class Facebook_Open_Graph_Protocol {
 		foreach ( $meta_tags as $property => $content ) {
 			self::meta_elements( $property, $content );
 		}
+	}
+
+	/**
+	 * Classify the current post as an Open Graph object type
+	 *
+	 * @since 1.5
+	 * @link https://developers.facebook.com/docs/reference/opengraph/object-type/ Facebook global object types
+	 * @param WP_Post $post the post to classify
+	 * @return string Open Graph protocol type property value
+	 */
+	public static function get_post_og_type( $post ) {
+		$og_type = 'article';
+		if ( ! $post )
+			return $og_type;
+
+		// treat video post format as OG type video
+		if ( has_post_format( 'video', $post ) )
+			$og_type = 'video.other';
+		else if ( has_post_format( 'image', $post ) )
+			$og_type = 'photo';
+		$og_type = apply_filters( 'facebook_og_type', $og_type, $post );
+		if ( ! $og_type )
+			$og_type = 'article';
+
+		return $og_type;
+	}
+
+	/**
+	 * Map WordPress post data to Open Graph article object properties
+	 *
+	 * @since 1.5
+	 * @param WP_Post $post the post of interest
+	 * @return array associative array of OGP properties and values related to the post
+	 */
+	public static function get_article_properties( $post ) {
+		global $facebook_loader;
+
+		$ogp = array(
+			self::ARTICLE_NS . 'published_time' => date( 'c', strtotime( $post->post_date_gmt ) ),
+			self::ARTICLE_NS . 'modified_time' => date( 'c', strtotime( $post->post_modified_gmt ) )
+		);
+
+		if ( post_type_supports( get_post_type( $post ), 'author' ) && isset( $post->post_author ) ) {
+			if ( ! class_exists( 'Facebook_User' ) )
+				require_once( $facebook_loader->plugin_directory . 'facebook-user.php' );
+
+			$facebook_user_data = Facebook_User::get_user_meta( $post->post_author, 'fb_data', true );
+			if ( is_array( $facebook_user_data ) && isset( $facebook_user_data['link'] ) )
+				$ogp[ self::ARTICLE_NS . 'author' ] = $facebook_user_data['link'];
+			else
+				$ogp[ self::ARTICLE_NS . 'author' ] = get_author_posts_url( $post->post_author );
+			unset( $facebook_user_data );
+		}
+
+		$facebook_page = get_option( 'facebook_publish_page' );
+		if ( is_array( $facebook_page ) && isset( $facebook_page['link'] ) )
+			$ogp[ self::ARTICLE_NS . 'publisher' ] = $facebook_page['link'];
+		unset( $facebook_page );
+
+		// add the first category as a section. all other categories as tags
+		$cat_ids = get_the_category();
+		if ( ! empty( $cat_ids ) ) {
+			$no_category = apply_filters( 'the_category', __( 'Uncategorized' ) );
+
+			$cat = get_category( $cat_ids[0] );
+
+			if ( ! empty( $cat ) && isset( $cat->name ) && $cat->name !== $no_category )
+				$ogp[ self::ARTICLE_NS . 'section' ] = $cat->name;
+
+			// output the rest of the categories as tags
+			unset( $cat_ids[0] );
+
+			if ( ! empty( $cat_ids ) ) {
+				$ogp[ self::ARTICLE_NS . 'tag' ] = array();
+				foreach( $cat_ids as $cat_id ) {
+					$cat = get_category( $cat_id );
+					if ( isset( $cat->name ) && $cat->name !== $no_category )
+						$ogp[ self::ARTICLE_NS . 'tag' ][] = $cat->name;
+					unset( $cat );
+				}
+			}
+		}
+
+		// add tags. treat tags as lower priority than multiple categories
+		$tags = get_the_tags();
+		if ( $tags ) {
+			if ( ! isset( $ogp[ self::ARTICLE_NS . 'tag' ] ) )
+				$ogp[ self::ARTICLE_NS . 'tag' ] = array();
+
+			foreach ( $tags as $tag ) {
+				$ogp[ self::ARTICLE_NS . 'tag' ][] = $tag->name;
+			}
+		}
+
+		return $ogp;
 	}
 
 	/**
@@ -395,11 +505,12 @@ class Facebook_Open_Graph_Protocol {
 	}
 
 	/**
-	 * Identify images attachments related to the post
+	 * Identify image attachments related to the post
 	 * Request the full size of the attachment, not necessarily the same as the size used in the post
 	 *
 	 * @since 1.5
 	 * @param WP_Post $post WordPress post of interest
+	 * @return array array of associative arrays containing OGP image structured data
 	 */
 	public static function get_og_images( $post ) {
 		$og_images = array();
@@ -466,6 +577,99 @@ class Facebook_Open_Graph_Protocol {
 		}
 
 		return $og_images;
+	}
+
+	/**
+	 * Identify video attachments related to the post
+	 * Prefer SWF and MP4 videos
+	 *
+	 * @since 1.5
+	 * @param WP_Post $post WordPress post of interest
+	 * @return array array of associative arrays containing OGP video structured data
+	 */
+	public static function get_og_videos( $post ) {
+		$og_videos = array();
+
+		if ( ! $post )
+			return $og_videos;
+
+		if ( function_exists( 'get_attached_media' ) ) {
+			$videos = get_attached_media( 'video', $post->ID );
+			foreach( $videos as $video ) {
+				if ( ! isset( $video->ID ) )
+					continue;
+
+				$url = wp_get_attachment_url( $video->ID );
+				if ( ! $url || isset( $og_videos[ $url ] ) )
+					continue;
+
+				$og_video = array( 'url' => $url );
+				unset( $url );
+
+				if ( isset( $video->post_mime_type ) && $video->post_mime_type )
+					$og_video['type'] = $video->post_mime_type;
+
+				$meta = wp_get_attachment_metadata( $video->ID );
+				if ( is_array( $meta ) ) {
+					if ( isset( $meta['width'] ) && isset( $meta['height'] ) ) {
+						$meta['width'] = absint( $meta['width'] );
+						$meta['height'] = absint( $meta['height'] );
+						if ( $meta['width'] < self::MIN_IMAGE_DIMENSION || $meta['height'] < self::MIN_IMAGE_DIMENSION )
+							continue;
+
+						$og_video['width'] = $meta['width'];
+						$og_video['height'] = $meta['height'];
+					}
+					if ( isset( $meta['length'] ) ) {
+						$meta['length'] = absint( $meta['length'] );
+						if ( $meta['length'] > 0 )
+							$og_video[ self::VIDEO_NS ]['duration'] = $meta['length'];
+					}
+				}
+				unset( $meta );
+
+				$og_videos[ $og_video['url'] ] = $og_video;
+				unset( $og_video );
+			}
+			unset( $videos );
+		}
+
+		return $og_videos;
+	}
+
+	/**
+	 * Identify MP3 (audio/mpeg) attachments related to the post
+	 *
+	 * @since 1.5
+	 * @param WP_Post $post WordPress post of interest
+	 * @return array array of associative arrays containing OGP audio structured data
+	 */
+	public static function get_og_audio( $post ) {
+		$og_audios = array();
+
+		if ( ! $post )
+			return $og_audios;
+
+		if ( function_exists( 'get_attached_media' ) ) {
+			$audios = get_attached_media( 'audio/mpeg', $post->ID );
+			foreach ( $audios as $audio ) {
+				$url = wp_get_attachment_url( $audio->ID );
+				if ( ! $url || isset( $og_audios[ $url ] ) )
+					continue;
+
+				$og_audio = array( 'url' => $url );
+				unset( $url );
+
+				if ( isset( $audio->post_mime_type ) && $audio->post_mime_type )
+					$og_audio['type'] = $audio->post_mime_type;
+
+				$og_audios[ $og_audio['url'] ] = $og_audio;
+				unset( $og_audio );
+			}
+			unset( $audios );
+		}
+
+		return $og_audios;
 	}
 
 	/**

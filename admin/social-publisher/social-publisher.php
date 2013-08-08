@@ -94,7 +94,7 @@ class Facebook_Social_Publisher {
 	 * Access token stored along with the token may fail, but its existence is an indicator of possible success
 	 *
 	 * @since 1.1
-	 * @return array associative array of stored page data or empty array 
+	 * @return array associative array of stored page data or empty array
 	 */
 	public static function get_publish_page() {
 		$page = get_option( 'facebook_publish_page' );
@@ -239,7 +239,7 @@ class Facebook_Social_Publisher {
 
 		// transition post status happens before save post
 		// wait until the end of the insert / update process to send to Facebook
-		if ( isset( $post->post_author ) && self::user_can_publish_to_facebook( (int) $post->post_author ) )		
+		if ( isset( $post->post_author ) && self::user_can_publish_to_facebook( (int) $post->post_author ) )
 			add_action( 'wp_insert_post', array( 'Facebook_Social_Publisher', 'publish_to_facebook_profile' ), 10, 2 );
 
 		$publish_page = self::get_publish_page();
@@ -419,12 +419,15 @@ class Facebook_Social_Publisher {
 
 		$og_action = false;
 		if ( ! class_exists( 'Facebook_Social_Publisher_Settings' ) )
-			require_once( dirname( dirname( __FILE__ ) ) . '/settings-social-publisher.php' );
+			require_once( $facebook_loader->plugin_directory . 'admin/settings-social-publisher.php' );
 		if ( get_option( Facebook_Social_Publisher_Settings::OPTION_OG_ACTION ) )
 			$og_action = true;
 
+		if ( ! class_exists( 'Facebook_Open_Graph_Protocol' ) )
+			require_once( $facebook_loader->plugin_directory . 'open-graph-protocol.php' );
+
 		$path = $author_facebook_id . '/';
-		if ( $og_action ) {
+		if ( $og_action && Facebook_Open_Graph_Protocol::get_post_og_type( $post ) === 'article' ) {
 			$story = array( 'article' => $link );
 			$path .= 'news.publishes';
 			if ( $meta_box_present )

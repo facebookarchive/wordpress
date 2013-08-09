@@ -158,18 +158,18 @@ FB_WP.admin.mentions = {
 	},
 	// user result item
 	render_user: function( user ) {
-		return jQuery( "<li />" ).addClass( "user" ).attr( {"role": "option", "aria-label": user.name} ).mouseenter(function(){jQuery(this).addClass("ui-state-focus")}).mouseleave(function(){jQuery(this).removeClass("ui-state-focus")}).append(
-			jQuery( "<img />" ).attr( {src: (user.picture === undefined) ? "https:\/\/graph.facebook.com\/" + user.id + "\/picture" : user.picture, alt: user.name, width:32, height:32} ) ).append(
-			jQuery( "<a />" ).addClass( "text" ).text( user.name )
+		return jQuery( "<li>" ).addClass( "user" ).attr( {"role": "option", "aria-label": user.name} ).mouseenter(function(){jQuery(this).addClass("ui-state-focus")}).mouseleave(function(){jQuery(this).removeClass("ui-state-focus")}).append(
+			jQuery( "<img>" ).attr( {src: (user.picture === undefined) ? "https:\/\/graph.facebook.com\/" + user.id + "\/picture" : user.picture, alt: user.name, width:32, height:32} ) ).append(
+			jQuery( "<a>" ).addClass( "text" ).text( user.name )
 		);
 	},
 	// page result item
 	render_page: function( page ) {
-		var li = jQuery( "<li />" ).addClass( "page" ).attr( {"role": "option", "aria-label": page.name} ).mouseenter(function(){jQuery(this).addClass("ui-state-focus")}).mouseleave(function(){jQuery(this).removeClass("ui-state-focus")});
+		var li = jQuery( "<li>" ).addClass( "page" ).attr( {"role": "option", "aria-label": page.name} ).mouseenter(function(){jQuery(this).addClass("ui-state-focus")}).mouseleave(function(){jQuery(this).removeClass("ui-state-focus")});
 		if ( page.image !== undefined ) {
-			li.append( jQuery( "<img />" ).attr( {src: page.image, alt: page.name, width:32, height:32} ) );
+			li.append( jQuery( "<img>" ).attr( {src: page.image, alt: page.name, width:32, height:32} ) );
 		}
-		li.append( jQuery( "<a />" ).addClass( "text" ).text( page.name ) );
+		li.append( jQuery( "<a>" ).addClass( "text" ).text( page.name ) );
 
 		var subtext_pieces = [];
 		if ( page.likes !== undefined ) {
@@ -191,7 +191,7 @@ FB_WP.admin.mentions = {
 			subtext_pieces.push( page.category );
 		}
 		if ( subtext_pieces.length !== 0 ) {
-			li.append( jQuery( "<div />" ).addClass( "subtext" ).text( subtext_pieces.join( " • " ) ) );
+			li.append( jQuery( "<div>" ).addClass( "subtext" ).text( subtext_pieces.join( " • " ) ) );
 		}
 
 		return li;

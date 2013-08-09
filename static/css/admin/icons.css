@@ -11,9 +11,15 @@
   font-style: normal;
 }
 
-#toplevel_page_facebook-application-settings div.wp-menu-image:before {
+#toplevel_page_facebook-application-settings div.wp-menu-image:before, .facebook-icon:before {
   content: '\e000';
-  display: inline-block;
+  font-family: 'facebookdashicons' !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
   -webkit-font-smoothing: antialiased;
-  font: normal 16px/1 'facebookdashicons' !important;
+}
+
+.mp6 #toplevel_page_facebook-application-settings div.wp-menu-image:before {
+  font-size: 16px !important;
+  line-height: 1 !important;
 }

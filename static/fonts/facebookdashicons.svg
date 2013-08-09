@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata></metadata>
+<defs>
+<font id="facebookdashicons" horiz-adv-x="512" >
+<font-face units-per-em="512" ascent="480" descent="-32" />
+<missing-glyph horiz-adv-x="512" />
+<glyph class="hidden" unicode="&#xf000;" d="M0,480L 512 -32L0 -32 z" horiz-adv-x="0" />
+<glyph unicode="&#xe000;" d="M 485.344,480L 28.352,480 C 12.672,480,0,467.392,0,451.872l0-453.44 c0-15.52, 12.672-28.128, 28.352-28.128l 246.016,0 L 274.368,167.68 L 207.424,167.68 L 207.424,244.64 l 66.944,0 L 274.368,301.344  c0,65.824, 40.544,101.664, 99.712,101.664c 28.352,0, 52.704-2.080, 59.808-3.040L 433.888,331.2 l-41.056-0.032c-32.192,0-38.4-15.168-38.4-37.44l0-49.088 l 76.768,0  L 421.216,167.68l-66.784,0 l0-197.376 l 130.912,0 c 15.648,0, 28.352,12.608, 28.352,28.128L 513.696,451.872 C 513.696,467.392, 500.992,480, 485.344,480z"  />
+<glyph unicode="&#x20;" horiz-adv-x="256" />
+</font></defs></svg>

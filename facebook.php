@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Facebook
- * @version 1.4
+ * @version 1.5
  */
 /*
 Plugin Name: Facebook

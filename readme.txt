@@ -60,7 +60,6 @@ The development [source code for this plugin is available on Facebook's GitHub a
 
 = Actions =
 
-* `facebook_notify_plugin_conflicts` - executes code to notify site administrators of possible conflicts with other plugins by iterating through a list of all installed plugins and highlighting known conflicts at the time the Facebook plugin for WordPress was released. Some publishers may wish to remove this check for efficiency.
 * `facebook_settings_before_header_$hook_suffix` - add content to a settings page before the main page header section
 * `facebook_settings_after_header_$hook_suffix` - add content to a settings page after the main page header section
 * `facebook_settings_footer_$hook_suffix` - add content to a settings page below the wrapper div

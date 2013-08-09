@@ -359,47 +359,5 @@ class Facebook_Settings {
 
 		return array();
 	}
-
-	/**
-	 * Check if the wordpress user has plugins that may conflict with the Facebook plugin due to Open Graph.
-	 * Display an admin dialog if conflicts found
-	 */
-	public static function plugin_conflicts() {
-		$og_conflicting_plugins = apply_filters( 'fb_conflicting_plugins', array(
-			'http://wordpress.org/extend/plugins/opengraph/' => true,
-			'http://wordbooker.tty.org.uk' => true,
-			'http://ottopress.com/wordpress-plugins/simple-facebook-connect/' => true,
-			'http://www.whiletrue.it' => true,
-			'http://aaroncollegeman.com/sharepress' => true
-		) );
-
-		// allow for short circuit
-		if ( ! is_array( $og_conflicting_plugins ) || empty( $og_conflicting_plugins ) )
-			return;
-
-		//fetch activated plugins
-		$plugins_list = get_option( 'active_plugins' );
-		if ( ! is_array( $plugins_list ) )
-			$plugins_list = array();
-
-		$conflicting_plugins = array();
-
-		// iterate through activated plugins, checking if they are in the list of conflict plugins
-		foreach ( $plugins_list as $val ) {
-			$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $val );
-			if ( ! ( isset( $plugin_data['PluginURI'] ) && isset( $plugin_data['Name'] ) ) || $plugin_data['PluginURI'] === 'http://wordpress.org/extend/plugins/facebook/' )
-				continue;
-
-			if ( isset( $og_conflicting_plugins[ $plugin_data['PluginURI'] ] ) )
-				$conflicting_plugins[] = esc_html( $plugin_data['Name'] );
-
-			unset( $plugin_data );
-		}
-
-		//if there are more than 1 plugins relying on Open Graph, warn the user on this plugins page
-		if ( ! empty( $conflicting_plugins ) ) {
-			echo '<div id="facebook-warning" class="error fade"><p>' . sprintf( esc_html( __( 'You have plugins installed that could potentially conflict with the Facebook plugin. Please consider disabling the following plugins on the %s:', 'facebook' ) . '<br />' . implode( ', ', $conflicting_plugins ) ), '<a href="' . admin_url( 'plugins.php' ) .'">' . esc_html( __( 'Plugins Settings page', 'facebook' ) ) . '</a>' ) . '</p></div>';
-		}
-	}
 }
 ?>

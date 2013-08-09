@@ -120,10 +120,6 @@ class Facebook_Application_Settings {
 		if ( ! isset( $this->hook_suffix ) )
 			return;
 
-		// notify of conflicts on the main settings page
-		// tie to an action to allow easy removal on sites/networks that rather not run checks
-		add_action( 'facebook_notify_plugin_conflicts', array( 'Facebook_Settings', 'plugin_conflicts' ) );
-
 		add_action( 'facebook_settings_after_header_' . $this->hook_suffix, array( 'Facebook_Application_Settings', 'after_header' ) );
 
 		Facebook_Settings::settings_page_template( $this->hook_suffix, __( 'Facebook for WordPress', 'facebook' ) );
@@ -156,8 +152,6 @@ class Facebook_Application_Settings {
 		$like_button->setFont( 'arial' );
 		$like_button->setReference( 'wp-admin' );
 		echo $like_button->asHTML();
-
-		do_action( 'facebook_notify_plugin_conflicts' );
 	}
 
 	/**

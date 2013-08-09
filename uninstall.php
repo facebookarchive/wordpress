@@ -21,7 +21,7 @@ unset( $__user_id );
 
 // site options
 $__options = array(
-	'fb_options', // did not delete the old options on migration in case we needed to rerun
+	'fb_options',
 	'facebook_application',
 	'facebook_comments',
 	'facebook_comments_enabled',
@@ -33,7 +33,10 @@ $__options = array(
 	'facebook_publish_page',
 	'facebook_follow_button',
 	'facebook_home_features',
-	'facebook_archive_features'
+	'facebook_archive_features',
+	'facebook_migration_10',
+	'facebook_migration_115',
+	'facebook_migration_118'
 );
 
 $__public_post_types = get_post_types( array( 'public' => true ) );

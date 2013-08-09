@@ -62,19 +62,3 @@ tbody tr:nth-child(odd) td, tbody tr:nth-child(odd) th {
   font-style: bold;
   color: red
 }
-
-.facebook-icon {
-  background-image: url( '../../img/icon.png' );
-  background-repeat: no-repeat;
-  background-size: 16px 16px;
-  display: inline-block;
-  height: 16px;
-  width: 16px;
-}
-
-/* high-dpi */
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5) {
-  .facebook-icon {
-    background-image: url( '../../img/icon-2x.png' );
-  }
-}

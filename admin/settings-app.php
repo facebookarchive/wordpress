@@ -67,7 +67,7 @@ class Facebook_Application_Settings {
 			'manage_options', // capability needed
 			self::PAGE_SLUG, // what should I call you?
 			array( &$app_settings, 'settings_page' ), // pageload callback
-			plugins_url( 'static/img/icon-bw.png', dirname(__FILE__) ) // icon make pretty
+			'none' // to be replaced by Facebook dashicon
 		);
 
 		// conditional load CSS, scripts

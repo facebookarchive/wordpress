@@ -11,9 +11,6 @@
   font-style: normal;
 }
 
-#toplevel_page_facebook-application-settings div.wp-menu-image {
-}
-
 #toplevel_page_facebook-application-settings div.wp-menu-image:before {
   content: '\e000';
   display: inline-block;

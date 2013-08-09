@@ -20,7 +20,6 @@ class Facebook_Settings {
 	 * @since 1.1
 	 */
 	public static function init() {
-		add_action( 'admin_init', array( 'Facebook_Settings', 'migrate_options' ), 0, 0 );
 		add_action( 'admin_menu', array( 'Facebook_Settings', 'settings_menu_items' ) );
 		add_filter( 'plugin_action_links', array( 'Facebook_Settings', 'plugin_action_links' ), 10, 2 );
 		add_action( 'admin_init', array( 'Facebook_Settings', 'load_social_settings' ), 1 );
@@ -400,42 +399,6 @@ class Facebook_Settings {
 		//if there are more than 1 plugins relying on Open Graph, warn the user on this plugins page
 		if ( ! empty( $conflicting_plugins ) ) {
 			echo '<div id="facebook-warning" class="error fade"><p>' . sprintf( esc_html( __( 'You have plugins installed that could potentially conflict with the Facebook plugin. Please consider disabling the following plugins on the %s:', 'facebook' ) . '<br />' . implode( ', ', $conflicting_plugins ) ), '<a href="' . admin_url( 'plugins.php' ) .'">' . esc_html( __( 'Plugins Settings page', 'facebook' ) ) . '</a>' ) . '</p></div>';
-		}
-	}
-
-	/**
-	 * Migrate options from plugin version 1.0
-	 *
-	 * @since 1.1
-	 */
-	public static function migrate_options() {
-		if ( get_option( 'facebook_migration_118' ) )
-			return;
-
-		// wait for an appropirate user
-		if ( ! current_user_can( 'manage_options' ) )
-			return;
-
-		// the options migration from 1.1 sets migrations from 1.1.5 and 1.1.8
-		if ( get_option( 'facebook_migration_10' ) ) {
-			// run 1.1.5 migration if 1.0 migration already run
-			if ( ! get_option( 'facebook_migration_115' ) ) {
-				if ( ! class_exists( 'Facebook_Migrate_Options_115' ) )
-					require_once( dirname(__FILE__) . '/migrate-options-115.php' );
-				Facebook_Migrate_Options_115::migrate();
-				update_option( 'facebook_migration_115', '1' );
-			}
-			if ( ! class_exists( 'Facebook_Migrate_Options_118' ) )
-				require_once( dirname(__FILE__) . '/migrate-options-118.php' );
-			Facebook_Migrate_Options_118::migrate();
-			update_option( 'facebook_migration_118', '1' );
-		} else {
-			if ( ! class_exists( 'Facebook_Migrate_Options_10' ) )
-				require_once( dirname(__FILE__) . '/migrate-options-10.php' );
-			Facebook_Migrate_Options_10::migrate();
-			update_option( 'facebook_migration_10', '1' );
-			update_option( 'facebook_migration_115', '1' ); // 1.0 covers the changes from 1.1.5
-			update_option( 'facebook_migration_118', '1' ); // 1.0 covers the changes from 1.1.8
 		}
 	}
 }

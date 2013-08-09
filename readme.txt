@@ -5,7 +5,7 @@ Requires at least: 3.3
 Tested up to: 3.6
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.4
+Stable tag: 1.5
 
 Add Facebook social plugins and the ability to publish new posts to a Facebook Timeline or Facebook Page. Official Facebook plugin.
 
@@ -18,6 +18,7 @@ The Facebook plugin for WordPress adds Facebook social plugins to your WordPress
 * [Open Graph protocol](http://ogp.me/) markup optimizes your content for social sharing and rich story previews on Facebook, Twitter, Google+, Mixi, and more. Display large images, link to author pages, and improve story distribution through social news feeds.
 * [Facebook Insights](http://www.facebook.com/insights) support for Facebook accounts associated with a Facebook application. Track rich audience data powered by Facebook profiles (age, location, language) and see how your content is shared on Facebook.
 * Add [Like](https://developers.facebook.com/docs/reference/plugins/like/), [send](https://developers.facebook.com/docs/reference/plugins/send/), and [follow](https://developers.facebook.com/docs/reference/plugins/follow/) buttons to every post to help your site's readers share content with friends or stay connected to future content shared by your site on Facebook.
+* [Embed Facebook Posts](https://developers.facebook.com/docs/plugins/embedded-posts/) by pasting a URL into your post composer, creating a shortcode, or calling a function from your theme.
 * Enable the [Facebook Comments Box social plugin](https://developers.facebook.com/docs/reference/plugins/comments/) to encourage new comments from logged-in Facebook users and his or her Facebook friends. Comments associated with a post are sorted according to social signals including friend networks, most liked, or the most active discussion threads. Advanced features include moderation, blacklisted words, automatic grammar correction, and login support for AOL, Microsoft, and Yahoo! accounts.
 * [Like Box](https://developers.facebook.com/docs/reference/plugins/like-box/) displays recent activity from your Facebook Page and encourages new Like actions.
 * [Recommendations Bar](https://developers.facebook.com/docs/reference/plugins/recommendationsbar/) helps visitors discover additional content on your site by recommending posts and encouraging Like shares.
@@ -33,6 +34,7 @@ Add a [Like Button](https://developers.facebook.com/docs/reference/plugins/like/
 * `[facebook_like_button]`
 * `[facebook_send_button]`
 * `[facebook_follow_button href="{$facebook_profile_url}"]`
+* `[facebook_embedded_post href="{$facebook_post_url}"]`
 
 = Contributing code =
 
@@ -116,7 +118,7 @@ The [Comments Box social plugin](https://developers.facebook.com/docs/reference/
 
 Visit the [Facebook plugin for WordPress getting started page](https://developers.facebook.com/wordpress/) for more details and screenshots of each step in the process. You will need to create an Open Graph action-object pair for your Facebook application: publish a post. You will need to submit the new publish action for approval with support for [action capabilities](https://developers.facebook.com/docs/submission-process/opengraph/guidelines/action-properties/ "Facebook action capabilities") allowing custom messages on an author's Timeline, mentioning Facebook friends and Facebook pages within that message, and marking the new post as explicitly shared.
 
-= I setup my social plugin but nothing happened =
+= I set up my social plugin but nothing happened =
 
 Some social plugins require a URL representing a specific Facebook feature: the Follow button accepts a person's Timeline URL; the Like Box accepts a Page URL. Try configuring similar parameters through the appropriate [Facebook social plugins](https://developers.facebook.com/docs/plugins/) page to view a preview of what to expect on your WordPress site after a successful configuration.
 
@@ -129,6 +131,9 @@ It's possible another plugin (or your theme) including an English version of the
 
 
 == Upgrade Notice ==
+
+= 1.5 =
+New Facebook account association tools. Facebook Embedded Posts. Enhanced Open Graph Protocol. WP 3.6 extras.
 
 = 1.4 =
 Support new Facebook Comment API. Improve reliability of application credential verification. WP 3.6 updates.
@@ -192,11 +197,20 @@ Security fixes. Improved customization and debugging of settings. l10n and i18n 
 
 == Changelog ==
 
+= 1.5 =
+* Rewritten administrative tools to associate a WordPress user with a Facebook account and a Facebook Page with a WordPress site
+* Added support for [Facebook Embedded Posts](https://developers.facebook.com/docs/plugins/embedded-posts/)
+* Improved Open Graph protocol markup for image, video, and audio post formats
+* Improved auto-discovery of post images for use as Open Graph protocol images
+* Custom dashicon font adds resolution-independent graphics to your administrative interface
+* Updated Facebook SDK for JavaScript asynchronous loading snippet
+* Added enhanced privacy mode for Facebook SDK for JavaScript for sites targeting children in the United States under the age of 13
+
 = 1.4 =
 * [Facebook Comment API update](https://developers.facebook.com/blog/post/2013/04/03/new-apis-for-comment-replies/) to support July 2013 changes
 * Improved reliability of Facebook application credentials verification for app access token exchange
 * The `get_comments_number` function response now includes the number of comments for a post stored on Facebook servers
-* Update Facebook PHP SDK. Includes support for app secret proofs.
+* Update Facebook PHP SDK. Includes support for app secret proofs
 * Fix typo preventing custom classes on social plugins
 * New Facebook icons matching April 2013 Facebook favicon redesign
 * Added support for shortcode filters (WordPress 3.6+)

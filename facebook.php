@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Facebook
- * @version 1.4
+ * @version 1.5
  */
 /*
 Plugin Name: Facebook
@@ -9,7 +9,7 @@ Plugin URI: http://wordpress.org/extend/plugins/facebook/
 Description: Add Facebook social plugins and the ability to publish new posts to a Facebook Timeline or Facebook Page. Official Facebook plugin.
 Author: Facebook
 Author URI: https://developers.facebook.com/wordpress/
-Version: 1.4
+Version: 1.5
 License: GPL2
 License URI: license.txt
 Domain Path: /languages/
@@ -28,7 +28,7 @@ class Facebook_Loader {
 	 * @since 1.1
 	 * @var string
 	 */
-	const VERSION = '1.4';
+	const VERSION = '1.5';
 
 	/**
 	 * Default Facebook locale
@@ -252,7 +252,10 @@ class Facebook_Loader {
 	 * @link https://developer.mozilla.org/en-US/docs/Controlling_DNS_prefetching Firefox prefetch behavior
 	 */
 	public static function dns_prefetch_js_sdk() {
-		echo '<link rel="dns-prefetch" href="//connect.facebook.net" />' . "\n";
+		echo '<link rel="dns-prefetch" href="//connect.facebook.net"';
+		if ( ! current_theme_supports('html5') )
+			echo ' /';
+		echo '>' . "\n";
 	}
 
 	/**

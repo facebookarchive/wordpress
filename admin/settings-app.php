@@ -91,9 +91,24 @@ class Facebook_Application_Settings {
 			$options = array();
 		$this->existing_options = $options;
 
+		if ( ! wp_http_supports( array( 'ssl' => true ) ) )
+			add_action( 'admin_notices', array( 'Facebook_Application_Settings', 'admin_notice' ) );
+
 		$this->settings_api_init();
 
 		add_action( 'admin_enqueue_scripts', array( 'Facebook_Application_Settings', 'enqueue_scripts' ) );
+	}
+
+	/**
+	 * Warn of minimum requirements not met for app access token
+	 *
+	 * @since 1.5
+	 */
+	public static function admin_notice() {
+		echo '<div class="error">';
+		echo '<p>' . esc_html( __( 'Your server does not support communication with Facebook servers over HTTPS.', 'facebook' ) ) . '</p>';
+		echo '<p>' . esc_html( __( 'Facebook application functionality such as posting to your Facebook Timeline requires a HTTPS connection to Facebook servers.', 'facebook' ) ) . '</p>';
+		echo '</div>';
 	}
 
 	/**

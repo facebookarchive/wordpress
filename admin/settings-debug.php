@@ -79,7 +79,7 @@ class Facebook_Settings_Debugger {
 	 * @since 1.1.6
 	 */
 	public static function enqueue_scripts() {
-		wp_enqueue_style( self::PAGE_SLUG, plugins_url( 'static/css/admin/debug' . ( ( defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ) ? '' : '.min' )  . '.css', dirname( __FILE__ ) ), array(), '1.1.6' );
+		wp_enqueue_style( self::PAGE_SLUG, plugins_url( 'static/css/admin/debug' . ( ( defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ) ? '' : '.min' )  . '.css', dirname( __FILE__ ) ), array(), '1.5' );
 	}
 
 	/**
@@ -168,14 +168,22 @@ class Facebook_Settings_Debugger {
 		echo '<section id="debug-users"><header><h3>' . esc_html( __( 'Authors' ) ) . '</h3></header>';
 
 		if ( ! empty( $users['fb'] ) ) {
-			echo '<table><caption>' . esc_html( __( 'Connected to Facebook', 'facebook' ) ) . '</caption><colgroup><col><col span="2" class="permissions"></colgroup><thead><tr><th>' . esc_html( __( 'Name' ) ) . '</th><th title="' . esc_attr( __( 'Facebook account', 'facebook' ) ) . '"></th><th>' . esc_html( __( 'Post to timeline', 'facebook' ) ) . '</th><th>' . esc_html( __( 'Manage pages', 'facebook' ) ) . '</th></tr></thead><tbody>';
+			if ( ! class_exists( 'Facebook_User' ) )
+				require_once( dirname( dirname(__FILE__) ) . '/facebook-user.php' );
+
+			echo '<table><caption>' . esc_html( _x( 'Connected to Facebook', 'Local user account has an associated Facebook account stored', 'facebook' ) ) . '</caption><colgroup><col><col span="2" class="permissions"></colgroup><thead><tr><th>' . esc_html( __( 'Name' ) ) . '</th><th title="' . esc_attr( __( 'Facebook account', 'facebook' ) ) . '"></th><th>' . esc_html( __( 'Post to timeline', 'facebook' ) ) . '</th><th>' . esc_html( __( 'Manage pages', 'facebook' ) ) . '</th></tr></thead><tbody>';
 			foreach( $users['fb'] as $user ) {
 				echo '<tr><th><a href="' . esc_url( get_author_posts_url( $user->id ) ) . '">' . esc_html( $user->display_name ) . '</a></th>';
 
-				echo '<td><a class="facebook-icon" href="' . esc_url( 'https://www.facebook.com/' . ( isset( $user->fb_data['username'] ) ? $user->fb_data['username'] : 'profile.php?' . http_build_query( array( 'id' => $user->fb_data['fb_uid'] ) ) ), array( 'http', 'https' ) ) . '"></a></td>';
+				echo '<td>';
+				$profile_link = Facebook_User::facebook_profile_link( $user->fb_data );
+				if ( $profile_link )
+					echo '<a class="facebook-icon" href="' . esc_url( $profile_link, array( 'http', 'https' ) ) . '"></a>';
+				unset( $profile_link );
+				echo '</td>';
 
 				echo '<td>';
-				if ( isset( $user->fb_data['permissions']['publish_stream'] ) && $user->fb_data['permissions']['publish_stream'] )
+				if ( isset( $user->fb_data['permissions']['publish_actions'] ) && $user->fb_data['permissions']['publish_actions'] )
 					echo self::EXISTS;
 				else
 					echo self::DOES_NOT_EXIST;
@@ -255,10 +263,16 @@ class Facebook_Settings_Debugger {
 			return;
 
 		echo '<section id="debug-page"><header><h3>' . esc_html( __( 'Facebook Page', 'facebook' ) ) . '</h3></header>';
-		echo '<p>' . sprintf( esc_html( _x( 'Publishing to %s.', 'publishing to a page name on Facebook.com', 'facebook' ) ), '<a href="' . esc_url( 'https://www.facebook.com/' . $post_to_page['id'], array( 'http', 'https' ) ) . '">' . esc_html( $post_to_page['name'] ) . '</a>' );
+		$page_link = '';
+		if ( isset( $post_to_page['link'] ) )
+			$page_link = $post_to_page['link'];
+		else
+			$page_link = 'https://www.facebook.com/' . $post_to_page['id'];
+		$page_link = esc_url( $page_link, array( 'http', 'https' ) );
+		echo '<p>' . sprintf( esc_html( _x( 'Publishing to %s.', 'publishing to a page name on Facebook.com', 'facebook' ) ), '<a href="' . $page_link . '">' . esc_html( $post_to_page['name'] ) . '</a>' );
+		unset( $page_link );
 		if ( isset( $post_to_page['set_by_user'] ) ) {
-			$current_user = wp_get_current_user();
-			if ( $current_user->ID == $post_to_page['set_by_user'] ) {
+			if ( get_current_user_id() == $post_to_page['set_by_user'] ) {
 				echo ' ' . esc_html( __( 'Saved by you.', 'facebook' ) );
 			} else {
 				$setter = get_userdata( $post_to_page['set_by_user'] );
@@ -270,7 +284,7 @@ class Facebook_Settings_Debugger {
 			unset( $current_user );
 		}
 		echo '</p>';
-		
+
 		echo '</section>';
 	}
 

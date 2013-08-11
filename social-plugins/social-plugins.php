@@ -222,10 +222,9 @@ function facebook_the_content_follow_button( $content ) {
 	if ( ! ( $facebook_user && isset( $facebook_user['fb_uid'] ) ) )
 		return $content;
 
-	if ( isset( $facebook_user['username'] ) )
-		$options['href'] = 'https://www.facebook.com/' . $facebook_user['username'];
-	else
-		$options['href'] = 'https://www.facebook.com/profile.php?' . http_build_query( array( 'id' => $facebook_user['fb_uid'] ) );
+	$options['href'] = Facebook_User::facebook_profile_link( $facebook_user );
+	if ( ! $options['href'] )
+		return $content;
 
 	if ( $options['position'] === 'top' ) {
 		$options['ref'] = 'above-post';

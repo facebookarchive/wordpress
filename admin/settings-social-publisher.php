@@ -331,6 +331,10 @@ class Facebook_Social_Publisher_Settings {
 		if ( $this->user_associated_with_facebook_account ) {
 			// edits only avaialble to WordPress accounts connected with a Facebook account
 			echo '<div id="facebook-login" data-option="' . self::PUBLISH_OPTION_NAME . '[page_timeline]"></div>';
+			if ( ! class_exists( 'Facebook_User' ) )
+				require_once( dirname( dirname(__FILE__) ) . '/facebook-user.php' );
+			// page permissions require active user access token
+			Facebook_User::extend_access_token();
 		} else {
 			// send to profile page to connect an account if no connected account stored for current WP user
 			echo '<p><a href="' . esc_url( self_admin_url( 'profile.php' ), array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( 'Add a Facebook account to your WordPress account' ) . '</a></p>';

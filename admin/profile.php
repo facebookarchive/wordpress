@@ -56,13 +56,17 @@ class Facebook_User_Profile {
 	 * @param $wordpress_user WP_User object for the current profile
 	 */
 	public static function personal_options( $wordpress_user ) {
-		echo '<tr class="facebook-post-to-timeline"><th scope="row">Facebook</th><td><input class="checkbox" type="checkbox" name="facebook_timeline" id="facebook-timeline" value="1"';
+		if ( ! ( $wordpress_user && isset( $wordpress_user->ID ) ) )
+			return;
 
-		if ( $wordpress_user && isset( $wordpress_user->ID ) ) {
-			if ( ! class_exists( 'Facebook_User' ) )
-				require_once( dirname( dirname(__FILE__) ) . '/facebook-user.php' );
-			checked( ! Facebook_User::get_user_meta( $wordpress_user->ID, 'facebook_timeline_disabled', true ) );
-		}
+		if ( ! class_exists( 'Facebook_User' ) )
+			require_once( dirname( dirname(__FILE__) ) . '/facebook-user.php' );
+
+		if ( ! Facebook_User::can_publish_to_facebook( $wordpress_user->ID, false /* do not check for the presence of publish override in this option field */ ) )
+			return;
+
+		echo '<tr class="facebook-post-to-timeline"><th scope="row">Facebook</th><td><input class="checkbox" type="checkbox" name="facebook_timeline" id="facebook-timeline" value="1"';
+		checked( ! Facebook_User::get_user_meta( $wordpress_user->ID, 'facebook_timeline_disabled', true ) );
 
 		echo ' /> <label for="facebook-timeline">' . esc_html( __( 'Post an article to my Facebook Timeline after it is public.', 'facebook' ) ) . '</label><br /></td></tr>';
 	}

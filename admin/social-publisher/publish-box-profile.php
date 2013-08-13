@@ -68,16 +68,8 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 			require_once( dirname( dirname( __FILE__ ) ) . '/settings-social-publisher.php' );
 
 		// only load mentions-specific features if Facebook app configuration supports tags
-		if ( get_option( Facebook_Social_Publisher_Settings::OPTION_OG_ACTION ) ) {
+		if ( get_option( Facebook_Social_Publisher_Settings::OPTION_OG_ACTION ) )
 			add_action( 'admin_enqueue_scripts', array( 'Facebook_Social_Publisher_Meta_Box_Profile', 'enqueue_scripts' ) );
-
-			// attempt to extend the access token while suppressing errors and warnings such as headers sent on session start
-			// extended session used to match friends on mentions search
-			try {
-				if ( isset( $facebook ) || ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
-					$facebook->setExtendedAccessToken();
-			}catch(Exception $e){}
-		}
 	}
 
 	/**
@@ -169,7 +161,7 @@ class Facebook_Social_Publisher_Meta_Box_Profile {
 		if ( ! class_exists( 'Facebook_Social_Publisher' ) )
 			require_once( dirname(__FILE__) . '/social_publisher.php' );
 		$capability_singular_base = Facebook_Social_Publisher::post_type_capability_base( $post_type );
-	
+
 		if ( ! current_user_can( 'edit_' . $capability_singular_base, $post_id ) )
 			return;
 

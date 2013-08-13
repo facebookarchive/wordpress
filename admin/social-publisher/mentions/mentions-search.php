@@ -31,7 +31,7 @@ class Facebook_Mentions_Search {
 	 * @since 1.2
 	 */
 	public static function search_endpoint() {
-		global $facebook, $facebook_loader;
+		global $facebook_loader;
 
 		header( 'Content-Type: application/json; charset=utf-8', true );
 
@@ -49,7 +49,7 @@ class Facebook_Mentions_Search {
 			exit;
 		}
 
-		if ( ! isset( $facebook ) && ! ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) ) {
+		if ( ! ( isset( $facebook_loader ) && $facebook_loader->app_access_token_exists() ) ) {
 			status_header( 403 );
 			echo json_encode( array( 'error' => __( 'Facebook credentials not properly configured on the server', 'facebook' ) ) );
 			exit;
@@ -81,9 +81,10 @@ class Facebook_Mentions_Search {
 	 * @return array friend results
 	 */
 	public static function search_friends( $search_term, $limit = 4 ) {
-		global $facebook;
+		if ( ! class_exists( 'Facebook_User' ) )
+			require_once( dirname( dirname( dirname( dirname(__FILE__) ) ) ) . '/facebook-user.php' );
 
-		$facebook_user_id = $facebook->getUser();
+		$facebook_user_id = Facebook_User::get_facebook_profile_id( get_current_user_id() );
 		if ( ! $facebook_user_id )
 			return array();
 
@@ -91,8 +92,11 @@ class Facebook_Mentions_Search {
 		$cache_key = 'facebook_13_friends_' . $facebook_user_id;
 		$friends = get_transient( $cache_key );
 		if ( $friends === false ) {
+			if ( ! class_exists( 'Facebook_WP_Extend' ) )
+				require_once( dirname( dirname( dirname( dirname(__FILE__) ) ) ) . '/includes/facebook-php-sdk/class-facebook-wp.php' );
+
 			try {
-				$friends = $facebook->api( '/' . $facebook_user_id . '/friends', 'GET', array( 'fields' => 'id,name,picture', 'ref' => 'fbwpp' ) );
+				$friends = Facebook_WP_Extend::graph_api_with_app_access_token( $facebook_user_id . '/friends', 'GET', array( 'fields' => 'id,name,picture', 'ref' => 'fbwpp' ) );
 			} catch ( WP_FacebookApiException $e ) {
 				return array();
 			}
@@ -155,20 +159,22 @@ class Facebook_Mentions_Search {
 	 * @return array pages results
 	 */
 	public static function search_pages( $search_term, $limit = 4 ) {
-		global $facebook, $facebook_loader;
+		global $facebook_loader;
 
 		$cache_key = 'facebook_12_pages_' . $search_term;
 
 		$matched_pages = get_transient( $cache_key );
 		if ( $matched_pages === false ) {
-			$params = array( 'type' => 'page', 'fields' => 'id,name,is_published,picture,category,location,likes,talking_about_count', 'ref' => 'fbwpp', 'limit' => $limit, 'q' => $search_term );
+			if ( ! class_exists( 'Facebook_WP_Extend' ) )
+				require_once( dirname( dirname( dirname( dirname(__FILE__) ) ) ) . '/includes/facebook-php-sdk/class-facebook-wp.php' );
+
+			$params = array( 'type' => 'page', 'fields' => 'id,name,is_published,picture,category,location,likes,talking_about_count', 'limit' => $limit, 'q' => $search_term, 'ref' => 'fbwpp' );
 			if ( isset( $facebook_loader ) && isset( $facebook_loader->locale ) )
 				$params['locale'] = $facebook_loader->locale;
 
 			try {
-				$pages = $facebook->api( '/search', 'GET', $params );
-			}
-			catch (WP_FacebookApiException $e) {
+				$pages = Facebook_WP_Extend::graph_api_with_app_access_token( 'search', 'GET', $params );
+			} catch (WP_FacebookApiException $e) {
 				return array();
 			}
 			unset( $params );
@@ -186,7 +192,9 @@ class Facebook_Mentions_Search {
 				if ( $matched_count === $limit )
 					break;
 
-				if ( ! ( isset( $page['id'] ) && isset( $page['name'] ) ) || ( isset( $page['is_published'] ) && $page['is_published'] === false ) )
+				if ( ! ( isset( $page['id'] ) && isset( $page['name'] ) && isset( $page['is_published'] ) ) )
+					continue;
+				if ( ! $page['is_published'] )
 					continue;
 
 				if ( isset( $page['picture'] ) ) {

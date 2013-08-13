@@ -8,61 +8,6 @@
 class Facebook_User {
 
 	/**
-	 * Extend our access token usage time
-	 *
-	 * @since 1.0
-	 */
-	public static function extend_access_token() {
-		global $facebook, $facebook_loader;
-
-		if ( isset( $facebook ) || ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
-			$facebook->setExtendedAccessToken();
-	}
-
-	/**
-	 * Gets and returns the current, active Facebook user
-	 *
-	 * @since 1.0
-	 */
-	public static function get_current_user( $fields = array() ) {
-		global $facebook, $facebook_loader;
-
-		if ( ! isset( $facebook ) && ! ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
-			return;
-
-		Facebook_User::extend_access_token();
-		$params = array( 'ref' => 'fbwpp' );
-		if ( is_array( $fields ) )
-			$params['fields'] = implode( ',', $fields );
-
-		try {
-			return $facebook->api( '/me', 'GET', $params );
-		} catch ( WP_FacebookApiException $e ) {}
-	}
-
-	/**
-	 * Gets and returns a specific Facebook user
-	 * Requires public info read access for the account
-	 *
-	 * @since 1.5
-	 * @link https://developers.facebook.com/docs/reference/api/user/ Facebook User fields
-	 * @param string $facebook_id Facebook user identifier
-	 * @param array $fields User fields to include in the result
-	 */
-	public static function get_facebook_user( $facebook_id, $fields = array() ) {
-		if ( ! class_exists('Facebook_WP_Extend') )
-			require_once( dirname(__FILE__) . '/includes/facebook-php-sdk/class-facebook-wp.php' );
-
-		$response = Facebook_WP_Extend::graph_api_with_app_access_token( $facebook_id, 'GET', $fields );
-
-		if ( is_array( $response ) ) {
-			return $response;
-		}
-
-		return array();
-	}
-
-	/**
 	 * Allow WordPress publishers to interrupt the get_user_meta process
 	 *
 	 * @since 1.1
@@ -126,28 +71,15 @@ class Facebook_User {
 	}
 
 	/**
-	 * Check permissions granted for the current user and site application
+	 * Extend our access token usage time
 	 *
-	 * @since 1.1
-	 * @return array permissions array returned by Facebook Graph API
+	 * @since 1.0
 	 */
-	public static function get_permissions() {
+	public static function extend_access_token() {
 		global $facebook, $facebook_loader;
 
-		if ( ! isset( $facebook ) && ! ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
-			return array();
-
-		$current_user = wp_get_current_user();
-
-		$facebook_user_data = self::get_user_meta( $current_user->ID, 'fb_data', true );
-		if ( ! ( is_array( $facebook_user_data ) && isset( $facebook_user_data['fb_uid'] ) ) )
-			return array();
-
-		$permissions = $facebook->get_current_user_permissions();
-		if ( is_array( $permissions ) && ! empty( $permissions ) )
-			return $permissions;
-
-		return array();
+		if ( isset( $facebook ) || ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
+			$facebook->setExtendedAccessToken();
 	}
 
 	/**
@@ -155,25 +87,26 @@ class Facebook_User {
 	 * Has the current viewer authorized the current application to post on his or her behalf?
 	 *
 	 * @since 1.1
+	 * @param int $wp_user_id WordPress user identifier
 	 * @return bool true if Facebook information present for current user and publish permissions exist
 	 */
-	public static function can_publish_to_facebook() {
-		global $facebook, $facebook_loader;
-
-		if ( ! isset( $facebook ) && ! ( isset( $facebook_loader ) && $facebook_loader->load_php_sdk() ) )
+	public static function can_publish_to_facebook( $wordpress_user_id = 0, $check_publish_override = true ) {
+		if ( ! $wordpress_user_id )
+			$wordpress_user_id = get_current_user_id();
+		if ( ! $wordpress_user_id )
 			return false;
 
-		$current_user = wp_get_current_user();
-
-		// does the current user have associated Facebook account data stored in WordPress?
-		$facebook_user_data = self::get_user_meta( $current_user->ID, 'fb_data', true );
-		if ( ! ( is_array( $facebook_user_data ) && isset( $facebook_user_data['fb_uid'] ) ) )
+		$facebook_profile_id = self::get_facebook_profile_id( $wordpress_user_id );
+		if ( ! $facebook_profile_id )
 			return false;
 
-		if ( self::get_user_meta( $current_user->ID, 'facebook_timeline_disabled', true ) )
+		if ( $check_publish_override && self::get_user_meta( $wordpress_user_id, 'facebook_timeline_disabled', true ) )
 			return false;
 
-		$permissions = $facebook->get_current_user_permissions( $current_user );
+		if ( ! class_exists( 'Facebook_WP_Extend' ) )
+			require_once( dirname(__FILE__) . '/includes/facebook-php-sdk/class-facebook-wp.php' );
+
+		$permissions = Facebook_WP_Extend::get_permissions_by_facebook_user_id( $facebook_profile_id );
 		if ( ! ( is_array( $permissions ) && ! empty( $permissions ) && isset( $permissions['publish_actions'] ) ) )
 			return false;
 
@@ -222,14 +155,36 @@ class Facebook_User {
 	}
 
 	/**
+	 * Gets and returns a specific Facebook user
+	 * Requires public info read access for the account
+	 *
+	 * @since 1.5
+	 * @link https://developers.facebook.com/docs/reference/api/user/ Facebook User fields
+	 * @param string $facebook_id Facebook user identifier
+	 * @param array $fields User fields to include in the result
+	 */
+	public static function get_facebook_user( $facebook_id, $fields = array() ) {
+		if ( ! class_exists( 'Facebook_WP_Extend' ) )
+			require_once( dirname(__FILE__) . '/includes/facebook-php-sdk/class-facebook-wp.php' );
+
+		$response = Facebook_WP_Extend::graph_api_with_app_access_token( $facebook_id, 'GET', $fields );
+
+		if ( is_array( $response ) ) {
+			return $response;
+		}
+
+		return array();
+	}
+
+	/**
 	 * Get a list of publishable Facebook pages for the currently authenticated Facebook account
 	 *
 	 * @since 1.5
 	 * @link https://www.facebook.com/help/www/289207354498410 Facebook Page admin roles
 	 * @param string $permission page permission
-	 * @return array associative array with key of id, valuee of associative array of name and access token values for pages with create content permissions
+	 * @return array associative array with key of id, value of associative array of name, link, and access token values for pages with the given permission
 	 */
-	public static function get_permissioned_pages( $permission ) {
+	public static function get_permissioned_pages( $permission = '' ) {
 		global $facebook, $facebook_loader;
 
 		$pages = array();
@@ -254,7 +209,7 @@ class Facebook_User {
 
 		try {
 			// refresh token if needed
-			$facebook->setExtendedAccessToken();
+			self::extend_access_token();
 			$accounts = $facebook->api( '/me/accounts', 'GET', array( 'fields' => $fields, 'ref' => 'fbwpp' ) );
 		} catch (WP_FacebookApiException $e) {}
 		if ( ! ( isset( $accounts ) && is_array( $accounts['data'] ) ) )
@@ -262,7 +217,7 @@ class Facebook_User {
 		$accounts = $accounts['data'];
 
 		foreach ( $accounts as $account ) {
-
+			// limit to published pages
 			if ( ! ( isset( $account['is_published'] ) && $account['is_published'] === true ) )
 				continue;
 
@@ -274,10 +229,15 @@ class Facebook_User {
 			if ( empty( $account['id'] ) || empty( $account['name'] ) || empty( $account['access_token'] ) )
 				continue;
 
-			$pages[ $account['id'] ] = array(
+			$page = array(
 				'name' => $account['name'],
 				'access_token' => $account['access_token']
 			);
+			if ( isset( $account['link'] ) && $account['link'] )
+				$page['link'] = $account['link'];
+
+			$pages[ $account['id'] ] = $page;
+			unset( $page );
 		}
 
 		return $pages;

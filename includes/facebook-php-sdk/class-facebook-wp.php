@@ -184,47 +184,6 @@ class Facebook_WP_Extend extends WP_Facebook {
 	}
 
 	/**
-	 * Request current application permissions for an authenticated Facebook user
-	 *
-	 * @since 1.1
-	 * @return array user permissions as flat array
-	 */
-	public function get_current_user_permissions( $current_user = '' ) {
-		if ( ! $current_user ) {
-			// load user functions
-			if ( ! class_exists( 'Facebook_User' ) )
-				require_once( dirname( dirname( dirname(__FILE__) ) ) . '/facebook-user.php' );
-
-			// simply verify a connection between user and app
-			$current_user = Facebook_User::get_current_user( array( 'id' ) );
-			if ( ! $current_user )
-				return array();
-		}
-
-		try {
-			$response = $this->api( '/me/permissions', 'GET', array( 'ref' => 'fbwpp' ) );
-		} catch ( WP_FacebookApiException $e ) {
-			$error_result = $e->getResult();
-			if ( $error_result && isset( $error_result['error_code'] ) ) {
-				// try to extend access token if request failed
-				if ( $error_result['error_code'] === 2500 )
-					$this->setExtendedAccessToken();
-			}
-			return array();
-		}
-
-		if ( is_array( $response ) && isset( $response['data'][0] ) ) {
-			$permissions = array();
-			foreach( $response['data'][0] as $permission => $exists ) {
-				$permissions[$permission] = true;
-			}
-			return $permissions;
-		}
-
-		return array();
-	}
-
-	/**
 	 * Retrieve Facebook permissions assigned to the application by a specific Facebook user id
 	 *
 	 * @since 1.2

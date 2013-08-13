@@ -76,17 +76,7 @@ class Facebook_Social_Publisher {
 		if ( ! class_exists( 'Facebook_User' ) )
 			require_once( $facebook_loader->plugin_directory . 'facebook-user.php' );
 
-		if ( ! ( is_int( $wordpress_user_id ) && $wordpress_user_id ) ) {
-			$current_user = wp_get_current_user();
-			if ( isset( $current_user->ID ) )
-				$wordpress_user_id = (int) $current_user->ID;
-			unset( $current_user );
-		}
-
-		if ( is_int( $wordpress_user_id ) && $wordpress_user_id && Facebook_User::get_facebook_profile_id( $wordpress_user_id ) && ! Facebook_User::get_user_meta( $wordpress_user_id, 'facebook_timeline_disabled', true ) )
-			return true;
-
-		return false;
+		return Facebook_User::can_publish_to_facebook( $wordpress_user_id );
 	}
 
 	/**

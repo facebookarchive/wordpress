@@ -112,7 +112,7 @@ class Facebook_User_Profile {
 					$permission_labels[] = '<a href="https://www.facebook.com/about/privacy/your-info#public-info">' . esc_html( __( 'Public profile information', 'facebook' ) ) . '</a>';
 				if ( isset( $permissions['publish_actions'] ) )
 					$permission_labels[] = esc_html( __( 'Publish to Timeline', 'facebook' ) );
-				if ( isset( $permissions['manage_pages'] ) )
+				if ( isset( $permissions['manage_pages'] ) && isset( $permissions['publish_stream'] ) )
 					$permission_labels[] = '<a href="https://developers.facebook.com/docs/reference/login/page-permissions/">' . esc_html( __( 'Manage your pages on your behalf (including creating content)', 'facebook' ) ) . '</a>';
 				$section .= '<tr><th scope="row">' . esc_html( __( 'Permissions', 'facebook' ) ) . '</th><td>';
 				if ( empty( $permissions ) ) {

@@ -454,18 +454,21 @@ class Facebook_Social_Publisher_Settings {
 		$page_field = 'page_timeline';
 		if ( isset( $options[ $page_field ] ) ) {
 			$page_id = trim( $options[ $page_field ] );
-			// check if page is stored
-			$existing_page = get_option( self::OPTION_PUBLISH_TO_PAGE );
-			if ( is_array( $existing_page ) && isset( $existing_page['id'] ) ) {
-				// process the option to delete the stored page
-				if ( $options[ $page_field ] === '' ) {
-					delete_option( self::OPTION_PUBLISH_TO_PAGE );
-				} else if ( $page_id != $existing_page['id'] ) {
+			if ( $page_id ) {
+				// check if page is stored
+				$existing_page = get_option( self::OPTION_PUBLISH_TO_PAGE );
+				if ( is_array( $existing_page ) && isset( $existing_page['id'] ) ) {
+					// process the option to delete the stored page
+					if ( $options[ $page_field ] === 'delete' ) {
+						delete_option( self::OPTION_PUBLISH_TO_PAGE );
+					} else if ( $page_id != $existing_page['id'] ) {
+						self::update_publish_to_page( array( 'id' => $page_id ) );
+					}
+				} else {
 					self::update_publish_to_page( array( 'id' => $page_id ) );
 				}
-			} else {
-				self::update_publish_to_page( array( 'id' => $page_id ) );
 			}
+			unset( $page_id );
 		}
 		unset( $page_field );
 		return false;

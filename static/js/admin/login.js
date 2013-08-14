@@ -10,7 +10,8 @@ FB_WP.admin.login = FB_WP.admin.login || {
 			permissions: {
 				connected: false,
 				manage_pages: false,
-				publish: false
+				publish_actions: false,
+				publish_stream: false
 			},
 			pages:{}
 		}
@@ -43,7 +44,10 @@ FB_WP.admin.login = FB_WP.admin.login || {
 					FB_WP.admin.login.accounts.viewer.permissions.manage_pages = true;
 				}
 				if ( response.data[0].publish_actions === 1 ) {
-					FB_WP.admin.login.accounts.viewer.permissions.publish = true;
+					FB_WP.admin.login.accounts.viewer.permissions.publish_actions = true;
+				}
+				if ( response.data[0].publish_stream === 1 ) {
+					FB_WP.admin.login.accounts.viewer.permissions.publish_stream = true;
 				}
 			}
 			jQuery(document).trigger("facebook-permissions-check");
@@ -129,12 +133,13 @@ FB_WP.admin.login.page = FB_WP.admin.login.page || {
 		field_container.append( jQuery("<p>").text( FB_WP.admin.login.page.messages.select_new ) );
 
 		if ( FB_WP.admin.login.page.accounts.page.id !== "" && FB_WP.admin.login.page.accounts.page.name !== "" ) {
-			pages.unshift({id:"",name: FB_WP.admin.login.page.messages.delete_stored_page.replace( /%s/i, FB_WP.admin.login.page.accounts.page.name)});
+			pages.unshift({id:"delete",name: FB_WP.admin.login.page.messages.delete_stored_page.replace( /%s/i, FB_WP.admin.login.page.accounts.page.name)});
 		}
 
 		if ( pages.length < 6 ) {
 			// show all options as input[type=radio] if not many options
 			jQuery.each( pages, function(i,page) {
+				// hide already selected page
 				if ( FB_WP.admin.login.page.accounts.page.id == page.id ) {
 					return;
 				}
@@ -146,8 +151,11 @@ FB_WP.admin.login.page = FB_WP.admin.login.page || {
 		} else {
 			// handle longer lists in a select
 			var select = jQuery("<select>").attr("name",field_name);
+			// provide a default selected page value
+			pages.unshift({id:"",name:" "});
 			jQuery.each( pages, function(i,page) {
-				if ( FB_WP.admin.login.page.accounts.page.id === page.id ) {
+				// hide already selected page
+				if ( FB_WP.admin.login.page.accounts.page.id == page.id ) {
 					return;
 				}
 
@@ -187,11 +195,11 @@ FB_WP.admin.login.page = FB_WP.admin.login.page || {
 		}
 		existing_page=null;
 
-		if ( FB_WP.admin.login.accounts.viewer.permissions.manage_pages === true ) {
+		if ( FB_WP.admin.login.accounts.viewer.permissions.manage_pages === true && FB_WP.admin.login.accounts.viewer.permissions.publish_stream === true ) {
 			jQuery(document).one("facebook-pages-check",FB_WP.admin.login.page.display_publishable_pages);
 			FB_WP.admin.login.page.get_publishable_pages();
 		} else {
-			container.append( jQuery("<p>").addClass("facebook-login-prompt").css(FB_WP.admin.login.link_style).text(FB_WP.admin.login.page.messages.add_manage_pages).click( function(){FB_WP.admin.login.trigger_login(FB_WP.admin.login.page.handle_login, {manage_pages:true})} ) );
+			container.append( jQuery("<p>").addClass("facebook-login-prompt").css(FB_WP.admin.login.link_style).text(FB_WP.admin.login.page.messages.add_manage_pages).click( function(){FB_WP.admin.login.trigger_login(FB_WP.admin.login.page.handle_login, {manage_pages:true,publish_stream:true})} ) );
 		}
 	},
 	init: function() {
@@ -245,7 +253,7 @@ FB_WP.admin.login.person = {
 			if ( FB_WP.admin.login.accounts.viewer.permissions.connected === false ) {
 				container.append( jQuery( "<p>" ).addClass("facebook-login-prompt").css(FB_WP.admin.login.link_style).text(FB_WP.admin.login.person.messages.associate_account).click( function(){FB_WP.admin.login.trigger_login(FB_WP.admin.login.person.handle_login)} ) );
 				container.append( jQuery( "<p>" ).addClass("facebook-login-prompt").css(FB_WP.admin.login.link_style).text(FB_WP.admin.login.person.messages.associate_account_publish).click( function(){FB_WP.admin.login.trigger_login(FB_WP.admin.login.person.handle_login, {publish_actions:true})} ) );
-			} else if ( FB_WP.admin.login.accounts.viewer.permissions.publish === false ) {
+			} else if ( FB_WP.admin.login.accounts.viewer.permissions.publish_actions === false ) {
 				container.append( jQuery( "<p>" ).addClass("facebook-login-prompt").css(FB_WP.admin.login.link_style).text(FB_WP.admin.login.person.messages.add_publish_actions).click( function(){FB_WP.admin.login.trigger_login(FB_WP.admin.login.person.handle_login, {publish_actions:true})} ) );
 			} else {
 				// logged in to Facebook, permissions granted, but not associated with the WordPress user
@@ -258,7 +266,7 @@ FB_WP.admin.login.person = {
 				if ( FB_WP.admin.login.accounts.viewer.permissions.connected === false ) {
 					container.append( jQuery( "<p>" ).css(FB_WP.admin.login.link_style).text(FB_WP.admin.login.person.messages.associate_account).click( function(){FB_WP.admin.login.trigger_login(FB_WP.admin.login.person.handle_login)} ) );
 					container.append( jQuery( "<p>" ).css(FB_WP.admin.login.link_style).text(FB_WP.admin.login.person.messages.associate_account_publish).click( function(){FB_WP.admin.login.trigger_login(FB_WP.admin.login.person.handle_login, {publish_actions:true})} ) );
-				} else if ( FB_WP.admin.login.accounts.viewer.permissions.publish === false ) {
+				} else if ( FB_WP.admin.login.accounts.viewer.permissions.publish_actions === false ) {
 					container.append( jQuery( "<p>" ).css(FB_WP.admin.login.link_style).text(FB_WP.admin.login.person.messages.add_publish_actions).click( function(){FB_WP.admin.login.trigger_login(FB_WP.admin.login.person.handle_login, {publish_actions:true})} ) );
 				}
 

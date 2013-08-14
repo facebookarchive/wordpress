@@ -190,7 +190,7 @@ class Facebook_Settings_Debugger {
 				echo '</td>';
 
 				echo '<td>';
-				if ( isset( $user->fb_data['permissions']['manage_pages'] ) && $user->fb_data['permissions']['manage_pages'] )
+				if ( isset( $user->fb_data['permissions']['manage_pages'] ) && $user->fb_data['permissions']['manage_pages'] && isset( $user->fb_data['permissions']['publish_stream'] ) && $user->fb_data['permissions']['publish_stream'] )
 					echo self::EXISTS;
 				else
 					echo self::DOES_NOT_EXIST;

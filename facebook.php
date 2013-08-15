@@ -5,7 +5,7 @@
  */
 /*
 Plugin Name: Facebook
-Plugin URI: http://wordpress.org/extend/plugins/facebook/
+Plugin URI: http://wordpress.org/plugins/facebook/
 Description: Add Facebook social plugins and the ability to publish new posts to a Facebook Timeline or Facebook Page. Official Facebook plugin.
 Author: Facebook
 Author URI: https://developers.facebook.com/wordpress/
@@ -145,7 +145,7 @@ class Facebook_Loader {
 		'vi_VN' => true, // Vietnamese
 		'zh_CN' => true, // Simplified Chinese (China)
 		'zh_HK' => true, // Traditional Chinese (Hong Kong)
-		'zh_TW' => true // Traditional Chinese (Taiwan)
+		'zh_TW' => true  // Traditional Chinese (Taiwan)
 	);
 
 	/**

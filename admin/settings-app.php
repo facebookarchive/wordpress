@@ -398,7 +398,7 @@ class Facebook_Application_Settings {
 
 		$content .= '<p>' . sprintf( esc_html( __( 'Click the %s button near the top right corner of the page to trigger an application creation dialog.', 'facebook' ) ), '<span style="background-color:#EEE;border:1px solid #999;color:#333;font-family:\'lucinda grande\',tahoma,verdana,arial,sans-serif;font-size:11px;font-weight:bold;line-height:13px;margin:0;padding-top:1px;padding-right:0;padding-bottom:2px;padding-left:0;text-align:center;white-space:nowrap;">+ Create New App</span>' ) . '</p>';
 
-		$content .= '<div style="text-align:center"><img alt="' . esc_attr( sprintf( __( '%s new application creation dialog', 'facebook' ), 'Facebook' ) ) . '" src="' . plugins_url( 'static/img/create-app.png', dirname(__FILE__) ) .  '" width="610" height="179" /></div>';
+		$content .= '<div style="text-align:center"><img alt="' . esc_attr( sprintf( __( '%s new application creation dialog', 'facebook' ), 'Facebook' ) ) . '" src="' . plugins_url( 'static/img/create-app.png', dirname(__FILE__) ) .  '" width="665" height="225" /></div>';
 
 		$content .= '<p>' . sprintf( esc_html( __( 'Uniquely identify your site on %1$s with an application name.', 'facebook' ) ), 'Facebook' );
 		$site_name = get_bloginfo( 'name' );

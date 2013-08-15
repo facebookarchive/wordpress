@@ -238,7 +238,7 @@ class Facebook_Open_Graph_Protocol {
 			$meta_tags[ self::OGP_NS . 'title' ] = get_bloginfo( 'name' );
 			$meta_tags[ self::OGP_NS . 'description' ] = get_bloginfo( 'description' );
 			$meta_tags[ self::OGP_NS . 'url' ] = home_url();
-		} else if ( is_single() && empty( $post->post_password ) ) {
+		} else if ( ( is_single() || is_page() ) && empty( $post->post_password ) ) {
 			setup_postdata( $post );
 			$post_type = get_post_type();
 			$meta_tags[ self::OGP_NS . 'url' ] = apply_filters( 'facebook_rel_canonical', get_permalink() );
@@ -381,17 +381,19 @@ class Facebook_Open_Graph_Protocol {
 	 * @return string Open Graph protocol type property value
 	 */
 	public static function get_post_og_type( $post ) {
-		$og_type = 'article';
-		if ( ! $post )
+		$og_type = 'website';
+		if ( ! ( $post && isset( $post->ID ) ) )
 			return $og_type;
 
 		// treat video post format as OG type video
 		if ( has_post_format( 'video', $post ) )
 			$og_type = 'video.other';
+		else if ( is_single( $post->ID ) )
+			$og_type = 'article';
 
 		$og_type = apply_filters( 'facebook_og_type', $og_type, $post );
 		if ( ! $og_type )
-			$og_type = 'article';
+			$og_type = 'website';
 
 		return $og_type;
 	}

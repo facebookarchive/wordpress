@@ -388,7 +388,7 @@ class Facebook_Open_Graph_Protocol {
 		// treat video post format as OG type video
 		if ( has_post_format( 'video', $post ) )
 			$og_type = 'video.other';
-		else if ( is_single( $post->ID ) )
+		else if ( get_post_type( $post ) === 'post' )
 			$og_type = 'article';
 
 		$og_type = apply_filters( 'facebook_og_type', $og_type, $post );

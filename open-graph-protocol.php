@@ -297,7 +297,7 @@ class Facebook_Open_Graph_Protocol {
 			}
 
 			// include MP3s for audio post formats
-			if ( has_post_format( array('audio'), $post ) ) {
+			if ( has_post_format( 'audio', $post ) ) {
 				$audios = self::get_og_audio( $post );
 				if ( ! empty( $audios ) )
 					$meta_tags[ self::OGP_NS . 'audio' ] = array_values( $audios );
@@ -386,7 +386,7 @@ class Facebook_Open_Graph_Protocol {
 			return $og_type;
 
 		// treat video post format as OG type video
-		if ( has_post_format( array('video'), $post ) )
+		if ( has_post_format( 'video', $post ) )
 			$og_type = 'video.other';
 		else if ( get_post_type( $post ) === 'post' )
 			$og_type = 'article';

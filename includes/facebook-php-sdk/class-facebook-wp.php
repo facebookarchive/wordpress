@@ -179,6 +179,8 @@ class Facebook_WP_Extend extends WP_Facebook {
 		if ( ! is_array( $params ) )
 			$params = array();
 		$params['access_token'] = $facebook_loader->credentials['access_token'];
+		if ( isset( $facebook_loader->credentials['appsecret_proof'] ) )
+			$params['appsecret_proof'] = $facebook_loader->credentials['appsecret_proof'];
 
 		return self::graph_api( $path, $method, $params );
 	}
@@ -275,6 +277,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 	 * Get application details including app name, namespace, link, and more.
 	 *
 	 * @since 1.4
+	 * @link https://developers.facebook.com/docs/reference/api/application/ Application object and fields
 	 * @param string $app_id application identifier
 	 * @param array $fields app fields to retrieve. if blank a default set will be returned
 	 * @return array application data response from Facebook API
@@ -311,14 +314,19 @@ class Facebook_WP_Extend extends WP_Facebook {
 	 * Get application details based on an application access token
 	 *
 	 * @since 1.4
+	 * @link https://developers.facebook.com/docs/reference/api/application/ Application object and fields
 	 * @param string $access_token application access token
+	 * @param array $fields request specific application fields
+	 * @param string $app_secret_proof hashed access token
 	 * @return array application information returned by Facebook servers
 	 */
-	public static function get_app_details_by_access_token( $access_token, $fields ) {
+	public static function get_app_details_by_access_token( $access_token, $fields, $app_secret_proof = '' ) {
 		if ( ! ( is_string( $access_token ) && $access_token ) )
 			return array();
 
 		$params = array( 'access_token' => $access_token );
+		if ( is_string( $app_secret_proof ) && $app_secret_proof )
+			$params['appsecret_proof'] = $app_secret_proof;
 		if ( is_array( $fields ) && ! empty( $fields ) ) {
 			if ( ! in_array( 'id', $fields, true ) )
 				$fields[] = 'id';

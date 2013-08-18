@@ -352,14 +352,19 @@ class Facebook_Application_Settings {
 			if ( wp_http_supports( array( 'ssl' => true ) ) ) {
 				$access_token = Facebook_WP_Extend::get_app_access_token( $clean_options['app_id'], $clean_options['app_secret'] );
 				if ( $access_token ) {
-					$app_info = Facebook_WP_Extend::get_app_details_by_access_token( $access_token, array( 'id', 'namespace' ) );
+					$app_secret_proof = hash_hmac( 'sha256', $access_token, $clean_options['app_secret'] );
+					$app_info = Facebook_WP_Extend::get_app_details_by_access_token( $access_token, array( 'id', 'namespace' ), $app_secret_proof );
 					if ( empty( $app_info ) ) {
+						if ( function_exists( 'add_settings_error' ) )
+							add_settings_error( 'facebook-app-auth', 'facebook-app-auth-error', __( 'Application access token failed on authentication with Facebook.', 'facebook' ) );
 						unset( $clean_options['app_id'] );
 						unset( $clean_options['app_secret'] );
 					} else {
 						if ( isset( $app_info['namespace'] ) )
 							$clean_options['app_namespace'] = $app_info['namespace'];
 						$clean_options['access_token'] = $access_token;
+						if ( $app_secret_proof )
+							$clean_options['appsecret_proof'] = $app_secret_proof;
 					}
 					unset( $app_info );
 				} else {
@@ -372,6 +377,8 @@ class Facebook_Application_Settings {
 			} else {
 				$app_info = Facebook_WP_Extend::get_app_details( $clean_options['app_id'], array( 'id','namespace' ) );
 				if ( empty( $app_info ) ) {
+					if ( function_exists( 'add_settings_error' ) )
+							add_settings_error( 'facebook-app-info', 'facebook-app-info-error', __( 'Unable to request application data from Facebook.', 'facebook' ) );
 					unset( $clean_options['app_id'] );
 					unset( $clean_options['app_secret'] );
 				} else if ( isset( $app_info['namespace'] ) ) {

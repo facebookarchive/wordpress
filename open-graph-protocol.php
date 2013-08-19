@@ -238,7 +238,7 @@ class Facebook_Open_Graph_Protocol {
 			$meta_tags[ self::OGP_NS . 'title' ] = get_bloginfo( 'name' );
 			$meta_tags[ self::OGP_NS . 'description' ] = get_bloginfo( 'description' );
 			$meta_tags[ self::OGP_NS . 'url' ] = home_url();
-		} else if ( ( is_single() || is_page() ) && empty( $post->post_password ) ) {
+		} else if ( is_singular() && empty( $post->post_password ) ) {
 			setup_postdata( $post );
 			$post_type = get_post_type();
 			$meta_tags[ self::OGP_NS . 'url' ] = apply_filters( 'facebook_rel_canonical', get_permalink() );
@@ -431,7 +431,7 @@ class Facebook_Open_Graph_Protocol {
 		unset( $facebook_page );
 
 		// add the first category as a section. all other categories as tags
-		$cat_ids = get_the_category();
+		$cat_ids = get_the_category( $post->ID );
 		if ( ! empty( $cat_ids ) ) {
 			$no_category = apply_filters( 'the_category', __( 'Uncategorized' ) );
 
@@ -455,7 +455,7 @@ class Facebook_Open_Graph_Protocol {
 		}
 
 		// add tags. treat tags as lower priority than multiple categories
-		$tags = get_the_tags();
+		$tags = get_the_tags( $post->ID );
 		if ( $tags ) {
 			if ( ! isset( $ogp[ self::ARTICLE_NS . 'tag' ] ) )
 				$ogp[ self::ARTICLE_NS . 'tag' ] = array();

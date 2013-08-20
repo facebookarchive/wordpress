@@ -293,6 +293,8 @@ class Facebook_Social_Publisher {
 			'access_token' => $facebook_page['access_token'],
 			'link' => $link
 		);
+		if ( isset( $facebook_page['appsecret_proof'] ) && $facebook_page['appsecret_proof'] )
+			$args['appsecret_proof'] = $facebook_page['appsecret_proof'];
 
 		if ( $meta_box_present )
 			$args['fb:explicitly_shared'] = 'true';

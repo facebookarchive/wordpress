@@ -397,6 +397,8 @@ class Facebook_Social_Publisher_Settings {
 	 * @param array $page_data data returned from Facebook Graph API permissions call
 	 */
 	public static function update_publish_to_page( $page_data ) {
+		global $facebook_loader;
+
 		if ( ! ( is_array( $page_data ) && ! empty( $page_data ) && isset( $page_data['id'] ) ) )
 			return;
 
@@ -428,6 +430,8 @@ class Facebook_Social_Publisher_Settings {
 		);
 		if ( isset( $write_pages[ $page_data['id'] ]['link'] ) )
 			$value['link'] = $write_pages[ $page_data['id'] ]['link'];
+		if ( isset( $facebook_loader->credentials['app_secret'] ) )
+			$value['appsecret_proof'] = hash_hmac( 'sha256', $access_token, $facebook_loader->credentials['app_secret'] );
 
 		update_option( self::OPTION_PUBLISH_TO_PAGE, $value );
 	}

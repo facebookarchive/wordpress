@@ -25,6 +25,7 @@ class Facebook_Shortcodes {
 		wp_embed_register_handler( 'facebook_embedded_post_question', '#^https?://www\.facebook\.com/questions/([\d]+)#i', array( 'Facebook_Shortcodes', 'wp_embed_handler_embedded_post' ) );
 		wp_embed_register_handler( 'facebook_embedded_post_photo', '#^https?://www\.facebook\.com/photo\.php\?fbid=([\d]+)#i', array( 'Facebook_Shortcodes', 'wp_embed_handler_embedded_post' ) );
 		wp_embed_register_handler( 'facebook_embedded_post_video', '#^https?://www\.facebook\.com/photo\.php\?v=([\d]+)#i', array( 'Facebook_Shortcodes', 'wp_embed_handler_embedded_post' ) );
+		wp_embed_register_handler( 'facebook_embedded_post_note', '#^https?://www\.facebook\.com/notes/([A-Za-z0-9\.-]{2,50})/([^/]+)/([\d]+)#i', array( 'Facebook_Shortcodes', 'wp_embed_handler_embedded_post' ) );
 	}
 
 	/**

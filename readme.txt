@@ -5,7 +5,7 @@ Requires at least: 3.3
 Tested up to: 3.6
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.5
+Stable tag: 1.5.1
 
 Add Facebook social plugins and the ability to publish new posts to a Facebook Timeline or Facebook Page. Official Facebook plugin.
 
@@ -99,6 +99,10 @@ The development [source code for this plugin is available on Facebook's GitHub a
 
 You may create a new Facebook application or edit your existing Facebook application through the [Facebook Developers application interface](https://developers.facebook.com/apps/). You may first need to signup for a Facebook Developer account.
 
+= I am unable to save my Facebook application ID and secret =
+
+Some webmasters have reported issues saving Facebook application ID and secret information in the Facebook settings page. These inputted values are verified with Facebook servers before saving, requiring an HTTPS request to Facebook servers. Some sites experiencing issues have identified their server's bundled SSL certificates as an issue; returning false for the `https_ssl_verify` filter used by the WordPress HTTP class may help fix server-to-server communication issues if updating your cURL or other libraries is not an option.
+
 = How do I change the image that appears for my posts shared on Facebook? =
 
 The plugin generates [Open Graph protocol](http://ogp.me/) markup for your site's webpages including a explicitly-specified images generated from the [post thumbnail](http://codex.wordpress.org/Post_Thumbnails), [attached images](http://codex.wordpress.org/Inserting_Images_into_Posts_and_Pages), or gallery shortcode. Your plugin or theme may define additional images through the `fb_meta_tags` filter. If an image or images already exists your additional image may be used as an alternate for stories shared through a pasted link. Unattended story summaries such as a Like Button click use the first defined image. [support sticky](http://wordpress.org/support/topic/customize-open-graph-protocol-for-your-site-or-network)
@@ -114,6 +118,10 @@ The [Comment Moderation Tool](https://developers.facebook.com/tools/comments) al
 = Does Facebook Comments work with my existing WordPress comments? =
 
 The [Comments Box social plugin](https://developers.facebook.com/docs/reference/plugins/comments/) is meant to replace the WordPress commenting system with a more social, client-side experience. We do not currently support synchronizing comments stored on Facebook with comments stored in your WordPress database. Posts with existing WordPress comments will display those comments followed by the Facebook Comments Box.
+
+= Why do comments on a post published to my Facebook Timeline or Page not appear inside Facebook Comments Box on my post page? =
+
+The [Facebook Comments Box social plugin](https://developers.facebook.com/docs/reference/plugins/comments/) is a separate commenting system associated with a URL regardless of your authors' decision to post to his or her Facebook Timeline or your site's Facebook Page.
 
 = What additional configuration steps do I need to complete to enable an Open Graph action for my Facebook application? =
 
@@ -132,6 +140,9 @@ It's possible another plugin (or your theme) including an English version of the
 
 
 == Upgrade Notice ==
+
+= 1.5.1 =
+Open Graph protocol markup for singular query types. Sign API app access token calls with app secret proof.
 
 = 1.5 =
 New Facebook account association tools. Enhanced Open Graph Protocol. Facebook Embedded Posts. WP 3.6 extras.
@@ -197,6 +208,11 @@ Improve site performance when cURL not installed or SSL not available. Removed p
 Security fixes. Improved customization and debugging of settings. l10n and i18n fixes.
 
 == Changelog ==
+
+= 1.5.1 =
+* Expand Open Graph protocol markup to all singular post types
+* Generate and store an [app secret proof](https://developers.facebook.com/docs/reference/api/securing-graph-api/ "Facebook Graph API app secret proof") on Facebook app id and app secret verification
+* Support auto embed of Facebook notes URLs
 
 = 1.5 =
 * Rewritten administrative tools to associate a WordPress user with a Facebook account from a profile settings page and a Facebook Page with a WordPress site from the Facebook Social Publisher settings page

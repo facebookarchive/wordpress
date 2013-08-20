@@ -367,6 +367,7 @@ class Facebook_Application_Settings {
 							$clean_options['appsecret_proof'] = $app_secret_proof;
 					}
 					unset( $app_info );
+					unset( $app_secret_proof );
 				} else {
 					if ( function_exists( 'add_settings_error' ) )
 						add_settings_error( 'facebook-app-auth', 'facebook-app-auth-error', __( 'Application ID and secret failed on authentication with Facebook.', 'facebook' ) );

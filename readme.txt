@@ -5,7 +5,7 @@ Requires at least: 3.3
 Tested up to: 3.6
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 
 Add Facebook social plugins and the ability to publish new posts to a Facebook Timeline or Facebook Page. Official Facebook plugin.
 
@@ -141,6 +141,9 @@ It's possible another plugin (or your theme) including an English version of the
 
 == Upgrade Notice ==
 
+= 1.5.2 =
+Include app secret proof with Page access tokens.
+
 = 1.5.1 =
 Open Graph protocol markup for singular query types. Sign API app access token calls with app secret proof.
 
@@ -208,6 +211,9 @@ Improve site performance when cURL not installed or SSL not available. Removed p
 Security fixes. Improved customization and debugging of settings. l10n and i18n fixes.
 
 == Changelog ==
+
+= 1.5.2 =
+* Generate and store an [app secret proof](https://developers.facebook.com/docs/reference/api/securing-graph-api/ "Facebook Graph API app secret proof") for Facebook Page access token verification
 
 = 1.5.1 =
 * Expand Open Graph protocol markup to all singular post types

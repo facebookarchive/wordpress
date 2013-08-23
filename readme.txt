@@ -72,7 +72,6 @@ The development [source code for this plugin is available on Facebook's GitHub a
 = Filters =
 
 * `facebook_features` - limit the plugin features available on your site
-* `fb_conflicting_plugins` - add or remove plugin URLs used by the plugin to warn against potential conflicts
 * `facebook_jssdk_init_options` - customize arguments sent to the [FB.init](https://developers.facebook.com/docs/reference/javascript/FB.init/) function of the Facebook JavaScript SDK
 * `facebook_jssdk_init_extras` - add extra JavaScript to the `fbAsyncInit` JavaScript function called after the Facebook JavaScript SDK is loaded
 * `facebook_content_filter_priority` - choose the priority of Facebook social plugin filters attached to `the_content` filter. Affects where Facebook content is output on your page relative to other plugins attached to `the_content`

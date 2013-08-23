@@ -8,7 +8,7 @@ Plugin Name: Facebook
 Plugin URI: http://wordpress.org/plugins/facebook/
 Description: Add Facebook social plugins and the ability to publish new posts to a Facebook Timeline or Facebook Page. Official Facebook plugin.
 Author: Facebook
-Author URI: https://developers.facebook.com/wordpress/
+Author URI: https://developers.facebook.com/docs/wordpress/
 Version: 1.5.2
 License: GPL2
 License URI: license.txt

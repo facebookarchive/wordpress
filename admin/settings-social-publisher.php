@@ -235,7 +235,7 @@ class Facebook_Social_Publisher_Settings {
 
 		echo '<p>' . esc_html( __( 'Promote social engagement and readership by publishing new posts to the Facebook Timeline of a connected author.', 'facebook' ) ) . '</p>';
 
-		echo '<p>' . sprintf( esc_html( __( 'Open Graph %s', 'facebook' ) ), '<a href="' . esc_url( 'https://developers.facebook.com/wordpress/open-graph-action/', array( 'http', 'https' ) ) . '" target="_blank" title="' . esc_attr( __( 'Facebook Open Graph action submission process', 'facebook' ) ) . '">' . esc_html( __( 'prerequisites', 'facebook' ) ) . '</a>' ) . ': </p>';
+		echo '<p>' . sprintf( esc_html( __( 'Open Graph %s', 'facebook' ) ), '<a href="' . esc_url( 'https://developers.facebook.com/docs/wordpress/open-graph-action/', array( 'http', 'https' ) ) . '" target="_blank" title="' . esc_attr( __( 'Facebook Open Graph action submission process', 'facebook' ) ) . '">' . esc_html( __( 'prerequisites', 'facebook' ) ) . '</a>' ) . ': </p>';
 
 		echo '<ol>';
 
@@ -386,7 +386,7 @@ class Facebook_Social_Publisher_Settings {
 			'content' => self::help_tab_publisher()
 		) );
 
-		$screen->set_help_sidebar( '<p><a href="' . esc_url( 'https://developers.facebook.com/apps/', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'Facebook Apps Tool', 'facebook' ) ) . '</a></p><p><a href="' . esc_url( 'https://developers.facebook.com/wordpress/', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'Plugin help page', 'facebook' ) ) . '</a></p>' );
+		$screen->set_help_sidebar( '<p><a href="' . esc_url( 'https://developers.facebook.com/apps/', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'Facebook Apps Tool', 'facebook' ) ) . '</a></p><p><a href="' . esc_url( 'https://developers.facebook.com/docs/wordpress/', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'Plugin help page', 'facebook' ) ) . '</a></p>' );
 	}
 
 	/**

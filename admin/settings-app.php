@@ -146,7 +146,7 @@ class Facebook_Application_Settings {
 
 		// promote Facebook for WordPress page on Facebook Developers site
 		$like_button = new Facebook_Like_Button(false);
-		$like_button->setURL( 'http://developers.facebook.com/wordpress/' );
+		$like_button->setURL( 'https://developers.facebook.com/docs/wordpress/' );
 		$like_button->setLayout( 'button_count' );
 		$like_button->includeSendButton();
 		$like_button->setFont( 'arial' );

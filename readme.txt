@@ -45,7 +45,7 @@ The development [source code for this plugin is available on Facebook's GitHub a
 1. Install Facebook for WordPress either via the WordPress.org plugin directory, or by uploading the files to your server (in the `/wp-content/plugins/` directory).
 1. You should be able to start using social plugins (Like Button, Send Button, etc.) right away.
 1. After activating the plugin, you will be asked to set up your Facebook application or enter existing credentials copied from the [Facebook Developers site](http://developers.facebook.com/apps/) to unlock additional features such as publishing posts to an author Timeline or site Page.
-1. Optionally set up a Facebook Open Graph action with user message, mentions tagging, and explicitly shared action capabilities. See the [Facebook for WordPress help page](https://developers.facebook.com/wordpress/) for more information.
+1. Optionally set up a Facebook Open Graph action with user message, mentions tagging, and explicitly shared action capabilities. See the [Facebook for WordPress help page](https://developers.facebook.com/docs/wordpress/) for more information.
 1. That's it. You're ready to go!
 
 == Screenshots ==
@@ -125,7 +125,7 @@ The [Facebook Comments Box social plugin](https://developers.facebook.com/docs/r
 
 = What additional configuration steps do I need to complete to enable an Open Graph action for my Facebook application? =
 
-Visit the [Facebook plugin for WordPress getting started page](https://developers.facebook.com/wordpress/) for more details and screenshots of each step in the process. You will need to create an Open Graph action-object pair for your Facebook application: publish an article. You will need to submit the new publish action for approval with support for [action capabilities](https://developers.facebook.com/docs/submission-process/opengraph/guidelines/action-properties/ "Facebook action capabilities") allowing custom messages on an author's Timeline, mentioning Facebook friends and Facebook pages within that message, and marking the new post as explicitly shared.
+Visit the [Facebook plugin for WordPress getting started page](https://developers.facebook.com/docs/wordpress/) for more details and screenshots of each step in the process. You will need to create an Open Graph action-object pair for your Facebook application: publish an article. You will need to submit the new publish action for approval with support for [action capabilities](https://developers.facebook.com/docs/submission-process/opengraph/guidelines/action-properties/ "Facebook action capabilities") allowing custom messages on an author's Timeline, mentioning Facebook friends and Facebook pages within that message, and marking the new post as explicitly shared.
 
 = I set up my social plugin but nothing happened =
 

@@ -62,3 +62,7 @@ tbody tr:nth-child(odd) td, tbody tr:nth-child(odd) th {
   font-style: bold;
   color: red
 }
+
+a.facebook-icon {
+  text-decoration: none;
+}

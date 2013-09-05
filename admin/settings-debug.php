@@ -98,6 +98,7 @@ class Facebook_Settings_Debugger {
 
 		// only show users if app credentials stored
 		if ( $facebook_loader->app_access_token_exists() ) {
+			self::app_section();
 			self::users_section();
 			self::post_to_page_section();
 		}
@@ -149,6 +150,174 @@ class Facebook_Settings_Debugger {
 		$users['fb'] = $users_with_app_permissions;
 
 		return $users;
+	}
+
+	/**
+	 * URL of the Facebook app editor for a specific Facebook app id
+	 *
+	 * @since 1.5.3
+	 * @param string Facebook application identifier
+	 * @return string absolute URI of the passed Facebook app_id editor
+	 */
+	public static function get_app_edit_base_uri( $app_id ) {
+		return 'https://developers.facebook.com/apps/' . $app_id . '/';
+	}
+
+	/**
+	 * Display Facebook application settings, prompt for missing values
+	 *
+	 * Help WordPress administrators troubleshoot missing minimum requirements for a Facebook app using Facebook Login and/or an approved Open Graph action.
+	 *
+	 * @since 1.5.3
+	 * @global \Facebook_Loader $facebook_loader access Facebook app id
+	 * @return void
+	 */
+	public static function app_section() {
+		global $facebook_loader;
+
+		if ( ! ( isset( $facebook_loader->credentials['app_id'] ) && $facebook_loader->credentials['app_id'] ) )
+			return;
+
+		echo '<section id="debug-app">';
+		echo '<header><h3><a href="' . self::get_app_edit_base_uri( $facebook_loader->credentials['app_id'] ) . '" target="_blank">' . esc_html( sprintf( __( 'App %s', 'facebook' ), $facebook_loader->credentials['app_id'] ) ) . '</a></h3></header>';
+
+		self::app_details( $facebook_loader->credentials['app_id'] );
+
+		echo '</section>';
+	}
+
+	/**
+	 * Display Facebook application details; suggest new values if value not set
+	 *
+	 * Request stored details for the site's stored Facebook application. Highlight values relevant to a proper functioning Facebook Login experience
+	 *
+	 * @since 1.5.3
+	 * @param string $app_id Facebook application identifier
+	 * @return void
+	 */
+	public static function app_details( $app_id ) {
+		// HTTP interface to Facebook
+		if ( ! class_exists( 'Facebook_WP_Extend' ) )
+			require_once( dirname( dirname( __FILE__ ) ) . '/includes/facebook-php-sdk/class-facebook-wp.php' );
+
+		// request application data for the app id using stored app access token
+		$app_details = Facebook_WP_Extend::graph_api_with_app_access_token( $app_id, 'GET', array( 'fields' => 'name,icon_url,logo_url,app_domains,website_url,privacy_policy_url,terms_of_service_url,auth_dialog_headline,auth_dialog_perms_explanation' ) );
+
+		if ( empty( $app_details ) )
+			return;
+
+		// link to the relevant Facebook app editor screen
+		$app_edit_base_uri = self::get_app_edit_base_uri( $app_id );
+
+		echo '<table id="facebook-app-login-fields">';
+		echo '<caption>' . esc_html( __( 'Facebook Login', 'facebook' ) ) . '</caption>';
+		echo '<thead><tr><th>' . esc_html( __( 'Setting', 'facebook' ) ) . '</th><th>' . esc_html( __( 'Value', 'facebook' ) ) . '</th></tr></thead>';
+		echo '<tbody>';
+
+		// app name
+		echo '<tr><th><a href="' . $app_edit_base_uri . 'appdetails/#name" target="_blank">' . esc_html( __( 'App name', 'facebook' ) ) . '</a></th><td';
+		if ( isset( $app_details['name'] ) && $app_details['name'] ) {
+			echo '>"' . esc_html( $app_details['name'] ) . '"';
+		} else {
+			echo ' class="error-message">';
+			$site_name = trim( get_bloginfo( 'name' ) );
+			// consider the WordPress default the same as not set
+			if ( $site_name && $site_name !== __( 'My Site' ) )
+				echo esc_html( sprintf( __( 'Not set. Consider using: %s', 'facebook' ), $site_name ) );
+			else
+				echo esc_html( __( 'Not set.', 'facebook' ) );
+			unset( $site_name );
+		}
+		echo '</td></tr>';
+
+		// app domains able to act on behalf of the application
+		echo '<tr><th><a href="' . $app_edit_base_uri . 'summary/" target="_blank">' . esc_html( __( 'App Domains', 'facebook' ) ) . '</a></th><td';
+		if ( isset( $app_details['app_domains'] ) && ! empty( $app_details['app_domains'] ) ) {
+			echo '><ul>';
+			foreach( $app_details['app_domains'] as $app_domain ) {
+				echo '<li><code>' . esc_html( $app_domain ) . '</code></li>';
+			}
+			echo '</ul>';
+		} else {
+			echo ' class="error-message">';
+			echo esc_html( sprintf( __( 'Not set. Consider using: %s', 'facebook' ), parse_url( admin_url(), PHP_URL_HOST ) ) );
+		}
+		echo '</td></tr>';
+
+		// Website with Facebook Login
+		echo '<tr><th><a href="' . $app_edit_base_uri . 'summary/#site_url_input" target="_blank">' . esc_html( __( 'Website', 'facebook' ) ) . '</a></th><td';
+		if ( isset( $app_details['website_url'] ) && $app_details['website_url'] ) {
+			$app_details['website_url'] = esc_url( $app_details['website_url'], array( 'http', 'https' ) );
+			echo '><a href="' . $app_details['website_url'] . '" target="_blank">' . $app_details['website_url'] . '</a>';
+		} else {
+			echo ' class="error-message">';
+			echo esc_html( sprintf( __( 'Not set. Consider using: %s', 'facebook' ), home_url() ) );
+		}
+		echo '</td></tr>';
+
+		// One-line description
+		echo '<tr><th><a href="' . $app_edit_base_uri . 'appdetails/" target="_blank">' . esc_html( __( 'One-line description', 'facebook' ) ) . '</a></th><td';
+		if ( isset( $app_details['auth_dialog_headline'] ) && $app_details['auth_dialog_headline'] ) {
+			echo '>"' . esc_html( $app_details['auth_dialog_headline'] ) . '"';
+		} else {
+			echo ' class="error-message">';
+			$site_description = trim( get_bloginfo( 'description' ) );
+			if ( $site_description && $site_description !== __( 'Just another WordPress site' ) )
+				echo esc_html( sprintf( __( 'Not set. Consider using: %s', 'facebook' ), '"' . $site_description . '"' ) );
+			else
+				echo esc_html( __( 'Not set.', 'facebook' ) );
+			unset( $site_description );
+		}
+		echo '</td></tr>';
+
+		// publish permissions explanation
+		echo '<tr><th><a href="' . $app_edit_base_uri . 'appdetails/" target="_blank">' . esc_html( _x( 'Publish permissions explanation', 'Explain the reason for requesting publish permissions from a Facebook user', 'facebook' ) ) . '</a></th><td';
+		if ( isset( $app_details['auth_dialog_perms_explanation'] ) && $app_details['auth_dialog_perms_explanation'] )
+			echo '>"' . esc_html( $app_details['auth_dialog_perms_explanation'] ) . '"';
+		else
+			echo ' class="error-message">' . esc_html( sprintf( __( 'Not set. Consider using: %s', 'facebook' ), '"' . __( 'Publish new posts to your Facebook Timeline or Page.', 'facebook' ) . '"' ) );
+		echo '</td></tr>';
+
+		// Privacy Policy
+		echo '<tr><th><a href="' . $app_edit_base_uri . 'appdetails/#privacy_url" target="_blank">' . esc_html( __( 'Privacy Policy', 'facebook' ) ) . '</a></th><td';
+		if ( isset( $app_details['privacy_policy_url'] ) && $app_details['privacy_policy_url'] ) {
+			$app_details['privacy_policy_url'] = esc_url( $app_details['privacy_policy_url'], array( 'http', 'https' ) );
+			echo '><a href="' . $app_details['privacy_policy_url'] . '" target="_blank">' . $app_details['privacy_policy_url'] . '</a>';
+		} else {
+			echo ' class="error-message">' . esc_html( __( 'Not set.', 'facebook' ) ) . ' ' . esc_html( _x( 'Create a new page?', 'Create a new WordPress page', 'facebook' ) );
+		}
+		echo '</td></tr>';
+
+		// Terms of Service
+		echo '<tr><th><a href="' . $app_edit_base_uri . 'appdetails/#tos_url" target="_blank">' . esc_html( __( 'Terms of Service', 'facebook' ) ) . '</a></th><td';
+		if ( isset( $app_details['terms_of_service_url'] ) && $app_details['terms_of_service_url'] ) {
+			$app_details['terms_of_service_url'] = esc_url( $app_details['terms_of_service_url'], array( 'http', 'https' ) );
+			echo '><a href="' . $app_details['terms_of_service_url'] . '" target="_blank">' . $app_details['terms_of_service_url'] . '</a>';
+		} else {
+			echo ' class="error-message">';
+			echo esc_html( __( 'Not set.', 'facebook' ) ) . ' ' . esc_html( _x( 'Create a new page?', 'Create a new WordPress page', 'facebook' ) );
+		}
+		echo '</td></tr>';
+
+		// Logo
+		echo '<tr><th><a href="' . $app_edit_base_uri . 'appdetails/" target="_blank">' . esc_html( _x( 'Logo', 'Facebook application logo', 'facebook' ) ) . '</a></th><td';
+		if ( isset( $app_details['logo_url'] ) && $app_details['logo_url'] ) {
+			echo '><img alt="' . esc_attr( __( 'Facebook application logo', 'facebook' ) ) . '" src="' . esc_url( $app_details['logo_url'], array( 'http', 'https' ) ) . '" />';
+		} else {
+			echo ' class="error-message">' . esc_html( __( 'Not set.', 'facebook' ) );
+		}
+		echo '</td></tr>';
+
+		// Icon
+		echo '<tr><th><a href="' . $app_edit_base_uri . 'appdetails/" target="_blank">' . esc_html( _x( 'Icon', 'Facebook application icon', 'facebook' ) ) . '</a></th><td';
+		if ( isset( $app_details['icon_url'] ) && $app_details['icon_url'] ) {
+			echo '><img alt="' . esc_attr( __( 'Facebook application icon', 'facebook' ) ) . '" src="' . esc_url( $app_details['icon_url'], array( 'http', 'https' ) ) . '" />';
+		} else {
+			echo ' class="error-message">' . esc_html( __( 'Not set.', 'facebook' ) );
+		}
+		echo '</td></tr>';
+
+		echo '</tbody></table>';
 	}
 
 	/**

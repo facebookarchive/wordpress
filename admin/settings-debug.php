@@ -181,9 +181,95 @@ class Facebook_Settings_Debugger {
 		echo '<section id="debug-app">';
 		echo '<header><h3><a href="' . self::get_app_edit_base_uri( $facebook_loader->credentials['app_id'] ) . '" target="_blank">' . esc_html( sprintf( __( 'App %s', 'facebook' ), $facebook_loader->credentials['app_id'] ) ) . '</a></h3></header>';
 
+		self::app_editors( $facebook_loader->credentials['app_id'] );
 		self::app_details( $facebook_loader->credentials['app_id'] );
 
 		echo '</section>';
+	}
+
+	/**
+	 * Mention WordPress users with manage_options capability who can also edit the Facebook app
+	 *
+	 * @since 1.5.3
+	 * @param string $app_id Facebook application identifier
+	 * @return void
+	 */
+	public static function app_editors( $app_id ) {
+		// HTTP interface to Facebook
+		if ( ! class_exists( 'Facebook_WP_Extend' ) )
+			require_once( dirname( dirname( __FILE__ ) ) . '/includes/facebook-php-sdk/class-facebook-wp.php' );
+
+		$app_roles = Facebook_WP_Extend::graph_api_with_app_access_token( $app_id . '/roles', 'GET', array( 'fields' => 'user,role' ) );
+		if ( empty( $app_roles ) || ! isset( $app_roles['data'] ) )
+			return;
+		$app_roles = $app_roles['data'];
+
+		// Facebook to WordPress user helper class
+		if ( ! class_exists( 'Facebook_User' ) )
+			require_once( dirname( dirname( __FILE__ ) ) . '/facebook-user.php' );
+		$current_user_facebook_id = Facebook_User::get_facebook_profile_id( get_current_user_id() );
+		$facebook_users_can_edit = array();
+		foreach( $app_roles as $facebook_user ) {
+			if ( ! ( isset( $facebook_user['user'] ) && $facebook_user['user'] && isset( $facebook_user['role'] ) && in_array( $facebook_user['role'], array( 'administrators', 'developers' ), true ) ) )
+				continue;
+
+			// confirm the current WordPress user's ability to edit Facebook app values
+			if ( $current_user_facebook_id && $facebook_user['user'] == $current_user_facebook_id ) {
+				echo '<p>' . __( 'You have the ability to change these application settings on Facebook.', 'facebook' ) . '</p>';
+				return;
+			}
+			$facebook_users_can_edit[ $facebook_user['user'] ] = true;
+		}
+		unset( $current_user_facebook_id );
+		unset( $app_roles );
+		if ( empty( $facebook_users_can_edit ) )
+			return;
+
+		// fb => [], wp => []
+		$facebook_users = Facebook_User::get_wordpress_users_associated_with_facebook_accounts( 'manage_options' );
+		if ( empty( $facebook_users ) || ! isset( $facebook_users['fb'] ) || empty( $facebook_users['fb'] ) )
+			return;
+		$facebook_users = $facebook_users['fb'];
+
+		// WordPress accounts capable of managing WordPress site options who have associated a Facebook account capable of editing the current WordPress site's Facebook app
+		$wordpress_users_can_edit = array();
+		foreach( $facebook_users as $facebook_user ) {
+			if ( isset( $facebook_user->fb_data ) && isset( $facebook_user->fb_data['fb_uid'] ) && isset( $facebook_users_can_edit[ $facebook_user->fb_data['fb_uid'] ] ) )
+				$wordpress_users_can_edit[] = $facebook_user;
+		}
+		unset( $facebook_users );
+		if ( empty( $wordpress_users_can_edit ) )
+			return;
+
+		// display a list of people who could help edit Facebook app values
+		// link to Facebook account page instead of email due to the more public nature of a Facebook account
+		$wordpress_users_display = array();
+		foreach( $wordpress_users_can_edit as $wordpress_user ) {
+			if ( ! isset( $wordpress_user->display_name ) )
+				continue;
+
+			$facebook_profile_link = Facebook_User::facebook_profile_link( $wordpress_user->fb_data );
+			if ( $facebook_profile_link )
+				$wordpress_users_display[] = '<a href="' . esc_url( $facebook_profile_link, array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( $wordpress_user->display_name ) . '</a>';
+			else
+				$wordpress_users_display[] = esc_html( $wordpress_user->display_name );
+			unset( $facebook_profile_link );
+		}
+		if ( empty( $wordpress_users_display ) )
+			return;
+
+		// format the display of the list of people
+		$wordpress_users_display_count = count( $wordpress_users_display );
+		$ask_string = '';
+		if ( $wordpress_users_display_count === 1 ) {
+			$ask_string = $wordpress_users_display[0];
+		} else if ( $wordpress_users_display_count === 2 ) {
+			$ask_string = $wordpress_users_display[0] . ' ' . _x( 'or', 'bridge between two options: this or that or these', 'facebook' ) . ' ' . $wordpress_users_display[1];
+		} else {
+			$ask_string = ', ' . _x( 'or', 'bridge between two options: this or that or these', 'facebook' ) . ' ' . array_pop( $wordpress_users_display );
+			$ask_string = implode( ', ', $wordpress_users_display ) . $ask_string;
+		}
+		echo '<p>' . sprintf( __( '%s can change these application settings on Facebook.', 'facebook' ), $ask_string ) . '</p>';
 	}
 
 	/**
@@ -251,7 +337,7 @@ class Facebook_Settings_Debugger {
 			echo '><a href="' . $app_details['website_url'] . '" target="_blank">' . $app_details['website_url'] . '</a>';
 		} else {
 			echo ' class="error-message">';
-			echo esc_html( sprintf( __( 'Not set. Consider using: %s', 'facebook' ), home_url() ) );
+			echo esc_html( sprintf( __( 'Not set. Consider using: %s', 'facebook' ), home_url( '/' ) ) );
 		}
 		echo '</td></tr>';
 
@@ -262,6 +348,7 @@ class Facebook_Settings_Debugger {
 		} else {
 			echo ' class="error-message">';
 			$site_description = trim( get_bloginfo( 'description' ) );
+			// do not suggest WordPress default site description
 			if ( $site_description && $site_description !== __( 'Just another WordPress site' ) )
 				echo esc_html( sprintf( __( 'Not set. Consider using: %s', 'facebook' ), '"' . $site_description . '"' ) );
 			else

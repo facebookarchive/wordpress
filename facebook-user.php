@@ -14,12 +14,24 @@ class Facebook_User {
 	 * @uses get_user_meta()
 	 * @link http://codex.wordpress.org/Function_Reference/get_user_meta
 	 *
-	 * @param int $user_id Post ID.
-	 * @param string $key Optional. The meta key to retrieve. By default, returns data for all keys.
+	 * @param int $user_id WordPress user identifier
+	 * @param string $meta_key Optional. The meta key to retrieve. By default, returns data for all keys.
 	 * @param bool $single Whether to return a single value.
 	 * @return mixed Will be an array if $single is false. Will be value of meta data field if $single is true.
 	 */
 	public static function get_user_meta( $user_id, $meta_key, $single = false ) {
+		/**
+		 * Allow sites to override user data requests.
+		 *
+		 * Allow WordPress hosts to implement a custom user meta system by passing data through a custom filter.
+		 *
+		 * @since 1.0
+		 *
+		 * @param bool false default state to test if the filter received a new value
+		 * @param int $user_id WordPress user identifier
+		 * @param string $meta_key the user meta key requested
+		 * @param bool $single if true return value of the meta data field
+		 */
 		$override = apply_filters( 'fb_get_user_meta', false, $user_id, $meta_key, $single );
 		if ( false !== $override )
 			return $override;
@@ -35,13 +47,26 @@ class Facebook_User {
 	 * @uses update_user_meta()
 	 * @link http://codex.wordpress.org/Function_Reference/update_user_meta
 	 *
-	 * @param int $user_id Post ID.
-	 * @param string $meta_key Metadata key.
-	 * @param mixed $meta_value Metadata value.
+	 * @param int $user_id WordPress user identifier
+	 * @param string $meta_key The meta key to update
+	 * @param mixed $meta_value new desired value of $meta_key
 	 * @param mixed $prev_value Optional. Previous value to check before removing.
 	 * @return bool False on failure, true if success.
 	 */
 	public static function update_user_meta( $user_id, $meta_key, $meta_value, $prev_value = '' ) {
+		/**
+		 * Allow sites to override user data updates
+		 *
+		 * Allow WordPress hosts to implement a custom user meta system by passing data through a custom filter.
+		 *
+		 * @since 1.0
+		 *
+		 * @param bool false default state to test if the filter received a new value
+		 * @param int $user_id WordPress user identifier
+		 * @param string $meta_key the user meta key to be updated
+		 * @param mixed $meta_value The new desired value of the meta_key, which must be different from the existing value. Arrays and objects will be automatically serialized
+		 * @param mixed $prev_value Previous value to check before removing
+		 */
 		$override = apply_filters( 'fb_update_user_meta', false, $user_id, $meta_key, $meta_value, $prev_value );
 		if ( false !== $override )
 			return $override;
@@ -57,12 +82,24 @@ class Facebook_User {
 	 * @uses delete_user_meta()
 	 * @link http://codex.wordpress.org/Function_Reference/delete_user_meta
 	 *
-	 * @param int $user_id user ID
-	 * @param string $meta_key Metadata name.
-	 * @param mixed $meta_value Optional. Metadata value.
+	 * @param int $user_id WordPress user identifier
+	 * @param string $meta_key The user meta key to depete
+	 * @param mixed $meta_value Optional. Delete a specific value
 	 * @return bool False for failure. True for success.
 	 */
 	public static function delete_user_meta( $user_id, $meta_key, $meta_value = '' ) {
+		/**
+		 * Allow sites to override user data deletes
+		 *
+		 * Allow WordPress hosts to implement a custom user meta system by passing data through a custom filter.
+		 *
+		 * @since 1.0
+		 *
+		 * @param bool false default state to test if the filter received a new value
+		 * @param int $user_id WordPress user identifier
+		 * @param string $meta_key the user meta key to be deleted
+		 * @param mixed $meta_value Delete a specific value
+		 */
 		$override = apply_filters( 'fb_delete_user_meta', false, $user_id, $meta_key, $meta_value );
 		if ( false !== $override )
 			return $override;
@@ -71,9 +108,13 @@ class Facebook_User {
 	}
 
 	/**
-	 * Extend our access token usage time
+	 * Extend our access token usage time through the Facebook SDK for PHP
 	 *
 	 * @since 1.0
+	 *
+	 * @global Facebook_WP_Extend $facebook a possible existing instance of the Facebook SDK for PHP
+	 * @global Facebook_Loader $facebook_loader load the Facebook SDK for PHP if not already loaded
+	 * @return void
 	 */
 	public static function extend_access_token() {
 		global $facebook, $facebook_loader;
@@ -84,11 +125,13 @@ class Facebook_User {
 
 	/**
 	 * Does the current WordPress user have Facebook data stored?
+	 *
 	 * Has the current viewer authorized the current application to post on his or her behalf?
 	 *
 	 * @since 1.1
-	 * @param int $wp_user_id WordPress user identifier
-	 * @return bool true if Facebook information present for current user and publish permissions exist
+	 * @param int $wordpress_user_id WordPress user identifier. Optional. Uses current user id if not passed
+	 * @param bool $check_publish_override test for the ability to publish to Facebook disabled by the given $wordpress_user_id
+	 * @return bool True if Facebook information present for current user and publish permissions exist
 	 */
 	public static function can_publish_to_facebook( $wordpress_user_id = 0, $check_publish_override = true ) {
 		if ( ! $wordpress_user_id )
@@ -96,16 +139,20 @@ class Facebook_User {
 		if ( ! $wordpress_user_id )
 			return false;
 
+		// get associated Facebook account
 		$facebook_profile_id = self::get_facebook_profile_id( $wordpress_user_id );
 		if ( ! $facebook_profile_id )
 			return false;
 
+		// treat a disabled publish to Timeline preference the same as no publish_actions
 		if ( $check_publish_override && self::get_user_meta( $wordpress_user_id, 'facebook_timeline_disabled', true ) )
 			return false;
 
+		// Facebook HTTP helper functions
 		if ( ! class_exists( 'Facebook_WP_Extend' ) )
 			require_once( dirname(__FILE__) . '/includes/facebook-php-sdk/class-facebook-wp.php' );
 
+		// test for publish permissions
 		$permissions = Facebook_WP_Extend::get_permissions_by_facebook_user_id( $facebook_profile_id );
 		if ( ! ( is_array( $permissions ) && ! empty( $permissions ) && isset( $permissions['publish_actions'] ) ) )
 			return false;
@@ -114,12 +161,18 @@ class Facebook_User {
 	}
 
 	/**
-	 * Retrieve a list of all WordPress users for the current site with the given capability
-	 * Check each user for stored data indicating a possible association with a Facebook account
+	 * Retrieve a list of all WordPress users for the current site with the given capability.
+	 *
+	 * Divide a site's WordPress users into a group with an associated Facebook account and a group without an account
 	 *
 	 * @since 1.1.6
 	 * @param string $capability WordPress capability. default: edit_posts
-	 * @return array associative array with Facebook-enabled users (fb key) and other users (wp key)
+	 * @return array associative array with Facebook-enabled users (fb key) and other users (wp key) {
+	 *     WordPress users with the given $capability grouped into users with Facebook accounts and users without
+	 *
+	 *     @type string fb array of WP_User objects with Facebook account data accessible via the fb_data property
+	 *     @type string wp array of WP_User objects without Facebook account data stored
+	 * }
 	 */
 	public static function get_wordpress_users_associated_with_facebook_accounts( $capability = 'edit_posts' ) {
 		$authors = array(
@@ -137,7 +190,7 @@ class Facebook_User {
 		) );
 
 		foreach( $site_users as $user ) {
-			// post authors only
+			// test for requested capability
 			if ( ! ( isset( $user->id ) && user_can( $user->id, $capability ) ) )
 				continue;
 
@@ -155,15 +208,19 @@ class Facebook_User {
 	}
 
 	/**
-	 * Gets and returns a specific Facebook user
-	 * Requires public info read access for the account
+	 * Gets and returns a specific Facebook user.
+	 *
+	 * Requires basic_info read access for the account. Customize fields to request exactly what you expect to use.
 	 *
 	 * @since 1.5
+	 *
 	 * @link https://developers.facebook.com/docs/reference/api/user/ Facebook User fields
 	 * @param string $facebook_id Facebook user identifier
 	 * @param array $fields User fields to include in the result
+	 * @return array a json_decode()d User response from the Facebook Graph API for the requested user and fields
 	 */
 	public static function get_facebook_user( $facebook_id, $fields = array() ) {
+		// Facebook HTTP helper functions
 		if ( ! class_exists( 'Facebook_WP_Extend' ) )
 			require_once( dirname(__FILE__) . '/includes/facebook-php-sdk/class-facebook-wp.php' );
 
@@ -177,12 +234,20 @@ class Facebook_User {
 	}
 
 	/**
-	 * Get a list of publishable Facebook pages for the currently authenticated Facebook account
+	 * Get a list of publishable Facebook pages for the currently authenticated Facebook account.
 	 *
 	 * @since 1.5
+	 *
 	 * @link https://www.facebook.com/help/www/289207354498410 Facebook Page admin roles
+	 * @global Facebook_WP_Extend $facebook a possible existing instance of the Facebook SDK for PHP
+	 * @global Facebook_Loader $facebook_loader load the Facebook SDK for PHP if not already loaded
 	 * @param string $permission page permission
-	 * @return array associative array with key of id, value of associative array of name, link, and access token values for pages with the given permission
+	 * @return array {
+	 *     Associative array of pages with the given permission.
+	 *
+	 *     @type string Facebook Page id
+	 *     @type array associative array of name, link, access token
+	 * }
 	 */
 	public static function get_permissioned_pages( $permission = '' ) {
 		global $facebook, $facebook_loader;
@@ -244,9 +309,10 @@ class Facebook_User {
 	}
 
 	/**
-	 * Get the Facebook user identifier associated with the given WordPress user identifier, if one exists
+	 * Get the Facebook user identifier associated with the given WordPress user identifier, if one exists.
 	 *
 	 * @since 1.2
+	 *
 	 * @param int $wordpress_user_id WordPress user identifier
 	 * @return string Facebook user identifier
 	 */
@@ -262,10 +328,17 @@ class Facebook_User {
 	}
 
 	/**
-	 * Build a link to a Facebook profile based on stored Facebook metadata
+	 * Build a link to a Facebook profile based on stored Facebook metadata.
 	 *
 	 * @since 1.5
-	 * @param array $facebook_user_data fb_data user metadata
+	 *
+	 * @param array $facebook_user_data {
+	 *     fb_data user metadata
+	 *
+	 *     @type string 'fb_uid' Facebook User identifier.
+	 *     @type string 'link' Absolute URL to a Facebook profile.
+	 *     @type string 'username' Vanity Facebook username.
+	 * }
 	 * @return string Facebook profile URL or blank of not enough data exists
 	 */
 	public static function facebook_profile_link( $facebook_user_data ) {
@@ -274,7 +347,7 @@ class Facebook_User {
 
 		if ( isset( $facebook_user_data['link'] ) )
 			return $facebook_user_data['link'];
-		else if ( isset( $facebook_user_data['name'] ) )
+		else if ( isset( $facebook_user_data['username'] ) )
 			return 'https://www.facebook.com/' . $facebook_user_data['username'];
 		else
 			return 'https://www.facebook.com/profile.php?' . http_build_query( array( 'id' => $facebook_user_data['fb_uid'] ), '', '&' );

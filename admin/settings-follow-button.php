@@ -4,24 +4,26 @@ if ( ! class_exists( 'Facebook_Social_Plugin_Button_Settings' ) )
 	require_once( dirname(__FILE__) . '/settings-social-plugin-button.php' );
 
 /**
- * Site settings for the Facebook Send Button social plugin
+ * Site settings for the Facebook Send Button social plugin.
  *
  * @since 1.1
  */
 class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Settings {
 
 	/**
-	 * Setting page identifier
+	 * Setting page identifier.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const PAGE_SLUG = 'facebook-follow-button';
 
 	/**
-	 * Define our option array value
+	 * Define our option array value.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const OPTION_NAME = 'facebook_follow_button';
@@ -30,14 +32,16 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	 * The hook suffix assigned by add_submenu_page()
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	protected $hook_suffix = '';
 
 	/**
-	 * Initialize with an options array
+	 * Initialize with an options array.
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $options existing options
 	 */
 	public function __construct( $options = array() ) {
@@ -48,9 +52,10 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	}
 
 	/**
-	 * Reference the social plugin by name
+	 * Reference the social plugin by name.
 	 *
 	 * @since 1.1
+	 *
 	 * @return string social plugin name
 	 */
 	public static function social_plugin_name() {
@@ -58,9 +63,11 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	}
 
 	/**
-	 * Evaluate the Facebook_Follow_Button class file if it is not already loaded
+	 * Evaluate the Facebook_Follow_Button class file if it is not already loaded.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public static function require_follow_button_builder() {
 		if ( ! class_exists( 'Facebook_Follow_Button' ) )
@@ -68,9 +75,10 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	}
 
 	/**
-	 * Navigate to the settings page through the Facebook top-level menu item
+	 * Navigate to the settings page through the Facebook top-level menu item.
 	 *
 	 * @since 1.1
+	 *
 	 * @uses add_submenu_page()
 	 * @param string $parent_slug Facebook top-level menu item slug
 	 * @return string submenu hook suffix
@@ -97,9 +105,11 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	}
 
 	/**
-	 * Load stored options and scripts on settings page view
+	 * Load stored options and scripts on settings page view.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function onload() {
 		$options = get_option( self::OPTION_NAME );
@@ -111,9 +121,11 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	}
 
 	/**
-	 * Load the page
+	 * Load the page.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function settings_page() {
 		if ( ! isset( $this->hook_suffix ) )
@@ -123,11 +135,13 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	}
 
 	/**
-	 * Hook into the settings API
+	 * Hook into the settings API.
 	 *
 	 * @since 1.1
+	 *
 	 * @uses add_settings_section()
 	 * @uses add_settings_field()
+	 * @return void
 	 */
 	private function settings_api_init() {
 		if ( ! isset( $this->hook_suffix ) )
@@ -200,18 +214,21 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	}
 
 	/**
-	 * Introduce publishers to the Follow Button social plugin
+	 * Introduce publishers to the Follow Button social plugin.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function section_header() {
 		echo '<p>' . esc_html( __( "Encourage visitors to follow to public updates from an author's Facebook account.", 'facebook' ) ) . ' <a href="https://developers.facebook.com/docs/reference/plugins/follow/" title="' . esc_attr( sprintf( __( '%s social plugin documentation', 'facebook' ), 'Facebook ' . self::social_plugin_name() ) ) . '">' . esc_html( __( 'Read more...', 'facebook' ) ) . '</a></p>';
 	}
 
 	/**
-	 * Archive choices and post type choices
+	 * Archive choices and post type choices.
 	 *
 	 * @since 1.1.9
+	 *
 	 * @param string $scope accept the same number of parameters as the parent class function. no effect
 	 * @return array list of archive names and public post type names
 	 */
@@ -220,10 +237,12 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	}
 
 	/**
-	 * Not all post types support the concept of an author
-	 * Limit selectable post types to just public post types supporting authors
+	 * Limit selectable post types to just public post types supporting authors.
+	 *
+	 * Not all post types support the concept of an author.
 	 *
 	 * @since 1.1.9
+	 *
 	 * @return array list of public post types supporting author feature
 	 */
 	public static function post_types_supporting_authorship() {
@@ -245,7 +264,9 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	 * Where should the button appear?
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $extra_attributes custom form attributes
+	 * @return void
 	 */
 	public function display_show_on( $extra_attributes = array() ) {
 		$key = 'show_on';
@@ -282,9 +303,10 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	}
 
 	/**
-	 * Describe layout choices
+	 * Describe layout choices.
 	 *
 	 * @since 1.1
+	 *
 	 * @return array layout descriptions keyed by layout choice
 	 */
 	public static function layout_descriptions() {
@@ -297,10 +319,12 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	}
 
 	/**
-	 * Choose a Follow Button layout option
+	 * Choose a Follow Button layout option.
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $extra_attributes custom form attributes
+	 * @return void
 	 */
 	public function display_layout( $extra_attributes = array() ) {
 		$key = 'layout';
@@ -351,10 +375,12 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	}
 
 	/**
-	 * Option to display faces of friends below the Follow Button
+	 * Option to display faces of friends below the Follow Button.
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $extra_attributes custom form attributes
+	 * @return void
 	 */
 	public function display_show_faces( $extra_attributes = array() ) {
 		$key = 'show_faces';
@@ -376,10 +402,13 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	}
 
 	/**
-	 * Allow the publisher to customize the width of the Follow Button
+	 * Allow the publisher to customize the width of the Follow Button.
 	 *
 	 * @since 1.1
+	 *
+	 * @global int $content_width theme content width used as default width value
 	 * @param array $extra_attributes custom form attributes
+	 * @return void
 	 */
 	public function display_width( $extra_attributes = array() ) {
 		global $content_width;
@@ -413,10 +442,12 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	}
 
 	/**
-	 * Customize the color scheme
+	 * Customize the color scheme.
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $extra_attributes custom form attributes
+	 * @return void
 	 */
 	public function display_colorscheme( $extra_attributes = array() ) {
 		$key = 'colorscheme';
@@ -437,10 +468,12 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	}
 
 	/**
-	 * Choose a custom font
+	 * Choose a custom font.
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $extra_attributes custom form attributes
+	 * @return void
 	 */
 	public function display_font( $extra_attributes = array() ) {
 		$key = 'font';
@@ -464,7 +497,9 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	 * Where would you like it?
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $extra_attributes custom form attributes
+	 * @return void
 	 */
 	public function display_position( $extra_attributes = array() ) {
 		$key = 'position';
@@ -485,9 +520,10 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	}
 
 	/**
-	 * Translate HTML data response returned from Facebook social plugin builder into underscored keys and PHP values before saving
+	 * Translate HTML data response returned from Facebook social plugin builder into underscored keys and PHP values before saving.
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $options data-* options returned from Facebook social plugin builder
 	 * @return array $options options to store in WordPress
 	 */
@@ -510,9 +546,10 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	}
 
 	/**
-	 * Sanitize Follow Button settings before they are saved to the database
+	 * Sanitize Follow Button settings before they are saved to the database.
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $options Follow Button options
 	 * @return array clean option sets. note: we remove Follow Button social plugin default options, storing only custom settings (e.g. dark color scheme stored, light is default and therefore not stored)
 	 */

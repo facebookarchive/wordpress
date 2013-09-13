@@ -9,6 +9,10 @@ class Facebook_Like_Button_Widget extends WP_Widget {
 
 	/**
 	 * Register widget with WordPress
+	 *
+	 * @since 1.0
+	 *
+	 * @return void
 	 */
 	public function __construct() {
 		parent::__construct(
@@ -25,8 +29,12 @@ class Facebook_Like_Button_Widget extends WP_Widget {
 	 *
 	 * @see WP_Widget::widget()
 	 *
+	 * @since 1.0
+	 *
 	 * @param array $args     Widget arguments.
 	 * @param array $instance Saved values from database.
+	 *
+	 * @return void
 	 */
 	public function widget( $args, $instance ) {
 		extract( $args );
@@ -62,6 +70,8 @@ class Facebook_Like_Button_Widget extends WP_Widget {
 	 * Sanitize widget form values as they are saved.
 	 *
 	 * @see WP_Widget::update()
+	 *
+	 * @since 1.0
 	 *
 	 * @param array $new_instance Values just sent to be saved.
 	 * @param array $old_instance Previously saved values from database.
@@ -101,7 +111,10 @@ class Facebook_Like_Button_Widget extends WP_Widget {
 	 *
 	 * @see WP_Widget::form()
 	 *
+	 * @since 1.0
+	 *
 	 * @param array $instance Previously saved values from database.
+	 * @return void
 	 */
 	public function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, array(
@@ -175,11 +188,14 @@ class Facebook_Like_Button_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Allow a publisher to customize the title displayed above the widget area
+	 * Allow a publisher to customize the title displayed above the widget area.
+	 *
 	 * e.g. Like us on Facebook!
 	 *
 	 * @since 1.1
+	 *
 	 * @param string $existing_value saved title
+	 * @return void
 	 */
 	public function display_title( $existing_value = '' ) {
 		echo '<p><label>' . esc_html( __( 'Title', 'facebook' ) ) . ': ';
@@ -190,10 +206,12 @@ class Facebook_Like_Button_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Customize the Like target
+	 * Customize the Like target.
 	 *
 	 * @since 1.1
+	 *
 	 * @param string $existing_value stored URL value
+	 * @return void
 	 */
 	public function display_href( $existing_value = '' ) {
 		echo '<p><label>URL: <input type="url" id="' . $this->get_field_id( 'href' ) . '" name="' . $this->get_field_name( 'href' ) . '" class="widefat"';

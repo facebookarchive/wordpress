@@ -4,31 +4,35 @@
  * Facebook Embedded post
  *
  * @since 1.5
+ *
  * @link https://developers.facebook.com/docs/plugins/embedded-posts/ Facebook Embedded Posts
  */
 class Facebook_Embedded_Post {
 	/**
-	 * Element and class name used in markup builders
+	 * Element and class name used in markup builders.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const ID = 'post';
 
 	/**
-	 * The Facebook URL representing public post by a person or page
+	 * The Facebook URL representing public post by a person or page.
 	 *
 	 * @since 1.5
+	 *
 	 * @var string
 	 */
 	protected $href;
 
 	/**
 	 * Show a border around the plugin
-	 * Default: true
+	 *
 	 * Set to false to style the resulting iframe with your custom CSS
 	 *
 	 * @since 1.5
+	 *
 	 * @var bool
 	 */
 	protected $show_border = true;
@@ -37,16 +41,18 @@ class Facebook_Embedded_Post {
 	 * I am an embedded post
 	 *
 	 * @since 1.5
-	 * @return string
+	 *
+	 * @return string Facebook social plugin name
 	 */
 	public function __toString() {
 		return 'Facebook Embedded Post';
 	}
 
 	/**
-	 * Setter for href attribute
+	 * Setter for href attribute.
 	 *
 	 * @since 1.5
+	 *
 	 * @param string $url absolute URL
 	 * @return Facebook_Embedded_Post support chaining
 	 */
@@ -58,9 +64,10 @@ class Facebook_Embedded_Post {
 	}
 
 	/**
-	 * Add a border to the box
+	 * Add a border to the box.
 	 *
 	 * @since 1.5
+	 *
 	 * @return Facebook_Embedded_Post support chaining
 	 */
 	public function showBorder() {
@@ -69,9 +76,10 @@ class Facebook_Embedded_Post {
 	}
 
 	/**
-	 * Hide the box border
+	 * Hide the box border.
 	 *
 	 * @since 1.5
+	 *
 	 * @return Facebook_Embedded_Post support chaining
 	 */
 	public function hideBorder() {
@@ -83,6 +91,7 @@ class Facebook_Embedded_Post {
 	 * convert an options array into an object
 	 *
 	 * @since 1.5
+	 *
 	 * @param array $values associative array
 	 * @return Facebook_Embedded_Post embedded post object
 	 */
@@ -104,11 +113,12 @@ class Facebook_Embedded_Post {
 	}
 
 	/**
-	 * Convert the class to data-* attribute friendly associative array
-	 * will become data-key="value"
-	 * Exclude values if default
+	 * Convert the class to data-* attribute friendly associative array.
+	 *
+	 * Will become data-key="value". Exclude values if default
 	 *
 	 * @since 1.5
+	 *
 	 * @return array associative array
 	 */
 	public function toHTMLDataArray() {
@@ -125,9 +135,10 @@ class Facebook_Embedded_Post {
 	}
 
 	/**
-	 * Output Embedded Post with data-* attributes
+	 * Output Embedded Post with data-* attributes.
 	 *
 	 * @since 1.5
+	 *
 	 * @param array $div_attributes associative array. customize the returned div with id, class, or style attributes
 	 * @return HTML div or empty string
 	 */
@@ -150,6 +161,7 @@ class Facebook_Embedded_Post {
 	 * Output Embedded Post as XFBML
 	 *
 	 * @since 1.5
+	 *
 	 * @return string XFBML markup
 	 */
 	public function asXFBML() {

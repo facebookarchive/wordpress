@@ -3,12 +3,16 @@
 /**
  * Adds the Recommendations Social Plugin as a WordPress Widget
  *
- * @since 1.0
+ * @since 1.1
  */
 class Facebook_Recommendations_Widget extends WP_Widget {
 
 	/**
 	 * Register widget with WordPress
+	 *
+	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function __construct() {
 		parent::__construct(
@@ -23,8 +27,11 @@ class Facebook_Recommendations_Widget extends WP_Widget {
 	 *
 	 * @see WP_Widget::widget()
 	 *
+	 * @since 1.1
+	 *
 	 * @param array $args     Widget arguments.
 	 * @param array $instance Saved values from database.
+	 * @return void
 	 */
 	public function widget( $args, $instance ) {
 		extract( $args );
@@ -59,6 +66,8 @@ class Facebook_Recommendations_Widget extends WP_Widget {
 	 * Sanitize widget form values as they are saved.
 	 *
 	 * @see WP_Widget::update()
+	 *
+	 * @since 1.1
 	 *
 	 * @param array $new_instance Values just sent to be saved.
 	 * @param array $old_instance Previously saved values from database.
@@ -117,7 +126,10 @@ class Facebook_Recommendations_Widget extends WP_Widget {
 	 *
 	 * @see WP_Widget::form()
 	 *
+	 * @since 1.1
+	 *
 	 * @param array $instance Previously saved values from database.
+	 * @return void
 	 */
 	public function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, array(
@@ -139,11 +151,14 @@ class Facebook_Recommendations_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Allow a publisher to customize the title displayed above the widget area
-	 * e.g. Things we hope you will like
+	 * Allow a publisher to customize the title displayed above the widget area.
+	 *
+	 * e.g. Things we hope you will like.
 	 *
 	 * @since 1.1
+	 *
 	 * @param string $existing_value saved title
+	 * @return void
 	 */
 	public function display_title( $existing_value = '' ) {
 		echo '<p><label>' . esc_html( __( 'Title', 'facebook' ) ) . ': ';
@@ -154,11 +169,14 @@ class Facebook_Recommendations_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Show the Facebook header
-	 * Works best when you don't set your own widget title
+	 * Show the Facebook header.
+	 *
+	 * Works best when you don't set your own widget title.
 	 *
 	 * @since 1.1
+	 *
 	 * @param bool $true_false
+	 * @return void
 	 */
 	public function display_header( $true_false ) {
 		echo '<p><label><input type="checkbox" id="' . $this->get_field_id( 'header' ) . '" name="' . $this->get_field_name( 'header' ) . '"';
@@ -167,10 +185,12 @@ class Facebook_Recommendations_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Specify the width of the recommendations box in whole pixels
+	 * Specify the width of the recommendations box in whole pixels.
 	 *
 	 * @since 1.1
+	 *
 	 * @param int $existing_value previously stored value
+	 * @return void
 	 */
 	public function display_width( $existing_value = 300 ) {
 		if ( $existing_value < 200 )
@@ -179,10 +199,12 @@ class Facebook_Recommendations_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Specify the height of the recommendations box in whole pixels
+	 * Specify the height of the recommendations box in whole pixels.
 	 *
 	 * @since 1.1
+	 *
 	 * @param int $existing_value previously stored value
+	 * @return void
 	 */
 	public function display_height( $existing_value = 300 ) {
 		if ( $existing_value < 200 )
@@ -191,10 +213,11 @@ class Facebook_Recommendations_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Choose a font
+	 * Choose a font.
 	 *
 	 * @since 1.1
 	 * @param string $existing_value stored font value
+	 * @return void
 	 */
 	public function display_font( $existing_value = '' ) {
 		if ( ! class_exists( 'Facebook_Social_Plugin_Settings' ) )
@@ -204,10 +227,12 @@ class Facebook_Recommendations_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Choose a light or dark color scheme
+	 * Choose a light or dark color scheme.
 	 *
 	 * @since 1.1
+	 *
 	 * @param string $existing_value saved colorscheme value
+	 * @return void
 	 */
 	public function display_colorscheme( $existing_value = 'light' ) {
 		if ( ! class_exists( 'Facebook_Social_Plugin_Settings' ) )
@@ -222,7 +247,9 @@ class Facebook_Recommendations_Widget extends WP_Widget {
 	 * Limit articles displayed in recommendations box to last N days where N is a number between 0 (no limit) and 180.
 	 *
 	 * @since 1.1
+	 *
 	 * @param int $existing_value stored value
+	 * @return void
 	 */
 	public function display_max_age( $existing_value = 0 ) {
 		echo '<p><label>' . esc_html( __( 'Maximum age', 'facebook' ) ) . ': ';

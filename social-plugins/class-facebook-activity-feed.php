@@ -4,9 +4,10 @@ if ( ! class_exists( 'Facebook_Recommendations_Box' ) )
 	require_once( dirname(__FILE__) . '/class-facebook-recommendations-box.php' );
 
 /**
- * Display activity happening on your site including likes and comments in a social context
+ * Display activity happening on your site including likes and comments in a social context.
  *
  * @since 1.1
+ *
  * @link https://developers.facebook.com/docs/reference/plugins/activity/ Activity Feed social plugin documentation
  */
 class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
@@ -15,6 +16,7 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	 * Element and class name used in markup builders
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const ID = 'activity';
@@ -23,15 +25,18 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	 * Include recommendations?
 	 *
 	 * @since 1.1
+	 *
 	 * @var bool
 	 */
 	protected $recommendations;
 
 	/**
 	 * Filter which URLs are shown in the plugin
+	 *
 	 * Up to two path directories: e.g. /section1/section2
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	protected $filter;
@@ -40,6 +45,7 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	 * I am an activity feed
 	 *
 	 * @since 1.1
+	 * @return string name of the social plugin
 	 */
 	public function __toString() {
 		return 'Facebook Activity Feed';
@@ -49,6 +55,7 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	 * Always show recommendations?
 	 *
 	 * @since 1.1
+	 *
 	 * @return Facebook_Activity_Feed support chaining
 	 */
 	public function includeRecommendations() {
@@ -57,11 +64,13 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	}
 
 	/**
-	 * Filter which URLs are shown in the plugin by including a directory path
+	 * Filter which URLs are shown in the plugin by including a directory path.
+	 *
 	 * Facebook will parse up to two directories deep: e.g. /section1/section2
 	 * Does not apply to recommendations
 	 *
 	 * @since 1.1
+	 *
 	 * @var string $path URL path in current site
 	 * @return Facebook_Activity_Feed support chaining
 	 */
@@ -75,7 +84,8 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	}
 
 	/**
-	 * Convert the class to data-* attribute friendly associative array
+	 * Convert the class to data-* attribute friendly associative array.
+	 *
 	 * will become data-key="value"
 	 * Exclude values if default
 	 *
@@ -94,9 +104,10 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	}
 
 	/**
-	 * convert an options array into an object
+	 * convert an options array into an object.
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $values associative array
 	 * @return Facebook_Activity_Feed activity feed object
 	 */
@@ -161,6 +172,7 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	 * Output Activity Feed div with data-* attributes
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $div_attributes associative array. customize the returned div with id, class, or style attributes
 	 * @return HTML div or empty string
 	 */
@@ -175,6 +187,7 @@ class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 	 * Output Activity Feed as XFBML
 	 *
 	 * @since 1.1
+	 *
 	 * @return string XFBML markup
 	 */
 	public function asXFBML() {

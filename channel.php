@@ -8,7 +8,7 @@
 
 if ( ! headers_sent() ) {
 	header( 'Content-Type: text/html; charset=utf-8', true );
-	// cache me	
+	// cache for a year
 	$cache_expire = 60 * 60 * 24 * 365;
 	header( 'Pragma: public', true );
 	header( 'Cache-Control: max-age=' . $cache_expire, true );

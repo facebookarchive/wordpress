@@ -1,10 +1,12 @@
 <?php
 
 /**
- * Generate HTML for a single Like Button
+ * Generate HTML for a single Like Button.
+ *
+ * @since 1.0
  *
  * @param array $options like button options
- * @return string HTML div for use with the JavaScript SDK
+ * @return string HTML div for use with the Facebook SDK for JavaScript
  */
 function facebook_get_like_button( $options = array() ) {
 	if ( ! class_exists( 'Facebook_Like_Button' ) )
@@ -22,10 +24,13 @@ function facebook_get_like_button( $options = array() ) {
 }
 
 /**
- * Add Like Button(s) to post content
+ * Add Like Button(s) to post content.
+ *
  * Adds a like button above the post, below the post, or both above and below the post depending on stored preferences.
  *
  * @since 1.1
+ *
+ * @global stdClass|WP_Post $post WordPress post. Used to request a post permalink.
  * @param string $content existing content
  * @return string passed content with Like Button markup prepended, appended, or both.
  */
@@ -43,6 +48,7 @@ function facebook_the_content_like_button( $content ) {
 	if ( ! isset( $options['position'] ) )
 		return $content;
 
+	// duplicate_hook
 	$options['href'] = apply_filters( 'facebook_rel_canonical', get_permalink( $post->ID ) );
 
 	if ( $options['position'] === 'top' ) {
@@ -63,9 +69,10 @@ function facebook_the_content_like_button( $content ) {
 }
 
 /**
- * Recommendations Bar markup for use with Facebook JavaScript SDK
+ * Recommendations Bar markup for use with Facebook SDK for JavaScript
  *
  * @since 1.1
+ *
  * @param array $options stored options
  * @return string HTML div markup or empty string
  */
@@ -85,11 +92,13 @@ function facebook_get_recommendations_bar( $options = array() ) {
 }
 
 /**
- * Add Recommendations Bar to the end of post content
+ * Add Recommendations Bar to the end of post content.
  *
- * Triggers the Recommendations Bar display once a visitor scrolls past the end of the post in 'onvisible' trigger mode
+ * Triggers the Recommendations Bar display once a visitor scrolls past the end of the post in 'onvisible' trigger mode.
  *
  * @since 1.1
+ *
+ * @global stdClass|WP_Post WordPress post object. Used to scope to singular post views.
  * @param string $content post content
  * @return string the content with the Recommendations Bar HTML5-style data-* div
  */
@@ -110,11 +119,12 @@ function facebook_the_content_recommendations_bar( $content ) {
 }
 
 /**
- * Generate HTML for a send button based on passed options
+ * Generate HTML for a send button based on passed options.
  *
  * @since 1.1
+ *
  * @param array $options customizations
- * @return string send button HTML for use with the JavaScript SDK
+ * @return string send button HTML for use with the Facebook SDK for JavaScript
  */
 function facebook_get_send_button( $options = array() ) {
 	if ( ! class_exists( 'Facebook_Send_Button' ) )
@@ -132,10 +142,13 @@ function facebook_get_send_button( $options = array() ) {
 }
 
 /**
- * Add Send Button(s) to post content
+ * Add Send Button(s) to post content.
+ *
  * Adds a send button above the post, below the post, or both above and below the post depending on stored preferences.
  *
  * @since 1.1
+ *
+ * @global stdClass|WP_Post WordPress post object. Used to generate a post permalink.
  * @param string $content existing content
  * @return string passed content with Send Button markup prepended, appended, or both.
  */
@@ -171,11 +184,12 @@ function facebook_the_content_send_button( $content ) {
 }
 
 /**
- * Generate HTML for a follow button based on passed options
+ * Generate HTML for a follow button based on passed options.
  *
  * @since 1.1
+ *
  * @param array $options customizations
- * @return string follow button HTML for use with the JavaScript SDK
+ * @return string follow button HTML for use with the Facebook SDK for JavaScript
  */
 function facebook_get_follow_button( $options = array() ) {
 	// need a subscription target
@@ -198,16 +212,16 @@ function facebook_get_follow_button( $options = array() ) {
 
 /**
  * Add Follow Button(s) to post content
+ *
  * Adds a follow button above the post, below the post, or both above and below the post depending on stored preferences.
  *
  * @since 1.1
+ *
  * @param string $content existing content
  * @return string passed content with Follow Button markup prepended, appended, or both.
  */
 function facebook_the_content_follow_button( $content ) {
-	global $post;
-
-	// Send Button should not be the only content
+	// Follow Button should not be the only content
 	if ( ! $content )
 		return $content;
 

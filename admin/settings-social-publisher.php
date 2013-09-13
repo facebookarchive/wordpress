@@ -7,33 +7,37 @@
  */
 class Facebook_Social_Publisher_Settings {
 	/**
-	 * Setting page identifier
+	 * Setting page identifier.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const PAGE_SLUG = 'facebook-social-publisher';
 
 	/**
-	 * Define the option name used to process the form
+	 * Define the option name used to process the form.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const PUBLISH_OPTION_NAME = 'facebook_publish';
 
 	/**
-	 * Option name for target Facebook page
+	 * Option name for target Facebook page.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const OPTION_PUBLISH_TO_PAGE = 'facebook_publish_page';
 
 	/**
-	 * Option name for advanced Facebook Open Graph action functionality
+	 * Option name for advanced Facebook Open Graph action functionality.
 	 *
 	 * @since 1.2.4
+	 *
 	 * @var string
 	 */
 	const OPTION_OG_ACTION = 'facebook_og_action';
@@ -48,7 +52,9 @@ class Facebook_Social_Publisher_Settings {
 	protected $hook_suffix = '';
 
 	/**
-	 * The current user object
+	 * The current user object.
+	 *
+	 * @since 1.1
 	 *
 	 * @var WP_User
 	 */
@@ -58,6 +64,7 @@ class Facebook_Social_Publisher_Settings {
 	 * Does the current WordPress user have an associated Facebook account stored?
 	 *
 	 * @since 1.1
+	 *
 	 * @var boolean
 	 */
 	protected $user_associated_with_facebook_account = false;
@@ -66,6 +73,7 @@ class Facebook_Social_Publisher_Settings {
 	 * Reference the social plugin by name
 	 *
 	 * @since 1.1
+	 *
 	 * @return string social plugin name
 	 */
 	public static function social_plugin_name() {
@@ -73,9 +81,10 @@ class Facebook_Social_Publisher_Settings {
 	}
 
 	/**
-	 * Navigate to the settings page through the Facebook top-level menu item
+	 * Navigate to the settings page through the Facebook top-level menu item.
 	 *
 	 * @since 1.1
+	 *
 	 * @uses add_submenu_page()
 	 * @param string $parent_slug Facebook top-level menu item slug
 	 * @return string submenu hook suffix
@@ -105,6 +114,8 @@ class Facebook_Social_Publisher_Settings {
 	 * Load extra assets early in the page build process to tap into proper hooks
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function onload() {
 		// prep user-specific functionality and comparisons
@@ -128,6 +139,8 @@ class Facebook_Social_Publisher_Settings {
 	 * Load the page
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function settings_page() {
 		if ( ! isset( $this->hook_suffix ) )
@@ -137,11 +150,13 @@ class Facebook_Social_Publisher_Settings {
 	}
 
 	/**
-	 * Hook into the settings API
+	 * Hook into the settings API.
 	 *
 	 * @since 1.1
+	 *
 	 * @uses add_settings_section()
 	 * @uses add_settings_field()
+	 * @return void
 	 */
 	private function settings_api_init() {
 		if ( ! isset( $this->hook_suffix ) )
@@ -195,10 +210,12 @@ class Facebook_Social_Publisher_Settings {
 	}
 
 	/**
-	 * Add the login JavaScript to the WordPress script queue
+	 * Add the login JavaScript to the WordPress script queue.
 	 *
 	 * @since 1.5
+	 *
 	 * @uses wp_enqueue_script()
+	 * @return void
 	 */
 	public static function enqueue_scripts() {
 		global $wp_scripts;
@@ -219,9 +236,12 @@ class Facebook_Social_Publisher_Settings {
 	}
 
 	/**
-	 * Introduce the publish to Facebook feature
+	 * Introduce the publish to Facebook feature.
 	 *
 	 * @since 1.1
+	 *
+	 * @global Facebook_Loader $facebook_loader Facebook application id
+	 * @return void
 	 */
 	public function section_timeline_publish() {
 		global $facebook_loader;
@@ -274,27 +294,33 @@ class Facebook_Social_Publisher_Settings {
 	}
 
 	/**
-	 * Describe publish to Facebook Page functionality
+	 * Describe publish to Facebook Page functionality.
 	 *
 	 * @since 1.2.4
+	 *
+	 * @return void
 	 */
 	public function section_page_publish() {
 		echo '<p>' . sprintf( esc_html( __( 'Publish to a Facebook Page using the credentials of a Facebook account with %s permissions for the Page.', 'facebook' ) ), '<a href="' . esc_html( 'https://www.facebook.com/help/289207354498410/', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'content creator', 'facebook' ) ) . '</a>' ) . '</p>';
 	}
 
 	/**
-	 * Publish new posts to your Facebook timeline
+	 * Publish new posts to your Facebook timeline.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public static function display_publish_author() {
 		echo '<p>' . sprintf( esc_html( __( 'An author can associate his or her WordPress account with a Facebook account on his or her %s', 'facebook' ) ), '<a href="' . esc_url( self_admin_url( 'profile.php' ), array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'profile page', 'facebook' ) ) . '</a>' ) . '</p>';
 	}
 
 	/**
-	 * Publish new posts to your Facebook page
+	 * Publish new posts to your Facebook page.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function display_publish_page() {
 		$existing_page = get_option( self::OPTION_PUBLISH_TO_PAGE );
@@ -344,9 +370,11 @@ class Facebook_Social_Publisher_Settings {
 	}
 
 	/**
-	 * Display an option for the publisher to enable advanced Open Graph action functionality
+	 * Display an option for the publisher to enable advanced Open Graph action functionality.
 	 *
 	 * @since 1.2.4
+	 *
+	 * @return void
 	 */
 	public function display_og_action() {
 		$id = 'og-action';
@@ -357,9 +385,10 @@ class Facebook_Social_Publisher_Settings {
 	}
 
 	/**
-	 * Display inline help for publisher functionality
+	 * Display inline help for publisher functionality.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @return string HTML
 	 */
 	public static function help_tab_publisher() {
@@ -371,9 +400,12 @@ class Facebook_Social_Publisher_Settings {
 	}
 
 	/**
-	 * Display help content on the settings page
+	 * Display help content on the settings page.
 	 *
 	 * @since 1.1
+	 *
+	 * @uses get_current_screen()
+	 * @return void
 	 */
 	public static function inline_help_content() {
 		$screen = get_current_screen();
@@ -390,11 +422,14 @@ class Facebook_Social_Publisher_Settings {
 	}
 
 	/**
-	 * Update the Facebook page information stored for the site
+	 * Update the Facebook page information stored for the site.
 	 *
 	 * @since 1.1
+	 *
 	 * @uses update_option()
+	 * @global Facebook_Loader $facebook_loader request app access secret to hash app access token
 	 * @param array $page_data data returned from Facebook Graph API permissions call
+	 * @return void
 	 */
 	public static function update_publish_to_page( $page_data ) {
 		global $facebook_loader;
@@ -437,9 +472,10 @@ class Facebook_Social_Publisher_Settings {
 	}
 
 	/**
-	 * Set the appropriate settings for each form component
+	 * Set the appropriate settings for each form component.
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $options social publisher options
 	 * @return array clean option sets.
 	 */

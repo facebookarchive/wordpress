@@ -8,33 +8,37 @@
 class Facebook_Settings_Debugger {
 
 	/**
-	 * Page identifier
+	 * Page identifier.
 	 *
 	 * @since 1.1.6
+	 *
 	 * @var string
 	 */
 	const PAGE_SLUG = 'facebook-debug';
 
 	/**
-	 * HTML span noting a feature exists
+	 * HTML span noting a feature exists.
 	 *
 	 * @since 1.1.6
+	 *
 	 * @var string
 	 */
 	const EXISTS = '<span class="feature-present">&#10003;</span>';
 
 	/**
-	 * HTML span noting a feature does not exist
+	 * HTML span noting a feature does not exist.
 	 *
 	 * @since 1.1.6
+	 *
 	 * @var string
 	 */
 	const DOES_NOT_EXIST = '<span class="feature-not-present">X</span>';
 
 	/**
-	 * Reference the social plugin by name
+	 * Reference the social plugin by name.
 	 *
 	 * @since 1.1.6
+	 *
 	 * @return string social plugin name
 	 */
 	public static function social_plugin_name() {
@@ -42,9 +46,10 @@ class Facebook_Settings_Debugger {
 	}
 
 	/**
-	 * Navigate to the debugger page through the Facebook top-level menu item
+	 * Navigate to the debugger page through the Facebook top-level menu item.
 	 *
 	 * @since 1.1.6
+	 *
 	 * @uses add_submenu_page()
 	 * @param string $parent_slug Facebook top-level menu item slug
 	 * @return string submenu hook suffix
@@ -67,25 +72,34 @@ class Facebook_Settings_Debugger {
 	}
 
 	/**
-	 * Load scripts and other setup functions on page load
+	 * Load scripts and other setup functions on page load.
+	 *
+	 * @since 1.1.6
+	 *
+	 * @return void
 	 */
 	public static function onload() {
 		add_action( 'admin_enqueue_scripts', array( 'Facebook_Settings_Debugger', 'enqueue_scripts' ) );
 	}
 
 	/**
-	 * Enqueue scripts and styles
+	 * Enqueue scripts and styles.
 	 *
 	 * @since 1.1.6
+	 *
+	 * @return void
 	 */
 	public static function enqueue_scripts() {
 		wp_enqueue_style( self::PAGE_SLUG, plugins_url( 'static/css/admin/debug' . ( ( defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ) ? '' : '.min' )  . '.css', dirname( __FILE__ ) ), array(), '1.5' );
 	}
 
 	/**
-	 * Page content
+	 * Page content.
 	 *
 	 * @since 1.1.6
+	 *
+	 * @global Facebook_Loader $facebook_loader test if Facebook app access token exists
+	 * @return void
 	 */
 	public static function content() {
 		global $facebook_loader;
@@ -113,9 +127,12 @@ class Facebook_Settings_Debugger {
 	}
 
 	/**
-	 * Get all users with edit_posts capabilities broken out into Facebook-permissioned users and non-Facebook permissioned users
+	 * Get all users with edit_posts capabilities broken out into Facebook-permissioned users and non-Facebook permissioned users.
 	 *
 	 * @since 1.1.6
+	 *
+	 * @see Facebook_User::get_wordpress_users_associated_with_facebook_accounts()
+	 * @return array WordPress users with and without Facebook data stored.
 	 */
 	public static function get_all_wordpress_facebook_users() {
 		if ( ! class_exists( 'Facebook_User' ) )
@@ -156,6 +173,7 @@ class Facebook_Settings_Debugger {
 	 * URL of the Facebook app editor for a specific Facebook app id
 	 *
 	 * @since 1.5.3
+	 *
 	 * @param string Facebook application identifier
 	 * @return string absolute URI of the passed Facebook app_id editor
 	 */
@@ -164,11 +182,12 @@ class Facebook_Settings_Debugger {
 	}
 
 	/**
-	 * Display Facebook application settings, prompt for missing values
+	 * Display Facebook application settings, prompt for missing values.
 	 *
 	 * Help WordPress administrators troubleshoot missing minimum requirements for a Facebook app using Facebook Login and/or an approved Open Graph action.
 	 *
 	 * @since 1.5.3
+	 *
 	 * @global \Facebook_Loader $facebook_loader access Facebook app id
 	 * @return void
 	 */
@@ -191,6 +210,7 @@ class Facebook_Settings_Debugger {
 	 * Mention WordPress users with manage_options capability who can also edit the Facebook app
 	 *
 	 * @since 1.5.3
+	 *
 	 * @param string $app_id Facebook application identifier
 	 * @return void
 	 */
@@ -278,6 +298,7 @@ class Facebook_Settings_Debugger {
 	 * Request stored details for the site's stored Facebook application. Highlight values relevant to a proper functioning Facebook Login experience
 	 *
 	 * @since 1.5.3
+	 *
 	 * @param string $app_id Facebook application identifier
 	 * @return void
 	 */
@@ -411,6 +432,9 @@ class Facebook_Settings_Debugger {
 	 * Detail site users and their association with Facebook
 	 *
 	 * @since 1.1.6
+	 *
+	 * @global wpdb $wpdb escape SQL
+	 * @return void
 	 */
 	public static function users_section() {
 		global $wpdb;
@@ -509,6 +533,8 @@ class Facebook_Settings_Debugger {
 	 * Display the currently associated Facebook page, if one exists.
 	 *
 	 * @since 1.1.6
+	 *
+	 * @return void
 	 */
 	public static function post_to_page_section() {
 		if ( ! class_exists( 'Facebook_Social_Publisher_Settings' ) )
@@ -548,6 +574,8 @@ class Facebook_Settings_Debugger {
 	 * Which features are enabled for the site on each major view type?
 	 *
 	 * @since 1.1.6
+	 *
+	 * @return void
 	 */
 	public static function enabled_features_by_view_type() {
 		if ( ! class_exists( 'Facebook_Social_Plugin_Settings' ) )
@@ -615,9 +643,11 @@ class Facebook_Settings_Debugger {
 	}
 
 	/**
-	 * Widgets enabled for the site
+	 * Widgets enabled for the site.
 	 *
 	 * @since 1.1.6
+	 *
+	 * @return void
 	 */
 	public static function widgets_section() {
 		if ( ! class_exists( 'Facebook_Settings' ) )
@@ -667,6 +697,8 @@ class Facebook_Settings_Debugger {
 	 * How does the site communicate with Facebook?
 	 *
 	 * @since 1.1.6
+	 *
+	 * @return void
 	 */
 	public static function server_info() {
 		echo '<section id="debug-server"><header><h3>' . esc_html( __( 'Server configuration', 'facebook' ) ) . '</h3></header><table><thead><th>' . esc_html( __( 'Feature', 'facebook' ) ) . '</th><th>' . esc_html( _x( 'Info', 'Information', 'facebook' ) ) . '</th></thead><tbody>';

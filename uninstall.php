@@ -1,14 +1,17 @@
 <?php
 /**
- * Remove data written by the Facebook plugin for WordPress after an administrative user clicks "Delete" from the plugin management page in wp-admin.
+ * Remove data written by the Facebook plugin for WordPress after an administrative user clicks "Delete" from the plugin management page in the WordPress administrative interface (wp-admin).
  *
  * @since 1.1
+ *
  * @todo post meta data
  */
 
+// only execute as part of an uninstall script
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) )
 	exit();
 
+// Facebook user helpers
 if ( ! class_exists( 'Facebook_User' ) )
 	require_once( dirname(__FILE__) . '/facebook-user.php' );
 

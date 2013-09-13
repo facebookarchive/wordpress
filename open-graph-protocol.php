@@ -1,76 +1,87 @@
 <?php
 
 /**
- * Output Open Graph protocol for consumption by Facebook and other consuming agents
+ * Output Open Graph protocol for consumption by Facebook services building a summary of the webpage.
  *
  * @since 1.1
+ *
  * @link http://ogp.me/ Open Graph protocol
  */
 class Facebook_Open_Graph_Protocol {
 	/**
-	 * Base IRI of Open Graph protocol RDFa properties
+	 * Base IRI of Open Graph protocol RDFa properties.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const OGP_NS = 'http://ogp.me/ns#';
 
 	/**
-	 * Base IRI of Facebook RDFa properties
+	 * Base IRI of Facebook RDFa properties.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const FB_NS = 'http://ogp.me/ns/fb#';
 
 	/**
-	 * Base IRI of Open Graph protocol article object global properties
+	 * Base IRI of Open Graph protocol article object global properties.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const ARTICLE_NS = 'http://ogp.me/ns/article#';
 
 	/**
-	 * Base IRI of Open Graph protocol profile object global properties
+	 * Base IRI of Open Graph protocol profile object global properties.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const PROFILE_NS = 'http://ogp.me/ns/profile#';
 
 	/**
-	 * Base IRI of Open Graph protocol video object global properties
+	 * Base IRI of Open Graph protocol video object global properties.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const VIDEO_NS = 'http://ogp.me/ns/video#';
 
 	/**
-	 * Minimum edge of an acceptable Open Graph protocol image in whole pixels
+	 * Minimum edge of an acceptable Open Graph protocol image in whole pixels.
 	 *
 	 * @since 1.1.9
+	 *
 	 * @var int
 	 */
 	const MIN_IMAGE_DIMENSION = 200;
 
 	/**
-	 * Only list the first N eligible Open Graph protocol images
+	 * Only list the first N eligible Open Graph protocol images.
+	 *
 	 * Facebook helps a person choose one of three parsed images when a link is pasted into a message
 	 * Other consumers of Open Graph protocol data (Google, Twitter, etc.) may index additional images; increase this number to trade-off speed for coverage
 	 *
 	 * @since 1.5
+	 *
 	 * @var int
 	 */
 	const MAX_IMAGE_COUNT = 3;
 
 	/**
-	 * Recursively build RDFa <meta> elements used for Open Graph protocol
+	 * Recursively build RDFa <meta> elements used for Open Graph protocol.
 	 *
 	 * @since 1.0
+	 *
 	 * @param string $property whitespace separated list of CURIEs placed in a property attribute
 	 * @param mixed content attribute value for the given property. use an array for array property values or structured properties
+	 * @return void
 	 */
 	 public static function meta_elements( $property, $content ) {
 		if ( empty( $property ) || empty( $content ) )
@@ -106,6 +117,7 @@ class Facebook_Open_Graph_Protocol {
 	 * Clean post description text in preparation for Open Graph protocol description or Facebook post caption|description
 	 *
 	 * @since 1.1
+	 *
 	 * @uses strip_shortcodes()
 	 * @uses wp_trim_words()
 	 * @param string $description description text
@@ -158,7 +170,16 @@ class Facebook_Open_Graph_Protocol {
 		if ( ! is_array( $ogp ) || empty( $ogp ) )
 			return array();
 
-		// map the referenced used by this plugin as well as OGP globals
+		/**
+		 * Map RDFa Core CURIEs and prefixes
+		 *
+		 * @since 1.1.6
+		 *
+		 * @param array {
+		 *     @type string RDFa CURIE
+		 *     @type array 'prefix' abbreviation recognized without a prefix mapping on a parent element
+		 * }
+		 */
 		$curies = apply_filters( 'facebook_rdfa_mappings', array(
 			self::OGP_NS => array( 'prefix' => 'og' ),
 			self::FB_NS => array( 'prefix' => 'fb' ),
@@ -217,7 +238,11 @@ class Facebook_Open_Graph_Protocol {
 	 * We use full IRIs for consistent mapping between mapped CURIE prefixes defined in a parent element and self-contained properties using a full IRI
 	 *
 	 * @since 1.0
+	 *
 	 * @link http://www.w3.org/TR/rdfa-syntax/#s_curieprocessing RDFa Core 1.1 CURIE and IRI processing
+	 * @global stdClass|WP_Post $post WordPress post object for the current view
+	 * @global Facebook_Loader $facebook_loader
+	 * @return void
 	 */
 	public static function add_og_protocol() {
 		global $post, $facebook_loader;
@@ -240,8 +265,16 @@ class Facebook_Open_Graph_Protocol {
 			$meta_tags[ self::OGP_NS . 'url' ] = home_url();
 		} else if ( is_singular() && empty( $post->post_password ) ) {
 			setup_postdata( $post );
-			$post_type = get_post_type();
-			$meta_tags[ self::OGP_NS . 'url' ] = apply_filters( 'facebook_rel_canonical', get_permalink() );
+			$post_type = get_post_type( $post );
+
+			/**
+			 * Canonical URL for the singular page.
+			 *
+			 * @since 1.1.6
+			 * @param string absolute URI of the current post context
+			 */
+			$meta_tags[ self::OGP_NS . 'url' ] = apply_filters( 'facebook_rel_canonical', get_permalink( $post->ID ) );
+
 			if ( post_type_supports( $post_type, 'title' ) )
 				$meta_tags[ self::OGP_NS . 'title' ] = get_the_title();
 			if ( post_type_supports( $post_type, 'excerpt' ) ) {
@@ -305,6 +338,7 @@ class Facebook_Open_Graph_Protocol {
 			}
 
 			if ( post_type_supports( $post_type, 'author' ) && isset( $post->post_author ) ) {
+				// Facebook user helper
 				if ( ! class_exists( 'Facebook_User' ) )
 					require_once( $facebook_loader->plugin_directory . 'facebook-user.php' );
 
@@ -342,6 +376,7 @@ class Facebook_Open_Graph_Protocol {
 				if ( $description )
 					$meta_tags[ self::OGP_NS . 'description'] = $description;
 
+				// Facebook user helper
 				if ( ! class_exists( 'Facebook_User' ) )
 					require_once( $facebook_loader->plugin_directory . 'facebook-user.php' );
 
@@ -358,12 +393,34 @@ class Facebook_Open_Graph_Protocol {
 		} else if ( is_page() ) {
 			$meta_tags[ self::OGP_NS . 'type' ] = 'article';
 			$meta_tags[ self::OGP_NS . 'title' ] = get_the_title();
+			// duplicate_hook
 			$meta_tags[ self::OGP_NS . 'url' ] = apply_filters( 'facebook_rel_canonical', get_permalink() );
 		}
 
+		/**
+		 * Customize Open Graph protocol for the site or page before output.
+		 *
+		 * Add, change, and delete Open Graph protocol values used to summarize a link shared on Facebook and create new Open Graph objects.
+		 *
+		 * @since 1.0
+		 * @param array $meta_tags {
+		 *     Open Graph protocol values to be output
+		 *
+		 *     @type string Full IRI RDFa Core property
+		 *     @type mixed property value or multiple values
+		 * }
+		 * @param stdClass|WP_Post $post the current post global if set
+		 */
 		$meta_tags = apply_filters( 'fb_meta_tags', $meta_tags, $post );
 
-		// default: true while Facebook crawler corrects its indexing of full IRI values
+		/**
+		 * Control auto-prefixing or full IRI RDFa Core 1.1 properties output for the page.
+		 *
+		 * Use prefixed values (e.g. og:image) by default to maximize compatibility with indexers. Assumes prefix CURIE mappings will be set on <head> or <html> to properly map the prefixes or the publisher is not concerned with RDFa Core 1.1 compatibility and reserved prefixes.
+		 *
+		 * @since 1.1.6
+		 * @param bool default true
+		 */
 		if ( apply_filters( 'facebook_ogp_prefixed', true ) )
 			$meta_tags = self::prefixed_properties( $meta_tags );
 
@@ -373,11 +430,12 @@ class Facebook_Open_Graph_Protocol {
 	}
 
 	/**
-	 * Classify the current post as an Open Graph object type
+	 * Classify the current post as an Open Graph object type.
 	 *
 	 * @since 1.5
+	 *
 	 * @link https://developers.facebook.com/docs/reference/opengraph/object-type/ Facebook global object types
-	 * @param WP_Post $post the post to classify
+	 * @param stdClass|WP_Post $post the post to classify
 	 * @return string Open Graph protocol type property value
 	 */
 	public static function get_post_og_type( $post ) {
@@ -399,11 +457,17 @@ class Facebook_Open_Graph_Protocol {
 	}
 
 	/**
-	 * Map WordPress post data to Open Graph article object properties
+	 * Map WordPress post data to Open Graph article object properties.
 	 *
 	 * @since 1.5
-	 * @param WP_Post $post the post of interest
-	 * @return array associative array of OGP properties and values related to the post
+	 *
+	 * @param stdClass|WP_Post $post the post of interest
+	 * @return array {
+	 *     Associative array of OGP properties and values related to the post
+	 *
+	 *     @type string Full IRI Open Graph protocol property
+	 *     @type string|array Open Graph protocol property value
+	 * }
 	 */
 	public static function get_article_properties( $post ) {
 		global $facebook_loader;
@@ -469,12 +533,20 @@ class Facebook_Open_Graph_Protocol {
 	}
 
 	/**
-	 * Extract Open Graph protocol image information from a WordPress image attachment
+	 * Extract Open Graph protocol image information from a WordPress image attachment.
 	 *
 	 * @since 1.5
+	 *
+	 * @uses wp_get_attachment_image_src()
 	 * @param int $attachment_id post id of the attachment object
 	 * @param string $size requested size. one of thumbnail, medium, large, or full
-	 * @return array associative array with URL, width, height or empty array if minimum requirements not met
+	 * @return array {
+	 *     Attachment converted into image, width, and height values or empty if no image data found or minimum requirements not met
+	 *
+	 *     @type string 'url' Full URI of the attachment for the requested size
+	 *     @type int 'width' Width of the image in whole pixels
+	 *     @type int 'height' Height of the image in whole pixels
+	 * }
 	 */
 	public static function attachment_to_og_image( $attachment_id, $size = 'full' ) {
 		if ( ! ( is_string( $size ) && $size ) )
@@ -494,6 +566,7 @@ class Facebook_Open_Graph_Protocol {
 			else if ( $image['width'] < self::MIN_IMAGE_DIMENSION )
 				return array();
 		}
+
 		if ( ! empty( $attachment_height ) ) {
 			$image['height'] = absint( $attachment_height );
 			if ( ! $image['height'] )
@@ -506,12 +579,19 @@ class Facebook_Open_Graph_Protocol {
 	}
 
 	/**
-	 * Identify image attachments related to the post
-	 * Request the full size of the attachment, not necessarily the same as the size used in the post
+	 * Identify image attachments related to the post.
+	 *
+	 * Request the full size of the attachment, not necessarily the same as the size used in the post.
 	 *
 	 * @since 1.5
-	 * @param WP_Post $post WordPress post of interest
-	 * @return array array of associative arrays containing OGP image structured data
+	 *
+	 * @param stdClass|WP_Post $post WordPress post of interest
+	 * @return array {
+	 *     Open Graph protocol image structured data
+	 *
+	 *     @type string URL of the image
+	 *     @type array associative array of image data
+	 * }
 	 */
 	public static function get_og_images( $post ) {
 		$og_images = array();
@@ -581,12 +661,19 @@ class Facebook_Open_Graph_Protocol {
 	}
 
 	/**
-	 * Identify video attachments related to the post
-	 * Prefer SWF and MP4 videos
+	 * Identify video attachments related to the post.
+	 *
+	 * Prefer SWF and MP4 videos.
 	 *
 	 * @since 1.5
-	 * @param WP_Post $post WordPress post of interest
-	 * @return array array of associative arrays containing OGP video structured data
+	 *
+	 * @param stdClass|WP_Post $post WordPress post of interest
+	 * @return array {
+	 *     Array of associative arrays containing OGP video structured data
+	 *
+	 *     @type string URL of the video
+	 *     @type array Open Graph protocol video properties
+	 * }
 	 */
 	public static function get_og_videos( $post ) {
 		$og_videos = array();
@@ -639,11 +726,17 @@ class Facebook_Open_Graph_Protocol {
 	}
 
 	/**
-	 * Identify MP3 (audio/mpeg) attachments related to the post
+	 * Identify MP3 (audio/mpeg) attachments related to the post.
 	 *
 	 * @since 1.5
-	 * @param WP_Post $post WordPress post of interest
-	 * @return array array of associative arrays containing OGP audio structured data
+	 *
+	 * @param stdClass|WP_Post $post WordPress post of interest
+	 * @return array {
+	 *     Array of associative arrays containing OGP audio structured data
+	 *
+	 *     @type string URL of the audio file
+	 *     @type array Open Graph protocol audio properties
+	 * }
 	 */
 	public static function get_og_audio( $post ) {
 		$og_audios = array();
@@ -676,9 +769,18 @@ class Facebook_Open_Graph_Protocol {
 	/**
 	 * Find gallery shortcodes in the post. Build Open Graph protocol image results.
 	 *
+	 * Used if get_post_galleries() is not present (adds support for WordPress < 3.6).
+	 *
 	 * @since 1.1.9
-	 * @param stdClass $post current post object
-	 * @return array array of arrays containing Open Graph protocol image markup
+	 *
+	 * @param stdClass|WP_Post $post current post object
+	 * @param array $existing_images add to an existing list of images. Check for duplication.
+	 * @return array {
+	 *     Array of arrays containing Open Graph protocol image markup
+	 *
+	 *     @type string URL of the image
+	 *     @type array Open Graph protocol image properties
+	 * }
 	 */
 	public static function gallery_images( $post, $existing_images = array() ) {
 		global $shortcode_tags;

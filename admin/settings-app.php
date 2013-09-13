@@ -7,25 +7,28 @@
  */
 class Facebook_Application_Settings {
 	/**
-	 * Settings page identifier
+	 * Settings page identifier.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const PAGE_SLUG = 'facebook-application-settings';
 
 	/**
-	 * Define our option array value
+	 * Define our option array value.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const OPTION_NAME = 'facebook_application';
 
 	/**
-	 * Define the kid-directed option value
+	 * Define the kid-directed option value.
 	 *
 	 * @since 1.5
+	 *
 	 * @var string
 	 */
 	const OPTION_NAME_KID_DIRECTED = 'facebook_kid_directed_site';
@@ -34,14 +37,16 @@ class Facebook_Application_Settings {
 	 * The hook suffix assigned by add_submenu_page()
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	protected $hook_suffix = '';
 
 	/**
-	 * Initialize with an options array
+	 * Initialize with an options array.
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $options existing options
 	 */
 	public function __construct( $options = array() ) {
@@ -52,9 +57,10 @@ class Facebook_Application_Settings {
 	}
 
 	/**
-	 * Add a menu item to WordPress admin
+	 * Add a menu item to WordPress admin.
 	 *
 	 * @since 1.1
+	 *
 	 * @uses add_utility_page()
 	 * @return string page hook
 	 */
@@ -81,9 +87,12 @@ class Facebook_Application_Settings {
 	}
 
 	/**
-	 * Load stored options and scripts on settings page view
+	 * Load stored options and scripts on settings page view.
 	 *
 	 * @since 1.1
+	 *
+	 * @uses get_option() load existing options
+	 * @return void
 	 */
 	public function onload() {
 		$options = get_option( self::OPTION_NAME );
@@ -91,6 +100,7 @@ class Facebook_Application_Settings {
 			$options = array();
 		$this->existing_options = $options;
 
+		// notify of lack of HTTPS
 		if ( ! wp_http_supports( array( 'ssl' => true ) ) )
 			add_action( 'admin_notices', array( 'Facebook_Application_Settings', 'admin_notice' ) );
 
@@ -100,9 +110,11 @@ class Facebook_Application_Settings {
 	}
 
 	/**
-	 * Warn of minimum requirements not met for app access token
+	 * Warn of minimum requirements not met for app access token.
 	 *
 	 * @since 1.5
+	 *
+	 * @return void
 	 */
 	public static function admin_notice() {
 		echo '<div class="error">';
@@ -112,9 +124,11 @@ class Facebook_Application_Settings {
 	}
 
 	/**
-	 * Load the settings page
+	 * Load the settings page.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function settings_page() {
 		if ( ! isset( $this->hook_suffix ) )
@@ -126,21 +140,26 @@ class Facebook_Application_Settings {
 	}
 
 	/**
-	 * Enhance settings page with JavaScript
+	 * Enhance settings page with JavaScript.
 	 *
 	 * @since 1.1
+	 *
 	 * @uses wp_enqueue_script()
+	 * @return void
 	 */
 	public static function enqueue_scripts() {
 		wp_enqueue_script( 'facebook-jssdk' );
 	}
 
 	/**
-	 * Facebook Like Button after header
+	 * Facebook Like Button after header.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public static function after_header() {
+		// Facebook Like Button social plugin markup builder
 		if ( ! class_exists( 'Facebook_Like_Button' ) )
 			require_once( dirname( dirname(__FILE__) ) . '/social-plugins/class-facebook-like-button.php' );
 
@@ -155,11 +174,13 @@ class Facebook_Application_Settings {
 	}
 
 	/**
-	 * Hook into the settings API
+	 * Hook into the settings API.
 	 *
 	 * @since 1.1
+	 *
 	 * @uses add_settings_section()
 	 * @uses add_settings_field()
+	 * @return void
 	 */
 	private function settings_api_init() {
 		if ( ! isset( $this->hook_suffix ) )
@@ -215,9 +236,11 @@ class Facebook_Application_Settings {
 	}
 
 	/**
-	 * Introduction to the application settings section
+	 * Introduction to the application settings section.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function section_header() {
 		if ( ! empty( $this->existing_options['app_id'] ) )
@@ -227,18 +250,22 @@ class Facebook_Application_Settings {
 	}
 
 	/**
-	 * Introduction to Facebook restrictions configurations
+	 * Introduction to Facebook restrictions configurations.
 	 *
 	 * @since 1.5
+	 *
+	 * @return void
 	 */
 	public static function restriction_section_header() {
 		echo '<p>' . esc_html( __( 'Limit Facebook functionality', 'facebook' ) ) . '</p>';
 	}
 
 	/**
-	 * Display the application ID input field
+	 * Display the application ID input field.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function display_app_id() {
 		$key = 'app_id';
@@ -259,9 +286,11 @@ class Facebook_Application_Settings {
 	}
 
 	/**
-	 * Display the Facebook application secret input field
+	 * Display the Facebook application secret input field.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function display_app_secret() {
 		$key = 'app_secret';
@@ -282,9 +311,12 @@ class Facebook_Application_Settings {
 	}
 
 	/**
-	 * Display a checkbox to designate the site as child-focused
+	 * Display a checkbox to designate the site as child-focused.
 	 *
-	 * @since 1.3
+	 * @since 1.5
+	 *
+	 * @global Facebook_Loader $facebook_loader determine child directed site status
+	 * @return void
 	 */
 	public static function display_kid_directed_site() {
 		global $facebook_loader;
@@ -297,9 +329,10 @@ class Facebook_Application_Settings {
 	}
 
 	/**
-	 * Clean user inputs before saving to database
+	 * Clean user inputs before saving to database.
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $options form options values
 	 * @return array $options sanitized options
 	 */
@@ -396,9 +429,10 @@ class Facebook_Application_Settings {
 	}
 
 	/**
-	 * Display helpful information about setting up a new application
+	 * Display helpful information about setting up a new application.
 	 *
 	 * @since 1.1
+	 *
 	 * @return string HTML content
 	 */
 	public static function help_tab_new_app() {
@@ -430,9 +464,10 @@ class Facebook_Application_Settings {
 	}
 
 	/**
-	 * Display helpful information about retrieving application credentials from Facebook Developers site
+	 * Display helpful information about retrieving application credentials from Facebook Developers site.
 	 *
 	 * @since 1.1
+	 *
 	 * @return string HTML content
 	 */
 	public static function help_tab_existing_app() {
@@ -451,9 +486,10 @@ class Facebook_Application_Settings {
 	}
 
 	/**
-	 * Help applications associate basic data with their Facebook application
+	 * Help applications associate basic data with their Facebook application.
 	 *
 	 * @since 1.1
+	 *
 	 * @param string $app_id application identifier. used to construct a link to the Facebook Developers site
 	 * @return string HTML content
 	 */
@@ -505,6 +541,7 @@ class Facebook_Application_Settings {
 	 * Explain the child-directed site option
 	 *
 	 * @since 1.5
+	 *
 	 * @return string HTML string
 	 */
 	public static function help_tab_kid_directed() {
@@ -519,6 +556,9 @@ class Facebook_Application_Settings {
 	 * Display help content on the settings page
 	 *
 	 * @since 1.1
+	 *
+	 * @uses get_current_screen()
+	 * @return void
 	 */
 	private function inline_help_content() {
 		$screen = get_current_screen();

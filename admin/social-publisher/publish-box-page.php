@@ -7,51 +7,59 @@
  */
 class Facebook_Social_Publisher_Meta_Box_Page {
 	/**
-	 * Check page origin before saving
+	 * Check page origin before saving.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const NONCE_NAME = 'facebook_fan_page_message_box_noncename';
 
 	/**
-	 * Post meta key for the message
+	 * Post meta key for the message.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const POST_META_KEY = 'fb_fan_page_message';
 
 	/**
-	 * Post meta key for post to Facebook feature enabled / disabled
+	 * Post meta key for post to Facebook feature enabled / disabled.
 	 *
 	 * @since 1.2
+	 *
 	 * @var string
 	 */
 	const POST_META_KEY_FEATURE_ENABLED = 'post_to_facebook_page';
 
 	/**
-	 * Form field name for page message
+	 * Form field name for page message.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const FIELD_MESSAGE = 'facebook_page_message_box_message';
 
 	/**
-	 * Form field name for feature enabled or disabled
+	 * Form field name for feature enabled or disabled.
 	 *
 	 * @since 1.2
+	 *
 	 * @var string
 	 */
 	const FIELD_FEATURE_ENABLED = 'facebook_page_enabled';
 
 	/**
-	 * Add a meta box to the post editor
+	 * Add a meta box to the post editor.
 	 *
 	 * @since 1.1
+	 *
+	 * @uses add_meta_box()
 	 * @param string $post_type target page post type
-	 * @param array Facebook page info
+	 * @param array $page Facebook page info
+	 * @return void
 	 */
 	public static function add_meta_box( $post_type, $page ) {
 		add_meta_box(
@@ -63,10 +71,12 @@ class Facebook_Social_Publisher_Meta_Box_Page {
 	}
 
 	/**
-	 * Add content to the page publisher meta box
+	 * Add content to the page publisher meta box.
 	 *
 	 * @since 1.0
+	 *
 	 * @param stdClass $post current post
+	 * @return void
 	 */
 	public static function content( $post ) {
 		$page = get_option( 'facebook_publish_page' );
@@ -91,10 +101,12 @@ class Facebook_Social_Publisher_Meta_Box_Page {
 	}
 
 	/**
-	 * Save the custom Status, used when posting to an Fan Page's Timeline
+	 * Save the custom Status, used when posting to an Fan Page's Timeline.
 	 *
 	 * @since 1.0
-	 * @param int $post_id post identifier
+	 *
+	 * @param int $post_id WordPress post identifier
+	 * @return void
 	 */
 	public static function save( $post_id ) {
 		// verify if this is an auto save routine.
@@ -116,7 +128,7 @@ class Facebook_Social_Publisher_Meta_Box_Page {
 		if ( ! class_exists( 'Facebook_Social_Publisher' ) )
 			require_once( dirname(__FILE__) . '/social_publisher.php' );
 		$capability_singular_base = Facebook_Social_Publisher::post_type_capability_base( $post_type );
-	
+
 		if ( ! current_user_can( 'edit_' . $capability_singular_base, $post_id ) )
 			return;
 

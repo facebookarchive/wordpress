@@ -11,17 +11,19 @@ if ( ! class_exists( 'Facebook_Social_Plugin_Settings' ) )
 class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Settings {
 
 	/**
-	 * Setting page identifier
+	 * Setting page identifier.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const PAGE_SLUG = 'facebook-recommendations-bar';
 
 	/**
-	 * Define our option array value
+	 * Define our option array value.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const OPTION_NAME = 'facebook_recommendations_bar';
@@ -30,14 +32,16 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	 * The hook suffix assigned by add_submenu_page()
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	protected $hook_suffix = '';
 
 	/**
-	 * Initialize with an options array
+	 * Initialize with an options array.
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $options existing options
 	 */
 	public function __construct( $options = array() ) {
@@ -48,9 +52,10 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	}
 
 	/**
-	 * Reference the social plugin by name
+	 * Reference the social plugin by name.
 	 *
 	 * @since 1.1
+	 *
 	 * @return string social plugin name
 	 */
 	public static function social_plugin_name() {
@@ -58,9 +63,11 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	}
 
 	/**
-	 * Evaluate the Facebook_Recommendations_Bar class file if it is not already loaded
+	 * Evaluate the Facebook_Recommendations_Bar class file if it is not already loaded.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public static function require_recommendations_bar_builder() {
 		if ( ! class_exists( 'Facebook_Recommendations_Bar' ) )
@@ -71,6 +78,7 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	 * Navigate to the settings page through the Facebook top-level menu item
 	 *
 	 * @since 1.1
+	 *
 	 * @uses add_submenu_page()
 	 * @param string $parent_slug Facebook top-level menu item slug
 	 * @return string submenu hook suffix
@@ -100,6 +108,8 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	 * Load stored options and scripts on settings page view
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function onload() {
 		$options = get_option( self::OPTION_NAME );
@@ -114,6 +124,8 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	 * Load the page
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function settings_page() {
 		if ( ! isset( $this->hook_suffix ) )
@@ -126,9 +138,11 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	 * Hook into the settings API
 	 *
 	 * @since 1.1
+	 *
 	 * @uses add_settings_section()
 	 * @uses add_settings_field()
 	 * @param string $options_group target grouping
+	 * @return void
 	 */
 	private function settings_api_init() {
 		if ( ! isset( $this->hook_suffix ) )
@@ -203,6 +217,8 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	 * Introduce publishers to the Recommendations Bar social plugin
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function section_header() {
 		echo '<p>' . esc_html( __( 'Encourage additional pageviews with site recommendations based on social context.', 'facebook' ) ) . ' ' . esc_html( sprintf( __( 'Adds a %s overlay to the bottom of your page with an expanded list of recommendations triggered by time or position on the page.', 'facebook' ), __( 'Like Button', 'facebook' ) ) ) . '<br /><a href="https://developers.facebook.com/docs/reference/plugins/recommendationsbar/" title="' . esc_attr( sprintf( __( '%s social plugin documentation', 'facebook' ), 'Facebook ' . self::social_plugin_name() ) ) . '">' . esc_html( __( 'Read more...', 'facebook' ) ) . '</a></p>';
@@ -212,6 +228,8 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	 * Where should the button appear?
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function display_show_on() {
 		echo '<fieldset id="facebook-recommendations-bar-show-on">' . self::show_on_choices( self::OPTION_NAME . '[show_on]', self::get_display_conditionals_by_feature( 'recommendations_bar', 'all' ) ) . '</fieldset>';
@@ -223,6 +241,8 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	 * Choose to display the recommendations bar on the left or right side
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function display_side() {
 		$key = 'side';
@@ -248,6 +268,8 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	 * Choose action text.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function display_action() {
 		$key = 'action';
@@ -274,6 +296,8 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	 * What page progression should trigger the recommendations bar?
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function display_trigger() {
 		$key = 'trigger';
@@ -305,9 +329,11 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	}
 
 	/**
-	 * Trigger the recommendations bar after a given number of seconds
+	 * Trigger the recommendations bar after a given number of seconds.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function display_read_time() {
 		$key = 'read_time';
@@ -324,9 +350,11 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	}
 
 	/**
-	 * Maximum number of recommendations displayed
+	 * Maximum number of recommendations displayed.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function display_num_recommendations() {
 		$key = 'num_recommendations';
@@ -342,9 +370,11 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	}
 
 	/**
-	 * Maximum age of a recommended article
+	 * Maximum age of a recommended article.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function display_max_age() {
 		$key = 'max_age';
@@ -366,9 +396,10 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	}
 
 	/**
-	 * Translate HTML data response returned from Facebook social plugin builder into underscored keys and PHP values before saving
+	 * Translate HTML data response returned from Facebook social plugin builder into underscored keys and PHP values before saving.
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $options data-* options returned from Facebook social plugin builder
 	 * @return array $options options to store in WordPress
 	 */
@@ -387,9 +418,10 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	}
 
 	/**
-	 * Sanitize Recommendations Bar settings before they are saved to the database
+	 * Sanitize Recommendations Bar settings before they are saved to the database.
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $options recommendation bar options
 	 * @return array clean option sets. note: we remove Recommendation Button social plugin default options, storing only custom settings (e.g. recommend action preference value stored, like is not stored)
 	 */

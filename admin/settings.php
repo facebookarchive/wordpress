@@ -10,7 +10,11 @@ class Facebook_Settings {
 	 * All plugin features supported
 	 *
 	 * @since 1.1
-	 * @var array
+	 *
+	 * @var array {
+	 *     @type string feature slug
+	 *     @type bool true
+	 * }
 	 */
 	public static $features = array( 'like' => true, 'send' => true, 'follow' => true, 'recommendations_bar' => true, 'comments' => true, 'social_publisher' => true );
 
@@ -18,6 +22,8 @@ class Facebook_Settings {
 	 * Add hooks
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public static function init() {
 		add_action( 'admin_menu', array( 'Facebook_Settings', 'settings_menu_items' ) );
@@ -27,9 +33,12 @@ class Facebook_Settings {
 	}
 
 	/**
-	 * Load extra settings only if Facebook application credentials exist
+	 * Load extra settings only if Facebook application credentials exist.
 	 *
 	 * @since 1.2
+	 *
+	 * @global Facebook_Loader $facebook_loader check for stored Facebook application credentials before loading features.
+	 * @return void
 	 */
 	public static function load_social_settings() {
 		global $facebook_loader;
@@ -37,14 +46,28 @@ class Facebook_Settings {
 		if ( ! ( isset( $facebook_loader ) && $facebook_loader->app_access_token_exists() ) )
 			return;
 
+		/**
+		 * Limit Facebook plugin for WordPress features or functionality available on the site
+		 *
+		 * @since 1.1.9
+		 *
+		 * @see Facebook_Settings::$features
+		 * @param array {
+		 *     All available features.
+		 *
+		 *     @type string feature slug
+		 *     @type bool true
+		 * }
+		 */
 		$available_features = apply_filters( 'facebook_features', self::$features );
 		if ( is_array( $available_features ) && ! empty( $available_features ) ) {
 			if ( isset( $available_features['social_publisher'] ) ) {
 				// check user capability to publish to Facebook
-				$current_user = wp_get_current_user();
-				if ( user_can( $current_user, 'edit_posts' ) ) {
+				if ( current_user_can( 'edit_posts' ) ) {
+					// display Facebook account management in profile admin
 					if ( ! class_exists( 'Facebook_User_Profile' ) )
 						require_once( dirname(__FILE__) . '/profile.php' );
+
 					add_action( 'load-profile.php', array( 'Facebook_User_Profile', 'init' ) );
 				}
 			}
@@ -52,20 +75,28 @@ class Facebook_Settings {
 	}
 
 	/**
-	 * Enqueue scripts and styles
+	 * Enqueue scripts and styles.
 	 *
 	 * @since 1.1.6
+	 *
+	 * @uses wp_enqueue_style()
+	 * @return void
 	 */
 	public static function enqueue_scripts() {
 		wp_enqueue_style( 'facebook-admin-icons', plugins_url( 'static/css/admin/icons' . ( ( defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ) ? '' : '.min' ) . '.css', dirname( __FILE__ ) ), array(), '1.5' );
 	}
 
 	/**
-	 * Register the JavaScript file used for Facebook Login
-	 * Localize strings used in the JavaScript file
+	 * Register the JavaScript file used for Facebook Login.
+	 *
+	 * Localize strings used in the JavaScript file.
 	 *
 	 * @since 1.5
+	 *
 	 * @uses wp_register_script()
+	 * @global Facebook_Loader $facebook_loader reference plugin directory
+	 * @global WP_Scripts $wp_scripts associate an extra script block with the Facebook Login script handle
+	 * @return string Facebook Login JavaScript handle registered with WordPress
 	 */
 	public static function register_login_script() {
 		global $facebook_loader, $wp_scripts;
@@ -102,28 +133,37 @@ class Facebook_Settings {
 	}
 
 	/**
-	 * Check if Facebook application credentials are stored for the current site
-	 * Limit displayed features based on the existence of app data
+	 * Check if Facebook application credentials are stored for the current site.
+	 *
+	 * Limit displayed features based on the existence of app data.
 	 *
 	 * @since 1.1
-	 * @return bool true if app_id and app_secret stored
+	 *
+	 * @global Facebook_Loader $facebook_loader access already requested Facebook application credentials
+	 * @return bool True if app_id and app_secret stored.
 	 */
 	public static function app_credentials_exist() {
 		global $facebook_loader;
 
 		if ( isset( $facebook_loader ) && isset( $facebook_loader->credentials ) && isset( $facebook_loader->credentials['app_id'] ) && isset( $facebook_loader->credentials['app_secret'] ) )
 			return true;
+
 		return false;
 	}
 
 	/**
-	 * Add Facebook to the WordPress administration menu
+	 * Add Facebook settings to the WordPress administration menu.
 	 *
 	 * @since 1.1
+	 *
+	 * @global Facebook_Loader $facebook_loader Access loaded Facebook application credentials
+	 * @global $submenu array submenu created for the menu slugs
+	 * @return void
 	 */
 	public static function settings_menu_items() {
 		global $facebook_loader, $submenu;
 
+		// main settings page
 		if ( ! class_exists( 'Facebook_Application_Settings' ) )
 			require_once( dirname( __FILE__ ) . '/settings-app.php' );
 
@@ -135,6 +175,7 @@ class Facebook_Settings {
 
 		$menu_slug = Facebook_Application_Settings::PAGE_SLUG;
 
+		// duplicate_hook
 		$available_features = apply_filters( 'facebook_features', self::$features );
 
 		// publisher could short-circuit all features
@@ -213,17 +254,31 @@ class Facebook_Settings {
 	}
 
 	/**
-	 * Standardize the form flow through settings API
+	 * Standardize the form flow through settings API.
 	 *
 	 * @since 1.1
+	 *
 	 * @uses settings_fields()
 	 * @uses do_settings_sections()
 	 * @param string $page_slug constructs custom actions. passed to Settings API functions
+	 * @param string $page_title placed in a <h2> at the top of the page
+	 * @return void
 	 */
 	public static function settings_page_template( $page_slug, $page_title ) {
 		echo '<div class="wrap">';
+
+		/**
+		 * Echo content before the page header.
+		 *
+		 * @since 1.1
+		 */
 		do_action( 'facebook_settings_before_header_' . $page_slug );
 		echo '<header><h2>' . esc_html( $page_title ) . '</h2></header>';
+		/**
+		 * Echo content after the page header.
+		 *
+		 * @since 1.1
+		 */
 		do_action( 'facebook_settings_after_header_' . $page_slug );
 
 		// handle general messages such as settings updated up top
@@ -238,6 +293,12 @@ class Facebook_Settings {
 		submit_button();
 		echo '</form>';
 		echo '</div>';
+
+		/**
+		 * Echo content at the bottom of the page.
+		 *
+		 * @since 1.1
+		 */
 		do_action( 'facebook_settings_footer_' . $page_slug );
 		self::stats_beacon();
 	}
@@ -246,6 +307,7 @@ class Facebook_Settings {
 	 * Link to settings from the plugin listing page
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $links links displayed under the plugin
 	 * @param string $file plugin main file path relative to plugin dir
 	 * @return array links array passed in, possibly with our settings link added
@@ -265,7 +327,10 @@ class Facebook_Settings {
 	 * Report basic usage data back to Facebook
 	 *
 	 * @since 1.1
+	 *
+	 * @uses Facebook_Settings::debug_output()
 	 * @param string $app_id Facebook application identifier
+	 * @return void
 	 */
 	public static function stats_beacon( $app_id = '' ) {
 		$debug = self::debug_output( $app_id );
@@ -277,23 +342,32 @@ class Facebook_Settings {
 	 * Identify active features for debugging purposes or sent via a Facebook beacon
 	 *
 	 * @since 1.1
-	 * @param string $app_id application identifier
-	 * @return array debug information
+	 *
+	 * @global Facebook_Loader $facebook_loader Access Facebook application information
+	 * @param string $app_id Facebook application identifier
+	 * @return array {
+	 *     debug information
+	 *
+	 *     @type string parameter to include in debugger (typically as a URI query parameter)
+	 *     @type string|array information about the current site installation
+	 * }
 	 */
 	public static function debug_output( $app_id = '' ) {
 		global $facebook_loader;
 
-		if ( ! $app_id && isset( $facebook_loader ) && isset( $facebook_loader->credentials['app_id'] ) )
-			$app_id = $facebook_loader->credentials['app_id'];
-
 		$debug = array();
 
+		// Facebook application identifier
+		if ( ! $app_id && isset( $facebook_loader ) && isset( $facebook_loader->credentials['app_id'] ) )
+			$app_id = $facebook_loader->credentials['app_id'];
 		if ( $app_id )
 			$debug['appid'] = $app_id;
 
+		// plugin version
 		if ( isset( $facebook_loader ) )
 			$debug['version'] = Facebook_Loader::VERSION;
 
+		// site domain
 		$hostname = parse_url( site_url(), PHP_URL_HOST );
 		if ( $hostname )
 			$debug['domain'] = $hostname;
@@ -318,6 +392,7 @@ class Facebook_Settings {
 			$debug['features'] = $enabled_features;
 		unset( $enabled_features );
 
+		// active widgets
 		$widgets = self::get_active_widgets();
 		if ( ! empty( $widgets ) )
 			$debug['widgets'] = $widgets;
@@ -326,9 +401,11 @@ class Facebook_Settings {
 	}
 
 	/**
-	 * Get a list of Facebook widgets in one or more sidebars
+	 * Get a list of Facebook widgets in one or more sidebars.
 	 *
 	 * @since 1.1.6
+	 *
+	 * @uses wp_get_sidebars_widgets()
 	 * @return array Facebook widget feature slugs
 	 */
 	public static function get_active_widgets() {

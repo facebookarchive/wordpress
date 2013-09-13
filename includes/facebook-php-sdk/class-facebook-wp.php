@@ -5,22 +5,26 @@ if ( ! class_exists( 'WP_Facebook' ) )
 	require_once( dirname( __FILE__ ) . '/facebook.php' );
 
 /**
- * Override default Facebook PHP SDK behaviors with WordPress-friendly features
+ * Override default Facebook SDK for PHP behaviors with WordPress-friendly features
+ *
+ * A class combining the user-session-focused Facebook SDK for PHP and server-to-server communication methods of app access token data access into a single WordPress HTTP API friendly wrapper class
  *
  * @since 1.0
  */
 class Facebook_WP_Extend extends WP_Facebook {
 
 	/**
-	 * Uniquely identify requests sent from the WordPress site by WordPress version and blog url
+	 * Uniquely identify requests sent from the WordPress site by WordPress version and site url
 	 *
 	 * @since 1.4
+	 * @global string $wp_version communicate the version of WordPress making the request
+	 * @uses home_url() include the URL of WordPress site in the User-Agent string
 	 * @return string User-Agent string for use in requests to Facebook
 	 */
 	public static function generate_user_agent() {
 		global $wp_version;
 
-		return apply_filters( 'http_headers_useragent', 'WordPress/' . $wp_version . '; ' . get_bloginfo( 'url' ) . '; facebook-php-' . self::VERSION . '-wp' );
+		return apply_filters( 'http_headers_useragent', 'WordPress/' . $wp_version . '; ' . home_url() . '; facebook-php-' . self::VERSION . '-wp' );
 	}
 
 	/**
@@ -83,7 +87,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 	 *
 	 * @since 1.1.6
 	 * @param string absolute URL
-	 * @return array decoded JSON response as an associative array
+	 * @return array decoded json_decode() response as an associative array
 	 */
 	public static function get_json_url( $url ) {
 		if ( ! is_string( $url ) && $url )
@@ -166,8 +170,9 @@ class Facebook_WP_Extend extends WP_Facebook {
 	 * @param string $path The Graph API URI endpoint path component
 	 * @param string $method The HTTP method (default 'GET')
 	 * @param array $params The query/post data
+	 * @uses \Facebook_WP_Extend::graph_api()
 	 *
-	 * @return mixed The decoded response object
+	 * @return array|null The decoded response object
 	 * @throws WP_FacebookApiException
 	 */
 	public static function graph_api_with_app_access_token( $path, $method = 'GET', $params = array() ) {
@@ -190,7 +195,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 	 *
 	 * @since 1.2
 	 * @param string $facebook_id Facebook user identifier
-	 * @return array Facebook permissions
+	 * @return array Facebook permissions as keys in an associative array
 	 */
 	public static function get_permissions_by_facebook_user_id( $facebook_id ) {
 		if ( ! ( is_string( $facebook_id ) && $facebook_id ) )
@@ -248,7 +253,10 @@ class Facebook_WP_Extend extends WP_Facebook {
 	 * Trade an application id and a application secret for an application token used for future requests
 	 *
 	 * @since 1.4
-	 * @return string access token or false if error
+	 * @param string $app_id Facebook application identifier
+	 * @param string $app_secret Facebook application secret
+	 * @uses \Facebook_WP_Extend::get_access_token()
+	 * @return string access token or empty string if error
 	 */
 	public static function get_app_access_token( $app_id, $app_secret ) {
 		if ( ! ( is_string( $app_id ) && $app_id && is_string( $app_secret ) && $app_secret ) )
@@ -260,7 +268,9 @@ class Facebook_WP_Extend extends WP_Facebook {
 	/**
 	 * Exchange a short-term access token for a long-lived access token
 	 *
+	 * @since 1.5
 	 * @link https://developers.facebook.com/docs/facebook-login/access-tokens/#extending Access Tokens: Extending Access Tokens
+	 * @uses \Facebook_WP_Extend::get_access_token()
 	 * @param string $token existing access token
 	 * @return string long-lived access token
 	 */
@@ -276,9 +286,12 @@ class Facebook_WP_Extend extends WP_Facebook {
 	/**
 	 * Get application details including app name, namespace, link, and more.
 	 *
+	 * Requests application data server-to-server without the Facebook SDK for PHP or an app access token
+	 *
 	 * @since 1.4
 	 * @link https://developers.facebook.com/docs/reference/api/application/ Application object and fields
-	 * @param string $app_id application identifier
+	 * @uses \Facebook_WP_Extend::get_json_url()
+	 * @param string $app_id Facebook application identifier
 	 * @param array $fields app fields to retrieve. if blank a default set will be returned
 	 * @return array application data response from Facebook API
 	 */
@@ -315,6 +328,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 	 *
 	 * @since 1.4
 	 * @link https://developers.facebook.com/docs/reference/api/application/ Application object and fields
+	 * @uses \Facebook_WP_Extend::graph_api()
 	 * @param string $access_token application access token
 	 * @param array $fields request specific application fields
 	 * @param string $app_secret_proof hashed access token
@@ -346,10 +360,11 @@ class Facebook_WP_Extend extends WP_Facebook {
 	}
 
 	/**
-	 * Provides the implementations of the inherited abstract
-	 * methods.  The implementation uses user meta to maintain
-	 * a store for authorization codes, user ids, CSRF states, and
-	 * access tokens.
+	 * Persist data stored by the Facebook SDK for JavaScript inside WordPress user meta storage
+	 *
+	 * Provides the implementations of the inherited abstract methods. The implementation uses user meta to maintain a store for authorization codes, user ids, CSRF states, and access tokens.
+	 *
+	 * @since 1.0
 	 */
 	protected function setPersistentData( $key, $value ) {
 		if ( ! in_array( $key, self::$kSupportedKeys ) ) {

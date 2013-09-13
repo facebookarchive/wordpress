@@ -8,6 +8,10 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 
 	/**
 	 * Register widget with WordPress
+	 *
+	 * @since 1.0
+	 *
+	 * @return void
 	 */
 	public function __construct() {
 		parent::__construct(
@@ -19,9 +23,13 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 
 	/**
 	 * Test if a provided string is a URL to a Facebook page
+	 *
 	 * Sanitize the URL if valid
 	 *
 	 * @since 1.1.11
+	 *
+	 * @global wpdb $wpdb WordPress database class. sanitize FQL values.
+	 * @global \Facebook_Loader $facebook_loader access Facebook application credentials
 	 * @param string $url absolute URL
 	 * @return string Facebook Page URL or empty string if the passed URL does not seem to be a Facebook Page URL
 	 */
@@ -91,8 +99,11 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 	 *
 	 * @see WP_Widget::widget()
 	 *
+	 * @since 1.0
+	 *
 	 * @param array $args     Widget arguments.
 	 * @param array $instance Saved values from database.
+	 * @return void
 	 */
 	public function widget( $args, $instance ) {
 		// no Facebook Page target specified. fail early
@@ -131,6 +142,8 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 	 * Sanitize widget form values as they are saved.
 	 *
 	 * @see WP_Widget::update()
+	 *
+	 * @since 1.0
 	 *
 	 * @param array $new_instance Values just sent to be saved.
 	 * @param array $old_instance Previously saved values from database.
@@ -204,7 +217,10 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 	 *
 	 * @see WP_Widget::form()
 	 *
+	 * @since 1.0
+	 *
 	 * @param array $instance Previously saved values from database.
+	 * @return void
 	 */
 	public function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, array(
@@ -233,10 +249,13 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 
 	/**
 	 * Allow a publisher to customize the title displayed above the widget area
+	 *
 	 * e.g. Like us!
 	 *
 	 * @since 1.1.11
+	 *
 	 * @param string $existing_value saved title
+	 * @return void
 	 */
 	public function display_title( $existing_value = '' ) {
 		echo '<p><label for="' . $this->get_field_id( 'title' ) . '">' . esc_html( _x( 'Title', 'Section title or header', 'facebook' ) ) . '</label>: ';
@@ -247,11 +266,14 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Show the Facebook header
+	 * Show the Facebook header.
+	 *
 	 * Works best when you do not set your own widget title
 	 *
 	 * @since 1.1.11
+	 *
 	 * @param bool $true_false
+	 * @return void
 	 */
 	public function display_header( $true_false ) {
 		echo '<p><input class="checkbox" type="checkbox" id="' . $this->get_field_id( 'header' ) . '" name="' . $this->get_field_name( 'header' ) . '" value="1"';
@@ -260,11 +282,14 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Show the Facebook header
+	 * Show the social plugin border.
+	 *
 	 * Works best when you do not set your own widget title
 	 *
 	 * @since 1.5
+	 *
 	 * @param bool $true_false
+	 * @return void
 	 */
 	public function display_show_border( $true_false ) {
 		echo '<p><input class="checkbox" type="checkbox" id="' . $this->get_field_id( 'show_border' ) . '" name="' . $this->get_field_name( 'show_border' ) . '" value="1"';
@@ -273,10 +298,12 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Set the Like target
+	 * Set the Like target.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @param string $existing_value stored URL value
+	 * @return void
 	 */
 	public function display_href( $existing_value = '' ) {
 		echo '<p><label for="' . $this->get_field_id( 'href' ) . '">URL</label>: <input type="url" id="' . $this->get_field_id( 'href' ) . '" name="' . $this->get_field_name( 'href' ) . '" class="widefat" required';
@@ -288,10 +315,12 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Display a stream of latest posts from the Facebook Page's wall
+	 * Display a stream of latest posts from the Facebook Page's wall.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @param bool $true_false enabled or disabled
+	 * @return void
 	 */
 	public function display_stream( $true_false ) {
 		echo '<p><input type="checkbox" id="' . $this->get_field_id( 'stream' ) . '" name="' . $this->get_field_name( 'stream' ) . '" value="1"';
@@ -300,10 +329,12 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Always display posts from Page's stream, even if page is a Place and checkins available
+	 * Always display posts from Page's stream, even if page is a Place and checkins available.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @param bool $true_false
+	 * @return void
 	 */
 	public function display_force_wall( $true_false ) {
 		echo '<p><input type="checkbox" id="' . $this->get_field_id( 'force_wall' ) . '" name="' . $this->get_field_name( 'force_wall' ) . '" value="1"';
@@ -312,10 +343,12 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Show faces of viewer's friends
+	 * Show faces of viewer's friends.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @param bool $true_false enabled or disabled
+	 * @return void
 	 */
 	public function display_show_faces( $true_false ) {
 		echo '<p><input class="checkbox" type="checkbox" id="' . $this->get_field_id( 'show_faces' ) . '" name="' . $this->get_field_name( 'show_faces' ) . '" value="1"';
@@ -324,10 +357,12 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Choose a light or dark color scheme
+	 * Choose a light or dark color scheme.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @param string $existing_value saved colorscheme value
+	 * @return void
 	 */
 	public function display_colorscheme( $existing_value = 'light' ) {
 		if ( ! class_exists( 'Facebook_Social_Plugin_Settings' ) )
@@ -339,10 +374,12 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Specify the width of the recommendations box in whole pixels
+	 * Specify the width of the recommendations box in whole pixels.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @param int $existing_value previously stored value
+	 * @return void
 	 */
 	public function display_width( $existing_value = 300 ) {
 		if ( ! class_exists( 'Facebook_Like_Box' ) )
@@ -355,10 +392,12 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Specify the height of the recommendations box in whole pixels
+	 * Specify the height of the recommendations box in whole pixels.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @param int $existing_value previously stored value
+	 * @return void
 	 */
 	public function display_height( $existing_value = 0 ) {
 		if ( ! class_exists( 'Facebook_Like_Box' ) )

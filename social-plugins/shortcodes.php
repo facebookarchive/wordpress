@@ -10,6 +10,10 @@ class Facebook_Shortcodes {
 	 * Register shortcode handlers
 	 *
 	 * @since 1.1.6
+	 *
+	 * @uses add_shortcode()
+	 * @uses wp_embed_register_handler()
+	 * @return void
 	 */
 	public static function init() {
 		// expose social plugin markup using WordPress Shortcode API
@@ -29,10 +33,12 @@ class Facebook_Shortcodes {
 	}
 
 	/**
-	 * Facebook Embedded Post embed handler callback
-	 * Facebook does not support oEmbed
+	 * Facebook Embedded Post embed handler callback.
+	 *
+	 * Facebook does not support oEmbed.
 	 *
 	 * @since 1.5
+	 *
 	 * @param array $matches The regex matches from the provided regex when calling {@link wp_embed_register_handler()}.
 	 * @param array $attr Embed attributes. Not used.
 	 * @param string $url The original URL that was matched by the regex. Not used.
@@ -44,9 +50,10 @@ class Facebook_Shortcodes {
 	}
 
 	/**
-	 * Generate a HTML div element with data-* attributes to be converted into a Like Button by the Facebook JavaScript SDK
+	 * Generate a HTML div element with data-* attributes to be converted into a Like Button by the Facebook JavaScript SDK.
 	 *
 	 * @since 1.1.6
+	 *
 	 * @param array $attributes shortcode attributes. overrides site options for specific button attributes
 	 * @param string $content shortcode content. no effect
 	 * @return string Like Button div HTML or empty string if minimum requirements not met
@@ -102,6 +109,7 @@ class Facebook_Shortcodes {
 	 * Generate a HTML div element with data-* attributes to be converted into a Send Button by the Facebook JavaScript SDK
 	 *
 	 * @since 1.1.6
+	 *
 	 * @param array $attributes shortcode attributes. overrides site options for specific button attributes
 	 * @param string $content shortcode content. no effect
 	 * @return string send button HTML div or empty string if minimum requirements not met
@@ -146,6 +154,7 @@ class Facebook_Shortcodes {
 	 * The passed href URL value must be a Facebook User profile URL; this URL is not validated before attempting to use in a Follow Button parameter
 	 *
 	 * @since 1.5
+	 *
 	 * @param array $attributes shortcode attributes. overrides site options for specific button attributes
 	 * @param string $content shortcode content. no effect
 	 * @return string Follow Button div HTML or empty string if minimum requirements not met
@@ -192,6 +201,7 @@ class Facebook_Shortcodes {
 	 * Generate a HTML div element with data-* attributes to be converted into a Facebook embedded post
 	 *
 	 * @since 1.5
+	 *
 	 * @param array $attributes shortcode attributes. overrides site options for specific button attributes
 	 * @param string $content shortcode content. no effect
 	 * @return string Follow Button div HTML or empty string if minimum requirements not met

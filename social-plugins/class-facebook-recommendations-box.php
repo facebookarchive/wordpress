@@ -7,104 +7,118 @@ if ( ! class_exists( 'Facebook_Social_Plugin' ) )
  * Display recommended pages based on the browsing history, site interactions, and interests of a Facebook user and friends
  *
  * @since 1.1
+ *
  * @link https://developers.facebook.com/docs/reference/plugins/recommendations/ Recommendations Box social plugin
  */
 class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 
 	/**
-	 * Element and class name used in markup builders
+	 * Element and class name used in markup builders.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const ID = 'recommendations';
 
 	/**
-	 * The activity domain. Defaults to the current domain
+	 * The activity domain. Defaults to the current domain.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	protected $site;
 
 	/**
-	 * Actions to show activities for
+	 * Actions to show activities for.
 	 *
 	 * @since 1.1
+	 *
 	 * @var array
 	 */
 	protected $action = array();
 
 	/**
-	 * Display all actions, custom and global, associated with this application
+	 * Display all actions, custom and global, associated with this application.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	protected $app_id;
 
 	/**
-	 * Width of the activity feed box in whole pixels
+	 * Width of the activity feed box in whole pixels.
 	 *
 	 * @since 1.1
+	 *
 	 * @var int
 	 */
 	protected $width;
 
 	/**
-	 * Height of the activity feed box in whole pixels
+	 * Height of the activity feed box in whole pixels.
 	 *
 	 * @since 1.1
+	 *
 	 * @var int
 	 */
 	protected $height;
 
 	/**
-	 * Show or hide the Facebook header
+	 * Show or hide the Facebook header.
 	 *
 	 * @since 1.1
+	 *
 	 * @var bool
 	 */
 	protected $header;
 
 	/**
-	 * Define the browsing context of followed links
+	 * Define the browsing context of followed links.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	protected $linktarget;
 
 	/**
-	 * Allowed browsing contexts
+	 * Allowed browsing contexts.
 	 *
 	 * @link http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-names Browsing context names
 	 * @since 1.1
+	 *
 	 * @var array
 	 */
 	public static $linktarget_choices = array( '_blank' => true, '_parent' => true, '_top' => true );
 
 	/**
-	 * Limit the number of days since article creation
+	 * Limit the number of days since article creation.
 	 *
 	 * @since 1.1
+	 *
 	 * @var int
 	 */
 	protected $max_age;
 
 	/**
-	 * I am a recommendation box
+	 * I am a recommendation box.
 	 *
 	 * @since 1.1
+	 *
+	 * @return string Facebook social plugin name
 	 */
 	public function __toString() {
 		return 'Facebook Recommendations Box';
 	}
 
 	/**
-	 * Set the domain for which to show activity
+	 * Set the domain for which to show activity.
      *
      * @since 1.1
+     *
      * @param string $domain domain / hostname
      * @return Facebook_Recommendations_Box support chaining
 	 */
@@ -118,6 +132,7 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 	 * Scope the activity feed display to an additional action
 	 *
 	 * @since 1.1
+	 *
 	 * @param string $action action name. global- or app-scoped
 	 * @return Facebook_Recommendations_Box support chaining
 	 */
@@ -128,9 +143,10 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Display actions associated with the specified application
+	 * Display actions associated with the specified application.
 	 *
 	 * @since 1.1
+	 *
 	 * @param string $app_id Facebook application identifer
 	 * @return Facebook_Recommendations_Box support chaining
 	 */
@@ -147,9 +163,10 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Define the width of the activity feed box in whole pixels
+	 * Define the width of the activity feed box in whole pixels.
 	 *
 	 * @since 1.1
+	 *
 	 * @param int $width width in whole pixels
 	 * @return Facebook_Recommendations_Box support chaining
 	 */
@@ -160,9 +177,10 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Define the height of the recommendations box in whole pixels
+	 * Define the height of the recommendations box in whole pixels.
 	 *
 	 * @since 1.1
+	 *
 	 * @param int $height height in whole pixels
 	 * @return Facebook_Recommendations_Box support chaining
 	 */
@@ -176,6 +194,7 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 	 * Show the Facebook header
 	 *
 	 * @since 1.1
+	 *
 	 * @return Facebook_Activity_Feed support chaining
 	 */
 	public function showHeader() {
@@ -187,6 +206,7 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 	 * Hide the Facebook header
 	 *
 	 * @since 1.1
+	 *
 	 * @return Facebook_Recommendations_Box support chaining
 	 */
 	public function hideHeader() {
@@ -198,6 +218,7 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 	 * Define a link target to control browser context on link actions
 	 *
 	 * @since 1.1
+	 *
 	 * @param string $target _blank|_parent|_top
 	 * @return Facebook_Activity_Feed support chaining
 	 */
@@ -212,6 +233,7 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 	 * Plugin defaults to no maximum age (age=0)
 	 *
 	 * @since 1.1
+	 *
 	 * @param int $days number of whole days
 	 * @return Facebook_Activity_Feed support chaining
 	 */
@@ -222,9 +244,11 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Convert the class to data-* attribute friendly associative array
-	 * will become data-key="value"
-	 * Exclude values if default
+	 * Convert the class to data-* attribute friendly associative array.
+	 *
+	 * will become data-key="value". Exclude values if default
+	 *
+	 * @since 1.1
 	 *
 	 * @return array associative array
 	 */
@@ -261,9 +285,10 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 	}
 
 	/**
-	 * convert an options array into an object
+	 * convert an options array into an object.
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $values associative array
 	 * @return Facebook_Recommendations_Box recommendations box object
 	 */
@@ -319,9 +344,10 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Output Recommendations Box div with data-* attributes
+	 * Output Recommendations Box div with data-* attributes.
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $div_attributes associative array. customize the returned div with id, class, or style attributes
 	 * @return HTML div or empty string
 	 */
@@ -336,6 +362,7 @@ class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 	 * Output Activity Feed as XFBML
 	 *
 	 * @since 1.1
+	 *
 	 * @return string XFBML markup
 	 */
 	public function asXFBML() {

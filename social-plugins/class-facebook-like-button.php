@@ -4,26 +4,30 @@ if ( ! class_exists( 'Facebook_Social_Plugin' ) )
 	require_once( dirname(__FILE__) . '/class-facebook-social-plugin.php' );
 
 /**
- * Allow page visitors to easily share content on Facebook with a Like button
+ * Allow page visitors to easily share content on Facebook with a Like button.
  *
  * @since 1.1
+ *
  * @link https://developers.facebook.com/docs/reference/plugins/like/ Like button social plugin documentation
  */
 class Facebook_Like_Button extends Facebook_Social_Plugin {
 
 	/**
-	 * Element and class name used in markup builders
+	 * Element and class name used in markup builders.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const ID = 'like';
 
 	/**
 	 * Override the URL used for the like action.
+	 *
 	 * Default is og:url or link[rel=canonical] or document.URL
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	protected $href;
@@ -32,14 +36,16 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	 * Display a send button alongside the like button?
 	 *
 	 * @since 1.1
+	 *
 	 * @var bool
 	 */
 	protected $send_button;
 
 	/**
-	 * Which like button you would like displayed
+	 * Which like button you would like displayed.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	protected $layout;
@@ -48,15 +54,18 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	 * Choose your like button
 	 *
 	 * @since 1.1
+	 *
 	 * @var array
 	 */
 	public static $layout_choices = array( 'standard' => true, 'button_count' => true, 'box_count' => true );
 
 	/**
 	 * Show faces of the viewer's friends?
+	 *
 	 * Only applies to standard layout. Needs the extra width.
 	 *
 	 * @since 1.1
+	 *
 	 * @var bool
 	 */
 	protected $show_faces;
@@ -65,6 +74,7 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	 * Define a custom width in whole pixels
 	 *
 	 * @since 1.1
+	 *
 	 * @var int
 	 */
 	protected $width;
@@ -73,6 +83,7 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	 * Like or recommend
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	protected $action;
@@ -81,15 +92,18 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	 * The verb to display on the button
 	 *
 	 * @since 1.1
+	 *
 	 * @var array
 	 */
 	public static $action_choices = array( 'like' => true, 'recommend' => true );
 
 	/**
 	 * Option to bypass validation.
+	 *
 	 * You might validate when changing settings but choose not to validate on future generators
 	 *
 	 * @since 1.1
+	 *
 	 * @param bool $validate false if object should not be validated
 	 */
 	public function __construct( $validate = true ) {
@@ -103,15 +117,18 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	 * I am a like button
 	 *
 	 * @since 1.1
+	 *
+	 * @return string Facebook social plugin name
 	 */
 	public function __toString() {
 		return 'Facebook Like Button';
 	}
 
 	/**
-	 * Setter for href attribute
+	 * Setter for href attribute.
 	 *
 	 * @since 1.1
+	 *
 	 * @param string $url absolute URL
 	 * @return Facebook_Like_Button support chaining
 	 */
@@ -126,6 +143,7 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	 * Should a send button appear next to the like button?
 	 *
 	 * @since 1.1
+	 *
 	 * @return Facebook_Like_Button support chaining
 	 */
 	public function includeSendButton() {
@@ -134,9 +152,10 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Choose a layout option
+	 * Choose a layout option.
 	 *
 	 * @since 1.1
+	 *
 	 * @see self::$layout_choices
 	 * @param string $layout a supported layout option
 	 * @return Facebook_Like_Button support chaining
@@ -151,6 +170,7 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	 * Show the faces of a logged-on Facebook user's friends
 	 *
 	 * @since 1.1
+	 *
 	 * @return Facebook_Like_Button support chaining
 	 */
 	public function showFaces() {
@@ -160,9 +180,11 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 
 	/**
 	 * Do not display the faces of a logged-on Facebook user's friends
+	 *
 	 * Reverts to default state
 	 *
 	 * @since 1.1.11
+	 *
 	 * @return Facebook_Like_Button support chaining
 	 */
 	public function hideFaces() {
@@ -172,9 +194,11 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 
 	/**
 	 * Width of the like button
-	 * Should be greater than the minimum width of layout + send button (if enabled) + recommend text (if chosen)
+	 *
+	 * Should be greater than the minimum width of layout + send button (if enabled) + recommend text (if chosen).
 	 *
 	 * @since 1.1
+	 *
 	 * @param int $width width in whole pixels
 	 * @return Facebook_Like_Button support chaining
 	 */
@@ -189,6 +213,7 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	 * Override the default "like" text with "recommend"
 	 *
 	 * @since 1.1
+	 *
 	 * @param string $action like|recommend
 	 * @return Facebook_Like_Button support chaining
 	 */
@@ -199,10 +224,12 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Compute a minimum width of a like button based on configured options
-	 * Note: Minimum widths vary based on the language-specific text used for "like" and "recommend" action. Language variances are not factored into this calculation
+	 * Compute a minimum width of a like button based on configured options.
+	 *
+	 * Note: Minimum widths vary based on the language-specific text used for "like" and "recommend" action. Language variances are not factored into this calculation.
 	 *
 	 * @since 1.1
+	 *
 	 * @return int minimum width of the current configuration in whole pixels
 	 */
 	private function compute_minimum_width() {
@@ -224,10 +251,12 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Some options may be in conflict with other options or not available for main choices
-	 * Reset customizations if we can detect non-compliance to avoid later confusion and/or layout issues
+	 * Some options may be in conflict with other options or not available for main choices.
+	 *
+	 * Reset customizations if we can detect non-compliance to avoid later confusion and/or layout issues.
 	 *
 	 * @since 1.1
+	 * @return void
 	 */
 	public function validate() {
 		// allow overrides
@@ -250,9 +279,10 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	}
 
 	/**
-	 * convert an options array into an object
+	 * convert an options array into an object.
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $values associative array
 	 * @return Facebook_Like_Button like object
 	 */
@@ -297,8 +327,10 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 
 	/**
 	 * Convert the class to data-* attribute friendly associative array
-	 * will become data-key="value"
-	 * Exclude values if default
+	 *
+	 * will become data-key="value". Exclude values if default.
+	 *
+	 * @since 1.1
 	 *
 	 * @return array associative array
 	 */
@@ -330,6 +362,7 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	 * Output Like button with data-* attributes
 	 *
 	 * @since 1.1
+	 *
 	 * @param array $div_attributes associative array. customize the returned div with id, class, or style attributes
 	 * @return HTML div or empty string
 	 */
@@ -344,6 +377,7 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	 * Output Like button as XFBML
 	 *
 	 * @since 1.1
+	 *
 	 * @return string XFBML markup
 	 */
 	public function asXFBML() {

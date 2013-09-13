@@ -7,28 +7,36 @@
  */
 class Facebook_Mentions_Search {
 	/**
-	 * Maximum number of search results to return
+	 * Maximum number of search results to return.
 	 *
 	 * @since 1.2
+	 *
 	 * @var int
 	 */
 	const MAX_RESULTS = 8;
 
 	/**
-	 * Respond to WordPress admin AJAX requests
-	 * Adds custom wp_ajax_* actions
+	 * Respond to WordPress admin AJAX requests.
+	 *
+	 * Adds custom wp_ajax_* actions.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public static function wp_ajax_handlers() {
 		add_action( 'wp_ajax_facebook_mentions_search_autocomplete', array( 'Facebook_Mentions_Search', 'search_endpoint' ) );
 	}
 
 	/**
-	 * Check for minimum requirements before conducting a Facebook search
-	 * Populate result set with up to MAX_RESULTS results from current user's Facebook friends or Facebook pages
+	 * Check for minimum requirements before conducting a Facebook search.
+	 *
+	 * Populate result set with up to MAX_RESULTS results from current user's Facebook friends or Facebook pages.
 	 *
 	 * @since 1.2
+	 *
+	 * @global \Facebook_Loader $facebook_loader Determine if app access token exists
+	 * @return void
 	 */
 	public static function search_endpoint() {
 		global $facebook_loader;
@@ -76,9 +84,17 @@ class Facebook_Mentions_Search {
 	 * Search Facebook friends with names matching a given string up to a maximum number of results
 	 *
 	 * @since 1.2
+	 *
 	 * @param string $search_term search string
 	 * @param int $limit maximum number of results
-	 * @return array friend results
+	 * @return array {
+	 *     friend results
+	 *
+	 *     @type string 'object_type' user. Differentiate between User and Page results combined in one search.
+	 *     @type string 'id' Facebook User identifier.
+	 *     @type string 'name' Facebook User name.
+	 *     @type string 'picture' Facebook User picture URL.
+	 * }
 	 */
 	public static function search_friends( $search_term, $limit = 4 ) {
 		if ( ! class_exists( 'Facebook_User' ) )
@@ -154,9 +170,21 @@ class Facebook_Mentions_Search {
 	 * Search for Facebook pages matching a given string up to maximum number of results
 	 *
 	 * @since 1.2
+	 *
 	 * @param string $search_term search string
 	 * @param int $limit maximum number of results
-	 * @return array pages results
+	 * @return array {
+	 *     friend results
+	 *
+	 *     @type string 'object_type' page. Differentiate between Page and User objects in the same search results set
+	 *     @type string 'id' Facebook Page id.
+	 *     @type string 'name' Facebook Page name.
+	 *     @type string 'image' Facebook Page image URL
+	 *     @type int 'likes' Number of Likes received by the Page.
+	 *     @type int 'talking_about_count' Number of Facebook Users talking about the Page.
+	 *     @type string 'category' Page category.
+	 *     @type string 'location' Page location (if a physical place).
+	 * }
 	 */
 	public static function search_pages( $search_term, $limit = 4 ) {
 		global $facebook_loader;

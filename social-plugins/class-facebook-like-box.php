@@ -1,9 +1,11 @@
 <?php
 /**
- * Encourage visitors to Like a Facebook Page
- * Optionally display profile photos of friends who already like your page or latest updates from your page
+ * Encourage visitors to Like a Facebook Page.
+ *
+ * Optionally display profile photos of friends who already like your page or latest updates from your page.
  *
  * @since 1.1
+ *
  * @link https://developers.facebook.com/docs/reference/plugins/like-box/ Like Box social plugin
  */
 class Facebook_Like_Box {
@@ -11,20 +13,23 @@ class Facebook_Like_Box {
 	 * Element and class name used in markup builders
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const ID = 'like-box';
 
 	/**
-	 * Minimum allowed width of the Like Box in whole pixels
+	 * Minimum allowed width of the Like Box in whole pixels.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @var int
 	 */
 	const MIN_WIDTH = 292;
 
 	/**
-	 * Minimum allowed height of the Like Box in whole pixels
+	 * Minimum allowed height of the Like Box in whole pixels.
+	 *
 	 * No faces, no stream.
 	 *
 	 * @since 1.1.11
@@ -33,9 +38,10 @@ class Facebook_Like_Box {
 	const MIN_HEIGHT = 63;
 
 	/**
-	 * Use a light or dark color scheme
+	 * Use a light or dark color scheme.
 	 *
 	 * @since 1.1
+	 *
 	 * @var array
 	 */
 	public static $colorscheme_choices = array( 'light' => true, 'dark' => true );
@@ -44,25 +50,29 @@ class Facebook_Like_Box {
 	 * URL of a Facebook Page. The target of the Like action.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @var string
 	 */
 	protected $href;
 
 	/**
-	 * Define a custom width in whole pixels
-	 * Min: 292
-	 * Default: 300
+	 * Define a custom width in whole pixels.
+	 *
+	 * Min: 292. Default: 300.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @var int
 	 */
 	protected $width;
 
 	/**
-	 * Define a custom height in whole pixels
-	 * Default height varies
+	 * Define a custom height in whole pixels.
+	 *
+	 * Default height varies.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @var int
 	 */
 	protected $height;
@@ -71,6 +81,7 @@ class Facebook_Like_Box {
 	 * Choose a light or dark color scheme to match your site style
 	 *
 	 * @since 1.1.11
+	 *
 	 * @param string
 	 */
 	protected $colorscheme;
@@ -79,6 +90,7 @@ class Facebook_Like_Box {
 	 * Show faces of the viewer's friends who have already liked the page?
 	 *
 	 * @since 1.1.11
+	 *
 	 * @var bool
 	 */
 	protected $show_faces;
@@ -87,6 +99,7 @@ class Facebook_Like_Box {
 	 * Display the latest posts from the Facebook Page's wall?
 	 *
 	 * @since 1.1.11
+	 *
 	 * @var bool
 	 */
 	protected $stream;
@@ -95,16 +108,18 @@ class Facebook_Like_Box {
 	 * Display a Facebook header at the top of the social plugin. e.g. "Find us on Facebook"
 	 *
 	 * @since 1.1.11
+	 *
 	 * @var bool
 	 */
 	protected $header;
 
 	/**
 	 * Show a border around the plugin
-	 * Default: true
-	 * Set to false to style the resulting iframe with your custom CSS
+	 *
+	 * Default: true. Set to false to style the resulting iframe with your custom CSS.
 	 *
 	 * @since 1.5
+	 *
 	 * @var bool
 	 */
 	protected $show_border;
@@ -113,6 +128,7 @@ class Facebook_Like_Box {
 	 * Places-specific features: should the stream contain posts from a Pages' walls instead of checkins by friends?
 	 *
 	 * @since 1.1.11
+	 *
 	 * @var bool
 	 */
 	protected $force_wall;
@@ -121,15 +137,17 @@ class Facebook_Like_Box {
 	 * I am a Like Box
 	 *
 	 * @since 1.1
+	 * @return string Facebook social plugin name
 	 */
 	public function __toString() {
 		return 'Facebook Like Box';
 	}
 
 	/**
-	 * Setter for href attribute
+	 * Setter for href attribute.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @param string $url absolute URL
 	 * @return Facebook_Like_Box support chaining
 	 */
@@ -141,9 +159,10 @@ class Facebook_Like_Box {
 	}
 
 	/**
-	 * Define the width of the Like Box in whole pixels
+	 * Define the width of the Like Box in whole pixels.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @param int $width width in whole pixels
 	 * @return Facebook_Like_Box support chaining
 	 */
@@ -157,9 +176,10 @@ class Facebook_Like_Box {
 	}
 
 	/**
-	 * Define the height of the recommendations box in whole pixels
+	 * Define the height of the recommendations box in whole pixels.
 	 *
 	 * @since 1.1
+	 *
 	 * @param int $height height in whole pixels
 	 * @return Facebook_Like_Box support chaining
 	 */
@@ -173,9 +193,10 @@ class Facebook_Like_Box {
 	}
 
 	/**
-	 * Choose a light or dark color scheme
+	 * Choose a light or dark color scheme.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @see self::colorscheme_choices
 	 * @param string $color_scheme light|dark
 	 * @return Facebook_Like_Box support chaining
@@ -187,9 +208,10 @@ class Facebook_Like_Box {
 	}
 
 	/**
-	 * Show the faces of a logged-on Facebook user's friends
+	 * Show the faces of a logged-on Facebook user's friends.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @return Facebook_Like_Box support chaining
 	 */
 	public function showFaces() {
@@ -198,10 +220,12 @@ class Facebook_Like_Box {
 	}
 
 	/**
-	 * Do not display the faces of a logged-on Facebook user's friends
-	 * Reverts to default state
+	 * Do not display the faces of a logged-on Facebook user's friends.
+	 *
+	 * Reverts to default state.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @return Facebook_Like_Box support chaining
 	 */
 	public function hideFaces() {
@@ -210,9 +234,10 @@ class Facebook_Like_Box {
 	}
 
 	/**
-	 * Show the Facebook Page stream
+	 * Show the Facebook Page stream.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @return Facebook_Like_Box support chaining
 	 */
 	public function showStream() {
@@ -221,9 +246,10 @@ class Facebook_Like_Box {
 	}
 
 	/**
-	 * Hide the Facebook header
+	 * Hide the Facebook header.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @return Facebook_Like_Box support chaining
 	 */
 	public function hideStream() {
@@ -232,9 +258,10 @@ class Facebook_Like_Box {
 	}
 
 	/**
-	 * Show the Facebook header
+	 * Show the Facebook header.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @return Facebook_Like_Box support chaining
 	 */
 	public function showHeader() {
@@ -243,9 +270,10 @@ class Facebook_Like_Box {
 	}
 
 	/**
-	 * Hide the Facebook header
+	 * Hide the Facebook header.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @return Facebook_Like_Box support chaining
 	 */
 	public function hideHeader() {
@@ -257,6 +285,7 @@ class Facebook_Like_Box {
 	 * Add a border to the box
 	 *
 	 * @since 1.5
+	 *
 	 * @return Facebook_Like_Box support chaining
 	 */
 	public function showBorder() {
@@ -265,9 +294,10 @@ class Facebook_Like_Box {
 	}
 
 	/**
-	 * Hide the box border
+	 * Hide the box border.
 	 *
 	 * @since 1.5
+	 *
 	 * @return Facebook_Like_Box support chaining
 	 */
 	public function hideBorder() {
@@ -279,6 +309,7 @@ class Facebook_Like_Box {
 	 * Place-specific: show latest wall posts instead of checkins.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @return Facebook_Like_Box support chaining
 	 */
 	public function showWall() {
@@ -288,9 +319,11 @@ class Facebook_Like_Box {
 
 	/**
 	 * Place-specific: allow the default state of Place checkins displayed in Page stream.
+	 *
 	 * The counter-function to showWall()
 	 *
 	 * @since 1.1.11
+	 *
 	 * @return Facebook_Like_Box support chaining
 	 */
 	public function showCheckins() {
@@ -299,9 +332,10 @@ class Facebook_Like_Box {
 	}
 
 	/**
-	 * convert an options array into an object
+	 * convert an options array into an object.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @param array $values associative array
 	 * @return Facebook_Like_Box like box object
 	 */
@@ -354,6 +388,8 @@ class Facebook_Like_Box {
 	/**
 	 * Convert the class object into an array, removing default values
 	 *
+	 * @since 1.1.11
+	 *
 	 * @return array associative array
 	 */
 	public function toArray() {
@@ -399,7 +435,10 @@ class Facebook_Like_Box {
 
 	/**
 	 * Convert the class to data-* attribute friendly associative array
-	 * Exclude values if default
+	 *
+	 * Exclude values if default.
+	 *
+	 * @since 1.1.11
 	 *
 	 * @return array associative array
 	 */
@@ -408,9 +447,10 @@ class Facebook_Like_Box {
 	}
 
 	/**
-	 * Output Like Box with data-* attributes
+	 * Output Like Box with data-* attributes.
 	 *
-	 * @since 1.1
+	 * @since 1.1.11
+	 *
 	 * @param array $div_attributes associative array. customize the returned div with id, class, or style attributes
 	 * @return HTML div or empty string
 	 */
@@ -427,7 +467,8 @@ class Facebook_Like_Box {
 	/**
 	 * Output Like Box as XFBML
 	 *
-	 * @since 1.1
+	 * @since 1.1.11
+	 *
 	 * @return string XFBML markup
 	 */
 	public function asXFBML() {

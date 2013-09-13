@@ -1,15 +1,17 @@
 <?php
 /**
- * Add content to a WordPress user profile
+ * Add content to a WordPress user profile.
  *
  * @since 1.2
  */
 class Facebook_User_Profile {
 
 	/**
-	 * Conditionally load features on the edit profile page
+	 * Conditionally load features on the edit profile page.
 	 *
 	 * @since 1.2
+	 *
+	 * @return void
 	 */
 	public static function init() {
 		if ( ! current_user_can( 'edit_posts' ) )
@@ -26,10 +28,13 @@ class Facebook_User_Profile {
 	}
 
 	/**
-	 * Add the login JavaScript to the WordPress script queue
+	 * Add the login JavaScript to the WordPress script queue.
 	 *
 	 * @since 1.5
+	 *
 	 * @uses wp_enqueue_script()
+	 * @global \WP_Scripts $wp_scripts Add a script block to the enqueued script handle
+	 * @return void
 	 */
 	public static function enqueue_scripts() {
 		global $wp_scripts;
@@ -50,10 +55,12 @@ class Facebook_User_Profile {
 	}
 
 	/**
-	 * Allow an author to disable posting to Timeline by default
+	 * Allow an author to disable posting to Timeline by default.
 	 *
 	 * @since 1.2
-	 * @param $wordpress_user WP_User object for the current profile
+	 *
+	 * @param WP_User $wordpress_user WordPress user object for the current profile.
+	 * @return void
 	 */
 	public static function personal_options( $wordpress_user ) {
 		if ( ! ( $wordpress_user && isset( $wordpress_user->ID ) ) )
@@ -72,10 +79,13 @@ class Facebook_User_Profile {
 	}
 
 	/**
-	 * Add a Facebook section to the WordPress user profile page
+	 * Add a Facebook section to the WordPress user profile page.
 	 *
 	 * @since 1.5
-	 * @param WP_User $wp_user WordPress user for the current profile page
+	 *
+	 * @global \Facebook_Loader $facebook_loader Access Facebook application credentials.
+	 * @param WP_User $wp_user WordPress user for the current profile page.
+	 * @return void
 	 */
 	public static function facebook_section( $wp_user ) {
 		global $facebook_loader;
@@ -133,9 +143,10 @@ class Facebook_User_Profile {
 	}
 
 	/**
-	 * Save custom user information
+	 * Save custom user information.
 	 *
 	 * @since 1.2
+	 *
 	 * @uses current_user_can() current user must be able to edit the passed WordPress user ID
 	 * @param int $wordpress_user_id WordPress user identifier
 	 * @return void

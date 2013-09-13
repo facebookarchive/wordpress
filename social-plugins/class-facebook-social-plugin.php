@@ -8,59 +8,67 @@
 class Facebook_Social_Plugin {
 
 	/**
-	 * Customize a font displayed in the button to match your site style
+	 * Customize a font displayed in the button to match your site style.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	protected $font;
 
 	/**
-	 * The font to display in the button
+	 * The font to display in the button.
 	 *
 	 * @since 1.1
+	 *
 	 * @var array
 	 */
 	public static $font_choices = array( 'arial' => true, 'lucida grande' => true, 'segoe ui' => true, 'tahoma' => true, 'trebuchet ms' => true, 'verdana' => true );
 
 	/**
-	 * Choose a light or dark color scheme to match your site style
+	 * Choose a light or dark color scheme to match your site style.
 	 *
 	 * @since 1.1
+	 *
 	 * @param string
 	 */
 	protected $colorscheme;
 
 	/**
-	 * Use a light or dark color scheme
+	 * Use a light or dark color scheme.
 	 *
 	 * @since 1.1
+	 *
 	 * @var array
 	 */
 	public static $colorscheme_choices = array( 'light' => true, 'dark' => true );
 
 	/**
 	 * Add a unique reference to track referrals. Facebook passes this parameter to the destination URL when a Facebook user clicks the link.
-	 * Example: 'footer' for a like button in your footer vs. 'banner' for a button in your site banner
+	 *
+	 * Example: 'footer' for a like button in your footer vs. 'banner' for a button in your site banner.
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	protected $ref;
 
 	/**
 	 * Is your website primarily directed to children in the United States under the age of 13?
-	 * @link https://developers.facebook.com/docs/plugins/restrictions/ Child-directed sites and services
 	 *
+	 * @link https://developers.facebook.com/docs/plugins/restrictions/ Child-directed sites and services
 	 * @since 1.5
+	 *
 	 * @var bool
 	 */
 	protected $kid_directed_site;
 
 	/**
-	 * Choose a font to match your site styling
+	 * Choose a font to match your site styling.
 	 *
 	 * @since 1.1
+	 *
 	 * @see self::$font_choices
 	 * @param string $font a font name from $font_choices
 	 * @return Facebook_Social_Plugin support chaining
@@ -72,9 +80,10 @@ class Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Choose a light or dark color scheme
+	 * Choose a light or dark color scheme.
 	 *
 	 * @since 1.1
+	 *
 	 * @see self::colorscheme_choices
 	 * @param string $color_scheme light|dark
 	 * @return Facebook_Social_Plugin support chaining
@@ -86,9 +95,10 @@ class Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Clean up the ref paramter based on Facebook requirements
+	 * Clean up the ref paramter based on Facebook requirements.
 	 *
 	 * @since 1.1
+	 *
 	 * @param string $ref reference string you would like to track on your site after a Facebook visitor follows a link
 	 * @return string cleaned string
 	 */
@@ -100,9 +110,11 @@ class Facebook_Social_Plugin {
 
 	/**
 	 * Track referrals from Facebook with a string up to 50 chracters.
+	 *
 	 * Characters in string must be alphanumeric or punctuation (currently +/=-.:_)
 	 *
 	 * @since 1.1
+	 *
 	 * @param string $ref reference string
 	 * @return Facebook_Social_Plugin support chaining
 	 */
@@ -114,7 +126,7 @@ class Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Inform Facebook a social plugin will likely be displayed to a child in the United States under the age of 13
+	 * Inform Facebook a social plugin will likely be displayed to a child in the United States under the age of 13.
 	 *
 	 * @since 1.5
 	 * @return Facebook_Social_Plugin support chaining
@@ -125,7 +137,9 @@ class Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Convert the class object into an array, removing default values
+	 * Convert the class object into an array, removing default values.
+	 *
+	 * @since 1.1
 	 *
 	 * @return array associative array
 	 */
@@ -148,9 +162,11 @@ class Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Convert the class to data-* attribute friendly associative array
-	 * will become data-key="value"
-	 * Exclude values if default
+	 * Convert the class to data-* attribute friendly associative array.
+	 *
+	 * will become data-key="value". Exclude values if default
+	 *
+	 * @since 1.1
 	 *
 	 * @return array associative array
 	 */
@@ -167,9 +183,10 @@ class Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Add a class required by the social plugin to an existing set of attributes
+	 * Add a class required by the social plugin to an existing set of attributes.
 	 *
 	 * @since 1.1
+
 	 * @param string $class class name to add to the attributes array
 	 * @param array $attributes existing attributes array
 	 * @return array attributes array with social plugin class
@@ -192,7 +209,9 @@ class Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Output div element with data-* attributes
+	 * Output div element with data-* attributes.
+	 *
+	 * @since 1.1
 	 *
 	 * @param array $div_attributes associative array. customize the returned div with id, class, or style attributes. social plugin parameters in data.
 	 * @return string HTML div or empty string
@@ -232,9 +251,10 @@ class Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Output XFBML element with attributes
+	 * Output XFBML element with attributes.
 	 *
 	 * @since 1.1
+	 *
 	 * @param string $element name of the element, e.g. "like" for fb:like
 	 * @return string XFBML element or empty string
 	 */

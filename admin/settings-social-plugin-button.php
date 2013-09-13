@@ -10,17 +10,19 @@ if ( ! class_exists( 'Facebook_Social_Plugin_Settings' ) )
  */
 class Facebook_Social_Plugin_Button_Settings extends Facebook_Social_Plugin_Settings {
 	/**
-	 * Place a social plugin button above, below, or both above and below post content
+	 * Place a social plugin button above, below, or both above and below post content.
 	 *
 	 * @since 1.1
+	 *
 	 * @var array
 	 */
 	public static $position_choices = array( 'both', 'top', 'bottom' );
 
 	/**
-	 * Choose the position of a social plugin button above, below, or above and below your content
+	 * Choose the position of a social plugin button above, below, or above and below your content.
 	 *
 	 * @since 1.1
+	 *
 	 * @param string $existing_value stored option value
 	 * @return string HTML <option>s
 	 */
@@ -51,6 +53,8 @@ class Facebook_Social_Plugin_Button_Settings extends Facebook_Social_Plugin_Sett
 	 * Sanitize social plugin button common settings before they are saved to the database
 	 *
 	 * @since 1.1
+	 *
+	 * @uses Facebook_Social_Plugin_Settings::sanitize_options()
 	 * @param array $options social plugin button options
 	 * @return array clean option set
 	 */

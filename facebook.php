@@ -16,7 +16,9 @@ Domain Path: /languages/
 */
 
 /**
- * Load the Facebook plugin
+ * Loads the Facebook plugin.
+ *
+ * Load the Facebook plugin for WordPress based on an access method of admin or public site.
  *
  * @since 1.1
  */
@@ -26,6 +28,7 @@ class Facebook_Loader {
 	 * Bust caches based on this value
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	const VERSION = '1.5.2';
@@ -34,6 +37,7 @@ class Facebook_Loader {
 	 * Default Facebook locale
 	 *
 	 * @since 1.1.11
+	 *
 	 * @var string
 	 */
 	const DEFAULT_LOCALE = 'en_US';
@@ -42,23 +46,35 @@ class Facebook_Loader {
 	 * Locale of the site expressed as a Facebook locale
 	 *
 	 * @since 1.1
+	 *
 	 * @var string
 	 */
 	public $locale = 'en_US';
 
 	/**
-	 * Store Facebook application information (id, secret, namespace) if available.
+	 * Store Facebook application information (id, secret, namespace, access token, appsecret proof) if available.
 	 *
 	 * @since 1.1
-	 * @var array
+	 *
+	 * @var array {
+	 *     Facebook application data.
+	 *
+	 *     @type string 'app_id' Facebook application identifier.
+	 *     @type string 'app_secret' Facebook application secret. Similar to a password to authenticate the application.
+	 *     @type string 'app_namespace' Facebook application namespace. Associates custom Open Graph object properties and actions with a Facebook application.
+	 *     @type string 'access_token' Facebook application access token. A server-to-server access token granted to the WordPress application for use in future requests instead of an app_id and app_secret pair requiring an active user access token.
+	 *     @type string 'appsecret_proof' Facebook application access token hashed against the Facebook application secret at the time the application access token is received.
+	 * }
 	 */
 	public $credentials = array();
 
 	/**
 	 * Is the current site's primary audience children under the age of 13 in the United States?
+	 *
 	 * Restricts the availability of Facebook social plugins for compliance with United States laws
 	 *
 	 * @since 1.5
+	 *
 	 * @link https://developers.facebook.com/docs/plugins/restrictions/ Facebook Social Plugin restrictions
 	 * @var bool
 	 */
@@ -66,10 +82,18 @@ class Facebook_Loader {
 
 	/**
 	 * List of locales supported by Facebook.
+	 *
 	 * Two-letter languages codes stored in WordPress are translated to full locales; if a language has multiple country localizations place the first choice earlier in the array to make it the language default
-	 * @link https://www.facebook.com/translations/FacebookLocales.xml Facebook locales
 	 *
 	 * @since 1.1
+	 *
+	 * @link https://www.facebook.com/translations/FacebookLocales.xml Facebook locales
+	 * @var array {
+	 *     Supported Facebok locales.
+	 *
+	 *     @type string Facebook locale
+	 *     @type bool true
+	 * }
 	 */
 	public static $locales = array(
 		'af_ZA' => true, // Afrikaans
@@ -149,18 +173,21 @@ class Facebook_Loader {
 	);
 
 	/**
-	 * Let's get it started
+	 * Configures the plugin and future actions.
 	 *
 	 * @since 1.1
 	 */
 	public function __construct() {
 		// load plugin files relative to this directory
 		$this->plugin_directory = dirname(__FILE__) . '/';
+
+		// set the Facebook locale based on the WordPress site's locale. Used to load the appropriate version of the Facebook SDK for JavaScript.
 		$this->set_locale();
 
 		// Load the textdomain for translations
 		load_plugin_textdomain( 'facebook', false, $this->plugin_directory . 'languages/' );
 
+		// load Facebook application data
 		$credentials = get_option( 'facebook_application' );
 		if ( ! is_array( $credentials ) )
 			$credentials = array();
@@ -168,6 +195,7 @@ class Facebook_Loader {
 		unset( $credentials );
 		$this->kid_directed = (bool) get_option( 'facebook_kid_directed_site' );
 
+		// Include Facebook widgets
 		add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
 
 		// load shortcodes
@@ -185,16 +213,21 @@ class Facebook_Loader {
 			$this->admin_init();
 		} else {
 			add_action( 'wp_enqueue_scripts', array( &$this, 'register_js_sdk' ), 1 );
+
+			// split initialization functions into early (init) and regular (wp) action groups
 			add_action( 'init', array( &$this, 'public_early_init' ), 1, 0 );
 			add_action( 'wp', array( &$this, 'public_init' ) );
 		}
 	}
 
 	/**
-	 * Add Facebook functionality to the WordPress admin bar
+	 * Add Facebook functionality to the WordPress admin bar.
+	 *
+	 * Add a link to the Facebook Comments Box moderation tool if Facebook Comments Box enabled. Replaces a link to WordPress comments moderation.
 	 *
 	 * @since 1.1
-	 * @param WP_Admin_Bar $wp_admin_bar existing WordPress admin bar object
+	 *
+	 * @return void
 	 */
 	public function admin_bar() {
 		if ( isset( $this->credentials ) && isset( $this->credentials['app_id'] ) ) {
@@ -210,7 +243,10 @@ class Facebook_Loader {
 	 * Register the Facebook JavaScript SDK for later enqueueing
 	 *
 	 * @since 1.1
+	 *
 	 * @uses wp_register_script
+	 * @global WP_Scripts $wp_scripts add extra JavaScript to the registered script handle
+	 * @return void
 	 */
 	public function register_js_sdk() {
 		global $wp_scripts;
@@ -236,6 +272,14 @@ class Facebook_Loader {
 		if ( ! empty( $this->credentials['app_id'] ) )
 			$args['appId'] = $this->credentials['app_id'];
 
+		/**
+		 * Override options passed to the FB.init function to initialize the Facebook SDK for JavaScript.
+		 *
+		 * @since 1.1
+		 *
+		 * @link https://developers.facebook.com/docs/reference/javascript/FB.init/ Facebook SDK for JavaScript FB.init
+		 * @param array $args Facebook SDK for JavaScript initialization options
+		 */
 		$args = apply_filters( 'facebook_jssdk_init_options', $args );
 
 		// allow the publisher to short circuit the init through the filter
@@ -245,11 +289,13 @@ class Facebook_Loader {
 	}
 
 	/**
-	 * Proactively resolve Facebook JavaScript SDK domain name asynchronously before later use
+	 * Proactively resolve Facebook JavaScript SDK domain name asynchronously before later use.
 	 *
 	 * @since 1.1.9
+	 *
 	 * @link http://dev.chromium.org/developers/design-documents/dns-prefetching Chromium prefetch behavior
 	 * @link https://developer.mozilla.org/en-US/docs/Controlling_DNS_prefetching Firefox prefetch behavior
+	 * @return void
 	 */
 	public static function dns_prefetch_js_sdk() {
 		echo '<link rel="dns-prefetch" href="//connect.facebook.net"';
@@ -262,6 +308,7 @@ class Facebook_Loader {
 	 * Enqueue the JavaScript SDK
 	 *
 	 * @since 1.1
+	 *
 	 * @uses wp_enqueue_script()
 	 */
 	public static function enqueue_js_sdk() {
@@ -269,12 +316,15 @@ class Facebook_Loader {
 	}
 
 	/**
-	 * Load Facebook JS SDK async
-	 * Called from script_loader_src filter
+	 * Load Facebook SDK for JavaScript using an asynchronous loader.
+	 *
+	 * Called from script_loader_src filter.
 	 *
 	 * @since 1.1
+	 *
 	 * @param string $src script URL
 	 * @param string $handle WordPress registered script handle
+	 * @global WP_Scripts $wp_scripts match concatenation preferences
 	 * @return string empty string if Facebook JavaScript SDK, else give back the src variable
 	 */
 	public static function async_script_loader_src( $src, $handle ) {
@@ -297,20 +347,26 @@ class Facebook_Loader {
 
 	/**
 	 * Has the current site stored an application identifier, application secret, had the pair verified by Facebook, and stored the resulting application access token?
+	 *
 	 * Access token only saved if WP_HTTP supports HTTPS
+	 *
+	 * @since 1.2.1
 	 *
 	 * @return bool true if application access token set, else false
 	 */
 	public function app_access_token_exists() {
 		if ( ! empty( $this->credentials['access_token'] ) )
 			return true;
+
 		return false;
 	}
 
 	/**
-	 * Initialize a global $facebook variable if one does not already exist and credentials stored for this site
+	 * Initialize a global $facebook variable if one does not already exist and credentials stored for this site.
 	 *
 	 * @since 1.1
+	 *
+	 * @global Facebook_WP_Extend $facebook existing Facebook SDK for PHP instance
 	 * @return true if $facebook global exists, else false
 	 */
 	public function load_php_sdk() {
@@ -329,15 +385,17 @@ class Facebook_Loader {
 	}
 
 	/**
-	 * Initialize the Facebook PHP SDK using an application identifier and secret
+	 * Initialize the Facebook PHP SDK using an application identifier and secret.
 	 *
 	 * @since 1.2
-	 * @return Facebook_WP_Extend Facebook PHP SDK class or null if minimum requirements not met
+	 *
+	 * @return Facebook_WP_Extend Facebook SDK for PHP class or null if minimum requirements not met
 	 */
 	public function get_php_sdk() {
 		if ( empty( $this->credentials['app_id'] ) || empty( $this->credentials['app_secret'] ) )
 			return;
 
+		// Facebook SDK for PHP
 		if ( ! class_exists( 'Facebook_WP_Extend' ) )
 			require_once( $this->plugin_directory . 'includes/facebook-php-sdk/class-facebook-wp.php' );
 
@@ -351,10 +409,13 @@ class Facebook_Loader {
 	 * Add overrides early in the WordPress loading process for front-end views
 	 *
 	 * @since 1.3.1
+	 *
+	 * @return void
 	 */
 	public function public_early_init() {
 		// add possible comments submission override if Comments Box enabled for one or more post types
 		if ( get_option( 'facebook_comments_enabled' ) ) {
+			// Facebook Comments Box related functions
 			if ( ! class_exists( 'Facebook_Comments' ) )
 				require_once( $this->plugin_directory . 'social-plugins/class-facebook-comments.php' );
 
@@ -367,6 +428,9 @@ class Facebook_Loader {
 	 * Intialize the public, front end views
 	 *
 	 * @since 1.1
+	 *
+	 * @global Facebook_Loader $facebook_loader
+	 * @return void
 	 */
 	public function public_init() {
 		global $facebook_loader;
@@ -384,7 +448,7 @@ class Facebook_Loader {
 		add_action( 'wp_enqueue_scripts', array( 'Facebook_Loader', 'enqueue_js_sdk' ) );
 		self::plugin_extras();
 
-		// include comment count filters on all pages
+		// include comment count filters on all pages if kid directed not set
 		if ( ! $this->kid_directed && get_option( 'facebook_comments_enabled' ) ) {
 			if ( ! class_exists( 'Facebook_Comments' ) )
 				require_once( $this->plugin_directory . 'social-plugins/class-facebook-comments.php' );
@@ -418,8 +482,18 @@ class Facebook_Loader {
 		if ( ! is_array( $enabled_features ) || empty( $enabled_features ) )
 			return;
 
+		// social plugin helper functions
 		require_once( $this->plugin_directory . 'social-plugins/social-plugins.php' );
 
+		/**
+		 * Set the filter priority of Facebook plugin for WordPress social plugins.
+		 *
+		 * Control where Facebook social plugins appear before and after content relative to other plugins acting on the_content filter by altering the filter priority.
+		 *
+		 * @since 1.1
+		 *
+		 * @param int filter priority of Facebook social plugin content added to the_content
+		 */
 		$priority = apply_filters( 'facebook_content_filter_priority', 30 );
 
 		// features available for archives and singular
@@ -446,22 +520,28 @@ class Facebook_Loader {
 	}
 
 	/**
-	 * Initialize the backend, administrative views
+	 * Initialize the backend, administrative views.
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function admin_init() {
 		$admin_dir = $this->plugin_directory . 'admin/';
 
+		// Facebook settings loader
 		if ( ! class_exists( 'Facebook_Settings' ) )
 			require_once( $admin_dir . 'settings.php' );
 		Facebook_Settings::init();
 
+		// include social publisher functionality if app access token exists
 		if ( $this->app_access_token_exists() ) {
+			// Facebook Social Publisher functionality
 			if ( ! class_exists( 'Facebook_Social_Publisher' ) )
 				require_once( $admin_dir . 'social-publisher/social-publisher.php' );
 			add_action( 'admin_init', array( 'Facebook_Social_Publisher', 'init' ) );
 
+			// Open Graph mention tagging
 			if ( ! class_exists( 'Facebook_Mentions_Search' ) )
 				require_once( $admin_dir . 'social-publisher/mentions/mentions-search.php' );
 			Facebook_Mentions_Search::wp_ajax_handlers();
@@ -469,10 +549,12 @@ class Facebook_Loader {
 	}
 
 	/**
-	 * Register available widgets
+	 * Register available widgets.
 	 *
 	 * @since 1.1
+	 *
 	 * @uses register_widget()
+	 * @return void
 	 */
 	public function widgets_init() {
 		$widget_directory = $this->plugin_directory . 'social-plugins/widgets/';
@@ -504,23 +586,26 @@ class Facebook_Loader {
 	}
 
 	/**
-	 * Test if a given locale is a valid Facebook locale
+	 * Test if a given locale is a valid Facebook locale.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @see Facebook_Loader::$locales
-	 * @param @param string $locale language and localization combined in a single string. ISO 639-1 (alpha-2) language + underscore character (_) + ISO 3166-1 (alpha-2) country code. example: en_US, es_ES
+	 * @param string $locale language and localization combined in a single string. ISO 639-1 (alpha-2) language + underscore character (_) + ISO 3166-1 (alpha-2) country code. example: en_US, es_ES
 	 * @return bool true if locals in list of valid locales. else false
 	 */
 	public static function is_valid_locale( $locale ) {
 		if ( is_string( $locale ) && isset( self::$locales[$locale] ) )
 			return true;
+
 		return false;
 	}
 
 	/**
-	 * Sanitize a locale input against a list of Facebook-specific locales
+	 * Sanitize a locale input against a list of Facebook-specific locales.
 	 *
 	 * @since 1.1.11
+	 *
 	 * @param string $locale language and localization combined in a single string. The function will attempt to convert an ISO 639-1 (alpha-2) language or a language combined with a ISO 3166-1 (alpha-2) country code separated by a dash or underscore. examples: en, en-US, en_US
 	 * @return string a Facebook-friendly locale
 	 */
@@ -565,6 +650,8 @@ class Facebook_Loader {
 	 * Affects OGP and SDK outputs
 	 *
 	 * @since 1.1
+	 *
+	 * @return void
 	 */
 	public function set_locale() {
 		$transient_key = 'facebook_locale';
@@ -574,8 +661,15 @@ class Facebook_Loader {
 			return;
 		}
 
-		// sanitize the locale. e.g. en-US to en_US
-		// filter the result in case a site would like to override
+		/**
+		 * Explicitly set a Facebook locale.
+		 *
+		 * Overrides the Facebook plugin for WordPress attempt to convert the WordPress locale to a Facebook-friendly locale (e.g. en-US to en_US)
+		 *
+		 * @since 1.1.11
+		 *
+		 * @param string Facebook locale
+		 */
 		$locale = apply_filters( 'fb_locale', self::sanitize_locale( get_locale() ) );
 
 		// validate our sanitized value and a possible filter override
@@ -587,9 +681,10 @@ class Facebook_Loader {
 	}
 
 	/**
-	 * Tie-in to popular site features handled by popular WordPress plugins
+	 * Tie-in to popular site features handled by popular WordPress plugins.
 	 *
 	 * @since 1.1.9
+	 * @return void
 	 */
 	public static function plugin_extras() {
 		// add Google Analytics social trackers
@@ -606,9 +701,10 @@ class Facebook_Loader {
 	}
 
 	/**
-	 * Useful for blanking a string filter
+	 * Useful for blanking a string filter.
 	 *
 	 * @since 1.3
+	 *
 	 * @return string empty string
 	 */
 	public static function __return_empty_string() {
@@ -620,6 +716,8 @@ class Facebook_Loader {
  * Load plugin function during the WordPress init action
  *
  * @since 1.1
+ *
+ * @return void
  */
 function facebook_loader_init() {
 	global $facebook_loader;

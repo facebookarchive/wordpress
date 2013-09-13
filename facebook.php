@@ -195,6 +195,13 @@ class Facebook_Loader {
 		unset( $credentials );
 		$this->kid_directed = (bool) get_option( 'facebook_kid_directed_site' );
 
+		if ( $this->app_access_token_exists() ) {
+			// Facebook Social Publisher functionality
+			if ( ! class_exists( 'Facebook_Social_Publisher' ) )
+				require_once( $this->plugin_directory . 'admin/social-publisher/social-publisher.php' );
+			add_action( 'init', array( 'Facebook_Social_Publisher', 'init' ) );
+		}
+
 		// Include Facebook widgets
 		add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
 
@@ -536,11 +543,6 @@ class Facebook_Loader {
 
 		// include social publisher functionality if app access token exists
 		if ( $this->app_access_token_exists() ) {
-			// Facebook Social Publisher functionality
-			if ( ! class_exists( 'Facebook_Social_Publisher' ) )
-				require_once( $admin_dir . 'social-publisher/social-publisher.php' );
-			add_action( 'admin_init', array( 'Facebook_Social_Publisher', 'init' ) );
-
 			// Open Graph mention tagging
 			if ( ! class_exists( 'Facebook_Mentions_Search' ) )
 				require_once( $admin_dir . 'social-publisher/mentions/mentions-search.php' );

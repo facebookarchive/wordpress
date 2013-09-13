@@ -24,11 +24,14 @@ class Facebook_Social_Publisher {
 		// post can be published or deleted many different ways
 		add_action( 'transition_post_status', array( 'Facebook_Social_Publisher', 'publish' ), 10, 3 );
 		add_action( 'before_delete_post', array( 'Facebook_Social_Publisher', 'delete_facebook_post' ) );
-		self::add_save_post_hooks();
 
-		// load meta box hooks on post creation screens
-		foreach( array( 'post', 'post-new' ) as $hook ) {
-			add_action( 'load-' . $hook . '.php', array( 'Facebook_Social_Publisher', 'load' ), 1, 0 );
+		if ( is_admin() ) {
+			self::add_save_post_hooks();
+
+			// load meta box hooks on post creation screens
+			foreach( array( 'post', 'post-new' ) as $hook ) {
+				add_action( 'load-' . $hook . '.php', array( 'Facebook_Social_Publisher', 'load' ), 1, 0 );
+			}
 		}
 	}
 

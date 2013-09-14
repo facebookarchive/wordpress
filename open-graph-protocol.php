@@ -629,6 +629,22 @@ class Facebook_Open_Graph_Protocol {
 			unset( $images );
 		}
 
+		// test for WP_Embed handled images
+		if ( ! empty( $post->post_content ) ) {
+			// Instagram
+			preg_match_all( '#\s*http://instagr(\.am|am\.com)/p/(.*)/\s*#i', $post->post_content, $matches );
+			if ( isset( $matches[2] ) ) {
+				foreach( $matches[2] as $instagram_id ) {
+					$instagram_url = esc_url_raw( 'http://instagram.com/p/' . $instagram_id . '/media/?size=l', array( 'http' ) );
+					if ( ! $instagram_url || isset( $og_images[$instagram_url] ) )
+						continue;
+					$og_images[$instagram_url] = array( 'url' => $instagram_url );
+					unset( $instagram_url );
+				}
+			}
+			unset( $matches );
+		}
+
 		// add gallery content
 		if ( function_exists( 'get_post_galleries' ) ) {
 			// use get_post_galleries function from WP 3.6+

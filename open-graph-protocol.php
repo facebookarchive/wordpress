@@ -327,6 +327,23 @@ class Facebook_Open_Graph_Protocol {
 					}
 				}
 				unset( $videos );
+
+				if ( empty( $meta_tags[ self::OGP_NS . 'video' ] ) ) {
+					// try to find well-known and easily mapped video provider WP_Embeds
+					$videos = self::get_embed_videos( $post );
+					if ( ! empty( $videos ) ) {
+						foreach( $videos as $video_url => $video ) {
+							if ( empty( $video ) )
+								continue;
+							if ( isset( $video['image'] ) ) {
+								$meta_tags[ self::OGP_NS . 'image' ][] = $video['image'];
+								unset( $video['image'] );
+							}
+							$meta_tags[ self::OGP_NS . 'video' ] = array_values( $video );
+						}
+					}
+					unset( $videos );
+				}
 			}
 
 			// include MP3s for audio post formats
@@ -688,7 +705,7 @@ class Facebook_Open_Graph_Protocol {
 	 *     Array of associative arrays containing OGP video structured data
 	 *
 	 *     @type string URL of the video
-	 *     @type array Open Graph protocol video properties
+	 *     @type array Open Graph protocol video properties with possible video object namespaced properties
 	 * }
 	 */
 	public static function get_og_videos( $post ) {
@@ -736,6 +753,79 @@ class Facebook_Open_Graph_Protocol {
 				unset( $og_video );
 			}
 			unset( $videos );
+		}
+
+		return $og_videos;
+	}
+
+	/**
+	 * Convert popular video providers to SWF and image URLs
+	 *
+	 * @since 1.5.3
+	 *
+	 * @param stdClass|WP_Post $post WordPress post of interest
+	 * @return array {
+	 *     Array of associative arrays containing OGP video structured data for WP_Embed autolinked providers
+	 *
+	 *     @type string URL of the video
+	 *     @type array Open Graph protocol video properties with possible 'image' key containing an og:image strutured data array for the video
+	 * }
+	 */
+	public static function get_embed_videos( $post ) {
+		$og_videos = array();
+
+		if ( ! ( isset( $post->post_content ) && $post->post_content ) )
+			return $og_videos;
+
+		// full URL
+		preg_match_all( '#\s*https?://www\.youtube\.com/watch\?(.*)\s*#i', $post->post_content, $matches );
+		$youtube_ids = array();
+		if ( isset( $matches[1] ) ) {
+			foreach ( $matches[1] as $youtube_query_parameters ) {
+				parse_str( $youtube_query_parameters, $youtube_parameters );
+				if ( isset( $youtube_parameters['v'] ) && $youtube_parameters['v'] && ! isset( $youtube_ids[ $youtube_parameters['v'] ] ) )
+					$youtube_ids[ $youtube_parameters['v'] ] = true;
+				unset( $youtube_parameters );
+			}
+		}
+
+		// shortcode
+		preg_match_all( '#\s*http://youtu\.be/(.*)\s*#i', $post->post_content, $matches );
+		if ( isset( $matches[1] ) ) {
+			foreach( $matches[1] as $youtube_id ) {
+				if ( ! isset( $youtube_ids[ $youtube_id ] ) )
+					$youtube_ids[ $youtube_id ] = true;
+			}
+		}
+
+		foreach( $youtube_ids as $youtube_id => $exists ) {
+			// @link https://developers.google.com/youtube/player_parameters YouTube Embedded Player Parameters
+			$youtube_iframe_url = esc_url_raw( 'https://www.youtube.com/embed/' . $youtube_id . '?autoplay=1&rel=0', array( 'https' ) );
+			if ( ! $youtube_iframe_url )
+				continue;
+
+			$youtube_flash_url = esc_url_raw( 'https://www.youtube.com/v/' . $youtube_id . '?version=3&autoplay=1&rel=0', array( 'https' ) );
+			if ( ! $youtube_flash_url )
+				continue;
+
+			$og_videos[ $youtube_iframe_url ] = array(
+				'html' => array(
+					'url' => $youtube_iframe_url,
+					'type' => 'text/html'
+				),
+				'swf' => array(
+					'url' => $youtube_flash_url,
+					'type' => 'application/x-shockwave-flash'
+				)
+			);
+			unset( $youtube_flash_url );
+
+			$youtube_image_url = esc_url_raw( 'http://img.youtube.com/vi/' . $youtube_id . '/sddefault.jpg', array( 'http', 'https' ) );
+			if ( $youtube_image_url ) {
+				$og_videos[ $youtube_iframe_url ]['image'] = array( 'url' => $youtube_image_url );
+			}
+			unset( $youtube_iframe_url );
+			unset( $youtube_image_url );
 		}
 
 		return $og_videos;

@@ -777,55 +777,24 @@ class Facebook_Open_Graph_Protocol {
 		if ( ! ( isset( $post->post_content ) && $post->post_content ) )
 			return $og_videos;
 
-		// full URL
-		preg_match_all( '#\s*https?://www\.youtube\.com/watch\?(.*)\s*#i', $post->post_content, $matches );
-		$youtube_ids = array();
-		if ( isset( $matches[1] ) ) {
-			foreach ( $matches[1] as $youtube_query_parameters ) {
-				parse_str( $youtube_query_parameters, $youtube_parameters );
-				if ( isset( $youtube_parameters['v'] ) && $youtube_parameters['v'] && ! isset( $youtube_ids[ $youtube_parameters['v'] ] ) )
-					$youtube_ids[ $youtube_parameters['v'] ] = true;
+		// @see WP_Embed::autoembed()
+		preg_match_all( '|^\s*(https?://[^\s"]+)\s*$|im', $post->post_content, $embed_urls );
+		if ( ! isset( $embed_urls[1] ) )
+			return $og_videos;
+
+		$embed_urls = array_unique( $embed_urls[1], SORT_STRING );
+
+		foreach( $embed_urls as $embed_url ) {
+			if ( preg_match( '#^https?://www\.youtube\.com/watch\?(.*)#i', $embed_url, $matches ) ) {
+				parse_str( $matches[1], $youtube_parameters );
+				if ( isset( $youtube_parameters['v'] ) && $youtube_parameters['v'] )
+					$og_videos = self::youtube_video_to_open_graph( $youtube_parameters['v'], $og_videos );
 				unset( $youtube_parameters );
+			} else if ( preg_match( '#^http://youtu\.be/(.*)#i', $embed_url, $matches ) ) {
+				$og_videos = self::youtube_video_to_open_graph( $matches[1], $og_videos );
+			} else if ( preg_match( '#^https?://(www\.)?vimeo\.com/([0-9]+)\??#i', $embed_url, $matches ) ) {
+				$og_videos = self::vimeo_video_to_open_graph( $matches[2], $og_videos );
 			}
-		}
-
-		// shortcode
-		preg_match_all( '#\s*http://youtu\.be/(.*)\s*#i', $post->post_content, $matches );
-		if ( isset( $matches[1] ) ) {
-			foreach( $matches[1] as $youtube_id ) {
-				if ( ! isset( $youtube_ids[ $youtube_id ] ) )
-					$youtube_ids[ $youtube_id ] = true;
-			}
-		}
-
-		foreach( $youtube_ids as $youtube_id => $exists ) {
-			// @link https://developers.google.com/youtube/player_parameters YouTube Embedded Player Parameters
-			$youtube_iframe_url = esc_url_raw( 'https://www.youtube.com/embed/' . $youtube_id . '?autoplay=1&rel=0', array( 'https' ) );
-			if ( ! $youtube_iframe_url )
-				continue;
-
-			$youtube_flash_url = esc_url_raw( 'https://www.youtube.com/v/' . $youtube_id . '?version=3&autoplay=1&rel=0', array( 'https' ) );
-			if ( ! $youtube_flash_url )
-				continue;
-
-			$og_videos[ $youtube_iframe_url ] = array(
-				'html' => array(
-					'url' => $youtube_iframe_url,
-					'type' => 'text/html'
-				),
-				'swf' => array(
-					'url' => $youtube_flash_url,
-					'type' => 'application/x-shockwave-flash'
-				)
-			);
-			unset( $youtube_flash_url );
-
-			$youtube_image_url = esc_url_raw( 'http://img.youtube.com/vi/' . $youtube_id . '/sddefault.jpg', array( 'http', 'https' ) );
-			if ( $youtube_image_url ) {
-				$og_videos[ $youtube_iframe_url ]['image'] = array( 'url' => $youtube_image_url );
-			}
-			unset( $youtube_iframe_url );
-			unset( $youtube_image_url );
 		}
 
 		return $og_videos;
@@ -978,6 +947,91 @@ class Facebook_Open_Graph_Protocol {
 		}
 
 		return $existing_images;
+	}
+
+	/**
+	 * Build Open Graph protocol markup for a single YouTube video identifier.
+	 *
+	 * @since 1.5.3
+	 *
+	 * @link https://developers.google.com/youtube/player_parameters YouTube Embedded Player Parameters
+	 * @param string $youtube_id YouTube video identifier
+	 * @param array $exiting_videos Existing matched videos. Avoid duplication by comparing YouTube HTML embed URIs
+	 * @return array Passed 'existing_videos' array with a possible YouTube video added
+	 */
+	public static function youtube_video_to_open_graph( $youtube_id, $og_videos = array() ) {
+		if ( ! is_array( $og_videos ) )
+			$og_videos = array();
+
+		if ( ! ( is_string( $youtube_id ) && $youtube_id ) )
+			return $og_videos;
+
+		$iframe_url = esc_url_raw( 'https://www.youtube.com/embed/' . $youtube_id . '?autoplay=1&rel=0', array( 'https' ) );
+		if ( ! $iframe_url || isset( $og_videos[ $iframe_url ] ) )
+			return $existing_videos;
+
+		$flash_url = esc_url_raw( 'https://www.youtube.com/v/' . $youtube_id . '?version=3&autoplay=1&rel=0', array( 'https' ) );
+		if ( ! $flash_url )
+			return $og_videos;
+
+		$og_videos[ $iframe_url ] = array(
+			'html' => array(
+				'url' => $iframe_url,
+				'type' => 'text/html'
+			),
+			'swf' => array(
+				'url' => $flash_url,
+				'type' => 'application/x-shockwave-flash'
+			)
+		);
+
+		$image_url = esc_url_raw( 'http://img.youtube.com/vi/' . $youtube_id . '/sddefault.jpg', array( 'http', 'https' ) );
+		if ( $image_url ) {
+			$og_videos[ $iframe_url ]['image'] = array( 'url' => $image_url );
+		}
+
+		return $og_videos;
+	}
+
+	/**
+	 * Build Open Graph protocol markup for a single Vimeo video identifier.
+	 *
+	 * Note: this function does not query the Vimeo API and therefore does not include a thumbnail image for the video. For best results be sure to set your own og:image.
+	 *
+	 * @since 1.5.3
+	 *
+	 * @link http://developer.vimeo.com/player/embedding Vimeo Embedded Player documentation
+	 * @param string $vimeo_id Vimeo video identifier
+	 * @param array $exiting_videos Existing matched videos. Avoid duplication by comparing Vimeo HTML embed URIs
+	 * @return array Passed 'existing_videos' array with a possible Vimeo video added
+	 */
+	public static function vimeo_video_to_open_graph( $vimeo_id, $og_videos = array() ){
+		if ( ! is_array( $og_videos ) )
+			$og_videos = array();
+
+		if ( ! ( is_string( $vimeo_id ) && $vimeo_id ) )
+			return $og_videos;
+
+		$iframe_url = esc_url_raw( 'https://player.vimeo.com/video/' . $vimeo_id . '?autoplay=1', array( 'https' ) );
+		if ( ! $iframe_url || isset( $og_videos[ $iframe_url ] ) )
+			return $og_videos;
+
+		$flash_url = esc_url_raw( 'https://vimeo.com/moogaloop.swf?' . http_build_query( array( 'clip_id' => $vimeo_id, 'autoplay' => 1 ), '', '&' ), array( 'https' ) );
+		if ( ! $flash_url )
+			return $og_videos;
+
+		$og_videos[ $iframe_url ] = array(
+			'html' => array(
+				'url' => $iframe_url,
+				'type' => 'text/html'
+			),
+			'swf' => array(
+				'url' => $flash_url,
+				'type' => 'application/x-shockwave-flash'
+			)
+		);
+
+		return $og_videos;
 	}
 }
 ?>

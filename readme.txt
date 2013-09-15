@@ -218,6 +218,7 @@ Security fixes. Improved customization and debugging of settings. l10n and i18n 
 * Delete Facebook account data associated with a WordPress user from the user profile screen.
 * Facebook application data for Facebook Login displayed in the settings debug screen.
 * Improve social publisher compatibility with scheduled posts.
+* (beta) Convert Instagram embeds to `og:image`s. Convert YouTube and Vimeo embeds to Open Graph media objects for video post formats.
 * Improved code documentation.
 
 = 1.5.2 =

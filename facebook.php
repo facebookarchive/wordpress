@@ -340,16 +340,29 @@ class Facebook_Loader {
 		if ( $handle !== 'facebook-jssdk' )
 			return $src;
 
-		// @link https://developers.facebook.com/docs/reference/javascript/#loading
-		$html = '<div id="fb-root"></div><script type="text/javascript">(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src=' . json_encode($src) . ';fjs.parentNode.insertBefore(js,fjs)}(document,"script","facebook-jssdk"));</script>' . "\n";
+		// @link https://developers.facebook.com/docs/javascript/gettingstarted/#loading
+		$html = '<script type="text/javascript">(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src=' . json_encode($src) . ';fjs.parentNode.insertBefore(js,fjs)}(document,"script","facebook-jssdk"));</script>' . "\n";
 		if ( isset( $wp_scripts ) && $wp_scripts->do_concat )
 			$wp_scripts->print_html .= $html;
 		else
 			echo $html;
 
-		// empty out the src response
-		// results in extra DOM but nothing to load
+		// place after wp_print_footer_scripts at priority 20
+		add_action( 'wp_footer', array( 'Facebook_Loader', 'js_sdk_root_div' ), 21 );
+
+		// empty out the src response to avoid extra <script>
 		return '';
+	}
+
+	/**
+	 * Output a div#fb-root for use by the Facebook SDK for JavaScript
+	 *
+	 * @since 1.5.4
+	 *
+	 * @return void
+	 */
+	public static function js_sdk_root_div() {
+		echo '<div id="fb-root"></div>';
 	}
 
 	/**

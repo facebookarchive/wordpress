@@ -456,7 +456,14 @@ class Facebook_Loader {
 		global $facebook_loader;
 
 		// no feed filters yet
-		if ( is_feed() || is_404() )
+		/**
+		 * Configuration filter: facebook_should_not_init
+		 *
+		 * The idea is that some people might want to init the plugin for 404s/etc
+		 *
+		 * Filter should return (bool) true false
+		 */
+		if ( (bool) apply_filters( 'facebook_should_not_init', is_feed() || is_404() ) )
 			return;
 
 		// always include Open Graph protocol markup

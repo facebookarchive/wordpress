@@ -8,7 +8,7 @@ if ( ! class_exists( 'Facebook_Social_Plugin' ) )
  *
  * @since 1.1
  *
- * @link https://developers.facebook.com/docs/reference/plugins/recommendationsbar/ Recommendations Bar social plugin documentation
+ * @link https://developers.facebook.com/docs/plugins/recommendations-bar/ Recommendations Bar social plugin documentation
  */
 class Facebook_Recommendations_Bar extends Facebook_Social_Plugin {
 

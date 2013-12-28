@@ -289,7 +289,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 	 * Requests application data server-to-server without the Facebook SDK for PHP or an app access token
 	 *
 	 * @since 1.4
-	 * @link https://developers.facebook.com/docs/reference/api/application/ Application object and fields
+	 * @link https://developers.facebook.com/docs/graph-api/reference/app/ Application object and fields
 	 * @uses \Facebook_WP_Extend::get_json_url()
 	 * @param string $app_id Facebook application identifier
 	 * @param array $fields app fields to retrieve. if blank a default set will be returned
@@ -327,7 +327,7 @@ class Facebook_WP_Extend extends WP_Facebook {
 	 * Get application details based on an application access token
 	 *
 	 * @since 1.4
-	 * @link https://developers.facebook.com/docs/reference/api/application/ Application object and fields
+	 * @link https://developers.facebook.com/docs/graph-api/reference/app/ Application object and fields
 	 * @uses \Facebook_WP_Extend::graph_api()
 	 * @param string $access_token application access token
 	 * @param array $fields request specific application fields

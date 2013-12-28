@@ -8,7 +8,7 @@ if ( ! class_exists( 'Facebook_Social_Plugin' ) )
  *
  * @since 1.1
  *
- * @link https://developers.facebook.com/docs/reference/plugins/recommendations/ Recommendations Box social plugin
+ * @link https://developers.facebook.com/docs/plugins/recommendations/ Recommendations Box social plugin
  */
 class Facebook_Recommendations_Box extends Facebook_Social_Plugin {
 

@@ -221,7 +221,7 @@ class Facebook_Follow_Button_Settings extends Facebook_Social_Plugin_Button_Sett
 	 * @return void
 	 */
 	public function section_header() {
-		echo '<p>' . esc_html( __( "Encourage visitors to follow to public updates from an author's Facebook account.", 'facebook' ) ) . ' <a href="https://developers.facebook.com/docs/reference/plugins/follow/" title="' . esc_attr( sprintf( __( '%s social plugin documentation', 'facebook' ), 'Facebook ' . self::social_plugin_name() ) ) . '">' . esc_html( __( 'Read more...', 'facebook' ) ) . '</a></p>';
+		echo '<p>' . esc_html( __( "Encourage visitors to follow to public updates from an author's Facebook account.", 'facebook' ) ) . ' <a href="https://developers.facebook.com/docs/plugins/follow-button/" title="' . esc_attr( sprintf( __( '%s social plugin documentation', 'facebook' ), 'Facebook ' . self::social_plugin_name() ) ) . '">' . esc_html( __( 'Read more...', 'facebook' ) ) . '</a></p>';
 	}
 
 	/**

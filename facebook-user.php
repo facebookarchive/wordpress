@@ -214,7 +214,7 @@ class Facebook_User {
 	 *
 	 * @since 1.5
 	 *
-	 * @link https://developers.facebook.com/docs/reference/api/user/ Facebook User fields
+	 * @link https://developers.facebook.com/docs/graph-api/reference/user/ Facebook User fields
 	 * @param string $facebook_id Facebook user identifier
 	 * @param array $fields User fields to include in the result
 	 * @return array a json_decode()d User response from the Facebook Graph API for the requested user and fields

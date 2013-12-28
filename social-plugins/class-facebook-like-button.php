@@ -8,7 +8,7 @@ if ( ! class_exists( 'Facebook_Social_Plugin' ) )
  *
  * @since 1.1
  *
- * @link https://developers.facebook.com/docs/reference/plugins/like/ Like button social plugin documentation
+ * @link https://developers.facebook.com/docs/plugins/like-button/ Like button social plugin documentation
  */
 class Facebook_Like_Button extends Facebook_Social_Plugin {
 
@@ -33,13 +33,13 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	protected $href;
 
 	/**
-	 * Display a send button alongside the like button?
+	 * Display a share button alongside the like button?
 	 *
-	 * @since 1.1
+	 * @since 1.5.4
 	 *
 	 * @var bool
 	 */
-	protected $send_button;
+	protected $share;
 
 	/**
 	 * Which like button you would like displayed.
@@ -140,14 +140,14 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	}
 
 	/**
-	 * Should a send button appear next to the like button?
+	 * Should a share button appear next to the like button?
 	 *
-	 * @since 1.1
+	 * @since 1.5.4
 	 *
 	 * @return Facebook_Like_Button support chaining
 	 */
-	public function includeSendButton() {
-		$this->send_button = true;
+	public function includeShareButton() {
+		$this->share = true;
 		return $this;
 	}
 
@@ -195,7 +195,7 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 	/**
 	 * Width of the like button
 	 *
-	 * Should be greater than the minimum width of layout + send button (if enabled) + recommend text (if chosen).
+	 * Should be greater than the minimum width of layout + share button (if enabled) + recommend text (if chosen).
 	 *
 	 * @since 1.1
 	 *
@@ -244,7 +244,7 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 		if ( $this->action === 'recommend' )
 			$min_width += 40;
 
-		if ( $this->send_button === true )
+		if ( $this->share === true )
 			$min_width += 60;
 
 		return $min_width;
@@ -301,8 +301,8 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 		if ( isset( $values['show_faces'] ) && ( $values['show_faces'] === true || $values['show_faces'] === 'true' || $values['show_faces'] == 1 ) )
 			$like_button->showFaces();
 
-		if ( isset( $values['send'] ) && ( $values['send'] === true || $values['send'] === 'true' || $values['send'] == 1 ) )
-			$like_button->includeSendButton();
+		if ( isset( $values['share'] ) && ( $values['share'] === true || $values['share'] === 'true' || $values['share'] == 1 ) )
+			$like_button->includeShareButton();
 
 		if ( isset( $values['width'] ) )
 			$like_button->setWidth( absint( $values['width'] ) );
@@ -343,8 +343,8 @@ class Facebook_Like_Button extends Facebook_Social_Plugin {
 		if ( isset( $this->layout ) && $this->layout !== 'standard' )
 			$data['layout'] = $this->layout;
 
-		if ( isset( $this->send_button ) && $this->send_button === true )
-			$data['send'] = 'true';
+		if ( isset( $this->share ) && $this->share === true )
+			$data['share'] = 'true';
 
 		if ( isset( $this->show_faces ) && $this->show_faces === true )
 			$data['show-faces'] = 'true';

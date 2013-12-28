@@ -5,7 +5,7 @@
  *
  * @since 1.1
  *
- * @link https://developers.facebook.com/docs/reference/plugins/comments/ Facebook Comments Box
+ * @link https://developers.facebook.com/docs/plugins/comments/ Facebook Comments Box
  */
 class Facebook_Comments_Box {
 
@@ -32,7 +32,7 @@ class Facebook_Comments_Box {
 	/**
 	 * Define a custom width in whole pixels.
 	 *
-	 * Minimum recommended width: 400 pixels.
+	 * Minimum recommended width: 400 pixels. The mobile version of the Comments plugin ignores the width parameter, and instead has a fluid width of 100%.
 	 *
 	 * @since 1.1
 	 *
@@ -121,9 +121,7 @@ class Facebook_Comments_Box {
 	}
 
 	/**
-	 * Width of the like button.
-	 *
-	 * Should be greater than the minimum width of layout + send button (if enabled) + recommend text (if chosen).
+	 * Width of the Comments Box.
 	 *
 	 * @since 1.1
 	 *
@@ -262,7 +260,7 @@ class Facebook_Comments_Box {
 	}
 
 	/**
-	 * Output Like button with data-* attributes
+	 * Output Comments Box with data-* attributes
 	 *
 	 * @since 1.1
 	 *

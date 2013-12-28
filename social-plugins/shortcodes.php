@@ -67,7 +67,7 @@ class Facebook_Shortcodes {
 
 		$options = shortcode_atts( array(
 			'href' => '',
-			'send' => isset( $site_options['send'] ) && $site_options['send'],
+			'share' => isset( $site_options['share'] ) && $site_options['share'],
 			'layout' => isset( $site_options['layout'] ) ? $site_options['layout'] : '',
 			'show_faces' => isset( $site_options['show_faces'] ) && $site_options['show_faces'],
 			'width' => isset( $site_options['width'] ) ? $site_options['width'] : 0,
@@ -86,7 +86,7 @@ class Facebook_Shortcodes {
 				$options['href'] = apply_filters( 'facebook_rel_canonical', get_permalink( $post->ID ) );
 		}
 
-		foreach ( array( 'send', 'show_faces' ) as $bool_key ) {
+		foreach ( array( 'share', 'show_faces' ) as $bool_key ) {
 			$options[$bool_key] = (bool) $options[$bool_key];
 		}
 		$options['width'] = absint( $options['width'] );

@@ -229,7 +229,7 @@ class Facebook_Social_Publisher {
 	 *
 	 * @param string $new_status name of the new WordPress post status
 	 * @param string $old_status name of the old WordPress post status
-	 * @param stdClass|W{_Post $post WordPress post object
+	 * @param stdClass|WP_Post $post WordPress post object
 	 * @return void
 	 */
 	public static function publish( $new_status, $old_status, $post ) {
@@ -264,7 +264,7 @@ class Facebook_Social_Publisher {
 	 *
 	 * @since 1.0
 	 *
-	 * @link https://developers.facebook.com/docs/reference/api/page/#posts Facebook Graph API create page post
+	 * @link https://developers.facebook.com/docs/graph-api/reference/page/feed/ Facebook Graph API create page post
 	 * @param int $post_id WordPress post identifier
 	 * @param stdClass|WP_Post $post WordPress post object
 	 * @return void

@@ -157,14 +157,14 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 		/* when, where */
 		add_settings_field(
 			'facebook-like-show-on',
-			__( 'Show on', 'facebook' ),
+			_x( 'Show on', 'Display the social plugin in specific areas of a website', 'facebook' ),
 			array( &$this, 'display_show_on' ),
 			$this->hook_suffix,
 			$section
 		);
 		add_settings_field(
 			'facebook-like-position',
-			__( 'Position', 'facebook' ),
+			_x( 'Position', 'Desired position of a Facebook social plugin relative to main post content.', 'facebook' ),
 			array( &$this, 'display_position' ),
 			$this->hook_suffix,
 			$section,
@@ -182,14 +182,14 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 		);
 		add_settings_field(
 			'facebook-like-layout',
-			__( 'Layout', 'facebook' ),
+			_x( 'Layout', 'Positioning of components of a Facebook social plugin relative to each other. Example layouts include button before interaction count or interaction count above button.', 'facebook' ),
 			array( &$this, 'display_layout' ),
 			$this->hook_suffix,
 			$section
 		);
 		add_settings_field(
 			'facebook-like-show-faces',
-			__( 'Show faces', 'facebook' ),
+			_x( 'Show faces', 'Show the faces of Facebook friends who have interacted with this object.', 'facebook' ),
 			array( &$this, 'display_show_faces' ),
 			$this->hook_suffix,
 			$section,
@@ -318,7 +318,7 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 		checked( isset( $this->existing_options[$key] ) );
 		echo ' /> ';
 
-		echo esc_html( sprintf( __( 'Include a %1$s alongside the %2$s.', 'facebook' ), __( 'Send Button', 'facebook' ), self::social_plugin_name() ) ) . '</label>';
+		echo esc_html( sprintf( _x( 'Include a %1$s alongside the %2$s.', 'Include another social plugin alongside the current social plugin. Example: Send alongside Like', 'facebook' ), __( 'Send Button', 'facebook' ), self::social_plugin_name() ) ) . '</label>';
 
 		echo '<p class="description">' . esc_html( __( 'Allows a Facebook user to easily send your URL to a friend via email, Facebook message, or post to a Facebook group.', 'facebook' ) ) . '</p>';
 	}

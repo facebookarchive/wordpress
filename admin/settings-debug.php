@@ -318,7 +318,7 @@ class Facebook_Settings_Debugger {
 
 		echo '<table id="facebook-app-login-fields">';
 		echo '<caption>' . esc_html( __( 'Facebook Login', 'facebook' ) ) . '</caption>';
-		echo '<thead><tr><th>' . esc_html( __( 'Setting', 'facebook' ) ) . '</th><th>' . esc_html( __( 'Value', 'facebook' ) ) . '</th></tr></thead>';
+		echo '<thead><tr><th>' . esc_html( _x( 'Setting', 'Table column header. The Facebook application setting.', 'facebook' ) ) . '</th><th>' . esc_html( _x( 'Value', 'Facebook application setting retrieved from Facebook servers.', 'facebook' ) ) . '</th></tr></thead>';
 		echo '<tbody>';
 
 		// app name
@@ -332,7 +332,7 @@ class Facebook_Settings_Debugger {
 			if ( $site_name && $site_name !== __( 'My Site' ) )
 				echo esc_html( sprintf( __( 'Not set. Consider using: %s', 'facebook' ), $site_name ) );
 			else
-				echo esc_html( __( 'Not set.', 'facebook' ) );
+				echo esc_html( _x( 'Not set.', 'No stored value found.', 'facebook' ) );
 			unset( $site_name );
 		}
 		echo '</td></tr>';
@@ -590,23 +590,23 @@ class Facebook_Settings_Debugger {
 
 		$features = array(
 			'like' => array(
-				'name' => __( 'Like Button', 'facebook' ),
+				'name' => _x( 'Like Button', 'Facebook Like Button social plugin', 'facebook' ),
 				'url' => 'https://developers.facebook.com/docs/reference/plugins/like/'
 			),
 			'send' => array(
-				'name' => __( 'Send Button', 'facebook' ),
+				'name' => _x( 'Send Button', 'Facebook Send Button social plugin', 'facebook' ),
 				'url' => 'https://developers.facebook.com/docs/reference/plugins/send/'
 			),
 			'follow' => array(
-				'name' => __( 'Follow Button', 'facebook' ),
+				'name' => _x( 'Follow Button', 'Facebook Follow Button social plugin', 'facebook' ),
 				'url' => 'https://developers.facebook.com/docs/reference/plugins/follow/'
 			),
 			'recommendations_bar' => array(
-				'name' => __( 'Recommendations Bar', 'facebook' ),
+				'name' => _x( 'Recommendations Bar', 'Facebook Recommendations Bar social plugin', 'facebook' ),
 				'url' => 'https://developers.facebook.com/docs/reference/plugins/recommendationsbar/'
 			),
 			'comments' => array(
-				'name' => __( 'Comments Box', 'facebook' ),
+				'name' => _x( 'Comments Box', 'Facebook Comments Box social plugin', 'facebook' ),
 				'url' => 'https://developers.facebook.com/docs/reference/plugins/comments/'
 			)
 		);
@@ -748,7 +748,7 @@ class Facebook_Settings_Debugger {
 				echo $http_transport;
 			}
 		} else {
-			echo __( 'none available', 'facebook' );
+			echo _x( 'none available', 'No available solution found.', 'facebook' );
 		}
 		echo '</td></tr>';
 		unset( $http_transport );

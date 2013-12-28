@@ -151,7 +151,7 @@ class Facebook_Comments_Settings extends Facebook_Social_Plugin_Settings {
 
 		add_settings_field(
 			'facebook-comments-show-on',
-			__( 'Show on', 'facebook' ),
+			_x( 'Show on', 'Display the social plugin in specific areas of a website', 'facebook' ),
 			array( &$this, 'display_show_on' ),
 			$this->hook_suffix,
 			$section
@@ -160,7 +160,7 @@ class Facebook_Comments_Settings extends Facebook_Social_Plugin_Settings {
 		// comments box options
 		add_settings_field(
 			'facebook-comments-num-posts',
-			__( 'Number of comments', 'facebook' ),
+			_x( 'Number of comments', 'Number of comments to display in a list of comments', 'facebook' ),
 			array( &$this, 'display_num_posts' ),
 			$this->hook_suffix,
 			$section,
@@ -200,8 +200,8 @@ class Facebook_Comments_Settings extends Facebook_Social_Plugin_Settings {
 	public function section_header() {
 		global $facebook_loader;
 
-		echo '<p>' . esc_html( sprintf( __( 'Enable social commenting backed by a %s account and optional providers AOL, Hotmail, or Yahoo!.', 'facebook' ), 'Facebook' ) ) . ' <a href="https://developers.facebook.com/docs/reference/plugins/comments/" title="' . esc_attr( sprintf( __( '%s social plugin documentation', 'facebook' ), 'Facebook ' . self::social_plugin_name() ) ) . '">' . esc_html( __( 'Read more...', 'facebook' ) ) . '</a></p>';
-		echo '<p>' . esc_html( sprintf( __( "Comments appear in the author's %s.", 'facebook' ), __( 'Facebook Timeline', 'facebook' ) ) ) . ' ' . esc_html( sprintf( __( 'All administrators of your %s application will be able to moderate comments.', 'facebook' ), 'Facebook' ) ) . '</p>';
+		echo '<p>' . esc_html( __( 'Enable social commenting backed by a Facebook account and optional providers AOL, Hotmail, or Yahoo!.', 'facebook' ) ) . ' <a href="https://developers.facebook.com/docs/reference/plugins/comments/" title="' . esc_attr( sprintf( __( '%s social plugin documentation', 'facebook' ), 'Facebook ' . self::social_plugin_name() ) ) . '">' . esc_html( __( 'Read more...', 'facebook' ) ) . '</a></p>';
+		echo '<p>' . esc_html( __( "Comments appear in the author's Facebook Timeline.", 'facebook' ) ) . ' ' . esc_html( __( 'All administrators of your Facebook application will be able to moderate comments.', 'facebook' ) ) . '</p>';
 		echo '<p>' . sprintf( esc_html( __( 'You may customize your %1$s settings from the %2$s including moderated comments, blacklisted words, and comment sorting.', 'facebook' ) ), self::social_plugin_name(), '<a href="' . esc_url( 'https://developers.facebook.com/tools/comments' . ( isset( $facebook_loader->credentials['app_id'] ) ? '?' . http_build_query( array( 'id' => $facebook_loader->credentials['app_id'] ) ) : '' ), array( 'http', 'https' ) ) . '">' . esc_html( __( 'Facebook Comments Tool', 'facebook' ) ) . '</a>' ) . ' ' . esc_html( __( 'You may also specify individual comment moderators not associated with your application.', 'facebook' ) ) . '</p>';
 	}
 
@@ -276,7 +276,7 @@ class Facebook_Comments_Settings extends Facebook_Social_Plugin_Settings {
 		}
 
 		echo '<input type="number" name="' . self::OPTION_NAME . '[' . $key . ']" id="facebook-comments-num-posts" size="3" min="1" step="1" value="' . $existing_value . '" /> ';
-		echo esc_html( __( 'top-level comments shown before viewer expansion.', 'facebook' ) );
+		echo esc_html( _x( 'top-level comments shown before viewer expansion.', 'Digit prefix. Example: 5 comments shown', 'facebook' ) );
 	}
 
 	/**

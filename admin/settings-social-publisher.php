@@ -200,7 +200,7 @@ class Facebook_Social_Publisher_Settings {
 		);
 		add_settings_field(
 			'facebook-publish-page',
-			__( 'Publish to a page', 'facebook' ),
+			_x( 'Publish to a page', 'Publish to a Facebook Page', 'facebook' ),
 			array( &$this, 'display_publish_page' ),
 			$this->hook_suffix,
 			$section
@@ -259,7 +259,7 @@ class Facebook_Social_Publisher_Settings {
 
 		echo '<ol>';
 
-		echo '<li>' . esc_html( sprintf( __( 'A %1$s associated with %2$s','facebook' ), __( 'Facebook application identifier', 'facebook' ), get_bloginfo( 'name' ) ) );
+		echo '<li>' . esc_html( sprintf( _x( 'A Facebook application identifier associated with %s', 'Facebook app id for the website', 'facebook' ), get_bloginfo( 'name' ) ) );
 		if ( $app_id )
 			echo $yay;
 		else
@@ -286,8 +286,8 @@ class Facebook_Social_Publisher_Settings {
 		echo '<li>' . esc_html( __( 'Publish an article to your Facebook Timeline', 'facebook' ) ) . '</li>';
 
 		$og_action_text = esc_html( __( 'your Publish action', 'facebook' ) );
-		echo '<li>' . sprintf( esc_html( __( 'Submit %s for approval.', 'facebook' ) ), $app_id ? '<a href="' . esc_url( 'https://developers.facebook.com/apps/' . $app_id . '/opengraph/action_type/331247406956072', array( 'http', 'https' ) ) . '" target="_blank">' . $og_action_text . '</a>' : $og_action_text );
-		echo ' ' . esc_html( __( 'Request optional capabilities:', 'facebook' ) ) . ' <a href="' . esc_url( 'https://developers.facebook.com/docs/submission-process/opengraph/guidelines/action-properties/#usermessages', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'User Messages', 'facebook' ) ) . '</a>, <a href="' . esc_url( 'https://developers.facebook.com/docs/submission-process/opengraph/guidelines/action-properties/#mentiontagging', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'Tags', 'facebook' ) ) . '</a>, <a href="' . esc_url( 'https://developers.facebook.com/docs/submission-process/opengraph/guidelines/action-properties/#explicitlyshared', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'Explicitly Shared', 'facebook' ) ) . '</a></li>';
+		echo '<li>' . sprintf( esc_html( _x( 'Submit %s for approval.', 'Submit the Facebook Open Graph action name for approval.', 'facebook' ) ), $app_id ? '<a href="' . esc_url( 'https://developers.facebook.com/apps/' . $app_id . '/opengraph/action_type/331247406956072', array( 'http', 'https' ) ) . '" target="_blank">' . $og_action_text . '</a>' : $og_action_text );
+		echo ' ' . esc_html( __( 'Request optional capabilities:', 'facebook' ) ) . ' <a href="' . esc_url( 'https://developers.facebook.com/docs/submission-process/opengraph/guidelines/action-properties/#usermessages', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( _x( 'User Messages', 'Facebook Open Graph action capability permissions name: users may author a message associated with the action.', 'facebook' ) ) . '</a>, <a href="' . esc_url( 'https://developers.facebook.com/docs/submission-process/opengraph/guidelines/action-properties/#mentiontagging', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( _x( 'Tags', 'Facebook Open Graph action capability permissions name: users may mention tag friends in an action', 'facebook' ) ) . '</a>, <a href="' . esc_url( 'https://developers.facebook.com/docs/submission-process/opengraph/guidelines/action-properties/#explicitlyshared', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( _x( 'Explicitly Shared', 'Facebook Open Graph action capability: user has explicitly chosen to share the action to his or her Facebook Timeline', 'facebook' ) ) . '</a></li>';
 		unset( $og_action_text );
 
 		echo '</ol>';
@@ -301,7 +301,7 @@ class Facebook_Social_Publisher_Settings {
 	 * @return void
 	 */
 	public function section_page_publish() {
-		echo '<p>' . sprintf( esc_html( __( 'Publish to a Facebook Page using the credentials of a Facebook account with %s permissions for the Page.', 'facebook' ) ), '<a href="' . esc_html( 'https://www.facebook.com/help/289207354498410/', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( __( 'content creator', 'facebook' ) ) . '</a>' ) . '</p>';
+		echo '<p>' . sprintf( esc_html( __( 'Publish to a Facebook Page using the credentials of a Facebook account with %s permissions for the Page.', 'facebook' ) ), '<a href="' . esc_html( 'https://www.facebook.com/help/289207354498410/', array( 'http', 'https' ) ) . '" target="_blank">' . esc_html( _x( 'content creator', 'Facebook Page permissions grant classification for a Facebook user', 'facebook' ) ) . '</a>' ) . '</p>';
 	}
 
 	/**
@@ -335,13 +335,13 @@ class Facebook_Social_Publisher_Settings {
 			echo ' data-fbid="' . esc_attr( $existing_page['id'] ) . '" data-name="' . esc_attr( $existing_page['name'] ) . '">';
 
 			echo '<p>';
-			echo sprintf( esc_html( __( 'Publishing to %s', 'facebook' ) ), '<a href="' . esc_url( ( isset( $existing_page['link'] ) ? $existing_page['link'] : 'https://www.facebook.com/' . $existing_page['id'] ), array( 'http', 'https' ) ) . '" title="' . esc_attr( sprintf( __( '%s page on Facebook', 'facebook' ), $existing_page['name'] ) ) . '" target="_blank">' . esc_html( $existing_page['name'] ) . '</a>' );
+			echo sprintf( esc_html( _x( 'Publishing to %s', 'Currently publishing to the specified Facebook Page', 'facebook' ) ), '<a href="' . esc_url( ( isset( $existing_page['link'] ) ? $existing_page['link'] : 'https://www.facebook.com/' . $existing_page['id'] ), array( 'http', 'https' ) ) . '" title="' . esc_attr( sprintf( __( '%s page on Facebook', 'facebook' ), $existing_page['name'] ) ) . '" target="_blank">' . esc_html( $existing_page['name'] ) . '</a>' );
 			unset( $link );
 
 			// indicate the account responsible for publishing to the Facebook Page
 			if ( is_multi_author() && isset( $existing_page['set_by_user'] ) ) {
 				if ( $this->current_user->ID == $existing_page['set_by_user'] ) {
-					echo '. ' . esc_html( __( 'Saved by you.', 'facebook' ) );
+					echo '. ' . esc_html( _x( 'Saved by you.', 'Saved by the current viewer of the page.', 'facebook' ) );
 				} else {
 					$setter = get_userdata( $existing_page['set_by_user'] );
 					if ( $setter && isset( $setter->display_name ) ) {
@@ -394,7 +394,7 @@ class Facebook_Social_Publisher_Settings {
 	public static function help_tab_publisher() {
 		$content = '<p>' . esc_html( __( 'The Facebook plugin for WordPress can publish to Facebook on your behalf through a properly configured Facebook application when a public post type becomes public.', 'facebook' ) ) . ' ' . esc_html( __( 'An author must grant your application permission to publish to his or her Facebook Timeline before the post will appear.', 'facebook' ) ) . ' ' . esc_html( __( 'A Facebook account with the ability to create content on one or more Facebook Pages may store publishing permissions for use by your WordPress site.', 'facebook' ) ) . '</p>';
 
-		$content .= '<p>' . esc_html( sprintf( __( 'You must associate an Open Graph action-object pair for your Facebook application and submit the action to Facebook for approval before articles from %s and its authors will appear in Facebook News Feed.', 'facebook' ), get_bloginfo('name') ) ) . ' ' . esc_html( __( "The Facebook plugin for WordPress cannot programmatically verify your application's Open Graph approval status..", 'facebook' ) ) . '</p>';
+		$content .= '<p>' . esc_html( sprintf( __( 'You must associate an Open Graph action-object pair for your Facebook application and submit the action to Facebook for approval before articles from %s and its authors will appear in Facebook News Feed.', 'facebook' ), get_bloginfo('name') ) ) . ' ' . esc_html( __( "The Facebook plugin for WordPress cannot programmatically verify your application's Open Graph approval status.", 'facebook' ) ) . '</p>';
 
 		return $content;
 	}

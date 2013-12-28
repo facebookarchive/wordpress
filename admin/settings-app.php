@@ -68,7 +68,7 @@ class Facebook_Application_Settings {
 		$app_settings = new Facebook_Application_Settings();
 
 		$hook_suffix = add_utility_page(
-			sprintf( __( '%s Plugin Settings', 'facebook' ), 'Facebook' ), // page <title>
+			__( 'Facebook Plugin Settings', 'facebook' ), // page <title>
 			'Facebook', // menu title
 			'manage_options', // capability needed
 			self::PAGE_SLUG, // what should I call you?
@@ -195,11 +195,9 @@ class Facebook_Application_Settings {
 			$this->hook_suffix
 		);
 
-		$app_abbr = '<abbr title="' . esc_attr( _x( 'application', 'computer application or program', 'facebook' ) ) . '">' . esc_html( _x( 'App', 'application', 'facebook' ) ) . '</abbr>';
-
 		add_settings_field(
 			'facebook-app-id',
-			sprintf( __( '%s ID', 'facebook' ), $app_abbr ),
+			_x( '<abbr title="application">App</abbr> ID', 'Facebook application identifier', 'facebook' ),
 			array( &$this, 'display_app_id' ),
 			$this->hook_suffix,
 			$section,
@@ -207,7 +205,7 @@ class Facebook_Application_Settings {
 		);
 		add_settings_field(
 			'facebook-app-secret',
-			sprintf( __( '%s Secret', 'facebook' ), $app_abbr ),
+			_x( '<abbr title="application">App</abbr> Secret', 'Facebook application secret', 'facebook' ),
 			array( &$this, 'display_app_secret' ),
 			$this->hook_suffix,
 			$section,
@@ -257,7 +255,7 @@ class Facebook_Application_Settings {
 	 * @return void
 	 */
 	public static function restriction_section_header() {
-		echo '<p>' . esc_html( __( 'Limit Facebook functionality', 'facebook' ) ) . '</p>';
+		echo '<p>' . esc_html( _x( 'Limit Facebook functionality', 'Section header for options limiting Facebook on your site', 'facebook' ) ) . '</p>';
 	}
 
 	/**
@@ -282,7 +280,7 @@ class Facebook_Application_Settings {
 			echo ' value="' . esc_attr( $existing_value ) . '"';
 		echo ' maxlength="32" size="40" autocomplete="off" pattern="[0-9]+" />';
 
-		echo '<p class="description">' . esc_html( sprintf( __( 'An application identifier associates your site, its pages, and visitor actions with a registered %s application.', 'facebook' ), 'Facebook' ) ) . '</p>';
+		echo '<p class="description">' . esc_html( __( 'An application identifier associates your site, its pages, and visitor actions with a registered Facebook application.', 'facebook' ) ) . '</p>';
 	}
 
 	/**
@@ -307,7 +305,7 @@ class Facebook_Application_Settings {
 			echo ' value="' . esc_attr( $existing_value ) . '"';
 		echo ' size="40" autocomplete="off" pattern="[0-9a-f]+" />';
 
-		echo '<p class="description">' . esc_html( sprintf( __( 'An application secret is a secret shared between %s and your application, similar to a password.', 'facebook' ), 'Facebook' ) ) . '</p>';
+		echo '<p class="description">' . esc_html( __( 'An application secret is a secret shared between Facebook and your application, similar to a password.', 'facebook' ) ) . '</p>';
 	}
 
 	/**
@@ -436,13 +434,13 @@ class Facebook_Application_Settings {
 	 * @return string HTML content
 	 */
 	public static function help_tab_new_app() {
-		$content = '<p>' . sprintf ( esc_html( __( '%1$s to take advantage of advantage of advanced %2$s features such as post to timeline, recommendations bar, and more.', 'facebook' ) ), '<a href="https://developers.facebook.com/apps/">' . __( 'Register for a Facebook application', 'facebook' ) . '</a>', 'Facebook' ) . ' ' . esc_html( sprintf( __( 'You may need to register your %1$s account as a developer account if this is your first time managing a %1$s application.', 'facebook' ), 'Facebook' ) ) . '</p>';
+		$content = '<p>' . sprintf ( esc_html( __( '%s to take advantage of advantage of advanced Facebook features such as post to timeline, recommendations bar, and more.', 'facebook' ) ), '<a href="https://developers.facebook.com/apps/">' . __( 'Register for a Facebook application', 'facebook' ) . '</a>' ) . ' ' . esc_html( sprintf( __( 'You may need to register your %1$s account as a developer account if this is your first time managing a %1$s application.', 'facebook' ), 'Facebook' ) ) . '</p>';
 
 		$content .= '<p>' . sprintf( esc_html( __( 'Click the %s button near the top right corner of the page to trigger an application creation dialog.', 'facebook' ) ), '<span style="background-color:#EEE;border:1px solid #999;color:#333;font-family:\'lucinda grande\',tahoma,verdana,arial,sans-serif;font-size:11px;font-weight:bold;line-height:13px;margin:0;padding-top:1px;padding-right:0;padding-bottom:2px;padding-left:0;text-align:center;white-space:nowrap;">+ Create New App</span>' ) . '</p>';
 
-		$content .= '<div style="text-align:center"><img alt="' . esc_attr( sprintf( __( '%s new application creation dialog', 'facebook' ), 'Facebook' ) ) . '" src="' . plugins_url( 'static/img/create-app.png', dirname(__FILE__) ) .  '" width="665" height="225" /></div>';
+		$content .= '<div style="text-align:center"><img alt="' . esc_attr( __( 'Facebook new application creation dialog', 'facebook' ) ) . '" src="' . plugins_url( 'static/img/create-app.png', dirname(__FILE__) ) .  '" width="665" height="225" /></div>';
 
-		$content .= '<p>' . sprintf( esc_html( __( 'Uniquely identify your site on %1$s with an application name.', 'facebook' ) ), 'Facebook' );
+		$content .= '<p>' . esc_html( __( 'Uniquely identify your site on Facebook with an application name.', 'facebook' ) );
 		$site_name = get_bloginfo( 'name' );
 		if ( $site_name ) {
 			$content .= ' ';
@@ -456,7 +454,7 @@ class Facebook_Application_Settings {
 				$content .= esc_html( sprintf( __( 'You must choose an application name shorter than "%s."','facebook' ), $site_name ) );
 				$content .= ' ' . esc_html( sprintf( __( 'An application name must be between %1$u and %2$u characters in length.', 'facebook' ), $min_length, $max_length ) );
 			} else {
-				$content .= esc_html( sprintf( __( 'You may choose to use "%1$s" as your %2$s application name.', 'facebook' ), $site_name, 'Facebook' ) );
+				$content .= esc_html( sprintf( __( 'You may choose to use "%s" as your Facebook application name.', 'facebook' ), $site_name ) );
 			}
 		}
 		$content .= '</p>';
@@ -571,13 +569,13 @@ class Facebook_Application_Settings {
 			$app_id = '';
 			$screen->add_help_tab( array(
 				'id' => 'facebook-new-app-help',
-				'title' => sprintf( __( 'Create a %s application', 'facebook' ), 'Facebook' ),
+				'title' => __( 'Create a Facebook application', 'facebook' ),
 				'content' => self::help_tab_new_app()
 			) );
 		} else {
 			$screen->add_help_tab( array(
 				'id' => 'facebook-existing-app-help',
-				'title' => sprintf( __( 'Existing %s application', 'facebook' ), 'Facebook' ),
+				'title' => __( 'Existing Facebook application', 'facebook' ),
 				'content' => self::help_tab_existing_app()
 			) );
 		}
@@ -594,7 +592,7 @@ class Facebook_Application_Settings {
 			'content' => self::help_tab_kid_directed()
 		) );
 
-		$screen->set_help_sidebar( '<p><a href="https://developers.facebook.com/apps/">' . esc_html( sprintf( __( '%s Apps Tool', 'facebook' ), 'Facebook' ) ) . '</a></p>' );
+		$screen->set_help_sidebar( '<p><a href="https://developers.facebook.com/apps/">' . esc_html( __( 'Facebook Apps Tool', 'facebook' ) ) . '</a></p>' );
 	}
 }
 

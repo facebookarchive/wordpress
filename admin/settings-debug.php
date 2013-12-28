@@ -591,23 +591,23 @@ class Facebook_Settings_Debugger {
 		$features = array(
 			'like' => array(
 				'name' => _x( 'Like Button', 'Facebook Like Button social plugin', 'facebook' ),
-				'url' => 'https://developers.facebook.com/docs/reference/plugins/like/'
+				'url' => 'https://developers.facebook.com/docs/plugins/like-button/'
 			),
 			'send' => array(
 				'name' => _x( 'Send Button', 'Facebook Send Button social plugin', 'facebook' ),
-				'url' => 'https://developers.facebook.com/docs/reference/plugins/send/'
+				'url' => 'https://developers.facebook.com/docs/plugins/send-button/'
 			),
 			'follow' => array(
 				'name' => _x( 'Follow Button', 'Facebook Follow Button social plugin', 'facebook' ),
-				'url' => 'https://developers.facebook.com/docs/reference/plugins/follow/'
+				'url' => 'https://developers.facebook.com/docs/plugins/follow-button/'
 			),
 			'recommendations_bar' => array(
 				'name' => _x( 'Recommendations Bar', 'Facebook Recommendations Bar social plugin', 'facebook' ),
-				'url' => 'https://developers.facebook.com/docs/reference/plugins/recommendationsbar/'
+				'url' => 'https://developers.facebook.com/docs/plugins/recommendations-bar/'
 			),
 			'comments' => array(
 				'name' => _x( 'Comments Box', 'Facebook Comments Box social plugin', 'facebook' ),
-				'url' => 'https://developers.facebook.com/docs/reference/plugins/comments/'
+				'url' => 'https://developers.facebook.com/docs/plugins/comments/'
 			)
 		);
 
@@ -660,23 +660,23 @@ class Facebook_Settings_Debugger {
 		$all_widgets = array(
 			'activity-feed' => array(
 				'name' => __( 'Activity Feed', 'facebook' ),
-				'url' => 'https://developers.facebook.com/docs/reference/plugins/activity/'
+				'url' => 'https://developers.facebook.com/docs/plugins/activity/'
 			),
 			'like' => array(
 				'name' => __( 'Like Button', 'facebook' ),
-				'url' => 'https://developers.facebook.com/docs/reference/plugins/like/'
+				'url' => 'https://developers.facebook.com/docs/plugins/like-button/'
 			),
 			'recommendations' => array(
 				'name' => __( 'Recommendations Box', 'facebook' ),
-				'url' => 'https://developers.facebook.com/docs/reference/plugins/recommendations/'
+				'url' => 'https://developers.facebook.com/docs/plugins/recommendations/'
 			),
 			'send' => array(
 				'name' => __( 'Send Button', 'facebook' ),
-				'url' => 'https://developers.facebook.com/docs/reference/plugins/send/'
+				'url' => 'https://developers.facebook.com/docs/plugins/send-button/'
 			),
 			'follow' => array(
 				'name' => __( 'Follow Button', 'facebook' ),
-				'url' => 'https://developers.facebook.com/docs/reference/plugins/follow/'
+				'url' => 'https://developers.facebook.com/docs/plugins/follow-button/'
 			)
 		);
 

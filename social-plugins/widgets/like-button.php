@@ -85,7 +85,7 @@ class Facebook_Like_Button_Widget extends WP_Widget {
 		if ( ! empty( $new_instance['title'] ) )
 			$instance['title'] = strip_tags( $new_instance['title'] );
 
-		foreach( array( 'send', 'show_faces' ) as $bool_option ) {
+		foreach( array( 'share', 'show_faces' ) as $bool_option ) {
 			if ( isset( $new_instance[ $bool_option ] ) )
 				$new_instance[ $bool_option ] = true;
 			else
@@ -120,7 +120,7 @@ class Facebook_Like_Button_Widget extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, array(
 			'title' => '',
 			'href' => '',
-			'send' => false,
+			'share' => false,
 			'layout' => 'standard',
 			'show_faces' => false,
 			'width' => 0,
@@ -138,9 +138,9 @@ class Facebook_Like_Button_Widget extends WP_Widget {
 		$like_button_settings = new Facebook_Like_Button_Settings( $instance );
 
 		echo '<div>';
-		$like_button_settings->display_send( array(
-			'id' => $this->get_field_id( 'send' ),
-			'name' => $this->get_field_name( 'send' )
+		$like_button_settings->display_share( array(
+			'id' => $this->get_field_id( 'share' ),
+			'name' => $this->get_field_name( 'share' )
 		) );
 		echo '</div><p></p>';
 

@@ -8,7 +8,7 @@ if ( ! class_exists( 'Facebook_Recommendations_Box' ) )
  *
  * @since 1.1
  *
- * @link https://developers.facebook.com/docs/reference/plugins/activity/ Activity Feed social plugin documentation
+ * @link https://developers.facebook.com/docs/plugins/activity/ Activity Feed social plugin documentation
  */
 class Facebook_Activity_Feed extends Facebook_Recommendations_Box {
 

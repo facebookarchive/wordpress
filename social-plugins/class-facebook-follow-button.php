@@ -8,7 +8,7 @@ if ( ! class_exists( 'Facebook_Social_Plugin' ) )
  *
  * @since 1.1
  *
- * @link https://developers.facebook.com/docs/reference/plugins/follow/ Facebook Follow Button
+ * @link https://developers.facebook.com/docs/plugins/follow-button/ Facebook Follow Button
  */
 class Facebook_Follow_Button extends Facebook_Social_Plugin {
 

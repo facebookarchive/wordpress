@@ -186,7 +186,7 @@ class Facebook_Send_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 	public function section_header() {
 		echo '<p>';
 		echo esc_html( __( 'Help site visitors send your URL in a message to any email address, a message to his or her Facebook friends, or a post to a Facebook group.', 'facebook' ) );
-		echo ' ' . ' <a href="https://developers.facebook.com/docs/reference/plugins/send/" title="' . esc_attr( sprintf( __( '%s social plugin documentation', 'facebook' ), 'Facebook ' . self::social_plugin_name() ) ) . '">' . esc_html( __( 'Read more...', 'facebook' ) ) . '</a>';
+		echo ' ' . ' <a href="https://developers.facebook.com/docs/plugins/send-button/" title="' . esc_attr( sprintf( __( '%s social plugin documentation', 'facebook' ), 'Facebook ' . self::social_plugin_name() ) ) . '">' . esc_html( __( 'Read more...', 'facebook' ) ) . '</a>';
 		echo '</p>';
 	}
 

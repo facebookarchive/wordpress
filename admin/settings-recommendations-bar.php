@@ -221,7 +221,7 @@ class Facebook_Recommendations_Bar_Settings extends Facebook_Social_Plugin_Setti
 	 * @return void
 	 */
 	public function section_header() {
-		echo '<p>' . esc_html( __( 'Encourage additional pageviews with site recommendations based on social context.', 'facebook' ) ) . ' ' . esc_html( __( 'Adds a Like Button overlay to the bottom of your page with an expanded list of recommendations triggered by time or position on the page.', 'facebook' ) ) . '<br /><a href="https://developers.facebook.com/docs/reference/plugins/recommendationsbar/" title="' . esc_attr( sprintf( __( '%s social plugin documentation', 'facebook' ), 'Facebook ' . self::social_plugin_name() ) ) . '">' . esc_html( __( 'Read more...', 'facebook' ) ) . '</a></p>';
+		echo '<p>' . esc_html( __( 'Encourage additional pageviews with site recommendations based on social context.', 'facebook' ) ) . ' ' . esc_html( __( 'Adds a Like Button overlay to the bottom of your page with an expanded list of recommendations triggered by time or position on the page.', 'facebook' ) ) . '<br /><a href="https://developers.facebook.com/docs/plugins/recommendations-bar/" title="' . esc_attr( sprintf( __( '%s social plugin documentation', 'facebook' ), 'Facebook ' . self::social_plugin_name() ) ) . '">' . esc_html( __( 'Read more...', 'facebook' ) ) . '</a></p>';
 	}
 
 	/**

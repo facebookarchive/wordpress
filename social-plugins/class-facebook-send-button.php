@@ -8,7 +8,7 @@ if ( ! class_exists( 'Facebook_Social_Plugin' ) )
  *
  * @since 1.1
  *
- * @link https://developers.facebook.com/docs/reference/plugins/send/ Send Button docs
+ * @link https://developers.facebook.com/docs/plugins/send-button/ Send Button docs
  */
 class Facebook_Send_Button extends Facebook_Social_Plugin {
 

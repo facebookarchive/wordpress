@@ -173,12 +173,12 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 
 		/* like button options */
 		add_settings_field(
-			'facebook-like-send',
-			__( 'Send Button', 'facebook' ),
-			array( &$this, 'display_send' ),
+			'facebook-like-share',
+			__( 'Share Button', 'facebook' ),
+			array( &$this, 'display_share' ),
 			$this->hook_suffix,
 			$section,
-			array( 'label_for' => 'facebook-like-send' )
+			array( 'label_for' => 'facebook-like-share' )
 		);
 		add_settings_field(
 			'facebook-like-layout',
@@ -235,7 +235,7 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 	 * @return void
 	 */
 	public function section_header() {
-		echo '<p>' . esc_html( __( 'Help your visitors share your pages on their Facebook profile with one click.', 'facebook' ) ) . ' <a href="https://developers.facebook.com/docs/reference/plugins/like/" title="' . esc_attr( sprintf( __( '%s social plugin documentation', 'facebook' ), 'Facebook ' . self::social_plugin_name() ) ) . '">' . esc_html( __( 'Read more...', 'facebook' ) ) . '</a></p>';
+		echo '<p>' . esc_html( __( 'Help your visitors share your pages on their Facebook profile with one click.', 'facebook' ) ) . ' <a href="https://developers.facebook.com/docs/plugins/like-button/" title="' . esc_attr( sprintf( __( '%s social plugin documentation', 'facebook' ), 'Facebook ' . self::social_plugin_name() ) ) . '">' . esc_html( __( 'Read more...', 'facebook' ) ) . '</a></p>';
 	}
 
 	/**
@@ -293,15 +293,15 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 	}
 
 	/**
-	 * Display the send button option checkbox.
+	 * Display the share button option checkbox.
 	 *
-	 * @since 1.1
+	 * @since 1.5.4
 	 *
 	 * @param array $extra_attributes custom form attributes
 	 * @return void
 	 */
-	public function display_send( $extra_attributes = array() ) {
-		$key = 'send';
+	public function display_share( $extra_attributes = array() ) {
+		$key = 'share';
 
 		extract( self::parse_form_field_attributes(
 			$extra_attributes,
@@ -318,9 +318,9 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 		checked( isset( $this->existing_options[$key] ) );
 		echo ' /> ';
 
-		echo esc_html( sprintf( _x( 'Include a %1$s alongside the %2$s.', 'Include another social plugin alongside the current social plugin. Example: Send alongside Like', 'facebook' ), __( 'Send Button', 'facebook' ), self::social_plugin_name() ) ) . '</label>';
+		echo esc_html( sprintf( _x( 'Include a %1$s alongside the %2$s.', 'Include another social plugin alongside the current social plugin. Example: Share alongside Like', 'facebook' ), __( 'Share Button', 'facebook' ), self::social_plugin_name() ) ) . '</label>';
 
-		echo '<p class="description">' . esc_html( __( 'Allows a Facebook user to easily send your URL to a friend via email, Facebook message, or post to a Facebook group.', 'facebook' ) ) . '</p>';
+		echo '<p class="description">' . esc_html( __( 'Allows a Facebook user to easily share your URL on a Facebook Timeline, Page, group, or in a Facebook Message.', 'facebook' ) ) . '</p>';
 	}
 
 	/**
@@ -568,11 +568,11 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 		if ( ! is_array( $options ) )
 			return array();
 
-		if ( isset( $options['send'] ) ) {
-			if ( $options['send'] === 'true' )
-				$options['send'] = true;
-			else if ( $options['send'] === 'false' )
-				$options['send'] = false;
+		if ( isset( $options['share'] ) ) {
+			if ( $options['share'] === 'true' )
+				$options['share'] = true;
+			else if ( $options['share'] === 'false' )
+				$options['share'] = false;
 		}
 
 		if ( isset( $options['show-faces'] ) ) {
@@ -611,7 +611,7 @@ class Facebook_Like_Button_Settings extends Facebook_Social_Plugin_Button_Settin
 		}
 		unset( $options['show_on'] );
 
-		foreach( array( 'send', 'show_faces' ) as $bool_option ) {
+		foreach( array( 'share', 'show_faces' ) as $bool_option ) {
 			if ( isset( $options[ $bool_option ] ) )
 				$options[ $bool_option ] = true;
 			else

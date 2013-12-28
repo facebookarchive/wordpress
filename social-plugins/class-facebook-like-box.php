@@ -6,7 +6,7 @@
  *
  * @since 1.1
  *
- * @link https://developers.facebook.com/docs/reference/plugins/like-box/ Like Box social plugin
+ * @link https://developers.facebook.com/docs/plugins/like-box-for-pages/ Like Box social plugin
  */
 class Facebook_Like_Box {
 	/**

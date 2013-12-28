@@ -241,7 +241,7 @@ class Facebook_Comments {
 	 *
 	 * @since 1.1
 	 *
-	 * @link https://developers.facebook.com/docs/reference/api/Comment/ Individual Facebook Comment object
+	 * @link https://developers.facebook.com/docs/reference/api/comment Individual Facebook Comment object
 	 * @param string $url absolute URL
 	 * @return array list of comments
 	 */

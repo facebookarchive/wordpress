@@ -131,7 +131,7 @@ class Facebook_Social_Plugin_Settings {
 			// provides a hint of final display. May change but possibly helpful in making a decision
 			if ( isset( self::$color_scheme_styles[$color_scheme] ) )
 				$checkboxes .= ' style="padding:0.5em;' . self::$color_scheme_styles[$color_scheme] . '"';
-			$checkboxes .= '><input type="radio" name="' . $name . '" value="' . $color_scheme . '"' . checked( $existing_value, $color_scheme, false ) . ' />';
+			$checkboxes .= '><input type="radio" name="' . $name . '" value="' . esc_attr( $color_scheme ) . '"' . checked( $existing_value, $color_scheme, false ) . ' />';
 			$checkboxes .= ' ' . esc_html( __( $color_scheme, 'facebook' ) ) . '</label> ';
 		}
 		return rtrim( $checkboxes );

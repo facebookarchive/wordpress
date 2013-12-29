@@ -103,7 +103,7 @@ class Facebook_Open_Graph_Protocol {
 					self::meta_elements( $property . ':' . $structured_property, $content_value );
 			}
 		} else {
-			echo '<meta property="' . $property . '" content="' . esc_attr( $content ) . '"';
+			echo '<meta property="' . esc_attr( $property ) . '" content="' . esc_attr( $content ) . '"';
 
 			// do not use trailing slash if HTML5
 			// http://wiki.whatwg.org/wiki/FAQ#Should_I_close_empty_elements_with_.2F.3E_or_.3E.3F

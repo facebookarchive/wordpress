@@ -72,6 +72,16 @@ class Facebook_Embedded_Post {
 		return $this;
 	}
 
+	/**
+	 * Width of the embedded post
+	 *
+	 * Must be between 350 and 750 inclusive.
+	 *
+	 * @since 1.5.4
+	 *
+	 * @param int $width width in whole pixels
+	 * @return Facebook_Embedded_Post support chaining
+	 */
 	public function setWidth( $width ) {
 		if ( is_int( $width ) && $width >= 350 && $width <= 750 )
 			$this->width = $width;

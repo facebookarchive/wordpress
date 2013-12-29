@@ -167,7 +167,7 @@ class Facebook_Application_Settings {
 		$like_button = new Facebook_Like_Button(false);
 		$like_button->setURL( 'https://developers.facebook.com/docs/wordpress/' );
 		$like_button->setLayout( 'button_count' );
-		$like_button->includeSendButton();
+		$like_button->includeShareButton();
 		$like_button->setFont( 'arial' );
 		$like_button->setReference( 'wp-admin' );
 		echo $like_button->asHTML();

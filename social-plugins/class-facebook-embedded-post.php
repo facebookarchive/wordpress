@@ -27,6 +27,15 @@ class Facebook_Embedded_Post {
 	protected $href;
 
 	/**
+	 * Custom width in whole pixels
+	 *
+	 * @since 1.5.4
+	 *
+	 * @var int
+	*/
+	protected $width = 550;
+
+	/**
 	 * Show a border around the plugin
 	 *
 	 * Set to false to style the resulting iframe with your custom CSS
@@ -60,6 +69,12 @@ class Facebook_Embedded_Post {
 		$url = esc_url_raw( $url, array( 'http', 'https' ) );
 		if ( $url )
 			$this->href = $url;
+		return $this;
+	}
+
+	public function setWidth( $width ) {
+		if ( is_int( $width ) && $width >= 350 && $width <= 750 )
+			$this->width = $width;
 		return $this;
 	}
 
@@ -104,6 +119,9 @@ class Facebook_Embedded_Post {
 		if ( isset( $values['href'] ) && $values['href'] )
 			$embed->setURL( $values['href'] );
 
+		if ( isset( $values['width'] ) )
+			$embed->setWidth( absint( $values['width'] ) );
+
 		if ( isset( $values['show_border'] ) && ( $values['show_border'] === false || $values['show_border'] === 'false' || $values['show_border'] == 0 ) )
 			$embed->hideBorder();
 		else
@@ -127,6 +145,9 @@ class Facebook_Embedded_Post {
 			return $data;
 
 		$data['href'] = $this->href;
+
+		if ( $this->width !== 550 )
+			$data['width'] = $this->width;
 
 		if ( isset( $this->show_border ) && $this->show_border === false )
 			$data['show-border'] = 'false';

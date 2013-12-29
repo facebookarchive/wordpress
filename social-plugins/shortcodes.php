@@ -209,12 +209,16 @@ class Facebook_Shortcodes {
 	public static function embedded_post( $attributes, $content = null ) {
 		$options = shortcode_atts( array(
 			'href' => '',
+			'width' => 0,
 			'show_border' => true
-		), $attributes, 'facebook_embed_post' );
+		), $attributes, 'facebook_embedded_post' );
 
 		$options['href'] = trim( $options['href'] );
 		if ( ! $options['href'] )
 			return '';
+
+		if ( $options['width'] < 350 || $options['width'] > 750 )
+			unset($options['width']);
 
 		if ( ! class_exists( 'Facebook_Embedded_Post' ) )
 			require_once( dirname(__FILE__) . '/class-facebook-embedded-post.php' );

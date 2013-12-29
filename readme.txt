@@ -110,6 +110,10 @@ The plugin generates [Open Graph protocol](http://ogp.me/) markup for your site'
 
 Facebook generates a story summary for pasted links and new posts sent to your Timeline or Page based on metadata found on your page. The Facebook plugin for WordPress generates Open Graph protocol metadata to assist Facebook's understanding of your webpages. The [Facebook URL debugger](https://developers.facebook.com/tools/debug) provides a view into Facebook's representation of your webpage and relevant extracted metadata. Test URLs of interest in the debugger to better understand how your page might be represented on Facebook.
 
+= I do not see an option to associate my Facebook account from my WordPress profile page =
+
+Make sure your Facebook application is properly configured for Facebook Login including the correct app domain and website URL. The Facebook debug settings submenu item in your WordPress administrative interface highlights some common issues.
+
 = How do I moderate comments and add reviewers? =
 
 The [Comment Moderation Tool](https://developers.facebook.com/tools/comments) allows you to customize your Facebook application's moderators, blacklisted words, external logins, and more.
@@ -139,6 +143,9 @@ It's possible another plugin (or your theme) including an English version of the
 
 
 == Upgrade Notice ==
+
+= 1.5.4 =
+Like Button share button support. Facebook Embedded Post custom width. Facebook SDK for PHP 3.2.3.
 
 = 1.5.3 =
 Delete Facebook account data from user profile. Facebook Login info in settings debug. Improve social publishing of scheduled posts.
@@ -215,9 +222,10 @@ Security fixes. Improved customization and debugging of settings. l10n and i18n 
 == Changelog ==
 
 = 1.5.4 =
-* Facebook embedded post custom width supported through shortcode
 * Facebook Like Button supports the new Share button
+* Add Facebook Embedded Post custom width support through shortcode
 * Removed channelUrl Facebook JavaScript SDK initialization parameter
+* Facebook SDK for PHP 3.2.3
 
 = 1.5.3 =
 * Delete Facebook account data associated with a WordPress user from the user profile screen.

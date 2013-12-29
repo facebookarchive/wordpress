@@ -2,10 +2,10 @@
 Contributors: Facebook, automattic, niallkennedy, mattwkelly, rgharpuray, ngfeldman, jamesgpearce, ravi.grover, danielbachhuber, gigawats, eosgood, Otto42, colmdoyle, zazinteractive
 Tags: Facebook, comments, social, friends, like, like button, social plugins, facebook platform, page, posts, sidebar, plugin, open graph, publish Facebook
 Requires at least: 3.3
-Tested up to: 3.7.1
+Tested up to: 3.8
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.5.3
+Stable tag: 1.5.4
 
 Add Facebook social plugins and the ability to publish new posts to a Facebook Timeline or Facebook Page. Official Facebook plugin.
 
@@ -17,19 +17,19 @@ The Facebook plugin for WordPress adds Facebook social plugins to your WordPress
 
 * [Open Graph protocol](http://ogp.me/) markup optimizes your content for social sharing and rich story previews on Facebook, Twitter, Google+, Mixi, and more. Display large images, link to author pages, and improve story distribution through social news feeds.
 * [Facebook Insights](http://www.facebook.com/insights) support for Facebook accounts associated with a Facebook application. Track rich audience data powered by Facebook profiles (age, location, language) and see how your content is shared on Facebook.
-* Add [Like](https://developers.facebook.com/docs/reference/plugins/like/), [send](https://developers.facebook.com/docs/reference/plugins/send/), and [follow](https://developers.facebook.com/docs/reference/plugins/follow/) buttons to every post to help your site's readers share content with friends or stay connected to future content shared by your site and its authors on Facebook.
+* Add [Like](https://developers.facebook.com/docs/plugins/like-button/), [send](https://developers.facebook.com/docs/plugins/send-button/), and [follow](https://developers.facebook.com/docs/plugins/follow-button/) buttons to every post to help your site's readers share content with friends or stay connected to future content shared by your site and its authors on Facebook.
 * [Embed Facebook Posts](https://developers.facebook.com/docs/plugins/embedded-posts/) by pasting a URL into your post composer, creating a shortcode, or calling a function from your theme.
-* Enable the [Facebook Comments Box social plugin](https://developers.facebook.com/docs/reference/plugins/comments/) to encourage new comments from logged-in Facebook users and his or her Facebook friends. Comments associated with a post are sorted according to social signals including friend networks, most liked, or the most active discussion threads. Advanced features include moderation, blacklisted words, automatic grammar correction, and login support for AOL, Microsoft, and Yahoo! accounts.
-* [Like Box](https://developers.facebook.com/docs/reference/plugins/like-box/) displays recent activity from your Facebook Page and encourages new Like actions.
-* [Recommendations Bar](https://developers.facebook.com/docs/reference/plugins/recommendationsbar/) helps visitors discover additional content on your site by recommending posts and encouraging Like shares.
-* [Recommendations Box](https://developers.facebook.com/docs/reference/plugins/recommendations/) suggests related posts in a configurable widget.
+* Enable the [Facebook Comments Box social plugin](https://developers.facebook.com/docs/plugins/comments/) to encourage new comments from logged-in Facebook users and his or her Facebook friends. Comments associated with a post are sorted according to social signals including friend networks, most liked, or the most active discussion threads. Advanced features include moderation, blacklisted words, automatic grammar correction, and login support for AOL, Microsoft, and Yahoo! accounts.
+* [Like Box](https://developers.facebook.com/docs/plugins/like-box-for-pages/) displays recent activity from your Facebook Page and encourages new Like actions.
+* [Recommendations Bar](https://developers.facebook.com/docs/plugins/recommendations-bar/) helps visitors discover additional content on your site by recommending posts and encouraging Like shares.
+* [Recommendations Box](https://developers.facebook.com/docs/plugins/recommendations/) suggests related posts in a configurable widget.
 * Configure your Facebook application for Open Graph action news publishing support for improved Facebook distribution of author Timeline stories and news-specific highlights.
 * Mention Facebook friends and Facebook pages in a custom message posted to your Timeline with your post.
 * Customize and extend the plugin through custom actions and filters.
 
 = Shortcodes =
 
-Add a [Like Button](https://developers.facebook.com/docs/reference/plugins/like/), [Send Button](https://developers.facebook.com/docs/reference/plugins/send/), [Follow Button](https://developers.facebook.com/docs/reference/plugins/follow/), or [Embedded Posts](https://developers.facebook.com/docs/plugins/embedded-posts/) using a shortcode inside your post or evaluated from within your theme. You may override site-level options with shortcode attributes defined on the social plugin's page.
+Add a [Like Button](https://developers.facebook.com/docs/plugins/like-button/), [Send Button](https://developers.facebook.com/docs/plugins/send-button/), [Follow Button](https://developers.facebook.com/docs/plugins/follow-button/), or [Embedded Posts](https://developers.facebook.com/docs/plugins/embedded-posts/) using a shortcode inside your post or evaluated from within your theme. You may override site-level options with shortcode attributes defined on the social plugin's page.
 
 * `[facebook_like_button]`
 * `[facebook_send_button]`
@@ -116,11 +116,11 @@ The [Comment Moderation Tool](https://developers.facebook.com/tools/comments) al
 
 = Does Facebook Comments work with my existing WordPress comments? =
 
-The [Comments Box social plugin](https://developers.facebook.com/docs/reference/plugins/comments/) is meant to replace the WordPress commenting system with a more social, client-side experience. We do not currently support synchronizing comments stored on Facebook with comments stored in your WordPress database. Posts with existing WordPress comments will display those comments followed by the Facebook Comments Box.
+The [Comments Box social plugin](https://developers.facebook.com/docs/plugins/comments/) is meant to replace the WordPress commenting system with a more social, client-side experience. We do not currently support synchronizing comments stored on Facebook with comments stored in your WordPress database. Posts with existing WordPress comments will display those comments followed by the Facebook Comments Box.
 
 = Why do comments on a post published to my Facebook Timeline or Page not appear inside Facebook Comments Box on my post page? =
 
-The [Facebook Comments Box social plugin](https://developers.facebook.com/docs/reference/plugins/comments/) is a separate commenting system associated with a URL regardless of your authors' decision to post to his or her Facebook Timeline or your site's Facebook Page.
+The [Facebook Comments Box social plugin](https://developers.facebook.com/docs/plugins/comments/) is a separate commenting system associated with a URL regardless of your authors' decision to post to his or her Facebook Timeline or your site's Facebook Page.
 
 = What additional configuration steps do I need to complete to enable an Open Graph action for my Facebook application? =
 
@@ -214,6 +214,11 @@ Security fixes. Improved customization and debugging of settings. l10n and i18n 
 
 == Changelog ==
 
+= 1.5.4 =
+* Facebook embedded post custom width supported through shortcode
+* Facebook Like Button supports the new Share button
+* Removed channelUrl Facebook JavaScript SDK initialization parameter
+
 = 1.5.3 =
 * Delete Facebook account data associated with a WordPress user from the user profile screen.
 * Facebook application data for Facebook Login displayed in the settings debug screen.
@@ -222,11 +227,11 @@ Security fixes. Improved customization and debugging of settings. l10n and i18n 
 * Improved code documentation.
 
 = 1.5.2 =
-* Generate and store an [app secret proof](https://developers.facebook.com/docs/reference/api/securing-graph-api/ "Facebook Graph API app secret proof") for Facebook Page access token verification
+* Generate and store an [app secret proof](https://developers.facebook.com/docs/graph-api/securing-requests/ "Facebook Graph API app secret proof") for Facebook Page access token verification
 
 = 1.5.1 =
 * Expand Open Graph protocol markup to all singular post types
-* Generate and store an [app secret proof](https://developers.facebook.com/docs/reference/api/securing-graph-api/ "Facebook Graph API app secret proof") on Facebook app id and app secret verification
+* Generate and store an [app secret proof](https://developers.facebook.com/docs/graph-api/securing-requests/ "Facebook Graph API app secret proof") on Facebook app id and app secret verification
 * Support auto embed of Facebook notes URLs
 
 = 1.5 =
@@ -278,7 +283,7 @@ Security fixes. Improved customization and debugging of settings. l10n and i18n 
 * Associate a WordPress account with a Facebook account from the edit profile page
 
 = 1.1.11 =
-* Added [Like Box](https://developers.facebook.com/docs/reference/plugins/like-box/) widget for Facebook Page promotion
+* Added [Like Box](https://developers.facebook.com/docs/plugins/like-box-for-pages/) widget for Facebook Page promotion
 * New locale selector provides more extensible code
 * Social publisher settings page inline help
 * Fixed bug publishing to a Facebook Page

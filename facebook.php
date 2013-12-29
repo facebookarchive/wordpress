@@ -265,7 +265,6 @@ class Facebook_Loader {
 		add_filter( 'script_loader_src', array( 'Facebook_Loader', 'async_script_loader_src' ), 1, 2 );
 
 		$args = array(
-			'channelUrl' => plugins_url( 'channel.php', __FILE__ ),
 			'xfbml' => true
 		);
 		if ( is_admin() ) {

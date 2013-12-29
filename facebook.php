@@ -420,7 +420,8 @@ class Facebook_Loader {
 
 		return new Facebook_WP_Extend( array(
 			'appId' => $this->credentials['app_id'],
-			'secret' => $this->credentials['app_secret']
+			'secret' => $this->credentials['app_secret'],
+			'allowSignedRequest' => false
 		) );
 	}
 

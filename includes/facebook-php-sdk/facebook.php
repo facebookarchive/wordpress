@@ -25,13 +25,22 @@ if ( ! class_exists( 'WP_Facebook' ) ):
  */
 class WP_Facebook extends WP_BaseFacebook
 {
+  /**
+   * Cookie prefix
+   */
   const FBSS_COOKIE_NAME = 'fbss';
 
-  // We can set this to a high number because the main session
-  // expiration will trump this.
+  /**
+   * We can set this to a high number because the main session
+   * expiration will trump this.
+   */
   const FBSS_COOKIE_EXPIRE = 31556926; // 1 year
 
-  // Stores the shared session ID if one is set.
+  /**
+   * Stores the shared session ID if one is set.
+   *
+   * @var string
+   */
   protected $sharedSessionID;
 
   /**
@@ -40,11 +49,12 @@ class WP_Facebook extends WP_BaseFacebook
    * access token if during the course of execution
    * we discover them.
    *
-   * @param Array $config the application configuration. Additionally
+   * @param array $config the application configuration. Additionally
    * accepts "sharedSession" as a boolean to turn on a secondary
    * cookie for environments with a shared session (that is, your app
    * shares the domain with other apps).
-   * @see WP_BaseFacebook::__construct in facebook.php
+   *
+   * @see WP_BaseFacebook::__construct
    */
   public function __construct($config) {
     parent::__construct($config);
@@ -53,9 +63,17 @@ class WP_Facebook extends WP_BaseFacebook
     }
   }
 
+  /**
+   * Supported keys for persistent data
+   *
+   * @var array
+   */
   protected static $kSupportedKeys =
     array('state', 'code', 'access_token', 'user_id');
 
+  /**
+   * Initiates Shared Session
+   */
   protected function initSharedSession() {
     $cookie_name = $this->getSharedSessionCookieName();
     if (isset($_COOKIE[$cookie_name])) {
@@ -94,9 +112,15 @@ class WP_Facebook extends WP_BaseFacebook
 
   /**
    * Provides the implementations of the inherited abstract
-   * methods.  The implementation uses PHP sessions to maintain
+   * methods. The implementation uses PHP sessions to maintain
    * a store for authorization codes, user ids, CSRF states, and
    * access tokens.
+   */
+
+  /**
+   * {@inheritdoc}
+   *
+   * @see WP_BaseFacebook::setPersistentData()
    */
   protected function setPersistentData($key, $value) {
     if (!in_array($key, self::$kSupportedKeys)) {
@@ -108,6 +132,11 @@ class WP_Facebook extends WP_BaseFacebook
     $_SESSION[$session_var_name] = $value;
   }
 
+  /**
+   * {@inheritdoc}
+   *
+   * @see WP_BaseFacebook::getPersistentData()
+   */
   protected function getPersistentData($key, $default = false) {
     if (!in_array($key, self::$kSupportedKeys)) {
       self::errorLog('Unsupported key passed to getPersistentData.');
@@ -119,6 +148,11 @@ class WP_Facebook extends WP_BaseFacebook
       $_SESSION[$session_var_name] : $default;
   }
 
+  /**
+   * {@inheritdoc}
+   *
+   * @see WP_BaseFacebook::clearPersistentData()
+   */
   protected function clearPersistentData($key) {
     if (!in_array($key, self::$kSupportedKeys)) {
       self::errorLog('Unsupported key passed to clearPersistentData.');
@@ -126,9 +160,16 @@ class WP_Facebook extends WP_BaseFacebook
     }
 
     $session_var_name = $this->constructSessionVariableName($key);
-    unset($_SESSION[$session_var_name]);
+    if (isset($_SESSION[$session_var_name])) {
+      unset($_SESSION[$session_var_name]);
+    }
   }
 
+  /**
+   * {@inheritdoc}
+   *
+   * @see WP_BaseFacebook::clearAllPersistentData()
+   */
   protected function clearAllPersistentData() {
     foreach (self::$kSupportedKeys as $key) {
       $this->clearPersistentData($key);
@@ -138,6 +179,9 @@ class WP_Facebook extends WP_BaseFacebook
     }
   }
 
+  /**
+   * Deletes Shared session cookie
+   */
   protected function deleteSharedSessionCookie() {
     $cookie_name = $this->getSharedSessionCookieName();
     unset($_COOKIE[$cookie_name]);
@@ -145,10 +189,23 @@ class WP_Facebook extends WP_BaseFacebook
     setcookie($cookie_name, '', 1, '/', '.'.$base_domain);
   }
 
+  /**
+   * Returns the Shared session cookie name
+   *
+   * @return string The Shared session cookie name
+   */
   protected function getSharedSessionCookieName() {
     return self::FBSS_COOKIE_NAME . '_' . $this->getAppId();
   }
 
+  /**
+   * Constructs and returns the name of the session key.
+   *
+   * @see setPersistentData()
+   * @param string $key The key for which the session variable name to construct.
+   *
+   * @return string The name of the session key.
+   */
   protected function constructSessionVariableName($key) {
     $parts = array('fb', $this->getAppId(), $key);
     if ($this->sharedSessionID) {

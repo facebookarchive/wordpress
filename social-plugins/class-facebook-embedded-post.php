@@ -73,6 +73,21 @@ class Facebook_Embedded_Post {
 	}
 
 	/**
+	 * Test if a provided width falls in the allowed range of a Facebook embedded post width
+	 *
+	 * @since 1.5.4
+	 *
+	 * @param int $width desired width of an embedded post in whole pixels
+	 * @return bool true if in accepted range
+	 */
+	public static function isValidWidth( $width ) {
+		$width = absint( $width );
+		if ( $width < 350 || $width > 750 )
+			return false;
+		return true;
+	}
+
+	/**
 	 * Width of the embedded post
 	 *
 	 * Must be between 350 and 750 inclusive.
@@ -83,7 +98,8 @@ class Facebook_Embedded_Post {
 	 * @return Facebook_Embedded_Post support chaining
 	 */
 	public function setWidth( $width ) {
-		if ( is_int( $width ) && $width >= 350 && $width <= 750 )
+		$width = absint( $width );
+		if ( self::isValidWidth( $width ) )
 			$this->width = $width;
 		return $this;
 	}

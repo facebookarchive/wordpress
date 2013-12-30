@@ -207,6 +207,8 @@ class Facebook_Shortcodes {
 	 * @return string Follow Button div HTML or empty string if minimum requirements not met
 	 */
 	public static function embedded_post( $attributes, $content = null ) {
+		global $content_width;
+
 		$options = shortcode_atts( array(
 			'href' => '',
 			'width' => 0,
@@ -217,11 +219,18 @@ class Facebook_Shortcodes {
 		if ( ! $options['href'] )
 			return '';
 
-		if ( $options['width'] < 350 || $options['width'] > 750 )
-			unset($options['width']);
-
 		if ( ! class_exists( 'Facebook_Embedded_Post' ) )
 			require_once( dirname(__FILE__) . '/class-facebook-embedded-post.php' );
+
+		$options['width'] = absint( $options['width'] );
+		if ( ! Facebook_Embedded_Post::isValidWidth( $options['width'] ) ) {
+			unset($options['width']);
+			if ( isset($content_width) ) {
+				$width = absint($content_width);
+				if ( Facebook_Embedded_Post::isValidWidth( $width ) )
+					$options['width'] = $width;
+			}
+		}
 
 		$embed = Facebook_Embedded_Post::fromArray( $options );
 		if ( ! $embed )

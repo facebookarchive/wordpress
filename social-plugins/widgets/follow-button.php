@@ -54,7 +54,7 @@ class Facebook_Follow_Button_Widget extends WP_Widget {
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 
 		if ( $title )
-			echo $before_title . esc_html( $title ) . $after_title;
+			echo $before_title . $title . $after_title;
 
 		echo $follow_button_html;
 

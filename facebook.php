@@ -488,7 +488,8 @@ class Facebook_Loader {
 		// check for enabled features by page type
 		$enabled_features = array();
 		$option_name = 'facebook_%s_features';
-		if ( is_home() || is_front_page() ) {
+		// do not check is_front_page, it can cause of the problem paged 2 (3,etc..) not working when the front page is set to a specific page.
+		if ( is_home() ) {
 			$enabled_features = get_option( sprintf( $option_name, 'home' ) );
 		} else if ( is_archive() ) {
 			// all archives wrapped in one option

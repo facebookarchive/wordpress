@@ -246,7 +246,7 @@ class Facebook_Settings {
 				$submenu[$menu_slug][] = array(
 					_x( 'Insights', 'Facebook Insights', 'facebook' ),
 					'manage_options',
-					'https://www.facebook.com/insights/?' . http_build_query( array( 'sk' => 'ao_' . $facebook_loader->credentials['app_id'] ) ),
+					esc_url( 'https://www.facebook.com/insights/' . $facebook_loader->credentials['app_id'], array( 'https', 'http' ) ),
 					''
 				);
 			}

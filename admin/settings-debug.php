@@ -492,7 +492,7 @@ class Facebook_Settings_Debugger {
 				} else {
 					$s = '';
 					foreach( $public_post_types as $post_type ) {
-						$s .= "'" . $wpdb->escape( $post_type ) . "',";
+						$s .= "'" . esc_sql( $post_type ) . "',";
 					}
 					$where .= ' IN (' . rtrim( $s, ',' ) . ')';
 					unset( $s );
@@ -508,7 +508,7 @@ class Facebook_Settings_Debugger {
 				} else {
 					$s = '';
 					foreach( $public_states as $state ) {
-						$s .= "'" . $wpdb->escape( $state ) . "',";
+						$s .= "'" . esc_sql( $state ) . "',";
 					}
 					$where .= ' IN (' . rtrim( $s, ',' ) . ')';
 					unset( $s );

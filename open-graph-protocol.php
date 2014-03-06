@@ -616,16 +616,6 @@ class Facebook_Open_Graph_Protocol {
 		if ( ! $post || ! isset( $post->ID ) )
 			return $og_images;
 
-		// does current post type and the current theme support post thumbnails?
-		if ( post_type_supports( get_post_type( $post ), 'thumbnail' ) && function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {
-			list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
-
-			$image = self::attachment_to_og_image( get_post_thumbnail_id( $post->ID ) );
-			if ( isset( $image['url'] ) && ! isset( $og_images[ $image['url'] ] ) )
-				$og_images[ $image['url'] ] = $image;
-			unset( $image );
-		}
-
 		// get image attachments
 		if ( function_exists( 'get_attached_media' ) ) {
 			$images = get_attached_media( 'image', $post->ID );
@@ -690,6 +680,16 @@ class Facebook_Open_Graph_Protocol {
 			$og_images = self::gallery_images( $post, $og_images );
 		}
 
+		// does current post type and the current theme support post thumbnails?
+		if ( post_type_supports( get_post_type( $post ), 'thumbnail' ) && function_exists( 'has_post_thumbnail' ) && has_post_thumbnail() ) {
+			list( $post_thumbnail_url, $post_thumbnail_width, $post_thumbnail_height ) = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
+		
+			$image = self::attachment_to_og_image( get_post_thumbnail_id( $post->ID ) );
+			if ( isset( $image['url'] ) && ! isset( $og_images[ $image['url'] ] ) )
+				$og_images[ $image['url'] ] = $image;
+			unset( $image );
+		}
+		
 		return $og_images;
 	}
 

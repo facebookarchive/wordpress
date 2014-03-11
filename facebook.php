@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Facebook
- * @version 1.5.4
+ * @version 1.5.5
  */
 /*
 Plugin Name: Facebook
@@ -9,7 +9,7 @@ Plugin URI: http://wordpress.org/plugins/facebook/
 Description: Add Facebook social plugins and the ability to publish new posts to a Facebook Timeline or Facebook Page. Official Facebook plugin.
 Author: Facebook
 Author URI: https://developers.facebook.com/docs/wordpress/
-Version: 1.5.4
+Version: 1.5.5
 License: GPL2
 License URI: license.txt
 Domain Path: /languages/
@@ -31,7 +31,7 @@ class Facebook_Loader {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.5.4';
+	const VERSION = '1.5.5';
 
 	/**
 	 * Default Facebook locale

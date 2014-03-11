@@ -2,10 +2,10 @@
 Contributors: Facebook, automattic, niallkennedy, mattwkelly, rgharpuray, ngfeldman, jamesgpearce, ravi.grover, danielbachhuber, gigawats, eosgood, Otto42, colmdoyle, zazinteractive
 Tags: Facebook, comments, social, friends, like, like button, social plugins, facebook platform, page, posts, sidebar, plugin, open graph, publish Facebook
 Requires at least: 3.3
-Tested up to: 3.8
+Tested up to: 3.9
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.5.4
+Stable tag: 1.5.5
 
 Add Facebook social plugins and the ability to publish new posts to a Facebook Timeline or Facebook Page. Official Facebook plugin.
 
@@ -144,6 +144,9 @@ It's possible another plugin (or your theme) including an English version of the
 
 == Upgrade Notice ==
 
+= 1.5.5 =
+Unescaped widget titles. Deprecated function update. Latest Facebook SDK for PHP.
+
 = 1.5.4 =
 Like Button share button support. Facebook Embedded Post custom width. Facebook SDK for PHP 3.2.3.
 
@@ -220,6 +223,13 @@ Improve site performance when cURL not installed or SSL not available. Removed p
 Security fixes. Improved customization and debugging of settings. l10n and i18n fixes.
 
 == Changelog ==
+
+= 1.5.5 =
+* Update Facebook SDK for PHP app secret proof and signed request handling
+* Add empty directory index files to prevent autoindex files and exposed server directories
+* Replace deprecated `$wpdb->escape()` with `esc_sql()`
+* Link to [App Insights 2.0](https://developers.facebook.com/blog/post/2014/01/23/introducing-app-insights-2-0-beta/ "Facebook developer application insights and statistics")
+* Remove widget title escaping, allowing HTML titles
 
 = 1.5.4 =
 * Facebook Like Button supports the new Share button

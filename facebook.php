@@ -265,7 +265,8 @@ class Facebook_Loader {
 		add_filter( 'script_loader_src', array( 'Facebook_Loader', 'async_script_loader_src' ), 1, 2 );
 
 		$args = array(
-			'xfbml' => true
+			'xfbml'   => true,
+			'version' => 'v1.0',
 		);
 		if ( is_admin() ) {
 			$args['status'] = true;

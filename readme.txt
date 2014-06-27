@@ -43,10 +43,10 @@ The development [source code for this plugin is available on Facebook's GitHub a
 == Installation ==
 
 1. Install Facebook for WordPress either via the WordPress.org plugin directory, or by uploading the files to your server (in the `/wp-content/plugins/` directory).
-1. You should be able to start using social plugins (Like Button, Send Button, etc.) right away.
-1. After activating the plugin, you will be asked to set up your Facebook application or enter existing credentials copied from the [Facebook Developers site](http://developers.facebook.com/apps/) to unlock additional features such as publishing posts to an author Timeline or site Page.
-1. Optionally set up a Facebook Open Graph action with user message, mentions tagging, and explicitly shared action capabilities. See the [Facebook for WordPress help page](https://developers.facebook.com/docs/wordpress/) for more information.
-1. That's it. You're ready to go!
+2. You should be able to start using social plugins (Like Button, Send Button, etc.) right away.
+3. After activating the plugin, you will be asked to set up your Facebook application or enter existing credentials copied from the [Facebook Developers site](http://developers.facebook.com/apps/) to unlock additional features such as publishing posts to an author Timeline or site Page.
+4. Optionally set up a Facebook Open Graph action with user message, mentions tagging, and explicitly shared action capabilities. See the [Facebook for WordPress help page](https://developers.facebook.com/docs/wordpress/) for more information.
+5. That's it. You're ready to go!
 
 == Screenshots ==
 

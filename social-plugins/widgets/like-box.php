@@ -81,7 +81,7 @@ class Facebook_Like_Box_Widget extends WP_Widget {
 			try {
 				$page_info = Facebook_WP_Extend::graph_api_with_app_access_token( '/fql', 'GET', array( 'q' => 'SELECT page_url FROM page WHERE ' . $where ) );
 			} catch ( WP_FacebookApiException $e ) {
-				break;
+				return 'https://www.facebook.com/' . $url_parts['path'];
 			}
 			unset( $where );
 

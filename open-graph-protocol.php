@@ -276,7 +276,7 @@ class Facebook_Open_Graph_Protocol {
 			$meta_tags[ self::OGP_NS . 'url' ] = apply_filters( 'facebook_rel_canonical', get_permalink( $post->ID ) );
 
 			if ( post_type_supports( $post_type, 'title' ) )
-				$meta_tags[ self::OGP_NS . 'title' ] = get_the_title();
+				$meta_tags[ self::OGP_NS . 'title' ] = strip_tags(get_the_title());
 			if ( post_type_supports( $post_type, 'excerpt' ) ) {
 				$description = '';
 
@@ -409,7 +409,7 @@ class Facebook_Open_Graph_Protocol {
 			unset( $author );
 		} else if ( is_page() ) {
 			$meta_tags[ self::OGP_NS . 'type' ] = 'article';
-			$meta_tags[ self::OGP_NS . 'title' ] = get_the_title();
+			$meta_tags[ self::OGP_NS . 'title' ] = strip_tags(get_the_title());
 			// duplicate_hook
 			$meta_tags[ self::OGP_NS . 'url' ] = apply_filters( 'facebook_rel_canonical', get_permalink() );
 		}

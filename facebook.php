@@ -259,13 +259,14 @@ class Facebook_Loader {
 		global $wp_scripts;
 
 		$handle = 'facebook-jssdk'; // match the Facebook async snippet ID to avoid double load
-		wp_register_script( $handle, ( is_ssl() ? 'https' : 'http' ) . '://connect.facebook.net/' . $this->locale . '/' . ( defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? 'all/debug.js' : 'all.js' ), array(), null, true );
+		wp_register_script( $handle, ( is_ssl() ? 'https' : 'http' ) . '://connect.facebook.net/' . $this->locale . '/' . ( defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? 'sdk/debug.js' : 'sdk.js' ), array(), null, true );
 
 		// register the script but take it back with an async load
 		add_filter( 'script_loader_src', array( 'Facebook_Loader', 'async_script_loader_src' ), 1, 2 );
 
 		$args = array(
-			'xfbml' => true
+			'xfbml'   => true,
+			'version' => 'v2.3'
 		);
 		if ( is_admin() ) {
 			$args['status'] = true;

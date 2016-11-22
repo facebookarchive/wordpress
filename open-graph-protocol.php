@@ -690,7 +690,7 @@ class Facebook_Open_Graph_Protocol {
 			$og_images = self::gallery_images( $post, $og_images );
 		}
 
-		return $og_images;
+		return apply_filters( 'facebook_og_images', $og_images, $post );
 	}
 
 	/**

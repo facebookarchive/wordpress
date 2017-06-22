@@ -144,6 +144,9 @@ It's possible another plugin (or your theme) including an English version of the
 
 == Upgrade Notice ==
 
+= 1.5.6 =
+Changed error handling to support PHP 7.x upwards.
+
 = 1.5.5 =
 Unescaped widget titles. Deprecated function update. Latest Facebook SDK for PHP.
 

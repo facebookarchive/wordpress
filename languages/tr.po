@@ -1,0 +1,1597 @@
+# Copyright (C) 2013 Facebook
+# This file is distributed under the same license as the Facebook package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Facebook 1.5.4\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/facebook\n"
+"POT-Creation-Date: 2013-12-30 01:28:16+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2018-02-02 00:22+0300\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: tr\n"
+
+#: admin/profile.php:78
+msgid "Post an article to my Facebook Timeline after it is public."
+msgstr ""
+"Bir makaleyi herkese açık olduktan sonra Facebook Zaman Tünelime gönder."
+
+#: admin/profile.php:96
+msgid "Facebook Account"
+msgstr "Facebook Hesabı"
+
+#: admin/profile.php:110
+msgctxt "Connected Facebook Profile"
+msgid "Connected Profile"
+msgstr "Bağlanmış Profil"
+
+#: admin/profile.php:113
+msgid "Associated on %s"
+msgstr "İlişkili %s"
+
+#: admin/profile.php:114
+msgctxt ""
+"Remove an association between a Facebook account and a WordPress user profile"
+msgid "Remove Facebook account"
+msgstr "Facebook hesabını kaldır"
+
+#: admin/profile.php:123
+msgid "Public profile information"
+msgstr "Herkese açık profil bilgileri"
+
+#: admin/profile.php:125
+msgid "Publish to Timeline"
+msgstr "Zaman tünelinde yayınla"
+
+#: admin/profile.php:127
+msgid "Manage your pages on your behalf (including creating content)"
+msgstr "Sayfalarınızı kendi adınıza yönetin (içerik oluşturma da dahil)"
+
+#: admin/profile.php:128
+msgid "Permissions"
+msgstr "İzinler"
+
+#: admin/profile.php:130
+msgid "None"
+msgstr "Hiçbiri"
+
+#: admin/profile.php:137
+msgctxt "Begin the process"
+msgid "Get started"
+msgstr "Başlangıç"
+
+#: admin/settings-app.php:71
+msgid "Facebook Plugin Settings"
+msgstr "Facebook Eklenti Ayarları"
+
+#: admin/settings-app.php:121
+msgid ""
+"Your server does not support communication with Facebook servers over HTTPS."
+msgstr ""
+"Sunucunuz, HTTPS üzerinden Facebook sunucuları ile olan iletişimi "
+"desteklemiyor."
+
+#: admin/settings-app.php:122
+msgid ""
+"Facebook application functionality such as posting to your Facebook Timeline "
+"requires a HTTPS connection to Facebook servers."
+msgstr ""
+"Facebook Zaman Tüneline gönderme gibi Facebook uygulaması fonksiyonel "
+"olarak, Facebook sunucularına bir HTTPS bağlantısı gerektirir."
+
+#: admin/settings-app.php:139
+msgid "Facebook for WordPress"
+msgstr "WordPress için Facebook"
+
+#: admin/settings-app.php:193
+msgid "Application information"
+msgstr "Uygulama Bilgisi"
+
+#: admin/settings-app.php:200
+msgctxt "Facebook application identifier"
+msgid "<abbr title=\"application\">App</abbr> ID"
+msgstr "<abbr title=\"application\">Uyg</abbr>Kimlik"
+
+#: admin/settings-app.php:208
+msgctxt "Facebook application secret"
+msgid "<abbr title=\"application\">App</abbr> Secret"
+msgstr "<abbr title=\"application\">Uyg</abbr> Gizli"
+
+#: admin/settings-app.php:219
+msgid "Restrictions"
+msgstr "Kısıtlamalar"
+
+#: admin/settings-app.php:226
+msgid "Child-Directed Site"
+msgstr "Çocuklara Yönelik Site"
+
+#: admin/settings-app.php:245
+msgid "Edit your application settings on Facebook"
+msgstr "Facebook'ta uygulama ayarlarınızı düzenleyin"
+
+#: admin/settings-app.php:247
+msgid ""
+"Create a new Facebook application or associate %s with an existing Facebook "
+"application."
+msgstr ""
+"Yeni bir Facebook uygulaması oluşturun veya % s ile var olan bir Facebook "
+"uygulamasıyla ilişkilendirin."
+
+#: admin/settings-app.php:258
+msgctxt "Section header for options limiting Facebook on your site"
+msgid "Limit Facebook functionality"
+msgstr "Facebook fonksiyonelliğini sınırla"
+
+#: admin/settings-app.php:283
+msgid ""
+"An application identifier associates your site, its pages, and visitor "
+"actions with a registered Facebook application."
+msgstr ""
+"Bir uygulama tanımlayıcısı sitenizi, sayfalarını ve ziyaretçi eylemlerini "
+"kayıtlı bir Facebook uygulamasıyla ilişkilendirir."
+
+#: admin/settings-app.php:308
+msgid ""
+"An application secret is a secret shared between Facebook and your "
+"application, similar to a password."
+msgstr ""
+"Bir uygulama gizliliği, Facebook ile uygulamanız arasında şifre gibi "
+"paylaşılan bir gizliliği ifade eder."
+
+#: admin/settings-app.php:325
+msgid ""
+"Is your site directed at children in the United States under the age of 13?"
+msgstr ""
+"Siteniz Amerika Birleşik Devletleri'ndeki 13 yaşın altındaki çocuklara mı "
+"yöneliktir ?"
+
+#: admin/settings-app.php:358
+msgid "App ID must contain only digits."
+msgstr "Uygulama kimliği yalnızca rakam içermelidir."
+
+#: admin/settings-app.php:373
+msgid "Invalid app secret."
+msgstr "Geçersiz uygulama gizliliği."
+
+#: admin/settings-app.php:390
+msgid "Application access token failed on authentication with Facebook."
+msgstr "Uygulama erişim simgesi Facebook ile doğrulamada başarısız oldu."
+
+#: admin/settings-app.php:404
+msgid "Application ID and secret failed on authentication with Facebook."
+msgstr "Uygulama kimliği ve gizlilik Facebook ile doğrulamada başarısız oldu."
+
+#: admin/settings-app.php:413
+msgid "Unable to request application data from Facebook."
+msgstr "Uygulama verisi Facebook'tan talep edilemiyor."
+
+#: admin/settings-app.php:437
+msgid ""
+"%s to take advantage of advantage of advanced Facebook features such as post "
+"to timeline, recommendations bar, and more."
+msgstr ""
+"Zaman çizelgesinde yayınla, öneriler çubuğu ve daha pek çok şey gibi %s "
+"gelişmiş Facebook özelliklerinden yararlanılacak."
+
+#: admin/settings-app.php:437
+msgid "Register for a Facebook application"
+msgstr "Bir Facebook uygulaması için kaydolma"
+
+#: admin/settings-app.php:437
+msgid ""
+"You may need to register your %1$s account as a developer account if this is "
+"your first time managing a %1$s application."
+msgstr ""
+"Eğer bu bir %1$s uygulamayı ilk defa yönetişiniz ise %1$s hesabınızı bir "
+"geliştirici hesap olarak kaydettirmeniz gerekebilir."
+
+#: admin/settings-app.php:439
+msgid ""
+"Click the %s button near the top right corner of the page to trigger an "
+"application creation dialog."
+msgstr ""
+"Bir uygulama oluşturma iletişim kutusunu başlatmak için sayfanın sağ üst "
+"köşesindeki %s düğmesine tıklayın."
+
+#: admin/settings-app.php:441
+msgid "Facebook new application creation dialog"
+msgstr "Facebook yeni uygulama oluşturma iletişim kutusu"
+
+#: admin/settings-app.php:443
+msgid "Uniquely identify your site on Facebook with an application name."
+msgstr ""
+"Facebook'ta bir uygulama adı ile sitenizi benzersiz şekilde tanımlayın."
+
+#: admin/settings-app.php:451
+msgid "You must choose an application name longer than \"%s.\""
+msgstr "\"%s\"den daha uzun bir uygulama adı seçmelisiniz."
+
+#: admin/settings-app.php:452 admin/settings-app.php:455
+msgid "An application name must be between %1$u and %2$u characters in length."
+msgstr "Bir uygulama adı %1$u ila  %2$u karakter uzunluğunda olmalıdır."
+
+#: admin/settings-app.php:454
+msgid "You must choose an application name shorter than \"%s.\""
+msgstr "\"%s\"den daha kısa bir uygulama adı seçmelisiniz."
+
+#: admin/settings-app.php:457
+msgid "You may choose to use \"%s\" as your Facebook application name."
+msgstr "Facebook uygulaması adınız olarak \"%s\" kullanmayı seçebilirsiniz."
+
+#: admin/settings-app.php:475
+msgctxt "open the link to Facebook Developers dashboard site."
+msgid "Open the %s."
+msgstr "%s 'yi aç"
+
+#: admin/settings-app.php:476
+msgid "Facebook Developers Applications dashboard"
+msgstr "Facebook Geliştiricileri Uygulamaları ön bilgi panosu"
+
+#: admin/settings-app.php:479
+msgid "Select your existing application from the list of applications"
+msgstr "Mevcut uygulamalarınızı uygulamalar listesinden seçin"
+
+#: admin/settings-app.php:480
+msgid ""
+"Copy your App ID and App Secret from the Settings Summary section of your "
+"application."
+msgstr ""
+"Uygulamanızın Ayarlar Özeti bölümünden  Uygulama Kimliği  ve Uygulama "
+"Gizliliği kopyalayın."
+
+#: admin/settings-app.php:497
+msgid "Facebook application"
+msgstr "Facebook uygulaması"
+
+#: admin/settings-app.php:500
+msgid "new Facebook application"
+msgstr "yeni Facebook uygulaması "
+
+#: admin/settings-app.php:505
+msgid ""
+"Your %1$s should be associated with %2$s across desktop web, mobile web, "
+"iPhone, Android, or any other presence you have established."
+msgstr ""
+"%1$s'iniz %2$s masaüstü web, mobil web, iPhone, Android veya kurduğunuz "
+"diğer varlıklarla  ilişkili olmalıdır."
+
+#: admin/settings-app.php:506
+msgid ""
+"Facebook can send site visitors to the most appropriate URL based on their "
+"browsing context, market your site, and properly identify quality content "
+"with some extra information for your application."
+msgstr ""
+"Facebook, gezinme durumuna göre en uygun URL'ye site ziyaretçileri "
+"gönderebilir, sitenizi pazarlayabilir ve uygulamanız için bazı ek bilgilerle "
+"kaliteli içeriği doğru bir şekilde belirleyebilir."
+
+#: admin/settings-app.php:511
+msgid "Basic Settings"
+msgstr "Temel Ayarlar"
+
+#: admin/settings-app.php:512
+msgid ""
+"Associate your Facebook application with a domain, a desktop URL, and a "
+"mobile URL through your application's %s."
+msgstr ""
+"Facebook uygulamanızı bir domain ile ilişkilendirin,bir masaüstü URL'sine ve "
+"bir mobil URL'ye bağlayın"
+
+#: admin/settings-app.php:512
+msgid "basic settings"
+msgstr "temel ayarlar"
+
+#: admin/settings-app.php:513
+msgid "For example:"
+msgstr "Örneğin:"
+
+#: admin/settings-app.php:515
+msgctxt "data entry field"
+msgid "Field"
+msgstr "Alan"
+
+#: admin/settings-app.php:515
+msgctxt "data entry value"
+msgid "Value"
+msgstr "Değer"
+
+#: admin/settings-app.php:519
+msgid "Contact Email"
+msgstr "İletişim E-posta"
+
+#: admin/settings-app.php:521 admin/settings-debug.php:343
+msgid "App Domains"
+msgstr "Uygulama Domainleri"
+
+#: admin/settings-app.php:522
+msgid "Website with Facebook Login"
+msgstr "Facebook Girişli WebSitesi"
+
+#: admin/settings-app.php:523
+msgid "Mobile website"
+msgstr "Mobil website"
+
+#: admin/settings-app.php:528
+msgid "App Details"
+msgstr "Uygulama Detayları"
+
+#: admin/settings-app.php:530
+msgid "Set your primary language, site description, and categorize your site."
+msgstr ""
+"Öncelikli dilinizi ayarlayın, siteyi tanımlayın, ve sitenizi kategorize edin."
+
+#: admin/settings-app.php:531
+msgid ""
+"Add icons and images to establish trust when asking your authors for publish "
+"permissions or marketing your site through Facebook."
+msgstr ""
+"Yaratıcınızdan sitenizi Facebook ile pazarlamak veya yayın izinleri "
+"istediğinizde güven oluşturmak için için simgeler ve resimler ekleyin."
+
+#: admin/settings-app.php:546
+msgid ""
+"Comply with privacy laws of your audience including information collected "
+"about children."
+msgstr ""
+"Çocuklarla ilgili toplanan bilgiler de dahil olmak üzere kitlenizin gizlilik "
+"yasalarına uyun."
+
+#: admin/settings-app.php:547
+msgid ""
+"Example: a site primary directed at children in the United States under the "
+"age of 13 might set this option to comply with privacy policies in the "
+"United States."
+msgstr ""
+"Örneğin: Birleşik Devletler'de öncelikli olarak 13 yaşın altındaki çocuklara "
+"yönelik bir site, bu seçeneği ABD'deki gizlilik politikalarına uymak üzere "
+"ayarlayabilir."
+
+#: admin/settings-app.php:548
+msgid ""
+"Facebook social plugins: Information for Child-Directed Sites and Services"
+msgstr ""
+"Facebook sosyal eklentileri: Çocuklara Yönelik Siteler ve Hizmetler İçin "
+"Bilgiler"
+
+#: admin/settings-app.php:572
+msgid "Create a Facebook application"
+msgstr "Bir Facebook uygulaması oluştur"
+
+#: admin/settings-app.php:578
+msgid "Existing Facebook application"
+msgstr "Var olan Facebook uygulaması"
+
+#: admin/settings-app.php:585
+msgid "Application details"
+msgstr "Uygulama Detayları"
+
+#: admin/settings-app.php:591
+msgid "Child directed"
+msgstr "Çocuklara Yönelik"
+
+#: admin/settings-app.php:595 admin/settings-social-publisher.php:421
+msgid "Facebook Apps Tool"
+msgstr "Facebook Uygulama Aracı"
+
+#: admin/settings-comments.php:64
+msgid "Comments Box"
+msgstr "Yorumlar kutusu"
+
+#: admin/settings-comments.php:128 admin/settings-follow-button.php:134
+#: admin/settings-like-button.php:133
+#: admin/settings-recommendations-bar.php:134
+#: admin/settings-send-button.php:120 admin/settings-social-publisher.php:149
+msgid "%s Settings"
+msgstr "%s Ayarlar"
+
+#: admin/settings-comments.php:154 admin/settings-follow-button.php:161
+#: admin/settings-like-button.php:160
+#: admin/settings-recommendations-bar.php:162
+#: admin/settings-send-button.php:147
+msgctxt "Display the social plugin in specific areas of a website"
+msgid "Show on"
+msgstr "Göster"
+
+#: admin/settings-comments.php:163
+msgctxt "Number of comments to display in a list of comments"
+msgid "Number of comments"
+msgstr "Yorum sayısı"
+
+#: admin/settings-comments.php:171
+msgid "Order by"
+msgstr "Tarafından yapıldı"
+
+#: admin/settings-comments.php:178 admin/settings-follow-button.php:193
+#: admin/settings-like-button.php:200
+#: social-plugins/widgets/activity-feed.php:245
+#: social-plugins/widgets/follow-button.php:148
+#: social-plugins/widgets/like-box.php:391
+#: social-plugins/widgets/like-button.php:161
+#: social-plugins/widgets/recommendations-box.php:198
+msgid "Width"
+msgstr "Genişlik"
+
+#: admin/settings-comments.php:186 admin/settings-follow-button.php:209
+#: admin/settings-like-button.php:223 admin/settings-send-button.php:172
+#: social-plugins/widgets/activity-feed.php:290
+#: social-plugins/widgets/follow-button.php:162
+#: social-plugins/widgets/like-box.php:373
+#: social-plugins/widgets/like-button.php:182
+#: social-plugins/widgets/recommendations-box.php:243
+#: social-plugins/widgets/send-button.php:123
+msgid "Color scheme"
+msgstr "Renk Şeması"
+
+#: admin/settings-comments.php:203
+msgid ""
+"Enable social commenting backed by a Facebook account and optional providers "
+"AOL, Hotmail, or Yahoo!."
+msgstr ""
+"Bir Facebook hesabı ve opsiyonel sağlayıcılar olan AOL, Hotmail veya Yahoo "
+"tarafından desteklenen sosyal yorumlamayı etkinleştirin!."
+
+#: admin/settings-comments.php:203 admin/settings-follow-button.php:224
+#: admin/settings-like-button.php:238
+#: admin/settings-recommendations-bar.php:224
+#: admin/settings-send-button.php:189
+msgid "%s social plugin documentation"
+msgstr "%s sosyal eklenti belgeleri"
+
+#: admin/settings-comments.php:203 admin/settings-follow-button.php:224
+#: admin/settings-like-button.php:238
+#: admin/settings-recommendations-bar.php:224
+#: admin/settings-send-button.php:189
+msgid "Read more..."
+msgstr "Dahası için okuyun..."
+
+#: admin/settings-comments.php:204
+msgid "Comments appear in the author's Facebook Timeline."
+msgstr "Yorumlar, yazarın Facebook Zaman Tünelinde görünür."
+
+#: admin/settings-comments.php:204
+msgid ""
+"All administrators of your Facebook application will be able to moderate "
+"comments."
+msgstr "Facebook uygulamanızın tüm yöneticileri yorumları denetleyebilecektir."
+
+#: admin/settings-comments.php:205
+msgid ""
+"You may customize your %1$s settings from the %2$s including moderated "
+"comments, blacklisted words, and comment sorting."
+msgstr ""
+"%2$s'den %1$s ayarlarınızı,kara listeye eklenmiş kelimeleri,yorum "
+"sıralamasını, denetlenen yorumlar dahil, özelleştirebilirsiniz."
+
+#: admin/settings-comments.php:205
+msgid "Facebook Comments Tool"
+msgstr "Facebook Yorumlar Aracı"
+
+#: admin/settings-comments.php:205
+msgid ""
+"You may also specify individual comment moderators not associated with your "
+"application."
+msgstr ""
+"Ayrıca, uygulamanızla ilişkili olmayan şahsi yorum moderatörlerini de "
+"belirtebilirsiniz."
+
+#: admin/settings-comments.php:257
+msgid "Display the %s on one or more post types."
+msgstr "%s'yi bir veya daha fazla yazı tipi üzerinde görüntüleme."
+
+#: admin/settings-comments.php:279
+msgctxt "Digit prefix. Example: 5 comments shown"
+msgid "top-level comments shown before viewer expansion."
+msgstr ""
+"görüntüleyen kişinin ilerlemesi öncesinde gösterilen üst düzey yorumlar."
+
+#: admin/settings-comments.php:309 admin/settings-follow-button.php:439
+#: admin/settings-like-button.php:460
+msgid "Content width: %u"
+msgstr "İçerik genişliği:%u"
+
+#: admin/settings-comments.php:311 admin/settings-follow-button.php:441
+#: admin/settings-like-button.php:462
+msgid "The width of the %s display area in whole pixels."
+msgstr " %s'nin görüntü alanının genişliği piksel cinsinden."
+
+#: admin/settings-comments.php:336
+msgid "social"
+msgstr "Sosyal"
+
+#: admin/settings-comments.php:337
+msgctxt "display comments ordered from oldest to newest"
+msgid "oldest first"
+msgstr "önce en eskiler"
+
+#: admin/settings-comments.php:338
+msgctxt "display comments ordered from newest to oldest"
+msgid "newest first"
+msgstr "önce en yeniler"
+
+#: admin/settings-debug.php:45
+msgid "Debugger"
+msgstr "Debugger"
+
+#: admin/settings-debug.php:201
+msgid "App %s"
+msgstr "Uygulama %s"
+
+#: admin/settings-debug.php:238
+msgid "You have the ability to change these application settings on Facebook."
+msgstr "Bu uygulama ayarlarını Facebook'ta değiştirebilirsiniz."
+
+#: admin/settings-debug.php:287 admin/settings-debug.php:289
+msgctxt "bridge between two options: this or that or these"
+msgid "or"
+msgstr "yada"
+
+#: admin/settings-debug.php:292
+msgid "%s can change these application settings on Facebook."
+msgstr "%s bu uygulama ayarlarını Facebook'ta değiştirilebilir."
+
+#: admin/settings-debug.php:322
+msgid "Facebook Login"
+msgstr "Facebook Giriş"
+
+#: admin/settings-debug.php:323
+msgctxt "Table column header. The Facebook application setting."
+msgid "Setting"
+msgstr "Ayar"
+
+#: admin/settings-debug.php:323
+msgctxt "Facebook application setting retrieved from Facebook servers."
+msgid "Value"
+msgstr "Değer"
+
+#: admin/settings-debug.php:327
+msgid "App name"
+msgstr "Uygulama adı"
+
+#: admin/settings-debug.php:334
+msgid "My Site"
+msgstr "Benim Sitem"
+
+#: admin/settings-debug.php:335 admin/settings-debug.php:352
+#: admin/settings-debug.php:362 admin/settings-debug.php:375
+#: admin/settings-debug.php:387
+msgid "Not set. Consider using: %s"
+msgstr "Ayarlanmamış.Kullanmayı düşünün: %s"
+
+#: admin/settings-debug.php:337
+msgctxt "No stored value found."
+msgid "Not set."
+msgstr "Ayarlanmamış."
+
+#: admin/settings-debug.php:357
+msgid "Website"
+msgstr "Website"
+
+#: admin/settings-debug.php:367
+msgid "One-line description"
+msgstr "Tek satırlık tanımlama"
+
+#: admin/settings-debug.php:374
+msgid "Just another WordPress site"
+msgstr "Başka bir WordPress sitesi"
+
+#: admin/settings-debug.php:377 admin/settings-debug.php:395
+#: admin/settings-debug.php:406 admin/settings-debug.php:415
+#: admin/settings-debug.php:424
+msgid "Not set."
+msgstr "Ayarlanmamış."
+
+#: admin/settings-debug.php:383
+msgctxt ""
+"Explain the reason for requesting publish permissions from a Facebook user"
+msgid "Publish permissions explanation"
+msgstr "Yayımlama izinleri açıklaması"
+
+#: admin/settings-debug.php:387
+msgid "Publish new posts to your Facebook Timeline or Page."
+msgstr "Facebook Zaman Tünelinizde veya Sayfanızda yeni yayın yayımlayın."
+
+#: admin/settings-debug.php:391
+msgid "Privacy Policy"
+msgstr "Gizlilik Politikası"
+
+#: admin/settings-debug.php:395 admin/settings-debug.php:406
+msgctxt "Create a new WordPress page"
+msgid "Create a new page?"
+msgstr "Yeni bir sayfa oluşturmak mı?"
+
+#: admin/settings-debug.php:400
+msgid "Terms of Service"
+msgstr "Hizmet Şartları"
+
+#: admin/settings-debug.php:411
+msgctxt "Facebook application logo"
+msgid "Logo"
+msgstr "Logo"
+
+#: admin/settings-debug.php:413
+msgid "Facebook application logo"
+msgstr "Facebook uygulama logosu"
+
+#: admin/settings-debug.php:420
+msgctxt "Facebook application icon"
+msgid "Icon"
+msgstr "İkon"
+
+#: admin/settings-debug.php:422
+msgid "Facebook application icon"
+msgstr "Facebook uygulama ikonu"
+
+#: admin/settings-debug.php:448
+msgid "Authors"
+msgstr "Yaratıcılar"
+
+#: admin/settings-debug.php:454
+msgctxt "Local user account has an associated Facebook account stored"
+msgid "Connected to Facebook"
+msgstr "Facebook'a Bağlı"
+
+#: admin/settings-debug.php:454 admin/settings-debug.php:519
+msgid "Name"
+msgstr "İsim"
+
+#: admin/settings-debug.php:454
+msgid "Facebook account"
+msgstr "Facebook Hesabı"
+
+#: admin/settings-debug.php:454
+msgid "Post to timeline"
+msgstr "Zaman Tüneline gönder"
+
+#: admin/settings-debug.php:454
+msgid "Manage pages"
+msgstr "Sayfaları yönet"
+
+#: admin/settings-debug.php:519
+msgid "Not connected to Facebook"
+msgstr "Facebook'a bağlı değil"
+
+#: admin/settings-debug.php:519
+msgid "Number of published posts in the last %u days"
+msgstr "Son %u gün içinde yayımlanan yayınların sayısı"
+
+#: admin/settings-debug.php:519
+msgctxt "recent articles. used as a table column header"
+msgid "# of recent posts"
+msgstr "# son yayınlar"
+
+#: admin/settings-debug.php:547 admin/settings-social-publisher.php:197
+msgid "Facebook Page"
+msgstr "Facebook Sayfası"
+
+#: admin/settings-debug.php:553
+msgctxt "publishing to a page name on Facebook.com"
+msgid "Publishing to %s."
+msgstr " %s da yayınlanıyor."
+
+#: admin/settings-debug.php:557
+msgid "Saved by you."
+msgstr "Siz kaydettiniz."
+
+#: admin/settings-debug.php:561 admin/settings-social-publisher.php:348
+msgctxt "saved by person name"
+msgid "Saved by %s."
+msgstr "Tarafından kaydedildi %s."
+
+#: admin/settings-debug.php:587
+msgid "Social Plugins"
+msgstr "Sosyal Eklentiler"
+
+#: admin/settings-debug.php:588
+msgctxt ""
+"software features available based on different classifications website view"
+msgid "Features enabled by view type"
+msgstr "Görünüm türü tarafından etkinleştirilen özellikler"
+
+#: admin/settings-debug.php:592
+msgctxt "Facebook Like Button social plugin"
+msgid "Like Button"
+msgstr "Beğenme Butonu"
+
+#: admin/settings-debug.php:596
+msgctxt "Facebook Send Button social plugin"
+msgid "Send Button"
+msgstr "Gönderme Butonu"
+
+#: admin/settings-debug.php:600
+msgctxt "Facebook Follow Button social plugin"
+msgid "Follow Button"
+msgstr "Takip Etme Butonu"
+
+#: admin/settings-debug.php:604
+msgctxt "Facebook Recommendations Bar social plugin"
+msgid "Recommendations Bar"
+msgstr "Öneriler Çubuğu"
+
+#: admin/settings-debug.php:608
+msgctxt "Facebook Comments Box social plugin"
+msgid "Comments Box"
+msgstr "Yorumlar kutusu"
+
+#: admin/settings-debug.php:613
+msgid "View"
+msgstr "Göster"
+
+#: admin/settings-debug.php:661
+msgid "Activity Feed"
+msgstr "Etkinlik Akışı"
+
+#: admin/settings-debug.php:665 admin/settings-like-button.php:73
+msgid "Like Button"
+msgstr "Beğenme Butonu"
+
+#: admin/settings-debug.php:669
+msgid "Recommendations Box"
+msgstr "Öneriler Çubuğu"
+
+#: admin/settings-debug.php:673 admin/settings-send-button.php:62
+#: admin/settings-send-button.php:218
+msgid "Send Button"
+msgstr "Gönderme Butonu"
+
+#: admin/settings-debug.php:677 admin/settings-follow-button.php:62
+msgid "Follow Button"
+msgstr "Takip Etme Butonu"
+
+#: admin/settings-debug.php:682
+msgid "Widgets"
+msgstr "Widgetlar"
+
+#: admin/settings-debug.php:683
+msgctxt "name of a page component"
+msgid "Widget name"
+msgstr "Widget ismi"
+
+#: admin/settings-debug.php:683
+msgid "Active"
+msgstr "Aktif"
+
+#: admin/settings-debug.php:703
+msgid "Server configuration"
+msgstr "Sunucu yapılandırması"
+
+#: admin/settings-debug.php:703
+msgid "Feature"
+msgstr "Özellik"
+
+#: admin/settings-debug.php:703
+msgctxt "Information"
+msgid "Info"
+msgstr "Bilgi"
+
+#: admin/settings-debug.php:706 admin/settings-debug.php:715
+msgctxt "software version"
+msgid "%s version"
+msgstr "%s versiyon"
+
+#: admin/settings-debug.php:718
+msgid "Server software"
+msgstr "Sunucu yazılımı"
+
+#: admin/settings-debug.php:722
+msgctxt "server-to-server connection"
+msgid "%s connection method"
+msgstr "%s bağlantı yöntemi"
+
+#: admin/settings-debug.php:750
+msgctxt "No available solution found."
+msgid "none available"
+msgstr "hiçbiri mevcut değil"
+
+#: admin/settings-follow-button.php:168 admin/settings-like-button.php:167
+#: admin/settings-send-button.php:154
+msgctxt ""
+"Desired position of a Facebook social plugin relative to main post content."
+msgid "Position"
+msgstr "Pozisyon"
+
+#: admin/settings-follow-button.php:178 admin/settings-like-button.php:185
+msgctxt ""
+"Positioning of components of a Facebook social plugin relative to each "
+"other. Example layouts include button before interaction count or "
+"interaction count above button."
+msgid "Layout"
+msgstr "Düzen"
+
+#: admin/settings-follow-button.php:185 admin/settings-like-button.php:192
+msgctxt ""
+"Show the faces of Facebook friends who have interacted with this object."
+msgid "Show faces"
+msgstr "Yüzleri göster"
+
+#: admin/settings-follow-button.php:201 admin/settings-like-button.php:215
+#: admin/settings-send-button.php:164
+#: social-plugins/widgets/activity-feed.php:273
+#: social-plugins/widgets/follow-button.php:155
+#: social-plugins/widgets/like-button.php:175
+#: social-plugins/widgets/recommendations-box.php:226
+#: social-plugins/widgets/send-button.php:116
+msgid "Font"
+msgstr "Yazı Tipi"
+
+#: admin/settings-follow-button.php:224
+msgid ""
+"Encourage visitors to follow to public updates from an author's Facebook "
+"account."
+msgstr ""
+"Ziyaretçileri bir yaratıcının Facebook hesabındaki genel güncellemeleri "
+"takip etmeye teşvik edin."
+
+#: admin/settings-follow-button.php:313
+msgctxt "Facebook users following public updates from another Facebook user"
+msgid "followers"
+msgstr "takipçiler"
+
+#: admin/settings-follow-button.php:315 admin/settings-like-button.php:336
+msgid "Display social text next to the button."
+msgstr "Sosyal metni butonun yanında gösterin."
+
+#: admin/settings-follow-button.php:316 admin/settings-like-button.php:337
+msgid "Display total number of %s next to the button."
+msgstr "Butonun yanındaki toplam %s sayısını göster."
+
+#: admin/settings-follow-button.php:317 admin/settings-like-button.php:338
+msgid "Display total number of %s above the button."
+msgstr "Butonun üstündeki %s sayısını göster."
+
+#: admin/settings-follow-button.php:401
+msgid ""
+"Show profile photos of the viewer's friends who already follow this person."
+msgstr ""
+"Bu kişiyi zaten takip eden görüntüleyicinin arkadaşlarının profil "
+"fotoğraflarını göster."
+
+#: admin/settings-like-button.php:177 admin/settings-like-button.php:321
+msgid "Share Button"
+msgstr "Paylaşma Butonu"
+
+#: admin/settings-like-button.php:208
+#: admin/settings-recommendations-bar.php:178
+#: social-plugins/widgets/like-button.php:168
+msgid "Action"
+msgstr "Eylem"
+
+#: admin/settings-like-button.php:238
+msgid ""
+"Help your visitors share your pages on their Facebook profile with one click."
+msgstr ""
+"Ziyaretçilerinizin tek bir tıklamayla Facebook profillerinde sizin "
+"sayfalarınızı paylaşmalarına yardımcı olun."
+
+#: admin/settings-like-button.php:321
+msgctxt ""
+"Include another social plugin alongside the current social plugin. Example: "
+"Share alongside Like"
+msgid "Include a %1$s alongside the %2$s."
+msgstr "%2$s ile birlikte%1$s ekleyin."
+
+#: admin/settings-like-button.php:323
+msgid ""
+"Allows a Facebook user to easily share your URL on a Facebook Timeline, "
+"Page, group, or in a Facebook Message."
+msgstr ""
+"Bir Facebook kullanıcısının, URL'nizi bir Facebook Zaman Tünelinde, Sayfada, "
+"grupta veya Facebook Mesajında kolayca paylaşmasına izin verir."
+
+#: admin/settings-like-button.php:334
+msgctxt "plural of the noun: Facebook Likes"
+msgid "likes"
+msgstr "beğeniler"
+
+#: admin/settings-like-button.php:422 social-plugins/widgets/like-box.php:356
+msgid ""
+"Show profile photos of the viewer's friends who have already liked the URL."
+msgstr ""
+"URL'yi zaten beğenmiş olan görüntüleyicinin arkadaşlarının profil "
+"fotoğraflarını gösterin."
+
+#: admin/settings-like-button.php:504
+msgid "Action verb displayed in button."
+msgstr "Eylem fiil butonda görüntülenir."
+
+#: admin/settings-recommendations-bar.php:62
+msgid "Recommendations Bar"
+msgstr "Öneriler Çubuğu"
+
+#: admin/settings-recommendations-bar.php:169
+msgctxt ""
+"Form label asking the viewer to choose the left or right side of a webpage "
+"for widget display."
+msgid "Side"
+msgstr "Yan"
+
+#: admin/settings-recommendations-bar.php:185
+msgctxt ""
+"An event triggering another event on a webpage. Examples: scrolled to the "
+"end of the page; 30 seconds elapsed."
+msgid "Trigger"
+msgstr "Başlatıcı"
+
+#: admin/settings-recommendations-bar.php:192
+msgctxt "A number of elapsed seconds"
+msgid "Read time"
+msgstr "Okuma zamanı"
+
+#: admin/settings-recommendations-bar.php:200
+msgid "Number of recommendations"
+msgstr "Önerilerin sayısı"
+
+#: admin/settings-recommendations-bar.php:208
+#: social-plugins/widgets/activity-feed.php:222
+#: social-plugins/widgets/recommendations-box.php:255
+msgid "Maximum age"
+msgstr "Maksimum yaş"
+
+#: admin/settings-recommendations-bar.php:224
+msgid ""
+"Encourage additional pageviews with site recommendations based on social "
+"context."
+msgstr ""
+"Sosyal içeriğe dayalı olarak site önerileri ile ek sayfa görüntüleme "
+"öneririz."
+
+#: admin/settings-recommendations-bar.php:224
+msgid ""
+"Adds a Like Button overlay to the bottom of your page with an expanded list "
+"of recommendations triggered by time or position on the page."
+msgstr ""
+"Sayfadaki zaman veya konuma bağlı olarak başlatılan genişletilmiş bir liste "
+"ile sayfanın altına alt sırayı kapatan şekilde bir beğeni düğmesi ekler."
+
+#: admin/settings-recommendations-bar.php:264
+msgid "The side of the screen where the Recommendations Bar will be displayed."
+msgstr "Tavsiye çubuğunun görüntüleneceği yerin yan tarafı."
+
+#: admin/settings-recommendations-bar.php:292
+msgid "Action verb displayed in the Like Button."
+msgstr "Eylem fiili, Beğen Butonunda görüntülenir."
+
+#: admin/settings-recommendations-bar.php:319
+msgid ""
+"Bottom of page for home & archive pages, after post for single post types."
+msgstr ""
+"Sayfanın alt tarafı ev ve arşiv sayfaları ,tekli gönderim türleri sonrası "
+"içindir."
+
+#: admin/settings-recommendations-bar.php:323
+msgid "After a visitor scrolls through %s of the total page height."
+msgstr ""
+"Bir ziyaretçi, toplam sayfa yüksekliğinin %s 'si boyunca ilerledikten sonra."
+
+#: admin/settings-recommendations-bar.php:323
+msgid "Percentage of total page height expressed as a whole positive number."
+msgstr ""
+"Toplam sayfa yüksekliğinin yüzdesi, bir pozitif sayı olarak ifade edilir."
+
+#: admin/settings-recommendations-bar.php:326
+msgid "I will call the %s function manually from my site JavaScript."
+msgstr "%S fonksiyonu sitemdeki JavaScript'ten manuel olarak çağıracağım."
+
+#: admin/settings-recommendations-bar.php:348
+msgctxt "measurement of time"
+msgid "seconds"
+msgstr "saniye"
+
+#: admin/settings-recommendations-bar.php:349
+msgid "Number of seconds before the plugin will expand"
+msgstr "Eklenti genişletilmeden önceki saniye sayısı"
+
+#: admin/settings-recommendations-bar.php:369
+msgid "maximum recommendation"
+msgid_plural "maximum recommendations"
+msgstr[0] "maksimum öneri"
+msgstr[1] ""
+
+#: admin/settings-recommendations-bar.php:389
+#: social-plugins/widgets/activity-feed.php:223
+#: social-plugins/widgets/recommendations-box.php:256
+msgid "day old"
+msgid_plural "days old"
+msgstr[0] "Eski zamanlar"
+msgstr[1] ""
+
+#: admin/settings-recommendations-bar.php:393
+#: social-plugins/widgets/activity-feed.php:227
+#: social-plugins/widgets/recommendations-box.php:260
+msgid "(no limit)"
+msgstr "(sınırsız)"
+
+#: admin/settings-recommendations-bar.php:395
+#: social-plugins/widgets/activity-feed.php:231
+#: social-plugins/widgets/recommendations-box.php:264
+msgid "Limit recommendations to articles authored within the last N days."
+msgstr "Önerileri son N gün içinde yazılmış olan makalelere sınırlayın."
+
+#: admin/settings-recommendations-bar.php:395
+#: social-plugins/widgets/activity-feed.php:231
+#: social-plugins/widgets/recommendations-box.php:264
+msgid "Reset this value to %s for no date-based limits."
+msgstr "Tarih tabanlı sınırlar yok için bu değeri %s olarak sıfırlayın."
+
+#: admin/settings-send-button.php:188
+msgid ""
+"Help site visitors send your URL in a message to any email address, a "
+"message to his or her Facebook friends, or a post to a Facebook group."
+msgstr ""
+"Site ziyaretçilerine, URL'nizi bir mesajla herhangi bir e-posta adresine, "
+"Facebook arkadaşlarına mesajla veya bir Facebook grubuna göndermesi için "
+"yardımcı olun."
+
+#: admin/settings-social-plugin-button.php:34
+msgid "before & after the post"
+msgstr "önce & sonra yayını"
+
+#: admin/settings-social-plugin-button.php:35
+msgid "after the post"
+msgstr "yayından sonrası"
+
+#: admin/settings-social-plugin-button.php:36
+msgid "before the post"
+msgstr "yayından öncesi"
+
+#: admin/settings-social-plugin.php:83
+msgid ""
+"Choose where the %s will appear including your site homepage, archive pages, "
+"or individual public post types."
+msgstr ""
+"Sitenizin ana sayfasını, arşiv sayfalarını veya tek tek herkese açık "
+"gönderim türlerini içeren %s'nin nerede görüneceğini seçin."
+
+#: admin/settings-social-publisher.php:80
+msgid "Social Publisher"
+msgstr "Sosyal Yayıncı"
+
+#: admin/settings-social-publisher.php:169
+#: admin/social-publisher/social-publisher.php:482
+msgid "Facebook Timeline"
+msgstr "Facebook Zaman Tüneli"
+
+#: admin/settings-social-publisher.php:175
+msgid "Facebook permissions"
+msgstr "Facebook izinleri"
+
+#: admin/settings-social-publisher.php:181
+msgid "Publish to my Timeline"
+msgstr "Zaman tünelimde yayınla"
+
+#: admin/settings-social-publisher.php:188
+msgid "Enable Open Graph features"
+msgstr "Açık Grafik özelliklerine izin ver"
+
+#: admin/settings-social-publisher.php:203
+msgctxt "Publish to a Facebook Page"
+msgid "Publish to a page"
+msgstr "Bir sayfada yayınla"
+
+#: admin/settings-social-publisher.php:256
+msgid ""
+"Promote social engagement and readership by publishing new posts to the "
+"Facebook Timeline of a connected author."
+msgstr ""
+"Bağlı bir yaratıcının Facebook Zaman Tünelinde yeni yayınlar yayınlayarak "
+"sosyal katılımı ve okuyucuyu teşvik edin."
+
+#: admin/settings-social-publisher.php:258
+msgid "Open Graph %s"
+msgstr "Açık Grafik"
+
+#: admin/settings-social-publisher.php:258
+msgid "Facebook Open Graph action submission process"
+msgstr "Facebook Açık Grafik eylem gönderme süreci"
+
+#: admin/settings-social-publisher.php:258
+msgid "prerequisites"
+msgstr "önkoşullar"
+
+#: admin/settings-social-publisher.php:262
+msgctxt "Facebook app id for the website"
+msgid "A Facebook application identifier associated with %s"
+msgstr "%s ile ilişkili bir Facebook uygulama tanımlayıcısı"
+
+#: admin/settings-social-publisher.php:270
+msgid "Associate an Open Graph action-object pair for your application:"
+msgstr "Uygulamanız için bir Açık Grafik eylem-nesne çifti ilişkilendirin:"
+
+#: admin/settings-social-publisher.php:270
+msgctxt "Open Graph. people can ACTION an OBJECT"
+msgid "people can %1$s an %2$s"
+msgstr "insanlar %1$ s bir %2$s yapabilir"
+
+#: admin/settings-social-publisher.php:279
+msgid ""
+"Authenticate with Facebook to allow your Facebook application to post to "
+"your Timeline or Page on your behalf when a post is published"
+msgstr ""
+"Bir yayın yayınlandığında Facebook uygulamanızın sizin adınıza Zaman "
+"Tünelinde veya Sayfanızda yayın yapmasına izin vermek için Facebook ile "
+"kimlik doğrulama yapın"
+
+#: admin/settings-social-publisher.php:286
+msgid "Publish an article to your Facebook Timeline"
+msgstr "Facebook Zaman Tünelinizde bir makale yayınlayın"
+
+#: admin/settings-social-publisher.php:288
+msgid "your Publish action"
+msgstr "sizin Yayın eyleminiz"
+
+#: admin/settings-social-publisher.php:289
+msgctxt "Submit the Facebook Open Graph action name for approval."
+msgid "Submit %s for approval."
+msgstr "Onay için%s sunun."
+
+#: admin/settings-social-publisher.php:290
+msgid "Request optional capabilities:"
+msgstr "İsteğe bağlı yetenekler isteyin:"
+
+#: admin/settings-social-publisher.php:290
+msgctxt ""
+"Facebook Open Graph action capability permissions name: users may author a "
+"message associated with the action."
+msgid "User Messages"
+msgstr "Kullanıcı mesajları"
+
+#: admin/settings-social-publisher.php:290
+msgctxt ""
+"Facebook Open Graph action capability permissions name: users may mention "
+"tag friends in an action"
+msgid "Tags"
+msgstr "Etiketler"
+
+#: admin/settings-social-publisher.php:290
+msgctxt ""
+"Facebook Open Graph action capability: user has explicitly chosen to share "
+"the action to his or her Facebook Timeline"
+msgid "Explicitly Shared"
+msgstr "Açıkça Paylaşılan"
+
+#: admin/settings-social-publisher.php:304
+msgid ""
+"Publish to a Facebook Page using the credentials of a Facebook account with "
+"%s permissions for the Page."
+msgstr ""
+"Sayfa için % s izinleri olan bir Facebook hesabının kimlik bilgilerini "
+"kullanarak bir Facebook sayfasına yayınlayın."
+
+#: admin/settings-social-publisher.php:304
+msgctxt "Facebook Page permissions grant classification for a Facebook user"
+msgid "content creator"
+msgstr "içerik yaratıcı"
+
+#: admin/settings-social-publisher.php:315
+msgid ""
+"An author can associate his or her WordPress account with a Facebook account "
+"on his or her %s"
+msgstr ""
+"Bir yaratıcı, WordPress %s hesabını bir Facebook hesabıyla ilişkilendirebilir"
+
+#: admin/settings-social-publisher.php:315
+msgid "profile page"
+msgstr "profil sayfası"
+
+#: admin/settings-social-publisher.php:338
+msgctxt "Currently publishing to the specified Facebook Page"
+msgid "Publishing to %s"
+msgstr "Yayımlanıyor %s"
+
+#: admin/settings-social-publisher.php:338
+msgid "%s page on Facebook"
+msgstr "%s Facebook'taki sayfalar"
+
+#: admin/settings-social-publisher.php:344
+msgctxt "Saved by the current viewer of the page."
+msgid "Saved by you."
+msgstr "Siz kaydettiniz."
+
+#: admin/settings-social-publisher.php:383
+msgid "Post to Facebook Timeline using Open Graph actions"
+msgstr "Açık Grafik eylemlerini kullanarak Facebook Zaman Tüneli'ne gönder"
+
+#: admin/settings-social-publisher.php:384
+msgid "Publish new posts to Facebook using Open Graph actions."
+msgstr ""
+"Açık Grafik eylemlerini kullanarak yeni yayınları Facebook'ta yayınlayın."
+
+#: admin/settings-social-publisher.php:384
+msgid ""
+"Increases News Feed engagement through news-specific classification, "
+"explicitly shared posts, custom messages, and mention tagging."
+msgstr ""
+"Yeni spesifik-haber sınıflandırma yoluyla Haber Akışı,açıkça paylaşılan "
+"yayınlar, özel mesajlar ve etiketleme sözü katılımı arttırılır."
+
+#: admin/settings-social-publisher.php:395
+msgid ""
+"The Facebook plugin for WordPress can publish to Facebook on your behalf "
+"through a properly configured Facebook application when a public post type "
+"becomes public."
+msgstr ""
+"WordPress için Facebook eklentisi, halka açık yayın türü herkese açık hale "
+"geldiğinden düzgün yapılandırılmış bir Facebook uygulaması aracılığıyla "
+"Facebookta sizin adınıza yayınlayabilir."
+
+#: admin/settings-social-publisher.php:395
+msgid ""
+"An author must grant your application permission to publish to his or her "
+"Facebook Timeline before the post will appear."
+msgstr ""
+"Bir yaratıcı, Facebook Zaman Tüneli'nde görünmeden önce yayınlamak için "
+"başvurunuza izin vermelidir."
+
+#: admin/settings-social-publisher.php:395
+msgid ""
+"A Facebook account with the ability to create content on one or more "
+"Facebook Pages may store publishing permissions for use by your WordPress "
+"site."
+msgstr ""
+"Bir veya daha fazla Facebook Sayfasında içerik oluşturabilen bir Facebook "
+"hesabı, WordPress siteniz tarafından kullanılmak üzere yayınlama iznini "
+"saklayabilir."
+
+#: admin/settings-social-publisher.php:397
+msgid ""
+"You must associate an Open Graph action-object pair for your Facebook "
+"application and submit the action to Facebook for approval before articles "
+"from %s and its authors will appear in Facebook News Feed."
+msgstr ""
+"Facebook uygulaması için bir Açık Grafik eylem-nesne çiftini "
+"ilişkilendirmeli ve eylemi %s ve yaratıcı tarafından Facebook Haber "
+"Akışı'nda görünmeden önce onay için Facebook'a göndermelisiniz."
+
+#: admin/settings-social-publisher.php:397
+msgid ""
+"The Facebook plugin for WordPress cannot programmatically verify your "
+"application's Open Graph approval status."
+msgstr ""
+"WordPress için Facebook eklentisi, uygulamanızın Açık Grafik onay durumunu "
+"programlı olarak doğrulayamaz."
+
+#: admin/settings-social-publisher.php:417
+msgid "Publish to Facebook"
+msgstr "Facebook'ta yayımlama"
+
+#: admin/settings-social-publisher.php:421
+msgid "Plugin help page"
+msgstr "Eklenti yardım sayfası"
+
+#: admin/settings.php:113
+msgid "Please save your edits by submitting the form"
+msgstr "Lütfen düzenlemelerinizi formu göndererek kaydedin"
+
+#: admin/settings.php:114
+msgid "Allow new posts to a Facebook Page"
+msgstr "Bir Facebook Sayfasına yeni yayınlara izin verin"
+
+#: admin/settings.php:115
+msgctxt "Choose none of the options and remove the object"
+msgid "None: remove %s"
+msgstr "Hiçbiri:kaldır %s"
+
+#: admin/settings.php:116
+msgctxt "Displayed above a list of choices"
+msgid "Select a new page:"
+msgstr "Yeni bir sayfa seç:"
+
+#: admin/settings.php:117
+msgctxt ""
+"No Facebook Pages found for the user where the user has been granted "
+"permission to create content"
+msgid "No new published pages with create content permission found"
+msgstr "İçerik izni yaratan ile yeni yayımlanmış sayfa bulunamadı"
+
+#: admin/settings.php:118
+msgid "Associate my WordPress account with my Facebook account"
+msgstr "WordPress hesabımı Facebook hesabımla ilişkilendir"
+
+#: admin/settings.php:119
+msgid ""
+"Associate my WordPress account with my Facebook account and allow new posts "
+"to my Facebook Timeline"
+msgstr ""
+"WordPress hesabımı Facebook hesabımla ilişkilendir ve Facebook Zaman "
+"Tüneli'mde yani yayınlara izin ver"
+
+#: admin/settings.php:120
+msgctxt ""
+"Allow the application to publish to the Facebook Timeline of the viewer"
+msgid "Allow new posts to my Facebook Timeline"
+msgstr "Facebook Zaman Tüneli'mde yeni yayınlara izin ver"
+
+#: admin/settings.php:121
+msgid "Manage app permissions and visibility"
+msgstr "Uygulama izinlerini ve görünürlüğü yönetme"
+
+#: admin/settings.php:244
+msgid "General"
+msgstr "Genel"
+
+#: admin/settings.php:247
+msgctxt "Facebook Insights"
+msgid "Insights"
+msgstr "İç yüzü anlama"
+
+#: admin/settings.php:320
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: admin/social-publisher/mentions/mentions-search.php:56
+msgid "Cheatin' uh?"
+msgstr "Cheatin' uh?"
+
+#: admin/social-publisher/mentions/mentions-search.php:62
+msgid "Facebook credentials not properly configured on the server"
+msgstr "Facebook kimlik bilgileri sunucu üzerinde düzgün yapılandırılmadı"
+
+#: admin/social-publisher/mentions/mentions-search.php:68
+msgid "search term required"
+msgstr "arama terimi gerekli"
+
+#: admin/social-publisher/mentions/mentions-search.php:76
+msgid "No results"
+msgstr "Sonuç yok"
+
+#: admin/social-publisher/publish-box-page.php:67
+msgid "Facebook Status on %s Timeline"
+msgstr "Zaman Tüneli'nde %s Facebook Durumları"
+
+#: admin/social-publisher/publish-box-page.php:94
+msgctxt "Post to Facebook profile name or page name"
+msgid "Post to %s"
+msgstr "Yayınla %s"
+
+#: admin/social-publisher/publish-box-page.php:97
+#: admin/social-publisher/publish-box-profile.php:126
+msgid "Summarize the post for your Facebook audience"
+msgstr "Facebook kitleniz için yayını özetleyin"
+
+#: admin/social-publisher/publish-box-page.php:100
+msgid "This message will show as part of the story on the %s Timeline."
+msgstr ""
+"Bu mesaj,%s Zaman Tüneli üzerindeki hikayenin bir parçası olarak "
+"gösterilecek."
+
+#: admin/social-publisher/publish-box-profile.php:67
+msgid "Facebook Status on Your Timeline"
+msgstr "Zaman Tüneli'nde Facebook Durumları"
+
+#: admin/social-publisher/publish-box-profile.php:123
+msgid "Post to Facebook Timeline"
+msgstr "Facebook Zaman Tüneli'nde Yayınla"
+
+#: admin/social-publisher/publish-box-profile.php:131
+msgid "This message will show as part of the story on your Facebook Timeline."
+msgstr ""
+"Bu mesaj Zaman Tüneli üzerindeki hikayenin bir parçası olarak gösterilecek."
+
+#: admin/social-publisher/publish-box-profile.php:141
+msgctxt "number of people who Like a Page"
+msgid "%s like this"
+msgstr "%s bunun gibi"
+
+#: admin/social-publisher/publish-box-profile.php:142
+msgctxt "number of people talking about a Page"
+msgid "%s talking about this"
+msgstr "%s bunun hakkında konuşuyor"
+
+#: admin/social-publisher/social-publisher.php:352
+msgid "Failed posting to %s Timeline because the access token expired."
+msgstr "Erişim simgesinin süresi dolduğundan %s Zaman Tüneli'ne gönderilemedi."
+
+#: admin/social-publisher/social-publisher.php:352
+msgid ""
+"To reactivate publishing, visit Facebook Social Publisher settings page and "
+"associate a Page through the \"Allow new posts to a Facebook Page\" link."
+msgstr ""
+"Yayıncılamayı yeniden etkinleştirmek için,Facebook Sosyal Yayıncı ayarları "
+"sayfasını ziyaret edin ve \"Bir Facebook sayfasına yeni yayınlara izin ver\" "
+"bağlantısıyla bir Sayfayı ilişkilendirin."
+
+#: admin/social-publisher/social-publisher.php:352
+#: admin/social-publisher/social-publisher.php:354
+#: admin/social-publisher/social-publisher.php:478
+msgid "Error"
+msgstr "Hata"
+
+#: admin/social-publisher/social-publisher.php:354
+msgid "Failed posting to %s Timeline."
+msgstr "Zaman Tüneli'nde yayınlama başarısız oldu."
+
+#: admin/social-publisher/social-publisher.php:362
+#: admin/social-publisher/social-publisher.php:486
+msgid "Posted to %1$s with message \"%2$s\""
+msgstr "Yayınlandı %1$s mesajıyla \"%2$s\""
+
+#: admin/social-publisher/social-publisher.php:364
+#: admin/social-publisher/social-publisher.php:484
+msgid "Posted to %s"
+msgstr "Yayınlandı %s"
+
+#: admin/social-publisher/social-publisher.php:478
+msgid "Failed posting to your Facebook Timeline."
+msgstr "Zaman Tüneli'nde yayınlama başarısız oldu."
+
+#: open-graph-protocol.php:146
+msgid "&hellip;"
+msgstr "&hellip;"
+
+#: open-graph-protocol.php:517
+msgid "Uncategorized"
+msgstr "Kategorize edilmemiş"
+
+#: social-plugins/class-facebook-comments.php:86
+msgid "Sorry, comments are closed for this item."
+msgstr "Üzgünüz,bu öğe için yorumlar kapalıdır."
+
+#: social-plugins/class-facebook-comments.php:176
+msgid "% Comments"
+msgstr "% Yorumlar"
+
+#: social-plugins/class-facebook-comments.php:235
+msgid "Moderate Facebook comments"
+msgstr "Facebook yorumlarını yönet"
+
+#: social-plugins/class-facebook-comments.php:348
+msgctxt "date at time"
+msgid "%1$s at %2$s"
+msgstr "%1$s de %2$s"
+
+#: social-plugins/comments.php:34
+msgid "Comments"
+msgstr "Yorumlar"
+
+#: social-plugins/widgets/activity-feed.php:20
+msgid "Facebook Recent Activity"
+msgstr "Facebook Son Etkinlikler"
+
+#: social-plugins/widgets/activity-feed.php:21
+msgid ""
+"Displays the most interesting recent activity taking place on your site."
+msgstr "Sitenizde gerçekleşen son en ilginç etkinlikleri görüntüler."
+
+#: social-plugins/widgets/activity-feed.php:176
+#: social-plugins/widgets/follow-button.php:181
+#: social-plugins/widgets/like-button.php:201
+#: social-plugins/widgets/recommendations-box.php:164
+#: social-plugins/widgets/send-button.php:142
+msgid "Title"
+msgstr "Başlık"
+
+#: social-plugins/widgets/activity-feed.php:196
+#: social-plugins/widgets/like-box.php:281
+#: social-plugins/widgets/recommendations-box.php:184
+msgid "Include Facebook header"
+msgstr "Facebook Başlığı dahil"
+
+#: social-plugins/widgets/activity-feed.php:210
+msgid "Include recommendations"
+msgstr "Öneriler dahil"
+
+#: social-plugins/widgets/activity-feed.php:259
+#: social-plugins/widgets/like-box.php:406
+#: social-plugins/widgets/recommendations-box.php:212
+msgid "Height"
+msgstr "Yükseklik"
+
+#: social-plugins/widgets/follow-button.php:19
+msgid "Facebook Follow Button"
+msgstr "Facebook Takip Etme Butonu"
+
+#: social-plugins/widgets/follow-button.php:20
+msgid "Lets a user follow your public updates on Facebook."
+msgstr ""
+"Bir kullanıcının Facebook'taki herkese açık güncellemelerinizi takip "
+"etmesine izin verir."
+
+#: social-plugins/widgets/follow-button.php:134
+#: social-plugins/widgets/like-button.php:147
+msgid "Layout"
+msgstr "Tasarım"
+
+#: social-plugins/widgets/follow-button.php:202
+msgid "Must be a Facebook URL"
+msgstr "Bir Facebook URL'si olmak zorundadır"
+
+#: social-plugins/widgets/like-box.php:19
+msgid "Facebook Like Box"
+msgstr "Facebook Beğenme Butonu"
+
+#: social-plugins/widgets/like-box.php:20
+msgctxt "Improve the marketing of Facebook content by including on your site."
+msgid "Highlight your Facebook Page content."
+msgstr "Facebook Sayfanızın içeriğini vurgulayın."
+
+#: social-plugins/widgets/like-box.php:20
+msgid "Encourage visitors to like your Facebook page."
+msgstr "Ziyaretçileri Facebook sayfanızı beğenmeye teşvik edin."
+
+#: social-plugins/widgets/like-box.php:261
+msgctxt "Section title or header"
+msgid "Title"
+msgstr "Başlık"
+
+#: social-plugins/widgets/like-box.php:297
+msgid "Show a border"
+msgstr "Bir sınır göster"
+
+#: social-plugins/widgets/like-box.php:314
+msgid "Must be a Facebook Page URL"
+msgstr "Bir Facebook URL'si olmak zorundadır"
+
+#: social-plugins/widgets/like-box.php:328
+msgid "Display the latest posts from your Facebook Page"
+msgstr "Facebook sayfanızdan son yayınları gösterir"
+
+#: social-plugins/widgets/like-box.php:342
+msgctxt "Prefer Posts from a page over Checkins to the venue"
+msgid ""
+"Places-specific: disable display of checkins from the current visitor's "
+"friends"
+msgstr ""
+"Yerler-belirli: Geçerli ziyaretçinin arkadaşlarının checkin'ini gösteri "
+"devre dışı bırak"
+
+#: social-plugins/widgets/like-box.php:391
+#: social-plugins/widgets/like-box.php:409
+msgid "pixels"
+msgstr "pikseller"
+
+#: social-plugins/widgets/like-button.php:20
+msgid "Facebook Like Button"
+msgstr "Facebook Beğenme Butonu"
+
+#: social-plugins/widgets/like-button.php:23
+msgid "Lets a viewer share your content to his or her Facebook timeline."
+msgstr ""
+"Bir izleyicinin sizin içeriğinizi kendi Facebook Zaman Tüneli'nde "
+"paylaşmasına izin verir."
+
+#: social-plugins/widgets/like-button.php:222
+#: social-plugins/widgets/send-button.php:163
+msgid "Default: URL of the displayed page"
+msgstr "Varsayılan: Gösterilen sayfanın URL'si"
+
+#: social-plugins/widgets/recommendations-box.php:20
+msgid "Facebook Recommendations"
+msgstr "Facebook Önerileri"
+
+#: social-plugins/widgets/recommendations-box.php:21
+msgid "Shows personalized recommendations to your users."
+msgstr "Kullanıcılarınız için kişiselleştirilmiş önerileri gösterir."
+
+#: social-plugins/widgets/send-button.php:19
+msgid "Facebook Send Button"
+msgstr "Facebook Gönderme Butonu"
+
+#: social-plugins/widgets/send-button.php:20
+msgid "The Send Button allows users to easily send content to their friends."
+msgstr ""
+"Gönderme Butonu kullanıcıların içerikleri kolayca arkadaşlarına göndermesine "
+"izin verir."
+
+#. Plugin Name of the plugin/theme
+#. Author of the plugin/theme
+msgid "Facebook"
+msgstr "Facebook"
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/plugins/facebook/"
+msgstr "http://wordpress.org/plugins/facebook/"
+
+#. Description of the plugin/theme
+msgid ""
+"Add Facebook social plugins and the ability to publish new posts to a "
+"Facebook Timeline or Facebook Page. Official Facebook plugin."
+msgstr ""
+"Facebook sosyal eklentileri ve bir Facebook Zaman Tüneli veya Facebook "
+"Sayfasında yeni yayınlar yayınlama olanağı ekleyin. Resmi Facebook eklentisi."
+
+#. Author URI of the plugin/theme
+msgid "https://developers.facebook.com/docs/wordpress/"
+msgstr "https://developers.facebook.com/docs/wordpress/"
